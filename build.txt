@@ -1,0 +1,3 @@
+displayName = TerrafirmaRedux
+author = Fred
+version = 0.1
