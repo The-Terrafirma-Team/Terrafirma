@@ -5,4 +5,11 @@ Items: {
 		DisplayName: Basic Bitch
 		Tooltip: ""
 	}
+
+	SingularityHook: {
+		DisplayName: Singularity Hook
+		Tooltip: ""
+	}
 }
+
+Projectiles.SingularityHookProjectile.DisplayName: Singularity Hook Projectile
