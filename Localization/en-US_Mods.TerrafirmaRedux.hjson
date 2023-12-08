@@ -1,14 +1,24 @@
 # This file will automatically update with entries for new content after a build and reload
 
 Items: {
-	BasicBitch: {
-		DisplayName: Basic Bitch
-		Tooltip: ""
-	}
-
 	SingularityHook: {
 		DisplayName: Singularity Hook
 		Tooltip: ""
+	}
+
+	KinMask: {
+		DisplayName: Kin Mask
+		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
+	}
+
+	KinMechanicalLegs: {
+		DisplayName: Kin's Mechanical Legs
+		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
+	}
+
+	KinStripedSweater: {
+		DisplayName: Kin's Stripey Sweater
+		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
 	}
 }
 
