@@ -30,7 +30,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 
     public class KinEyeGlow : PlayerDrawLayer
     {
-        private Asset<Texture2D> GlowTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Vanity/Dedicated/KinMask_Head_Glow");
+        private Texture2D GlowTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Vanity/Dedicated/KinMask_Head_Glow").Value;
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Head);
         public override bool IsHeadLayer => true;
 
@@ -41,7 +41,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             Player p = drawInfo.drawPlayer;
-            SpriteEffects spriteEffects = SpriteEffects.None;
+            SpriteEffects spriteEffects;
             if (p.gravDir == 1f)
             {
                 if (p.direction == 1)
@@ -87,7 +87,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
             var vector3 = new Vector2(p.legFrame.Width * 0.5f, p.legFrame.Height * 0.4f);
             if (p.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "KinMask", EquipType.Head))
             {
-                var value = new DrawData(Mod.Assets.Request<Texture2D>("Items/Vanity/Dedicated/KinMask_Head_Glow").Value,
+                var value = new DrawData(GlowTexture,
                     new Vector2(
                         (int)(drawInfo.Position.X - Main.screenPosition.X - (p.bodyFrame.Width / 2) + (p.width / 2)),
                         (int)(drawInfo.Position.Y - Main.screenPosition.Y + p.height - p.bodyFrame.Height + 4f)) +
@@ -103,7 +103,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            int j = 0;
+            int j;
             if(Player.direction > 0)
             {
                 j = -10;
