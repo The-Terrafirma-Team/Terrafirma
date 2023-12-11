@@ -33,7 +33,7 @@ Items: {
 
 	KnifeShooter: {
 		DisplayName: Knife Shooter
-		Tooltip: ""
+		Tooltip: Has a 33% chance to save ammo
 	}
 
 	MajesticGel: {
@@ -45,10 +45,46 @@ Items: {
 		DisplayName: Star Revolver
 		Tooltip: ""
 	}
+
+	SacredGreaves: {
+		DisplayName: Sacred Greaves
+		Tooltip: ""
+	}
+
+	SacredHeadgear: {
+		DisplayName: Sacred Headgear
+		Tooltip: ""
+	}
+
+	SacredHelmet: {
+		DisplayName: Sacred Helmet
+		Tooltip: ""
+	}
+
+	SacredHood: {
+		DisplayName: Sacred Hood
+		Tooltip: ""
+	}
+
+	SacredMask: {
+		DisplayName: Sacred Mask
+		Tooltip: ""
+	}
+
+	SacredPlateMail: {
+		DisplayName: Sacred Plate Mail
+		Tooltip: ""
+	}
+
+	WandOfPoisoning: {
+		DisplayName: Wand of Poisoning
+		Tooltip: Shoots a little poison
+	}
 }
 
 Projectiles: {
 	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
 	IceHookProjectile.DisplayName: Ice Hook Projectile
-	RapierProjectile.DisplayName: Rapier Projectile
+	RapierProjectile.DisplayName: Rapier
+	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
 }
