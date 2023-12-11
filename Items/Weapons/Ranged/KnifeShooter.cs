@@ -23,11 +23,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.useTime = 8;
             Item.width = 44;
             Item.height = 22;
-<<<<<<< HEAD
-            Item.UseSound = SoundID.Item5;
-=======
             Item.UseSound = SoundID.Item11;
->>>>>>> 5d755a3874179e6e45bb9542d1efc1fa6ef05ea3
             Item.DamageType = DamageClass.Ranged;
             Item.autoReuse = true;
             Item.noMelee = true;

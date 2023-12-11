@@ -89,18 +89,12 @@ Items: {
 	WandOfPoisoning: {
 		DisplayName: Wand of Poisoning
 		Tooltip: Shoots a little poison
->>>>>>> 5d755a3874179e6e45bb9542d1efc1fa6ef05ea3
 	}
 }
 
 Projectiles: {
 	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
 	IceHookProjectile.DisplayName: Ice Hook Projectile
-<<<<<<< HEAD
-	RapierProjectile.DisplayName: Rapier Projectile
-	Poison.DisplayName: Poison
-=======
 	RapierProjectile.DisplayName: Rapier
 	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
->>>>>>> 5d755a3874179e6e45bb9542d1efc1fa6ef05ea3
 }
