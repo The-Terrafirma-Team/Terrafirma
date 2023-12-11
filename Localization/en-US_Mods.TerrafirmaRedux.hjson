@@ -46,16 +46,11 @@ Items: {
 		Tooltip: ""
 	}
 
-<<<<<<< HEAD
-	WandOfPoisoning: {
-		DisplayName: Wand Of Poisoning
-		Tooltip: ""
-	}
-
 	LuckyBlock: {
 		DisplayName: Lucky Block
 		Tooltip: Test your Luck with this Lucky item! We're not responsible for any damage caused by opening this item.
-=======
+	}
+
 	SacredGreaves: {
 		DisplayName: Sacred Greaves
 		Tooltip: ""
@@ -97,4 +92,5 @@ Projectiles: {
 	IceHookProjectile.DisplayName: Ice Hook Projectile
 	RapierProjectile.DisplayName: Rapier
 	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
+	Poison.DisplayName: Poison
 }
