@@ -35,6 +35,16 @@ Items: {
 		DisplayName: Knife Shooter
 		Tooltip: ""
 	}
+
+	MajesticGel: {
+		DisplayName: Majestic Gel
+		Tooltip: ""
+	}
+
+	StarRevolver: {
+		DisplayName: Star Revolver
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
