@@ -16,7 +16,7 @@ namespace TerrafirmaRedux.Reworks.QueenSlime
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<MajesticGel>(), 1, 16, 54));
+            npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<MajesticGel>(), 1, 32, 54));
         }
 
         public override void SetDefaults(NPC entity)
@@ -28,7 +28,7 @@ namespace TerrafirmaRedux.Reworks.QueenSlime
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.type is >= 658 or <= 660)
+            if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.type is >= 658 and <= 660)
             {
                 projectile.damage = (int)(projectile.damage * 0.7f);
             }
@@ -43,7 +43,7 @@ namespace TerrafirmaRedux.Reworks.QueenSlime
         }
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<MajesticGel>(), 1, 16, 54));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<MajesticGel>(), 1, 32, 54));
         }
     }
 }
