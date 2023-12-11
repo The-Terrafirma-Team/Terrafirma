@@ -21,8 +21,8 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.autoReuse = false;
             Item.noMelee = true;
 
-            Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 3, 0);
+            Item.rare = ItemRarityID.Green;
+            Item.value = Item.sellPrice(0, 0, 20, 0);
 
             Item.useAmmo = AmmoID.FallenStar;
             Item.shoot = ProjectileID.FallingStar;

@@ -33,7 +33,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
             Item.noMelee = true;
 
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 2, 50);
+            Item.value = Item.sellPrice(0, 0, 10, 0);
 
             Item.shoot = ModContent.ProjectileType<RapierProjectile>();
             Item.shootSpeed = 2.1f;

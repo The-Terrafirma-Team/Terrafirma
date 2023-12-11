@@ -20,16 +20,16 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.knockBack = 2f;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 8;
-            Item.useTime = 5;
+            Item.useTime = 8;
             Item.width = 44;
             Item.height = 22;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item5;
             Item.DamageType = DamageClass.Ranged;
             Item.autoReuse = true;
             Item.noMelee = true;
 
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 3, 0);
+            Item.value = Item.sellPrice(0, 0, 20, 0);
 
             Item.useAmmo = ItemID.ThrowingKnife;
             Item.shoot = ProjectileID.ThrowingKnife;

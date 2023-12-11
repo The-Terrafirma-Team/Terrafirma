@@ -8,17 +8,17 @@ Items: {
 
 	KinMask: {
 		DisplayName: Kin Mask
-		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	KinMechanicalLegs: {
 		DisplayName: Kin's Mechanical Legs
-		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	KinStripedSweater: {
 		DisplayName: Kin's Stripey Sweater
-		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	IceHook: {
@@ -45,10 +45,21 @@ Items: {
 		DisplayName: Star Revolver
 		Tooltip: ""
 	}
+
+	WandOfPoisoning: {
+		DisplayName: Wand Of Poisoning
+		Tooltip: ""
+	}
+
+	LuckyBlock: {
+		DisplayName: Lucky Block
+		Tooltip: Test your Luck with this Lucky item! We're not responsible for any damage caused by opening this item.
+	}
 }
 
 Projectiles: {
 	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
 	IceHookProjectile.DisplayName: Ice Hook Projectile
 	RapierProjectile.DisplayName: Rapier Projectile
+	Poison.DisplayName: Poison
 }
