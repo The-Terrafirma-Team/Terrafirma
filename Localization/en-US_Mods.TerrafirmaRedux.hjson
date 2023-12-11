@@ -33,7 +33,7 @@ Items: {
 
 	KnifeShooter: {
 		DisplayName: Knife Shooter
-		Tooltip: ""
+		Tooltip: Has a 33% chance to save ammo
 	}
 
 	MajesticGel: {
@@ -46,6 +46,7 @@ Items: {
 		Tooltip: ""
 	}
 
+<<<<<<< HEAD
 	WandOfPoisoning: {
 		DisplayName: Wand Of Poisoning
 		Tooltip: ""
@@ -54,12 +55,52 @@ Items: {
 	LuckyBlock: {
 		DisplayName: Lucky Block
 		Tooltip: Test your Luck with this Lucky item! We're not responsible for any damage caused by opening this item.
+=======
+	SacredGreaves: {
+		DisplayName: Sacred Greaves
+		Tooltip: ""
+	}
+
+	SacredHeadgear: {
+		DisplayName: Sacred Headgear
+		Tooltip: ""
+	}
+
+	SacredHelmet: {
+		DisplayName: Sacred Helmet
+		Tooltip: ""
+	}
+
+	SacredHood: {
+		DisplayName: Sacred Hood
+		Tooltip: ""
+	}
+
+	SacredMask: {
+		DisplayName: Sacred Mask
+		Tooltip: ""
+	}
+
+	SacredPlateMail: {
+		DisplayName: Sacred Plate Mail
+		Tooltip: ""
+	}
+
+	WandOfPoisoning: {
+		DisplayName: Wand of Poisoning
+		Tooltip: Shoots a little poison
+>>>>>>> 5d755a3874179e6e45bb9542d1efc1fa6ef05ea3
 	}
 }
 
 Projectiles: {
 	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
 	IceHookProjectile.DisplayName: Ice Hook Projectile
+<<<<<<< HEAD
 	RapierProjectile.DisplayName: Rapier Projectile
 	Poison.DisplayName: Poison
+=======
+	RapierProjectile.DisplayName: Rapier
+	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
+>>>>>>> 5d755a3874179e6e45bb9542d1efc1fa6ef05ea3
 }
