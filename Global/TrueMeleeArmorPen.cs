@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using TerrafirmaRedux.Items.Melee.Shortswords;
 
 namespace TerrafirmaRedux.Global
 {
@@ -16,7 +17,9 @@ namespace TerrafirmaRedux.Global
     }
     public class TrueMeleeArmorPenetrationGlobalProjectile : GlobalProjectile
     {
-        public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet();
+        public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+        ModContent.ProjectileType<RapierProjectile>()
+        );
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (projectile.IsTrueMeleeProjectile())

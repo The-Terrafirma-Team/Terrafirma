@@ -10,7 +10,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 		public override void SetStaticDefaults()
 		{
 			//DisplayName.SetDefault("Kin's Stripy Sweater");
-			//Tooltip.SetDefault("[c/A58CFF:Dedicated to Patchouli]");
+			//Tooltip.SetDefault("[c/A58CFF:Dedicated to Inkgum]");
 		}
 		public override void SetDefaults()
 		{

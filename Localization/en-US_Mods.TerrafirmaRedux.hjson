@@ -20,6 +20,25 @@ Items: {
 		DisplayName: Kin's Stripey Sweater
 		Tooltip: "[c/A58CFF:Dedicated to Patchouli]"
 	}
+
+	IceHook: {
+		DisplayName: Ice Hook
+		Tooltip: ""
+	}
+
+	Rapier: {
+		DisplayName: Rapier
+		Tooltip: ""
+	}
+
+	KnifeShooter: {
+		DisplayName: Knife Shooter
+		Tooltip: ""
+	}
 }
 
-Projectiles.SingularityHookProjectile.DisplayName: Singularity Hook Projectile
+Projectiles: {
+	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
+	IceHookProjectile.DisplayName: Ice Hook Projectile
+	RapierProjectile.DisplayName: Rapier Projectile
+}

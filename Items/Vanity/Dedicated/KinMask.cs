@@ -15,7 +15,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
         public bool Janky = false;
         public override void SetStaticDefaults()
         {
-            //Tooltip.SetDefault("[c/A58CFF:Dedicated to Patchouli]");
+            //Tooltip.SetDefault("[c/A58CFF:Dedicated to Inkgum]");
         }
         public override void SetDefaults()
         {
