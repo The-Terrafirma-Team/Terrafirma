@@ -1,13 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Items.Melee.Shortswords;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrafirmaRedux.Global;
 
-namespace TerrafirmaRedux.Items.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged
 {
     internal class KnifeShooter : ModItem
     {

@@ -7,7 +7,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Terraria.Utilities;
 
-namespace TerrafirmaRedux.Items.Melee.Shortswords
+namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
 {
     internal class Rapier : ModItem
     {
