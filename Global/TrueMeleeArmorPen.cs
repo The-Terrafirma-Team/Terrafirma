@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using TerrafirmaRedux.Items.Melee.Shortswords;
+using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
 
 namespace TerrafirmaRedux.Global
 {
