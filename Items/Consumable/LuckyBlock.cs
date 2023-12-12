@@ -3,10 +3,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Items.Weapons.Ranged;
-using System.Collections.Generic;
-using System;
 using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
 using TerrafirmaRedux.Items.Weapons.Magic;
+using TerrafirmaRedux.Projectiles;
 
 namespace TerrafirmaRedux.Items.Consumable
 {
@@ -35,7 +34,7 @@ namespace TerrafirmaRedux.Items.Consumable
         public override bool? UseItem(Player player)
         {
             //Random Chance System
-            float LuckyNumber = Main.rand.NextFloat(-1f, 1f) + (player.luck / 2);
+            float LuckyNumber = Main.rand.NextFloat(-0.8f, 1f) + (player.luck / 2);
 
             //Good Outcome :D
             if (LuckyNumber >= 0f)
@@ -100,7 +99,15 @@ namespace TerrafirmaRedux.Items.Consumable
             //Bad Outcome :(
             else
             {
-                Projectile.NewProjectile(default, player.position, Vector2.Zero, ProjectileID.Bomb, default, default, player.whoAmI, default, default, default);
+                int CaseChance = Main.rand.Next(0, 101);
+                if (CaseChance <= 1)
+                {
+                    Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ModContent.ProjectileType<HolyHandGrenade>(), default, default, player.whoAmI, default, default, default);
+                }
+                else
+                {
+                    Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ProjectileID.Bomb, default, default, player.whoAmI, default, default, default);
+                }
             }
 
             return true;

@@ -93,4 +93,5 @@ Projectiles: {
 	RapierProjectile.DisplayName: Rapier
 	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
 	Poison.DisplayName: Poison
+	HolyHandGrenade.DisplayName: Holy Hand Grenade
 }
