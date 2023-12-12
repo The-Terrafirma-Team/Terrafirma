@@ -35,7 +35,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
             if (Main.rand.NextBool(3))
             {
                 // Emit dusts when the sword is swung
-                Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<Dusts.Sparkle>());
+                Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<Dusts.PoisonDust>());
             }
         }
 
@@ -45,3 +45,5 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
             // 60 frames = 1 second
             target.AddBuff(BuffID.ShadowFlame, 153);
         }
+    }
+}
