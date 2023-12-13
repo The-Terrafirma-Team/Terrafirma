@@ -24,7 +24,7 @@ namespace TerrafirmaRedux.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<PhantasmalBurn>(),300);
+            target.AddBuff(ModContent.BuffType<PhantasmalBurn>(), 240);
         }
 
         public override void AI()

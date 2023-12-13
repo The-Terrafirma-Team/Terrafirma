@@ -42,7 +42,7 @@ namespace TerrafirmaRedux.Items.Consumable
             {
 
                 //Weight for each DropNum case
-                int[] RarityPool = new int[] { 16, 20, 25, 18 };
+                int[] RarityPool = new int[] { 12, 20, 25, 18, 12 };
                 //
 
                 //Not Important
@@ -107,6 +107,9 @@ namespace TerrafirmaRedux.Items.Consumable
                             else if ((CaseChance <= 85)) { player.QuickSpawnItem(default, ItemID.Grenade, Main.rand.Next(3, 15)); } // Grenade - 15%
                             else { player.QuickSpawnItem(default, ItemID.Bomb, Main.rand.Next(1, 6) * 10); } // Bomb - 15%
                             break;
+                        //Accessories
+                        case 4:
+                            break;
                     }
                 }
                 else if (NPC.downedBoss2 == true) //Eater of Worlds / Brain of Cthulhu downed?
@@ -139,6 +142,9 @@ namespace TerrafirmaRedux.Items.Consumable
                             else if ((CaseChance <= 85)) { player.QuickSpawnItem(default, ItemID.Grenade, Main.rand.Next(3, 15)); } // Grenade - 15%
                             else { player.QuickSpawnItem(default, ItemID.Bomb, Main.rand.Next(1, 6) * 10); } // Bomb - 15%
                             break;
+                        //Accessories
+                        case 4:
+                            break;
                     }
                 }
                 else //Start of World Progression
@@ -169,6 +175,9 @@ namespace TerrafirmaRedux.Items.Consumable
                             else if ((CaseChance <= 70)) { player.QuickSpawnItem(default, ItemID.Shuriken, Main.rand.Next(1, 10) * 10); } // Shuriken - 20%
                             else if ((CaseChance <= 85)) { player.QuickSpawnItem(default, ItemID.Grenade, Main.rand.Next(3, 15)); } // Grenade - 15%
                             else { player.QuickSpawnItem(default, ItemID.Bomb, Main.rand.Next(1, 6) * 10); } // Bomb - 15%
+                            break;
+                        //Accessories
+                        case 4:
                             break;
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using TerrafirmaRedux.Global;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,11 +14,9 @@ namespace TerrafirmaRedux.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.lifeRegen = -40;
-            NPC.HitInfo hit = new NPC.HitInfo();
-            hit.Damage = 20;
-            hit.Knockback = 0;
-            hit.HitDirection = 0;
+
+
+            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().PhantasmalBurn = true;
 
 
             if (npc.buffTime[buffIndex] % 2 == 0)
@@ -28,11 +27,11 @@ namespace TerrafirmaRedux.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.lifeRegen = -20;
-            Player.HurtInfo hit = new Player.HurtInfo();
-            hit.Damage = 20;
-            hit.Knockback = 0;
-            hit.HitDirection = 0;
+            if (player.lifeRegen > 0)
+            {
+                player.lifeRegen = 0;
+            }
+            player.lifeRegen -= 60;
 
             if (player.buffTime[buffIndex] % 2 == 0)
             {
