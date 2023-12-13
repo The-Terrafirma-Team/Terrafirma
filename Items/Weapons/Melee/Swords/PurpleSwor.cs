@@ -16,7 +16,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
             Item.width = 40; // The item texture's width.
             Item.height = 40; // The item texture's height.
 
-            Item.useStyle = ItemUseStyleID.RaiseLamp; // The useStyle of the Item.
+            Item.useStyle = ItemUseStyleID.Swing; // The useStyle of the Item.
             Item.useTime = 12; // The time span of using the weapon. Remember in terraria, 60 frames is a second.
             Item.useAnimation = 5; // The time span of the using animation of the weapon, suggest setting it the same as useTime.
             Item.autoReuse = true; // Whether the weapon can be used more than once automatically by holding the use button.
