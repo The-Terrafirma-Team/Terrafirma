@@ -42,8 +42,7 @@ namespace TerrafirmaRedux.Items.Consumable
             {
 
                 //Weight for each DropNum case
-                int[] RarityPool = new int[4];
-                RarityPool = [16, 20, 25, 18];
+                int[] RarityPool = new int[] { 16, 20, 25, 18 };
                 //
 
                 //Not Important
