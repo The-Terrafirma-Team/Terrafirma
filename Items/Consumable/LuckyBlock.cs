@@ -26,7 +26,7 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.UseSound = SoundID.Item4;
             Item.rare = ItemRarityID.Gray;
             Item.value = Item.sellPrice(0, 0, 5, 0);
-            Item.maxStack = 999;
+            Item.maxStack = Item.CommonMaxStack;
             Item.consumable = true;
 
         }
@@ -41,8 +41,8 @@ namespace TerrafirmaRedux.Items.Consumable
             {
 
                 //Weight for each DropNum case
-                int[] RarityPool = new int[10];
-                RarityPool = [16, 20, 25, 18];
+                int[] RarityPool = new int[] {16,20,25,18};
+                //RarityPool = [16, 20, 25, 18];
                 //
 
                 //Not Important
