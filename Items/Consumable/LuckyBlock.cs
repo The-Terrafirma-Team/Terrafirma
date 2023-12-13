@@ -35,7 +35,7 @@ namespace TerrafirmaRedux.Items.Consumable
         public override bool? UseItem(Player player)
         {
             //Random Chance System
-            float LuckyNumber = Main.rand.NextFloat(-0.8f, 1f) + (player.luck / 2);
+            float LuckyNumber = Main.rand.NextFloat(-0.9f, 1f) + (player.luck / 2);
 
             //Good Outcome :D
             if (LuckyNumber >= 0f)
@@ -90,8 +90,8 @@ namespace TerrafirmaRedux.Items.Consumable
                         //Coins
                         case 1:
                             if ((CaseChance <= 60)) { player.QuickSpawnItem(default, ItemID.SilverCoin, Main.rand.Next(8, 10) * 10); } // 40-80 Silver Coins - 60%
-                            else if (CaseChance <= 90) { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(2, 5)); } // 2-4 Gold Coins - 30%
-                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(5, 11)); } // 5-10 Gold Coins - 10%
+                            else if (CaseChance <= 90) { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(5, 11)); } // 5-10 Gold Coins - 30%
+                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(10, 21)); } // 10-20 Gold Coins - 10%
                             break;
                         //Ammo
                         case 2:
@@ -126,7 +126,7 @@ namespace TerrafirmaRedux.Items.Consumable
                         //Coins
                         case 1:
                             if ((CaseChance <= 80)) { player.QuickSpawnItem(default, ItemID.SilverCoin, Main.rand.Next(3, 10) * 10); } // 30-90 Silver Coins - 80%
-                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(1, 4)); } // 1-3 Gold Coins - 20%
+                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(4, 11)); } // 4-10 Gold Coins - 20%
                             break;
                         //Ammo
                         case 2:
@@ -153,16 +153,17 @@ namespace TerrafirmaRedux.Items.Consumable
                     {
                         //Weapons
                         case 0:
-                            if (CaseChance <= 25) { player.QuickSpawnItem(default, ModContent.ItemType<StarRevolver>()); } // Star Revolver - 25%
-                            else if ((CaseChance <= 50)) { player.QuickSpawnItem(default, ModContent.ItemType<KnifeShooter>()); } // Knife Shooter - 25%
-                            else if ((CaseChance <= 75)) { player.QuickSpawnItem(default, ModContent.ItemType<Rapier>()); } // Rapier - 25%
-                            else { player.QuickSpawnItem(default, ModContent.ItemType<WandOfPoisoning>()); } // Wand of Poisoning - 25%
+                            if (CaseChance <= 20) { player.QuickSpawnItem(default, ModContent.ItemType<StarRevolver>()); } // Star Revolver - 20%
+                            else if ((CaseChance <= 40)) { player.QuickSpawnItem(default, ModContent.ItemType<KnifeShooter>()); } // Knife Shooter - 20%
+                            else if ((CaseChance <= 60)) { player.QuickSpawnItem(default, ModContent.ItemType<Rapier>()); } // Rapier - 20%
+                            else if ((CaseChance <= 80)) { player.QuickSpawnItem(default, ModContent.ItemType<Rapier>()); } // Rapier - 20%
+                            else { player.QuickSpawnItem(default, ModContent.ItemType<WandOfPoisoning>()); } // Wand of Poisoning - 20%
                             break;
                         //Coins
                         case 1:
                             if (CaseChance <= 60) { player.QuickSpawnItem(default, ItemID.CopperCoin, Main.rand.Next(2, 5) * 20); } // 40-80 Copper Coins - 60%
                             else if ((CaseChance <= 90)) { player.QuickSpawnItem(default, ItemID.SilverCoin, Main.rand.Next(1, 10) * 10); } // 10-90 Silver Coins - 30%
-                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(1, 3)); } // 1-2 Gold Coins - 10%
+                            else { player.QuickSpawnItem(default, ItemID.GoldCoin, Main.rand.Next(2, 6)); } // 2-5 Gold Coins - 10%
                             break;
                         //Ammo
                         case 2:
@@ -192,14 +193,58 @@ namespace TerrafirmaRedux.Items.Consumable
             //Bad Outcome :(
             else
             {
-                int CaseChance = Main.rand.Next(0, 101);
-                if (CaseChance <= 1)
+
+                //Weight for each DropNum case
+                int[] RarityPool = new int[] { 5, 10, 2, 5};
+                //
+
+                //Not Important
+                int RarityPoolSum = 0;
+                for (int i = 0; i < RarityPool.Length; i++)
                 {
-                    Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ModContent.ProjectileType<HolyHandGrenade>(), default, default, player.whoAmI, default, default, default);
+                    RarityPoolSum += RarityPool[i];
                 }
-                else
+
+                int CheckNum = 0;
+                int DropNum = Main.rand.Next(0, RarityPoolSum + 1);
+                for (int i = 0; i < RarityPool.Length; i++)
                 {
-                    Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ProjectileID.Bomb, default, default, player.whoAmI, default, default, default);
+                    CheckNum += RarityPool[i];
+                    if (DropNum < CheckNum)
+                    {
+                        DropNum = i;
+                        break;
+                    }
+                }
+                //
+
+
+                int CaseChance = Main.rand.Next(0, 101);
+                switch (DropNum)
+                {
+                    // Bomb Spawn
+                    case 0:
+                        if (CaseChance <= 1) { Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ModContent.ProjectileType<HolyHandGrenade>(), default, default, player.whoAmI, default, default, default); } // Holy Hand Grenade Spawn - 1%
+                        else { Projectile.NewProjectile(default, player.position, new Vector2(player.velocity.X, player.velocity.Y - 3f), ProjectileID.Bomb, default, default, player.whoAmI, default, default, default); } // Bomb Spawn - 1%
+                        break;
+                    // Debuff - Each Debuff can apply separately
+                    case 1:
+                        if (CaseChance <= 20) { player.AddBuff(BuffID.OnFire, Main.rand.Next(8, 17) * 60, false, false); } // 8-16s OnFire - 20%
+                        else if (CaseChance <= 40) { player.AddBuff(BuffID.CursedInferno, Main.rand.Next(5, 10) * 60, false, false); } // 5-9s Cursed Inferno - 20%
+                        if (CaseChance <= 25) { player.AddBuff(BuffID.BrokenArmor, Main.rand.Next(50, 71) * 60, false, false); } // 50-70s Broken Armor - 20%
+                        else if (CaseChance <= 50) { player.AddBuff(BuffID.Bleeding, Main.rand.Next(35, 51) * 60, false, false); } // 35-50s Bleeding - 20%
+                        if (CaseChance > 40) { player.AddBuff(BuffID.Frostburn, Main.rand.Next(8, 13) * 60, false, false); } // 8-12s Frostburn - 40%
+                        else if (CaseChance > 90) { player.AddBuff(BuffID.Bleeding, Main.rand.Next(25, 36) * 60, false, false); } // 25-35s Chilled - 50%
+                        else { player.AddBuff(BuffID.Frozen, Main.rand.Next(4, 9) * 60, false, false); } // 4-8s Frozen - 10%
+                        break;
+                    // Teleport Player at random Location
+                    case 2:
+                        player.Teleport(new Vector2(Main.rand.Next(0, (int)Main.rightWorld), Main.rand.Next(0, (int)Main.bottomWorld))  ,0,0);
+                        break;
+                    // Spawn a bunch of NPCs
+                    case 3:
+                        if (CaseChance <= 20) { for (int i = 0; i < Main.rand.Next(0,11);  i++) { NPC.NewNPC(default, (int)player.position.X, (int)player.position.Y, NPCID.Zombie, 0, 0, 0, 0, 0, player.whoAmI); } }
+                            break;
                 }
             }
 
