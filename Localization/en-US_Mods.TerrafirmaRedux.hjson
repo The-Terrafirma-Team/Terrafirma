@@ -106,3 +106,10 @@ Projectiles: {
 	HolyHandGrenade.DisplayName: Holy Hand Grenade
 	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
 }
+
+Buffs: {
+	PhantasmalBurn: {
+		DisplayName: Phantasmal Burn
+		Description: Mods.TerrafirmaRedux.Buffs.PhantasmalBurn.Description
+	}
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using TerrafirmaRedux.Buffs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -23,7 +24,7 @@ namespace TerrafirmaRedux.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.CursedInferno,90);
+            target.AddBuff(ModContent.BuffType<PhantasmalBurn>(),300);
         }
 
         public override void AI()
