@@ -23,5 +23,23 @@ namespace TerrafirmaRedux
         {
             return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis || TrueMeleeArmorPenetrationGlobalProjectile.TrueMeleeProjectiles[projectile.type]);
         }
+        public static int TypeCountNPC(int type)
+        {
+            int found = 0;
+            for(int i = 0; i < Main.npc.Length; i++) 
+            {
+                if (Main.npc[i].type == type) found++;
+            }
+            return found;
+        }
+        public static int TypeCountProjectile(int type)
+        {
+            int found = 0;
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i].type == type) found++;
+            }
+            return found;
+        }
     }
 }
