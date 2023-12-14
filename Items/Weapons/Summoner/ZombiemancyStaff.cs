@@ -27,6 +27,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.DamageType = DamageClass.Summon;
             Item.autoReuse = false;
             Item.noMelee = true;
+            Item.mana = 10;
 
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(0, 0, 30, 0);

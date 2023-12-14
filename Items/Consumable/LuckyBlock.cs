@@ -75,7 +75,7 @@ namespace TerrafirmaRedux.Items.Consumable
                 //Remember that the chances that are listed below refer to the chances after that case has been selected
                 //ex. *5-10 Gold Coins - 10%* is in reality a 2.53% chance to drop from a lucky block (25.3% for block to drop coins, 10% chance for those coins to be 5-10 Gold Coins)
 
-                int CaseChance = Main.rand.Next(0, 101);
+                float CaseChance = Main.rand.NextFloat(0, 101);
                 if (Main.hardMode == true) //Pre-Tempire Started?
                 {
                     switch (DropNum)
@@ -195,7 +195,7 @@ namespace TerrafirmaRedux.Items.Consumable
             {
 
                 //Weight for each DropNum case
-                int[] RarityPool = new int[] { 5, 10, 2, 5};
+                int[] RarityPool = new int[] { 3, 8, 1, 3};
                 //
 
                 //Not Important
@@ -231,11 +231,14 @@ namespace TerrafirmaRedux.Items.Consumable
                     case 1:
                         if (CaseChance <= 20) { player.AddBuff(BuffID.OnFire, Main.rand.Next(8, 17) * 60, false, false); } // 8-16s OnFire - 20%
                         else if (CaseChance <= 40) { player.AddBuff(BuffID.CursedInferno, Main.rand.Next(5, 10) * 60, false, false); } // 5-9s Cursed Inferno - 20%
+                        
                         if (CaseChance <= 25) { player.AddBuff(BuffID.BrokenArmor, Main.rand.Next(50, 71) * 60, false, false); } // 50-70s Broken Armor - 20%
                         else if (CaseChance <= 50) { player.AddBuff(BuffID.Bleeding, Main.rand.Next(35, 51) * 60, false, false); } // 35-50s Bleeding - 20%
+                        
                         if (CaseChance > 40) { player.AddBuff(BuffID.Frostburn, Main.rand.Next(8, 13) * 60, false, false); } // 8-12s Frostburn - 40%
-                        else if (CaseChance > 90) { player.AddBuff(BuffID.Bleeding, Main.rand.Next(25, 36) * 60, false, false); } // 25-35s Chilled - 50%
+                        else if (CaseChance > 90) { player.AddBuff(BuffID.Chilled, Main.rand.Next(25, 36) * 60, false, false); } // 25-35s Chilled - 50%
                         else { player.AddBuff(BuffID.Frozen, Main.rand.Next(4, 9) * 60, false, false); } // 4-8s Frozen - 10%
+                       
                         break;
                     // Teleport Player at random Location
                     case 2:
@@ -243,8 +246,13 @@ namespace TerrafirmaRedux.Items.Consumable
                         break;
                     // Spawn a bunch of NPCs
                     case 3:
-                        if (CaseChance <= 20) { for (int i = 0; i < Main.rand.Next(0,11);  i++) { NPC.NewNPC(default, (int)player.position.X, (int)player.position.Y, NPCID.Zombie, 0, 0, 0, 0, 0, player.whoAmI); } }
-                            break;
+                        
+                        if (CaseChance <= 20) { for (int i = 0; i < Main.rand.Next(0,11);  i++) { NPC.NewNPC(default, (int)player.position.X, (int)player.position.Y, NPCID.Zombie, 0, 0, 0, 0, 0, player.whoAmI); } } // 1-10 Zombies - 20%
+                        else if (CaseChance <= 30) { NPC.NewNPC(default, (int)player.position.X, (int)player.position.Y, NPCID.RockGolem, 0, 0, 0, 0, 0, player.whoAmI); } // 1-10 Zombies - 10%
+
+
+
+                        break;
                 }
             }
 

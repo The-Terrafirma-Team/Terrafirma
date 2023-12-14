@@ -24,7 +24,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             Projectile.friendly = true;
             Projectile.damage = 8;
             Projectile.height = 46;
-            Projectile.width = 34;
+            Projectile.width = 30;
             Projectile.tileCollide = true;
             Projectile.timeLeft = 600;
             Projectile.penetrate = 6;
