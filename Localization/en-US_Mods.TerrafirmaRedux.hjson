@@ -95,6 +95,11 @@ Items: {
 		DisplayName: Zombiemancy Staff
 		Tooltip: Summons a friendly Zombie to fight for you
 	}
+
+	LuckyCrossbow: {
+		DisplayName: Lucky Crossbow
+		Tooltip: Shoots fast lucky arrows
+	}
 }
 
 Projectiles: {
@@ -111,6 +116,6 @@ Projectiles: {
 Buffs: {
 	PhantasmalBurn: {
 		DisplayName: Phantasmal Burn
-		Description: Mods.TerrafirmaRedux.Buffs.PhantasmalBurn.Description
+		Description: Scorching Ectoplasma burns you!
 	}
 }
