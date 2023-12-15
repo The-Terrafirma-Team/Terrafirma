@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using TerrafirmaRedux.Projectiles;
 using TerrafirmaRedux.Rarities;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,7 +20,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.useTime = 8;
             Item.width = 64;
             Item.height = 34;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item5;
             Item.DamageType = DamageClass.Ranged;
             Item.autoReuse = true;
             Item.noMelee = true;
@@ -26,7 +29,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.value = Item.sellPrice(0, 40, 0, 0);
 
             Item.useAmmo = AmmoID.Arrow;
-            Item.shoot = ProjectileID.WoodenArrowFriendly;
+            Item.shoot = ModContent.ProjectileType<LuckyArrow>();
             Item.shootSpeed = 20f;
         }
 
@@ -42,6 +45,13 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
                 return false;
             }
             return true;
+        }
+
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            type = ModContent.ProjectileType<LuckyArrow>();
+            Vector2 muzzleoff = new Vector2(Item.width - 10, -6 * player.direction).RotatedBy(Math.Atan2(velocity.Y, velocity.X));
+            position = player.Center + muzzleoff;
         }
     }
 }

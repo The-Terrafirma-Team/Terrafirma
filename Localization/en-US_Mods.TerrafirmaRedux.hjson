@@ -111,6 +111,7 @@ Projectiles: {
 	HolyHandGrenade.DisplayName: Holy Hand Grenade
 	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
 	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
+	LuckyArrow.DisplayName: Lucky Arrow
 }
 
 Buffs: {
