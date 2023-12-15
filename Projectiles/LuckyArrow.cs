@@ -38,17 +38,18 @@ namespace TerrafirmaRedux.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.ai[0] = Main.rand.Next(7);
+            Projectile.ai[0] = Main.rand.Next(8);
 
             switch (Projectile.ai[0])
             {
                 case 0: TrailColor = new Color(60, 40, 0, 0); break;
-                case 1: TrailColor = new Color(40, 0, 0, 0); break;
-                case 2: TrailColor = new Color(0, 60, 40, 0); break;
+                case 1: TrailColor = new Color(40, 0, 0, 0); Projectile.penetrate = 4; break;
+                case 2: TrailColor = new Color(0, 60, 40, 0); Projectile.penetrate = 4; break;
                 case 3: TrailColor = new Color(60, 0, 60, 0); break;
                 case 4: TrailColor = new Color(40, 40, 40, 0); Projectile.velocity = Projectile.velocity * 0.1f; break;
-                case 5: TrailColor = new Color(0, 0, 0, 0); Projectile.velocity = Projectile.velocity * 2f; break;
+                case 5: TrailColor = new Color(0, 0, 0, 0); Projectile.velocity = Projectile.velocity * 2f; Projectile.penetrate = 10; break;
                 case 6: TrailColor = new Color(0, 60, 0, 0); Projectile.velocity = Projectile.velocity * 0.8f; break;
+                case 7: TrailColor = new Color(20, 40, 40, 0); Projectile.tileCollide = false; Projectile.penetrate = 4; break;
             }
 
         }
@@ -56,6 +57,7 @@ namespace TerrafirmaRedux.Projectiles
         {
             Projectile.ai[1] += 1;
 
+            Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 40,TrailColor.G / 40, TrailColor.B / 40));
             Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + (float)(90 * (Math.PI / 180));
 
             switch(Projectile.ai[0])
@@ -65,13 +67,13 @@ namespace TerrafirmaRedux.Projectiles
                     break;
                 case 1:
                     Projectile.velocity = Projectile.velocity.RotatedBy(5 * (Math.PI / 180) * rotdirection);
-                    if (Projectile.ai[1] % 40 == 0)
+                    if (Projectile.ai[1] % 20 == 0)
                     {
                         rotdirection = Main.rand.NextBool() ? -1 : 1;
                     }
                     break;
                 case 2:
-                    if (Projectile.ai[1] % 40 == 0)
+                    if (Projectile.ai[1] % 20 == 0)
                     {
                         Projectile.velocity = Projectile.velocity.RotatedBy(90 * (Math.PI / 180) * ( Main.rand.NextBool()? -1 : 1 ) );
                     }
@@ -93,6 +95,8 @@ namespace TerrafirmaRedux.Projectiles
                         Projectile.velocity = Projectile.velocity.LengthClamp(20f);
                     }
                     break;
+                case 7:
+                    break;
 
             }
 
@@ -100,7 +104,6 @@ namespace TerrafirmaRedux.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-
             Projectile.Kill();
             return false;
         }
@@ -109,10 +112,15 @@ namespace TerrafirmaRedux.Projectiles
         {
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-            
+            Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 50, TrailColor.G / 50, TrailColor.B / 50));
+
             for (int i = 0; i < 15; i++)
             {
                 Dust.NewDust(Projectile.Center, 2, 2, DustID.Gold, Projectile.velocity.X * Main.rand.NextFloat(0.1f, 0.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.1f, 0.2f), 0, default, Main.rand.NextFloat(0.8f, 1.0f));
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                Dust.NewDust(Projectile.Center, 2, 2, DustID.GemDiamond, Projectile.velocity.X * Main.rand.NextFloat(0.1f, 0.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.1f, 0.2f), 0, new Color(TrailColor.R * 10, TrailColor.G * 10, TrailColor.B * 10), Main.rand.NextFloat(0.8f, 1.0f));
             }
         }
 

@@ -13,7 +13,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
     {
         public override void SetDefaults()
         {
-            Item.damage = 11;
+            Item.damage = 8;
             Item.knockBack = 2f;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 8;
@@ -32,6 +32,39 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.shoot = ModContent.ProjectileType<LuckyArrow>();
             Item.shootSpeed = 20f;
         }
+
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
+        {
+            if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+            {
+                damage = new StatModifier(0, 1, 46, 0);
+            }
+            else if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && !NPC.downedMechBoss3 || !NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3 || NPC.downedMechBoss1 && !NPC.downedMechBoss2 && NPC.downedMechBoss3)
+            {
+                damage = new StatModifier(0, 1, 40, 0);
+            }
+            else if (NPC.downedMechBoss1 && !NPC.downedMechBoss2 && !NPC.downedMechBoss3 || !NPC.downedMechBoss1 && NPC.downedMechBoss2 && !NPC.downedMechBoss3 || !NPC.downedMechBoss1 && !NPC.downedMechBoss2 && NPC.downedMechBoss3)
+            {
+                damage = new StatModifier(0, 1, 37, 0);
+            }
+            else if (Main.hardMode)
+            {
+                damage = new StatModifier(0, 1, 34, 0);
+            }
+            else if (NPC.downedBoss3)
+            {
+                damage = new StatModifier(0, 1, 20, 0);
+            }
+            else if (NPC.downedBoss2)
+            {
+                damage = new StatModifier(0, 1, 14, 0);
+            }
+            else if (NPC.downedBoss1)
+            {
+                damage = new StatModifier(0, 1, 10, 0);
+            }
+        }
+
 
         public override Vector2? HoldoutOffset()
         {

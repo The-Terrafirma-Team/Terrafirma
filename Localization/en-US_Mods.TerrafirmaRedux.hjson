@@ -98,7 +98,7 @@ Items: {
 
 	LuckyCrossbow: {
 		DisplayName: Lucky Crossbow
-		Tooltip: Shoots fast lucky arrows
+		Tooltip: Shoots fast lucky arrows. 33% Chance to save ammo
 	}
 }
 
