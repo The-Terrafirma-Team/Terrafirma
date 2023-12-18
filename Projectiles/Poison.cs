@@ -2,53 +2,39 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using SteelSeries.GameSense;
-using TerrafirmaRedux.Dusts;
+using System;
 
 namespace TerrafirmaRedux.Projectiles
 {
-    internal class Poison : ModProjectile
+    public class Poison : ModProjectile
     {
-        float Timer = 0;
         public override void SetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Magic;
+            Projectile.Size = new Vector2(8);
+            Projectile.aiStyle = -1;
+            Projectile.hide = true;
             Projectile.timeLeft = 60;
         }
-
         public override void AI()
         {
-        
-            Timer += 1;
-
-            if (Timer <= 60)
+            Projectile.ai[0]++;
+            //Projectile.velocity.Y += 0.1f;
+            Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin((Projectile.ai[0] * 0.3f) - MathHelper.PiOver2) * 0.07f);
+            if (Projectile.ai[0] > 2)
             {
-                int randint = Main.rand.Next(0, 9);
-                if (randint <= 6)
-                {
-                    Dust.NewDust(Projectile.position, 4, 4, ModContent.DustType<PoisonDust>(), Projectile.velocity.X * (Main.rand.NextFloat(1f, 1f) * Main.rand.Next(-1, 1)), Projectile.velocity.Y * 0.6f, 0, default, 1.3f);
-                }
-                else
-                {
-                    Dust.NewDust(Projectile.position, 4, 4, ModContent.DustType<PoisonDust>(), Projectile.velocity.X * (Main.rand.NextFloat(1f, 1f) * Main.rand.Next(-1, 1)), Projectile.velocity.Y * 0.6f, 150, default, 3f);
-                }
-            }
-
-            if (Timer > 30)
-            {
-                Projectile.velocity.Y += 0.15f;
+                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, Projectile.velocity * 0.1f, 64);
+                d.scale = 1;
+                d.frame.Y = Projectile.timeLeft % 2 == 0 ? 10 : 0;
             }
         }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(0,9) < 9 )
-            {
-                target.AddBuff(BuffID.Poisoned, 60);
-            }
+            target.AddBuff(BuffID.Poisoned, 60 * 4);
+        }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.Poisoned, 60 * 4);
         }
     }
 }

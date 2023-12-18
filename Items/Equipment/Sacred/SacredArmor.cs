@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Sacred
+namespace TerrafirmaRedux.Items.Equipment.Sacred
 {
     [AutoloadEquip(EquipType.Body)]
     public class SacredPlateMail : ModItem
