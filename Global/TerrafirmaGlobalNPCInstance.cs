@@ -1,5 +1,7 @@
-﻿using Terraria;
+﻿using TerrafirmaRedux.Items.Consumable;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Global
@@ -20,6 +22,11 @@ namespace TerrafirmaRedux.Global
                 npc.lifeRegen -= 60;
             }
 
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), chanceDenominator:20 , 1,1) );
         }
         public override bool InstancePerEntity => true;
 

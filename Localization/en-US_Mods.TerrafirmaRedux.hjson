@@ -98,7 +98,16 @@ Items: {
 
 	LuckyCrossbow: {
 		DisplayName: Lucky Crossbow
-		Tooltip: Shoots fast lucky arrows. 33% Chance to save ammo
+		Tooltip:
+			'''
+			Shoots fast lucky arrows with a randomised pattern 
+			33% Chance to save ammo 
+			'''
+	}
+
+	CrystalChainBlades: {
+		DisplayName: Crystal Chain Blades
+		Tooltip: ""
 	}
 }
 
@@ -112,6 +121,7 @@ Projectiles: {
 	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
 	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
 	LuckyArrow.DisplayName: Lucky Arrow
+	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
 }
 
 Buffs: {
