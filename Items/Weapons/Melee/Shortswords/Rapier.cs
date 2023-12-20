@@ -3,9 +3,6 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Enums;
-using System;
-using Microsoft.Xna.Framework;
-using Terraria.Utilities;
 
 namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
 {
@@ -118,10 +115,8 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
         {
             // 32 is the sprite size (here both width and height equal)
             const int HalfSpriteWidth = 50 / 2;
-            const int HalfSpriteHeight = 44 / 2;
 
             int HalfProjWidth = Projectile.width / 2;
-            int HalfProjHeight = Projectile.height / 2;
 
             // Vanilla configuration for "hitbox towards the end"
             if (Projectile.spriteDirection == 1)

@@ -92,45 +92,6 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
             }
         }
     }
-
-    // Jeo make original code challenge IMPOSSIBLE
-    public static void DrawProj_Spear(Projectile proj, Microsoft.Xna.Framework.Color color, SpriteEffects dir, Vector2 offset)
-    {
-        dir = SpriteEffects.None;
-        float num = (float)Math.Atan2(proj.velocity.Y, proj.velocity.X) + 2.355f;
-        Asset<Texture2D> val = TextureAssets.Projectile[proj.type];
-        Player player = Main.player[proj.owner];
-        Microsoft.Xna.Framework.Rectangle value = val.Frame();
-        Microsoft.Xna.Framework.Rectangle rect = proj.getRect();
-        Vector2 vector = Vector2.Zero;
-        if (player.direction > 0)
-        {
-            dir = SpriteEffects.FlipHorizontally;
-            vector.X = val.Width();
-            num -= (float)Math.PI / 2f;
-        }
-        if (player.gravDir == -1f)
-        {
-            if (proj.direction == 1)
-            {
-                dir = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
-                vector = new Vector2(val.Width(), val.Height());
-                num -= (float)Math.PI / 2f;
-            }
-            else if (proj.direction == -1)
-            {
-                dir = SpriteEffects.FlipVertically;
-                vector = new Vector2(0f, val.Height());
-                num += (float)Math.PI / 2f;
-            }
-        }
-        //Vector2.Lerp(vector, value.Center.ToVector2(), 0.25f);
-        float num2 = 0f;
-        Vector2 vector2 = proj.Center + new Vector2(0f, proj.gfxOffY);
-        Main.EntitySpriteDraw(val.Value, vector2 - Main.screenPosition, value, proj.GetAlpha(Color.White), num, vector, proj.scale, dir);
-        rect.Offset((int)(0f - Main.screenPosition.X), (int)(0f - Main.screenPosition.Y));
-        //Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, rect, Microsoft.Xna.Framework.Color.White * num2);
-    }
 }
 
 public abstract class SpearTemplate2 : ModProjectile // Thanks example mod ! ! ! :3

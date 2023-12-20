@@ -122,6 +122,8 @@ Projectiles: {
 	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
 	LuckyArrow.DisplayName: Lucky Arrow
 	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
+	MajesticGelShot.DisplayName: Majestic Gel Shot
+	QueenSlimeBeam.DisplayName: Queen Slime Beam
 }
 
 Buffs: {
