@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Items.Hallow
+namespace TerrafirmaRedux.Items.Materials
 {
     public class MajesticGel : ModItem
     {
