@@ -52,10 +52,6 @@ namespace TerrafirmaRedux.Particles
                 Particle particle = Particles[i];
                 if (particle.Active)
                 {
-                    if (particle.TimeInWorld == 0)
-                    {
-                        particle.OnSpawn();
-                    }
                     particle.TimeInWorld++;
                     particle.Update();
                 }
@@ -104,7 +100,7 @@ namespace TerrafirmaRedux.Particles
             Particles.Last().ai1 = AI1;
             Particles.Last().ai2 = AI2;
             Particles.Last().ai3 = AI3;
-
+            Particles.Last().OnSpawn();
             return Particles.Last();
         }
     }

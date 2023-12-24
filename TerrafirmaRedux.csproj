@@ -11,7 +11,6 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Items\Weapons\Melee\Swords\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>
 </Project>

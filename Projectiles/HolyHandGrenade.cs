@@ -159,7 +159,7 @@ namespace TerrafirmaRedux.Projectiles
                 int maxTileY = (int)(Projectile.Center.Y / 16f + explosionRadius);
 
                 // Ensure that all tile coordinates are within the world bounds
-                Utils.ClampWithinWorld(ref minTileX, ref minTileY, ref maxTileX, ref maxTileY);
+                Terraria.Utils.ClampWithinWorld(ref minTileX, ref minTileY, ref maxTileX, ref maxTileY);
 
                 // These 2 methods handle actually mining the tiles and walls while honoring tile explosion conditions
                 bool explodeWalls = Projectile.ShouldWallExplode(Projectile.Center, explosionRadius, minTileX, maxTileX, minTileY, maxTileY);

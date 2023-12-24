@@ -95,7 +95,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
             // GetLerpValue returns a value between 0f and 1f - if clamped is true - representing how far Timer got along the "distance" defined by the first two parameters
             // The first call handles the fade in, the second one the fade out.
             // Notice the second call's parameters are swapped, this means the result will be reverted
-            Projectile.Opacity = Utils.GetLerpValue(0f, FadeInDuration, Timer, clamped: true) * Utils.GetLerpValue(TotalDuration, TotalDuration - FadeOutDuration, Timer, clamped: true);
+            Projectile.Opacity = Terraria.Utils.GetLerpValue(0f, FadeInDuration, Timer, clamped: true) * Terraria.Utils.GetLerpValue(TotalDuration, TotalDuration - FadeOutDuration, Timer, clamped: true);
 
             // Keep locked onto the player, but extend further based on the given velocity (Requires ShouldUpdatePosition returning false to work)
             Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter, reverseRotation: false, addGfxOffY: false);
@@ -145,7 +145,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
             DelegateMethods.tilecut_0 = TileCuttingContext.AttackProjectile;
             Vector2 start = Projectile.Center;
             Vector2 end = start + Projectile.velocity.SafeNormalize(-Vector2.UnitY) * 10f;
-            Utils.PlotTileLine(start, end, CollisionWidth, DelegateMethods.CutTiles);
+            Terraria.Utils.PlotTileLine(start, end, CollisionWidth, DelegateMethods.CutTiles);
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

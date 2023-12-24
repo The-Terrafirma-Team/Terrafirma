@@ -109,6 +109,11 @@ Items: {
 		DisplayName: Crystal Chain Blades
 		Tooltip: ""
 	}
+
+	TheCrucible: {
+		DisplayName: The Crucible
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -124,6 +129,7 @@ Projectiles: {
 	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
 	MajesticGelShot.DisplayName: Majestic Gel Shot
 	QueenSlimeBeam.DisplayName: Queen Slime Beam
+	CrucibleBeam.DisplayName: Crucible Beam
 }
 
 Buffs: {

@@ -113,7 +113,7 @@ namespace TerrafirmaRedux.Reworks.QueenSlime
             Projectile.velocity *= 0.999f;
             if(Projectile.timeLeft == 1)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient && ClassExtensions.TypeCountNPC(NPCID.QueenSlimeMinionPurple) < 4)
+                if (Main.netMode != NetmodeID.MultiplayerClient && Utils.TypeCountNPC(NPCID.QueenSlimeMinionPurple) < 4)
                 {
                     int npc = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, NPCID.QueenSlimeMinionPurple);
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, npc);
