@@ -1,9 +1,9 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using TerrafirmaRedux.Projectiles;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
+using TerrafirmaRedux.Projectiles.Melee;
 
 namespace TerrafirmaRedux.Items.Weapons.Melee.Other
 {

@@ -137,4 +137,9 @@ Buffs: {
 		DisplayName: Phantasmal Burn
 		Description: Scorching Ectoplasma burns you!
 	}
+
+	AgnomalumBurns: {
+		DisplayName: Agnomalum Burns
+		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+	}
 }

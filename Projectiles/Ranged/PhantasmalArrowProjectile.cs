@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Buffs;
+using TerrafirmaRedux.Buffs.Debuffs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles
+namespace TerrafirmaRedux.Projectiles.Ranged
 {
     internal class PhantasmalArrowProjectile : ModProjectile
     {
@@ -30,11 +30,11 @@ namespace TerrafirmaRedux.Projectiles
         public override void AI()
         {
             Projectile.ai[1] += 1;
-            if ((Projectile.ai[1] % 2) == 0)
+            if (Projectile.ai[1] % 2 == 0)
             {
-                Dust.NewDust(Projectile.Center - new Vector2(4,4), 0, 0, DustID.BlueFlare, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 0, default, Main.rand.NextFloat(1.8f, 2.3f));
+                Dust.NewDust(Projectile.Center - new Vector2(4, 4), 0, 0, DustID.BlueFlare, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 0, default, Main.rand.NextFloat(1.8f, 2.3f));
             }
-            else if ((Projectile.ai[1] % 3) == 0)
+            else if (Projectile.ai[1] % 3 == 0)
             {
                 Dust.NewDust(Projectile.Center - new Vector2(4, 4), 0, 0, DustID.BlueFlare, Projectile.velocity.X * 0.9f, Projectile.velocity.Y * 0.7f, 0, default, Main.rand.NextFloat(0.8f, 1.2f));
             }
@@ -48,7 +48,7 @@ namespace TerrafirmaRedux.Projectiles
 
             for (int i = 0; i < 15; i++)
             {
-                Dust.NewDust(Projectile.Center, 2, 2, DustID.BlueFlare, Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.5f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.5f), 0, default, Main.rand.NextFloat(1.8f, 2.3f)  );
+                Dust.NewDust(Projectile.Center, 2, 2, DustID.BlueFlare, Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.5f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.5f), 0, default, Main.rand.NextFloat(1.8f, 2.3f));
             }
 
             return false;

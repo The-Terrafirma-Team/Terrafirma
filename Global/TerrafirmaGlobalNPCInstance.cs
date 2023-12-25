@@ -9,14 +9,22 @@ namespace TerrafirmaRedux.Global
     internal class TerrafirmaGlobalNPCInstance : GlobalNPC
     {
         public bool PhantasmalBurn;
+        public bool AgnomalumBurns;
         public override void ResetEffects(NPC npc)
         {
             PhantasmalBurn = false;
+            AgnomalumBurns = false;
         }
 
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
             if (PhantasmalBurn) 
+            {
+                damage = 15;
+                npc.lifeRegen -= 60;
+            }
+
+            if (AgnomalumBurns)
             {
                 damage = 15;
                 npc.lifeRegen -= 60;

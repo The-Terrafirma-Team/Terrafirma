@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Items.Weapons.Ranged;
 using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
 using TerrafirmaRedux.Items.Weapons.Magic;
-using TerrafirmaRedux.Projectiles;
 using TerrafirmaRedux.Items.Ammo;
+using TerrafirmaRedux.Projectiles.Hostile;
 
 namespace TerrafirmaRedux.Items.Consumable
 {

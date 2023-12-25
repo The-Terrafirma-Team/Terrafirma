@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles
+namespace TerrafirmaRedux.Projectiles.Hostile
 {
     // This projectile demonstrates exploding tiles (like a bomb or dynamite), spawning child projectiles, and explosive visual effects.
     // TODO: This projectile does not currently damage the owner, or damage other players on the For the worthy secret seed.

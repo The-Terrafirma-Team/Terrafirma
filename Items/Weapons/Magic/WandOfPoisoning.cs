@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Projectiles;
+using TerrafirmaRedux.Projectiles.Magic;
 
 namespace TerrafirmaRedux.Items.Weapons.Magic
 {

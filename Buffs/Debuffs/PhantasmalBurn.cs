@@ -3,13 +3,14 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Buffs
+namespace TerrafirmaRedux.Buffs.Debuffs
 {
     internal class PhantasmalBurn : ModBuff
     {
         public override void SetStaticDefaults()
         {
-            Main.pvpBuff[Type] = true; 
+            Main.pvpBuff[Type] = true;
+            Main.debuff[Type] = true;
         }
 
         public override void Update(NPC npc, ref int buffIndex)

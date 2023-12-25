@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Projectiles;
+using TerrafirmaRedux.Projectiles.Ranged;
 using TerrafirmaRedux.Rarities;
 using Terraria;
 using Terraria.DataStructures;

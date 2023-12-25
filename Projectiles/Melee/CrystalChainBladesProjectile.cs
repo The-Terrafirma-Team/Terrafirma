@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles
+namespace TerrafirmaRedux.Projectiles.Melee
 {
     internal class CrystalChainBladesProjectile : ModProjectile
     {
@@ -66,7 +66,7 @@ namespace TerrafirmaRedux.Projectiles
 
             for (int i = 0; i < (int)(Projectile.Center.Distance(Main.player[Projectile.owner].Center) / ChainSprite.Height()); i++)
             {
-                Main.EntitySpriteDraw(ChainSprite.Value, Projectile.Center + (Vector2.Normalize(Main.player[Projectile.owner].Center - Projectile.Center) * i * ChainSprite.Height()) - Main.screenPosition, null, lightColor, (Main.player[Projectile.owner].Center - Projectile.Center).ToRotation() + 90 * (float)(Math.PI / 180), ChainSprite.Size() / 2, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(ChainSprite.Value, Projectile.Center + Vector2.Normalize(Main.player[Projectile.owner].Center - Projectile.Center) * i * ChainSprite.Height() - Main.screenPosition, null, lightColor, (Main.player[Projectile.owner].Center - Projectile.Center).ToRotation() + 90 * (float)(Math.PI / 180), ChainSprite.Size() / 2, 1f, SpriteEffects.None, 0);
             }
 
             if ((Projectile.position - Main.player[Projectile.owner].position).X < 0)
@@ -79,7 +79,7 @@ namespace TerrafirmaRedux.Projectiles
                 {
                     Main.EntitySpriteDraw(BladeSprite.Value, Main.player[Projectile.owner].Center + (Projectile.Center - Main.player[Projectile.owner].Center) - Main.screenPosition, null, lightColor, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + 90 * (float)(Math.PI / 180), BladeSprite.Size() / 2 - new Vector2(-4, 0), 1f, SpriteEffects.None, 0);
                 }
-                
+
             }
             else
             {

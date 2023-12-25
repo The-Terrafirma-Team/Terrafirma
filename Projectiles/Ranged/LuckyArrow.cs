@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Projectiles
+namespace TerrafirmaRedux.Projectiles.Ranged
 {
     internal class LuckyArrow : ModProjectile
     {
@@ -33,7 +33,7 @@ namespace TerrafirmaRedux.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            
+
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -57,13 +57,13 @@ namespace TerrafirmaRedux.Projectiles
         {
             Projectile.ai[1] += 1;
 
-            Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 40,TrailColor.G / 40, TrailColor.B / 40));
+            Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 40, TrailColor.G / 40, TrailColor.B / 40));
             Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + (float)(90 * (Math.PI / 180));
 
-            switch(Projectile.ai[0])
+            switch (Projectile.ai[0])
             {
                 case 0:
-                    Projectile.velocity.Y += 0.05f; ; 
+                    Projectile.velocity.Y += 0.05f; ;
                     break;
                 case 1:
                     Projectile.velocity = Projectile.velocity.RotatedBy(5 * (Math.PI / 180) * rotdirection);
@@ -75,11 +75,11 @@ namespace TerrafirmaRedux.Projectiles
                 case 2:
                     if (Projectile.ai[1] % 20 == 0)
                     {
-                        Projectile.velocity = Projectile.velocity.RotatedBy(90 * (Math.PI / 180) * ( Main.rand.NextBool()? -1 : 1 ) );
+                        Projectile.velocity = Projectile.velocity.RotatedBy(90 * (Math.PI / 180) * (Main.rand.NextBool() ? -1 : 1));
                     }
                     break;
                 case 3:
-                    Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin((Projectile.ai[1] * 0.3f) - MathHelper.PiOver2) * 0.5f);
+                    Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin(Projectile.ai[1] * 0.3f - MathHelper.PiOver2) * 0.5f);
                     break;
                 case 4:
                     Projectile.velocity *= 1.05f;
@@ -130,15 +130,15 @@ namespace TerrafirmaRedux.Projectiles
             Asset<Texture2D> ArrowSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/LuckyArrow");
             Asset<Texture2D> ArrowGlowSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/LuckyArrowGlow");
 
-            for (int i = 0; i < 20; i ++)
+            for (int i = 0; i < 20; i++)
             {
 
-                Main.EntitySpriteDraw(ArrowOutlineSprite.Value, Projectile.oldPos[i] - Main.screenPosition + Projectile.Size/2, null, TrailColor, Projectile.oldRot[i], ArrowSprite.Size()/2, 1f - 0.05f * i, SpriteEffects.None, 0f);
-            
+                Main.EntitySpriteDraw(ArrowOutlineSprite.Value, Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2, null, TrailColor, Projectile.oldRot[i], ArrowSprite.Size() / 2, 1f - 0.05f * i, SpriteEffects.None, 0f);
+
             }
 
-            Main.EntitySpriteDraw(ArrowGlowSprite.Value, Projectile.Center - Main.screenPosition, null, TrailColor, Projectile.rotation, ArrowGlowSprite.Size()/2, 1f, SpriteEffects.None, 0f);
-            Main.EntitySpriteDraw(ArrowSprite.Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, ArrowSprite.Size()/2, 1f, SpriteEffects.None, 0f);
+            Main.EntitySpriteDraw(ArrowGlowSprite.Value, Projectile.Center - Main.screenPosition, null, TrailColor, Projectile.rotation, ArrowGlowSprite.Size() / 2, 1f, SpriteEffects.None, 0f);
+            Main.EntitySpriteDraw(ArrowSprite.Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, ArrowSprite.Size() / 2, 1f, SpriteEffects.None, 0f);
 
             return false;
         }

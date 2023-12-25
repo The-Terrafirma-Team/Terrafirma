@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace TerrafirmaRedux.Projectiles
+namespace TerrafirmaRedux.Projectiles.Magic
 {
     public class Poison : ModProjectile
     {
@@ -20,7 +20,7 @@ namespace TerrafirmaRedux.Projectiles
         {
             Projectile.ai[0]++;
             //Projectile.velocity.Y += 0.1f;
-            Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin((Projectile.ai[0] * 0.3f) - MathHelper.PiOver2) * 0.07f);
+            Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin(Projectile.ai[0] * 0.3f - MathHelper.PiOver2) * 0.07f);
             if (Projectile.ai[0] > 2)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, Projectile.velocity * 0.1f, 64);
