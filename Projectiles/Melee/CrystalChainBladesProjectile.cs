@@ -61,8 +61,8 @@ namespace TerrafirmaRedux.Projectiles.Melee
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> ChainSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/CrystalChainBladesChain");
-            Asset<Texture2D> BladeSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/CrystalChainBladesProjectile");
+            Asset<Texture2D> ChainSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Melee/CrystalChainBladesChain");
+            Asset<Texture2D> BladeSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Melee/CrystalChainBladesProjectile");
 
             for (int i = 0; i < (int)(Projectile.Center.Distance(Main.player[Projectile.owner].Center) / ChainSprite.Height()); i++)
             {
