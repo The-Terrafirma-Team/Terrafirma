@@ -126,9 +126,9 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> ArrowOutlineSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/LuckyArrowAfterimage");
-            Asset<Texture2D> ArrowSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/LuckyArrow");
-            Asset<Texture2D> ArrowGlowSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/LuckyArrowGlow");
+            Asset<Texture2D> ArrowOutlineSprite = ModContent.Request<Texture2D>(Texture + "Afterimage");
+            Asset<Texture2D> ArrowSprite = ModContent.Request<Texture2D>(Texture);
+            Asset<Texture2D> ArrowGlowSprite = ModContent.Request<Texture2D>(Texture + "Glow");
 
             for (int i = 0; i < 20; i++)
             {
