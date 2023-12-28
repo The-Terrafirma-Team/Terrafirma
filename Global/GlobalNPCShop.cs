@@ -1,4 +1,4 @@
-﻿using TerrafirmaRedux.Items.Equipment;
+﻿using TerrafirmaRedux.Items.Equipment.Ranged;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

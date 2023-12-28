@@ -122,12 +122,17 @@ Items: {
 
 	Foregrip: {
 		DisplayName: Foregrip
-		Tooltip: "Increases gun accuracy and bullet velocity"
+		Tooltip: Increases gun accuracy and bullet velocity
 	}
 
 	DrumMag: {
 		DisplayName: Drum Mag
-		Tooltip: "66% chance to save bullets"
+		Tooltip: 66% chance to save bullets
+	}
+
+	AmmoCan: {
+		DisplayName: Ammo Can
+		Tooltip: ""
 	}
 }
 

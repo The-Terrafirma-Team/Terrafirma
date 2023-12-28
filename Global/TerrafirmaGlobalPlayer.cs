@@ -13,18 +13,28 @@ namespace TerrafirmaRedux.Global
     {
         public bool Foregrip = false;
         public bool DrumMag = false;
+        public bool AmmoCan = false;
+        public bool CanUseAmmo = true;
         public override void ResetEffects()
         {
             Foregrip = false;
             DrumMag = false;
+            AmmoCan = false;
+            CanUseAmmo = true;
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if(ammo.ammo == AmmoID.Bullet && Main.rand.NextBool(2,3) && DrumMag)
+            if (!CanUseAmmo)
+            {
+                return false;
+            }
+
+            if (ammo.ammo == AmmoID.Bullet && Main.rand.NextBool(2,3) && DrumMag)
             {
                 return false;
             }
             return base.CanConsumeAmmo(weapon, ammo);
+
         }
     }
 }

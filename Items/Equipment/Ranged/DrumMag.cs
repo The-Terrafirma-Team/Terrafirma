@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Equipment
+namespace TerrafirmaRedux.Items.Equipment.Ranged
 {
     public class DrumMag : ModItem
     {
