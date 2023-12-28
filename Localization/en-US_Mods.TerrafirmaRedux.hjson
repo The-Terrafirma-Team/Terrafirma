@@ -127,12 +127,21 @@ Items: {
 
 	DrumMag: {
 		DisplayName: Drum Mag
-		Tooltip: 66% chance to save bullets
+		Tooltip: 
+		'''
+		66% chance to save bullets
+		5% increased ranged damage
+		'''
 	}
 
 	AmmoCan: {
 		DisplayName: Ammo Can
-		Tooltip: ""
+		Tooltip: Guns randomly cycle between bullets in your ammo slot
+	}
+
+	BoxOfHighPiercingRounds: {
+		DisplayName: Box Of High Piercing Rounds
+		Tooltip: Increases bullet penetration
 	}
 }
 

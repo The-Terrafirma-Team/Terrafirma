@@ -18,6 +18,7 @@ namespace TerrafirmaRedux.Global
                 entity.usesLocalNPCImmunity = true;
                 entity.localNPCHitCooldown = -1;
             }
+
         }
     }
 }

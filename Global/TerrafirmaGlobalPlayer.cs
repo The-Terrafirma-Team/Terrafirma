@@ -15,12 +15,14 @@ namespace TerrafirmaRedux.Global
         public bool DrumMag = false;
         public bool AmmoCan = false;
         public bool CanUseAmmo = true;
+        public bool BoxOfHighPiercingRounds = false;
         public override void ResetEffects()
         {
             Foregrip = false;
             DrumMag = false;
             AmmoCan = false;
             CanUseAmmo = true;
+            BoxOfHighPiercingRounds = false;
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {

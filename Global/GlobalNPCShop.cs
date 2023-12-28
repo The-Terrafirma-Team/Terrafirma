@@ -12,7 +12,7 @@ namespace TerrafirmaRedux.Global
             if (shop.NpcType == NPCID.ArmsDealer)
             {
                 shop.Add(ModContent.ItemType<DrumMag>());
-                shop.Add(ModContent.ItemType<Foregrip>(),Condition.Hardmode);
+                shop.Add(ModContent.ItemType<Foregrip>(), Condition.Hardmode);
             }
         }
     }
