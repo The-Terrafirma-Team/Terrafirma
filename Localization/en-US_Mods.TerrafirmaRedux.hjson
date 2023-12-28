@@ -114,6 +114,11 @@ Items: {
 		DisplayName: The Crucible
 		Tooltip: ""
 	}
+
+	TommyGun: {
+		DisplayName: Tommy Gun
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
