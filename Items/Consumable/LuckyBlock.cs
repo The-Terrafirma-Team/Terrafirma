@@ -27,7 +27,7 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.UseSound = SoundID.Item4;
             Item.rare = ItemRarityID.Gray;
             Item.value = Item.sellPrice(0, 0, 5, 0);
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
 
         }
