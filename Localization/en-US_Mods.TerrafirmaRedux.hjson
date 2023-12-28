@@ -143,6 +143,11 @@ Items: {
 		DisplayName: Box Of High Piercing Rounds
 		Tooltip: Increases bullet penetration
 	}
+
+	Uldrax: {
+		DisplayName: Uldrax
+		Tooltip: Not to be confused with the Draxmer
+	}
 }
 
 Projectiles: {
@@ -159,6 +164,7 @@ Projectiles: {
 	MajesticGelShot.DisplayName: Majestic Gel Shot
 	QueenSlimeBeam.DisplayName: Queen Slime Beam
 	CrucibleBeam.DisplayName: Crucible Beam
+	UldraxProjectile.DisplayName: Uldrax Projectile
 }
 
 Buffs: {
