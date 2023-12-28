@@ -1,0 +1,19 @@
+﻿using TerrafirmaRedux.Items.Equipment;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace TerrafirmaRedux.Global
+{
+    public class GlobalNPCShop : GlobalNPC
+    {
+        public override void ModifyShop(NPCShop shop)
+        {
+            if (shop.NpcType == NPCID.ArmsDealer)
+            {
+                shop.Add(ModContent.ItemType<DrumMag>());
+                shop.Add(ModContent.ItemType<Foregrip>(),Condition.Hardmode);
+            }
+        }
+    }
+}
