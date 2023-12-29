@@ -127,11 +127,11 @@ Items: {
 
 	DrumMag: {
 		DisplayName: Drum Mag
-		Tooltip: 
-		'''
-		66% chance to save bullets
-		5% increased ranged damage
-		'''
+		Tooltip:
+			'''
+			66% chance to save bullets
+			5% increased ranged damage
+			'''
 	}
 
 	AmmoCan: {
@@ -147,6 +147,11 @@ Items: {
 	Uldrax: {
 		DisplayName: Uldrax
 		Tooltip: Not to be confused with the Draxmer
+	}
+
+	BoneBullet: {
+		DisplayName: Bone Bullet
+		Tooltip: ""
 	}
 }
 
@@ -165,6 +170,7 @@ Projectiles: {
 	QueenSlimeBeam.DisplayName: Queen Slime Beam
 	CrucibleBeam.DisplayName: Crucible Beam
 	UldraxProjectile.DisplayName: Uldrax Projectile
+	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
 }
 
 Buffs: {
