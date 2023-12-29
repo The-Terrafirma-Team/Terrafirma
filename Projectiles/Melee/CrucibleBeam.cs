@@ -50,14 +50,8 @@ namespace TerrafirmaRedux.Projectiles.Melee
         }
         public override void OnKill(int timeLeft)
         {
-            Projectile.ResetLocalNPCHitImmunity();
-            Projectile.maxPenetrate = -1;
-            Projectile.penetrate = -1;
-
+            Projectile.Explode(100);
             SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.position);
-            Projectile.Resize(100, 100);
-
-            Projectile.Damage();
 
             for (int i = 0; i < 20; i++)
             {

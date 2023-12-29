@@ -4,17 +4,31 @@ using Terraria.ModLoader;
 using Terraria;
 using TerrafirmaRedux.Global;
 using System;
+using Terraria.Audio;
 
 namespace TerrafirmaRedux
 {
     public static class Utils
     {
+        /// <summary>
+        /// Clamps a Vector2 to be a specific length between max and min. Good for giving something a maximum speed.
+        /// </summary>
         public static Vector2 LengthClamp(this Vector2 vector, float max, float min = 0)
         {
             if (vector.Length() > max) return Vector2.Normalize(vector) * max;
             else if (vector.Length() < min) return Vector2.Normalize(vector) * min;
             else return vector;
         }
+        /// <summary>
+        /// I should learn what this actually does at some point
+        /// </summary>
+        /// <param name="spriteWidth"></param>
+        /// <param name="spriteHeight"></param>
+        /// <param name="normalizedPointOnPath"></param>
+        /// <param name="itemScale"></param>
+        /// <param name="location"></param>
+        /// <param name="outwardDirection"></param>
+        /// <param name="player"></param>
         public static void GetPointOnSwungItemPath(float spriteWidth, float spriteHeight, float normalizedPointOnPath, float itemScale, out Vector2 location, out Vector2 outwardDirection, Player player)
         {
             float num = (float)Math.Sqrt(spriteWidth * spriteWidth + spriteHeight * spriteHeight);
@@ -56,7 +70,14 @@ namespace TerrafirmaRedux
         {
             return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis || TrueMeleeArmorPenetrationGlobalProjectile.TrueMeleeProjectiles[projectile.type]);
         }
-
+        public static void Explode(this Projectile projectile, int Diameter)
+        {
+            projectile.ResetLocalNPCHitImmunity();
+            projectile.maxPenetrate = -1;
+            projectile.penetrate = -1;
+            projectile.Resize(Diameter, Diameter);
+            projectile.Damage();
+        }
         public static Color getAgnomalumFlameColor()
         {
             Color[] colors = new Color[] { new Color(255, 188, 122, 0), new Color(255, 128, 0, 0), new Color(252, 120, 111, 0), new Color(207,33,76,0)};
