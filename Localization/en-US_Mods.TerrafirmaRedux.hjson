@@ -153,6 +153,11 @@ Items: {
 		DisplayName: Bone Bullet
 		Tooltip: ""
 	}
+
+	CarmineHook: {
+		DisplayName: Carmine Hook
+		Tooltip: Spits an ichor stream
+	}
 }
 
 Projectiles: {
@@ -171,6 +176,7 @@ Projectiles: {
 	CrucibleBeam.DisplayName: Crucible Beam
 	UldraxProjectile.DisplayName: Uldrax Projectile
 	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
+	CarmineHookProjectile.DisplayName: Carmine Hook Projectile
 }
 
 Buffs: {
