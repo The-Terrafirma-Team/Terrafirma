@@ -202,6 +202,25 @@ Items: {
 			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
 			'''
 	}
+
+	ShroomiteCrossbow: {
+		DisplayName: Shroomite Crossbow
+		Tooltip: ""
+	}
+
+	ShroomiteSMG: {
+		DisplayName: Shroomite SMG
+		Tooltip: Shoots a burst of 3 shroomite bullets
+	}
+
+	ShroomiteSniper: {
+		DisplayName: Shroomite Sniper Rifle
+		Tooltip:
+			'''
+			Shoots powerful, high velocity, armor penetrating bullets 
+			Right click to zoom out
+			'''
+	}
 }
 
 Projectiles: {

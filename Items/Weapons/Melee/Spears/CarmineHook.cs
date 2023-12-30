@@ -25,6 +25,8 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Spears
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
+            Item.rare = ItemRarityID.Yellow;
+
             Item.shoot = ModContent.ProjectileType<CarmineHookProjectile>();
             Item.shootSpeed = 10;
         }

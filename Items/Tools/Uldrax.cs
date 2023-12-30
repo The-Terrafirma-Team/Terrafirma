@@ -33,7 +33,7 @@ namespace TerrafirmaRedux.Items.Tools
             Item.channel = true;
 
             Item.value = Item.sellPrice(gold: 6);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
         }
 
         public override void AddRecipes()
