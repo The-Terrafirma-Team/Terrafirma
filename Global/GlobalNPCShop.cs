@@ -15,6 +15,8 @@ namespace TerrafirmaRedux.Global
                 shop.Add(ModContent.ItemType<DrumMag>());
                 shop.Add(ModContent.ItemType<Foregrip>(), Condition.Hardmode);
                 shop.InsertAfter(ItemID.UnholyArrow, ModContent.ItemType<CarbonFiberArrow>(), Condition.Hardmode);
+                shop.InsertAfter(ItemID.SilverBullet, ModContent.ItemType<Buckshot>(), Condition.DownedSkeletron);
+                shop.InsertAfter(ModContent.ItemType<Buckshot>(), ModContent.ItemType<Birdshot>(), Condition.DownedSkeletron, Condition.BloodMoon);
 
             }
         }

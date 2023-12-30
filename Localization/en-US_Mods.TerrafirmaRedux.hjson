@@ -168,6 +168,26 @@ Items: {
 		DisplayName: Carbon Fiber Arrow
 		Tooltip: ""
 	}
+
+	Birdshot: {
+		DisplayName: Birdshot
+		Tooltip: Shoots a bunch of little pellets
+	}
+
+	Buckshot: {
+		DisplayName: Buckshot
+		Tooltip: Shoots a bunch of pellets
+	}
+
+	ExplosiveBuckshot: {
+		DisplayName: Explosive Buckshot
+		Tooltip: Shoots a bunch of explosive pellets
+	}
+
+	RubberBuckshot: {
+		DisplayName: Rubber Buckshot
+		Tooltip: Shoots a bunch of bouncy pellets
+	}
 }
 
 Projectiles: {
@@ -189,6 +209,10 @@ Projectiles: {
 	CarmineHookProjectile.DisplayName: Carmine Hook Projectile
 	AngryArrowProjectile.DisplayName: Angry Arrow Projectile
 	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
+	BirdshotProjectile.DisplayName: Birdshot Projectile
+	BuckshotProjectile.DisplayName: Buckshot Projectile
+	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
+	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
 }
 
 Buffs: {
