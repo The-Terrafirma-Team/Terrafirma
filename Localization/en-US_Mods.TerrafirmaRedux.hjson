@@ -157,6 +157,8 @@ Items: {
 	CarmineHook: {
 		DisplayName: Carmine Hook
 		Tooltip: Spits an ichor stream
+	}
+
 	AngryArrow: {
 		DisplayName: Angry Arrow
 		Tooltip: Hit enemies target you
