@@ -5,8 +5,12 @@ using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Global
 {
-    public class RecipeReplacer : ModSystem
+    public class RecipeSystem : ModSystem
     {
+        public override void AddRecipes()
+        {
+            Recipe.Create(ItemID.SlimeStaff).AddTile(TileID.WorkBenches).AddIngredient(ItemID.Gel, 25).AddIngredient(ItemID.Wood, 25).AddIngredient(ItemID.Daybloom).Register();
+        }
         public override void PostAddRecipes()
         {
             for(int i = 0; i < Recipe.numRecipes; i++) 
@@ -24,8 +28,6 @@ namespace TerrafirmaRedux.Global
                 {
                     recipe.AddIngredient(ModContent.ItemType<MajesticGel>(),10);
                 }
-
-
             }
         }
     }
