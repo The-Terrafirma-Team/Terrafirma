@@ -22,7 +22,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.DamageType = DamageClass.Ranged; 
             Projectile.penetrate = 1; 
 
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 400;
 
             Projectile.ignoreWater = true; 
             Projectile.tileCollide = true; 

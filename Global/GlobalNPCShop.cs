@@ -19,6 +19,12 @@ namespace TerrafirmaRedux.Global
                 shop.InsertAfter(ModContent.ItemType<Buckshot>(), ModContent.ItemType<Birdshot>(), Condition.DownedSkeletron, Condition.BloodMoon);
 
             }
+
+            if (shop.NpcType == NPCID.Cyborg)
+            {
+                shop.InsertAfter(ItemID.DryRocket, ModContent.ItemType<ICBA>());
+
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.DamageType = DamageClass.Ranged; 
             Projectile.penetrate = 1; 
 
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 400;
 
             Projectile.ignoreWater = true; 
             Projectile.tileCollide = true; 
@@ -40,16 +40,6 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Main.rand.NextFloat(-1.2f, 1.2f), Main.rand.NextFloat(-1.2f, 1.2f)), 0, default, Main.rand.NextFloat(1.5f, 1.8f));
-                TorchDust.noGravity = true;
-            }
-            for (int i = 0; i < 12; i++)
-            {
-                Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Main.rand.NextFloat(-0.9f, 0.9f), Main.rand.NextFloat(-0.9f, 0.9f)), 128, default, Main.rand.NextFloat(1.2f, 1.7f));
-                SmokeDust.noGravity = true;
-            }
             Projectile.Kill();
             return false;
         }
@@ -68,23 +58,14 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             else
             {
                 Lighting.AddLight(Projectile.position, new Vector3(0.4f, 0.4f, 0));
-                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.5f, 1.7f));
+                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.2f, 1.4f));
                 TorchDust.noGravity = true;
             }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-2f, 2f)), 0, default, Main.rand.NextFloat(2.5f, 2.8f));
-                TorchDust.noGravity = true;
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Main.rand.NextFloat(-1.8f, 1.8f), Main.rand.NextFloat(-1.8f, 1.8f)), 128, default, Main.rand.NextFloat(1.6f, 2f));
-                SmokeDust.noGravity = true;
-            }
+
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -105,12 +86,23 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override void OnKill(int timeLeft)
         {
-            Projectile.Explode(15);
             if (Projectile.ai[2] == 1)
             {
+                for (int i = 0; i < 5; i++)
+                {
+                    Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Main.rand.NextFloat(-1.6f, 1.6f) * 2, Main.rand.NextFloat(-1.6f, 1.6f) * 2), 0, default, Main.rand.NextFloat(1.5f, 1.8f));
+                    TorchDust.noGravity = true;
+                }
+                for (int i = 0; i < 12; i++)
+                {
+                    Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Main.rand.NextFloat(-1.4f, 1.4f) * 2, Main.rand.NextFloat(-1.4f, 1.4f) * 2), 128, default, Main.rand.NextFloat(1.2f, 1.7f));
+                    SmokeDust.noGravity = true;
+                }
                 Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
-                SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+                Projectile.Explode(100);
             }
+
             
         }
 

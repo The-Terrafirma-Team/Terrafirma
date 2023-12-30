@@ -20,6 +20,8 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.aiStyle = ProjAIStyleID.Arrow;
             Projectile.timeLeft = 600;
             Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Ranged;
+            Projectile.arrow = true;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

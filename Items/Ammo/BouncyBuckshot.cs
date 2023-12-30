@@ -5,7 +5,7 @@ using Terraria;
 
 namespace TerrafirmaRedux.Items.Ammo
 {
-    internal class RubberBuckshot : ModItem
+    internal class BouncyBuckshot : ModItem
     {
         public override void SetDefaults()
         {
@@ -18,7 +18,7 @@ namespace TerrafirmaRedux.Items.Ammo
             Item.knockBack = 3f;
             Item.value = Item.sellPrice(0, 0, 0, 12);
             Item.rare = ItemRarityID.LightRed;
-            Item.shoot = ModContent.ProjectileType<RubberBuckshotProjectile>();
+            Item.shoot = ModContent.ProjectileType<BouncyBuckshotProjectile>();
             Item.shootSpeed = 2f;
             Item.ammo = AmmoID.Bullet;
         }

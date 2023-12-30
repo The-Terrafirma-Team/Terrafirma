@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Projectiles.Ranged
 {
-    internal class RubberBuckshotProjectile : ModProjectile
+    internal class BouncyBuckshotProjectile : ModProjectile
     {
         public override void SetDefaults()
         {
@@ -22,7 +22,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.DamageType = DamageClass.Ranged; 
             Projectile.penetrate = 5; 
 
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 400;
 
             Projectile.ignoreWater = true; 
             Projectile.tileCollide = true; 

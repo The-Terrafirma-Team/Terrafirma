@@ -29,6 +29,8 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.penetrate = 1;
             Projectile.timeLeft = 600;
             Projectile.friendly = true;
+            Projectile.arrow = true;
+            Projectile.DamageType = DamageClass.Ranged;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

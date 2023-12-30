@@ -188,6 +188,20 @@ Items: {
 		DisplayName: Rubber Buckshot
 		Tooltip: Shoots a bunch of bouncy pellets
 	}
+
+	BouncyBuckshot: {
+		DisplayName: Bouncy Buckshot
+		Tooltip: ""
+	}
+
+	ICBA: {
+		DisplayName: I.C.B.A
+		Tooltip:
+			'''
+			Speeds up over time for extra damage
+			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
+			'''
+	}
 }
 
 Projectiles: {
@@ -213,6 +227,8 @@ Projectiles: {
 	BuckshotProjectile.DisplayName: Buckshot Projectile
 	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
 	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
+	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
+	ICBAProjectile.DisplayName: I C B A Projectile
 }
 
 Buffs: {
