@@ -202,6 +202,11 @@ Items: {
 			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
 			'''
 	}
+
+	IcicleMachineGun: {
+		DisplayName: Icicle Machine Gun
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -229,6 +234,7 @@ Projectiles: {
 	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
 	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
 	ICBAProjectile.DisplayName: I C B A Projectile
+	IcicleProjectile.DisplayName: Icicle Projectile
 }
 
 Buffs: {

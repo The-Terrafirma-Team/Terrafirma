@@ -104,5 +104,35 @@ namespace TerrafirmaRedux
             }
             return found;
         }
+
+        /// <summary>
+        /// Finds the closest NPC to the given position and returns that NPC
+        /// </summary>
+        public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position)
+        {
+            NPC closestNPC = null;
+
+            float sqrMaxDetectDistance = maxDetectDistance * maxDetectDistance;
+
+            for (int k = 0; k < Main.npc.Length; k++)
+            {
+                NPC target = Main.npc[k];
+
+                if (target.CanBeChasedBy())
+                {
+
+                    float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, position);
+
+                    if (sqrDistanceToTarget < sqrMaxDetectDistance)
+                    {
+                        sqrMaxDetectDistance = sqrDistanceToTarget;
+                        closestNPC = target;
+                    }
+                }
+            }
+
+            return closestNPC;
+
+        }
     }
 }

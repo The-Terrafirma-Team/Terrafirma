@@ -90,10 +90,10 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                     Projectile.velocity *= 0.95f;
                     break;
                 case 6:
-                    if (FindClosestNPC(300f) != null)
+                    if (Utils.FindClosestNPC(300f,Projectile.Center) != null)
                     {
-                        Projectile.velocity += Projectile.Center.DirectionTo(FindClosestNPC(300f).Center);
-                        Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(FindClosestNPC(300f).Center) * Projectile.velocity.Length(), 0.2f);
+                        Projectile.velocity += Projectile.Center.DirectionTo(Utils.FindClosestNPC(300f, Projectile.Center).Center);
+                        Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(Utils.FindClosestNPC(300f, Projectile.Center).Center) * Projectile.velocity.Length(), 0.2f);
                         Projectile.velocity = Projectile.velocity.LengthClamp(20f);
                     }
                     break;
@@ -145,31 +145,5 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             return false;
         }
 
-        public NPC FindClosestNPC(float maxDetectDistance)
-        {
-            NPC closestNPC = null;
-
-            float sqrMaxDetectDistance = maxDetectDistance * maxDetectDistance;
-
-            for (int k = 0; k < Main.npc.Length; k++)
-            {
-                NPC target = Main.npc[k];
-
-                if (target.CanBeChasedBy())
-                {
-
-                    float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
-
-                    if (sqrDistanceToTarget < sqrMaxDetectDistance)
-                    {
-                        sqrMaxDetectDistance = sqrDistanceToTarget;
-                        closestNPC = target;
-                    }
-                }
-            }
-
-            return closestNPC;
-
-        }
     }
 }
