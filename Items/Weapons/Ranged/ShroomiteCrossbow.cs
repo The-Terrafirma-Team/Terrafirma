@@ -17,6 +17,8 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.DefaultToBow(15, 5, true);
             Item.damage = 105;
             Item.rare = ItemRarityID.Yellow;
+            Item.value = Item.sellPrice(gold: 10);
+
         }
 
         public override Vector2? HoldoutOffset()

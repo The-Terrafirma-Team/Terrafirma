@@ -221,6 +221,11 @@ Items: {
 			Right click to zoom out
 			'''
 	}
+
+	ShroomiteBullet: {
+		DisplayName: Shroomite Bullet
+		Tooltip: Penetrates Armor
+	}
 }
 
 Projectiles: {
@@ -248,6 +253,8 @@ Projectiles: {
 	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
 	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
 	ICBAProjectile.DisplayName: I C B A Projectile
+	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
+	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
 }
 
 Buffs: {
