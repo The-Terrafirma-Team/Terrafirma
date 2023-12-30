@@ -1,4 +1,5 @@
-﻿using TerrafirmaRedux.Items.Equipment.Ranged;
+﻿using TerrafirmaRedux.Items.Ammo;
+using TerrafirmaRedux.Items.Equipment.Ranged;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,6 +14,8 @@ namespace TerrafirmaRedux.Global
             {
                 shop.Add(ModContent.ItemType<DrumMag>());
                 shop.Add(ModContent.ItemType<Foregrip>(), Condition.Hardmode);
+                shop.InsertAfter(ItemID.UnholyArrow, ModContent.ItemType<CarbonFiberArrow>(), Condition.Hardmode);
+
             }
         }
     }

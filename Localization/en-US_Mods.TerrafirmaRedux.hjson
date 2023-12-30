@@ -157,6 +157,14 @@ Items: {
 	CarmineHook: {
 		DisplayName: Carmine Hook
 		Tooltip: Spits an ichor stream
+	AngryArrow: {
+		DisplayName: Angry Arrow
+		Tooltip: Hit enemies target you
+	}
+
+	CarbonFiberArrow: {
+		DisplayName: Carbon Fiber Arrow
+		Tooltip: ""
 	}
 }
 
@@ -177,6 +185,8 @@ Projectiles: {
 	UldraxProjectile.DisplayName: Uldrax Projectile
 	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
 	CarmineHookProjectile.DisplayName: Carmine Hook Projectile
+	AngryArrowProjectile.DisplayName: Angry Arrow Projectile
+	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
 }
 
 Buffs: {

@@ -18,11 +18,14 @@ namespace TerrafirmaRedux.Global
                     recipe.AddIngredient(ItemID.SoulofFright,5);
                     recipe.AddIngredient(ItemID.SoulofSight, 5);
                     recipe.AddIngredient(ItemID.SoulofMight, 5);
+
                 }
                 else if(recipe.HasResult(ItemID.AdamantiteForge) || recipe.HasResult(ItemID.TitaniumForge))
                 {
                     recipe.AddIngredient(ModContent.ItemType<MajesticGel>(),10);
                 }
+
+
             }
         }
     }

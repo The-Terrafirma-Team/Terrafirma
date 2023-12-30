@@ -15,6 +15,23 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 22)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail,1)
+                .AddIngredient(ModContent.ItemType<SacredPlateMail>(),1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+        }
     }
     [AutoloadEquip(EquipType.Legs)]
     public class SacredGreaves : ModItem
@@ -25,6 +42,22 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 10;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 16)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail, 1)
+                .AddIngredient(ModContent.ItemType<SacredGreaves>(), 1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
     [AutoloadEquip(EquipType.Head)]
@@ -37,6 +70,22 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 10)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail, 1)
+                .AddIngredient(ModContent.ItemType<SacredHeadgear>(), 1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+        }
     }
     [AutoloadEquip(EquipType.Head)]
     public class SacredHelmet : ModItem
@@ -47,6 +96,22 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 9;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 10)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail, 1)
+                .AddIngredient(ModContent.ItemType<SacredHelmet>(), 1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
     [AutoloadEquip(EquipType.Head)]
@@ -59,6 +124,22 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 10)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail, 1)
+                .AddIngredient(ModContent.ItemType<SacredMask>(), 1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+        }
     }
     [AutoloadEquip(EquipType.Head)]
     public class SacredHood : ModItem
@@ -69,6 +150,22 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 1;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.HallowedBar, 10)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            Recipe.Create(ItemID.HallowedPlateMail, 1)
+                .AddIngredient(ModContent.ItemType<SacredHood>(), 1)
+                .AddIngredient(ItemID.SoulofFright, 5)
+                .AddIngredient(ItemID.SoulofSight, 5)
+                .AddIngredient(ItemID.SoulofMight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
 }
