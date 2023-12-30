@@ -1,0 +1,70 @@
+﻿using Microsoft.Xna.Framework;
+using System;
+using TerrafirmaRedux.Buffs.Debuffs;
+using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace TerrafirmaRedux.Projectiles.Ranged
+{
+    internal class AngryArrowProjectile : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.damage = 17;
+            Projectile.width = 4;
+            Projectile.height = 4;
+            DrawOffsetX = -Projectile.width / 2 - 5;
+            Projectile.penetrate = 1;
+            Projectile.aiStyle = ProjAIStyleID.Arrow;
+            Projectile.timeLeft = 600;
+            Projectile.friendly = true;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (target.boss && Main.rand.Next(11) == 10)
+            {
+                target.target = Projectile.owner;
+            }
+            else
+            {
+                target.target = Projectile.owner;
+            }
+
+        }
+
+        public override void AI()
+        {
+            Projectile.ai[1]++;
+
+            if (Projectile.ai[1] % 2 == 0)
+            {
+                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-0.3f, 0.3f)), 0, default, Main.rand.NextFloat(1.2f, 1.5f));
+                TorchDust.noGravity = true;
+            }
+            Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-0.3f, 0.3f)), 128, default, Main.rand.NextFloat(0.9f, 1.2f));
+            SmokeDust.noGravity = true;
+
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+
+            Projectile.Kill();
+
+            for (int i = 0; i < 15; i++)
+            {
+                Dust.NewDust(Projectile.Center, 2, 2, DustID.BlueFlare, Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.5f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.5f), 0, default, Main.rand.NextFloat(1.8f, 2.3f));
+            }
+
+            return false;
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
+            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+        }
+    }
+}

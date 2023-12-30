@@ -153,6 +153,16 @@ Items: {
 		DisplayName: Bone Bullet
 		Tooltip: ""
 	}
+
+	AngryArrow: {
+		DisplayName: Angry Arrow
+		Tooltip: ""
+	}
+
+	CarbonFiberArrow: {
+		DisplayName: Carbon Fiber Arrow
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -171,6 +181,8 @@ Projectiles: {
 	CrucibleBeam.DisplayName: Crucible Beam
 	UldraxProjectile.DisplayName: Uldrax Projectile
 	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
+	AngryArrowProjectile.DisplayName: Angry Arrow Projectile
+	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
 }
 
 Buffs: {
