@@ -25,15 +25,20 @@ namespace TerrafirmaRedux.Projectiles.Ranged
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.target = Projectile.owner;
+
+            for (int i = 0; i < 8; i++)
+            {
+                Dust.NewDust(Projectile.Center, 2, 2, DustID.Obsidian, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, default, Main.rand.NextFloat(0.8f, 1f));
+            }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
 
             Projectile.Kill();
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(Projectile.Center, 2, 2, DustID.BlueFlare, Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.5f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.5f), 0, default, Main.rand.NextFloat(1.8f, 2.3f));
+                Dust.NewDust(Projectile.Center, 2, 2, DustID.Obsidian, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, default, Main.rand.NextFloat(0.8f, 1f));
             }
 
             return false;

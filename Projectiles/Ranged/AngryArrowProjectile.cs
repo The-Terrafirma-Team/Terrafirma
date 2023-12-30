@@ -33,6 +33,17 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                 target.target = Projectile.owner;
             }
 
+            for (int i = 0; i < 5; i++)
+            {
+                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.5f, 1.8f));
+                TorchDust.noGravity = true;
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 128, default, Main.rand.NextFloat(1.2f, 1.7f));
+                SmokeDust.noGravity = true;
+            }
+
         }
 
         public override void AI()
@@ -53,9 +64,15 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
             Projectile.Kill();
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 5; i++)
             {
-                Dust.NewDust(Projectile.Center, 2, 2, DustID.BlueFlare, Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.5f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.5f), 0, default, Main.rand.NextFloat(1.8f, 2.3f));
+                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.5f, 1.8f));
+                TorchDust.noGravity = true;
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                Dust SmokeDust = Dust.NewDustPerfect(Projectile.position, DustID.Smoke, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 128, default, Main.rand.NextFloat(1.2f, 1.7f));
+                SmokeDust.noGravity = true;
             }
 
             return false;

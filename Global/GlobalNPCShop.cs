@@ -14,7 +14,8 @@ namespace TerrafirmaRedux.Global
             {
                 shop.Add(ModContent.ItemType<DrumMag>());
                 shop.Add(ModContent.ItemType<Foregrip>(), Condition.Hardmode);
-                shop.Add(ModContent.ItemType<CarbonFiberArrow>(), Condition.Hardmode);
+                shop.InsertAfter(ItemID.UnholyArrow, ModContent.ItemType<CarbonFiberArrow>(), Condition.Hardmode);
+
             }
         }
     }

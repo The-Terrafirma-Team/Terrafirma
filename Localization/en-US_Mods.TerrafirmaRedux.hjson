@@ -156,7 +156,7 @@ Items: {
 
 	AngryArrow: {
 		DisplayName: Angry Arrow
-		Tooltip: ""
+		Tooltip: Hit enemies target you
 	}
 
 	CarbonFiberArrow: {
