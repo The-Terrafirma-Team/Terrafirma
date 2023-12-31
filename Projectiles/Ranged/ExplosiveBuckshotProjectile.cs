@@ -58,7 +58,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             else
             {
                 Lighting.AddLight(Projectile.position, new Vector3(0.4f, 0.4f, 0));
-                Dust TorchDust = Dust.NewDustPerfect(Projectile.position, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.2f, 1.4f));
+                Dust TorchDust = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, new Vector2(Projectile.velocity.X * Main.rand.NextFloat(0.8f, 1.2f), Projectile.velocity.Y * Main.rand.NextFloat(0.8f, 1.2f)), 0, default, Main.rand.NextFloat(1.2f, 1.4f));
                 TorchDust.noGravity = true;
             }
         }

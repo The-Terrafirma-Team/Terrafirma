@@ -184,14 +184,9 @@ Items: {
 		Tooltip: Shoots a bunch of explosive pellets
 	}
 
-	RubberBuckshot: {
-		DisplayName: Rubber Buckshot
-		Tooltip: Shoots a bunch of bouncy pellets
-	}
-
 	BouncyBuckshot: {
 		DisplayName: Bouncy Buckshot
-		Tooltip: ""
+		Tooltip: Shoots a bunch of bouncy pellets
 	}
 
 	ICBA: {
@@ -205,36 +200,66 @@ Items: {
 
 	IcicleMachineGun: {
 		DisplayName: Icicle Machine Gun
+		Tooltip: Uses ice as ammo
+	}
+
+	ShroomiteBullet: {
+		DisplayName: Shroomite Bullet
+		Tooltip: Ignores 30 points of enemy defence
+	}
+
+	ShroomiteCrossbow: {
+		DisplayName: Shroomite Crossbow
 		Tooltip: ""
+	}
+
+	ShroomiteSMG: {
+		DisplayName: Shroomite SMG
+		Tooltip:
+			'''
+			Fires a 3 round burst
+			Converts musket balls to shroomite bullets
+			'''
+	}
+
+	ShroomiteSniper: {
+		DisplayName: Shroomite Sniper
+		Tooltip:
+			'''
+			Shoots powerful, high velocity, armor penetrating bullets 
+			Right click to zoom out
+			'''
 	}
 }
 
 Projectiles: {
-	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
-	IceHookProjectile.DisplayName: Ice Hook Projectile
+	SingularityHookProjectile.DisplayName: Singularity Hook
+	IceHookProjectile.DisplayName: Ice Hook
 	RapierProjectile.DisplayName: Rapier
 	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
 	Poison.DisplayName: Poison
-	HolyHandGrenade.DisplayName: Holy Hand Grenade
-	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
+	HolyHandGrenade.DisplayName: The Holy Hand Grenade
+	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow
 	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
 	LuckyArrow.DisplayName: Lucky Arrow
-	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
+	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades
 	MajesticGelShot.DisplayName: Majestic Gel Shot
 	QueenSlimeBeam.DisplayName: Queen Slime Beam
-	CrucibleBeam.DisplayName: Crucible Beam
-	UldraxProjectile.DisplayName: Uldrax Projectile
-	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
-	CarmineHookProjectile.DisplayName: Carmine Hook Projectile
-	AngryArrowProjectile.DisplayName: Angry Arrow Projectile
-	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
-	BirdshotProjectile.DisplayName: Birdshot Projectile
-	BuckshotProjectile.DisplayName: Buckshot Projectile
-	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
-	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
-	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
-	ICBAProjectile.DisplayName: I C B A Projectile
-	IcicleProjectile.DisplayName: Icicle Projectile
+	CrucibleBeam.DisplayName: The Crucible
+	UldraxProjectile.DisplayName: Uldrax
+	BoneBulletProjectile.DisplayName: Bone Bullet
+	CarmineHookProjectile.DisplayName: Carmine Hook
+	AngryArrowProjectile.DisplayName: Angry Arrow
+	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow
+	BirdshotProjectile.DisplayName: Birdshot
+	BuckshotProjectile.DisplayName: Buckshot
+	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot
+	RubberBuckshotProjectile.DisplayName: Rubber Buckshot
+	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot
+	ICBAProjectile.DisplayName: I.C.B.A
+	IcicleProjectile.DisplayName: Icicle
+	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
+	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet
 }
 
 Buffs: {
@@ -245,6 +270,6 @@ Buffs: {
 
 	AgnomalumBurns: {
 		DisplayName: Agnomalum Burns
-		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+		Description: Your skin is melting
 	}
 }
