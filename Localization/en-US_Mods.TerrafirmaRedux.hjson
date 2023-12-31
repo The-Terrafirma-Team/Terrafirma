@@ -205,6 +205,26 @@ Items: {
 
 	IcicleMachineGun: {
 		DisplayName: Icicle Machine Gun
+		Tooltip: 'Do not use as an ice cream maker!'
+	}
+
+	ShroomiteBullet: {
+		DisplayName: Shroomite Bullet
+		Tooltip: ""
+	}
+
+	ShroomiteCrossbow: {
+		DisplayName: Shroomite Crossbow
+		Tooltip: ""
+	}
+
+	ShroomiteSMG: {
+		DisplayName: Shroomite S M G
+		Tooltip: ""
+	}
+
+	ShroomiteSniper: {
+		DisplayName: Shroomite Sniper
 		Tooltip: ""
 	}
 }
@@ -235,6 +255,8 @@ Projectiles: {
 	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
 	ICBAProjectile.DisplayName: I C B A Projectile
 	IcicleProjectile.DisplayName: Icicle Projectile
+	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
+	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
 }
 
 Buffs: {

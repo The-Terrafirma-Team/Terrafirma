@@ -16,8 +16,8 @@ namespace TerrafirmaRedux.Projectiles.Ranged
         public override void SetDefaults()
         {
             Projectile.damage = 8;
-            Projectile.width = 50;
-            Projectile.height = 42;
+            Projectile.width = 8;
+            Projectile.height = 8;
             Projectile.penetrate = 2;
             Projectile.timeLeft = 600;
             Projectile.friendly = true;
