@@ -34,12 +34,6 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
         }
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            Projectile.Kill();
-            return false;
-        }
         public override void AI()
         {
             if (Projectile.ai[2] == 0)
@@ -73,14 +67,11 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             return true;
         }
 
-        public override void OnKill(int timeLeft)
+        public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (Projectile.ai[2] == 1)
-            {
-                Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
-                SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-            }
-
+            Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+            return base.OnTileCollide(oldVelocity);
         }
 
     }

@@ -34,7 +34,7 @@ namespace TerrafirmaRedux.Global
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), chanceDenominator:20 , 1,1) );
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), 20, 1, 1));
         }
         public override bool InstancePerEntity => true;
 

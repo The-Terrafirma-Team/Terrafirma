@@ -48,14 +48,6 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                 d.fadeIn = 1.3f;
             }
         }
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-
-            Projectile.Kill();
-            return false;
-        }
-
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 15; i++)

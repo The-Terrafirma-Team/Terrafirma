@@ -1,8 +1,5 @@
 ﻿
 using Microsoft.Xna.Framework;
-using System;
-using TerrafirmaRedux.Projectiles.Ranged;
-using TerrafirmaRedux.Rarities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -14,7 +11,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
     {
         public override void SetDefaults()
         {
-            Item.DefaultToBow(15, 5, true);
+            Item.DefaultToBow(15, 12, true);
             Item.damage = 105;
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 10);
@@ -30,7 +27,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI, -100);
+            Projectile projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI, -75);
             projectile.extraUpdates++;
             return false;
         }

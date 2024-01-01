@@ -59,6 +59,8 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             {
                 Projectile.Kill();
             }
+            Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             return false;
         }
 
@@ -94,16 +96,5 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
             return true;
         }
-
-        public override void OnKill(int timeLeft)
-        {
-            if (Projectile.ai[2] == 1)
-            {
-                Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
-                SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-            }
-            
-        }
-
     }
 }

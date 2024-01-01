@@ -28,7 +28,14 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.shoot = ProjectileID.FallingStar;
             Item.shootSpeed = 16f;
         }
-
+        public override bool CanConsumeAmmo(Item ammo, Player player)
+        {
+            if (Main.rand.NextBool(3))
+            {
+                return false;
+            }
+            return base.CanConsumeAmmo(ammo, player);
+        }
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-1,0);

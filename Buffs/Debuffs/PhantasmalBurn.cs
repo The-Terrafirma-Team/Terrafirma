@@ -1,4 +1,6 @@
-﻿using TerrafirmaRedux.Global;
+﻿using Microsoft.Xna.Framework;
+using TerrafirmaRedux.Global;
+using TerrafirmaRedux.Particles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,15 +17,25 @@ namespace TerrafirmaRedux.Buffs.Debuffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-
-
             npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().PhantasmalBurn = true;
-
-
             if (npc.buffTime[buffIndex] % 2 == 0)
             {
-                Dust.NewDust(npc.position, 0, 0, DustID.BlueFlare, Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-6f, 5f), 0, default, Main.rand.NextFloat(2.5f, 2.7f));
+                Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.BlueFlare, Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-6f, -5f), 0, default, Main.rand.NextFloat(1.5f, 1.7f));
+                if (!Main.rand.NextBool(3))
+                {
+                    d.noGravity = true;
+                    d.fadeIn = 1.2f;
+                    d.scale *= 2;
+                }
             }
+            //if (Main.rand.NextBool(3))
+            //{
+            //    ParticleSystem.AddParticle(new ColorDot(), Main.rand.NextVector2FromRectangle(npc.Hitbox), Vector2.Zero + Main.rand.NextVector2Circular(4, 5), Color.Lerp(new Color(0,255,255,0),new Color(0,128,255,0),Main.rand.NextFloat()), 0.2f);
+            //}
+            //if (Main.rand.NextBool(3))
+            //{
+            //    ParticleSystem.AddParticle(new HiResFlame(), Main.rand.NextVector2FromRectangle(npc.Hitbox), Vector2.Zero, Color.Lerp(new Color(0, 255, 255, 0), new Color(0, 128, 255, 0), Main.rand.NextFloat()), 3f);
+            //}
         }
 
         public override void Update(Player player, ref int buffIndex)
