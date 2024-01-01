@@ -48,17 +48,13 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            Vector2 muzzleoff = new Vector2(26, -5 * player.direction).RotatedBy(velocity.ToRotation()) + new Vector2(13,0);
+            Vector2 muzzleoff = new Vector2(26,-8 * player.direction).RotatedBy(velocity.ToRotation());
             position = player.MountedCenter + muzzleoff;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                Dust.NewDust(position + new Vector2(-13,0), 2, 2, DustID.Ice, velocity.X * Main.rand.NextFloat(0.2f, 0.3f), velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, default, Main.rand.NextFloat(0.8f, 1f));
-            }
-            return true;
+            return base.Shoot(player,source,position,velocity,type,damage,knockback);
         }
 
         public override void AddRecipes()

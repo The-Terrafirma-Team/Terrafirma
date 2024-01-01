@@ -20,19 +20,20 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.value = Item.sellPrice(gold: 10);
 
         }
-
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-7, -4);
         }
-
+        public override void HoldItem(Player player)
+        {
+            player.scope = true;
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI, -100);
             projectile.extraUpdates++;
             return false;
         }
-
         public override void AddRecipes()
         {
             CreateRecipe()

@@ -25,6 +25,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
+            DrawOffsetX = -5;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -39,7 +40,16 @@ namespace TerrafirmaRedux.Projectiles.Ranged
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             Projectile.spriteDirection = Projectile.direction;
-            
+
+            if (Projectile.ai[0] == 0)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Dust d = Dust.NewDustDirect(Projectile.Center, 0, 0, Main.rand.NextBool(3) ? DustID.Ice : DustID.Snow, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, default, Main.rand.NextFloat(0.8f, 1f));
+                    d.noGravity = !Main.rand.NextBool(5) || (d.type == DustID.Snow);
+                }
+            }
+
             Projectile.ai[0]++;
 
             if (Projectile.ai[0] > 20)
@@ -56,7 +66,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                 Dust.NewDust(Projectile.Center, 2, 2, DustID.Ice, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, default, Main.rand.NextFloat(0.8f, 1f));
             }
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
-            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item50, Projectile.position);
         }
     }
 }

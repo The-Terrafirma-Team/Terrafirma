@@ -33,7 +33,11 @@ Items: {
 
 	KnifeShooter: {
 		DisplayName: Knife Shooter
-		Tooltip: Has a 33% chance to save ammo
+		Tooltip: 
+		'''
+		Uses throwing knives as ammo
+		Has a 33% chance to save ammo
+		'''
 	}
 
 	MajesticGel: {
@@ -184,14 +188,9 @@ Items: {
 		Tooltip: Shoots a bunch of explosive pellets
 	}
 
-	RubberBuckshot: {
-		DisplayName: Rubber Buckshot
-		Tooltip: Shoots a bunch of bouncy pellets
-	}
-
 	BouncyBuckshot: {
 		DisplayName: Bouncy Buckshot
-		Tooltip: ""
+		Tooltip: Shoots a bunch of bouncy pellets
 	}
 
 	ICBA: {
@@ -205,27 +204,43 @@ Items: {
 
 	IcicleMachineGun: {
 		DisplayName: Icicle Machine Gun
-		Tooltip: 'Do not use as an ice cream maker!'
+		Tooltip: 
+		'''
+		Uses ice as ammo
+		'Do not use as an ice cream maker!'
+		'''
 	}
 
 	ShroomiteBullet: {
 		DisplayName: Shroomite Bullet
-		Tooltip: ""
+		Tooltip: Ignores 30 points of enemy defence
 	}
 
 	ShroomiteCrossbow: {
-		DisplayName: Shroomite Crossbow
-		Tooltip: ""
+		DisplayName: Shroomite Sniper Crossbow
+		Tooltip:
+		'''
+		Right click to zoom out
+		Arrows travel farther before falling
+		'''
 	}
 
 	ShroomiteSMG: {
-		DisplayName: Shroomite S M G
-		Tooltip: ""
+		DisplayName: Shroomite S.M.G.
+		Tooltip: 
+		'''
+		Fires a 3 round burst
+		Converts musket balls to shroomite bullets
+		'''
 	}
 
 	ShroomiteSniper: {
-		DisplayName: Shroomite Sniper
-		Tooltip: ""
+		DisplayName: Shroomite Sniper Rifle
+		Tooltip:
+		'''
+		Converts musket balls to high velocity shroomite bullets
+		Right click to zoom out
+		'''
 	}
 }
 
