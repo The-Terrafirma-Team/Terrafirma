@@ -246,6 +246,11 @@ Items: {
 			Right click to zoom out
 			'''
 	}
+
+	StaffofRa: {
+		DisplayName: Staff of Ra
+		Tooltip: Summons the Sun to light your path
+	}
 }
 
 Projectiles: {
@@ -276,6 +281,7 @@ Projectiles: {
 	IcicleProjectile.DisplayName: Icicle Projectile
 	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
 	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
+	SunofRa.DisplayName: Sunof Ra
 }
 
 Buffs: {
@@ -287,5 +293,10 @@ Buffs: {
 	AgnomalumBurns: {
 		DisplayName: Agnomalum Burns
 		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+	}
+
+	SunofRaBuff: {
+		DisplayName: The Unmatched Power of the Sun
+		Description: It's a little warm
 	}
 }
