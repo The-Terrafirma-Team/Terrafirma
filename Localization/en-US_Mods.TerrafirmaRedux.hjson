@@ -251,6 +251,11 @@ Items: {
 		DisplayName: Staff of Ra
 		Tooltip: Summons the Sun to light your path
 	}
+
+	VultureStaff: {
+		DisplayName: Vulture Staff
+		Tooltip: Summons a friendly vulture to fight for you
+	}
 }
 
 Projectiles: {
@@ -282,6 +287,7 @@ Projectiles: {
 	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
 	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
 	SunofRa.DisplayName: Sunof Ra
+	SummonedVulture.DisplayName: Summoned Vulture
 }
 
 Buffs: {

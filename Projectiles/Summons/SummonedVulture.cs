@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 
 namespace TerrafirmaRedux.Projectiles.Summons
 {
@@ -18,15 +19,27 @@ namespace TerrafirmaRedux.Projectiles.Summons
         public override void SetDefaults()
         {
             Projectile.friendly = true;
-            Projectile.damage = 8;
-            Projectile.height = 46;
+            Projectile.damage = 14;
+
+            Projectile.height = 30;
             Projectile.width = 30;
+            DrawOffsetX = -Projectile.width;
+            DrawOriginOffsetY = -15;
+
             Projectile.tileCollide = true;
             Projectile.timeLeft = 600;
             Projectile.penetrate = 12;
             Projectile.CritChance = 15;
             Projectile.frameCounter = 0;
 
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                Dust.NewDust(Projectile.Center, 10, 10, DustID.Smoke, Main.rand.NextFloat(-0.5f, 0.5f) * 4, Main.rand.NextFloat(-0.5f, 0.5f) * 4, 0, default, Main.rand.NextFloat(1.1f, 1.5f));
+            }
         }
 
         public override void AI()
@@ -48,7 +61,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             Projectile.spriteDirection = -Projectile.direction;
             Projectile.rotation = Projectile.velocity.X / 10;
 
-            //Attack
+            //Movement
 
             Projectile.ai[1]++;
 
@@ -99,15 +112,15 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            return true;
+            return false;
         }
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCHit28 , Projectile.position);
             
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 24; i++)
             {
-                Dust.NewDust(Projectile.Center, 10, 10, DustID.Smoke, Main.rand.Next(-2, 2), Main.rand.Next(-2, 2), 0, default, Main.rand.NextFloat(1.8f, 2.5f));
+                Dust.NewDust(Projectile.Center, 10, 10, DustID.Smoke, Main.rand.NextFloat(-0.5f, 0.5f) * 4, Main.rand.NextFloat(-0.5f, 0.5f) * 4, 0, default, Main.rand.NextFloat(1.1f, 1.5f));
             }
         }
 

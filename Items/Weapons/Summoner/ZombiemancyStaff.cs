@@ -9,19 +9,26 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
     internal class ZombiemancyStaff : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Item.staff[Item.type] = true;
+        }
         public override void SetDefaults()
         {
             Item.damage = 8;
             Item.knockBack = 4f;
-            Item.useStyle = ItemUseStyleID.Swing;
+
             Item.useAnimation = 80;
             Item.useTime = 80;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.UseSound = SoundID.Item8;
+
             Item.crit = 15;
             Item.width = 40;
             Item.height = 46;
-            Item.UseSound = SoundID.Item8;
             Item.DamageType = DamageClass.Summon;
-            Item.autoReuse = false;
+
+            Item.autoReuse = true;
             Item.noMelee = true;
             Item.mana = 10;
 
