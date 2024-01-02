@@ -1,4 +1,5 @@
-﻿using TerrafirmaRedux.Items.Weapons.Summoner;
+﻿using System.Runtime.CompilerServices;
+using TerrafirmaRedux.Items.Weapons.Summoner;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +12,8 @@ namespace TerrafirmaRedux.Global
         {
 
             //Desert Chest
+            //1/8 Chance for Main Item to be
+
             int desertchest_maxitems = 5;
             int desertchest_itemsplaced = 0;
 
@@ -33,7 +36,6 @@ namespace TerrafirmaRedux.Global
                     }
                 }
             }
-
 
         }
     }

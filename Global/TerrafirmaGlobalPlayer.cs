@@ -38,5 +38,6 @@ namespace TerrafirmaRedux.Global
             return base.CanConsumeAmmo(weapon, ammo);
 
         }
+
     }
 }

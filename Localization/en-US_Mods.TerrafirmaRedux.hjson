@@ -259,6 +259,11 @@ Items: {
 		DisplayName: Vulture Staff
 		Tooltip: Summons a friendly vulture to fight for you
 	}
+
+	HeartContainer: {
+		DisplayName: Heart Container
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
