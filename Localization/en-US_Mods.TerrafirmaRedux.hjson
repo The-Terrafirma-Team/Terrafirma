@@ -259,7 +259,7 @@ Items: {
 
 	HeartContainer: {
 		DisplayName: Heart Container
-		Tooltip: ""
+		Tooltip: Increases max health by 50
 	}
 }
 
