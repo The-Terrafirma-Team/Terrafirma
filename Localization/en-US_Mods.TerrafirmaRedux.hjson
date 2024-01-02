@@ -246,6 +246,11 @@ Items: {
 			Right click to zoom out
 			'''
 	}
+
+	SlapJuice: {
+		DisplayName: Slap Juice
+		Tooltip: Gives a temporary speed boost
+	}
 }
 
 Projectiles: {
@@ -281,11 +286,16 @@ Projectiles: {
 Buffs: {
 	PhantasmalBurn: {
 		DisplayName: Phantasmal Burn
-		Description: Scorching Ectoplasma burns you!
+		Description: Scorching Ectoplasm burns you!
 	}
 
 	AgnomalumBurns: {
 		DisplayName: Agnomalum Burns
 		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+	}
+
+	SlapBuff: {
+		DisplayName: Slapped!
+		Description: 100% increased movement speed
 	}
 }

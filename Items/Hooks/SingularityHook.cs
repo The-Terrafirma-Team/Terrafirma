@@ -19,10 +19,14 @@ namespace TerrafirmaRedux.Items.Hooks
 			Item.CloneDefaults(ItemID.AmethystHook);
 			Item.shootSpeed = 18f;
 			Item.shoot = ModContent.ProjectileType<SingularityHookProjectile>();
-
 		}
 
-	}
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
+    }
 
 	internal class SingularityHookProjectile : ModProjectile
 	{

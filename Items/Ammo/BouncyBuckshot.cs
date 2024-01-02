@@ -23,6 +23,11 @@ namespace TerrafirmaRedux.Items.Ammo
             Item.ammo = AmmoID.Bullet;
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 99;
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe(50)

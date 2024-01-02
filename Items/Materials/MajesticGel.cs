@@ -17,5 +17,10 @@ namespace TerrafirmaRedux.Items.Materials
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(0, 0, 15, 0);
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 99;
+        }
     }
 }

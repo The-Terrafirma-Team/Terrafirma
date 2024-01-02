@@ -23,7 +23,10 @@ namespace TerrafirmaRedux.Items.Ammo
             Item.shootSpeed = 5f;
             Item.ammo = AmmoID.Arrow; 
         }
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 99;
+        }
+
     }
-
-
 }

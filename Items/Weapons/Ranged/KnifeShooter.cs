@@ -10,10 +10,6 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 {
     internal class KnifeShooter : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-        }
         public override void SetDefaults()
         {
             Item.damage = 11;
@@ -35,6 +31,12 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.shoot = ProjectileID.ThrowingKnife;
             Item.shootSpeed = 12f;
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             return !Main.rand.NextBool(3);

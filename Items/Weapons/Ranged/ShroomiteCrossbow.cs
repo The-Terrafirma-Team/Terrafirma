@@ -15,8 +15,13 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.damage = 105;
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 10);
-
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-7, -4);

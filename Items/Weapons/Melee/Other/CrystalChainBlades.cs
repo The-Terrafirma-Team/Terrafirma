@@ -31,7 +31,11 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Other
 
             Item.shoot = ModContent.ProjectileType<CrystalChainBladesProjectile>();
             Item.shootSpeed = 20f;
+        }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
         }
 
         public override bool MeleePrefix()

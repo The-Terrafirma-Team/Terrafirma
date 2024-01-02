@@ -16,7 +16,11 @@ namespace TerrafirmaRedux.Items.Hooks
 
 		}
 
-	}
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+    }
 
 	internal class IceHookProjectile : ModProjectile
 	{

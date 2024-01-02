@@ -13,10 +13,6 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
     public class KinMask : ModItem
     {
         public bool Janky = false;
-        public override void SetStaticDefaults()
-        {
-            //Tooltip.SetDefault("[c/A58CFF:Dedicated to Inkgum]");
-        }
         public override void SetDefaults()
         {
             Item.width = 28;
@@ -26,6 +22,12 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
             Item.vanity = true;
             Item.maxStack = 1;
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
     }
 
     public class KinEyeGlow : PlayerDrawLayer

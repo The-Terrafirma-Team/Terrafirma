@@ -13,6 +13,7 @@ namespace TerrafirmaRedux.Items.Weapons.Magic
         public override void SetStaticDefaults()
         {
             Item.staff[Item.type] = true;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {

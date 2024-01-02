@@ -33,6 +33,11 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.shootSpeed = 20f;
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
         {
             if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)

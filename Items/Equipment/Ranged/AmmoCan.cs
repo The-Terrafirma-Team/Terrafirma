@@ -22,6 +22,11 @@ namespace TerrafirmaRedux.Items.Equipment.Ranged
             player.GetModPlayer<TerrafirmaGlobalPlayer>().AmmoCan = true;
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
     }
 
     public class AmmoCanBullet : GlobalItem

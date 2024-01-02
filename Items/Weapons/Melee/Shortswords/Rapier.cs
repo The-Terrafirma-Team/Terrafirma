@@ -8,12 +8,6 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
 {
     internal class Rapier : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 11;
@@ -34,6 +28,11 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Shortswords
 
             Item.shoot = ModContent.ProjectileType<RapierProjectile>();
             Item.shootSpeed = 2.1f;
+        }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

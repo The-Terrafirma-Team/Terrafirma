@@ -36,6 +36,11 @@ namespace TerrafirmaRedux.Items.Tools
             Item.rare = ItemRarityID.Pink;
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe()

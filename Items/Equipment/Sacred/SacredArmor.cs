@@ -16,6 +16,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.sellPrice(3);
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe()
@@ -42,6 +47,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 10;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void AddRecipes()
@@ -71,6 +81,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.sellPrice(3);
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe()
@@ -96,6 +111,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 9;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void AddRecipes()
@@ -125,6 +145,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.sellPrice(3);
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe()
@@ -150,6 +175,11 @@ namespace TerrafirmaRedux.Items.Equipment.Sacred
             Item.defense = 1;
             Item.rare = ItemRarityID.Pink;
             Item.sellPrice(3);
+        }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void AddRecipes()
