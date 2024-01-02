@@ -34,8 +34,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            NPC closestnpc = FindClosestNPC(600f);
-                fallThrough = !(closestnpc != null && closestnpc.Top.Y <= Projectile.Bottom.Y);
+            NPC closestnpc = Utils.FindClosestNPC(600f, Projectile.position);
+            fallThrough = !(closestnpc != null && closestnpc.Top.Y <= Projectile.Bottom.Y);
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
         public override void AI()
@@ -76,7 +76,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
             }
 
-            NPC closestnpc = FindClosestNPC(600f);
+            NPC closestnpc = Utils.FindClosestNPC(600f, Projectile.position);
            
             if (closestnpc != null && Projectile.ai[1] % 10 == 0)
             {
@@ -162,31 +162,5 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         }
 
-        public NPC FindClosestNPC(float maxDetectDistance)
-        {
-            NPC closestNPC = null;
-
-            float sqrMaxDetectDistance = maxDetectDistance * maxDetectDistance;
-
-            for (int k = 0; k < Main.npc.Length; k++)
-            {
-                NPC target = Main.npc[k];
-
-                if (target.CanBeChasedBy())
-                {
-
-                    float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
-
-                    if (sqrDistanceToTarget < sqrMaxDetectDistance)
-                    {
-                        sqrMaxDetectDistance = sqrDistanceToTarget;
-                        closestNPC = target;
-                    }
-                }
-            }
-
-            return closestNPC;
-
-        }
     }
 }

@@ -7,7 +7,7 @@ using TerrafirmaRedux.Projectiles.Summons;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
-    internal class ZombiemancyStaff : ModItem
+    internal class VultureStaff : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -15,37 +15,31 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         }
         public override void SetDefaults()
         {
-            Item.damage = 8;
+            Item.damage = 14;
             Item.knockBack = 4f;
+            Item.mana = 15;
+            Item.DamageType = DamageClass.Summon;
 
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 80;
             Item.useTime = 80;
-            Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item8;
 
-            Item.crit = 15;
-            Item.width = 40;
+            Item.width = 38;
             Item.height = 46;
-            Item.DamageType = DamageClass.Summon;
 
             Item.autoReuse = true;
             Item.noMelee = true;
-            Item.mana = 10;
 
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 30, 0);
-        }
 
-        public override void SetStaticDefaults()
-        {
-            Item.ResearchUnlockCount = 1;
         }
 
         public override bool? UseItem(Player player)
         {
-            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<ZombiemancedZombie>(), 14, 0, -1, 0, 0, 0);
+            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<SummonedVulture>(), 14, 0, -1, 0, 0, 0);
             return true;
         }
-
     }
 }
