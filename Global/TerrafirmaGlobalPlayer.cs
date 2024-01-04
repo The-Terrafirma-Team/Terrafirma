@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -16,6 +17,8 @@ namespace TerrafirmaRedux.Global
         public bool AmmoCan = false;
         public bool CanUseAmmo = true;
         public bool BoxOfHighPiercingRounds = false;
+
+        public Vector2 Momentum = new Vector2(0, 0);
         public override void ResetEffects()
         {
             Foregrip = false;

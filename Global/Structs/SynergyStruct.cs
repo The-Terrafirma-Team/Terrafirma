@@ -12,11 +12,18 @@ namespace TerrafirmaRedux.Global.Structs
         public string Description;
         public int[] Accessories;
 
-        public SynergyData(string Name , string Description, int[] Accessories)
+        public SynergyData(string Name, string Description, int[] Accessories)
         {
             this.Name = Name;
             this.Description = Description;
             this.Accessories = Accessories;
+        }
+
+        public SynergyData(string Name)
+        {
+            this.Name = Name;
+            this.Description = "";
+            this.Accessories = new int[] {};
         }
     }
 }

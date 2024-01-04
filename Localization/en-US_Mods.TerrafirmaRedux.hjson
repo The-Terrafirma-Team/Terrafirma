@@ -261,6 +261,11 @@ Items: {
 		DisplayName: Heart Container
 		Tooltip: Increases max health by 50
 	}
+
+	SpringBoots: {
+		DisplayName: Spring Boots
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
