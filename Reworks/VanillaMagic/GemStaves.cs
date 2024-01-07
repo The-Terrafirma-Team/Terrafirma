@@ -46,7 +46,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 3: mult = 1.2f; break;
                 case 5: mult = 1f + 2/6f; break;
                 case 7: mult = 1f + 2/7f; break;
-                case 9: mult = 2f + 4/9f; break;
+                case 9: mult = 5f; break;
                 case 11: mult = 1f + 1/6f; break;
                 case 12: mult = 2f; break;
             }

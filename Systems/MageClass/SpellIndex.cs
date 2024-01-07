@@ -56,8 +56,8 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(10, new Tuple<byte, string, string, string, string>(10, AssetPath + "Pre-Hardmode/GemStaff/SapphireBolt", "Sapphire Bolt", "Shoots a Bolt of Mana", "Uses 6 Mana"));
             SpellCatalogue.Add(11, new Tuple<byte, string, string, string, string>(11, AssetPath + "Pre-Hardmode/GemStaff/SapphireQuickShot", "Quick Amethyst Bolt", "Shoots a quick Bolt of Mana", "Uses 7 Mana"));
             //Amber Staff
-            SpellCatalogue.Add(12, new Tuple<byte, string, string, string, string>(12, AssetPath + "Pre-Hardmode/GemStaff/AmberBolt", "AmberBolt", "Shoots a Bolt of Mana", "Uses 7 Mana"));
-            SpellCatalogue.Add(13, new Tuple<byte, string, string, string, string>(13, AssetPath + "Pre-Hardmode/GemStaff/AmberWall", "AmberWall", "Shoots a Bolt of Mana that expands into a wall", "Uses 14 Mana"));
+            SpellCatalogue.Add(12, new Tuple<byte, string, string, string, string>(12, AssetPath + "Pre-Hardmode/GemStaff/AmberBolt", "Amber Bolt", "Shoots a Bolt of Mana", "Uses 7 Mana"));
+            SpellCatalogue.Add(13, new Tuple<byte, string, string, string, string>(13, AssetPath + "Pre-Hardmode/GemStaff/AmberWall", "Amber Wall", "Shoots a Bolt of Mana that expands into a wall", "Uses 14 Mana"));
             //InfernoFork
             SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Inferno Bolt", "Shoots a Bolt of flames that explodes into a lingering ball of fire", ""));
             SpellCatalogue.Add(15, new Tuple<byte, string, string, string, string>(1, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Hellfire Breath", "Shoots a blast of flame", ""));
