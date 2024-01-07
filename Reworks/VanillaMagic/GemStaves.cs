@@ -27,6 +27,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 0: return 1.2f;
                 case 2: return 1.2f;
                 case 3: return 1.1f;
+                case 5: return 0.85f;
+                case 7: return 0.6f;
+                case 11: return 0.75f;
             }
             return base.UseSpeedMultiplier(item, player);
         }
@@ -37,6 +40,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             {
                 case 1: mult = 1.2f; break;
                 case 3: mult = 1.2f; break;
+                case 5: mult = 1f + 2/6f; break;
+                case 7: mult = 1f + 2/7f; break;
+                case 11: mult = 1f + 1/6f; break;
             }
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
@@ -53,6 +59,20 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 3:
                     type = ModContent.ProjectileType<SplittingTopaz>();
                     break;
+                case 5:
+                    type = ModContent.ProjectileType<PiercingEmerald>();
+                    velocity *= 0.9f;
+                    break;
+                case 7:
+                    type = ModContent.ProjectileType<ExplodingRuby>();
+                    velocity *= 0.7f;
+                    damage = (int)(damage * 1.2f);
+                    break;
+                case 11:
+                    velocity *= 2f;
+                    damage = (int)(damage * 1.2f);
+                    break;
+
             }
 
         }
@@ -102,6 +122,52 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     }
                     Projectile.Kill();
                 }
+            }
+        }
+
+        public class PiercingEmerald : ModProjectile
+        {
+            public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.EmeraldBolt}";
+            public override void SetDefaults()
+            {
+                Projectile.CloneDefaults(ProjectileID.EmeraldBolt);
+                AIType = ProjectileID.EmeraldBolt;
+                Projectile.penetrate = 6;
+                Projectile.tileCollide = false;
+                Projectile.Size = new Vector2(16);
+            }
+        }
+
+        public class ExplodingRuby : ModProjectile
+        {
+            public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.RubyBolt}";
+            public override void SetDefaults()
+            {
+                Projectile.CloneDefaults(ProjectileID.RubyBolt);
+                AIType = ProjectileID.RubyBolt;
+                Projectile.penetrate = 1;
+                Projectile.Size = new Vector2(16);
+            }
+
+            public override void AI()
+            {
+                Projectile.velocity *= 0.985f;
+
+                if (Projectile.velocity.Length() < 1)
+                {
+                    Projectile.Kill();
+                }
+
+            }
+
+            public override void Kill(int timeLeft)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust newdust = Dust.NewDustPerfect(Projectile.position, DustID.GemRuby, new Vector2(Main.rand.NextFloat(-5.8f, 5.8f), Main.rand.NextFloat(-5.8f, 5.8f)), 0, Color.White, Main.rand.NextFloat(1.7f, 2f));
+                    newdust.noGravity = true;
+                }
+                Projectile.Explode(100);
             }
         }
     }

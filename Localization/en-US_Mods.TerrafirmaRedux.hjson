@@ -305,6 +305,8 @@ Projectiles: {
 	SummonedVulture.DisplayName: Summoned Vulture
 	HomingAmethyst.DisplayName: Homing Amethyst
 	SplittingTopaz.DisplayName: Splitting Topaz
+	PiercingEmerald.DisplayName: Piercing Emerald
+	ExplodingRuby.DisplayName: Exploding Ruby
 }
 
 Buffs: {

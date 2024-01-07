@@ -119,13 +119,19 @@ namespace TerrafirmaRedux.Global
                         ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
                         HeldMagicItem = Player.selectedItem;
                     }
+
+                    if (HeldMagicItem != Player.selectedItem)
+                    {
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
+                        HeldMagicItem = Player.selectedItem;
+                    }
                 }
                 SpellUI = true;
             }
             else
             { 
                 SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 && Player.inventory[HeldMagicItem].type != 0 && Player.HasItemInAnyInventory(Player.inventory[Player.selectedItem].type) )
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 && Player.inventory[HeldMagicItem].type != 0 && Player.HasItemInAnyInventory(Player.inventory[Player.selectedItem].type) && ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[HeldMagicItem].type) && ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type].Length)
                 {
 
                     Player.inventory[HeldMagicItem].GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type][ ModContent.GetInstance<SpellUISystem>().Index ]].Item1;
