@@ -310,6 +310,8 @@ Projectiles: {
 	DiamondTurret.DisplayName: Diamond Turret
 	AmberWall.DisplayName: Amber Wall
 	AmberWallCrystal.DisplayName: Amber Wall Crystal
+	Firewall.DisplayName: Firewall
+	InfernoFork.DisplayName: Inferno Fork
 }
 
 Buffs: {

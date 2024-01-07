@@ -18,7 +18,13 @@ namespace TerrafirmaRedux.Global
                 entity.usesLocalNPCImmunity = true;
                 entity.localNPCHitCooldown = -1;
             }
-
+            if(entity.type == ProjectileID.InfernoFriendlyBlast)
+            {
+                entity.usesLocalNPCImmunity = true;
+                entity.localNPCHitCooldown = 10;
+                entity.timeLeft = 60;
+            }
+                
         }
     }
 }
