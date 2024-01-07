@@ -29,9 +29,9 @@ namespace TerrafirmaRedux.Systems.MageClass
                     {
                         tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellDescription", 
                         "[c/AAAAAA:" + 
-                        ModContent.GetInstance<SpellIndex>().SpellDescription[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item1 + 
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item3 + 
                         ": " + 
-                        ModContent.GetInstance<SpellIndex>().SpellDescription[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item2 + 
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item4 + 
                         "]"
                         ));
                     }

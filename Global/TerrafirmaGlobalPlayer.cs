@@ -128,7 +128,7 @@ namespace TerrafirmaRedux.Global
                 if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 && Player.inventory[HeldMagicItem].type != 0 && Player.HasItemInAnyInventory(Player.inventory[Player.selectedItem].type) )
                 {
 
-                    Player.inventory[HeldMagicItem].shoot = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type][ ModContent.GetInstance<SpellUISystem>().SelectedSpell ]].Item1;
+                    Player.inventory[HeldMagicItem].GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type][ ModContent.GetInstance<SpellUISystem>().SelectedSpell ]].Item1;
                 }
                 ModContent.GetInstance<SpellUISystem>().Flush(); 
             }

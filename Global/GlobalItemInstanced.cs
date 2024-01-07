@@ -8,24 +8,15 @@ using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Global
 {
-    public class MiscItemChanges : GlobalItem
+    public class GlobalItemInstanced : GlobalItem
     {
+        public byte Spell = 0;
         public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type <= 5455;
-        }
-
-        //SetDefaults
         public override void SetDefaults(Item entity)
         {
+            Spell = 0;
 
-            //if (ItemID.Sets.SortingPriorityBossSpawns[entity.type] > -1)
-            //{
-            //    entity.consumable = false;
-            //    entity.maxStack = 1;
-            //}
-            if (entity.DamageType == DamageClass.Summon)
+            if (entity.DamageType == DamageClass.Summon && entity.type <= 5455)
             {
                 entity.useTime = entity.useAnimation = 16;
                 entity.mana = 0;

@@ -65,10 +65,10 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         public override void Update(GameTime gameTime)
         {
-            if (ModContent.GetInstance<SpellIndex>().SpellDescription.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
+            if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
-                Title.SetText(ModContent.GetInstance<SpellIndex>().SpellDescription[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item2);
-                Description.SetText(ModContent.GetInstance<SpellIndex>().SpellDescription[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item1);
+                Title.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item4);
+                Description.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item3);
                 TextPanel.Width.Set(Description.MinWidth.Pixels > Title.MinWidth.Pixels * 1.1f ? Description.MinWidth.Pixels : Title.MinWidth.Pixels * 1.1f + 20, 0);
                 TextPanel.Height.Set(Description.MinHeight.Pixels + Title.MinHeight.Pixels + 40, 0);
             }

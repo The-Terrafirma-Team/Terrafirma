@@ -303,6 +303,7 @@ Projectiles: {
 	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
 	SunofRa.DisplayName: Sunof Ra
 	SummonedVulture.DisplayName: Summoned Vulture
+	HomingAmethyst.DisplayName: Homing Amethyst
 }
 
 Buffs: {
