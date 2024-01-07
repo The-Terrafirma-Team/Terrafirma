@@ -95,6 +95,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
                 case 9: return player.ownedProjectileCounts[ModContent.ProjectileType<DiamondTurret>()] < 1;
+                case 13: if (player.ownedProjectileCounts[ModContent.ProjectileType<AmberWall>()] < 4 && player.ownedProjectileCounts[ModContent.ProjectileType<AmberWallCrystal>()] < 1) { return true; } return false; 
 
             }
             return base.Shoot(item,player,source,position,velocity,type,damage,knockback);
@@ -106,7 +107,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
                 case 9: return player.ownedProjectileCounts[ModContent.ProjectileType<DiamondTurret>()] < 1;
-                case 13: return player.ownedProjectileCounts[ModContent.ProjectileType<AmberWall>()] < 1;
+                case 13: if (player.ownedProjectileCounts[ModContent.ProjectileType<AmberWall>()] < 4 && player.ownedProjectileCounts[ModContent.ProjectileType<AmberWallCrystal>()] < 1) { return true; } return false;
             }
             return base.CanUseItem(item, player);
         }
@@ -283,7 +284,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 Vector2 length = Main.player[Projectile.owner].MountedCenter - Projectile.Center;
                 for (int i = -3; i < 4; i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].MountedCenter - length.RotatedBy(0.05f * i), Vector2.Zero, ModContent.ProjectileType<AmberWall>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 1);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].MountedCenter - length.RotatedBy( 0.05f * i), Vector2.Zero, ModContent.ProjectileType<AmberWall>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 1);
                 }
                 SoundEngine.PlaySound(SoundID.Tink, Projectile.Center);
             }
@@ -297,12 +298,16 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/AmberWall";
             public override void SetDefaults()
             {
-                Projectile.penetrate = 6;
+                Projectile.penetrate = 12;
                 Projectile.tileCollide = false;
-                DrawOffsetX = -Projectile.width / 2;
+                DrawOffsetX = -5;
+                DrawOriginOffsetY = -5;
                 Projectile.Size = new Vector2(16);
                 Projectile.timeLeft = 400;
                 Projectile.friendly = true;
+
+                Projectile.usesLocalNPCImmunity = true;
+                Projectile.localNPCHitCooldown = 40;
             }
 
             public override void OnSpawn(IEntitySource source)
@@ -327,6 +332,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
             public override void OnKill(int timeLeft)
             {
+                SoundEngine.PlaySound(SoundID.Tink, Projectile.Center);
                 for (int j = 0; j < 5; j++)
                 {
                     Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.GemAmber, new Vector2(Main.rand.NextFloat(-5f, 5f), Main.rand.NextFloat(-5f, 5f)), 0, Color.White, Main.rand.NextFloat(1f, 1.3f));
