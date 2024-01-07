@@ -30,6 +30,8 @@ namespace TerrafirmaRedux.Systems.MageClass
             ItemCatalogue.Add(ItemID.DiamondStaff, new[] { 8, 9 });
             ItemCatalogue.Add(ItemID.SapphireStaff, new[] { 10, 11 });
             ItemCatalogue.Add(ItemID.AmberStaff, new[] { 12, 13 });
+            //Dungeon Staves
+            ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             //TEST
             ItemCatalogue.Add(ItemID.WandofFrosting, new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 });
 
@@ -56,9 +58,12 @@ namespace TerrafirmaRedux.Systems.MageClass
             //Amber Staff
             SpellCatalogue.Add(12, new Tuple<byte, string, string, string, string>(12, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Amber Bolt", "Shoots a Bolt of Mana", "Uses 7 Mana"));
             SpellCatalogue.Add(13, new Tuple<byte, string, string, string, string>(13, AssetPath + "Pre-Hardmode/GemStaff/AmethystHomingShot", "Homing Amethyst Bolt", "Shoots a Bolt of Homing Mana", "Uses 6 Mana"));
-
+            //InfernoFork
+            SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Inferno Bolt", "Shoots a Bolt of flames that explodes into a lingering ball of fire", ""));
+            SpellCatalogue.Add(15, new Tuple<byte, string, string, string, string>(1, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Hellfire Breath", "Shoots a blast of flame", ""));
+            SpellCatalogue.Add(16, new Tuple<byte, string, string, string, string>(2, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Diabolical Flameburst", "Summons pillars of fire", ""));
             //TEST
-            SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
+            //SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
         }
     }
 }
