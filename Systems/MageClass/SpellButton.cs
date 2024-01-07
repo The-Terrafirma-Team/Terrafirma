@@ -18,6 +18,7 @@ namespace TerrafirmaRedux.Systems.MageClass
         public Vector2 position = Vector2.Zero;
         public string icon = "";
 
+        public int Index;
         public int SelectedSpell;
 
         internal float timer;
@@ -51,6 +52,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 }
                 dist = 1f;
                 ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
+                ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
             else if (Math.Abs((angle * (Math.PI / 180)) - (mouseangle - Math.PI*2)) < (anglespace * (Math.PI / 180)) / 2)
@@ -62,6 +64,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 }
                 dist = 1f;
                 ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
+                ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
             else

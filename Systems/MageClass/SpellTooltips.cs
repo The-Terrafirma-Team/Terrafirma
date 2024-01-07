@@ -22,16 +22,20 @@ namespace TerrafirmaRedux.Systems.MageClass
         {
             if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(item.type))
             {
+                var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
+                tooltips.Remove(manaremove);
                 tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " For more info)"));
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
                     for (int i = 0; i < ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length; i++)
                     {
                         tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellDescription", 
-                        "[c/AAAAAA:" + 
+                        "[c/999999:" + 
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item3 + 
                         ": " + 
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item4 + 
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item4 +
+                        ". " +
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item5 +
                         "]"
                         ));
                     }
