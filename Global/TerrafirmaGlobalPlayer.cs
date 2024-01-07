@@ -25,6 +25,8 @@ namespace TerrafirmaRedux.Global
 
         public bool SpellUI = false;
         internal int HeldMagicItem = 0;
+
+
         
         public override void ResetEffects()
         {
@@ -101,7 +103,7 @@ namespace TerrafirmaRedux.Global
 
         public override void PostUpdate()
         {
-            if (SpellUI) { ModContent.GetInstance<SpellUISystem>().Show(); }
+            if (SpellUI && Player.inventory[HeldMagicItem].type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }
 
         }
@@ -123,10 +125,10 @@ namespace TerrafirmaRedux.Global
             else
             { 
                 SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 )
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 && Player.inventory[HeldMagicItem].type != 0 && Player.HasItemInAnyInventory(Player.inventory[Player.selectedItem].type) )
                 {
 
-                    Player.inventory[HeldMagicItem].shoot = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem ].type][ ModContent.GetInstance<SpellUISystem>().SelectedSpell ]].Item1;
+                    Player.inventory[HeldMagicItem].shoot = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type][ ModContent.GetInstance<SpellUISystem>().SelectedSpell ]].Item1;
                 }
                 ModContent.GetInstance<SpellUISystem>().Flush(); 
             }
