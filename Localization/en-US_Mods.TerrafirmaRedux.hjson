@@ -307,6 +307,9 @@ Projectiles: {
 	SplittingTopaz.DisplayName: Splitting Topaz
 	PiercingEmerald.DisplayName: Piercing Emerald
 	ExplodingRuby.DisplayName: Exploding Ruby
+	DiamondTurret.DisplayName: Diamond Turret
+	AmberWall.DisplayName: Amber Wall
+	AmberWallCrystal.DisplayName: Amber Wall Crystal
 }
 
 Buffs: {
