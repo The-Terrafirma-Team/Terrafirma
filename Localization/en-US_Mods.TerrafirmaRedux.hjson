@@ -264,6 +264,11 @@ Items: {
 
 	SpringBoots: {
 		DisplayName: Spring Boots
+		Tooltip: Keep jumping to build up speed and jump height
+	}
+
+	PirateCrossbow: {
+		DisplayName: Pirate Crossbow
 		Tooltip: ""
 	}
 }

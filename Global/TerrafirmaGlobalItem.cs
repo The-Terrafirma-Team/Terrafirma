@@ -65,7 +65,7 @@ namespace TerrafirmaRedux.Global
             {
                 if (player.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergyNames().Contains("Silly Ammo Belt") && item.useAmmo == AmmoID.Bullet)
                 {
-                    if (Main.rand.Next(100) < 30)
+                    if (Main.rand.Next(100) < 33)
                     {
                         Item newitem = new Item(TerrafirmaRedux.Mod.BulletArray[Main.rand.Next(TerrafirmaRedux.Mod.BulletArray.Length)]);
                         type = newitem.shoot;

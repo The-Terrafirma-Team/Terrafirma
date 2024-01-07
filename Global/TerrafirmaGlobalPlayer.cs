@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Audio;
+using Terraria.GameInput;
+using TerrafirmaRedux.Systems.MageClass;
+using TerrafirmaRedux.Global.Structs;
 
 namespace TerrafirmaRedux.Global
 {
@@ -18,7 +17,15 @@ namespace TerrafirmaRedux.Global
         public bool CanUseAmmo = true;
         public bool BoxOfHighPiercingRounds = false;
 
-        public Vector2 Momentum = new Vector2(0, 0);
+        public bool SpringBoots = true;
+
+        public Vector2 Momentum = Vector2.Zero;
+        public int FloorTime = 0;
+        public float JumpMultiplier = 1f;
+
+        public bool SpellUI = false;
+        internal int HeldMagicItem = 0;
+        
         public override void ResetEffects()
         {
             Foregrip = false;
@@ -26,6 +33,8 @@ namespace TerrafirmaRedux.Global
             AmmoCan = false;
             CanUseAmmo = true;
             BoxOfHighPiercingRounds = false;
+
+            SpringBoots = false;
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
@@ -40,6 +49,87 @@ namespace TerrafirmaRedux.Global
             }
             return base.CanConsumeAmmo(weapon, ammo);
 
+        }
+
+        public override void PostUpdateRunSpeeds()
+        {
+            if (SpringBoots)
+            {
+                Player.runSlowdown = 0.2f;
+
+                if (Player.velocity.Y != 0)
+                {
+                    FloorTime = 0;
+                }
+                else
+                {
+                    FloorTime++;
+                }
+
+                if (FloorTime > 10)
+                {
+                    JumpMultiplier = 1f;
+                }
+
+            }
+        }
+
+        public override void PreUpdateMovement()
+        {
+            
+            if (SpringBoots)
+            {
+                Player.frogLegJumpBoost = true;
+
+                if (Player.justJumped)
+                {
+
+                    if (JumpMultiplier > 1)
+                    {
+                        SoundStyle boing = new SoundStyle("TerrafirmaRedux/Sounds/Boing",SoundType.Sound);
+                        boing.Volume = 0.8f;
+                        boing.PitchRange = (-0.1f, 0.1f);
+                        boing.Pitch -= JumpMultiplier / 10;
+
+                        SoundEngine.PlaySound(boing, Player.position);
+                    }
+
+                    JumpMultiplier = MathHelper.Clamp(JumpMultiplier * 1.25f, 1f, 3f);
+                }
+            }
+        }
+
+        public override void PostUpdate()
+        {
+            if (SpellUI) { ModContent.GetInstance<SpellUISystem>().Show(); }
+            else { ModContent.GetInstance<SpellUISystem>().Hide(); }
+
+        }
+
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (triggersSet.MouseRight) {  
+                
+                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type))
+                {
+                    if (!SpellUI)
+                    {
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
+                        HeldMagicItem = Player.selectedItem;
+                    }
+                }
+                SpellUI = true;
+            }
+            else
+            { 
+                SpellUI = false;
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 )
+                {
+
+                    Player.inventory[HeldMagicItem].shoot = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem ].type][ ModContent.GetInstance<SpellUISystem>().SelectedSpell ]].Item1;
+                }
+                ModContent.GetInstance<SpellUISystem>().Flush(); 
+            }
         }
 
     }
