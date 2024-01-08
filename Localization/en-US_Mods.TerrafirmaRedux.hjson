@@ -312,6 +312,7 @@ Projectiles: {
 	AmberWallCrystal.DisplayName: Amber Wall Crystal
 	Firewall.DisplayName: Firewall
 	InfernoFork.DisplayName: Inferno Fork
+	WaterGeyser.DisplayName: Water Geyser
 }
 
 Buffs: {

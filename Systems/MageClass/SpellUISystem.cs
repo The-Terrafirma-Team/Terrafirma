@@ -51,6 +51,10 @@ namespace TerrafirmaRedux.Systems.MageClass
             spellui?.Create(item);
         }
 
+        public void UpdateMana (float manacost)
+        {
+            spellui.manacost = manacost;
+        }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));

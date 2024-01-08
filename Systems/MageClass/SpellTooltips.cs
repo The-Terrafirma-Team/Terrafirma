@@ -13,11 +13,13 @@ namespace TerrafirmaRedux.Systems.MageClass
     {
         public override bool InstancePerEntity => true;
         internal Player getplayer;
+        internal float manacost;
 
         public override void UpdateInventory(Item item, Player player)
         {
             getplayer = player;
         }
+
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(item.type))
@@ -34,9 +36,9 @@ namespace TerrafirmaRedux.Systems.MageClass
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item3 + 
                         ": " + 
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item4 +
-                        ". " +
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item5 +
-                        "]"
+                        ". Uses " +
+                        (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item5 * getplayer.manaCost) +
+                        " Mana ]"
                         ));
                     }
                     

@@ -125,6 +125,7 @@ namespace TerrafirmaRedux.Global
                         ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
                         HeldMagicItem = Player.selectedItem;
                     }
+                    ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
                 }
                 SpellUI = true;
             }

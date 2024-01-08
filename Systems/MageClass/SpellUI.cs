@@ -16,6 +16,7 @@ namespace TerrafirmaRedux.Systems.MageClass
         UIText Description;
         UIText ManaCost;
         UIPanel TextPanel;
+        public float manacost;
         public void Flush()
         {
             RemoveAllChildren();
@@ -70,12 +71,11 @@ namespace TerrafirmaRedux.Systems.MageClass
             Append(TextPanel);
 
         }
-
         public override void Update(GameTime gameTime)
         {
             if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
-                ManaCost.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5);
+                ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 * manacost) + " Mana");
                 Title.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item4);
                 Description.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item3);
                 
