@@ -319,6 +319,7 @@ Projectiles: {
 	InfernoFork.DisplayName: Inferno Fork
 	WaterGeyser.DisplayName: Water Geyser
 	AuraWave.DisplayName: Aura Wave
+	IchorBubble.DisplayName: Ichor Bubble
 }
 
 Buffs: {

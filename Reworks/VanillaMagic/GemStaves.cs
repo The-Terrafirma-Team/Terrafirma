@@ -210,6 +210,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     newdust.noGravity = true;
                 }
                 Projectile.Explode(100);
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
             }
         }
         #endregion

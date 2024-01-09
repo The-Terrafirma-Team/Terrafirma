@@ -30,6 +30,8 @@ namespace TerrafirmaRedux.Global
         
         public override void ResetEffects()
         {
+            Player.pickSpeed *= 0.8f;
+
             Foregrip = false;
             DrumMag = false;
             AmmoCan = false;
