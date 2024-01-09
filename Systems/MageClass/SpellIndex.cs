@@ -66,9 +66,8 @@ namespace TerrafirmaRedux.Systems.MageClass
 
             /// Evil Weapons
             //Golden Shower
-            SpellCatalogue.Add(20, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/GoldenShower", "Golden Shower", "Shoots Sprays a shower of ichor, Decreases target's defense", 6));
-            SpellCatalogue.Add(21, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of Ichor", 6));
-
+            SpellCatalogue.Add(20, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/GoldenShower", "Golden Shower", "Shoots Sprays a shower of ichor, Decreases target's defense", 7));
+            SpellCatalogue.Add(21, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of boiling Ichor, Decreases target's defense and lights them on fire", 7));
             /// Dungeon Weapons
             //Inferno Fork
             SpellCatalogue.Add(14, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/InfernoFork", "Inferno Fork", "Shoots an inferno fork that explodes into a lingering ball of fire", 18));

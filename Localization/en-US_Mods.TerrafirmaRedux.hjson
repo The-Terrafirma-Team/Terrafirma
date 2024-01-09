@@ -326,6 +326,7 @@ Projectiles: {
 	AuraWave.DisplayName: Aura Wave
 	BoneFragment.DisplayName: Bone Fragment
 	IchorSentry.DisplayName: Ichor Sentry
+	IchorBubble.DisplayName: Ichor Bubble
 }
 
 Buffs: {
