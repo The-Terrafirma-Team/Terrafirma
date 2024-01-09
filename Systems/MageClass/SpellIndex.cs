@@ -35,6 +35,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             //Dungeon Weapons
             ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             ItemCatalogue.Add(ItemID.WaterBolt, new[] { 17, 18, 19 });
+            ItemCatalogue.Add(ItemID.BookofSkulls, new[] { 22, 23 });
             //TEST
             ItemCatalogue.Add(ItemID.WandofFrosting, new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 });
 
@@ -42,40 +43,44 @@ namespace TerrafirmaRedux.Systems.MageClass
             //// Spells
             /// Gem Staves
             //Amethyst Staff
-            SpellCatalogue.Add(0, new Tuple<byte, string, string, string, float>(0, AssetPath + "Pre-Hardmode/GemStaff/AmethystBolt", "Amethyst Bolt", "Shoots a Bolt of Mana", 5) );
-            SpellCatalogue.Add(1, new Tuple<byte, string, string, string, float>(1, AssetPath + "Pre-Hardmode/GemStaff/AmethystHomingShot", "Homing Amethyst Bolt", "Shoots a bolt of homing mana", 6) );
+            SpellCatalogue.Add(0, new Tuple<byte, string, string, string, float>(0, AssetPath + "PreHardmode/GemStaff/AmethystBolt", "Amethyst Bolt", "Shoots a Bolt of Mana", 5) );
+            SpellCatalogue.Add(1, new Tuple<byte, string, string, string, float>(1, AssetPath + "PreHardmode/GemStaff/AmethystHomingShot", "Homing Amethyst Bolt", "Shoots a bolt of homing mana", 6) );
             //Topaz Staff
-            SpellCatalogue.Add(2, new Tuple<byte, string, string, string, float>(2, AssetPath + "Pre-Hardmode/GemStaff/TopazBolt", "Topaz Bolt", "Shoots a Bolt of Mana", 5));
-            SpellCatalogue.Add(3, new Tuple<byte, string, string, string, float>(3, AssetPath + "Pre-Hardmode/GemStaff/TopazSplitShot", "Splitting Topaz Bolt", "Shoots a bolt of splitting mana", 6));
+            SpellCatalogue.Add(2, new Tuple<byte, string, string, string, float>(2, AssetPath + "PreHardmode/GemStaff/TopazBolt", "Topaz Bolt", "Shoots a Bolt of Mana", 5));
+            SpellCatalogue.Add(3, new Tuple<byte, string, string, string, float>(3, AssetPath + "PreHardmode/GemStaff/TopazSplitShot", "Splitting Topaz Bolt", "Shoots a bolt of splitting mana", 6));
             //Emerald Staff
-            SpellCatalogue.Add(4, new Tuple<byte, string, string, string, float>(4, AssetPath + "Pre-Hardmode/GemStaff/EmeraldBolt", "Emerald Bolt", "Shoots a Bolt of Mana", 6));
-            SpellCatalogue.Add(5, new Tuple<byte, string, string, string, float>(5, AssetPath + "Pre-Hardmode/GemStaff/EmeraldPenetrationShot", "Piercing Emerald Bolt", "Shoots a bolt of piercing mana", 8));
+            SpellCatalogue.Add(4, new Tuple<byte, string, string, string, float>(4, AssetPath + "PreHardmode/GemStaff/EmeraldBolt", "Emerald Bolt", "Shoots a Bolt of Mana", 6));
+            SpellCatalogue.Add(5, new Tuple<byte, string, string, string, float>(5, AssetPath + "PreHardmode/GemStaff/EmeraldPenetrationShot", "Piercing Emerald Bolt", "Shoots a bolt of piercing mana", 8));
             //Ruby Staff
-            SpellCatalogue.Add(6, new Tuple<byte, string, string, string, float>(6, AssetPath + "Pre-Hardmode/GemStaff/RubyBolt", "Ruby Bolt", "Shoots a Bolt of Mana", 7));
-            SpellCatalogue.Add(7, new Tuple<byte, string, string, string, float>(7, AssetPath + "Pre-Hardmode/GemStaff/RubyExplosiveShot", "Explosive Ruby Bolt", "Shoots a bolt of exploding mana", 9));
+            SpellCatalogue.Add(6, new Tuple<byte, string, string, string, float>(6, AssetPath + "PreHardmode/GemStaff/RubyBolt", "Ruby Bolt", "Shoots a Bolt of Mana", 7));
+            SpellCatalogue.Add(7, new Tuple<byte, string, string, string, float>(7, AssetPath + "PreHardmode/GemStaff/RubyExplosiveShot", "Explosive Ruby Bolt", "Shoots a bolt of exploding mana", 9));
             //Diamond Staff
-            SpellCatalogue.Add(8, new Tuple<byte, string, string, string, float>(8, AssetPath + "Pre-Hardmode/GemStaff/DiamondBolt", "Diamond Bolt", "Shoots a Bolt of mana", 8));
-            SpellCatalogue.Add(9, new Tuple<byte, string, string, string, float>(9, AssetPath + "Pre-Hardmode/GemStaff/DiamondTurret", "Crystal Turret", "Shoots out a turret", 40));
+            SpellCatalogue.Add(8, new Tuple<byte, string, string, string, float>(8, AssetPath + "PreHardmode/GemStaff/DiamondBolt", "Diamond Bolt", "Shoots a Bolt of mana", 8));
+            SpellCatalogue.Add(9, new Tuple<byte, string, string, string, float>(9, AssetPath + "PreHardmode/GemStaff/DiamondTurret", "Crystal Turret", "Shoots out a turret", 40));
             //Sapphire Staff
-            SpellCatalogue.Add(10, new Tuple<byte, string, string, string, float>(10, AssetPath + "Pre-Hardmode/GemStaff/SapphireBolt", "Sapphire Bolt", "Shoots a Bolt of Mana", 6));
-            SpellCatalogue.Add(11, new Tuple<byte, string, string, string, float>(11, AssetPath + "Pre-Hardmode/GemStaff/SapphireQuickShot", "Quick Amethyst Bolt", "Shoots a quick bolt of mana", 7));
+            SpellCatalogue.Add(10, new Tuple<byte, string, string, string, float>(10, AssetPath + "PreHardmode/GemStaff/SapphireBolt", "Sapphire Bolt", "Shoots a Bolt of Mana", 6));
+            SpellCatalogue.Add(11, new Tuple<byte, string, string, string, float>(11, AssetPath + "PreHardmode/GemStaff/SapphireQuickShot", "Quick Amethyst Bolt", "Shoots a quick bolt of mana", 7));
             //Amber Staff
-            SpellCatalogue.Add(12, new Tuple<byte, string, string, string, float>(12, AssetPath + "Pre-Hardmode/GemStaff/AmberBolt", "Amber Bolt", "Shoots a bolt of mana", 7));
-            SpellCatalogue.Add(13, new Tuple<byte, string, string, string, float>(13, AssetPath + "Pre-Hardmode/GemStaff/AmberWall", "Amber Wall", "Shoots a bolt of mana that expands into a wall", 14));
+            SpellCatalogue.Add(12, new Tuple<byte, string, string, string, float>(12, AssetPath + "PreHardmode/GemStaff/AmberBolt", "Amber Bolt", "Shoots a bolt of mana", 7));
+            SpellCatalogue.Add(13, new Tuple<byte, string, string, string, float>(13, AssetPath + "PreHardmode/GemStaff/AmberWall", "Amber Wall", "Shoots a bolt of mana that expands into a wall", 14));
 
             /// Evil Weapons
             //Golden Shower
             SpellCatalogue.Add(20, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/GoldenShower", "Golden Shower", "Shoots Sprays a shower of ichor, Decreases target's defense", 6));
             SpellCatalogue.Add(21, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of Ichor", 6));
+
             /// Dungeon Weapons
             //Inferno Fork
             SpellCatalogue.Add(14, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/InfernoFork", "Inferno Fork", "Shoots an inferno fork that explodes into a lingering ball of fire", 18));
             SpellCatalogue.Add(15, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/InfernoFlamethrower", "Hellfire Breath", "Shoots a blast of flame", 16));
             SpellCatalogue.Add(16, new Tuple<byte, string, string, string, float>(2, AssetPath + "Hardmode/InfernoWall", "Diabolical Firewall", "Summons a wall of fire", 24));
             //Water Bolt
-            SpellCatalogue.Add(17, new Tuple<byte, string, string, string, float>(3, AssetPath + "Pre-Hardmode/SpellBooks/WaterBolt", "Water Bolt", "Shoots a bolt of bouncy water", 10));
-            SpellCatalogue.Add(18, new Tuple<byte, string, string, string, float>(4, AssetPath + "Pre-Hardmode/SpellBooks/WaterGeyser", "Water Geyser", "Summons a water geyser", 16));
-            SpellCatalogue.Add(19, new Tuple<byte, string, string, string, float>(5, AssetPath + "Pre-Hardmode/SpellBooks/WaterAura", "Aura Wave", "Shoots a wavee to splash enemies away", 12));
+            SpellCatalogue.Add(17, new Tuple<byte, string, string, string, float>(3, AssetPath + "PreHardmode/SpellBooks/WaterBolt", "Water Bolt", "Shoots a bolt of bouncy water", 10));
+            SpellCatalogue.Add(18, new Tuple<byte, string, string, string, float>(4, AssetPath + "PreHardmode/SpellBooks/WaterGeyser", "Water Geyser", "Summons a water geyser", 16));
+            SpellCatalogue.Add(19, new Tuple<byte, string, string, string, float>(5, AssetPath + "PreHardmode/SpellBooks/WaterAura", "Aura Wave", "Shoots a wavee to splash enemies away", 12));
+            //Book of Skull
+            SpellCatalogue.Add(22, new Tuple<byte, string, string, string, float>(6, AssetPath + "PreHardmode/SpellBooks/FlyingSkull", "Flaming Skull", "Shoots a flying flaming skull", 18));
+            SpellCatalogue.Add(23, new Tuple<byte, string, string, string, float>(7, AssetPath + "PreHardmode/SpellBooks/BoneFragmentStorm", "Bone Fragment Storm", "Shoots multiple bone fragments", 2));
             //SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
         }
     }

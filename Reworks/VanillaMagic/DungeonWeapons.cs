@@ -18,7 +18,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return entity.type is >= 1444 and <= 1446 || entity.type == ItemID.WaterBolt;
+            return entity.type is >= 1444 and <= 1446 || entity.type == ItemID.WaterBolt || entity.type == ItemID.BookofSkulls;
         }
         public override void SetDefaults(Item entity)
         {
@@ -33,6 +33,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 2: mult = 1f + 6/18f; break;
                 case 4: mult = 1.6f; break;
                 case 5: mult = 1.2f; break;
+                case 7: mult = 2/18f; break;
             };
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
@@ -45,6 +46,8 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     return 1.2f;
                 case 4:
                     return 1.8f;
+                case 7:
+                    return 0.2f;
             }
             return base.UseAnimationMultiplier(item, player);
         }
@@ -59,6 +62,8 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     return 0.3f;
                 case 4:
                     return 1.8f;
+                case 7:
+                    return 0.3f;
             }
 
             return base.UseTimeMultiplier(item, player);
@@ -113,6 +118,11 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     position = Main.MouseWorld;
                     velocity = Vector2.Normalize(velocity) * 0.01f;
                     knockback *= 2f;
+                    break;
+                case 7:
+                    type = ModContent.ProjectileType<BoneFragment>();
+                    damage = (int)(damage * 0.8f);
+                    velocity += velocity * 2f + new Vector2(0, Main.rand.NextFloat(-1f, 1f)).RotatedBy(velocity.ToRotation());
                     break;
             }
         }
@@ -170,7 +180,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 float SetPos = 0;
                 for (int i = 300; i > 0; i -= 4)
                 {
-                    if (Collision.SolidCollision(Projectile.Center + new Vector2(0, i * 2), Projectile.width, Projectile.height))
+                    if (Collision.SolidCollision(Projectile.Center + new Vector2(0, i * 2), Projectile.width, Projectile.height, true) )
                     {
                         SetPos = new Vector2(0, Projectile.Bottom.Y + i * 2).ToTileCoordinates().Y * 16;
                     }
@@ -249,6 +259,12 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             Projectile.ai[0]++;
 
         }
+
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            fallThrough = false;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
     }
     #endregion
 
@@ -304,6 +320,63 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         public override void OnSpawn(IEntitySource source)
         {
             playerpos = Main.player[Projectile.owner].MountedCenter;
+        }
+    }
+    #endregion
+
+    #region Bone Fragment
+    public class BoneFragment : ModProjectile
+    {
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/BoneFragments";
+
+        Vector2 playerpos = Vector2.Zero;
+
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Type] = 4;
+        }
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = 1;
+            Projectile.Size = new Vector2(14, 14);
+            Projectile.timeLeft = 200;
+            Projectile.friendly = true;
+        }
+
+        public override void AI()
+        {
+            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.ai[0]++;
+            if (Projectile.ai[0] > 20)
+            {
+                Projectile.velocity.Y += 0.3f;
+            }
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
+            for (int i = 0; i < 2; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center, DustID.Bone, Projectile.velocity / 2 + new Vector2(Main.rand.NextFloat(-3f, 1f), Main.rand.NextFloat(-1f, 1f)).RotatedBy(Projectile.velocity.ToRotation()), 0, Color.White, 1);
+            }
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Collision.TileCollision(Projectile.position, Projectile.velocity / 2, Projectile.width, Projectile.height);
+            return base.OnTileCollide(oldVelocity);
+        }
+        public override void OnKill(int timeLeft)
+        {
+            SoundStyle bonesound = SoundID.NPCHit2;
+            bonesound.Volume = 0.2f;
+            bonesound.PitchRange = (-0.2f, 0.2f);
+            SoundEngine.PlaySound(bonesound, Projectile.position);
+            for (int i = 0; i < 4; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center, DustID.Bone, Projectile.velocity / 2 + new Vector2(Main.rand.NextFloat(-3f, 1f), Main.rand.NextFloat(-1f, 1f)).RotatedBy(Projectile.velocity.ToRotation()), 0, Color.White, 1);
+            }
         }
     } 
     #endregion
