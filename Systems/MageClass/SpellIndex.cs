@@ -30,6 +30,8 @@ namespace TerrafirmaRedux.Systems.MageClass
             ItemCatalogue.Add(ItemID.DiamondStaff, new[] { 8, 9 });
             ItemCatalogue.Add(ItemID.SapphireStaff, new[] { 10, 11 });
             ItemCatalogue.Add(ItemID.AmberStaff, new[] { 12, 13 });
+            //EvilWeapons
+            ItemCatalogue.Add(ItemID.GoldenShower, new[] { 20, 21 });
             //Dungeon Weapons
             ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             ItemCatalogue.Add(ItemID.WaterBolt, new[] { 17, 18, 19 });
@@ -60,7 +62,11 @@ namespace TerrafirmaRedux.Systems.MageClass
             //Amber Staff
             SpellCatalogue.Add(12, new Tuple<byte, string, string, string, float>(12, AssetPath + "Pre-Hardmode/GemStaff/AmberBolt", "Amber Bolt", "Shoots a bolt of mana", 7));
             SpellCatalogue.Add(13, new Tuple<byte, string, string, string, float>(13, AssetPath + "Pre-Hardmode/GemStaff/AmberWall", "Amber Wall", "Shoots a bolt of mana that expands into a wall", 14));
-            
+
+            /// Evil Weapons
+            //Golden Shower
+            SpellCatalogue.Add(20, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/GoldenShower", "Golden Shower", "Shoots Sprays a shower of ichor, Decreases target's defense", 6));
+            SpellCatalogue.Add(21, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of Ichor", 6));
             /// Dungeon Weapons
             //Inferno Fork
             SpellCatalogue.Add(14, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/InfernoFork", "Inferno Fork", "Shoots an inferno fork that explodes into a lingering ball of fire", 18));
