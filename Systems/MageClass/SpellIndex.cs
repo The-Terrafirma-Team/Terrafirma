@@ -67,9 +67,9 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(15, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/InfernoFlamethrower", "Hellfire Breath", "Shoots a blast of flame", 16));
             SpellCatalogue.Add(16, new Tuple<byte, string, string, string, float>(2, AssetPath + "Hardmode/InfernoWall", "Diabolical Firewall", "Summons a wall of fire", 24));
             //Water Bolt
-            SpellCatalogue.Add(17, new Tuple<byte, string, string, string, float>(3, AssetPath + "Pre-Hardmode/SpellBooks/WaterBolt", "Water Bolt", "Shoots a bolt of bouncy water", 5));
-            SpellCatalogue.Add(18, new Tuple<byte, string, string, string, float>(4, AssetPath + "Pre-Hardmode/SpellBooks/WaterGeyser", "Water Geyser", "Summons a water geyser", 8));
-            SpellCatalogue.Add(19, new Tuple<byte, string, string, string, float>(5, AssetPath + "Pre-Hardmode/SpellBooks/WaterAura", "Aura Wave", "Shoots a wavee to splash enemies away", 6));
+            SpellCatalogue.Add(17, new Tuple<byte, string, string, string, float>(3, AssetPath + "Pre-Hardmode/SpellBooks/WaterBolt", "Water Bolt", "Shoots a bolt of bouncy water", 10));
+            SpellCatalogue.Add(18, new Tuple<byte, string, string, string, float>(4, AssetPath + "Pre-Hardmode/SpellBooks/WaterGeyser", "Water Geyser", "Summons a water geyser", 16));
+            SpellCatalogue.Add(19, new Tuple<byte, string, string, string, float>(5, AssetPath + "Pre-Hardmode/SpellBooks/WaterAura", "Aura Wave", "Shoots a wavee to splash enemies away", 12));
             //SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
         }
     }
