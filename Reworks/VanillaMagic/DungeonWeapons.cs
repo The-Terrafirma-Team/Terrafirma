@@ -27,7 +27,13 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
+            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
+            {
+                case 1: mult = 16/18f; break;
+                case 2: mult = 1f + 6/18f; break;
+                case 4: mult = 1.6f; break;
+                case 5: mult = 1.2f; break;
+            };
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
         public override float UseAnimationMultiplier(Item item, Player player)
@@ -102,10 +108,17 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     velocity = Vector2.Normalize(velocity) * 0.01f;
                     knockback *= 0.2f;
                     break;
+                case 5:
+                    type = ModContent.ProjectileType<AuraWave>();
+                    position = Main.MouseWorld;
+                    velocity = Vector2.Normalize(velocity) * 0.01f;
+                    knockback *= 2f;
+                    break;
             }
         }
     }
 
+    #region Water Geyser
     public class WaterGeyser : ModProjectile
     {
         public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/WaterGeyser";
@@ -121,14 +134,14 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         {
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
-            Projectile.Size = new Vector2(28,20);
+            Projectile.Size = new Vector2(28, 20);
             Projectile.timeLeft = 400;
             Projectile.Opacity = 0;
             Projectile.friendly = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
         }
-        
+
         public override bool? CanHitNPC(NPC target)
         {
             if (Projectile.ai[2] % 2 == 0)
@@ -140,9 +153,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         }
         public override void AI()
         {
-            
+
             Projectile.position.X += (float)Math.Sin(Projectile.ai[0] / 10) / 4;
-            if ( Projectile.timeLeft > 390)
+            if (Projectile.timeLeft > 390)
             {
                 Projectile.Opacity += 1 / 10f;
             }
@@ -180,41 +193,51 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 }
                 else { Projectile.frame++; }
             }
-            
+
             if (Projectile.ai[0] % 5 == 0)
             {
 
-                Dust newdust = Dust.NewDustDirect(Projectile.Center , Projectile.width / 2, Projectile.height / 2, DustID.DungeonWater, 0, -2f, Projectile.alpha, Color.White, Projectile.Opacity);
+                Dust newdust = Dust.NewDustDirect(Projectile.Center, Projectile.width / 2, Projectile.height / 2, DustID.DungeonWater, 0, -2f, Projectile.alpha, Color.White, Projectile.Opacity);
                 newdust.velocity.X *= 0.3f;
                 newdust.noGravity = Main.rand.NextBool();
             }
 
 
-            if (Projectile.ai[0] == 4)
+            if (Projectile.ai[0] == 4 && Projectile.ai[2] <= 10)
             {
-                if (Projectile.ai[2] < 10)
+                if(Collision.SolidCollision(OriginalPos + new Vector2(0, -Projectile.height + 4),Projectile.width,Projectile.height)) 
                 {
-                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 4), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, Projectile.ai[2] + 1);
-                    newproj.frame = Projectile.frame - 1;
-                   
+                        Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 6), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, 11);
+                        newproj.frame = Projectile.frame - 1;
                 }
-                else if (Projectile.ai[2] == 10)
+                else
                 {
-                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 8), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, Projectile.ai[2] + 1);
-                    newproj.frame = Projectile.frame - 1;
+                    if (Projectile.ai[2] < 10)
+                    {
+                        Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 4), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, Projectile.ai[2] + 1);
+                        newproj.frame = Projectile.frame - 1;
 
+                    }
+                    else if (Projectile.ai[2] == 10)
+                    {
+                        Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 8), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, Projectile.ai[2] + 1);
+                        newproj.frame = Projectile.frame - 1;
+
+                    }
                 }
                 
-                
+
+
             }
 
-            for(int i = 0; i < Main.player.Length; i++)
+            for (int i = 0; i < Main.player.Length; i++)
             {
                 if (Main.player[i].Hitbox.Intersects(Projectile.Hitbox) && Main.player[i].velocity.Y > -45f)
                 {
-                    if (Math.Abs(Main.player[i].velocity.X) > 0.2f )
+                    Main.player[i].AddBuff(BuffID.Wet, 120);
+                    if (Math.Abs(Main.player[i].velocity.X) > 2f)
                     {
-                        Main.player[i].velocity.Y -= Math.Abs(Main.player[i].velocity.X) / 10;
+                        Main.player[i].velocity.Y -= Math.Abs(Main.player[i].velocity.X) / 20;
                     }
                     else
                     {
@@ -227,4 +250,61 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
         }
     }
+    #endregion
+
+    #region Aurawave
+    public class AuraWave : ModProjectile
+    {
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/AuraWave";
+
+        Vector2 playerpos = Vector2.Zero;
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.Size = new Vector2(10, 10);
+            Projectile.timeLeft = 400;
+            Projectile.friendly = true;
+        }
+
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+
+
+            if (Projectile.ai[2] == 0)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].MountedCenter, new Vector2(3f, 0f).RotatedBy(Math.PI / 8f * i), Type, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 1);
+                    newproj.Opacity = 0.5f;
+                    newproj.timeLeft = 60;
+                }
+                Projectile.Kill();
+
+            }
+            else
+            {
+                Projectile.Opacity = Projectile.timeLeft / 60f;
+                Projectile.velocity = Projectile.velocity * 0.95f + ((Projectile.Center - playerpos) - (Projectile.Center - playerpos).RotatedBy(0.01f));
+                Projectile.velocity *= 0.95f;
+                Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
+
+                //Projectile.velocity = Projectile.velocity.RotatedBy(0.08f);
+
+
+                if (Projectile.ai[0] % 2 == 0)
+                {
+                    Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(5, 0).RotatedBy(Projectile.velocity.ToRotation()), DustID.DungeonWater, Vector2.Zero, Projectile.alpha, Color.White, 1);
+                    newdust.noGravity = !Main.rand.NextBool(8);
+                }
+            }
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            playerpos = Main.player[Projectile.owner].MountedCenter;
+        }
+    } 
+    #endregion
 }

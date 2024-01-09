@@ -271,6 +271,11 @@ Items: {
 		DisplayName: Pirate Crossbow
 		Tooltip: ""
 	}
+
+	HandCannon: {
+		DisplayName: Hand Cannon
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -313,6 +318,7 @@ Projectiles: {
 	Firewall.DisplayName: Firewall
 	InfernoFork.DisplayName: Inferno Fork
 	WaterGeyser.DisplayName: Water Geyser
+	AuraWave.DisplayName: Aura Wave
 }
 
 Buffs: {
