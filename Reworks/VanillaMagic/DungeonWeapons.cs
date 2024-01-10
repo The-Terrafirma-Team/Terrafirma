@@ -255,6 +255,21 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     }
                 }
             }
+            for (int i = 0; i < Main.npc.Length; i++)
+            {
+                if (Main.npc[i].Hitbox.Intersects(Projectile.Hitbox) && Main.npc[i].velocity.Y > -45f && Main.npc[i].friendly)
+                {
+                    Main.npc[i].AddBuff(BuffID.Wet, 120);
+                    if (Math.Abs(Main.npc[i].velocity.X) > 2f)
+                    {
+                        Main.npc[i].velocity.Y -= Math.Abs(Main.npc[i].velocity.X) / 20;
+                    }
+                    else
+                    {
+                        Main.npc[i].velocity.Y -= 0.2f;
+                    }
+                }
+            }
 
             Projectile.ai[0]++;
 
