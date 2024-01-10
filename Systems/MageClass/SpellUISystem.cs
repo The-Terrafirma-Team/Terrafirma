@@ -15,7 +15,7 @@ namespace TerrafirmaRedux.Systems.MageClass
         internal SpellUI spellui;
         private UserInterface spellwheel;
         public int SelectedSpell = -1;
-        public int Index = -1;
+        public int Index = 0;
         public override void Load()
         {
             spellui = new SpellUI();

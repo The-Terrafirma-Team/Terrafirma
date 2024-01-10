@@ -12,9 +12,8 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
     {
         public override void SetDefaults()
         {
-            Item.damage = 14;
-            Item.knockBack = 4f;
-            Item.mana = 15;
+            Item.damage = 30;
+            Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
 
@@ -29,7 +28,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.autoReuse = true;
             Item.noMelee = true;
 
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 0, 30, 0);
             Item.shoot = ModContent.ProjectileType<IchorSentry>();
 

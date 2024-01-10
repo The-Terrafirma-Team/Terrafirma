@@ -24,7 +24,7 @@ namespace TerrafirmaRedux.Global
         public float JumpMultiplier = 1f;
 
         public bool SpellUI = false;
-        internal int HeldMagicItem = 0;
+        internal Item HeldMagicItem = new Item(0);
 
 
         
@@ -105,7 +105,7 @@ namespace TerrafirmaRedux.Global
 
         public override void PostUpdate()
         {
-            if (SpellUI && Player.inventory[HeldMagicItem].type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
+            if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }
 
         }
@@ -118,27 +118,54 @@ namespace TerrafirmaRedux.Global
                 {
                     if (!SpellUI)
                     {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
-                        HeldMagicItem = Player.selectedItem;
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+                        HeldMagicItem = Player.HeldItem;
                     }
 
-                    if (HeldMagicItem != Player.selectedItem)
+                    if (HeldMagicItem != Player.HeldItem)
                     {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.inventory[Player.selectedItem].type);
-                        HeldMagicItem = Player.selectedItem;
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+                        HeldMagicItem = Player.HeldItem;
                     }
                     ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
                 }
                 SpellUI = true;
             }
             else
-            { 
+            {
                 SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 && Player.inventory[HeldMagicItem].type != 0 && Player.HasItemInAnyInventory(Player.inventory[Player.selectedItem].type) && ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[HeldMagicItem].type) && ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type].Length)
+                //if 
+                //(
+                //    ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 &&
+                //    Player.HeldItem.type > 0 &&
+                //    ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
+                //    ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey( ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index] ) &&
+                //    ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length 
+                //)
+                //{
+                //    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
+                //}
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1)
                 {
-
-                    Player.inventory[HeldMagicItem].GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.inventory[HeldMagicItem].type][ ModContent.GetInstance<SpellUISystem>().Index ]].Item1;
+                    if (Player.HeldItem.type > 0)
+                    {
+                        if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) )
+                        {
+                            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1)
+                            {
+                                if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]))
+                                {
+                                    if (ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length)
+                                    {
+                                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
                 }
+
                 ModContent.GetInstance<SpellUISystem>().Flush(); 
             }
         }

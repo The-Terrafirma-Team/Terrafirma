@@ -15,6 +15,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
     internal class IchorSentry : ModProjectile
     {
         float sentryrot = 0;
+        float backtimer = 0;
         public override string Texture => "TerrafirmaRedux/Projectiles/Summons/IchorSentryBase";
         public override void SetDefaults()
         {
@@ -38,6 +39,11 @@ namespace TerrafirmaRedux.Projectiles.Summons
             return false;
         }
 
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            fallThrough = false;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
         public override bool? CanHitNPC(NPC target)
         {
             return false;
@@ -46,19 +52,39 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
-            if (Projectile.ai[0] % 20 == 0 && Utils.FindClosestNPC(600f, Projectile.Center) != null)
+            if (Projectile.ai[0] % 60 == 0 && Utils.FindClosestNPC(600f, Projectile.Center) != null)
             {
-                sentryrot = (Projectile.Center - Utils.FindClosestNPC(600f, Projectile.Center).Center).ToRotation();
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(3f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                backtimer = 10;
             }
+            else if (Utils.FindClosestNPC(600f, Projectile.Center) != null)
+            {
+                float toenemyrot = (Projectile.Center - Utils.FindClosestNPC(600f, Projectile.Center).Center).ToRotation();
+                if ( sentryrot - toenemyrot < toenemyrot + (float)Math.PI * 2f - sentryrot)
+                {
+                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - Utils.FindClosestNPC(600f, Projectile.Center).Center).ToRotation(), 0.1f);
+                }
+                else
+                {
+                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - Utils.FindClosestNPC(600f, Projectile.Center).Center).ToRotation() + (float)Math.PI * 2f, 0.1f);
+                }
+                    sentryrot = sentryrot % ((float)Math.PI * 2f);
+
+            }
+
+            if (backtimer > 0.1f)
+            {
+                backtimer *= 0.9f;
+            }
+
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryBase");
             Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryTentacle");
 
-            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8), null, Color.White, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0,1), null, Color.White, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8) + new Vector2(backtimer, 0).RotatedBy(sentryrot), null, Color.White, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 1), null, Color.White, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
 
             return false;
         }

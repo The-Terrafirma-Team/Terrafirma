@@ -30,12 +30,14 @@ namespace TerrafirmaRedux.Systems.MageClass
             ItemCatalogue.Add(ItemID.DiamondStaff, new[] { 8, 9 });
             ItemCatalogue.Add(ItemID.SapphireStaff, new[] { 10, 11 });
             ItemCatalogue.Add(ItemID.AmberStaff, new[] { 12, 13 });
-            //EvilWeapons
+            //Evil Weapons
             ItemCatalogue.Add(ItemID.GoldenShower, new[] { 20, 21 });
             //Dungeon Weapons
             ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             ItemCatalogue.Add(ItemID.WaterBolt, new[] { 17, 18, 19 });
             ItemCatalogue.Add(ItemID.BookofSkulls, new[] { 22, 23 });
+            //Other
+            ItemCatalogue.Add(ItemID.RainbowGun, new[] { 24, 25 });
             //TEST
             ItemCatalogue.Add(ItemID.WandofFrosting, new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 });
 
@@ -68,6 +70,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             //Golden Shower
             SpellCatalogue.Add(20, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/GoldenShower", "Golden Shower", "Shoots Sprays a shower of ichor, Decreases target's defense", 7));
             SpellCatalogue.Add(21, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of boiling Ichor, Decreases target's defense and lights them on fire", 7));
+            
             /// Dungeon Weapons
             //Inferno Fork
             SpellCatalogue.Add(14, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/InfernoFork", "Inferno Fork", "Shoots an inferno fork that explodes into a lingering ball of fire", 18));
@@ -81,6 +84,11 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(22, new Tuple<byte, string, string, string, float>(6, AssetPath + "PreHardmode/SpellBooks/FlyingSkull", "Flaming Skull", "Shoots a flying flaming skull", 18));
             SpellCatalogue.Add(23, new Tuple<byte, string, string, string, float>(7, AssetPath + "PreHardmode/SpellBooks/BoneFragmentStorm", "Bone Fragment Storm", "Shoots multiple bone fragments", 2));
             //SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
+
+            /// Other Weapons
+            //Rainbow Gun
+            SpellCatalogue.Add(24, new Tuple<byte, string, string, string, float>(0, AssetPath + "Hardmode/PiercingRainbow", "Piercing Rainbow", "Shoots a rainbow that does continuous damage", 20));
+            SpellCatalogue.Add(25, new Tuple<byte, string, string, string, float>(1, AssetPath + "Hardmode/PrismRain", "Prism Rain", "Shoots a barrage of colored glass prisms", 4));
         }
     }
 }
