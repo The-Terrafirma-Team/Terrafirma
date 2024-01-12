@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TerrafirmaRedux.Global;
 using Terraria;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
@@ -24,7 +25,9 @@ namespace TerrafirmaRedux.Systems.MageClass
         {
             if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(item.type))
             {
+
                 var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
+
                 tooltips.Remove(manaremove);
                 tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " For more info)"));
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)

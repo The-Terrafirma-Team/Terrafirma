@@ -12,23 +12,24 @@ using ReLogic.Content;
 
 namespace TerrafirmaRedux.Projectiles.Summons
 {
-    internal class IchorSentry : ModProjectile
+    internal class CursedFlameSentry : ModProjectile
     {
         float sentryrot = MathHelper.PiOver2;
-        float backtimer = 0;
-        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/IchorSentryBase";
+        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/CursedFlameSentryBase";
         public override void SetDefaults()
         {
-            Projectile.damage = 30;
             Projectile.friendly = true;
 
-            Projectile.height = 38;
+            Projectile.damage = 55;
+            Projectile.height = 30;
             Projectile.width = 36;
             Projectile.DamageType = DamageClass.Summon;
 
             Projectile.tileCollide = true;
             Projectile.timeLeft = Projectile.SentryLifeTime;
             Projectile.penetrate = -1;
+
+            Projectile.ArmorPenetration = 15;
 
             Projectile.sentry = true;
             
@@ -53,10 +54,10 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
-            if (Projectile.ai[0] % 30 == 0 && Utils.FindClosestNPC(600f, Projectile.Center) != null)
+            if (Projectile.ai[0] % 4 == 0 && Utils.FindClosestNPC(350f, Projectile.Center) != null)
             {
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
-                backtimer = 10;
+                Projectile cursedflame = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(12f, 0f).RotatedBy(sentryrot), ModContent.ProjectileType<CursedFlames>(), Projectile.damage + Projectile.ArmorPenetration, Projectile.knockBack, Projectile.owner, 0, Main.rand.NextFloat(0.5f,1f), 0);
+                cursedflame.ArmorPenetration = 15;
             }
             else if (Utils.FindClosestNPC(600f, Projectile.Center) != null)
             {
@@ -72,19 +73,13 @@ namespace TerrafirmaRedux.Projectiles.Summons
                     sentryrot = sentryrot % ((float)Math.PI * 2f);
 
             }
-
-            if (backtimer > 0.1f)
-            {
-                backtimer *= 0.9f;
-            }
-
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryBase");
-            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryTentacle");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/CursedFlameSentryBase");
+            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/CursedFlameShooter");
 
-            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8) + new Vector2(backtimer, 0).RotatedBy(sentryrot), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 0), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()/2 + 10), 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 1), null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
 
             return false;

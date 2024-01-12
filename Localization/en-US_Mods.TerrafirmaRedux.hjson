@@ -281,6 +281,11 @@ Items: {
 		DisplayName: Ichor Sentry Staff
 		Tooltip: ""
 	}
+
+	CursedFlameSentryStaff: {
+		DisplayName: Cursed Flame Sentry Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -328,6 +333,8 @@ Projectiles: {
 	IchorSentry.DisplayName: Ichor Sentry
 	IchorBubble.DisplayName: Ichor Bubble
 	ColoredPrism.DisplayName: Colored Prism
+	CursedFlameSentry.DisplayName: Cursed Flame Sentry
+	CursedFlames.DisplayName: Cursed Flames
 }
 
 Buffs: {

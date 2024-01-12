@@ -74,7 +74,6 @@ namespace TerrafirmaRedux.Global
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-
             SynergyData pickedSynergy = new SynergyData("", "", new int[] { });
             if (itemplayer != null)
             {
@@ -110,6 +109,7 @@ namespace TerrafirmaRedux.Global
 
 
                 tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyName", "[c/2BE5FF:" + pickedSynergy.Name + "]"));
+
                 tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyItems", "[c/2BE5FF:" + "Synergy with " + SynergyAccessories + "]"));
                 tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyDescription", "[c/2BE5FF:" + pickedSynergy.Description + "]"));
 

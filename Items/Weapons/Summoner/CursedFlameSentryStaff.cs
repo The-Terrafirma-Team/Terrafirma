@@ -8,11 +8,11 @@ using Terraria.DataStructures;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
-    internal class IchorSentryStaff : ModItem
+    internal class CursedFlameSentryStaff : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 30;
+            Item.damage = 55;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
@@ -28,11 +28,11 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.autoReuse = true;
             Item.noMelee = true;
 
-            
+            Item.ArmorPenetration = 15;
 
             Item.rare = ItemRarityID.Pink;
-            Item.value = Item.sellPrice(0, 4, 05, 0);
-            Item.shoot = ModContent.ProjectileType<IchorSentry>();
+            Item.value = Item.sellPrice(0, 2, 0, 0);
+            Item.shoot = ModContent.ProjectileType<CursedFlameSentry>();
 
         }
 
@@ -40,13 +40,13 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         {
             CreateRecipe(1)
             .AddIngredient(ItemID.SoulofFright, 20)
-            .AddIngredient(ItemID.HallowedBar, 10)
-            .AddIngredient(ItemID.Ichor, 10)
+            .AddIngredient(ItemID.EbonstoneBlock, 20)
+            .AddIngredient(ItemID.CursedFlame, 10)
             .Register();
         }
         public override bool? UseItem(Player player)
         {
-            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<IchorSentry>(), 14, 0, -1, 0, 0, 0);
+            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<CursedFlameSentry>(), 14, 0, -1, 0, 0, 0);
             player.UpdateMaxTurrets();
             return true;
         }
