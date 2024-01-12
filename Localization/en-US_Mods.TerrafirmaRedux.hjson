@@ -1,62 +1,130 @@
-# This file will automatically update with entries for new content after a build and reload
+Buffs: {
+	SlapBuff: {
+		DisplayName: Slapped!
+		Description: 100% increased movement speed
+	}
+
+	AgnomalumBurns: {
+		DisplayName: Agnomalum Burns
+		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+	}
+
+	PhantasmalBurn: {
+		DisplayName: Phantasmal Burn
+		Description: Scorching Ectoplasm burns you!
+	}
+
+	SunofRaBuff: {
+		DisplayName: The Unmatched Power of the Sun
+		Description: It little warm.
+	}
+}
 
 Items: {
-	SingularityHook: {
-		DisplayName: Singularity Hook
+	AngryArrow: {
+		DisplayName: Angry Arrow
+		Tooltip: Hit enemies target you
+	}
+
+	Birdshot: {
+		DisplayName: Birdshot
+		Tooltip: Shoots a bunch of little pellets
+	}
+
+	BoneBullet: {
+		DisplayName: Bone Bullet
 		Tooltip: ""
 	}
 
-	KinMask: {
-		DisplayName: Kin Mask
-		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
+	BouncyBuckshot: {
+		DisplayName: Bouncy Buckshot
+		Tooltip: Shoots a bunch bouncy of pellets
 	}
 
-	KinMechanicalLegs: {
-		DisplayName: Kin's Mechanical Legs
-		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
+	Buckshot: {
+		DisplayName: Buckshot
+		Tooltip: Shoots a bunch of pellets
 	}
 
-	KinStripedSweater: {
-		DisplayName: Kin's Stripey Sweater
-		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
-	}
-
-	IceHook: {
-		DisplayName: Ice Hook
+	CarbonFiberArrow: {
+		DisplayName: Carbon Fiber Arrow
 		Tooltip: ""
 	}
 
-	Rapier: {
-		DisplayName: Rapier
-		Tooltip: ""
+	ExplosiveBuckshot: {
+		DisplayName: Explosive Buckshot
+		Tooltip: Shoots a bunch of explosive pellets
 	}
 
-	KnifeShooter: {
-		DisplayName: Knife Shooter
+	ICBA: {
+		DisplayName: I.C.B.A
 		Tooltip:
 			'''
-			Uses throwing knives as ammo
-			Has a 33% chance to save ammo
+			Speeds up over time for extra damage
+			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
 			'''
 	}
 
-	MajesticGel: {
-		DisplayName: Majestic Gel
+	PhantasmalArrow: {
+		DisplayName: Phantasmal Arrow
 		Tooltip: ""
 	}
 
-	StarRevolver: {
-		DisplayName: Star Revolver
-		Tooltip:
-			'''
-			Shoots fallen stars
-			Has a 33% chance to save ammo
-			'''
+	ShroomiteBullet: {
+		DisplayName: Shroomite Bullet
+		Tooltip: Ignores 30 points of enemy defence
 	}
 
 	LuckyBlock: {
 		DisplayName: Lucky Block
-		Tooltip: Test your Luck with this Lucky item! We're not responsible for any damage caused by opening this item.
+		Tooltip:
+			'''
+			Test your Luck with this Lucky item! 
+			We're not responsible for any damages caused by opening this item.
+			'''
+	}
+
+	SlapJuice: {
+		DisplayName: Slap Juice
+		Tooltip: Greatly increases movement speed
+	}
+
+	HeartContainer: {
+		DisplayName: Heart Container
+		Tooltip: Increases max life by 50
+	}
+
+	SpringBoots: {
+		DisplayName: Spring Boots
+		Tooltip: Keep jumping to build up height and speed
+	}
+
+	AmmoCan: {
+		DisplayName: Ammo Can
+		Tooltip: Guns randomly cycle between bullets in your ammo slot
+	}
+
+	BoxOfHighPiercingRounds: {
+		DisplayName: Box Of High Piercing Rounds
+		Tooltip:
+			'''
+			66% chance to save bullets
+			5% increased ranged damage
+			'''
+	}
+
+	DrumMag: {
+		DisplayName: Drum Mag
+		Tooltip:
+			'''
+			66% chance to save bullets
+			5% increased ranged damage
+			'''
+	}
+
+	Foregrip: {
+		DisplayName: Foregrip
+		Tooltip: Increases gun accuracy and bullet velocity
 	}
 
 	SacredGreaves: {
@@ -89,28 +157,44 @@ Items: {
 		Tooltip: ""
 	}
 
-	WandOfPoisoning: {
-		DisplayName: Wand of Poisoning
-		Tooltip: Shoots a little poison
+	IceHook: {
+		DisplayName: Ice Hook
+		Tooltip: Incredibly fast
 	}
 
-	PhantasmalArrow: {
-		DisplayName: Phantasmal Arrow
+	SingularityHook: {
+		DisplayName: Singularity Hook
+		Tooltip: Grapples onto air
+	}
+
+	MajesticGel: {
+		DisplayName: Majestic Gel
 		Tooltip: ""
 	}
 
-	ZombiemancyStaff: {
-		DisplayName: Zombiemancy Staff
-		Tooltip: Summons a friendly Zombie to fight for you
+	Uldrax: {
+		DisplayName: Uldrax
+		Tooltip: ""
 	}
 
-	LuckyCrossbow: {
-		DisplayName: Lucky Crossbow
-		Tooltip:
-			'''
-			Shoots fast lucky arrows with a randomised pattern 
-			33% Chance to save ammo 
-			'''
+	KinMask: {
+		DisplayName: Kin Mask
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
+	}
+
+	KinMechanicalLegs: {
+		DisplayName: Kin Mechanical Legs
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
+	}
+
+	KinStripedSweater: {
+		DisplayName: Kin Striped Sweater
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
+	}
+
+	WandOfPoisoning: {
+		DisplayName: Wand Of Poisoning
+		Tooltip: Shoots a waving poison
 	}
 
 	CrystalChainBlades: {
@@ -118,92 +202,24 @@ Items: {
 		Tooltip: ""
 	}
 
-	TheCrucible: {
-		DisplayName: The Crucible
-		Tooltip: ""
-	}
-
-	TommyGun: {
-		DisplayName: Tommy Gun
-		Tooltip: ""
-	}
-
-	Foregrip: {
-		DisplayName: Foregrip
-		Tooltip: Increases gun accuracy and bullet velocity
-	}
-
-	DrumMag: {
-		DisplayName: Drum Mag
-		Tooltip:
-			'''
-			66% chance to save bullets
-			5% increased ranged damage
-			'''
-	}
-
-	AmmoCan: {
-		DisplayName: Ammo Can
-		Tooltip: Guns randomly cycle between bullets in your ammo slot
-	}
-
-	BoxOfHighPiercingRounds: {
-		DisplayName: Box Of High Piercing Rounds
-		Tooltip: Increases bullet penetration
-	}
-
-	Uldrax: {
-		DisplayName: Uldrax
-		Tooltip: Not to be confused with the Draxmer
-	}
-
-	BoneBullet: {
-		DisplayName: Bone Bullet
+	Rapier: {
+		DisplayName: Rapier
 		Tooltip: ""
 	}
 
 	CarmineHook: {
 		DisplayName: Carmine Hook
-		Tooltip: Spits an ichor stream
+		Tooltip: Shoots an ichor stream
 	}
 
-	AngryArrow: {
-		DisplayName: Angry Arrow
-		Tooltip: Hit enemies target you
+	TheCrucible: {
+		DisplayName: The Crucible
+		Tooltip: STARSONG TEMPIRE REAL OMQ
 	}
 
-	CarbonFiberArrow: {
-		DisplayName: Carbon Fiber Arrow
+	HandCannon: {
+		DisplayName: Hand Cannon
 		Tooltip: ""
-	}
-
-	Birdshot: {
-		DisplayName: Birdshot
-		Tooltip: Shoots a bunch of little pellets
-	}
-
-	Buckshot: {
-		DisplayName: Buckshot
-		Tooltip: Shoots a bunch of pellets
-	}
-
-	ExplosiveBuckshot: {
-		DisplayName: Explosive Buckshot
-		Tooltip: Shoots a bunch of explosive pellets
-	}
-
-	BouncyBuckshot: {
-		DisplayName: Bouncy Buckshot
-		Tooltip: Shoots a bunch of bouncy pellets
-	}
-
-	ICBA: {
-		DisplayName: I.C.B.A
-		Tooltip:
-			'''
-			Speeds up over time for extra damage
-			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
-			'''
 	}
 
 	IcicleMachineGun: {
@@ -215,13 +231,31 @@ Items: {
 			'''
 	}
 
-	ShroomiteBullet: {
-		DisplayName: Shroomite Bullet
-		Tooltip: Ignores 30 points of enemy defence
+	KnifeShooter: {
+		DisplayName: Knife Shooter
+		Tooltip:
+			'''
+			Uses throwing knives as ammo
+			Has a 33% chance to save ammo
+			'''
+	}
+
+	LuckyCrossbow: {
+		DisplayName: Lucky Crossbow
+		Tooltip:
+			'''
+			Shoots fast lucky arrows with a randomised pattern 
+			33% Chance to save ammo 
+			'''
+	}
+
+	PirateCrossbow: {
+		DisplayName: Pirate Crossbow
+		Tooltip: ""
 	}
 
 	ShroomiteCrossbow: {
-		DisplayName: Shroomite Sniper Crossbow
+		DisplayName: Shroomite Crossbow
 		Tooltip:
 			'''
 			Right click to zoom out
@@ -247,119 +281,89 @@ Items: {
 			'''
 	}
 
-	SlapJuice: {
-		DisplayName: Slap Juice
-		Tooltip: Gives a temporary speed boost
-
-		StaffofRa: {
-			DisplayName: Staff of Ra
-			Tooltip: Summons the Sun to light your path
-		}
-
-		VultureStaff: {
-			DisplayName: Vulture Staff
-			Tooltip: Summons a friendly vulture to fight for you
-		}
-
-		HeartContainer: {
-			DisplayName: Heart Container
-			Tooltip: Increases max health by 50
-		}
-
-		SpringBoots: {
-			DisplayName: Spring Boots
-			Tooltip: Keep jumping to build up speed and jump height
-		}
-
-		PirateCrossbow: {
-			DisplayName: Pirate Crossbow
-			Tooltip: ""
-		}
-
-		HandCannon: {
-			DisplayName: Hand Cannon
-			Tooltip: ""
-		}
-
-		IchorSentryStaff: {
-			DisplayName: Ichor Sentry Staff
-			Tooltip: ""
-		}
-
-		CursedFlameSentryStaff: {
-			DisplayName: Cursed Flame Sentry Staff
-			Tooltip: ""
-		}
+	StarRevolver: {
+		DisplayName: Star Revolver
+		Tooltip:
+			'''
+			Shoots fallen stars
+			has a 33% chance to save ammo
+			'''
 	}
 
-	Projectiles: {
-		SingularityHookProjectile.DisplayName: Singularity Hook Projectile
-		IceHookProjectile.DisplayName: Ice Hook Projectile
-		RapierProjectile.DisplayName: Rapier
-		WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
-		Poison.DisplayName: Poison
-		HolyHandGrenade.DisplayName: Holy Hand Grenade
-		PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
-		ZombiemancedZombie.DisplayName: Zombiemanced Zombie
-		LuckyArrow.DisplayName: Lucky Arrow
-		CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
-		MajesticGelShot.DisplayName: Majestic Gel Shot
-		QueenSlimeBeam.DisplayName: Queen Slime Beam
-		CrucibleBeam.DisplayName: Crucible Beam
-		UldraxProjectile.DisplayName: Uldrax Projectile
-		BoneBulletProjectile.DisplayName: Bone Bullet Projectile
-		CarmineHookProjectile.DisplayName: Carmine Hook Projectile
-		AngryArrowProjectile.DisplayName: Angry Arrow Projectile
-		CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
-		BirdshotProjectile.DisplayName: Birdshot Projectile
-		BuckshotProjectile.DisplayName: Buckshot Projectile
-		ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
-		RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
-		BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
-		ICBAProjectile.DisplayName: I C B A Projectile
-		IcicleProjectile.DisplayName: Icicle Projectile
-		HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
-		ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
-		SunofRa.DisplayName: Sunof Ra
-		SummonedVulture.DisplayName: Summoned Vulture
-		HomingAmethyst.DisplayName: Homing Amethyst
-		SplittingTopaz.DisplayName: Splitting Topaz
-		PiercingEmerald.DisplayName: Piercing Emerald
-		ExplodingRuby.DisplayName: Exploding Ruby
-		DiamondTurret.DisplayName: Diamond Turret
-		AmberWall.DisplayName: Amber Wall
-		AmberWallCrystal.DisplayName: Amber Wall Crystal
-		Firewall.DisplayName: Firewall
-		InfernoFork.DisplayName: Inferno Fork
-		WaterGeyser.DisplayName: Water Geyser
-		AuraWave.DisplayName: Aura Wave
-		BoneFragment.DisplayName: Bone Fragment
-		IchorSentry.DisplayName: Ichor Sentry
-		IchorBubble.DisplayName: Ichor Bubble
-		ColoredPrism.DisplayName: Colored Prism
-		CursedFlameSentry.DisplayName: Cursed Flame Sentry
-		CursedFlames.DisplayName: Cursed Flames
+	TommyGun: {
+		DisplayName: Tommy Gun
+		Tooltip: Gangsta.
 	}
 
-	Buffs: {
-		PhantasmalBurn: {
-			DisplayName: Phantasmal Burn
-			Description: Scorching Ectoplasm burns you!
-		}
-
-		AgnomalumBurns: {
-			DisplayName: Agnomalum Burns
-			Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
-		}
-
-		SlapBuff: {
-			DisplayName: Slapped!
-			Description: 100% increased movement speed
-		}
-
-		SunofRaBuff: {
-			DisplayName: The Unmatched Power of the Sun
-			Description: It's a little warm
-		}
+	CursedFlameSentryStaff: {
+		DisplayName: Cursed Flame Sentry Staff
+		Tooltip: Summons a cursed flamethrower to melt your enemies
 	}
+
+	IchorSentryStaff: {
+		DisplayName: Ichor Sentry Staff
+		Tooltip: Summons an ichor sentry to fight for you
+	}
+
+	VultureStaff: {
+		DisplayName: Vulture Staff
+		Tooltip: Summons vultures to fight for you
+	}
+
+	ZombiemancyStaff: {
+		DisplayName: Zombiemancy Staff
+		Tooltip: Summons zombies to fight for you
+	}
+
+	StaffofRa: {
+		DisplayName: Staff of Ra
+		Tooltip: Provides a little bit of light
+	}
+}
+
+Projectiles: {
+	IceHookProjectile.DisplayName: Ice Hook Projectile
+	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
+	RapierProjectile.DisplayName: Rapier
+	SunofRa.DisplayName: Sun of Ra
+	HolyHandGrenade.DisplayName: The Holy Hand Grenade
+	Firewall.DisplayName: Diabolical Firewall
+	InfernoFork.DisplayName: Inferno Fork
+	Poison.DisplayName: Poison
+	CarmineHookProjectile.DisplayName: Carmine Hook
+	CrucibleBeam.DisplayName: The Crucible
+	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades
+	AngryArrowProjectile.DisplayName: Angry Arrow
+	BirdshotProjectile.DisplayName: Birdshot
+	BoneBulletProjectile.DisplayName: Bone Bullet
+	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot
+	BuckshotProjectile.DisplayName: Buckshot
+	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow
+	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot
+	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite
+	ICBAProjectile.DisplayName: Intercontinental Ballistic Arrow
+	IcicleProjectile.DisplayName: Icicle
+	LuckyArrow.DisplayName: Lucky Arrow
+	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow
+	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet
+	CursedFlames.DisplayName: Cursed Flames
+	CursedFlameSentry.DisplayName: Cursed Flame Sentry
+	IchorSentry.DisplayName: Ichor Sentry
+	SummonedVulture.DisplayName: Vulture
+	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
+	UldraxProjectile.DisplayName: Uldrax
+	MajesticGelShot.DisplayName: Majestic Gel Shot
+	QueenSlimeBeam.DisplayName: Queen Slime Beam
+	AuraWave.DisplayName: Aura Wave
+	BoneFragment.DisplayName: Bone Fragment
+	ColoredPrism.DisplayName: Colored Prism
+	AmberWall.DisplayName: Amber Wall
+	AmberWallCrystal.DisplayName: Amber Wall Crystal
+	DiamondTurret.DisplayName: Diamond Turret
+	ExplodingRuby.DisplayName: Exploding Ruby
+	HomingAmethyst.DisplayName: Homing Amethyst
+	PiercingEmerald.DisplayName: Piercing Emerald
+	SplittingTopaz.DisplayName: Splitting Topaz
+	IchorBubble.DisplayName: Ichor Bubble
+	WaterGeyser.DisplayName: Water Geyser
 }
