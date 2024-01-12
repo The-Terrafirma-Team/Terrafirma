@@ -36,11 +36,6 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.value = Item.sellPrice(0, 0, 30, 0);
         }
 
-        public override void SetStaticDefaults()
-        {
-            Item.ResearchUnlockCount = 1;
-        }
-
         public override bool? UseItem(Player player)
         {
             Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<ZombiemancedZombie>(), 14, 0, -1, 0, 0, 0);

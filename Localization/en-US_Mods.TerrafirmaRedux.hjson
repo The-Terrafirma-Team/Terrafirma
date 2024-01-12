@@ -250,112 +250,116 @@ Items: {
 	SlapJuice: {
 		DisplayName: Slap Juice
 		Tooltip: Gives a temporary speed boost
-	StaffofRa: {
-		DisplayName: Staff of Ra
-		Tooltip: Summons the Sun to light your path
+
+		StaffofRa: {
+			DisplayName: Staff of Ra
+			Tooltip: Summons the Sun to light your path
+		}
+
+		VultureStaff: {
+			DisplayName: Vulture Staff
+			Tooltip: Summons a friendly vulture to fight for you
+		}
+
+		HeartContainer: {
+			DisplayName: Heart Container
+			Tooltip: Increases max health by 50
+		}
+
+		SpringBoots: {
+			DisplayName: Spring Boots
+			Tooltip: Keep jumping to build up speed and jump height
+		}
+
+		PirateCrossbow: {
+			DisplayName: Pirate Crossbow
+			Tooltip: ""
+		}
+
+		HandCannon: {
+			DisplayName: Hand Cannon
+			Tooltip: ""
+		}
+
+		IchorSentryStaff: {
+			DisplayName: Ichor Sentry Staff
+			Tooltip: ""
+		}
+
+		CursedFlameSentryStaff: {
+			DisplayName: Cursed Flame Sentry Staff
+			Tooltip: ""
+		}
 	}
 
-	VultureStaff: {
-		DisplayName: Vulture Staff
-		Tooltip: Summons a friendly vulture to fight for you
+	Projectiles: {
+		SingularityHookProjectile.DisplayName: Singularity Hook Projectile
+		IceHookProjectile.DisplayName: Ice Hook Projectile
+		RapierProjectile.DisplayName: Rapier
+		WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
+		Poison.DisplayName: Poison
+		HolyHandGrenade.DisplayName: Holy Hand Grenade
+		PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
+		ZombiemancedZombie.DisplayName: Zombiemanced Zombie
+		LuckyArrow.DisplayName: Lucky Arrow
+		CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
+		MajesticGelShot.DisplayName: Majestic Gel Shot
+		QueenSlimeBeam.DisplayName: Queen Slime Beam
+		CrucibleBeam.DisplayName: Crucible Beam
+		UldraxProjectile.DisplayName: Uldrax Projectile
+		BoneBulletProjectile.DisplayName: Bone Bullet Projectile
+		CarmineHookProjectile.DisplayName: Carmine Hook Projectile
+		AngryArrowProjectile.DisplayName: Angry Arrow Projectile
+		CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
+		BirdshotProjectile.DisplayName: Birdshot Projectile
+		BuckshotProjectile.DisplayName: Buckshot Projectile
+		ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
+		RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
+		BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
+		ICBAProjectile.DisplayName: I C B A Projectile
+		IcicleProjectile.DisplayName: Icicle Projectile
+		HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
+		ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
+		SunofRa.DisplayName: Sunof Ra
+		SummonedVulture.DisplayName: Summoned Vulture
+		HomingAmethyst.DisplayName: Homing Amethyst
+		SplittingTopaz.DisplayName: Splitting Topaz
+		PiercingEmerald.DisplayName: Piercing Emerald
+		ExplodingRuby.DisplayName: Exploding Ruby
+		DiamondTurret.DisplayName: Diamond Turret
+		AmberWall.DisplayName: Amber Wall
+		AmberWallCrystal.DisplayName: Amber Wall Crystal
+		Firewall.DisplayName: Firewall
+		InfernoFork.DisplayName: Inferno Fork
+		WaterGeyser.DisplayName: Water Geyser
+		AuraWave.DisplayName: Aura Wave
+		BoneFragment.DisplayName: Bone Fragment
+		IchorSentry.DisplayName: Ichor Sentry
+		IchorBubble.DisplayName: Ichor Bubble
+		ColoredPrism.DisplayName: Colored Prism
+		CursedFlameSentry.DisplayName: Cursed Flame Sentry
+		CursedFlames.DisplayName: Cursed Flames
 	}
 
-	HeartContainer: {
-		DisplayName: Heart Container
-		Tooltip: Increases max health by 50
-	}
+	Buffs: {
+		PhantasmalBurn: {
+			DisplayName: Phantasmal Burn
+			Description: Scorching Ectoplasm burns you!
+		}
 
-	SpringBoots: {
-		DisplayName: Spring Boots
-		Tooltip: Keep jumping to build up speed and jump height
-	}
+		AgnomalumBurns: {
+			DisplayName: Agnomalum Burns
+			Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+		}
 
-	PirateCrossbow: {
-		DisplayName: Pirate Crossbow
-		Tooltip: ""
-	}
+		SlapBuff: {
+			DisplayName: Slapped!
+			Description: 100% increased movement speed
+		}
 
-	HandCannon: {
-		DisplayName: Hand Cannon
-		Tooltip: ""
-	}
-
-	IchorSentryStaff: {
-		DisplayName: Ichor Sentry Staff
-		Tooltip: ""
-	}
-
-	CursedFlameSentryStaff: {
-		DisplayName: Cursed Flame Sentry Staff
-		Tooltip: ""
-	}
-}
-
-Projectiles: {
-	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
-	IceHookProjectile.DisplayName: Ice Hook Projectile
-	RapierProjectile.DisplayName: Rapier
-	WandOfPoisoningProjectile.DisplayName: Wand of Poisoning
-	Poison.DisplayName: Poison
-	HolyHandGrenade.DisplayName: Holy Hand Grenade
-	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow Projectile
-	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
-	LuckyArrow.DisplayName: Lucky Arrow
-	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades Projectile
-	MajesticGelShot.DisplayName: Majestic Gel Shot
-	QueenSlimeBeam.DisplayName: Queen Slime Beam
-	CrucibleBeam.DisplayName: Crucible Beam
-	UldraxProjectile.DisplayName: Uldrax Projectile
-	BoneBulletProjectile.DisplayName: Bone Bullet Projectile
-	CarmineHookProjectile.DisplayName: Carmine Hook Projectile
-	AngryArrowProjectile.DisplayName: Angry Arrow Projectile
-	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow Projectile
-	BirdshotProjectile.DisplayName: Birdshot Projectile
-	BuckshotProjectile.DisplayName: Buckshot Projectile
-	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot Projectile
-	RubberBuckshotProjectile.DisplayName: Rubber Buckshot Projectile
-	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot Projectile
-	ICBAProjectile.DisplayName: I C B A Projectile
-	IcicleProjectile.DisplayName: Icicle Projectile
-	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite Bullet
-	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
-	SunofRa.DisplayName: Sunof Ra
-	SummonedVulture.DisplayName: Summoned Vulture
-	HomingAmethyst.DisplayName: Homing Amethyst
-	SplittingTopaz.DisplayName: Splitting Topaz
-	PiercingEmerald.DisplayName: Piercing Emerald
-	ExplodingRuby.DisplayName: Exploding Ruby
-	DiamondTurret.DisplayName: Diamond Turret
-	AmberWall.DisplayName: Amber Wall
-	AmberWallCrystal.DisplayName: Amber Wall Crystal
-	Firewall.DisplayName: Firewall
-	InfernoFork.DisplayName: Inferno Fork
-	WaterGeyser.DisplayName: Water Geyser
-	AuraWave.DisplayName: Aura Wave
-	BoneFragment.DisplayName: Bone Fragment
-	IchorSentry.DisplayName: Ichor Sentry
-	IchorBubble.DisplayName: Ichor Bubble
-	ColoredPrism.DisplayName: Colored Prism
-	CursedFlameSentry.DisplayName: Cursed Flame Sentry
-	CursedFlames.DisplayName: Cursed Flames
-}
-
-Buffs: {
-	PhantasmalBurn: {
-		DisplayName: Phantasmal Burn
-		Description: Scorching Ectoplasm burns you!
-	}
-
-	AgnomalumBurns: {
-		DisplayName: Agnomalum Burns
-		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
-	}
-
-	SlapBuff: {
-		DisplayName: Slapped!
-		Description: 100% increased movement speed
-	SunofRaBuff: {
-		DisplayName: The Unmatched Power of the Sun
-		Description: It's a little warm
+		SunofRaBuff: {
+			DisplayName: The Unmatched Power of the Sun
+			Description: It's a little warm
+		}
 	}
 }
