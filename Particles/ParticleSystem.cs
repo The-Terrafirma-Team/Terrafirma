@@ -87,7 +87,7 @@ namespace TerrafirmaRedux.Particles
 
             Main.spriteBatch.End();
         }
-        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0)
+        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
         {
             if (Particles.Count == MaxParticles)
             {
@@ -97,6 +97,8 @@ namespace TerrafirmaRedux.Particles
             Particles.Last().Position = position;
             Particles.Last().Velocity = velocity;
             Particles.Last().Color = color;
+            Particles.Last().Scale = scale;
+            Particles.Last().Rotation = rotation;
             Particles.Last().ai1 = AI1;
             Particles.Last().ai2 = AI2;
             Particles.Last().ai3 = AI3;
@@ -114,6 +116,8 @@ namespace TerrafirmaRedux.Particles
         public float ai3;
         public bool Active = true;
         public Color Color;
+        public float Scale;
+        public float Rotation;
         public bool FrontLayer; // Draws in front of everything
         /// <summary>
         /// You have to manually add Position to Velocity if you want it to move with it.

@@ -84,4 +84,15 @@ namespace TerrafirmaRedux.Pets
             return false;
         }
     }
+    public class SunOfRaSystem : ModSystem
+    {
+        public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+        {
+            if(Main.LocalPlayer.HasBuff(ModContent.BuffType<SunofRaBuff>()))
+            {
+                tileColor = Color.White;
+                backgroundColor = Color.White;
+            }
+        }
+    }
 }

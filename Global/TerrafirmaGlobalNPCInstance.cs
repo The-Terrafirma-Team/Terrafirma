@@ -1,7 +1,9 @@
 ﻿using TerrafirmaRedux.Items.Consumable;
+using TerrafirmaRedux.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Global
@@ -35,6 +37,11 @@ namespace TerrafirmaRedux.Global
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), 20, 1, 1));
+
+            if(npc.type == NPCID.PirateCrossbower)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
+            }
         }
         public override bool InstancePerEntity => true;
 

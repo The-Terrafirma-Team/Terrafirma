@@ -27,7 +27,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= Projectile.velocity.Length() / 10;
+            modifiers.FinalDamage *= Projectile.velocity.Length() / 20;
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
@@ -44,9 +44,19 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override void AI()
         {
+            Projectile.ai[0]++;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-            Projectile.velocity *= 1.025f;
-            Projectile.velocity = Projectile.velocity.LengthClamp(15);
+            
+            if (Projectile.ai[0] > 90)
+            {
+                Projectile.velocity *= 1.06f;
+            }
+            else
+            {
+                Projectile.velocity *= 1.025f;
+            }
+
+            Projectile.velocity = Projectile.velocity.LengthClamp(30);
 
             if (Projectile.velocity.Length() > 2)
             {

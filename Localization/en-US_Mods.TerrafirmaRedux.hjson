@@ -262,6 +262,26 @@ Items: {
 
 	HeartContainer: {
 		DisplayName: Heart Container
+		Tooltip: Increases max health by 50
+	}
+
+	SpringBoots: {
+		DisplayName: Spring Boots
+		Tooltip: Keep jumping to build up speed and jump height
+	}
+
+	PirateCrossbow: {
+		DisplayName: Pirate Crossbow
+		Tooltip: ""
+	}
+
+	HandCannon: {
+		DisplayName: Hand Cannon
+		Tooltip: ""
+	}
+
+	IchorSentryStaff: {
+		DisplayName: Ichor Sentry Staff
 		Tooltip: ""
 	}
 }
@@ -296,6 +316,21 @@ Projectiles: {
 	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet Projectile
 	SunofRa.DisplayName: Sunof Ra
 	SummonedVulture.DisplayName: Summoned Vulture
+	HomingAmethyst.DisplayName: Homing Amethyst
+	SplittingTopaz.DisplayName: Splitting Topaz
+	PiercingEmerald.DisplayName: Piercing Emerald
+	ExplodingRuby.DisplayName: Exploding Ruby
+	DiamondTurret.DisplayName: Diamond Turret
+	AmberWall.DisplayName: Amber Wall
+	AmberWallCrystal.DisplayName: Amber Wall Crystal
+	Firewall.DisplayName: Firewall
+	InfernoFork.DisplayName: Inferno Fork
+	WaterGeyser.DisplayName: Water Geyser
+	AuraWave.DisplayName: Aura Wave
+	BoneFragment.DisplayName: Bone Fragment
+	IchorSentry.DisplayName: Ichor Sentry
+	IchorBubble.DisplayName: Ichor Bubble
+	ColoredPrism.DisplayName: Colored Prism
 }
 
 Buffs: {
