@@ -7,11 +7,6 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
     [AutoloadEquip(EquipType.Body)]
     public class KinStripedSweater : ModItem
     {
-		public override void SetStaticDefaults()
-		{
-			//DisplayName.SetDefault("Kin's Stripy Sweater");
-			//Tooltip.SetDefault("[c/A58CFF:Dedicated to Inkgum]");
-		}
 		public override void SetDefaults()
 		{
 			Item.width = 30;
@@ -22,5 +17,10 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 			Item.vanity = true;
 			Item.maxStack = 1;
 		}
-	}
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+    }
 }

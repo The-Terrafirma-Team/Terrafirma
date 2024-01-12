@@ -32,6 +32,11 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.scale = 0.85f;
         }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-14, -1);

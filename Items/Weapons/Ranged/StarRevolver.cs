@@ -28,6 +28,12 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.shoot = ProjectileID.FallingStar;
             Item.shootSpeed = 16f;
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             if (Main.rand.NextBool(3))

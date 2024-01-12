@@ -247,6 +247,9 @@ Items: {
 			'''
 	}
 
+	SlapJuice: {
+		DisplayName: Slap Juice
+		Tooltip: Gives a temporary speed boost
 	StaffofRa: {
 		DisplayName: Staff of Ra
 		Tooltip: Summons the Sun to light your path
@@ -340,7 +343,7 @@ Projectiles: {
 Buffs: {
 	PhantasmalBurn: {
 		DisplayName: Phantasmal Burn
-		Description: Scorching Ectoplasma burns you!
+		Description: Scorching Ectoplasm burns you!
 	}
 
 	AgnomalumBurns: {
@@ -348,6 +351,9 @@ Buffs: {
 		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
 	}
 
+	SlapBuff: {
+		DisplayName: Slapped!
+		Description: 100% increased movement speed
 	SunofRaBuff: {
 		DisplayName: The Unmatched Power of the Sun
 		Description: It's a little warm

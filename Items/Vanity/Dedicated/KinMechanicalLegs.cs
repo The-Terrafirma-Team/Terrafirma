@@ -7,11 +7,6 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
     [AutoloadEquip(EquipType.Legs)]
     public class KinMechanicalLegs : ModItem
     {
-		public override void SetStaticDefaults()
-		{
-			//DisplayName.SetDefault("Kin's Mechanical Legs");
-			//Tooltip.SetDefault("Pantless?\n[c/A58CFF:Dedicated to Inkgum]");
-		}
 		public override void SetDefaults()
 		{
 			Item.width = 22;
@@ -22,5 +17,10 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 			Item.vanity = true;
 			Item.maxStack = 1;
 		}
-	}
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+    }
 }

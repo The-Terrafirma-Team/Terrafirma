@@ -12,13 +12,8 @@ namespace TerrafirmaRedux.Items.Consumable
 {
     internal class LuckyBlock : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-        }
         public override void SetDefaults()
         {
-
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useAnimation = 26;
             Item.useTime = 26;
@@ -29,7 +24,11 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.value = Item.sellPrice(0, 0, 5, 0);
             Item.maxStack = 9999;
             Item.consumable = true;
+        }
 
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 99;
         }
 
         public override bool? UseItem(Player player)

@@ -11,10 +11,6 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 {
     internal class IcicleMachineGun : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-        }
         public override void SetDefaults()
         {
             Item.damage = 9;
@@ -42,6 +38,12 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 
             Item.scale = 0.85f;
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-12,3);

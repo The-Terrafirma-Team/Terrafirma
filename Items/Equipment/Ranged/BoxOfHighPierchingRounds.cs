@@ -16,6 +16,12 @@ namespace TerrafirmaRedux.Items.Equipment.Ranged
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.buyPrice(0, 5, 0, 0);
         }
+
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 1;
+        }
+
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<TerrafirmaGlobalPlayer>().BoxOfHighPiercingRounds = true;
