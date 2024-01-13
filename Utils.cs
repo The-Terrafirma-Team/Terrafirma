@@ -82,7 +82,7 @@ namespace TerrafirmaRedux
         {
             Color[] colors = new Color[] { new Color(255, 188, 122, 0), new Color(255, 128, 0, 0), new Color(252, 120, 111, 0), new Color(207,33,76,0)};
             if (Main.rand.NextBool(15))
-                return Main.rand.NextBool() ? new Color(255, 128, 246) : new Color(91, 186, 229);
+                return Main.rand.NextBool() ? new Color(255, 128, 246,0) : new Color(91, 186, 229,0);
             else
                 return colors[Main.rand.Next(colors.Length)];
         }
