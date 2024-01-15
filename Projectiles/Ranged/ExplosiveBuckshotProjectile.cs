@@ -46,7 +46,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 
         public override void AI()
         {
-            if (Projectile.ai[2] == 0)
+            if (Projectile.ai[2] == 0 && Main.myPlayer == Projectile.owner)
             {
                 for (int i = 0; i < 3; i++)
                 {

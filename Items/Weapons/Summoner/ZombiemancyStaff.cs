@@ -36,11 +36,10 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.value = Item.sellPrice(0, 0, 30, 0);
         }
 
-        public override bool? UseItem(Player player)
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<ZombiemancedZombie>(), 14, 0, -1, 0, 0, 0);
-            return true;
+            position = Main.MouseWorld;
+            velocity *= 0.01f;
         }
-
     }
 }
