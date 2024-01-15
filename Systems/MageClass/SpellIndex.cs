@@ -36,6 +36,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             ItemCatalogue.Add(ItemID.WaterBolt, new[] { 17, 18, 19 });
             ItemCatalogue.Add(ItemID.BookofSkulls, new[] { 22, 23 });
+            ItemCatalogue.Add(ItemID.AquaScepter, new[] { 26, 27 });
             //Other
             ItemCatalogue.Add(ItemID.RainbowGun, new[] { 24, 25 });
             //TEST
@@ -83,6 +84,9 @@ namespace TerrafirmaRedux.Systems.MageClass
             //Book of Skull
             SpellCatalogue.Add(22, new Tuple<byte, string, string, string, float>(6, AssetPath + "PreHardmode/SpellBooks/FlyingSkull", "Flaming Skull", "Shoots a flying flaming skull", 18));
             SpellCatalogue.Add(23, new Tuple<byte, string, string, string, float>(7, AssetPath + "PreHardmode/SpellBooks/BoneFragmentStorm", "Bone Fragment Storm", "Shoots multiple bone fragments", 2));
+            //Aqua Scepter
+            SpellCatalogue.Add(26, new Tuple<byte, string, string, string, float>(8, AssetPath + "PreHardmode/WaterStream", "Water Stream", "Sprays out a shower of water", 7));
+            SpellCatalogue.Add(27, new Tuple<byte, string, string, string, float>(9, AssetPath + "PreHardmode/WaterHealing", "Water Treatment", "Shoots out a bubble of healing water", 12));
             //SpellCatalogue.Add(14, new Tuple<byte, string, string, string, string>(0, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", "Uses 5 Mana"));
 
             /// Other Weapons

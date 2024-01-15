@@ -319,6 +319,16 @@ Items: {
 		DisplayName: Staff of Ra
 		Tooltip: Provides a little bit of light
 	}
+
+	CopperChakram: {
+		DisplayName: Copper Chakram
+		Tooltip: ""
+	}
+
+	TinChakram: {
+		DisplayName: Tin Chakram
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -366,4 +376,7 @@ Projectiles: {
 	SplittingTopaz.DisplayName: Splitting Topaz
 	IchorBubble.DisplayName: Ichor Bubble
 	WaterGeyser.DisplayName: Water Geyser
+	HealingBubble.DisplayName: Healing Bubble
+	CopperChakramProjetile.DisplayName: Copper Chakram Projetile
+	TinChakramProjetile.DisplayName: Tin Chakram Projetile
 }
