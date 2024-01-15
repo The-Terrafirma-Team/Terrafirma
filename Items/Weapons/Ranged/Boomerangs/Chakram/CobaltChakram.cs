@@ -9,9 +9,9 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using TerrafirmaRedux.Projectiles.Melee.Boomerangs;
+using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Boomerangs.Chakram
 {
     internal class CobaltChakram : ModItem
     {
@@ -23,7 +23,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.Ranged;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;

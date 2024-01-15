@@ -10,11 +10,11 @@ using Terraria.ModLoader;
 using TerrafirmaRedux.Global.Templates;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
+namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
 {
     public class MythrilChakramProjectile : ChakramTemplate
     {
-        public override string Texture => "TerrafirmaRedux/Items/Weapons/Melee/Boomerangs/Chakram/MythrilChakram";
+        public override string Texture => "TerrafirmaRedux/Items/Weapons/Ranged/Boomerangs/Chakram/MythrilChakram";
         protected override int BounceAmount => 0;
         protected override int BounceMode => 0;
         protected override float ReturnSpeed => 14f;
@@ -40,10 +40,10 @@ namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(i == 0 ? -5 : 5 ), ModContent.ProjectileType<MythrilChakramSplitProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, target.whoAmI); ;
+                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(i == 0 ? -5 : 5), ModContent.ProjectileType<MythrilChakramSplitProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, target.whoAmI); ;
                     if (i == 0) newproj.rotation = (float)Math.PI;
                 }
-                
+
 
             }
             Projectile.Kill();

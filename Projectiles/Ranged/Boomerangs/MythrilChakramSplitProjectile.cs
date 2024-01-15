@@ -8,14 +8,14 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 using TerrafirmaRedux.Global.Templates;
+using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
+namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
 {
-    public class CopperChakramProjectile : ChakramTemplate
+    public class MythrilChakramSplitProjectile : ChakramTemplate
     {
-        public override string Texture => "TerrafirmaRedux/Items/Weapons/Melee/Boomerangs/Chakram/CopperChakram";
-        protected override int BounceAmount => 0;
-        protected override int BounceMode => 0;
+        protected override int BounceAmount => 10;
+        protected override int BounceMode => 1;
         protected override float ReturnSpeed => 14f;
 
         public override void SetDefaults()
@@ -30,6 +30,12 @@ namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
             DrawOffsetX = -5;
             DrawOriginOffsetY = -5;
 
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            base.OnSpawn(source);
+            targetNPC = Utils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { Main.npc[(int)Projectile.ai[2]] });
         }
     }
 }

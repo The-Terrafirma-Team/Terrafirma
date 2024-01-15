@@ -129,32 +129,48 @@ Items: {
 
 	SacredGreaves: {
 		DisplayName: Sacred Greaves
-		Tooltip: ""
+		Tooltip: 4% increased movement speed
 	}
 
 	SacredHeadgear: {
 		DisplayName: Sacred Headgear
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases maximum mana by 60
+			6% increased magic damage
+			'''
 	}
 
 	SacredHelmet: {
 		DisplayName: Sacred Helmet
-		Tooltip: ""
+		Tooltip:
+			'''
+			8% increased ranged damage
+			4% increased critical strike chance
+			'''
 	}
 
 	SacredHood: {
 		DisplayName: Sacred Hood
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases your max number of minions by 1
+			5% increased summon damage
+			'''
 	}
 
 	SacredMask: {
 		DisplayName: Sacred Mask
-		Tooltip: ""
+		Tooltip:
+			'''
+			5% increased melee damage
+			5% increased melee speed
+			'''
 	}
 
 	SacredPlateMail: {
 		DisplayName: Sacred Plate Mail
-		Tooltip: ""
+		Tooltip: 5% increased critical strike chance
 	}
 
 	IceHook: {

@@ -9,29 +9,29 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using TerrafirmaRedux.Projectiles.Melee.Boomerangs;
+using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Boomerangs.Chakram
 {
-    internal class CopperChakram : ModItem
+    internal class MythrilChakram : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 9;
+            Item.damage = 35;
             Item.useTime = 26;
             Item.useAnimation = 26;
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.Ranged;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
-            Item.rare = ItemRarityID.White;
-            Item.value = Item.sellPrice(silver: 7, copper: 50);
+            Item.rare = ItemRarityID.LightRed;
+            Item.value = Item.sellPrice(gold: 2, silver: 22);
 
-            Item.shoot = ModContent.ProjectileType<CopperChakramProjectile>();
+            Item.shoot = ModContent.ProjectileType<MythrilChakramProjectile>();
             Item.shootSpeed = 10;
         }
 
@@ -42,13 +42,13 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
 
         public override bool CanUseItem(Player player)
         {
-            return player.ownedProjectileCounts[Item.shoot] < 1;
+            return player.ownedProjectileCounts[Item.shoot] < 3;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.CopperBar, 10)
+                .AddIngredient(ItemID.MythrilBar, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -9,17 +9,17 @@ using Terraria;
 using Terraria.ModLoader;
 using TerrafirmaRedux.Global.Templates;
 
-namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
+namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
 {
-    public class OrichalcumChakramProjectile : ChakramTemplate
+    public class CopperChakramProjectile : ChakramTemplate
     {
+        public override string Texture => "TerrafirmaRedux/Items/Weapons/Ranged/Boomerangs/Chakram/CopperChakram";
         protected override int BounceAmount => 0;
         protected override int BounceMode => 0;
         protected override float ReturnSpeed => 14f;
 
         public override void SetDefaults()
         {
-            
             AttackTime = 40;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
@@ -27,8 +27,8 @@ namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
             Projectile.damage = 16;
             Projectile.width = 20;
             Projectile.height = 20;
-            DrawOffsetX = -1;
-            DrawOriginOffsetY = -1;
+            DrawOffsetX = -5;
+            DrawOriginOffsetY = -5;
 
         }
     }

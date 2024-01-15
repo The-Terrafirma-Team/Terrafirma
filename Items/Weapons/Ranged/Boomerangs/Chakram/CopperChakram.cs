@@ -9,29 +9,29 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using TerrafirmaRedux.Projectiles.Melee.Boomerangs;
+using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Boomerangs.Chakram
 {
-    internal class TinChakram : ModItem
+    internal class CopperChakram : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 10;
+            Item.damage = 9;
             Item.useTime = 26;
             Item.useAnimation = 26;
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.Ranged;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
             Item.rare = ItemRarityID.White;
-            Item.value = Item.sellPrice(silver: 11, copper: 25);
+            Item.value = Item.sellPrice(silver: 7, copper: 50);
 
-            Item.shoot = ModContent.ProjectileType<TinChakramProjetile>();
+            Item.shoot = ModContent.ProjectileType<CopperChakramProjectile>();
             Item.shootSpeed = 10;
         }
 
