@@ -46,8 +46,11 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         }
         public override bool? UseItem(Player player)
         {
-            Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<IchorSentry>(), 14, 0, -1, 0, 0, 0);
-            player.UpdateMaxTurrets();
+            if (player == Main.LocalPlayer)
+            {
+                Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<IchorSentry>(), 14, 0, player.whoAmI, 0, 0, 0);
+                player.UpdateMaxTurrets();
+            }
             return true;
         }
 
