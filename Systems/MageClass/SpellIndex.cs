@@ -62,7 +62,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(9, new Tuple<byte, string, string, string, float>(9, AssetPath + "PreHardmode/GemStaff/DiamondTurret", "Crystal Turret", "Shoots out a turret", 40));
             //Sapphire Staff
             SpellCatalogue.Add(10, new Tuple<byte, string, string, string, float>(10, AssetPath + "PreHardmode/GemStaff/SapphireBolt", "Sapphire Bolt", "Shoots a Bolt of Mana", 6));
-            SpellCatalogue.Add(11, new Tuple<byte, string, string, string, float>(11, AssetPath + "PreHardmode/GemStaff/SapphireQuickShot", "Quick Amethyst Bolt", "Shoots a quick bolt of mana", 7));
+            SpellCatalogue.Add(11, new Tuple<byte, string, string, string, float>(11, AssetPath + "PreHardmode/GemStaff/SapphireQuickShot", "Quick Sapphire Bolt", "Shoots a quick bolt of mana", 7));
             //Amber Staff
             SpellCatalogue.Add(12, new Tuple<byte, string, string, string, float>(12, AssetPath + "PreHardmode/GemStaff/AmberBolt", "Amber Bolt", "Shoots a bolt of mana", 7));
             SpellCatalogue.Add(13, new Tuple<byte, string, string, string, float>(13, AssetPath + "PreHardmode/GemStaff/AmberWall", "Amber Wall", "Shoots a bolt of mana that expands into a wall", 14));
