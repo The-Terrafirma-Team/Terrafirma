@@ -18,7 +18,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return entity.type is >= 1444 and <= 1446 || entity.type == ItemID.WaterBolt || entity.type == ItemID.BookofSkulls;
+            return entity.type is >= 1444 and <= 1446 || entity.type == ItemID.WaterBolt || entity.type == ItemID.BookofSkulls || entity.type == ItemID.AquaScepter;
         }
         public override void SetDefaults(Item entity)
         {
@@ -29,12 +29,13 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         {
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
-                case 1: mult = 16/18f; break;
-                case 2: mult = 1f + 6/18f; break;
+                case 1: mult = 16 / 18f; break;
+                case 2: mult = 1f + 6 / 18f; break;
                 case 4: mult = 1.6f; break;
                 case 5: mult = 1.2f; break;
-                case 7: mult = 2/18f; break;
-            };
+                case 7: mult = 2 / 18f; break;
+                case 9: mult = 12 / 7f; break;
+            }
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
         public override float UseAnimationMultiplier(Item item, Player player)
@@ -47,7 +48,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 4:
                     return 1.8f;
                 case 7:
-                    return 0.2f;
+                    return 0.3f;
+                case 9:
+                    return 2f;
             }
             return base.UseAnimationMultiplier(item, player);
         }
@@ -64,6 +67,8 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     return 1.8f;
                 case 7:
                     return 0.3f;
+                case 9:
+                    return 5f;
             }
 
             return base.UseTimeMultiplier(item, player);
@@ -77,7 +82,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     SoundEngine.PlaySound(SoundID.Item73, player.position);
                     break;
                 case 1:
-                    if(player.ItemAnimationJustStarted) 
+                    if (player.ItemAnimationJustStarted)
                         SoundEngine.PlaySound(SoundID.Item34, player.position);
                     break;
             }
@@ -123,6 +128,10 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     type = ModContent.ProjectileType<BoneFragment>();
                     damage = (int)(damage * 0.8f);
                     velocity += velocity * 2f + new Vector2(0, Main.rand.NextFloat(-1f, 1f)).RotatedBy(velocity.ToRotation());
+                    break;
+                case 9:
+                    type = ModContent.ProjectileType<HealingBubble>();
+                    damage = (int)(damage * 0.1f);
                     break;
             }
         }
@@ -180,7 +189,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 float SetPos = 0;
                 for (int i = 300; i > 0; i -= 4)
                 {
-                    if (Collision.SolidCollision(Projectile.Center + new Vector2(0, i * 2), Projectile.width, Projectile.height, true) )
+                    if (Collision.SolidCollision(Projectile.Center + new Vector2(0, i * 2), Projectile.width, Projectile.height, true))
                     {
                         SetPos = new Vector2(0, Projectile.Bottom.Y + i * 2).ToTileCoordinates().Y * 16;
                     }
@@ -215,10 +224,10 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
             if (Projectile.ai[0] == 4 && Projectile.ai[2] <= 10)
             {
-                if(Collision.SolidCollision(OriginalPos + new Vector2(0, -Projectile.height + 4),Projectile.width,Projectile.height)) 
+                if (Collision.SolidCollision(OriginalPos + new Vector2(0, -Projectile.height + 4), Projectile.width, Projectile.height))
                 {
-                        Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 6), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, 11);
-                        newproj.frame = Projectile.frame - 1;
+                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), OriginalPos + new Vector2(0, -Projectile.height + 6), Vector2.Zero, ModContent.ProjectileType<WaterGeyser>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, 11);
+                    newproj.frame = Projectile.frame - 1;
                 }
                 else
                 {
@@ -235,7 +244,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
                     }
                 }
-                
+
 
 
             }
@@ -393,6 +402,63 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 Dust.NewDustPerfect(Projectile.Center, DustID.Bone, Projectile.velocity / 2 + new Vector2(Main.rand.NextFloat(-3f, 1f), Main.rand.NextFloat(-1f, 1f)).RotatedBy(Projectile.velocity.ToRotation()), 0, Color.White, 1);
             }
         }
+    }
+    #endregion
+
+    #region Healing Bubble
+    public class HealingBubble : ModProjectile
+    {
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/HealingBubble";
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = 1;
+            Projectile.Size = new Vector2(22, 22);
+            Projectile.timeLeft = 200;
+            Projectile.friendly = false;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.velocity.Y *= 0.2f;
+        }
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+            Projectile.velocity.Y -= 0.05f;
+            Projectile.velocity.X *= 0.98f;
+
+            if (Projectile.ai[0] % 2 == 0)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.position + new Vector2(Main.rand.Next(23), Main.rand.Next(23)), DustID.DungeonWater, Vector2.Zero, 0, Color.White, 1f);
+            }
+
+        }
+        public override bool CanHitPlayer(Player target)
+        {
+            if (target.team == Main.player[Projectile.owner].team)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            if (target.team == Main.player[Projectile.owner].team)
+            {
+                target.Heal(4);
+                Projectile.Kill();
+            }
+            
+        }
+        public override void Kill(int timeLeft)
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10f,10f), DustID.DungeonWater, Main.rand.NextVector2Circular(5f,5f), 0, Color.White, 1.25f);
+            }
+        }
+
     } 
     #endregion
 }

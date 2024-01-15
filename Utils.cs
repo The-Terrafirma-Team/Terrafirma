@@ -5,6 +5,7 @@ using Terraria;
 using TerrafirmaRedux.Global;
 using System;
 using Terraria.Audio;
+using System.Linq;
 
 namespace TerrafirmaRedux
 {
@@ -108,7 +109,7 @@ namespace TerrafirmaRedux
         /// <summary>
         /// Finds the closest NPC to the given position and returns that NPC
         /// </summary>
-        public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position, bool HostileOnly = true)
+        public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position, bool HostileOnly = true, NPC[] excludedNPCs = null)
         {
             NPC closestNPC = null;
 
@@ -120,14 +121,27 @@ namespace TerrafirmaRedux
 
                 if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly))
                 {
-
-                    float DistanceToTarget = Vector2.Distance(target.Center, position);
-
-                    if (DistanceToTarget < MaxDetectDistance)
+                    if (excludedNPCs != null && !excludedNPCs.Contains(target))
                     {
-                        MaxDetectDistance = DistanceToTarget;
-                        closestNPC = target;
+                        float DistanceToTarget = Vector2.Distance(target.Center, position);
+
+                        if (DistanceToTarget < MaxDetectDistance)
+                        {
+                            MaxDetectDistance = DistanceToTarget;
+                            closestNPC = target;
+                        }
                     }
+                    else
+                    {
+                        float DistanceToTarget = Vector2.Distance(target.Center, position);
+
+                        if (DistanceToTarget < MaxDetectDistance)
+                        {
+                            MaxDetectDistance = DistanceToTarget;
+                            closestNPC = target;
+                        }
+                    }
+                    
                 }
             }
 
