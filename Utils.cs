@@ -131,7 +131,7 @@ namespace TerrafirmaRedux
                             closestNPC = target;
                         }
                     }
-                    else
+                    else if (excludedNPCs == null)
                     {
                         float DistanceToTarget = Vector2.Distance(target.Center, position);
 
@@ -141,7 +141,6 @@ namespace TerrafirmaRedux
                             closestNPC = target;
                         }
                     }
-                    
                 }
             }
 

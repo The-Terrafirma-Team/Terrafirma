@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
+using TerrafirmaRedux.Projectiles.Melee.Boomerangs;
 
 namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
 {
@@ -31,7 +31,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
             Item.rare = ItemRarityID.White;
             Item.value = Item.sellPrice(silver: 7, copper: 50);
 
-            Item.shoot = ModContent.ProjectileType<CopperChakramProjetile>();
+            Item.shoot = ModContent.ProjectileType<CopperChakramProjectile>();
             Item.shootSpeed = 10;
         }
 

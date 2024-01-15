@@ -13,11 +13,11 @@ using TerrafirmaRedux.Projectiles.Melee.Boomerangs;
 
 namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
 {
-    internal class TinChakram : ModItem
+    internal class CobaltChakram : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 10;
+            Item.damage = 45;
             Item.useTime = 26;
             Item.useAnimation = 26;
             Item.knockBack = 6;
@@ -28,11 +28,11 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
-            Item.rare = ItemRarityID.White;
-            Item.value = Item.sellPrice(silver: 11, copper: 25);
+            Item.rare = ItemRarityID.LightRed;
+            Item.value = Item.sellPrice(gold: 1, silver: 05);
 
-            Item.shoot = ModContent.ProjectileType<TinChakramProjetile>();
-            Item.shootSpeed = 10;
+            Item.shoot = ModContent.ProjectileType<CobaltChakramProjectile>();
+            Item.shootSpeed = 12;
         }
 
         public override void SetStaticDefaults()
@@ -42,13 +42,13 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Boomerangs.Chakram
 
         public override bool CanUseItem(Player player)
         {
-            return player.ownedProjectileCounts[Item.shoot] < 1;
+            return player.ownedProjectileCounts[Item.shoot] < 3;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.CopperBar, 10)
+                .AddIngredient(ItemID.CobaltBar, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -9,19 +9,19 @@ using Terraria;
 using Terraria.ModLoader;
 using TerrafirmaRedux.Global.Templates;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace TerrafirmaRedux.Projectiles.Melee.Boomerangs
 {
     public class TinChakramProjetile : ChakramTemplate
     {
         public override string Texture => "TerrafirmaRedux/Items/Weapons/Melee/Boomerangs/Chakram/TinChakram";
         protected override int BounceAmount => 2;
-        protected override int AttackTime => 30;
         protected override int BounceMode => 1;
         protected override float ReturnSpeed => 14f;
         protected override float ReturnAcc => 0.015f;
 
         public override void SetDefaults()
         {
+            AttackTime = 30;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
             Projectile.friendly = true;
@@ -30,7 +30,7 @@ namespace TerrafirmaRedux.Projectiles.Melee
             Projectile.height = 20;
             DrawOffsetX = -4;
             DrawOriginOffsetY = -10;
-            
+
         }
     }
 }

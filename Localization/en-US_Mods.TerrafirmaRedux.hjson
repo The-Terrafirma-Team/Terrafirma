@@ -329,6 +329,26 @@ Items: {
 		DisplayName: Tin Chakram
 		Tooltip: ""
 	}
+
+	CobaltChakram: {
+		DisplayName: Cobalt Chakram
+		Tooltip: ""
+	}
+
+	MythrilChakram: {
+		DisplayName: Mythril Chakram
+		Tooltip: ""
+	}
+
+	OrichalcumChakram: {
+		DisplayName: Orichalcum Chakram
+		Tooltip: ""
+	}
+
+	PalladiumChakram: {
+		DisplayName: Palladium Chakram
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -379,4 +399,10 @@ Projectiles: {
 	HealingBubble.DisplayName: Healing Bubble
 	CopperChakramProjetile.DisplayName: Copper Chakram Projetile
 	TinChakramProjetile.DisplayName: Tin Chakram Projetile
+	CobaltChakramProjectile.DisplayName: Cobalt Chakram Projectile
+	CopperChakramProjectile.DisplayName: Copper Chakram Projectile
+	MythrilChakramProjectile.DisplayName: Mythril Chakram Projectile
+	OrichalcumChakramProjectile.DisplayName: Orichalcum Chakram Projectile
+	PalladiumChakramProjectile.DisplayName: Palladium Chakram Projectile
+	MythrilChakramSplitProjectile.DisplayName: Mythril Chakram Split Projectile
 }
