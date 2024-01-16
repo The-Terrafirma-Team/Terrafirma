@@ -18,6 +18,11 @@ Buffs: {
 		DisplayName: The Unmatched Power of the Sun
 		Description: It little warm.
 	}
+
+	OrdnanceBuff: {
+		DisplayName: Ordnance
+		Description: Increases max sentries by 1
+	}
 }
 
 Items: {
@@ -369,6 +374,11 @@ Items: {
 	PortableSlimeBakery: {
 		DisplayName: Portable Slime Bakery
 		Tooltip: ""
+	}
+
+	OrdnancePotion: {
+		DisplayName: Ordnance Potion
+		Tooltip: Increases max sentries by 1
 	}
 }
 
