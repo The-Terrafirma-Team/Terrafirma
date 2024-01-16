@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.GameContent.Drawing;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria;
-using Terraria.ModLoader;
 using TerrafirmaRedux.Global.Templates;
+using Microsoft.Xna.Framework;
 
 namespace TerrafirmaRedux.Projectiles.Melee
 {
@@ -21,23 +15,17 @@ namespace TerrafirmaRedux.Projectiles.Melee
             Projectile.CloneDefaults(ProjectileID.Spear);
             DrawOriginOffsetY = 100;
         }
-
         public override void PostAI()
         {
-            int S = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor);
-            Main.dust[S].noGravity = true;
-            Main.dust[S].velocity = Projectile.velocity * 2;
-            Main.dust[S].fadeIn = Main.rand.NextFloat(0, 1.5f);
-            int H = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch);
-            Main.dust[H].noGravity = true;
-            Main.dust[H].velocity = Projectile.velocity * -3;
-            Main.dust[H].fadeIn = Main.rand.NextFloat(0, 1.5f);
-
-            Player player = Main.player[Projectile.owner];
-            if (Projectile.timeLeft == (int)(player.itemAnimationMax * 1.3f) && Main.LocalPlayer == player)
+            Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(-7,5).RotatedBy(Projectile.rotation), DustID.Ichor, Main.rand.NextVector2Circular(1,1) + Projectile.velocity * 3);
+            d.noGravity = true;
+            d.fadeIn = Main.rand.NextFloat(0, 1.5f);
+        }
+        public override void OnTurnAround(Player player)
+        {
+            if (Main.LocalPlayer == player)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity * 2.5f,
-                                        ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.oldPosition + Projectile.Size/2, Projectile.velocity * 2.5f, ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
     }

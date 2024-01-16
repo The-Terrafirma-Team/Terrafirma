@@ -365,6 +365,11 @@ Items: {
 		DisplayName: Palladium Chakram
 		Tooltip: ""
 	}
+
+	PortableSlimeBakery: {
+		DisplayName: Portable Slime Bakery
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -421,4 +426,7 @@ Projectiles: {
 	OrichalcumChakramProjectile.DisplayName: Orichalcum Chakram Projectile
 	PalladiumChakramProjectile.DisplayName: Palladium Chakram Projectile
 	MythrilChakramSplitProjectile.DisplayName: Mythril Chakram Split Projectile
+	BlueSlimeFriend.DisplayName: Blue Slime Friend
+	PortableSlimeBakery.DisplayName: Portable Slime Bakery
+	OrangeSlimeFriend.DisplayName: Orange Slime Friend
 }

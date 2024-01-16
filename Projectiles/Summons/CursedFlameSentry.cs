@@ -54,10 +54,16 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
+            Projectile.ai[1]--;
             if (Projectile.ai[0] % 4 == 0 && Utils.FindClosestNPC(350f, Projectile.Center) != null)
             {
                 Projectile cursedflame = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(12f, 0f).RotatedBy(sentryrot), ModContent.ProjectileType<CursedFlames>(), Projectile.damage + Projectile.ArmorPenetration, Projectile.knockBack, Projectile.owner, 0, Main.rand.NextFloat(0.5f,1f), 0);
                 cursedflame.ArmorPenetration = 15;
+                if (Projectile.ai[1] <= 0)
+                {
+                    Projectile.ai[1] = 32;
+                    SoundEngine.PlaySound(SoundID.Item34, Projectile.position);
+                }
             }
             else if (Utils.FindClosestNPC(600f, Projectile.Center) != null)
             {

@@ -77,7 +77,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
             if (Projectile.frameCounter % 4 == 0 && Projectile.frame != 6)
             {
-                Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(Main.rand.Next(-Projectile.width, Projectile.width), Main.rand.Next(-Projectile.height / 2, Projectile.height / 2)), DustID.CursedTorch, Vector2.Zero, 0, Color.White, Main.rand.NextFloat(1.5f,2f));
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(Main.rand.Next(-Projectile.width, Projectile.width), Main.rand.Next(-Projectile.height / 2, Projectile.height / 2)), DustID.CursedTorch, Projectile.velocity * 0.3f, 0, Color.White, Main.rand.NextFloat(1.5f,2f));
                 Projectile.frame++;
             }
             flamecolor = new Color((96 / 255f) * Math.Clamp(Projectile.ai[0] / 10f, 0.8f, 2f), (248 / 255f) * Math.Clamp(Projectile.ai[0] / 10f, 0.8f, 1.2f), (2 / 255f) * Math.Clamp(Projectile.ai[0] / 10f, 0.8f, 1f), 0.5f) * Projectile.Opacity ;

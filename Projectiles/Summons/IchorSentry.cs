@@ -57,6 +57,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             {
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
                 backtimer = 10;
+                SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
             }
             else if (Utils.FindClosestNPC(600f, Projectile.Center) != null)
             {
