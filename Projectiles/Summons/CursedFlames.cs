@@ -96,7 +96,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             {
                 return false;
             }
-            return true;
+            return base.CanHitNPC(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

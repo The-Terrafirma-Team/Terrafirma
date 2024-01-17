@@ -60,7 +60,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (spell)
             {
                 case 1:
-                    return 0.17f;
+                    return 0.14f;
                 case 2:
                     return 0.3f;
                 case 4:
@@ -100,9 +100,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     //velocity = new Vector2(6,-6);
                     break;
                 case 1:
-                    type = ProjectileID.Flames;
+                    type = ModContent.ProjectileType<InfernoFlamethrower>();
                     damage = (int)(damage * 0.6f);
-                    velocity *= 0.7f;
+                    velocity *= 0.9f;
                     position += Vector2.Normalize(velocity) * 30;
                     break;
                 case 2:
