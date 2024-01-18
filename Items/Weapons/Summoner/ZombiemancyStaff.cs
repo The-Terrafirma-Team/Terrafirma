@@ -1,9 +1,8 @@
-﻿using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Projectiles.Summons;
+using TerrafirmaRedux.Data;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
@@ -12,6 +11,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         public override void SetStaticDefaults()
         {
             Item.staff[Item.type] = true;
+            ItemSets.isSwarmSummonItem[Type] = true;
         }
         public override void SetDefaults()
         {
