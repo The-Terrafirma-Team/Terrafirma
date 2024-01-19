@@ -385,6 +385,16 @@ Items: {
 		DisplayName: Hero Sword
 		Tooltip: ""
 	}
+
+	NecromancerLocket: {
+		DisplayName: Necromancer's Locket
+		Tooltip: Boosts the attack speed of swarm summoning weapons by 15%
+	}
+
+	MetalWrench: {
+		DisplayName: Metal Wrench
+		Tooltip: Boosts sentry attack speed for 3 seconds
+	}
 }
 
 Projectiles: {
@@ -446,4 +456,5 @@ Projectiles: {
 	OrangeSlimeFriend.DisplayName: Orange Slime Friend
 	HeroSwordProjectile.DisplayName: Hero Sword Projectile
 	HeroSwordShot.DisplayName: Hero Sword Shot
+	InfernoFlamethrower.DisplayName: Inferno Flamethrower
 }

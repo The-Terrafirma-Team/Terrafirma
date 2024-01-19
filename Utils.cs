@@ -6,6 +6,9 @@ using TerrafirmaRedux.Global;
 using System;
 using Terraria.Audio;
 using System.Linq;
+using TerrafirmaRedux.Particles;
+using Terraria.DataStructures;
+using TerrafirmaRedux.Projectiles.Ranged;
 
 namespace TerrafirmaRedux
 {
@@ -59,6 +62,17 @@ namespace TerrafirmaRedux
             item.damage = Damage;
             item.useTime = UseTime;
             item.useAnimation = UseTime;
+            item.knockBack = Knockback;
+            item.UseSound = SoundID.Item1;
+            item.Size = new Vector2(16, 16);
+        }
+        public static void DefaultToWrench(this Item item, int Damage, int UseTime, float Knockback = 7)
+        {
+            item.useStyle = ItemUseStyleID.Swing;
+            item.DamageType = DamageClass.SummonMeleeSpeed;
+            item.useTime = UseTime;
+            item.useAnimation = UseTime;
+            item.damage = Damage;
             item.knockBack = Knockback;
             item.UseSound = SoundID.Item1;
             item.Size = new Vector2(16, 16);
@@ -146,6 +160,35 @@ namespace TerrafirmaRedux
 
             return closestNPC;
 
+        }
+        public static float GetSentryAttackCooldownMultiplier(this Projectile projectile)
+        {
+            return projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier;
+        }
+        public static void WrenchHitSentry(this Player player, Rectangle hitbox, int WrenchBuffID, int Duration)
+        {
+            for(int i = 0; i < Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox))
+                {
+                    Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] = Duration;
+                    SoundEngine.PlaySound(SoundID.Item37, player.position);
+                    Main.projectile[i].netUpdate = true;
+
+                    ParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
+                    for(int j = 0; j < 3; j++)
+                    {
+                        Dust d = Dust.NewDustPerfect(hitbox.ClosestPointInRect(Main.projectile[i].Center), DustID.Torch, -Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(5));
+                        d.noGravity = true;
+                        d.scale *= 1.3f;
+                    }
+                }
+            }
+        }
+        public static Projectile NewProjectileButWithChangesFromSentryBuffs(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        {
+            //Do Stuff in here for buffs it's like modify shoot stats
+            return Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
         }
     }
 }

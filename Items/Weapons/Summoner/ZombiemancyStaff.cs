@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Data;
+using TerrafirmaRedux.Projectiles.Summons;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
@@ -31,7 +32,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.mana = 10;
-
+            Item.shoot = ModContent.ProjectileType<ZombiemancedZombie>();
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(0, 0, 30, 0);
         }

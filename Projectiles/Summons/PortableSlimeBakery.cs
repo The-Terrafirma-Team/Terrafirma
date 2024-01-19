@@ -49,8 +49,10 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
-            if (Projectile.ai[0] % 160 == 0 && Main.myPlayer == Projectile.owner)
+            if (Projectile.ai[0] >= 160 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner)
             {
+                Projectile.ai[0] = 0;
+                Projectile.ai[1]++;
                 for (int i = 0; i < 10; i++)
                 {
                     Dust newdust = Dust.NewDustDirect(Projectile.Center, 5, 5, DustID.Smoke, Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-2f, 2f), 1, Color.White, 1f);
@@ -60,10 +62,10 @@ namespace TerrafirmaRedux.Projectiles.Summons
                     }
                 }
                 SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
-                if (Projectile.ai[0] % (160 * 3) == 0)
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center, new Vector2(0, -2f),ModContent.ProjectileType<OrangeSlimeFriend>(),Projectile.damage,Projectile.knockBack,Projectile.owner);
+                if (Projectile.ai[1] % 3 == 0)
+                    Utils.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(),Projectile.Center, new Vector2(0, -2f),ModContent.ProjectileType<OrangeSlimeFriend>(),Projectile.damage,Projectile.knockBack,Projectile.owner);
                 else
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<BlueSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Utils.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<BlueSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
 
             

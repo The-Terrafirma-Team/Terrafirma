@@ -45,7 +45,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
             DrawOriginOffsetX = 0;
             DrawOriginOffsetY = 0;
-
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.ArmorPenetration = 15;
 
             Projectile.sentry = true;

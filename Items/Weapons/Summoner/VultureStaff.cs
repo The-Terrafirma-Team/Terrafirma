@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Data;
+using TerrafirmaRedux.Projectiles.Summons;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
@@ -30,7 +31,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
 
             Item.autoReuse = true;
             Item.noMelee = true;
-
+            Item.shoot = ModContent.ProjectileType<SummonedVulture>();
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 30, 0);
 

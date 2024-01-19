@@ -53,9 +53,10 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
-            if (Projectile.ai[0] % 30 == 0 && Utils.FindClosestNPC(600f, Projectile.Center) != null)
+            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Utils.FindClosestNPC(600f, Projectile.Center) != null)
             {
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile.ai[0] = 0;
+                Utils.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
                 backtimer = 10;
                 SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
             }
