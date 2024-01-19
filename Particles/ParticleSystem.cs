@@ -14,8 +14,28 @@ namespace TerrafirmaRedux.Particles
     {
         static List<Particle> Particles;
         static int MaxParticles = 3000;
+        static List<Particle> UIParticles;
+        
+        public static void DrawUIParticle(Vector2 Linepos)
+        {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.SamplerStateForCursor, null, null, null, Main.UIScaleMatrix);
+
+            for (int i = 0; i < UIParticles.Count; i++)
+            {
+                Particle particle = UIParticles[i];
+                if (particle.Active)
+                {
+                    particle.DrawInUI(Main.spriteBatch, Linepos);
+                }
+            }
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.SamplerStateForCursor, null, null, null, Main.UIScaleMatrix);
+        }
         public override void Load()
         {
+            UIParticles = new List<Particle>(MaxParticles);
             Particles = new List<Particle>(MaxParticles);
             On_Main.DrawCapture += On_Main_DrawCapture;
             On_Main.DrawDust += On_Main_DrawDust;
@@ -41,6 +61,7 @@ namespace TerrafirmaRedux.Particles
         public override void Unload()
         {
             Particles.Clear();
+            UIParticles.Clear();
             On_Main.DrawCapture -= On_Main_DrawCapture;
             On_Main.DrawDust -= On_Main_DrawDust;
             On_Main.Draw -= On_Main_Draw;
@@ -58,6 +79,20 @@ namespace TerrafirmaRedux.Particles
                 else
                 {
                     Particles.Remove(Particles[i]);
+                }
+            }
+
+            for (int i = 0; i < UIParticles.Count; i++)
+            {
+                Particle particle = UIParticles[i];
+                if (particle.Active)
+                {
+                    particle.TimeInWorld++;
+                    particle.Update();
+                }
+                else
+                {
+                    UIParticles.Remove(UIParticles[i]);
                 }
             }
         }
@@ -105,6 +140,25 @@ namespace TerrafirmaRedux.Particles
             Particles.Last().OnSpawn();
             return Particles.Last();
         }
+
+        public static Particle AddUIParticle(Particle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
+        {
+            if (UIParticles.Count == MaxParticles)
+            {
+                UIParticles.Remove(UIParticles[0]);
+            }
+            UIParticles.Add(type);
+            UIParticles.Last().Position = position;
+            UIParticles.Last().Velocity = velocity;
+            UIParticles.Last().Color = color;
+            UIParticles.Last().Scale = scale;
+            UIParticles.Last().Rotation = rotation;
+            UIParticles.Last().ai1 = AI1;
+            UIParticles.Last().ai2 = AI2;
+            UIParticles.Last().ai3 = AI3;
+            UIParticles.Last().OnSpawn();
+            return UIParticles.Last();
+        }
     }
     public abstract class Particle
     {
@@ -132,9 +186,15 @@ namespace TerrafirmaRedux.Particles
         public virtual void Draw(SpriteBatch spriteBatch)
         {
         }
+        
+        public virtual void DrawInUI(SpriteBatch spriteBatch, Vector2 linePos)
+        {
+        }
+
         /// <summary>
         /// Unlike other PostDraw hooks this one is called for each particle after all of them called Draw. Good for outlined particles.
         /// </summary>
+        /// 
         public virtual void PostDraw(SpriteBatch spriteBatch)
         {
         }

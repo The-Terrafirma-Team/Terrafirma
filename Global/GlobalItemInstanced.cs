@@ -117,5 +117,6 @@ namespace TerrafirmaRedux.Global
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
             #endregion
         }
+
     }
 }

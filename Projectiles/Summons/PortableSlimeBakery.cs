@@ -65,6 +65,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 else
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<BlueSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
+
+            
         }
     }
 }

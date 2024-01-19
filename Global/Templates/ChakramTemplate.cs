@@ -43,6 +43,7 @@ public abstract class ChakramTemplate : ModProjectile
         Projectile.penetrate = -1;
         Projectile.timeLeft = 3600;
         Projectile.friendly = true;
+        Projectile.DamageType = DamageClass.Ranged;
     }
 
     public override void OnSpawn(IEntitySource source)

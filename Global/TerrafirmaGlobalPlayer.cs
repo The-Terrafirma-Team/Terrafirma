@@ -6,6 +6,10 @@ using Terraria.Audio;
 using Terraria.GameInput;
 using TerrafirmaRedux.Systems.MageClass;
 using TerrafirmaRedux.Global.Structs;
+using TerrafirmaRedux.Items.Weapons.Melee.Swords;
+using TerrafirmaRedux.Projectiles.Melee;
+using System;
+using System.Drawing.Drawing2D;
 
 namespace TerrafirmaRedux.Global
 {
@@ -27,6 +31,7 @@ namespace TerrafirmaRedux.Global
         internal Item HeldMagicItem = new Item(0);
 
 
+        internal float[] ArmAnimationTimer = new float[] { 0, -1, -1};
         
         public override void ResetEffects()
         {
@@ -103,10 +108,24 @@ namespace TerrafirmaRedux.Global
             }
         }
 
+        
         public override void PostUpdate()
         {
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }
+
+            //ArmAnimationTimer Work
+            if (ArmAnimationTimer[1] > 0)
+            {
+                ArmAnimationTimer[0] += 1f;
+                Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, ArmAnimationTimer[2]);
+                Player.direction = (Player.MountedCenter - Main.MouseWorld).X > 0 ? -1 : 1;
+            }
+            if (ArmAnimationTimer[0] >= ArmAnimationTimer[1])
+            {
+                ArmAnimationTimer = new float[] { 0, -1, -1 };
+                Player.SetCompositeArmFront(false, Player.CompositeArmStretchAmount.None, 0);
+            }
 
         }
 
@@ -134,40 +153,54 @@ namespace TerrafirmaRedux.Global
             else
             {
                 SpellUI = false;
-                //if 
-                //(
-                //    ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1 &&
-                //    Player.HeldItem.type > 0 &&
-                //    ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
-                //    ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey( ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index] ) &&
-                //    ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length 
-                //)
-                //{
-                //    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
-                //}
                 if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1)
                 {
-                    if (Player.HeldItem.type > 0)
+                    if (Player.HeldItem.type > 0 &&
+                        ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
+                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1 &&
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]) &&
+                        ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
                     {
-                        if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) )
-                        {
-                            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1)
-                            {
-                                if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]))
-                                {
-                                    if (ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length)
-                                    {
-                                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
-                                    }
-                                }
-                            }
-                            
-                        }
+                                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
                     }
                 }
 
                 ModContent.GetInstance<SpellUISystem>().Flush(); 
             }
+
+
+            //Item Right Click
+            if (triggersSet.MouseRight)
+            {
+                if (Player.HeldItem.type == ModContent.ItemType<HeroSword>() &&
+                    Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1 &&
+                    Player == Main.LocalPlayer)
+                {
+                    Item sword = new Item(ModContent.ItemType<HeroSword>());
+                    Projectile.NewProjectile(sword.GetSource_FromThis(), Player.MountedCenter, -Vector2.Normalize(Player.MountedCenter - Main.MouseWorld) * 16f, ModContent.ProjectileType<HeroSwordProjectile>(), sword.damage, sword.knockBack, Player.whoAmI, 0, 0, 0);
+                    StretchArm(20f, Player.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() - MathHelper.PiOver2);
+                }
+            }
+                
+            
+        }
+
+        /// <summary>
+        /// Stretches the Player's arm towards a specific point for a certain amount of time (obvious)
+        /// </summary>
+        public void StretchArm(float time, float rotation)
+        {
+            ArmAnimationTimer = new float[] { 0f, time, rotation };
+        }
+
+        public override bool CanUseItem(Item item)
+        {
+            if (Player.HeldItem.type == ModContent.ItemType<HeroSword>() )
+            {
+                if (Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1) return true;
+                else return false;
+            }
+            return base.CanUseItem(item);
         }
 
     }

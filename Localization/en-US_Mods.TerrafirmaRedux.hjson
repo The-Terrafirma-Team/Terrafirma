@@ -380,6 +380,11 @@ Items: {
 		DisplayName: Ordnance Potion
 		Tooltip: Increases max sentries by 1
 	}
+
+	HeroSword: {
+		DisplayName: Hero Sword
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -439,4 +444,6 @@ Projectiles: {
 	BlueSlimeFriend.DisplayName: Blue Slime Friend
 	PortableSlimeBakery.DisplayName: Portable Slime Bakery
 	OrangeSlimeFriend.DisplayName: Orange Slime Friend
+	HeroSwordProjectile.DisplayName: Hero Sword Projectile
+	HeroSwordShot.DisplayName: Hero Sword Shot
 }
