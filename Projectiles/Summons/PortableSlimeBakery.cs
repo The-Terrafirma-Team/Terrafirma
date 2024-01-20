@@ -63,12 +63,16 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 }
                 SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
                 if (Projectile.ai[1] % 3 == 0)
-                    Utils.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(),Projectile.Center, new Vector2(0, -2f),ModContent.ProjectileType<OrangeSlimeFriend>(),Projectile.damage,Projectile.knockBack,Projectile.owner);
+                {
+                    Projectile slime = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<OrangeSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    slime.timeLeft = (int)(slime.timeLeft * Projectile.GetSentryRangeMultiplier());
+                }
                 else
-                    Utils.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<BlueSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                {
+                    Projectile slime = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -2f), ModContent.ProjectileType<BlueSlimeFriend>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    slime.timeLeft = (int)(slime.timeLeft * Projectile.GetSentryRangeMultiplier());
+                }
             }
-
-            
         }
     }
 }

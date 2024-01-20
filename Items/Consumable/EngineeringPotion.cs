@@ -8,7 +8,7 @@ using TerrafirmaRedux.Buffs.Buffs;
 
 namespace TerrafirmaRedux.Items.Consumable
 {
-    internal class OrdnancePotion : ModItem
+    internal class EngineeringPotion : ModItem
     { 
         public override void SetDefaults()
         {
@@ -27,7 +27,7 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(silver: 2);
 
-            Item.buffType = ModContent.BuffType<OrdnanceBuff>();
+            Item.buffType = ModContent.BuffType<Engineering>();
             Item.buffTime = 3600 * 5; 
         }
 
@@ -36,9 +36,9 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.ResearchUnlockCount = 20;
 
             ItemID.Sets.DrinkParticleColors[Type] = new Color[3] {
-                new Color(255, 0, 20),
-                new Color(240, 0, 40),
-                new Color(230, 0, 20)
+                new Color(255, 255, 20),
+                new Color(240, 240, 40),
+                new Color(230, 230, 20)
             };
         }
 
@@ -46,8 +46,15 @@ namespace TerrafirmaRedux.Items.Consumable
         {
             CreateRecipe()
             .AddIngredient(ItemID.BottledWater, 1)
-            .AddIngredient(ItemID.Blinkroot, 1)
-            .AddIngredient(ItemID.Deathweed, 1)
+            .AddIngredient(ItemID.VileMushroom, 1)
+            .AddIngredient(ItemID.Wire, 3)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+            CreateRecipe()
+            .AddIngredient(ItemID.BottledWater, 1)
+            .AddIngredient(ItemID.ViciousMushroom, 1)
+            .AddIngredient(ItemID.Wire, 3)
             .AddTile(TileID.Bottles)
             .Register();
         }

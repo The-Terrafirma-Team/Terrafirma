@@ -23,6 +23,11 @@ Buffs: {
 		DisplayName: Ordnance
 		Description: Increases max sentries by 1
 	}
+
+	Engineering: {
+		DisplayName: Engineering
+		Description: Your sentries are faster and have more range
+	}
 }
 
 Items: {
@@ -396,6 +401,11 @@ Items: {
 		Tooltip: Boosts sentry attack speed for 3 seconds
 	}
 
+	Overclock: {
+		DisplayName: Overclock
+		Tooltip: Boosts sentry attack speed by 15%
+	}
+
 	GunSword: {
 		DisplayName: Gun Sword
 		Tooltip: ""
@@ -403,6 +413,37 @@ Items: {
 
 	Microshark: {
 		DisplayName: Microshark
+		Tooltip: ""
+	}
+}
+
+	Uberclock: {
+		DisplayName: Uberclock
+		Tooltip: Boosts sentry attack speed and range by 20%
+	}
+
+	GunSword: {
+		DisplayName: Gun Sword
+		Tooltip: ""
+	}
+
+	Microshark: {
+		DisplayName: Microshark
+		Tooltip: ""
+	}
+
+	UmbraWrench: {
+		DisplayName: Umbra Wrench
+		Tooltip: ""
+	}
+
+	EngineeringPotion: {
+		DisplayName: Engineering Potion
+		Tooltip: Increases sentry speed and range
+	}
+
+	Bonetwister: {
+		DisplayName: Bonetwister
 		Tooltip: ""
 	}
 }
