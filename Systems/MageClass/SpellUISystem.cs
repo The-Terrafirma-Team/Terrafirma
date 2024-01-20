@@ -15,7 +15,7 @@ namespace TerrafirmaRedux.Systems.MageClass
         internal SpellUI spellui;
         private UserInterface spellwheel;
         public int SelectedSpell = -1;
-        public int Index = 0;
+        public int[] Index = new int[2] { 0, 0 };
         public override void Load()
         {
             spellui = new SpellUI();
@@ -46,9 +46,9 @@ namespace TerrafirmaRedux.Systems.MageClass
             spellui?.Flush();
         }
 
-        public void Create( int item)
+        public void Create( int item, Player player)
         {
-            spellui?.Create(item);
+            spellui?.Create(item, player);
         }
 
         public void UpdateMana (float manacost)

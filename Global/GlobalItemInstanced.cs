@@ -11,7 +11,7 @@ namespace TerrafirmaRedux.Global
 {
     public class GlobalItemInstanced : GlobalItem
     {
-        public byte Spell = 255;
+        public int Spell = -1;
         public override bool InstancePerEntity => true;
         public override void NetSend(Item item, BinaryWriter writer)
         {

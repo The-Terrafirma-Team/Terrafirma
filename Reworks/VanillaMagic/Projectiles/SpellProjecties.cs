@@ -1,164 +1,370 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Global;
-using TerrafirmaRedux.Projectiles.Magic;
-using Terraria.DataStructures;
 using Terraria.Audio;
-using TerrafirmaRedux.Systems.MageClass;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria;
 using Microsoft.Xna.Framework.Graphics;
+using TerrafirmaRedux.Particles;
 
-namespace TerrafirmaRedux.Reworks.VanillaMagic
+namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
 {
-    public class DungeonWeapons : GlobalItem
+    #region Homing Amethyst
+    public class HomingAmethyst : ModProjectile
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.AmethystBolt}";
+        public override void SetDefaults()
         {
-            return entity.type is >= 1444 and <= 1446 || entity.type == ItemID.WaterBolt || entity.type == ItemID.BookofSkulls || entity.type == ItemID.AquaScepter;
+            Projectile.CloneDefaults(ProjectileID.AmethystBolt);
+            AIType = ProjectileID.AmethystBolt;
+            Projectile.Size = new Vector2(16);
         }
-        public override void SetDefaults(Item entity)
+        public override void AI()
         {
-            if (entity.type == ItemID.InfernoFork)
-                entity.UseSound = null;
-        }
-        public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
-        {
-            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
+            NPC target = Utils.FindClosestNPC(200, Projectile.Center);
+            if (target != null && target.active)
             {
-                case 1: mult = 16 / 18f; break;
-                case 2: mult = 1f + 6 / 18f; break;
-                case 4: mult = 1.6f; break;
-                case 5: mult = 1.2f; break;
-                case 7: mult = 2 / 18f; break;
-                case 9: mult = 12 / 7f; break;
-                case 10: mult = 30 / 18f; break;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity += Projectile.Center.DirectionTo(target.Center) * 0.1f, Projectile.Center.DirectionTo(target.Center) * Projectile.velocity.Length(), 0.1f);
             }
-            base.ModifyManaCost(item, player, ref reduce, ref mult);
+            Projectile.velocity = Projectile.velocity.LengthClamp(5);
+        }
+    }
+    #endregion
+
+    #region Splitting Topaz
+    public class SplittingTopaz : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TopazBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.TopazBolt);
+            AIType = ProjectileID.TopazBolt;
+            Projectile.ai[2] = 0;
+            Projectile.Size = new Vector2(16);
         }
 
-        public override bool CanUseItem(Item item, Player player)
+        public override void AI()
         {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
-            switch (spell)
-            {
-                case 10:
-                    return player.ownedProjectileCounts[ModContent.ProjectileType<SkeletonHand>()] < 1? base.CanUseItem(item, player) : false;
-            }
-            return base.CanUseItem(item, player);
-        }
-        public override float UseAnimationMultiplier(Item item, Player player)
-        {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
-            switch (spell)
-            {
-                case 2:
-                    return 1.2f;
-                case 4:
-                    return 1.8f;
-                case 7:
-                    return 0.3f;
-                case 9:
-                    return 2f;
-            }
-            return base.UseAnimationMultiplier(item, player);
-        }
-        public override float UseTimeMultiplier(Item item, Player player)
-        {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
-            switch (spell)
-            {
-                case 1:
-                    return 0.14f;
-                case 2:
-                    return 0.3f;
-                case 4:
-                    return 1.8f;
-                case 7:
-                    return 0.3f;
-                case 9:
-                    return 5f;
-            }
+            Projectile.ai[0]++;
 
-            return base.UseTimeMultiplier(item, player);
-        }
-        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
-            switch (spell)
+            if (Projectile.ai[0] > 20 && Projectile.ai[2] == 0)
             {
-                case 0:
-                    SoundEngine.PlaySound(SoundID.Item73, player.position);
-                    break;
-                case 1:
-                    if (player.ItemAnimationJustStarted)
-                        SoundEngine.PlaySound(SoundID.Item34, player.position);
-                    break;
-            }
+                for (int i = -1; i < 2; i++)
+                {
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity.RotatedBy(20 * (Math.PI / 180) * i), Projectile.type, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, 0, 2);
 
-            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
-        }
-        public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            byte spell = item.GetGlobalItem<GlobalItemInstanced>().Spell;
-            switch (spell)
-            {
-                case 0:
-                    type = ModContent.ProjectileType<InfernoFork>();
-                    velocity *= 1.2f;
-                    //velocity = new Vector2(6,-6);
-                    break;
-                case 1:
-                    type = ModContent.ProjectileType<InfernoFlamethrower>();
-                    damage = (int)(damage * 0.6f);
-                    velocity *= 0.9f;
-                    position += Vector2.Normalize(velocity) * 30;
-                    break;
-                case 2:
-                    type = ModContent.ProjectileType<Firewall>();
-                    velocity = Vector2.Normalize(velocity) * 0.01f;
-                    damage = (int)(damage * 0.5f);
-                    position = Main.MouseWorld;
-                    break;
-                case 4:
-                    type = ModContent.ProjectileType<WaterGeyser>();
-                    damage = (int)(damage * 0.5f);
-                    position = Main.MouseWorld;
-                    velocity = Vector2.Normalize(velocity) * 0.01f;
-                    knockback *= 0.2f;
-                    break;
-                case 5:
-                    type = ModContent.ProjectileType<AuraWave>();
-                    position = Main.MouseWorld;
-                    velocity = Vector2.Normalize(velocity) * 0.01f;
-                    knockback *= 2f;
-                    break;
-                case 7:
-                    type = ModContent.ProjectileType<BoneFragment>();
-                    damage = (int)(damage * 0.5f);
-                    velocity += velocity * 2f + new Vector2(0, Main.rand.NextFloat(-1f, 1f)).RotatedBy(velocity.ToRotation());
-                    break;
-                case 9:
-                    type = ModContent.ProjectileType<HealingBubble>();
-                    damage = (int)(damage * 0.1f);
-                    break;
-                case 10:
-                    type = ModContent.ProjectileType<SkeletonHand>();
-                    velocity = Vector2.Zero;
-                    break;
+                }
+                Projectile.Kill();
             }
         }
     }
+    #endregion
+
+    #region Piercing Emerald
+    public class PiercingEmerald : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.EmeraldBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.EmeraldBolt);
+            AIType = ProjectileID.EmeraldBolt;
+            Projectile.penetrate = 6;
+            Projectile.tileCollide = false;
+            Projectile.Size = new Vector2(16);
+        }
+    }
+    #endregion
+
+    #region Exploding Ruby
+    public class ExplodingRuby : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.RubyBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.RubyBolt);
+            AIType = ProjectileID.RubyBolt;
+            Projectile.penetrate = 1;
+            Projectile.Size = new Vector2(16);
+        }
+
+        public override void AI()
+        {
+            Projectile.velocity *= 0.985f;
+
+            if (Projectile.velocity.Length() < 1)
+            {
+                Projectile.Kill();
+            }
+
+        }
+
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.position, DustID.GemRuby, new Vector2(Main.rand.NextFloat(-5.8f, 5.8f), Main.rand.NextFloat(-5.8f, 5.8f)), 0, Color.White, Main.rand.NextFloat(1.7f, 2f));
+                newdust.noGravity = true;
+            }
+            Projectile.Explode(100);
+            SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+        }
+    }
+    #endregion
+
+    #region Diamond Turret
+    public class DiamondTurret : ModProjectile
+    {
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/DiamondTurret";
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 600;
+            Projectile.Size = new Vector2(16);
+        }
+
+        public override bool? CanHitNPC(NPC target)
+        {
+            return false;
+        }
+
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+            Projectile.velocity *= 0.98f;
+            if (Projectile.ai[0] % 90 == 0 && Utils.FindClosestNPC(600f, Projectile.position) != null)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(Utils.FindClosestNPC(600f, Projectile.position).Center) * 10f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+            }
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.Tink, Projectile.Center);
+            for (int i = 0; i < 15; i++)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.GemDiamond, new Vector2(Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 4f)), 0, Color.White, Main.rand.NextFloat(1f, 1.3f));
+                newdust.noGravity = true;
+            }
+        }
+    }
+    #endregion
+
+    #region Amber Wall Crystal
+    public class AmberWallCrystal : ModProjectile
+    {
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AmberCrystal";
+        public override void SetDefaults()
+        {
+            Projectile.tileCollide = false;
+            Projectile.Size = new Vector2(16);
+            Projectile.timeLeft = 90;
+            Projectile.penetrate = 1;
+            Projectile.friendly = true;
+        }
+
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+            Projectile.velocity *= 0.98f;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            if (Projectile.ai[0] % 2 == 0)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, default, Main.rand.NextFloat(0.9f, 1.4f));
+                newdust.noGravity = true;
+            }
+
+
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            Vector2 length = Main.player[Projectile.owner].MountedCenter - Projectile.Center;
+            for (int i = -3; i < 4; i++)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].MountedCenter - length.RotatedBy(0.05f * i), Vector2.Zero, ModContent.ProjectileType<AmberWall>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 1);
+            }
+            SoundEngine.PlaySound(SoundID.Tink, Projectile.Center);
+        }
+    }
+    #endregion
+
+    #region Amber Wall
+    public class AmberWall : ModProjectile
+    {
+        float randfall = 0f;
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AmberWall";
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = 12;
+            Projectile.tileCollide = false;
+            DrawOffsetX = -5;
+            DrawOriginOffsetY = -5;
+            Projectile.Size = new Vector2(16);
+            Projectile.timeLeft = 400;
+            Projectile.friendly = true;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 40;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            randfall = Main.rand.NextFloat(0.05f, 0.15f);
+            for (int j = 0; j < 5; j++)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.GemAmber, new Vector2(Main.rand.NextFloat(-5f, 5f), Main.rand.NextFloat(-5f, 5f)), 0, Color.White, Main.rand.NextFloat(1f, 1.3f));
+                newdust.noGravity = true;
+            }
+
+            Projectile.scale = Main.rand.NextFloat(0.7f, 1.3f);
+        }
+
+        public override void AI()
+        {
+            if (Projectile.timeLeft < 30)
+            {
+                Projectile.velocity.Y += randfall;
+            }
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.Tink, Projectile.Center);
+            for (int j = 0; j < 5; j++)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.GemAmber, new Vector2(Main.rand.NextFloat(-5f, 5f), Main.rand.NextFloat(-5f, 5f)), 0, Color.White, Main.rand.NextFloat(1f, 1.3f));
+                newdust.noGravity = true;
+            }
+        }
+    }
+    #endregion
+
+    #region ColoredPrism
+    public class ColoredPrism : ModProjectile
+    {
+        Color ShotColor = new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0);
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/RainbowShot";
+
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+        }
+        public override void SetDefaults()
+        {
+            Projectile.penetrate = 3;
+            Projectile.tileCollide = true;
+            Projectile.friendly = true;
+
+            Projectile.timeLeft = 300;
+            Projectile.Opacity = 0f;
+
+            Projectile.Size = new Vector2(10);
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D RainbowShot = ModContent.Request<Texture2D>("TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/RainbowShot").Value;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Main.EntitySpriteDraw(RainbowShot, Projectile.oldPos[i] + Projectile.Size / 2 - Main.screenPosition, new Rectangle(0, 0, RainbowShot.Width, RainbowShot.Height), ShotColor * (Projectile.Opacity - (i * 0.2f) - 0.3f), Projectile.oldRot[i], RainbowShot.Size() / 2, 1, SpriteEffects.None, 0);
+            }
+            Main.EntitySpriteDraw(RainbowShot, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, RainbowShot.Width, RainbowShot.Height), ShotColor * Projectile.Opacity, Projectile.rotation, RainbowShot.Size() / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(RainbowShot, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, RainbowShot.Width, RainbowShot.Height), new Color(1f, 1f, 1f, 0f) * 0.4f * Projectile.Opacity, Projectile.rotation, RainbowShot.Size() / 2, 1, SpriteEffects.None, 0);
+            return false;
+        }
+        public override void AI()
+        {
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.Opacity += 0.075f;
+
+            if (Projectile.timeLeft == 300)
+            {
+                ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 46f, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+            }
+
+            if (Main.rand.NextBool(10))
+            {
+                ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor * 0.3f, 0, 8, Main.rand.NextFloat(0.3f, 0.8f), 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            }
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+        }
+    }
+    #endregion
+
+    #region Ichor Bubble
+    public class IchorBubble : ModProjectile
+    {
+        public override Color? GetAlpha(Color lightColor)
+        {
+            return new Color(1f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.14f) * 0.3f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.12f) * 0.3f, 0.4f) * (0.8f + (float)Math.Sin(Projectile.timeLeft * 0.1f) * 0.2f);
+        }
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.ToxicBubble);
+            Projectile.timeLeft = 150;
+            DrawOffsetX = 5;
+            DrawOriginOffsetY = 5;
+        }
+        public override void AI()
+        {
+            if (Projectile.ai[0] == 0)
+                Projectile.ai[0] = 1;
+
+            Projectile.ai[0] *= 1.02f;
+            Projectile.scale = 1 + (float)Math.Sin(Projectile.ai[0] * 0.1f) * 0.1f;
+
+            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10, 10), DustID.Ichor, Projectile.velocity, 0);
+            d.noGravity = true;
+        }
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.Item14);
+            for (int i = 0; i < 24; i++)
+            {
+                float rot = MathHelper.TwoPi / 24 * Main.rand.NextFloat(0.9f, 1.1f) * i;
+                Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(0, 10).RotatedBy(rot), DustID.Ichor, new Vector2(0, Main.rand.NextFloat(2, 4)).RotatedBy(rot));
+                d.noGravity = !Main.rand.NextBool(6);
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                Dust d2 = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(6, 6));
+                d2.noGravity = true;
+                d2.fadeIn = 1.2f;
+            }
+            Projectile.Explode(100);
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Ichor, 60 * 17);
+            if (Main.rand.NextBool())
+            {
+                target.AddBuff(BuffID.OnFire3, 60 * 6);
+            }
+        }
+    }
+    #endregion
 
     #region Water Geyser
     public class WaterGeyser : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/WaterGeyser";
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/WaterGeyser";
 
         public override void SetStaticDefaults()
         {
@@ -314,7 +520,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     #region Aurawave
     public class AuraWave : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/AuraWave";
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AuraWave";
 
         Vector2 playerpos = Vector2.Zero;
         public override void SetDefaults()
@@ -371,7 +577,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     #region Bone Fragment
     public class BoneFragment : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/BoneFragments";
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/BoneFragments";
 
         Vector2 playerpos = Vector2.Zero;
 
@@ -429,7 +635,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     #region Healing Bubble
     public class HealingBubble : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/HealingBubble";
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/HealingBubble";
         public override void SetDefaults()
         {
             Projectile.penetrate = 1;
@@ -470,13 +676,13 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 target.Heal(4);
                 Projectile.Kill();
             }
-            
+
         }
         public override void Kill(int timeLeft)
         {
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Dust newdust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10f,10f), DustID.DungeonWater, Main.rand.NextVector2Circular(5f,5f), 0, Color.White, 1.25f);
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), DustID.DungeonWater, Main.rand.NextVector2Circular(5f, 5f), 0, Color.White, 1.25f);
             }
         }
 
@@ -486,7 +692,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
     #region SkeletonHand
     public class SkeletonHand : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/SkeletonHand";
+        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/SkeletonHand";
 
         public override void SetStaticDefaults()
         {
@@ -506,9 +712,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         }
         public override void AI()
         {
-            
 
-            if (Projectile.ai[0] == 0) 
+
+            if (Projectile.ai[0] == 0)
             {
                 Projectile.frame = 0;
                 Projectile.velocity = new Vector2(0, -5f);
@@ -522,7 +728,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             else
             {
                 Projectile.frame = 1;
-                NPC[] AreaNPCs = new NPC[] {};
+                NPC[] AreaNPCs = new NPC[] { };
                 if (Projectile.ai[0] % 40 == 0 && AreaNPCs != null)
                 {
                     AreaNPCs = Utils.GetAllNPCsInArea(400f, Projectile.Center + new Vector2(18, 28));
@@ -540,7 +746,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                         for (int j = 0; j < Projectile.Center.Distance(AreaNPCs[i].Center) / 2; j++)
                         {
                             Dust newflame = Dust.NewDustDirect(
-                                Projectile.Center + (Projectile.Center.DirectionTo(AreaNPCs[i].Center) * (j * 2f)) + 
+                                Projectile.Center + (Projectile.Center.DirectionTo(AreaNPCs[i].Center) * (j * 2f)) +
                                 new Vector2(0, (float)Math.Sin(j / 4f) * 10f).RotatedBy(Projectile.Center.DirectionTo(AreaNPCs[i].Center).ToRotation()),
                                 1,
                                 1,
@@ -548,7 +754,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                                 0,
                                 0,
                                 0,
-                                new Color(255,0,255,0),
+                                new Color(255, 0, 255, 0),
                                 2f);
                             newflame.noGravity = true;
                         }
@@ -557,7 +763,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             }
 
             Dust newddust = Dust.NewDustDirect(
-                                OriginalPos + new Vector2(-16,28) + new Vector2(0, ( Projectile.Center.Y + 28 - OriginalPos.Y ) % 32),
+                                OriginalPos + new Vector2(-16, 28) + new Vector2(0, (Projectile.Center.Y + 28 - OriginalPos.Y) % 32),
                                 1,
                                 1,
                                 DustID.Torch,
@@ -573,12 +779,12 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("TerrafirmaRedux/Reworks/VanillaMagic/SkeletonHandBone").Value;
-            for (int i = 0; i < Math.Abs((  Projectile.Center.Y - OriginalPos.Y  ) / 32); i++)
+            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/SkeletonHandBone").Value;
+            for (int i = 0; i < Math.Abs((Projectile.Center.Y - OriginalPos.Y) / 32); i++)
             {
                 Main.EntitySpriteDraw(
                 SkeletonHandBone,
-                ( Projectile.Center + new Vector2(-6, 28 + (i * 32)) ) - Main.screenPosition,
+                (Projectile.Center + new Vector2(-6, 28 + (i * 32))) - Main.screenPosition,
                 SkeletonHandBone.Frame(),
                 Color.White,
                 0,
@@ -587,19 +793,19 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 SpriteEffects.None
                 );
             }
-                
+
             base.PostDraw(lightColor);
         }
         public override void Kill(int timeLeft)
         {
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Dust newddust = Dust.NewDustDirect(
                                 Projectile.Center + new Vector2(18, 28),
                                 1,
                                 1,
                                 DustID.Torch,
-                                Main.rand.NextFloat(-3f,3f),
+                                Main.rand.NextFloat(-3f, 3f),
                                 Main.rand.NextFloat(-3f, 3f),
                                 0,
                                 new Color(255, 0, 255, 0),
@@ -608,6 +814,6 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             }
         }
 
-    } 
+    }
     #endregion
 }

@@ -133,17 +133,17 @@ namespace TerrafirmaRedux.Global
         {
             if (triggersSet.MouseRight) {  
                 
-                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type))
+                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
                 {
                     if (!SpellUI)
                     {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type, Player);
                         HeldMagicItem = Player.HeldItem;
                     }
 
                     if (HeldMagicItem != Player.HeldItem)
                     {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type, Player);
                         HeldMagicItem = Player.HeldItem;
                     }
                     ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
@@ -157,11 +157,12 @@ namespace TerrafirmaRedux.Global
                 {
                     if (Player.HeldItem.type > 0 &&
                         ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
-                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1 &&
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]) &&
-                        ModContent.GetInstance<SpellUISystem>().Index <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
+                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index[0] + 1 &&
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index[0]]) &&
+                        ModContent.GetInstance<SpellUISystem>().Index[0] <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
                     {
-                                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index]].Item1;
+                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = 
+                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[ModContent.GetInstance<SpellUISystem>().Index[1]][ModContent.GetInstance<SpellUISystem>().Index[0]]].Item1;
                     }
                 }
 

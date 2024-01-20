@@ -415,21 +415,10 @@ Items: {
 		DisplayName: Microshark
 		Tooltip: ""
 	}
-}
 
 	Uberclock: {
 		DisplayName: Uberclock
 		Tooltip: Boosts sentry attack speed and range by 20%
-	}
-
-	GunSword: {
-		DisplayName: Gun Sword
-		Tooltip: ""
-	}
-
-	Microshark: {
-		DisplayName: Microshark
-		Tooltip: ""
 	}
 
 	UmbraWrench: {

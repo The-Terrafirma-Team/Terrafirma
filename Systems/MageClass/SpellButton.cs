@@ -18,7 +18,7 @@ namespace TerrafirmaRedux.Systems.MageClass
         public Vector2 position = Vector2.Zero;
         public string icon = "";
 
-        public int Index;
+        public int[] Index;
         public int SelectedSpell;
 
         internal float timer;

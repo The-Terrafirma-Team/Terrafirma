@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using TerrafirmaRedux.Global.Structs;
 using Terraria.GameContent.UI.Elements;
+using TerrafirmaRedux.Global;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
@@ -22,20 +23,56 @@ namespace TerrafirmaRedux.Systems.MageClass
             RemoveAllChildren();
         }
 
-        public void Create(int weapon)
+        public void Create(int weapon, Player player, bool accessoriesincluded = true)
         {
             Flush();
             if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(weapon))
             {
                 int SpellAmount = ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon].Length;
+                int WeaponSpellAmount = ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon].Length;
+                int AccessorySpellAmount = 0;
 
-                for (int i = 0; i < SpellAmount; i++)
+                if (accessoriesincluded)
+                {
+                        for (int i = 0; i < player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
+                        {
+                            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                            {
+                                int accessory = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
+                                SpellAmount += ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory].Length;
+                                AccessorySpellAmount += ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory].Length;
+                            }
+                        }
+
+                        for (int i = 0; i < player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
+                        {
+                            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                            {
+                                
+                                int accessory = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
+
+                                for (int j = 0; j < ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory].Length; j++)
+                                {
+                                    SpellButton accessoryspellicon = new SpellButton();
+                                    accessoryspellicon.angle = (360 / SpellAmount) * j;
+                                    accessoryspellicon.anglespace = 360 / SpellAmount;
+                                    accessoryspellicon.icon = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory][j]].Item2;
+                                    accessoryspellicon.Index = new int[2] { j, accessory };
+                                    accessoryspellicon.SelectedSpell = ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory][j];
+                                    Append(accessoryspellicon);
+                                }
+                                
+                            }
+                        }
+                }
+
+                for (int i = 0; i < ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon].Length; i++)
                 {
                     SpellButton spellicon = new SpellButton();
-                    spellicon.angle = (360 / SpellAmount) * i;
+                    spellicon.angle = (360 / SpellAmount) * (i + AccessorySpellAmount);
                     spellicon.anglespace = 360 / SpellAmount;
-                    spellicon.icon = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon][i] ].Item2;
-                    spellicon.Index = i;
+                    spellicon.icon = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon][i]].Item2;
+                    spellicon.Index = new int[2] { i, weapon };
                     spellicon.SelectedSpell = ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon][i];
                     Append(spellicon);
                 }

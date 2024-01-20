@@ -88,12 +88,12 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.penetrate = -2;
+            Projectile.penetrate = -4;
             return base.OnTileCollide(oldVelocity);
         }
         public override bool? CanHitNPC(NPC target)
         {
-            if (Projectile.penetrate == -2)
+            if (Projectile.penetrate == -4)
             {
                 return false;
             }
@@ -102,6 +102,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.penetrate = -2;
+            target.AddBuff(BuffID.CursedInferno, 120);
         }
 
         public override bool PreDraw(ref Color lightColor)
