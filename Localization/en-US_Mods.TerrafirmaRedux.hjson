@@ -395,6 +395,16 @@ Items: {
 		DisplayName: Metal Wrench
 		Tooltip: Boosts sentry attack speed for 3 seconds
 	}
+
+	Overclock: {
+		DisplayName: Overclock
+		Tooltip: Boosts sentry attack speed by 15%
+	}
+
+	Uberclock: {
+		DisplayName: Uberclock
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

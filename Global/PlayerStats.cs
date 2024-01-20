@@ -12,10 +12,12 @@ namespace TerrafirmaRedux.Global
     public class PlayerStats : ModPlayer
     {
         public float SentrySpeedMultiplier = 0f;
+        public float SentryRangeMultiplier = 0f;
         public float SwarmSpeedMultiplier = 1f;
         public override void ResetEffects()
         {
             SentrySpeedMultiplier = 0f;
+            SentryRangeMultiplier = 0f;
             SwarmSpeedMultiplier = 1f;
         }
         public override float UseSpeedMultiplier(Item item)

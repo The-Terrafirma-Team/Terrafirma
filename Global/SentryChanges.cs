@@ -16,9 +16,11 @@ namespace TerrafirmaRedux.Global
         public int[] BuffTime = new int[1];
 
         public float SpeedMultiplier = 1f;
+        public float RangeMultiplier = 1f;
         void ResetEffects(Projectile entity)
         {
             SpeedMultiplier = 1f;
+            RangeMultiplier = 1f;
         }
         public void UpdateBuffs(Projectile entity)
         {

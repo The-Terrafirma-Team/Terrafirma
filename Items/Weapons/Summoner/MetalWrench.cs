@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
@@ -18,6 +19,10 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
             player.WrenchHitSentry(hitbox, 0, 60 * 3);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddRecipeGroup(RecipeGroupID.IronBar, 15).AddTile(TileID.Anvils).Register();
         }
     }
 }

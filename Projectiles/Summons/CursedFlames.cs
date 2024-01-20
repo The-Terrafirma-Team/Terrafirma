@@ -49,7 +49,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             Projectile.localNPCHitCooldown = -1;
             Projectile.ArmorPenetration = 15;
 
-            Projectile.sentry = true;
+            //Projectile.sentry = true;
             Projectile.extraUpdates = 1;
             
 

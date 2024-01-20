@@ -165,6 +165,10 @@ namespace TerrafirmaRedux
         {
             return projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier;
         }
+        public static float GetSentryRangeMultiplier(this Projectile projectile)
+        {
+            return projectile.GetGlobalProjectile<SentryChanges>().RangeMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentryRangeMultiplier;
+        }
         public static void WrenchHitSentry(this Player player, Rectangle hitbox, int WrenchBuffID, int Duration)
         {
             for(int i = 0; i < Main.projectile.Length; i++)
@@ -185,9 +189,11 @@ namespace TerrafirmaRedux
                 }
             }
         }
-        public static Projectile NewProjectileButWithChangesFromSentryBuffs(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile projectile, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
         {
             //Do Stuff in here for buffs it's like modify shoot stats
+            velocity *= projectile.GetSentryRangeMultiplier();
+
             return Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
         }
     }
