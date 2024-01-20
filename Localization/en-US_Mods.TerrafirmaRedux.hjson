@@ -395,6 +395,16 @@ Items: {
 		DisplayName: Metal Wrench
 		Tooltip: Boosts sentry attack speed for 3 seconds
 	}
+
+	GunSword: {
+		DisplayName: Gun Sword
+		Tooltip: ""
+	}
+
+	Microshark: {
+		DisplayName: Microshark
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -457,4 +467,6 @@ Projectiles: {
 	HeroSwordProjectile.DisplayName: Hero Sword Projectile
 	HeroSwordShot.DisplayName: Hero Sword Shot
 	InfernoFlamethrower.DisplayName: Inferno Flamethrower
+	TyphoonBulletProjectile.DisplayName: Typhoon Bullet Projectile
+	SkeletonHand.DisplayName: Skeleton Hand
 }

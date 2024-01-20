@@ -133,7 +133,7 @@ namespace TerrafirmaRedux
             {
                 NPC target = Main.npc[k];
 
-                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly))
+                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null)
                 {
                     if (excludedNPCs != null && !excludedNPCs.Contains(target))
                     {
@@ -161,6 +161,42 @@ namespace TerrafirmaRedux
             return closestNPC;
 
         }
+
+        /// <summary>
+        /// Gets all the NPCs in an Area
+        /// </summary>
+        public static NPC[] GetAllNPCsInArea(float AreaSize, Vector2 position, bool HostileOnly = true, NPC[] excludedNPCs = null)
+        {
+            NPC[] AreaNPCs = new NPC[] {};
+
+            for (int k = 0; k < Main.npc.Length; k++)
+            {
+                NPC target = Main.npc[k];
+
+                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null)
+                {
+                    if (excludedNPCs != null && !excludedNPCs.Contains(target))
+                    {
+                        if (Vector2.Distance(target.Center, position) < AreaSize)
+                        {
+                            AreaNPCs = AreaNPCs.Append(target).ToArray();
+                        }
+                    }
+                    else if (excludedNPCs == null)
+                    {
+                        if (Vector2.Distance(target.Center, position) < AreaSize)
+                        {
+                            AreaNPCs = AreaNPCs.Append(target).ToArray();
+                        }
+                    }
+
+                }
+            }
+
+            return AreaNPCs;
+
+        }
+
         public static float GetSentryAttackCooldownMultiplier(this Projectile projectile)
         {
             return projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier;

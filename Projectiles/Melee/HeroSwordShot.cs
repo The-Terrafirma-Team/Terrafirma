@@ -35,11 +35,6 @@ namespace TerrafirmaRedux.Projectiles.Melee
         {
             Projectile.ai[0]++;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
-            NPC closestnpc = Utils.FindClosestNPC(600f, Projectile.Center);
-            if (closestnpc != null)
-            {
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, closestnpc.Center - Projectile.Center, 0.005f);
-            }
             ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(10, 10), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * (Projectile.scale / 3f), 0, 10, 1, 0.6f * Projectile.scale, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
         }
 

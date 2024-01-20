@@ -17,7 +17,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
     {
         public override void SetDefaults()
         {
-            Item.damage = 60;
+            Item.damage = 90;
             Item.knockBack = 5f;
             Item.crit = 15;
 
@@ -25,14 +25,14 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.height = 33;
 
             Item.autoReuse = false;
-            Item.useTime = 24;
-            Item.useAnimation = 24;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
 
 
             Item.shoot = ProjectileID.Bullet;
             Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 15;
-            Item.UseSound = SoundID.Item11;
+            Item.UseSound = SoundID.Item21;
             Item.value = Item.sellPrice(gold: 1);
 
             Item.rare = ItemRarityID.Orange;
@@ -68,7 +68,8 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             position = player.Center + muzzleoff;
             if (type == ProjectileID.Bullet)
             {
-                type = ProjectileID.BulletHighVelocity;
+                
+                type = ModContent.ProjectileType<TyphoonBulletProjectile>();
             }
         }
     }

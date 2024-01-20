@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using TerrafirmaRedux.Dusts;
+using TerrafirmaRedux.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -12,7 +14,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 {
     internal class TyphoonBulletProjectile : ModProjectile
     {
-        public override string Texture => null;
+        public override string Texture => "TerrafirmaRedux/Projectiles/Ranged/ShroomiteBulletProjectile";
         public override void SetDefaults()
         {
             Projectile.width = 8; 
@@ -21,7 +23,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.friendly = true; 
             Projectile.hostile = false; 
             Projectile.DamageType = DamageClass.Ranged; 
-            Projectile.penetrate = 3; 
+            Projectile.penetrate = -1; 
 
             Projectile.timeLeft = 600; 
 
@@ -29,18 +31,35 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             Projectile.tileCollide = true; 
             Projectile.extraUpdates = 1;
 
-            Projectile.aiStyle = 1;
             AIType = ProjectileID.Bullet;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
+
+            Projectile.extraUpdates = 20;
+            
         }
 
         public override void AI()
         {
+            if (Projectile.ai[0] == 0) 
+            { 
+                Projectile.velocity *= 0.25f; 
+                Projectile.Opacity = 0;
+            }
+
+
             Projectile.ai[0]++;
-            Dust newdust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Water_Jungle, -Projectile.velocity.X / 5f, -Projectile.velocity.Y / 5f, 0, Color.White, 1f);
+            
+            Dust newdust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Water_Jungle, -Projectile.velocity.X / 5f, -Projectile.velocity.Y / 5f, 0, new Color(190,200,215,1), Main.rand.NextFloat(1.2f,2f));
+            newdust.velocity.Y = -2;
             newdust.noGravity = true;
+            if (Projectile.ai[0] % 20 == 0)
+            {
+                
+                ParticleSystem.AddParticle(new TyphoonParticle(), Projectile.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, (1000f - Projectile.Center.Distance(Main.player[Projectile.owner].MountedCenter)) / 500f , Projectile.rotation);
+            }
+            if (Projectile.ai[0] % 80 == 0) SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -64,8 +83,19 @@ namespace TerrafirmaRedux.Projectiles.Ranged
             return true;
         }
 
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            ParticleSystem.AddParticle(new TyphoonParticle(), target.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, 1f, Projectile.rotation);
+            for (int i = 0; i < 10; i++)
+            {
+                Dust newdust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Water_Jungle, Main.rand.NextVector2Circular(10,10).X, Main.rand.NextVector2Circular(10, 10).Y, 0, new Color(190, 200, 215, 1), Main.rand.NextFloat(1.2f, 2f));
+            }
+            Projectile.damage -= 2;
+            base.OnHitNPC(target, hit, damageDone);
+        }
         public override void OnKill(int timeLeft)
         {
+
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         }
