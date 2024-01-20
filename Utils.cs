@@ -189,12 +189,21 @@ namespace TerrafirmaRedux
                 }
             }
         }
-        public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile projectile, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile sentry, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
         {
             //Do Stuff in here for buffs it's like modify shoot stats
-            velocity *= projectile.GetSentryRangeMultiplier();
+            SentryChanges sentryGlobal = sentry.GetGlobalProjectile<SentryChanges>();
 
-            return Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
+            velocity *= sentry.GetSentryRangeMultiplier();
+            damage = (int)(damage * sentryGlobal.DamageMultiplier);
+            Projectile p = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
+            SentryBulletBuff bulletGlobal = p.GetGlobalProjectile<SentryBulletBuff>();
+
+            if (sentryGlobal.BuffTime[SentryBuffID.DemoniteWrench] > 0)
+            {
+                bulletGlobal.Demonite = true;
+            }
+            return p;
         }
     }
 }

@@ -11,21 +11,21 @@ using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner
 {
-    public class MetalWrench : ModItem
+    public class UmbraWrench : ModItem
     {
         public override void SetDefaults()
         {
-            Item.DefaultToWrench(8, 25);
+            Item.DefaultToWrench(16, 30);
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0,10);
+            Item.value = Item.sellPrice(0, 1);
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            player.WrenchHitSentry(hitbox, SentryBuffID.MetalWrench, 60 * 3);
+            player.WrenchHitSentry(hitbox, SentryBuffID.DemoniteWrench, 60 * 3);
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddRecipeGroup(RecipeGroupID.IronBar, 15).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ItemID.DemoniteBar,15).AddIngredient(ItemID.ShadowScale, 15).AddTile(TileID.Anvils).Register();
         }
     }
 }

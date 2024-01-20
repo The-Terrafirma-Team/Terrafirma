@@ -12,7 +12,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
 {
     internal class TyphoonBulletProjectile : ModProjectile
     {
-        public override string Texture => null;
+        public override string Texture => "TerrafirmaRedux/Projectiles/Ranged/ShroomiteBulletProjectile";
         public override void SetDefaults()
         {
             Projectile.width = 8; 
