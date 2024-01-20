@@ -31,7 +31,6 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             if (entity.type == ItemID.InfernoFork) entity.UseSound = null;
             if (entity.type == ItemID.GoldenShower || entity.type == ItemID.CursedFlames) entity.UseSound = null;
             if (entity.type == ItemID.RainbowGun) entity.shoot = ProjectileID.WoodenArrowFriendly;
-
         }
 
         //Modify Mana Cost
@@ -55,7 +54,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 27: mult = 12 / 7f; break;
                 case 28: mult = 40 / 18f; break;
 
-                case 29: mult = 2 / 9f; break;
+                case 29: mult = 4 / 9f; break;
 
                 case 25: mult = 4 / 20f; break;
 
@@ -88,7 +87,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 21: return 9;
                 case 29: return 0.3f;
 
-                case 14: return 0.14f;
+                case 15: return 0.14f;
                 case 16: return 0.3f;
                 case 18: return 1.8f;
                 case 23: return 0.3f;
@@ -109,7 +108,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 21: return 3;
                 case 29: return 0.3f;
 
-                case 14: return 1.2f;
+                case 16: return 1.2f;
                 case 18: return 1.8f;
                 case 23: return 0.3f;
                 case 27: return 2f;
@@ -141,7 +140,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
                 case 31: 
-                    player.statMana += 6; 
+                    player.statMana += 10; 
                     return base.UseItem(item, player);
             }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -13,6 +14,8 @@ namespace TerrafirmaRedux.Global
     {
         public int Spell = -1;
         public override bool InstancePerEntity => true;
+
+        //Net Send & Recieve
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write(Spell);
@@ -21,9 +24,24 @@ namespace TerrafirmaRedux.Global
         {
             Spell = reader.ReadByte();
         }
+
+        //Modify Tooltips
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if ( item.type == ItemID.ManaFlower || item.type == ItemID.ManaCloak || item.type == ItemID.MagnetFlower || item.type == ItemID.ArcaneFlower ) tooltips.Remove(tooltips.Where(tooltip => tooltip.Name == "Tooltip1").FirstOrDefault());
+            
+            base.ModifyTooltips(item, tooltips);
+        }
+
+        //Set Defaults
         public override void SetDefaults(Item entity)
         {
             Spell = 0;
+
+            if (entity.type == ItemID.ManaFlower)
+            {
+                
+            }
 
             if (entity.DamageType == DamageClass.Summon && entity.type <= 5455 && !entity.sentry)
             {

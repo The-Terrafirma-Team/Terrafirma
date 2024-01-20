@@ -29,7 +29,15 @@ namespace TerrafirmaRedux.Systems.MageClass
                 var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
                 tooltips.Remove(manaremove);
 
-                tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " For more info)"));
+                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length > 1)
+                {
+                    tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
+                }
+                else
+                {
+                    tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                }
+                
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
                     for (int i = 0; i < ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length; i++)

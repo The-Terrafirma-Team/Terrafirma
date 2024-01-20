@@ -48,6 +48,9 @@ namespace TerrafirmaRedux.Systems.MageClass
 
             //// Accessories
             ItemCatalogue.Add(ItemID.ManaFlower, new [] { 31 });
+            ItemCatalogue.Add(ItemID.ArcaneFlower, new[] { 31 });
+            ItemCatalogue.Add(ItemID.MagnetFlower, new[] { 31 });
+            ItemCatalogue.Add(ItemID.ManaCloak, new[] { 31 });
 
 
 
@@ -81,7 +84,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(21, new Tuple<int, string, string, string, float>(21, AssetPath + "Hardmode/IchorBubble", "Ichor Bubble", "Shoots a big explosive bubble of boiling Ichor, Decreases target's defense and lights them on fire", 7));
             //Cursed Flames
             SpellCatalogue.Add(29, new Tuple<int, string, string, string, float>(29, AssetPath + "Hardmode/CursedFlame", "Cursed Flame", "Summons unholy fire balls", 9));
-            SpellCatalogue.Add(30, new Tuple<int, string, string, string, float>(30, AssetPath + "Hardmode/CursedFlamethrower", "Cursed Flamethrower", "Summons a wall of cursed fire", 2));
+            SpellCatalogue.Add(30, new Tuple<int, string, string, string, float>(30, AssetPath + "Hardmode/CursedFlamethrower", "Cursed Flamethrower", "Summons a wall of cursed fire", 4));
 
             /// Dungeon Weapons
             //Inferno Fork
@@ -107,7 +110,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(25, new Tuple<int, string, string, string, float>(25, AssetPath + "Hardmode/PrismRain", "Prism Rain", "Shoots a barrage of colored glass prisms", 4));
 
             /// Accessories
-            SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "PlaceholderSpellIcon", "TBA", "This Spell is not here yet! Tell Fred to push those changes already!!", 0));
+            SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "Accessories/ManaBloom", "Mana Bloom", "Regenerates 10 mana", 0));
 
         }
     }

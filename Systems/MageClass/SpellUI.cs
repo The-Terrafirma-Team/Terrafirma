@@ -112,7 +112,14 @@ namespace TerrafirmaRedux.Systems.MageClass
         {
             if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
-                ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 * manacost) + " Mana");
+                if (ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 > 0)
+                {
+                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 * manacost) + " Mana");
+                }
+                else
+                {
+                    ManaCost.SetText("");
+                }
                 Title.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item4);
                 Description.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item3);
                 

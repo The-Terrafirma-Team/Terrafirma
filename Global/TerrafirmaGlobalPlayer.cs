@@ -10,6 +10,7 @@ using TerrafirmaRedux.Items.Weapons.Melee.Swords;
 using TerrafirmaRedux.Projectiles.Melee;
 using System;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 namespace TerrafirmaRedux.Global
 {
@@ -108,7 +109,10 @@ namespace TerrafirmaRedux.Global
             }
         }
 
-        
+        public override void OnMissingMana(Item item, int neededMana)
+        {
+            Player.manaFlower = false;
+        }
         public override void PostUpdate()
         {
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
@@ -158,6 +162,7 @@ namespace TerrafirmaRedux.Global
                     if (Player.HeldItem.type > 0 &&
                         ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
                         ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index[0] + 1 &&
+                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Contains(ModContent.GetInstance<SpellUISystem>().SelectedSpell ) &&
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index[0]]) &&
                         ModContent.GetInstance<SpellUISystem>().Index[0] <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
                     {
