@@ -201,6 +201,10 @@ namespace TerrafirmaRedux
         {
             return projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier;
         }
+        public static float GetSentryAttackCooldownMultiplierInverse(this Projectile projectile)
+        {
+            return (1 - projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier - Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier) + 1;
+        }
         public static float GetSentryRangeMultiplier(this Projectile projectile)
         {
             return projectile.GetGlobalProjectile<SentryChanges>().RangeMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentryRangeMultiplier;
@@ -209,7 +213,7 @@ namespace TerrafirmaRedux
         {
             for(int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox))
+                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
                 {
                     Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] = Duration;
                     SoundEngine.PlaySound(SoundID.Item37, player.position);

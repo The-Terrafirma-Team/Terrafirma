@@ -323,20 +323,20 @@ Items: {
 
 	CursedFlameSentryStaff: {
 		DisplayName: Cursed Flame Sentry Staff
-		Tooltip: 
-		'''
-		Summons a sentry
-		Summons a cursed flamethrower to melt your enemies
-		'''
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a cursed flamethrower to melt your enemies
+			'''
 	}
 
 	IchorSentryStaff: {
 		DisplayName: Ichor Sentry Staff
-		Tooltip: 
-		'''
-		Summons a sentry
-		Summons an ichor sentry to fight for you
-		'''
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons an ichor sentry to fight for you
+			'''
 	}
 
 	VultureStaff: {
@@ -386,11 +386,11 @@ Items: {
 
 	PortableSlimeBakery: {
 		DisplayName: Portable Slime Bakery
-		Tooltip: 
-		'''
-		Summons a sentry
-		Summons a factory that neverendingly produces friendly slimes  
-		'''
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a factory that neverendingly produces friendly slimes  
+			'''
 	}
 
 	OrdnancePotion: {

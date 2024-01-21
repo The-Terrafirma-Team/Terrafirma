@@ -8,7 +8,6 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Particles\SquishedTyphoonDust.png" />
     <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
     <None Remove="Projectiles\Tools\UldraxProjectile.png" />
   </ItemGroup>

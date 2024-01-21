@@ -100,10 +100,6 @@ namespace TerrafirmaRedux.Global
     public class SentryBulletBuff : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
-        {
-            return entity.friendly;
-        }
 
         public bool Demonite = false;
         public override void PostAI(Projectile projectile)
