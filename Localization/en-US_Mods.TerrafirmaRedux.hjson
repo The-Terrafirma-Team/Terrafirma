@@ -318,17 +318,25 @@ Items: {
 
 	TommyGun: {
 		DisplayName: Tommy Gun
-		Tooltip: Gangsta.
+		Tooltip: Rattle 'em boys.
 	}
 
 	CursedFlameSentryStaff: {
 		DisplayName: Cursed Flame Sentry Staff
-		Tooltip: Summons a cursed flamethrower to melt your enemies
+		Tooltip: 
+		'''
+		Summons a sentry
+		Summons a cursed flamethrower to melt your enemies
+		'''
 	}
 
 	IchorSentryStaff: {
 		DisplayName: Ichor Sentry Staff
-		Tooltip: Summons an ichor sentry to fight for you
+		Tooltip: 
+		'''
+		Summons a sentry
+		Summons an ichor sentry to fight for you
+		'''
 	}
 
 	VultureStaff: {
@@ -378,7 +386,11 @@ Items: {
 
 	PortableSlimeBakery: {
 		DisplayName: Portable Slime Bakery
-		Tooltip: ""
+		Tooltip: 
+		'''
+		Summons a sentry
+		Summons a factory that neverendingly produces friendly slimes  
+		'''
 	}
 
 	OrdnancePotion: {
@@ -388,7 +400,7 @@ Items: {
 
 	HeroSword: {
 		DisplayName: Hero Sword
-		Tooltip: ""
+		Tooltip: It emanates an intense colorful aura
 	}
 
 	NecromancerLocket: {
@@ -408,12 +420,12 @@ Items: {
 
 	GunSword: {
 		DisplayName: Gun Sword
-		Tooltip: ""
+		Tooltip: Just like a gun, just like a sword, just like a gun sword
 	}
 
 	Microshark: {
 		DisplayName: Microshark
-		Tooltip: ""
+		Tooltip: Shoots a piercing typhoon bullet
 	}
 
 	Uberclock: {
@@ -423,7 +435,7 @@ Items: {
 
 	UmbraWrench: {
 		DisplayName: Umbra Wrench
-		Tooltip: ""
+		Tooltip: Makes sentires inflict shadowflame
 	}
 
 	EngineeringPotion: {
@@ -433,7 +445,7 @@ Items: {
 
 	Bonetwister: {
 		DisplayName: Bonetwister
-		Tooltip: ""
+		Tooltip: Increases sentry damage
 	}
 }
 
