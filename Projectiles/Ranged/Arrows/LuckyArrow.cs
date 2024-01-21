@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
 {
     internal class LuckyArrow : ModProjectile
     {
@@ -90,7 +90,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                     Projectile.velocity *= 0.95f;
                     break;
                 case 6:
-                    if (Utils.FindClosestNPC(300f,Projectile.Center) != null)
+                    if (Utils.FindClosestNPC(300f, Projectile.Center) != null)
                     {
                         Projectile.velocity += Projectile.Center.DirectionTo(Utils.FindClosestNPC(300f, Projectile.Center).Center);
                         Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(Utils.FindClosestNPC(300f, Projectile.Center).Center) * Projectile.velocity.Length(), 0.2f);

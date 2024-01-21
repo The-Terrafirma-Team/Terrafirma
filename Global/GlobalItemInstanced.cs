@@ -38,6 +38,8 @@ namespace TerrafirmaRedux.Global
         {
             Spell = 0;
 
+       
+
             if (entity.type == ItemID.ManaFlower)
             {
                 

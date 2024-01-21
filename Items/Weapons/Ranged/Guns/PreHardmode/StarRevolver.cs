@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class StarRevolver : ModItem
     {
@@ -44,7 +44,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         }
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(-1,0);
+            return new Vector2(-1, 0);
         }
     }
 }

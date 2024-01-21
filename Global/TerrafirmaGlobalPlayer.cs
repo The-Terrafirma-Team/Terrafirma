@@ -16,6 +16,7 @@ namespace TerrafirmaRedux.Global
 {
     public class TerrafirmaGlobalPlayer : ModPlayer
     {
+        
         public bool Foregrip = false;
         public bool DrumMag = false;
         public bool AmmoCan = false;
@@ -33,7 +34,7 @@ namespace TerrafirmaRedux.Global
 
 
         internal float[] ArmAnimationTimer = new float[] { 0, -1, -1};
-        
+
         public override void ResetEffects()
         {
             Player.pickSpeed *= 0.8f;

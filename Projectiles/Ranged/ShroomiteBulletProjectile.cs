@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 
 namespace TerrafirmaRedux.Projectiles.Ranged
 {
-    internal class ShroomiteBulletProjectile: ModProjectile
+    internal class ShroomiteBulletProjectile : ModProjectile
     {
         public override void SetDefaults()
         {

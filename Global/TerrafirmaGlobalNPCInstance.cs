@@ -1,5 +1,5 @@
 ﻿using TerrafirmaRedux.Items.Consumable;
-using TerrafirmaRedux.Items.Weapons.Ranged;
+using TerrafirmaRedux.Items.Weapons.Ranged.Bows;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;

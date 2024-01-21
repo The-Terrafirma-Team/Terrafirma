@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Shroomite
 {
     internal class ShroomiteCrossbow : ModItem
     {

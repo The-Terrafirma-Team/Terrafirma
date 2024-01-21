@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using TerrafirmaRedux.Global;
 using TerrafirmaRedux.Projectiles.Ranged;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class IcicleMachineGun : ModItem
     {
@@ -46,17 +46,17 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(-12,3);
+            return new Vector2(-12, 3);
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            Vector2 muzzleoff = new Vector2(26,-8 * player.direction).RotatedBy(velocity.ToRotation());
+            Vector2 muzzleoff = new Vector2(26, -8 * player.direction).RotatedBy(velocity.ToRotation());
             position = player.MountedCenter + muzzleoff;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            return base.Shoot(player,source,position,velocity,type,damage,knockback);
+            return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
 
         public override void AddRecipes()

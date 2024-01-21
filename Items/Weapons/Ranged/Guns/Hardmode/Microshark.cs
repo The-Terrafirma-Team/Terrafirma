@@ -11,9 +11,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Hardmode
 {
-    internal class Microshark: ModItem
+    internal class Microshark : ModItem
     {
         public override void SetDefaults()
         {
@@ -40,7 +40,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.DamageType = DamageClass.Ranged;
             Item.scale = 0.9f;
 
-            
+
         }
 
         public override void UseItemHitbox(Player player, ref Rectangle hitbox, ref bool noHitbox)
@@ -64,11 +64,11 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            Vector2 muzzleoff = new Vector2(Item.width /  2,  0).RotatedBy(Math.Atan2(velocity.Y, velocity.X));
+            Vector2 muzzleoff = new Vector2(Item.width / 2, 0).RotatedBy(Math.Atan2(velocity.Y, velocity.X));
             position = player.Center + muzzleoff;
             if (type == ProjectileID.Bullet)
             {
-                
+
                 type = ModContent.ProjectileType<TyphoonBulletProjectile>();
             }
         }

@@ -12,6 +12,14 @@ namespace TerrafirmaRedux.Global
 {
     public class TerrafirmaGlobalItem : GlobalItem
     {
+        public override void SetDefaults(Item entity)
+        {
+            if (entity.type == ItemID.Zenith)
+            {
+                entity.rare = ModContent.RarityType<FinalQuestRarity>();
+            }
+             base.SetDefaults(entity);
+        }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {
             if (item.rare == ModContent.RarityType<FinalQuestRarity>())

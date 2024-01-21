@@ -11,9 +11,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
 {
-    internal class GunSword: ModItem
+    internal class GunSword : ModItem
     {
         public override void SetDefaults()
         {
@@ -38,7 +38,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.DamageType = DamageClass.Ranged;
             Item.scale = 0.9f;
 
-            
+
         }
 
         public override void UseItemHitbox(Player player, ref Rectangle hitbox, ref bool noHitbox)

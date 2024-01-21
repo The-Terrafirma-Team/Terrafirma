@@ -659,23 +659,18 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
                 Dust newdust = Dust.NewDustPerfect(Projectile.position + new Vector2(Main.rand.Next(23), Main.rand.Next(23)), DustID.DungeonWater, Vector2.Zero, 0, Color.White, 1f);
             }
 
-        }
-        public override bool CanHitPlayer(Player target)
-        {
-            if (target.team == Main.player[Projectile.owner].team)
+            for (int i = 0; i < Main.player.Length; i++)
             {
-                return true;
+                if (Projectile.Hitbox.Intersects(Main.player[i].Hitbox) && 
+                    Main.player[i].team == Main.player[Projectile.owner].team &&
+                    Main.player[i] != Main.player[Projectile.owner])
+                {
+                    Main.player[i].Heal(8);
+                    Projectile.Kill();
+                }
+                    
             }
-            return false;
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (target.team == Main.player[Projectile.owner].team)
-            {
-                target.Heal(4);
-                Projectile.Kill();
-            }
+            
 
         }
         public override void Kill(int timeLeft)

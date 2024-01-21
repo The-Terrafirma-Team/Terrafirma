@@ -1,7 +1,7 @@
-﻿using TerrafirmaRedux.Projectiles.Ranged;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
+using TerrafirmaRedux.Projectiles.Ranged.Bullets;
 
 namespace TerrafirmaRedux.Items.Ammo
 {

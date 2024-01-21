@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace TerrafirmaRedux.Projectiles.Ranged.Bullets
 {
     internal class HighVelocityShroomiteBullet : ModProjectile
     {

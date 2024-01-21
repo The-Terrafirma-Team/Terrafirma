@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class HandCannon : ModItem
     {
@@ -34,7 +34,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         }
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(-4,1);
+            return new Vector2(-4, 1);
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
@@ -46,7 +46,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         {
             for (int i = 0; i < 5; i++)
             {
-                Dust newdust = Dust.NewDustPerfect(player.MountedCenter + new Vector2(-Item.width + 20, -4 * -player.direction).RotatedBy((player.MountedCenter - Main.MouseWorld).ToRotation()), DustID.Smoke, -(Vector2.Normalize(player.MountedCenter - Main.MouseWorld) * Main.rand.NextFloat(1f,3f)), 200, Color.White, Main.rand.NextFloat(1.2f, 2f));
+                Dust newdust = Dust.NewDustPerfect(player.MountedCenter + new Vector2(-Item.width + 20, -4 * -player.direction).RotatedBy((player.MountedCenter - Main.MouseWorld).ToRotation()), DustID.Smoke, -(Vector2.Normalize(player.MountedCenter - Main.MouseWorld) * Main.rand.NextFloat(1f, 3f)), 200, Color.White, Main.rand.NextFloat(1.2f, 2f));
                 newdust.velocity += new Vector2(0, Main.rand.NextFloat(-0.4f, 0.4f)).RotatedBy((player.MountedCenter - Main.MouseWorld).ToRotation());
                 newdust.velocity.Y += 1f;
             }

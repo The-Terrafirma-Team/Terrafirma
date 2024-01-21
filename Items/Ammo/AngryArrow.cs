@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using TerrafirmaRedux.Projectiles.Ranged;
+using TerrafirmaRedux.Projectiles.Ranged.Arrows;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

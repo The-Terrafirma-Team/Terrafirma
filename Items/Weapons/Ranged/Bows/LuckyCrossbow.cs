@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Projectiles.Ranged;
+using TerrafirmaRedux.Projectiles.Ranged.Arrows;
 using TerrafirmaRedux.Rarities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Bows
 {
     internal class LuckyCrossbow : ModItem
     {
@@ -73,7 +73,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
 
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(-7,-4);
+            return new Vector2(-7, -4);
         }
 
         public override bool CanConsumeAmmo(Item ammo, Player player)

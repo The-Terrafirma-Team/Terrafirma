@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerrafirmaRedux.Global;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class KnifeShooter : ModItem
     {
@@ -43,11 +43,11 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
         }
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(0,0);
+            return new Vector2(0, 0);
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            Vector2 muzzleoff = new Vector2(Item.width - 5, 4 * player.direction).RotatedBy(Math.Atan2(velocity.Y,velocity.X));
+            Vector2 muzzleoff = new Vector2(Item.width - 5, 4 * player.direction).RotatedBy(Math.Atan2(velocity.Y, velocity.X));
             position = player.Center + muzzleoff;
             velocity = velocity.RotatedByRandom(0.01f);
         }

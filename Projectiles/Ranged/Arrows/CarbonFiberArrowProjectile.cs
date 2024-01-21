@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
 {
     internal class CarbonFiberArrowProjectile : ModProjectile
     {

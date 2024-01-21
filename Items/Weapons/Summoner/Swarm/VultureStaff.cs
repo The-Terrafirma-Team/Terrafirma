@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Data;
 using TerrafirmaRedux.Projectiles.Summons;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner
+namespace TerrafirmaRedux.Items.Weapons.Summoner.Swarm
 {
     internal class VultureStaff : ModItem
     {

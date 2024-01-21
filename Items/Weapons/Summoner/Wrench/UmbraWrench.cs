@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner
+namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
 {
     public class UmbraWrench : ModItem
     {
@@ -25,7 +25,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.DemoniteBar,15).AddIngredient(ItemID.ShadowScale, 15).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ItemID.DemoniteBar, 15).AddIngredient(ItemID.ShadowScale, 15).AddTile(TileID.Anvils).Register();
         }
     }
 }

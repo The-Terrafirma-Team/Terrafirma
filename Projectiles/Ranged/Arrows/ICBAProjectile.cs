@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
 {
     internal class ICBAProjectile : ModProjectile
     {
@@ -39,14 +39,14 @@ namespace TerrafirmaRedux.Projectiles.Ranged
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.velocity *= 0.05f;
-            
+
         }
 
         public override void AI()
         {
             Projectile.ai[0]++;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-            
+
             if (Projectile.ai[0] > 90)
             {
                 Projectile.velocity *= 1.06f;
@@ -68,7 +68,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged
                 Dust SmokeDust = Dust.NewDustPerfect(Projectile.position + new Vector2(2 * Projectile.direction, 32).RotatedBy(Projectile.rotation), DustID.Smoke, new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-0.3f, 0.3f)), 128, default, Main.rand.NextFloat(0.9f, 1.2f));
                 SmokeDust.noGravity = true;
             }
-            
+
 
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Bows
 {
     internal class PirateCrossbow : ModItem
     {
@@ -15,7 +15,7 @@ namespace TerrafirmaRedux.Items.Weapons.Ranged
             Item.damage = 85;
             Item.knockBack = 2f;
             Item.rare = ItemRarityID.LightRed;
-            Item.value = Item.sellPrice(0,1,0,0);
+            Item.value = Item.sellPrice(0, 1, 0, 0);
 
         }
         public override Vector2? HoldoutOffset()

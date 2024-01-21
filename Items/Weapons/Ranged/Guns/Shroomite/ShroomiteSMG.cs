@@ -11,9 +11,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged
+namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Shroomite
 {
-    internal class ShroomiteSMG: ModItem
+    internal class ShroomiteSMG : ModItem
     {
         public override void SetDefaults()
         {

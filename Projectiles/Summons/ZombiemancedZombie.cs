@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace TerrafirmaRedux.Projectiles.Summons
 {
@@ -135,6 +137,20 @@ namespace TerrafirmaRedux.Projectiles.Summons
             return false;
         }
 
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write7BitEncodedInt( (int)(MaxSpeed * 10f));
+            writer.Write7BitEncodedInt((int)(MaxHeight * 10f));
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            MaxSpeed = reader.Read7BitEncodedInt() / 10f;
+            MaxHeight = reader.Read7BitEncodedInt() / 10f;
+            base.ReceiveExtraAI(reader);
+        }
+
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 12; i++)
@@ -145,7 +161,6 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override void OnSpawn(IEntitySource source)
         {
-
             MaxSpeed = Main.rand.NextFloat(2.8f, 3.2f);
             MaxHeight = Main.rand.NextFloat(13.8f, 14.2f);
 
