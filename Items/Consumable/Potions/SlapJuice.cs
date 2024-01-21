@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 using Terraria;
 using TerrafirmaRedux.Buffs.Buffs;
 
-namespace TerrafirmaRedux.Items.Consumable
+namespace TerrafirmaRedux.Items.Consumable.Potions
 {
-    internal class SlapJuice: ModItem
-    { 
+    internal class SlapJuice : ModItem
+    {
         public override void SetDefaults()
         {
             Item.width = 12;
@@ -28,7 +28,7 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.value = Item.buyPrice(silver: 2);
 
             Item.buffType = ModContent.BuffType<SlapBuff>();
-            Item.buffTime = 120; 
+            Item.buffTime = 120;
         }
 
         public override bool CanUseItem(Player player)

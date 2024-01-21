@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner
+namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
 {
     public class Bonetwister : ModItem
     {
@@ -25,7 +25,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.CrimtaneBar,15).AddIngredient(ItemID.TissueSample, 15).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ItemID.CrimtaneBar, 15).AddIngredient(ItemID.TissueSample, 15).AddTile(TileID.Anvils).Register();
         }
     }
 }

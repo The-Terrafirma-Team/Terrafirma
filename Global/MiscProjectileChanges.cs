@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerrafirmaRedux.Buffs.Buffs;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -47,6 +49,14 @@ namespace TerrafirmaRedux.Global
                 entity.DamageType = DamageClass.Ranged;
             }
                 
+        }
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if (Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier > 0 && projectile.penetrate > 0)
+            {
+                projectile.maxPenetrate = (int)(projectile.maxPenetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
+                projectile.penetrate = (int)(projectile.penetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner
+namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
 {
     public class MetalWrench : ModItem
     {
@@ -17,7 +17,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
         {
             Item.DefaultToWrench(8, 25);
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0,10);
+            Item.value = Item.sellPrice(0, 0, 10);
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {

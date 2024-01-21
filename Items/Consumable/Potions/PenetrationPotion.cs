@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 using Terraria;
 using TerrafirmaRedux.Buffs.Buffs;
 
-namespace TerrafirmaRedux.Items.Consumable
+namespace TerrafirmaRedux.Items.Consumable.Potions
 {
-    internal class OrdnancePotion : ModItem
-    { 
+    internal class PenetrationPotion : ModItem
+    {
         public override void SetDefaults()
         {
             Item.width = 20;
@@ -27,8 +27,8 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(silver: 2);
 
-            Item.buffType = ModContent.BuffType<OrdnanceBuff>();
-            Item.buffTime = 3600 * 5; 
+            Item.buffType = ModContent.BuffType<Penetration>();
+            Item.buffTime = 3600 * 5;
         }
 
         public override void SetStaticDefaults()
@@ -44,12 +44,7 @@ namespace TerrafirmaRedux.Items.Consumable
 
         public override void AddRecipes()
         {
-            CreateRecipe()
-            .AddIngredient(ItemID.BottledWater, 1)
-            .AddIngredient(ItemID.Blinkroot, 1)
-            .AddIngredient(ItemID.Deathweed, 1)
-            .AddTile(TileID.Bottles)
-            .Register();
+            Recipe.Create(Type).AddIngredient(ItemID.BottledWater).AddIngredient(ItemID.TissueSample).AddIngredient(ItemID.Marble, 6).AddTile(TileID.Bottles).Register();
         }
     }
 }

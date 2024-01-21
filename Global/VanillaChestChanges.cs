@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using TerrafirmaRedux.Items.Weapons.Summoner;
+using TerrafirmaRedux.Items.Weapons.Summoner.Swarm;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

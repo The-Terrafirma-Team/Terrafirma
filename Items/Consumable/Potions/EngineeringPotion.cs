@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 using Terraria;
 using TerrafirmaRedux.Buffs.Buffs;
 
-namespace TerrafirmaRedux.Items.Consumable
+namespace TerrafirmaRedux.Items.Consumable.Potions
 {
     internal class EngineeringPotion : ModItem
-    { 
+    {
         public override void SetDefaults()
         {
             Item.width = 20;
@@ -28,7 +28,7 @@ namespace TerrafirmaRedux.Items.Consumable
             Item.value = Item.buyPrice(silver: 2);
 
             Item.buffType = ModContent.BuffType<Engineering>();
-            Item.buffTime = 3600 * 5; 
+            Item.buffTime = 3600 * 5;
         }
 
         public override void SetStaticDefaults()

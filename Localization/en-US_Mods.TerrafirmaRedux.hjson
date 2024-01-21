@@ -28,6 +28,16 @@ Buffs: {
 		DisplayName: Engineering
 		Description: Your sentries are faster and have more range
 	}
+
+	KnockbackResist: {
+		DisplayName: Steadfast
+		Description: Can't be knocked back
+	}
+
+	Penetration: {
+		DisplayName: Penetration
+		Description: Weapon pierce is increased
+	}
 }
 
 Items: {
@@ -446,6 +456,21 @@ Items: {
 	Bonetwister: {
 		DisplayName: Bonetwister
 		Tooltip: Increases sentry damage
+	}
+
+	WoodenShield: {
+		DisplayName: Wooden Shield
+		Tooltip: Weakens knockback taken
+	}
+
+	KnockbackResistPotion: {
+		DisplayName: Steadfast Potion
+		Tooltip: Provides immunity to knockback
+	}
+
+	PenetrationPotion: {
+		DisplayName: Perforating Potion
+		Tooltip: Doubles weapon pierce
 	}
 }
 

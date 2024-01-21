@@ -1,13 +1,14 @@
-﻿using Terraria;
+﻿using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Projectiles.Summons;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner
+namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry
 {
-    internal class PortableSlimeBakery : ModItem
+    internal class IchorSentryStaff : ModItem
     {
         public override void SetDefaults()
         {
@@ -20,19 +21,28 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
             Item.useAnimation = 20;
             Item.useTime = 20;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
-
-            Item.width = 16;
-            Item.height = 16;
+            Item.mana = 20;
+            Item.width = 38;
+            Item.height = 46;
 
             Item.autoReuse = true;
             Item.noMelee = true;
-            Item.mana = 20;
-            
+
+
 
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 4, 05, 0);
-            Item.shoot = ModContent.ProjectileType<Projectiles.Summons.PortableSlimeBakery>();
+            Item.shoot = ModContent.ProjectileType<IchorSentry>();
 
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+            .AddIngredient(ItemID.SoulofFright, 20)
+            .AddIngredient(ItemID.HallowedBar, 10)
+            .AddIngredient(ItemID.Ichor, 10)
+            .Register();
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -43,7 +53,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner
                 int PushUpY;
                 Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
 
-                Projectile.NewProjectile(default, new Vector2(WorldX,WorldY - PushUpY + 9), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
+                Projectile.NewProjectile(default, new Vector2(WorldX, WorldY - PushUpY + 8), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
                 player.UpdateMaxTurrets();
             }
             return false;
