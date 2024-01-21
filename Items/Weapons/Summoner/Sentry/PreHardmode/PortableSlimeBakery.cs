@@ -5,11 +5,7 @@ using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Projectiles.Summons;
 using Terraria.DataStructures;
 
-<<<<<<<< HEAD:Items/Weapons/Summoner/Sentry/PreHardmode/PortableSlimeBakery.cs
 namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode
-========
-namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry
->>>>>>>> 94aca8f26a8d46abea18f75efe3a8ed1b0c597fd:Items/Weapons/Summoner/Sentry/PortableSlimeBakery.cs
 {
     internal class PortableSlimeBakery : ModItem
     {

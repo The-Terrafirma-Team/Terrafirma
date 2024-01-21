@@ -6,11 +6,7 @@ using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Projectiles.Summons;
 using Terraria.DataStructures;
 
-<<<<<<<< HEAD:Items/Weapons/Summoner/Sentry/Hardmode/CursedFlameSentryStaff.cs
 namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.Hardmode
-========
-namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry
->>>>>>>> 94aca8f26a8d46abea18f75efe3a8ed1b0c597fd:Items/Weapons/Summoner/Sentry/CursedFlameSentryStaff.cs
 {
     internal class CursedFlameSentryStaff : ModItem
     {
