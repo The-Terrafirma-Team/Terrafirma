@@ -110,7 +110,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             SpellCatalogue.Add(25, new Tuple<int, string, string, string, float>(25, AssetPath + "Hardmode/PrismRain", "Prism Rain", "Shoots a barrage of colored glass prisms", 4));
 
             /// Accessories
-            SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "Accessories/ManaBloom", "Mana Bloom", "Regenerates 10 mana", 0));
+            SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "Accessories/ManaBloom", "Mana Bloom", "Regenerates 10 mana but slows the player down", 0));
 
         }
     }

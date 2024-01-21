@@ -499,4 +499,5 @@ Projectiles: {
 	InfernoFlamethrower.DisplayName: Inferno Flamethrower
 	TyphoonBulletProjectile.DisplayName: Typhoon Bullet Projectile
 	SkeletonHand.DisplayName: Skeleton Hand
+	ManaBloomProj.DisplayName: Mana Bloom Proj
 }

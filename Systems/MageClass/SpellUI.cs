@@ -58,6 +58,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                                     accessoryspellicon.anglespace = 360 / SpellAmount;
                                     accessoryspellicon.icon = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory][j]].Item2;
                                     accessoryspellicon.Index = new int[2] { j, accessory };
+                                    accessoryspellicon.Accessory = 1;
                                     accessoryspellicon.SelectedSpell = ModContent.GetInstance<SpellIndex>().ItemCatalogue[accessory][j];
                                     Append(accessoryspellicon);
                                 }
@@ -74,6 +75,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     spellicon.icon = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon][i]].Item2;
                     spellicon.Index = new int[2] { i, weapon };
                     spellicon.SelectedSpell = ModContent.GetInstance<SpellIndex>().ItemCatalogue[weapon][i];
+                    spellicon.Accessory = 0;
                     Append(spellicon);
                 }
 
@@ -110,18 +112,18 @@ namespace TerrafirmaRedux.Systems.MageClass
         }
         public override void Update(GameTime gameTime)
         {
-            if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
+            if (ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]))
             {
-                if (ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 > 0)
+                if (ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]].Item5 > 0)
                 {
-                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item5 * manacost) + " Mana");
+                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]].Item5 * manacost) + " Mana");
                 }
                 else
                 {
                     ManaCost.SetText("");
                 }
-                Title.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item4);
-                Description.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell].Item3);
+                Title.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]].Item4);
+                Description.SetText(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]].Item3);
                 
                 TextPanel.Width.Set(Description.MinWidth.Pixels > Title.MinWidth.Pixels * 1.1f ? Description.MinWidth.Pixels : Title.MinWidth.Pixels * 1.1f + 20, 0);
                 TextPanel.Height.Set(Description.MinHeight.Pixels + Title.MinHeight.Pixels + ManaCost.MinHeight.Pixels + 40, 0);

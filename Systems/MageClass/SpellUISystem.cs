@@ -14,7 +14,9 @@ namespace TerrafirmaRedux.Systems.MageClass
     {
         internal SpellUI spellui;
         private UserInterface spellwheel;
-        public int SelectedSpell = -1;
+
+        //Second Number in both of these Array tell if the Spell is from an accessory or not (0: Weapon, 1: Accessory)
+        public int[] SelectedSpell = new int[2] { -1, 0 };
         public int[] Index = new int[2] { 0, 0 };
         public override void Load()
         {

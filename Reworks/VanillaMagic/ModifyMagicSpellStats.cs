@@ -54,7 +54,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                 case 27: mult = 12 / 7f; break;
                 case 28: mult = 40 / 18f; break;
 
-                case 29: mult = 4 / 9f; break;
+                case 30: mult = 4 / 9f; break;
 
                 case 25: mult = 4 / 20f; break;
 
@@ -85,7 +85,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
                 case 21: return 9;
-                case 29: return 0.3f;
+                case 30: return 0.4f;
 
                 case 15: return 0.14f;
                 case 16: return 0.3f;
@@ -106,7 +106,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
                 case 21: return 3;
-                case 29: return 0.3f;
+                case 30: return 0.4f;
 
                 case 16: return 1.2f;
                 case 18: return 1.8f;
@@ -139,9 +139,10 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
         {
             switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
             {
-                case 31: 
+                case 31:
+                    CombatText.NewText(player.Hitbox, CombatText.HealMana, 10, false);
                     player.statMana += 10; 
-                    return base.UseItem(item, player);
+                    return true;
             }
 
             return base.UseItem(item, player);
@@ -157,12 +158,12 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
                 case 20: if (player.ItemAnimationJustStarted) SoundEngine.PlaySound(SoundID.Item13, player.position); break;
                 case 21: SoundEngine.PlaySound(SoundID.NPCDeath19, player.position); break;
-                case 29: SoundEngine.PlaySound(SoundID.Item34, player.position); break;
+                case 30: SoundEngine.PlaySound(SoundID.Item34, player.position); break;
 
                 case 14: SoundEngine.PlaySound(SoundID.Item73, player.position); break;
                 case 15: if (player.ItemAnimationJustStarted) SoundEngine.PlaySound(SoundID.Item34, player.position); break;
 
-                case 31: return false;
+                case 31: return true;
 
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
@@ -206,7 +207,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
                     velocity *= 0.45f;
                     damage *= 3;
                     break;
-                case 29:
+                case 30:
                     type = ModContent.ProjectileType<CursedFlames>();
                     velocity *= 0.8f;
                     damage = (int)(damage * 0.5f);
@@ -280,7 +281,8 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
                 //Accessories
                 case 31:
-                    type = ProjectileID.None;
+                    type = ModContent.ProjectileType<ManaBloomProj>();
+                    SoundEngine.PlaySound(SoundID.Item8, position);
                     break;
             }
 

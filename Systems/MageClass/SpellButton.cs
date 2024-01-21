@@ -20,6 +20,7 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         public int[] Index;
         public int SelectedSpell;
+        public int Accessory = 0;
 
         internal float timer;
         internal float postimer = 0.1f;
@@ -51,7 +52,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
                 dist = 1f;
-                ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
+                ModContent.GetInstance<SpellUISystem>().SelectedSpell = new int[2] { SelectedSpell, Accessory };
                 ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
@@ -63,7 +64,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
                 dist = 1f;
-                ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
+                ModContent.GetInstance<SpellUISystem>().SelectedSpell = new int[2] { SelectedSpell, Accessory };
                 ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }

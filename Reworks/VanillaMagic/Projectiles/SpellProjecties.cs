@@ -816,4 +816,52 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
 
     }
     #endregion
+
+    #region ManaBloomProj
+    public class ManaBloomProj : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TopazBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.Opacity = 0f;
+            Projectile.timeLeft = 60;
+            Projectile.Size = new Vector2(4);
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
+        }
+
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+
+            if (Main.player[Projectile.owner] == Main.LocalPlayer && Projectile.ai[1] == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Projectile newproj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(2f), Type, 0, 0, Projectile.owner, 0, 1,  0);
+                    newproj.timeLeft = Main.rand.Next(40, 60);
+                }
+                Projectile.Kill();
+            }
+            if (Projectile.ai[1] == 1)
+            {
+                
+                if (Projectile.timeLeft < 30)
+                {
+                    //Projectile.velocity = Projectile.Center.DirectionTo(Main.player[Projectile.owner].MountedCenter) * 2f;
+                    Projectile.velocity += Vector2.Lerp(Projectile.velocity, Main.player[Projectile.owner].MountedCenter - Projectile.Center, 0.5f);
+                    Projectile.velocity = Projectile.velocity.LengthClamp(16f);
+                    if (Projectile.Hitbox.Intersects(Main.player[Projectile.owner].Hitbox)) Projectile.Kill();
+                }
+                else
+                {
+                    Projectile.velocity *= 0.925f;
+                }
+            }
+            Dust newDust = Dust.NewDustPerfect(Projectile.Center, DustID.ManaRegeneration, Vector2.Zero, 0, new Color(255, 255, 255, 0), 1f);
+            newDust.noGravity = true;
+            
+        }
+    } 
+    #endregion
 }

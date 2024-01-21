@@ -67,20 +67,18 @@ namespace TerrafirmaRedux.Global
             {
                 Player.runSlowdown = 0.2f;
 
-                if (Player.velocity.Y != 0)
-                {
-                    FloorTime = 0;
-                }
-                else
-                {
-                    FloorTime++;
-                }
+                if (Player.velocity.Y != 0) FloorTime = 0;
+                else FloorTime++;
 
-                if (FloorTime > 10)
-                {
-                    JumpMultiplier = 1f;
-                }
+                if (FloorTime > 10) JumpMultiplier = 1f;
 
+            }
+            if (Player.ItemAnimationActive && Player.HeldItem.type != 0)
+            {
+                if (Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell == 31)
+                {
+                    Player.accRunSpeed = 2f;
+                }
             }
         }
 
@@ -113,6 +111,7 @@ namespace TerrafirmaRedux.Global
         {
             Player.manaFlower = false;
         }
+
         public override void PostUpdate()
         {
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
@@ -157,17 +156,19 @@ namespace TerrafirmaRedux.Global
             else
             {
                 SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != -1)
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell[0] != -1)
                 {
                     if (Player.HeldItem.type > 0 &&
                         ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
                         ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index[0] + 1 &&
-                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Contains(ModContent.GetInstance<SpellUISystem>().SelectedSpell ) &&
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index[0]]) &&
                         ModContent.GetInstance<SpellUISystem>().Index[0] <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
                     {
-                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = 
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[ModContent.GetInstance<SpellUISystem>().Index[1]][ModContent.GetInstance<SpellUISystem>().Index[0]]].Item1;
+                        if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Contains(ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]) && ModContent.GetInstance<SpellUISystem>().SelectedSpell[1] == 0 || ModContent.GetInstance<SpellUISystem>().SelectedSpell[1] == 1)
+                        {
+                            Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
+                            ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[ModContent.GetInstance<SpellUISystem>().Index[1]][ModContent.GetInstance<SpellUISystem>().Index[0]]].Item1;
+                        }
                     }
                 }
 
@@ -208,6 +209,5 @@ namespace TerrafirmaRedux.Global
             }
             return base.CanUseItem(item);
         }
-
     }
 }
