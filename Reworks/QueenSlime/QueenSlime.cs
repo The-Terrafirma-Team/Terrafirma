@@ -11,6 +11,10 @@ namespace TerrafirmaRedux.Reworks.QueenSlime
 {
     public class QueenSlime : GlobalNPC
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
