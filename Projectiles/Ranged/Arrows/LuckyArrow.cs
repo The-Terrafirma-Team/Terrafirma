@@ -41,7 +41,10 @@ namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.ai[0] = Main.rand.Next(8);
-
+            Projectile.netUpdate = true;
+        }
+        public override void AI()
+        {
             switch (Projectile.ai[0])
             {
                 case 0: TrailColor = new Color(60, 40, 0, 0); break;
@@ -54,9 +57,6 @@ namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
                 case 7: TrailColor = new Color(20, 40, 40, 0); Projectile.tileCollide = false; Projectile.penetrate = 4; break;
             }
 
-        }
-        public override void AI()
-        {
             Projectile.ai[1] += 1;
 
             Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 40, TrailColor.G / 40, TrailColor.B / 40));

@@ -17,7 +17,6 @@ namespace TerrafirmaRedux.Items.Equipment
         {
             player.GetModPlayer<PlayerStats>().KnockbackResist -= 0.35f;
         }
-
         public override void AddRecipes()
         {
             Recipe.Create(Type).AddRecipeGroup(RecipeGroupID.Wood,25).AddRecipeGroup(RecipeGroupID.IronBar, 5).AddTile(TileID.WorkBenches).Register();
