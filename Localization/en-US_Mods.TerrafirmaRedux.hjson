@@ -472,6 +472,11 @@ Items: {
 		DisplayName: Perforating Potion
 		Tooltip: Doubles weapon pierce
 	}
+
+	Eruption: {
+		DisplayName: Eruption
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -537,4 +542,6 @@ Projectiles: {
 	TyphoonBulletProjectile.DisplayName: Typhoon Bullet Projectile
 	SkeletonHand.DisplayName: Skeleton Hand
 	ManaBloomProj.DisplayName: Mana Bloom Proj
+	EruptionProjectile.DisplayName: Eruption Projectile
+	EruptionFloatProjectile.DisplayName: Eruption Float Projectile
 }

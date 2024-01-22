@@ -30,7 +30,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic
 
             if (entity.type == ItemID.InfernoFork) entity.UseSound = null;
             if (entity.type == ItemID.GoldenShower || entity.type == ItemID.CursedFlames) entity.UseSound = null;
-            if (entity.type == ItemID.RainbowGun) entity.shoot = ProjectileID.WoodenArrowFriendly;
+            if (entity.type == ItemID.RainbowGun) entity.shoot = ModContent.ProjectileType<ColoredPrism>();
         }
 
         //Modify Mana Cost
