@@ -22,7 +22,7 @@ namespace TerrafirmaRedux.Global
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            Spell = reader.ReadByte();
+            Spell = reader.ReadInt32();
         }
 
         //Modify Tooltips
