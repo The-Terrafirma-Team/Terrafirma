@@ -11,14 +11,14 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode
     {
         public override void SetDefaults()
         {
-            Item.damage = 30;
-            Item.knockBack = 1f;
+            Item.damage = 10;
+            Item.knockBack = 0.5f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useAnimation = 20;
-            Item.useTime = 20;
+            Item.useAnimation = 25;
+            Item.useTime = 25;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
 
             Item.width = 16;
@@ -29,8 +29,8 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.mana = 20;
 
 
-            Item.rare = ItemRarityID.Pink;
-            Item.value = Item.sellPrice(0, 4, 05, 0);
+            Item.rare = ItemRarityID.Green;
+            Item.value = Item.buyPrice(0, 12, 0, 0);
             Item.shoot = ModContent.ProjectileType<Projectiles.Summons.MechanicsPocketSentry>();
 
         }

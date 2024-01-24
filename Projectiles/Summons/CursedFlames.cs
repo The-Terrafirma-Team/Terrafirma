@@ -32,8 +32,6 @@ namespace TerrafirmaRedux.Projectiles.Summons
         public override void SetDefaults()
         {
             Projectile.friendly = true;
-
-            Projectile.damage = 55;
             Projectile.height = 30;
             Projectile.width = 30;
             Projectile.DamageType = DamageClass.Summon;
@@ -47,7 +45,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             DrawOriginOffsetY = 0;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.ArmorPenetration = 15;
+            Projectile.ArmorPenetration = 5;
 
             //Projectile.sentry = true;
             Projectile.extraUpdates = 1;

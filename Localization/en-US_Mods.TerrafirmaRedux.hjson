@@ -497,8 +497,12 @@ Items: {
 	}
 
 	MechanicsPocketDefenseSystem: {
-		DisplayName: Mechanics Pocket Defense System
-		Tooltip: ""
+		DisplayName: Mechanic's Pocket Defense System
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a zapper sentry to fight for you.
+			'''
 	}
 }
 

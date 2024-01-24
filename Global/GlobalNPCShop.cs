@@ -1,5 +1,6 @@
 ﻿using TerrafirmaRedux.Items.Ammo;
 using TerrafirmaRedux.Items.Equipment.Ranged;
+using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,6 +24,12 @@ namespace TerrafirmaRedux.Global
             if (shop.NpcType == NPCID.Cyborg)
             {
                 shop.InsertAfter(ItemID.DryRocket, ModContent.ItemType<ICBA>());
+
+            }
+
+            if (shop.NpcType == NPCID.Mechanic)
+            {
+                shop.InsertAfter(ItemID.EngineeringHelmet, ModContent.ItemType<MechanicsPocketDefenseSystem>());
 
             }
         }

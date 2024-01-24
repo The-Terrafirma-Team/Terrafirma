@@ -19,8 +19,6 @@ namespace TerrafirmaRedux.Projectiles.Summons
         public override void SetDefaults()
         {
             Projectile.friendly = true;
-
-            Projectile.damage = 55;
             Projectile.height = 30;
             Projectile.width = 36;
             Projectile.DamageType = DamageClass.Summon;
@@ -29,7 +27,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             Projectile.timeLeft = Projectile.SentryLifeTime;
             Projectile.penetrate = -1;
 
-            Projectile.ArmorPenetration = 15;
+            Projectile.ArmorPenetration = 5;
 
             Projectile.sentry = true;
 
