@@ -53,23 +53,23 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
-            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Utils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
+            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
             {
                 Projectile.ai[0] = 0;
                 Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
                 backtimer = 10;
                 SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
             }
-            else if (Utils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
+            else if (TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
             {
-                float toenemyrot = (Projectile.Center - Utils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation();
+                float toenemyrot = (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation();
                 if ( sentryrot - toenemyrot < toenemyrot + (float)Math.PI * 2f - sentryrot)
                 {
-                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - Utils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation(), 0.1f);
+                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation(), 0.1f);
                 }
                 else
                 {
-                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - Utils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation() + (float)Math.PI * 2f, 0.1f);
+                    sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation() + (float)Math.PI * 2f, 0.1f);
                 }
                     sentryrot = sentryrot % ((float)Math.PI * 2f);
 

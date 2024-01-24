@@ -477,6 +477,29 @@ Items: {
 		DisplayName: Eruption
 		Tooltip: ""
 	}
+
+	SporeMortarStaff: {
+		DisplayName: Spore Mortar Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a spore mortar to fight for you
+			'''
+	}
+
+	CorruptedSunflowerStaff: {
+		DisplayName: Corrupted Sunflower Staff
+		Tooltip:
+		'''
+		Summons a sentry
+		Summons a corrupted sunflower to fight for you.
+		'''
+	}
+
+	MechanicsPocketDefenseSystem: {
+		DisplayName: Mechanics Pocket Defense System
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -542,6 +565,11 @@ Projectiles: {
 	TyphoonBulletProjectile.DisplayName: Typhoon Bullet Projectile
 	SkeletonHand.DisplayName: Skeleton Hand
 	ManaBloomProj.DisplayName: Mana Bloom Proj
+	Sportar.DisplayName: Sportar
+	SportarShot.DisplayName: Sportar Shot
+	CorruptedSunflower.DisplayName: Corrupted Sunflower
+	CorruptedSunflowerShot.DisplayName: Corrupted Sunflower Shot
 	EruptionProjectile.DisplayName: Eruption Projectile
 	EruptionFloatProjectile.DisplayName: Eruption Float Projectile
+	MechanicsPocketSentry.DisplayName: Mechanics Pocket Sentry
 }

@@ -101,12 +101,12 @@ public abstract class ChakramTemplate : ModProjectile
                     Projectile.velocity.Y = Projectile.oldVelocity.Y * -1;
                     break;
                 case 1:
-                    targetNPC = Utils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { target });
+                    targetNPC = TFUtils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { target });
                     break;
                 case 2:
                     Projectile.velocity.X = Projectile.oldVelocity.X * -1;
                     Projectile.velocity.Y = Projectile.oldVelocity.Y * -1;
-                    targetNPC = Utils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { target });
+                    targetNPC = TFUtils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { target });
                     break;
 
             }

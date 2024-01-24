@@ -36,7 +36,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            NPC closestnpc = Utils.FindClosestNPC(600f, Projectile.position);
+            NPC closestnpc = TFUtils.FindClosestNPC(600f, Projectile.position);
             fallThrough = !(closestnpc != null && closestnpc.Top.Y <= Projectile.Bottom.Y);
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
@@ -78,7 +78,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
             }
 
-            NPC closestnpc = Utils.FindClosestNPC(600f, Projectile.position);
+            NPC closestnpc = TFUtils.FindClosestNPC(600f, Projectile.position);
            
             if (closestnpc != null && Projectile.ai[1] % 10 == 0)
             {

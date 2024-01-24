@@ -12,7 +12,7 @@ using TerrafirmaRedux.Projectiles.Ranged;
 
 namespace TerrafirmaRedux
 {
-    public static class Utils
+    public static class TFUtils
     {
         /// <summary>
         /// Clamps a Vector2 to be a specific length between max and min. Good for giving something a maximum speed.
@@ -133,7 +133,7 @@ namespace TerrafirmaRedux
             {
                 NPC target = Main.npc[k];
 
-                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null)
+                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null && target.lifeMax > 5)
                 {
                     if (excludedNPCs != null && !excludedNPCs.Contains(target))
                     {
@@ -229,12 +229,13 @@ namespace TerrafirmaRedux
                 }
             }
         }
-        public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile sentry, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile sentry, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0, bool RangeDoesNotAffectVelocity = false)
         {
             //Do Stuff in here for buffs it's like modify shoot stats
             SentryChanges sentryGlobal = sentry.GetGlobalProjectile<SentryChanges>();
 
-            velocity *= sentry.GetSentryRangeMultiplier();
+            if(!RangeDoesNotAffectVelocity)
+                velocity *= sentry.GetSentryRangeMultiplier();
             damage = (int)(damage * sentryGlobal.DamageMultiplier);
             Projectile p = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
             SentryBulletBuff bulletGlobal = p.GetGlobalProjectile<SentryBulletBuff>();

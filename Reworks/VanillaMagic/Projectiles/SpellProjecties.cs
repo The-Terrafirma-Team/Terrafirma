@@ -26,7 +26,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
         }
         public override void AI()
         {
-            NPC target = Utils.FindClosestNPC(200, Projectile.Center);
+            NPC target = TFUtils.FindClosestNPC(200, Projectile.Center);
             if (target != null && target.active)
             {
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity += Projectile.Center.DirectionTo(target.Center) * 0.1f, Projectile.Center.DirectionTo(target.Center) * Projectile.velocity.Length(), 0.1f);
@@ -136,9 +136,9 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
         {
             Projectile.ai[0]++;
             Projectile.velocity *= 0.98f;
-            if (Projectile.ai[0] % 90 == 0 && Utils.FindClosestNPC(600f, Projectile.position) != null)
+            if (Projectile.ai[0] % 90 == 0 && TFUtils.FindClosestNPC(600f, Projectile.position) != null)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(Utils.FindClosestNPC(600f, Projectile.position).Center) * 10f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(TFUtils.FindClosestNPC(600f, Projectile.position).Center) * 10f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
             }
         }
 
@@ -726,7 +726,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
                 NPC[] AreaNPCs = new NPC[] { };
                 if (Projectile.ai[0] % 40 == 0 && AreaNPCs != null)
                 {
-                    AreaNPCs = Utils.GetAllNPCsInArea(400f, Projectile.Center + new Vector2(18, 28));
+                    AreaNPCs = TFUtils.GetAllNPCsInArea(400f, Projectile.Center + new Vector2(18, 28));
                     for (int i = 0; i < AreaNPCs.Length; i++)
                     {
                         NPC.HitInfo hitinfo = new NPC.HitInfo();

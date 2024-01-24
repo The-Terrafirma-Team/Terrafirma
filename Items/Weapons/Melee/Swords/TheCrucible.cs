@@ -41,22 +41,22 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
                 SoundEngine.PlaySound(SoundID.Item20, player.position);
             }
 
-            Utils.GetPointOnSwungItemPath(72, 72, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
+            TFUtils.GetPointOnSwungItemPath(72, 72, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
             Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
             ParticleSystem.AddParticle(new HiResFlame(),
                 player.Center + vector2.RotatedBy(player.direction * -MathHelper.PiOver2 * Main.rand.NextFloat(0.8f, 1.2f)) * Main.rand.Next(24, 90),
                 new Vector2(player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f) + vector2 * Main.rand.NextFloat(2, 5),
-                Utils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 3);
+                TFUtils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 3);
             ParticleSystem.AddParticle(new HiResFlame(),
                 player.Center + vector2.RotatedBy(player.direction * -MathHelper.PiOver2 * Main.rand.NextFloat(0.8f, 1.2f)) * Main.rand.Next(24, 90),
                 new Vector2(player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f) + vector2 * Main.rand.NextFloat(2, 5),
-                Utils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 4);
+                TFUtils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 4);
             if (Main.rand.NextBool(5))
             {
                 ParticleSystem.AddParticle(new ColorDot(),
                     player.Center + vector2.RotatedBy(player.direction * -MathHelper.PiOver2 * Main.rand.NextFloat(0.8f, 1.2f)) * Main.rand.Next(24, 90),
                     new Vector2(player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f) + vector2 * Main.rand.NextFloat(2, 5),
-                    Utils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 0.2f);
+                    TFUtils.getAgnomalumFlameColor() * Main.rand.NextFloat(0.8f, 1f), 0.2f);
             }
             //int num15 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.GemDiamond, player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f, 140, default(Color), 0.7f);
         }

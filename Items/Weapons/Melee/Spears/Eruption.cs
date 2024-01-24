@@ -26,7 +26,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Spears
             Item.noUseGraphic = true;
 
             Item.rare = ItemRarityID.LightRed;
-            Item.value = Item.sellPrice(gold: 3);
+            Item.value = Item.sellPrice(gold: 5);
 
             Item.shoot = ModContent.ProjectileType<EruptionProjectile>();
             Item.shootSpeed = 10;

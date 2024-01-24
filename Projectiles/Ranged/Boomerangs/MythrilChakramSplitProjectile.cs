@@ -35,7 +35,7 @@ namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
         public override void OnSpawn(IEntitySource source)
         {
             base.OnSpawn(source);
-            targetNPC = Utils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { Main.npc[(int)Projectile.ai[2]] });
+            targetNPC = TFUtils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { Main.npc[(int)Projectile.ai[2]] });
         }
     }
 }
