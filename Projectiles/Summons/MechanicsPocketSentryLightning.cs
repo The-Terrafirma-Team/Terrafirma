@@ -14,7 +14,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
     internal class MechanicsPocketSentryLightning : ModProjectile
     {
 
-        public override string Texture => "C:TerrafirmaRedux/Projectiles/Summons/MechanicsPocketSentry";
+        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/MechanicsPocketSentry";
 
         NPC targetnpc = null;
         public override void SetDefaults()
@@ -33,7 +33,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
         public override void AI()
         {
 
-            if (Projectile.ai[0] == 0) targetnpc = Utils.FindClosestNPC(400f, Projectile.Center);
+            if (Projectile.ai[0] == 0) targetnpc = TFUtils.FindClosestNPC(400f, Projectile.Center);
             if (Projectile.ai[0] % 10 == 0) Projectile.velocity = Main.rand.NextVector2Circular(5, 5);
 
             Projectile.ai[0]++;

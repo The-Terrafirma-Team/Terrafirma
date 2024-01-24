@@ -490,10 +490,10 @@ Items: {
 	CorruptedSunflowerStaff: {
 		DisplayName: Corrupted Sunflower Staff
 		Tooltip:
-		'''
-		Summons a sentry
-		Summons a corrupted sunflower to fight for you.
-		'''
+			'''
+			Summons a sentry
+			Summons a corrupted sunflower to fight for you.
+			'''
 	}
 
 	MechanicsPocketDefenseSystem: {
@@ -572,4 +572,5 @@ Projectiles: {
 	EruptionProjectile.DisplayName: Eruption Projectile
 	EruptionFloatProjectile.DisplayName: Eruption Float Projectile
 	MechanicsPocketSentry.DisplayName: Mechanics Pocket Sentry
+	MechanicsPocketSentryLightning.DisplayName: Mechanics Pocket Sentry Lightning
 }
