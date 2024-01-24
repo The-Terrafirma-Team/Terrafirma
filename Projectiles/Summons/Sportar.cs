@@ -55,7 +55,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             }
 
             Player owner = Main.player[Projectile.owner];
-            NPC potentialTarget = Utils.FindClosestNPC(600 * Projectile.GetSentryRangeMultiplier(), Projectile.Center);
+            NPC potentialTarget = TFUtils.FindClosestNPC(600 * Projectile.GetSentryRangeMultiplier(), Projectile.Center);
             if (owner.HasMinionAttackTargetNPC)
                 Projectile.ai[2] = owner.MinionAttackTargetNPC;
             else if (potentialTarget != null)

@@ -58,7 +58,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 Projectile.frame = Projectile.frame == 0 ? 1 : 0;
             }
 
-            NPC potentialTarget = Utils.FindClosestNPC(1600, Projectile.Center);
+            NPC potentialTarget = TFUtils.FindClosestNPC(1600, Projectile.Center);
             if (owner.HasMinionAttackTargetNPC)
                 Projectile.ai[2] = owner.MinionAttackTargetNPC;
             else if (potentialTarget != null)

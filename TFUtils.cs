@@ -12,7 +12,7 @@ using TerrafirmaRedux.Projectiles.Ranged;
 
 namespace TerrafirmaRedux
 {
-    public static class Utils
+    public static class TFUtils
     {
         /// <summary>
         /// Clamps a Vector2 to be a specific length between max and min. Good for giving something a maximum speed.
@@ -133,7 +133,7 @@ namespace TerrafirmaRedux
             {
                 NPC target = Main.npc[k];
 
-                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null)
+                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null && target.lifeMax > 5)
                 {
                     if (excludedNPCs != null && !excludedNPCs.Contains(target))
                     {
