@@ -512,7 +512,20 @@ Items: {
 
 	ClockworkTurretStaff: {
 		DisplayName: Clockwork Turret Staff
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a clockwork turret that boosts other sentries in its radius.
+			'''
+	}
+
+	CoolWrench: {
+		DisplayName: Cool Wrench
+		Tooltip: 
+			'''
+			Increases Sentry range
+			"Not to be mistaken with Cool Ranch"
+			'''
 	}
 }
 

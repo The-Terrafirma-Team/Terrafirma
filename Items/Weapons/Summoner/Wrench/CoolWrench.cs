@@ -11,21 +11,26 @@ using Terraria.ModLoader;
 
 namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
 {
-    public class MetalWrench : ModItem
+    public class CoolWrench : ModItem
     {
         public override void SetDefaults()
         {
-            Item.DefaultToWrench(8, 25);
+            Item.DefaultToWrench(12, 28);
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 10);
+            Item.value = Item.sellPrice(0, 2, 0);
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            player.WrenchHitSentry(hitbox, SentryBuffID.MetalWrench, 60 * 3);
+            player.WrenchHitSentry(hitbox, SentryBuffID.CoolWrench, 60 * 4);
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddRecipeGroup(RecipeGroupID.IronBar, 15).AddTile(TileID.Anvils).Register();
+
+            CreateRecipe()
+            .AddIngredient(ItemID.IceBlock, 10)
+            .AddRecipeGroup(nameof(ItemID.GoldBar), 6)
+            .AddTile(TileID.Anvils)
+            .Register();
         }
 
         public override bool MeleePrefix()

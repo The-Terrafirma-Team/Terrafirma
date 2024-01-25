@@ -51,7 +51,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.ai[0]++;
 
-            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner && TFUtils.FindClosestNPC(350f,Projectile.Center) != null)
+            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner && TFUtils.FindClosestNPC(350f, Projectile.Center) != null)
             {
                 SoundEngine.PlaySound(SoundID.DD2_LightningBugZap, Projectile.Center);
                 Projectile.ai[0] = 0;

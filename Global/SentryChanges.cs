@@ -13,8 +13,8 @@ namespace TerrafirmaRedux.Global
         public const int MetalWrench = 0;
         public const int DemoniteWrench = 1;
         public const int CrimtaneWrench = 2;
-
         public const int ClockworkTurret = 3;
+        public const int CoolWrench = 4;
     }
     public class SentryChanges : GlobalProjectile
     {
@@ -24,7 +24,7 @@ namespace TerrafirmaRedux.Global
             return entity.sentry;
         }
 
-        public int[] BuffTime = new int[4];
+        public int[] BuffTime = new int[5];
 
         public float SpeedMultiplier = 1f;
         public float RangeMultiplier = 1f;
@@ -41,20 +41,7 @@ namespace TerrafirmaRedux.Global
             {
                 if (BuffTime[i] > 0)
                     BuffTime[i]--;
-            }
-            if (BuffTime[SentryBuffID.MetalWrench] > 0)
-            {
-                SpeedMultiplier -= 0.3f;
-                if (Main.rand.NextBool(5))
-                {
-                    Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0,-4), projectile.width, 0, DustID.GemDiamond, 0, -projectile.height / 20);
-                    d.noGravity = true;
-                    d.velocity.X *= 0.1f;
-                    d.noLightEmittence = true;
-                    if (d.velocity.Y > 0)
-                        d.velocity *= -1;
-                }
-            }
+            } 
             if (BuffTime[SentryBuffID.DemoniteWrench] > 0 && Main.rand.NextBool(5))
             {
                 Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.Shadowflame, 0, -projectile.height / 10);
@@ -80,12 +67,38 @@ namespace TerrafirmaRedux.Global
                         d.velocity *= -1;
                 }
             }
+            if (BuffTime[SentryBuffID.CoolWrench] > 0)
+            {
+                RangeMultiplier += 0.3f;
+                if (Main.rand.NextBool(5))
+                {
+                    Dust d = Dust.NewDustDirect(projectile.Center - projectile.Size / 4, projectile.width / 2, projectile.height / 2, DustID.Ice, 0, -projectile.height / 20);
+                    d.noGravity = true;
+                    d.velocity = Main.rand.NextVector2Circular(5, 5);
+                    d.noLightEmittence = true;
+                    if (d.velocity.Y > 0)
+                        d.velocity *= -1;
+                }
+            }
             if (BuffTime[SentryBuffID.ClockworkTurret] > 0)
             {
                 SpeedMultiplier *= 0.8f;
                 if (Main.rand.NextBool(5))
                 {
                     Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.TreasureSparkle, 0, -projectile.height / 20);
+                    d.noGravity = true;
+                    d.velocity.X *= 0.1f;
+                    d.noLightEmittence = true;
+                    if (d.velocity.Y > 0)
+                        d.velocity *= -1;
+                }
+            }
+            if (BuffTime[SentryBuffID.MetalWrench] > 0)
+            {
+                SpeedMultiplier *= 0.8f;
+                if (Main.rand.NextBool(5))
+                {
+                    Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.GemDiamond, 0, -projectile.height / 20);
                     d.noGravity = true;
                     d.velocity.X *= 0.1f;
                     d.noLightEmittence = true;

@@ -27,5 +27,10 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
         {
             CreateRecipe().AddIngredient(ItemID.CrimtaneBar, 15).AddIngredient(ItemID.TissueSample, 15).AddTile(TileID.Anvils).Register();
         }
+
+        public override bool MeleePrefix()
+        {
+            return true;
+        }
     }
 }

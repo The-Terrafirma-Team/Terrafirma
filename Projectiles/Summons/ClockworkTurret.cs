@@ -64,6 +64,10 @@ namespace TerrafirmaRedux.Projectiles.Summons
             }
 
             if (Projectile.ai[0] % 4 == 0) Projectile.frame = Projectile.frame == 0 ? 1 : 0;
+            if (Projectile.ai[0] % 4 == 0)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(-16,-24), DustID.Smoke, new Vector2(Main.rand.NextFloat(-0.2f,0.2f), Main.rand.NextFloat(-4f, -0.5f)), 1, Color.White, 1f);
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)
