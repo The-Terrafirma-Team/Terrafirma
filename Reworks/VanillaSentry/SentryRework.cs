@@ -489,9 +489,10 @@ namespace TerrafirmaRedux.Reworks.VanillaSentry
                 AI_134_Ballista(projectile); // Good boy :3
             }
         }
+
         private void AI_130_FlameBurstTower(Projectile projectile)
         {
-            Main.NewText($"{projectile.ai[0]}" + $" {projectile.ai[1]}" + $" {projectile.ai[2]}" + "|" + $"{projectile.localAI[0]}" + $" {projectile.localAI[1]}" + $" {projectile.localAI[2]}", Main.DiscoColor);
+            //Main.NewText($"{projectile.ai[0]}" + $" {projectile.ai[1]}" + $" {projectile.ai[2]}" + "|" + $"{projectile.localAI[0]}" + $" {projectile.localAI[1]}" + $" {projectile.localAI[2]}", Main.DiscoColor);
 
             float num = 900f;
             float angleRatioMax = 1f;

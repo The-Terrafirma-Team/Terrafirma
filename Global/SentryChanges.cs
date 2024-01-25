@@ -13,6 +13,8 @@ namespace TerrafirmaRedux.Global
         public const int MetalWrench = 0;
         public const int DemoniteWrench = 1;
         public const int CrimtaneWrench = 2;
+
+        public const int ClockworkTurret = 3;
     }
     public class SentryChanges : GlobalProjectile
     {
@@ -22,7 +24,7 @@ namespace TerrafirmaRedux.Global
             return entity.sentry;
         }
 
-        public int[] BuffTime = new int[3];
+        public int[] BuffTime = new int[4];
 
         public float SpeedMultiplier = 1f;
         public float RangeMultiplier = 1f;
@@ -63,17 +65,33 @@ namespace TerrafirmaRedux.Global
                 if (d.velocity.Y > 0)
                     d.velocity *= -1;
             }
-            if (BuffTime[SentryBuffID.CrimtaneWrench] > 0 && Main.rand.NextBool(5))
+            if (BuffTime[SentryBuffID.CrimtaneWrench] > 0)
             {
                 DamageMultiplier += 0.15f;
 
-                Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.Crimson, 0, -projectile.height / 10);
-                d.noGravity = true;
-                d.velocity.X *= 0.1f;
-                d.scale *= 1.5f;
-                d.alpha = 128;
-                if (d.velocity.Y > 0)
-                    d.velocity *= -1;
+                if (Main.rand.NextBool(5))
+                {
+                    Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.Crimson, 0, -projectile.height / 10);
+                    d.noGravity = true;
+                    d.velocity.X *= 0.1f;
+                    d.scale *= 1.5f;
+                    d.alpha = 128;
+                    if (d.velocity.Y > 0)
+                        d.velocity *= -1;
+                }
+            }
+            if (BuffTime[SentryBuffID.ClockworkTurret] > 0)
+            {
+                SpeedMultiplier *= 0.8f;
+                if (Main.rand.NextBool(5))
+                {
+                    Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.TreasureSparkle, 0, -projectile.height / 20);
+                    d.noGravity = true;
+                    d.velocity.X *= 0.1f;
+                    d.noLightEmittence = true;
+                    if (d.velocity.Y > 0)
+                        d.velocity *= -1;
+                }
             }
         }
         public override bool PreAI(Projectile projectile)

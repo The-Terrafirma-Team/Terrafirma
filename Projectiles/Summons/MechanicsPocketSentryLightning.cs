@@ -43,7 +43,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 Projectile.velocity = Projectile.Center.DirectionTo(targetnpc.Center).RotatedByRandom(Projectile.Center.Distance(targetnpc.Center) / minimalise); 
             }
 
-            if (Projectile.ai[0] % 3 == 0)
+            if (Projectile.ai[0] % 3 == 0 && !Projectile.Hitbox.Intersects(targetnpc.Hitbox))
             {
                 Dust newdust = Dust.NewDustPerfect(Projectile.Center, DustID.TreasureSparkle, Vector2.Zero, 0, Color.White, 1f);
                 newdust.noGravity = true;

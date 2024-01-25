@@ -1,5 +1,6 @@
 ﻿using TerrafirmaRedux.Items.Ammo;
 using TerrafirmaRedux.Items.Equipment.Ranged;
+using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.Hardmode;
 using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode;
 using Terraria;
 using Terraria.ID;
@@ -30,6 +31,12 @@ namespace TerrafirmaRedux.Global
             if (shop.NpcType == NPCID.Mechanic)
             {
                 shop.InsertAfter(ItemID.EngineeringHelmet, ModContent.ItemType<MechanicsPocketDefenseSystem>());
+
+            }
+
+            if (shop.NpcType == NPCID.Steampunker)
+            {
+                shop.InsertAfter(ItemID.Clentaminator, ModContent.ItemType<ClockworkTurretStaff>());
 
             }
         }

@@ -504,6 +504,16 @@ Items: {
 			Summons a zapper sentry to fight for you.
 			'''
 	}
+
+	MonarchWings: {
+		DisplayName: Monarch Wings
+		Tooltip: ""
+	}
+
+	ClockworkTurretStaff: {
+		DisplayName: Clockwork Turret Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -577,4 +587,5 @@ Projectiles: {
 	EruptionFloatProjectile.DisplayName: Eruption Float Projectile
 	MechanicsPocketSentry.DisplayName: Mechanics Pocket Sentry
 	MechanicsPocketSentryLightning.DisplayName: Mechanics Pocket Sentry Lightning
+	ClockworkTurret.DisplayName: Clockwork Turret
 }

@@ -199,11 +199,11 @@ namespace TerrafirmaRedux
 
         public static float GetSentryAttackCooldownMultiplier(this Projectile projectile)
         {
-            return projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier;
+            return Math.Clamp(projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier ,0.1f , 100f);
         }
         public static float GetSentryAttackCooldownMultiplierInverse(this Projectile projectile)
         {
-            return (1 - projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier - Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier) + 1;
+            return Math.Clamp((1 - projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier - Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier) + 1, 0.1f, 100f);
         }
         public static float GetSentryRangeMultiplier(this Projectile projectile)
         {
