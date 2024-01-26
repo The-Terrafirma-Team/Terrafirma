@@ -246,5 +246,25 @@ namespace TerrafirmaRedux
             }
             return p;
         }
+
+        public static void UpdateSentryPriority(Projectile projectile, Player player = null)
+        {
+            if (projectile != null)
+            {
+                projectile.GetGlobalProjectile<SentryChanges>().Priority = true;
+                for (int i = 0; i < Main.projectile.Length; ++i)
+                {
+                    if (Main.projectile[i] != projectile && Main.projectile[i].owner == projectile.owner && Main.projectile[i].WipableTurret) Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority = false;
+                }
+            }
+            else if (player != null)
+            {
+                for (int i = 0; i < Main.projectile.Length; ++i)
+                {
+                    if (Main.projectile[i].WipableTurret && Main.player[Main.projectile[i].owner] == player) Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority = false;
+                }
+            }
+            
+        }
     }
 }

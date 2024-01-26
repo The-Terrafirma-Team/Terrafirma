@@ -38,6 +38,11 @@ Buffs: {
 		DisplayName: Penetration
 		Description: Weapon pierce is increased
 	}
+
+	BnuyBuff: {
+		DisplayName: Bnuy
+		Description: So Coquette!
+	}
 }
 
 Items: {
@@ -492,7 +497,7 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons a corrupted sunflower to fight for you.
+			Summons a corrupted sunflower to fight for you
 			'''
 	}
 
@@ -501,7 +506,7 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons a zapper sentry to fight for you.
+			Summons a zapper sentry to fight for you
 			'''
 	}
 
@@ -514,18 +519,37 @@ Items: {
 		DisplayName: Clockwork Turret Staff
 		Tooltip:
 			'''
-			Summons a sentry
-			Summons a clockwork turret that boosts other sentries in its radius.
+			Uses 2 sentry slots
+			Summons a clockwork turret that boosts other sentries in its radius
 			'''
 	}
 
 	CoolWrench: {
 		DisplayName: Cool Wrench
-		Tooltip: 
+		Tooltip:
 			'''
 			Increases Sentry range
-			"Not to be mistaken with Cool Ranch"
+			'Not to be confused with Cool Ranch'
 			'''
+	}
+
+	RoyalJellyStaff: {
+		DisplayName: Royal Jelly Staff
+		Tooltip:
+			'''
+			Uses 2 sentry slots
+			Summons a royal jelly dispenser that heals all players in its radius
+			'''
+	}
+
+	BookmarkerWrench: {
+		DisplayName: Bookmarker Wrench
+		Tooltip: Bookmarks sentries so they don't get replaced when another one is placed
+	}
+
+	Bnuy: {
+		DisplayName: Bnuy
+		Tooltip: ""
 	}
 }
 
@@ -601,4 +625,6 @@ Projectiles: {
 	MechanicsPocketSentry.DisplayName: Mechanics Pocket Sentry
 	MechanicsPocketSentryLightning.DisplayName: Mechanics Pocket Sentry Lightning
 	ClockworkTurret.DisplayName: Clockwork Turret
+	RoyalJellyDispenser.DisplayName: Royal Jelly Dispenser
+	BnuyProj.DisplayName: Bnuy Proj
 }

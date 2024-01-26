@@ -11,6 +11,7 @@ using TerrafirmaRedux.Projectiles.Melee;
 using System;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using TerrafirmaRedux.Items.Weapons.Summoner.Wrench;
 
 namespace TerrafirmaRedux.Global
 {
@@ -187,6 +188,11 @@ namespace TerrafirmaRedux.Global
                     Item sword = new Item(ModContent.ItemType<HeroSword>());
                     Projectile.NewProjectile(sword.GetSource_FromThis(), Player.MountedCenter, -Vector2.Normalize(Player.MountedCenter - Main.MouseWorld) * 16f, ModContent.ProjectileType<HeroSwordProjectile>(), sword.damage, sword.knockBack, Player.whoAmI, 0, 0, 0);
                     StretchArm(20f, Player.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() - MathHelper.PiOver2);
+                }
+                if (Player.HeldItem.type == ModContent.ItemType<BookmarkerWrench>() &&
+                    Player == Main.LocalPlayer)
+                {
+                    TFUtils.UpdateSentryPriority(null, Player);
                 }
             }
                 

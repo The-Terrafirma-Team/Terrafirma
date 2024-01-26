@@ -2,6 +2,7 @@
 using TerrafirmaRedux.Items.Equipment.Ranged;
 using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.Hardmode;
 using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode;
+using TerrafirmaRedux.Items.Weapons.Summoner.Wrench;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -37,8 +38,14 @@ namespace TerrafirmaRedux.Global
             if (shop.NpcType == NPCID.Steampunker)
             {
                 shop.InsertAfter(ItemID.Clentaminator, ModContent.ItemType<ClockworkTurretStaff>());
+                
 
             }
-        }
+
+            if (shop.NpcType == NPCID.GoblinTinkerer)
+            {
+                shop.InsertAfter(ItemID.RocketBoots, ModContent.ItemType<BookmarkerWrench>(), Condition.Hardmode);
+            }
+        } 
     }
 }

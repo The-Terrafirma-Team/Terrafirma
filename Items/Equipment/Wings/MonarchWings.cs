@@ -24,7 +24,7 @@ namespace TerrafirmaRedux.Items.Equipment.Wings
             Item.width = 46;
             Item.height = 22;
             Item.value = Item.sellPrice(gold: 8);
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Pink;
             Item.accessory = true;
         }
 

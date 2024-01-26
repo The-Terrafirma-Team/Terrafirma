@@ -5,6 +5,8 @@ using System.IO;
 using Terraria.ID;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
+using TerrafirmaRedux.Particles;
+using TerrafirmaRedux.Projectiles.Summons;
 
 namespace TerrafirmaRedux.Global
 {
@@ -15,16 +17,26 @@ namespace TerrafirmaRedux.Global
         public const int CrimtaneWrench = 2;
         public const int ClockworkTurret = 3;
         public const int CoolWrench = 4;
+        public const int SentryPriority = 5;
     }
     public class SentryChanges : GlobalProjectile
     {
+        public float SentrySlots = 1f;
+        public bool Priority = false;
         public override bool InstancePerEntity => true;
+
+        public override void SetDefaults(Projectile entity)
+        {
+            if (entity.type == ModContent.ProjectileType<ClockworkTurret>()) SentrySlots = 2f;
+            if (entity.type == ModContent.ProjectileType<RoyalJellyDispenser>()) SentrySlots = 2f;
+            Priority = false;
+        }
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
         {
             return entity.sentry;
         }
 
-        public int[] BuffTime = new int[5];
+        public int[] BuffTime = new int[6];
 
         public float SpeedMultiplier = 1f;
         public float RangeMultiplier = 1f;
@@ -41,7 +53,11 @@ namespace TerrafirmaRedux.Global
             {
                 if (BuffTime[i] > 0)
                     BuffTime[i]--;
-            } 
+            }
+            if (BuffTime[SentryBuffID.SentryPriority] == 29)
+            {    
+                TFUtils.UpdateSentryPriority(projectile);
+            }
             if (BuffTime[SentryBuffID.DemoniteWrench] > 0 && Main.rand.NextBool(5))
             {
                 Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.Shadowflame, 0, -projectile.height / 10);
@@ -106,6 +122,8 @@ namespace TerrafirmaRedux.Global
                         d.velocity *= -1;
                 }
             }
+
+            if(projectile.GetGlobalProjectile<SentryChanges>().Priority == true ) ParticleSystem.AddParticle(new Bookmark(), projectile.Bottom, Vector2.Zero, Color.White, 1, 0, 0, 1f, 0);
         }
         public override bool PreAI(Projectile projectile)
         {
@@ -128,6 +146,7 @@ namespace TerrafirmaRedux.Global
             }
         }
     }
+
     public class SentryBulletBuff : GlobalProjectile
     {
         public override bool InstancePerEntity => true;

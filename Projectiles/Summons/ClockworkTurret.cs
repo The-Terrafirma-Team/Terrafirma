@@ -63,7 +63,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 }
             }
 
-            if (Projectile.ai[0] % 4 == 0) Projectile.frame = Projectile.frame == 0 ? 1 : 0;
+            if (Projectile.ai[0] % 6 == 0) Projectile.frame = Projectile.frame == 0 ? 1 : 0;
             if (Projectile.ai[0] % 4 == 0)
             {
                 Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(-16,-24), DustID.Smoke, new Vector2(Main.rand.NextFloat(-0.2f,0.2f), Main.rand.NextFloat(-4f, -0.5f)), 1, Color.White, 1f);
@@ -81,7 +81,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
             {
                 float maxi = turretradius / 8;
                 float rotationvar = 200f;
-                Main.EntitySpriteDraw(SentryBorder.Value, Projectile.Center - Main.screenPosition + new Vector2(turretradius, 0).RotatedBy((((360 / maxi) * i) * (Math.PI / 180)) + (Projectile.ai[0] / rotationvar)), new Rectangle(0, 0, SentryBorder.Width(), SentryBorder.Height()), new Color(150, 100, 0, 0), ((360 / maxi) * i) * (float)(Math.PI / 180) + (Projectile.ai[0] / rotationvar), SentryBorder.Size() / 2, 0.75f + (i % 2 == 0 ? 0.25f : 0f), SpriteEffects.None, 0) ;
+                Main.EntitySpriteDraw(SentryBorder.Value, Projectile.Center - Main.screenPosition + new Vector2(turretradius, 0).RotatedBy((((365 / maxi) * i) * (Math.PI / 180)) + (Projectile.ai[0] / rotationvar)), new Rectangle(0, 0, SentryBorder.Width(), SentryBorder.Height()), new Color(150, 100, 0, 0), ((365 / maxi) * i) * (float)(Math.PI / 180) + (Projectile.ai[0] / rotationvar), SentryBorder.Size() / 2, 0.75f + (i % 2 == 0 ? 0.25f : 0f), SpriteEffects.None, 0) ;
             }
 
             return false;
