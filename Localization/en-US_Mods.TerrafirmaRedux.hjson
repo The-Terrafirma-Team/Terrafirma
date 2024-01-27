@@ -424,8 +424,8 @@ Items: {
 	}
 
 	MetalWrench: {
-		DisplayName: Metal Wrench
-		Tooltip: Boosts sentry attack speed for 3 seconds
+		DisplayName: Wrench
+		Tooltip: Boosts sentry attack speed
 	}
 
 	Overclock: {
