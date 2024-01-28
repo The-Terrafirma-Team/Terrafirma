@@ -7,12 +7,14 @@ using Terraria.ID;
 using TerrafirmaRedux.Global.Structs;
 using Terraria.GameContent.UI.Elements;
 using TerrafirmaRedux.Global;
+using System.Collections.Generic;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class SpellUI : UIState
     {
+
         UIText Title;
         UIText Description;
         UIText ManaCost;

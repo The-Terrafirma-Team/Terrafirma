@@ -13,6 +13,7 @@ namespace TerrafirmaRedux.Systems.MageClass
     internal class SpellButton : UIElement
     {
         internal Texture2D spellicon;
+
         public float angle = 0;
         public float anglespace = 90;
         public Vector2 position = Vector2.Zero;
@@ -32,8 +33,8 @@ namespace TerrafirmaRedux.Systems.MageClass
         {
             if (icon == ""){ spellicon = (Texture2D)ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/MageClass/SpellIcons/PlaceholderSpellIcon"); }
             else { spellicon = (Texture2D)ModContent.Request<Texture2D>(icon); }
-
-            spriteBatch.Draw(spellicon, position, new Rectangle(0,0,spellicon.Width,spellicon.Height), new Color(1,1,1, postimer) , 0, spellicon.Size() / 2 , MathHelper.Lerp( 0.5f , dist, timer) * 1.1f, SpriteEffects.None, 0);
+           
+            spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1.1f, SpriteEffects.None, 0);
 
         }
 

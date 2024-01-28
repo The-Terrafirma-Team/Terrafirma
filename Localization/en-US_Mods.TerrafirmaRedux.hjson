@@ -544,7 +544,11 @@ Items: {
 
 	BookmarkerWrench: {
 		DisplayName: Bookmarker Wrench
-		Tooltip: Bookmarks sentries so they don't get replaced when another one is placed
+		Tooltip:
+			'''
+			Bookmarks sentries so they don't get replaced when another one is placed
+			Right click to remove the bookmark
+			'''
 	}
 
 	Bnuy: {

@@ -68,7 +68,7 @@ namespace TerrafirmaRedux.Projectiles.Summons
                     if (Projectile.ai[1] % 4 == 0)
                     {
                         Main.player[i].Heal(2);
-                        Main.player[i].HealEffect(2); 
+                        //Main.player[i].HealEffect(2); 
                     }
 
                     Projectile.ai[0] = 0;

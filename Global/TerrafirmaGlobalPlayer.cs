@@ -36,6 +36,8 @@ namespace TerrafirmaRedux.Global
 
         internal float[] ArmAnimationTimer = new float[] { 0, -1, -1};
 
+        public QuestList playerquests = new QuestList();
+
         public override void ResetEffects()
         {
             Player.pickSpeed *= 0.8f;
@@ -116,6 +118,9 @@ namespace TerrafirmaRedux.Global
 
         public override void PostUpdate()
         {
+            //Main.NewText(playerquests.Quests[playerquests.Quests.Keys.ToArray()[0]]);
+            if (playerquests.Quests.Count == 0) playerquests = QuestList.ImportQuestList();
+
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }
 
@@ -132,6 +137,7 @@ namespace TerrafirmaRedux.Global
                 Player.SetCompositeArmFront(false, Player.CompositeArmStretchAmount.None, 0);
             }
 
+            
         }
 
         public override void ProcessTriggers(TriggersSet triggersSet)

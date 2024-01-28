@@ -112,6 +112,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             /// Accessories
             SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "Accessories/ManaBloom", "Mana Bloom", "Regenerates 10 mana but slows the player down", 0));
 
+            base.OnModLoad();
         }
     }
 }
