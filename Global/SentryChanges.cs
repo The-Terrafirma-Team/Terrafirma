@@ -85,7 +85,7 @@ namespace TerrafirmaRedux.Global
             }
             if (BuffTime[SentryBuffID.CoolWrench] > 0)
             {
-                RangeMultiplier += 0.3f;
+                RangeMultiplier += 3f;
                 if (Main.rand.NextBool(5))
                 {
                     Dust d = Dust.NewDustDirect(projectile.Center - projectile.Size / 4, projectile.width / 2, projectile.height / 2, DustID.Ice, 0, -projectile.height / 20);

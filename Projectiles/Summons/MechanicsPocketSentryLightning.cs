@@ -26,17 +26,14 @@ namespace TerrafirmaRedux.Projectiles.Summons
             Projectile.DamageType = DamageClass.Summon;
 
             Projectile.tileCollide = true;
-            Projectile.timeLeft = 1000;
+            Projectile.timeLeft = 3000;
             Projectile.extraUpdates = 100;
             Projectile.penetrate = 1;
             Projectile.Opacity = 0f;
         }
         public override void AI()
         {
-
-            if (Projectile.ai[0] == 0) targetnpc = TFUtils.FindClosestNPC(400f, Projectile.Center); origpos = Projectile.Center;
-
-
+            targetnpc = Main.npc[(int)Projectile.ai[1]];
             if (Projectile.ai[0] % 30 == 0 && targetnpc != null) 
             {
                 float minimalise = 50f * Math.Clamp(Projectile.ai[0] / 100f, 2f, 10f);
@@ -49,7 +46,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
                 newdust.noGravity = true;
                 Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.85f, 0.4f));
             }
-
+            if (!targetnpc.active)
+                Projectile.Kill();
             Projectile.ai[0]++;
 
         }

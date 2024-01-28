@@ -555,6 +555,16 @@ Items: {
 		DisplayName: Bnuy
 		Tooltip: ""
 	}
+
+	PatchouliBody: {
+		DisplayName: Purple Magician's Pajamas
+		Tooltip: ""
+	}
+
+	PatchouliHat: {
+		DisplayName: Purple Magican's Nightcap
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

@@ -21,7 +21,7 @@ namespace TerrafirmaRedux.Items.Weapons.Summoner.Wrench
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            player.WrenchHitSentry(hitbox, SentryBuffID.CoolWrench, 60 * 4);
+            player.WrenchHitSentry(hitbox, SentryBuffID.CoolWrench, 60 * 6);
         }
         public override void AddRecipes()
         {

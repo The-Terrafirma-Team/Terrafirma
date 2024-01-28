@@ -51,11 +51,11 @@ namespace TerrafirmaRedux.Projectiles.Summons
         {
             Projectile.ai[0]++;
 
-            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner && TFUtils.FindClosestNPC(350f, Projectile.Center) != null)
+            if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner && TFUtils.FindClosestNPC(350f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
             {
                 SoundEngine.PlaySound(SoundID.DD2_LightningBugZap, Projectile.Center);
                 Projectile.ai[0] = 0;
-                Projectile newproj = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(14,-8), Vector2.Zero, ModContent.ProjectileType<MechanicsPocketSentryLightning>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile newproj = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(14,-8), Vector2.Zero, ModContent.ProjectileType<MechanicsPocketSentryLightning>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, TFUtils.FindClosestNPC(350f * Projectile.GetSentryRangeMultiplier(),Projectile.Center).whoAmI, 0);
             }
 
             if (Projectile.ai[0] % 3 == 0) Glowrand = Main.rand.NextVector2Circular(1, 1);

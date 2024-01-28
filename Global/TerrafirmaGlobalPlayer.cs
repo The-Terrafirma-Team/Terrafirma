@@ -33,9 +33,6 @@ namespace TerrafirmaRedux.Global
         public bool SpellUI = false;
         internal Item HeldMagicItem = new Item(0);
 
-
-        internal float[] ArmAnimationTimer = new float[] { 0, -1, -1};
-
         public QuestList playerquests = new QuestList();
 
         public override void ResetEffects()
@@ -122,22 +119,7 @@ namespace TerrafirmaRedux.Global
             if (playerquests.Quests.Count == 0) playerquests = QuestList.ImportQuestList();
 
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
-            else { ModContent.GetInstance<SpellUISystem>().Hide(); }
-
-            //ArmAnimationTimer Work
-            if (ArmAnimationTimer[1] > 0)
-            {
-                ArmAnimationTimer[0] += 1f;
-                Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, ArmAnimationTimer[2]);
-                Player.direction = (Player.MountedCenter - Main.MouseWorld).X > 0 ? -1 : 1;
-            }
-            if (ArmAnimationTimer[0] >= ArmAnimationTimer[1])
-            {
-                ArmAnimationTimer = new float[] { 0, -1, -1 };
-                Player.SetCompositeArmFront(false, Player.CompositeArmStretchAmount.None, 0);
-            }
-
-            
+            else { ModContent.GetInstance<SpellUISystem>().Hide(); }            
         }
 
         public override void ProcessTriggers(TriggersSet triggersSet)
@@ -187,14 +169,6 @@ namespace TerrafirmaRedux.Global
             //Item Right Click
             if (triggersSet.MouseRight)
             {
-                if (Player.HeldItem.type == ModContent.ItemType<HeroSword>() &&
-                    Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1 &&
-                    Player == Main.LocalPlayer)
-                {
-                    Item sword = new Item(ModContent.ItemType<HeroSword>());
-                    Projectile.NewProjectile(sword.GetSource_FromThis(), Player.MountedCenter, -Vector2.Normalize(Player.MountedCenter - Main.MouseWorld) * 16f, ModContent.ProjectileType<HeroSwordProjectile>(), sword.damage, sword.knockBack, Player.whoAmI, 0, 0, 0);
-                    StretchArm(20f, Player.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() - MathHelper.PiOver2);
-                }
                 if (Player.HeldItem.type == ModContent.ItemType<BookmarkerWrench>() &&
                     Player == Main.LocalPlayer)
                 {
@@ -204,15 +178,6 @@ namespace TerrafirmaRedux.Global
                 
             
         }
-
-        /// <summary>
-        /// Stretches the Player's arm towards a specific point for a certain amount of time (obvious)
-        /// </summary>
-        public void StretchArm(float time, float rotation)
-        {
-            ArmAnimationTimer = new float[] { 0f, time, rotation };
-        }
-
         public override bool CanUseItem(Item item)
         {
             if (Player.HeldItem.type == ModContent.ItemType<HeroSword>() )

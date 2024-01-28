@@ -35,6 +35,29 @@ namespace TerrafirmaRedux.Projectiles.Melee
         }
         public override void AI()
         {
+            Player player = Main.player[Projectile.owner];
+            if(Projectile.timeLeft == 800)
+            {
+                Projectile.localAI[1] = -MathHelper.PiOver2;
+            }
+            if(Projectile.Center.Distance(player.MountedCenter) < 200)
+            {
+                if(Projectile.localAI[0] < 30)
+                Projectile.localAI[0] = 30;
+                Projectile.localAI[1] = Utils.AngleLerp(Projectile.localAI[1], player.MountedCenter.DirectionTo(Projectile.Center + Projectile.velocity).ToRotation(),0.1f);
+                Projectile.localAI[2] = Math.Sign(Projectile.Center.X - player.Center.X);
+            }
+            else
+            {
+                Projectile.localAI[1] = Utils.AngleLerp(Projectile.localAI[1], MathHelper.PiOver2, 1/15f);
+            }
+            if (Projectile.localAI[0] > 0)
+            {
+                player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.localAI[1] - MathHelper.PiOver2);
+                Projectile.localAI[0]--;
+                player.direction = (int)(Projectile.localAI[2]);
+            }
+
             Projectile.ai[0]++;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
              
@@ -66,7 +89,7 @@ namespace TerrafirmaRedux.Projectiles.Melee
             }
 
 
-            if (Main.player[Projectile.owner].HeldItem.type != ModContent.ItemType<HeroSword>()) Projectile.Kill();
+            if (player.HeldItem.type != ModContent.ItemType<HeroSword>()) Projectile.Kill();
             
 
         }

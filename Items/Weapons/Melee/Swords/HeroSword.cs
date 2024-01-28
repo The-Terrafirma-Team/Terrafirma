@@ -25,20 +25,35 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
             Item.useStyle = ItemUseStyleID.Swing;
             Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
+            Item.shoot = ModContent.ProjectileType<HeroSwordProjectile>();
 
             Item.rare = ModContent.RarityType<FinalQuestRarity>();
             Item.value = Item.sellPrice(gold: 20, silver: 00);
-
+            Item.shootSpeed = 20;
         }
         public override bool CanUseItem(Player player)
         {
             if (player.ownedProjectileCounts[Item.shoot] < 1) return base.CanUseItem(player);
             return false;
         }
-
+        public override bool AltFunctionUse(Player player)
+        {
+            return true;
+        }
+        public override void UseStyle(Player player, Rectangle heldItemFrame)
+        {
+            if(player.ownedProjectileCounts[Item.shoot] > 0)
+            { 
+                player.itemLocation = Vector2.Zero;
+            }
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[Item.shoot] < 1) return base.Shoot(player,source,position,velocity,type,damage,knockback);
+            if (player.altFunctionUse == 2)
+            {
+                player.itemLocation = Vector2.Zero;
+                return base.Shoot(player, source, position, velocity, type, damage, knockback);
+            }
             return false;
         }
 

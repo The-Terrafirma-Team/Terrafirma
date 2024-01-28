@@ -48,7 +48,7 @@ namespace TerrafirmaRedux.Pets
     {
         int AnimSpeed = 0;
         bool flyup = false;
-        string[] quotes = [
+        string[] quotes = {
             "KISS MY NUTS",
             "YAY",
             "good lird",
@@ -72,7 +72,7 @@ namespace TerrafirmaRedux.Pets
             "i am just so shy",
             "this is me if u even care",
             "sometimes"
-        ];
+        };
         public override string Texture => "TerrafirmaRedux/Pets/Bnuy";
         public override void SetStaticDefaults()
         {
