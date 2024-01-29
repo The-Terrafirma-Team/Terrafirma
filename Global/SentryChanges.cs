@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using TerrafirmaRedux.Particles;
 using TerrafirmaRedux.Projectiles.Summons;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TerrafirmaRedux.Global
 {
@@ -123,7 +124,15 @@ namespace TerrafirmaRedux.Global
                 }
             }
 
-            if(projectile.GetGlobalProjectile<SentryChanges>().Priority == true ) ParticleSystem.AddParticle(new Bookmark(), projectile.Bottom, Vector2.Zero, Color.White, 1, 0, 0, 1f, 0);
+            //if(projectile.GetGlobalProjectile<SentryChanges>().Priority == true ) ParticleSystem.AddParticle(new Bookmark(), projectile.Bottom, Vector2.Zero, Color.White, 1, 0, 0, 1f, 0);
+        }
+        public override void PostDraw(Projectile projectile, Color lightColor)
+        {
+            if (projectile.GetGlobalProjectile<SentryChanges>().Priority == true)
+            {
+                Texture2D Bookmark = ModContent.Request<Texture2D>(TerrafirmaRedux.AssetPath + "Bookmark").Value;
+                Main.EntitySpriteDraw(Bookmark, projectile.Bottom - Main.screenPosition, new Rectangle(0, 0, Bookmark.Width, Bookmark.Height), Color.White, 0, new Vector2(Bookmark.Width / 2, 0), 1, SpriteEffects.None);
+            }
         }
         public override bool PreAI(Projectile projectile)
         {
