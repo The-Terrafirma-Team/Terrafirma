@@ -556,6 +556,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	HollowHelmet: {
+		DisplayName: Hollow Helmet
+		Tooltip: ""
+	}
+
 	PatchouliBody: {
 		DisplayName: Purple Magician's Pajamas
 		Tooltip: ""

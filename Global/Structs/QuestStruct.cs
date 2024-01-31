@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace TerrafirmaRedux.Global.Structs
         public int[] InvolvedNPCs;
         public Item[] Rewards;
         public Condition[] conditions;
+        public int Completion;
 
         /// <summary>
         /// Create a quest, put this in the QuestIndex.cs file to automatically add this quest when the mod is loaded
@@ -31,7 +33,7 @@ namespace TerrafirmaRedux.Global.Structs
         /// <param name="involvednpcs"> Array of all NPCs that can show this quest in their quest menu </param>
         /// <param name="rewards"> List of all the quest's rewards </param>
         /// <param name="conditions"> Array of conditions that have to be met for this quest to show in the quest menu</param>
-        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Condition[] conditions = null)
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
@@ -40,6 +42,7 @@ namespace TerrafirmaRedux.Global.Structs
             this.InvolvedNPCs = involvednpcs;
             this.Rewards = rewards;
             this.conditions = conditions;
+            this.Completion = completion;
         }
 
         public Quest(string Name)
@@ -50,7 +53,28 @@ namespace TerrafirmaRedux.Global.Structs
             this.TaskDescription = "";
             this.InvolvedNPCs = new int[] {NPCID.Guide};
             this.Rewards = new Item[] { new Item(ItemID.CopperShortsword,1) };
+            this.Completion = 0;
         }
 
+    }
+
+    internal static class QuestMethods
+    {
+        /// <summary>
+        /// Compares two quests and checks if they match (Completion excluded)
+        /// </summary>
+        public static bool IsEqualsTo(this Quest quest, Quest comparison)
+        {
+            if (
+                quest.Name == comparison.Name &&
+                quest.Dialogue == comparison.Dialogue &&
+                quest.TaskDescription == comparison.TaskDescription &&
+                quest.Difficulty == comparison.Difficulty &&
+                quest.InvolvedNPCs == comparison.InvolvedNPCs &&
+                quest.Rewards == comparison.Rewards
+                ) return true;
+            else return false;
+
+        }
     }
 }

@@ -116,7 +116,7 @@ namespace TerrafirmaRedux.Global
         public override void PostUpdate()
         {
             //Main.NewText(playerquests.Quests[playerquests.Quests.Keys.ToArray()[0]]);
-            if (playerquests.Quests.Count == 0) playerquests = QuestList.ImportQuestList();
+            if (playerquests.Quests.Length == 0) playerquests = QuestList.ImportQuestList();
 
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }            

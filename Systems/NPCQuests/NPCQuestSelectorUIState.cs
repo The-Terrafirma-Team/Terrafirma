@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.Linq;
 using TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode;
 using TerrafirmaRedux.Global.Structs;
+using TerrafirmaRedux.Systems.NPCQuests;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
@@ -178,6 +179,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             {
                 if (Buttons[i].IsMouseHovering)
                 {
+
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
                     DifficultyRating = Buttonquests[i].Difficulty;
@@ -300,7 +302,7 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         public void UpdateQuests()
         {
-            if (Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Count > 0)
+            if (Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length > 0)
             {
                 
 
@@ -316,7 +318,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 ButtonTexts = new UIText[] { };
                 Buttonquests = new Quest[] { };
 
-                ButtonAmount = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Count;
+                ButtonAmount = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length;
 
                 if (ButtonAmount > 12)
                 {
@@ -329,11 +331,11 @@ namespace TerrafirmaRedux.Systems.MageClass
                     SideContainerLeft.Append(VerticalSlider);
                 }
 
-                for (int i = 0; i < Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Count; i++)
+                for (int i = 0; i < Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length; i++)
                 {
                     bool allconditionsmatch = true;
                     QuestList playerquests = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
-                    Buttonquests = Buttonquests.Append(playerquests.Quests.Keys.ToArray()[i]).ToArray();
+                    Buttonquests = Buttonquests.Append(playerquests.Quests[i]).ToArray();
                     if (Buttonquests[i].conditions != null)
                     {
                         for (int k = 0; k < Buttonquests[i].conditions.Length; k++)
@@ -355,10 +357,10 @@ namespace TerrafirmaRedux.Systems.MageClass
                         SideContainerLeft.Append(Button);
                         Buttons = Buttons.Append(Button).ToArray();
 
-                        string ButtonTextText = playerquests.Quests.Keys.ToArray()[i].Name;
-                        ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 25f), 0.5f, 1.1f));
+                        string ButtonTextText = playerquests.Quests[i].Name;
+                        ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
                         ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        ButtonText.MarginLeft = ButtonText.Text.Length > 20 ? -ButtonText.Text.Length / 2 : 0;
+                        ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
                         ButtonText.VAlign = 0.5f;
                         Button.Append(ButtonText);
 
