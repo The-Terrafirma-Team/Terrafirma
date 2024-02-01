@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerrafirmaRedux.Systems.NPCQuests;
 using Terraria;
 using Terraria.ID;
 
@@ -19,9 +20,10 @@ namespace TerrafirmaRedux.Global.Structs
         public string TaskDescription;
         public int Difficulty;
         public int[] InvolvedNPCs;
-        public Item[] Rewards;
+        public int[] Rewards;
         public Condition[] conditions;
         public int Completion;
+        public Progress CompletionProgress;
 
         /// <summary>
         /// Create a quest, put this in the QuestIndex.cs file to automatically add this quest when the mod is loaded
@@ -33,7 +35,7 @@ namespace TerrafirmaRedux.Global.Structs
         /// <param name="involvednpcs"> Array of all NPCs that can show this quest in their quest menu </param>
         /// <param name="rewards"> List of all the quest's rewards </param>
         /// <param name="conditions"> Array of conditions that have to be met for this quest to show in the quest menu</param>
-        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Condition[] conditions = null, int completion = 0)
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, int[] rewards, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
@@ -43,6 +45,20 @@ namespace TerrafirmaRedux.Global.Structs
             this.Rewards = rewards;
             this.conditions = conditions;
             this.Completion = completion;
+            this.CompletionProgress = new Progress(0);
+        }
+
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, int[] rewards, Progress completionprogress, Condition[] conditions = null, int completion = 0)
+        {
+            this.Name = Name;
+            this.Dialogue = dialogue;
+            this.Difficulty = Math.Clamp(difficulty, 1, 5);
+            this.TaskDescription = taskdescription;
+            this.InvolvedNPCs = involvednpcs;
+            this.Rewards = rewards;
+            this.conditions = conditions;
+            this.Completion = completion;
+            this.CompletionProgress = completionprogress;
         }
 
         public Quest(string Name)
@@ -52,13 +68,14 @@ namespace TerrafirmaRedux.Global.Structs
             this.Difficulty = 0;
             this.TaskDescription = "";
             this.InvolvedNPCs = new int[] {NPCID.Guide};
-            this.Rewards = new Item[] { new Item(ItemID.CopperShortsword,1) };
+            this.Rewards = new int[] { ItemID.CopperShortsword };
             this.Completion = 0;
+            this.CompletionProgress = new Progress(0);
         }
 
     }
 
-    internal static class QuestMethods
+    public static class QuestMethods
     {
         /// <summary>
         /// Compares two quests and checks if they match (Completion excluded)
@@ -75,6 +92,50 @@ namespace TerrafirmaRedux.Global.Structs
                 ) return true;
             else return false;
 
+        }
+
+        /// <summary>
+        /// Sets the Quest as "Completed"
+        /// </summary>
+        public static void Complete(this Quest quest)
+        {
+            quest.Completion = 2;
+        }
+
+        /// <summary>
+        /// Sets the Quest to "In Progress"
+        /// </summary>
+        /// <param name="DisableOtherQuests"> Automatically true, will turn all other quests's status in the quest list from "In Progress" to "Not Started"</param>
+        public static void SetInProgress(this Quest quest, QuestList questlist = null, bool DisableOtherQuests = true)
+        {
+            quest.Completion = 1;
+            if (DisableOtherQuests && questlist != null)
+            {
+                for (int i = 0; i < questlist.Quests.Length; i++)
+                {
+                    if (questlist.Quests[i].Completion == 1 && !questlist.Quests[i].IsEqualsTo(quest)) questlist.Quests[i].Completion = 0;
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// Sets the Quest as "Not Started"
+        /// </summary>
+        /// <param name="quest"></param>
+        public static void Uncomplete(this Quest quest)
+        {
+            quest.Completion = 0;
+        }
+
+        public static bool CanBeCompleted(this Quest quest, QuestList questlist, Player player)
+        {
+            if (quest.IsEqualsTo(QuestIndex.BusinessDeal))
+            {
+                if (player.HasItemInAnyInventory(ItemID.Minishark) && player.HasItemInAnyInventory(ItemID.FlintlockPistol)) return true;
+            }
+
+            return false;
         }
     }
 }

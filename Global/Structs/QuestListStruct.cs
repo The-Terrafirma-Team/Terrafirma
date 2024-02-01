@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -14,7 +15,7 @@ namespace TerrafirmaRedux.Global.Structs
     /// <summary>
     /// Creates a list of quests attached to a player, it is meant to be used to track a player's quest progression
     /// </summary>
-    public struct QuestList
+    public class QuestList
     {
         public Player QuestPlayer;
         public Quest[] Quests = new Quest[]{};
@@ -27,33 +28,6 @@ namespace TerrafirmaRedux.Global.Structs
         public QuestList()
         {
             Quests = new Quest[] {};
-        }
-
-        public static void AddQuest( QuestList questlist, Quest quest)
-        {
-            questlist.Quests = questlist.Quests.Append(quest).ToArray();
-        }
-
-        /// <summary>
-        /// Sets the completion value of a quest
-        /// </summary>
-        /// <param name="completion"> Completion value, 0 for uncompleted, 1 for quest in progress, 2 for completed</param>
-        public static void SetQuest(QuestList questlist, Quest quest, int completion)
-        {
-            if ( questlist.Quests.Contains(quest))
-            {
-                int pos = -1;
-                for (int i = 0; i < questlist.Quests.Length; i++)
-                {
-                    if (questlist.Quests[i].IsEqualsTo(quest))
-                    {
-                        pos = i; 
-                        break;
-                    }
-                }
-                if (pos > -1) questlist.Quests[pos].Completion = completion;
-                else Main.NewText("Couldn't Set Quest, Quest doesn't exist in questlist", Main.errorColor);
-            }
         }
 
         /// <summary>
@@ -72,10 +46,41 @@ namespace TerrafirmaRedux.Global.Structs
             return questlist;
         }
 
+    }
+
+    internal static class QuestListMethods
+    {
+        public static void AddQuest(this QuestList questlist, Quest quest)
+        {
+            questlist.Quests = questlist.Quests.Append(quest).ToArray();
+        }
+
+        /// <summary>
+        /// Sets the completion value of a quest
+        /// </summary>
+        /// <param name="completion"> Completion value, 0 for uncompleted, 1 for quest in progress, 2 for completed</param>
+        public static void SetQuest(this QuestList questlist, Quest quest, int completion)
+        {
+            if (questlist.Quests.Contains(quest))
+            {
+                int pos = -1;
+                for (int i = 0; i < questlist.Quests.Length; i++)
+                {
+                    if (questlist.Quests[i].IsEqualsTo(quest))
+                    {
+                        pos = i;
+                        break;
+                    }
+                }
+                if (pos > -1) questlist.Quests[pos].Completion = completion;
+                else Main.NewText("Couldn't Set Quest, Quest doesn't exist in questlist", Main.errorColor);
+            }
+        }
+
         /// <summary>
         /// Gets the completion value of a quest
         /// </summary>
-        public static int GetQuestCompletion(QuestList questlist, Quest quest) 
+        public static int GetQuestCompletion(this QuestList questlist, Quest quest)
         {
             int pos = 0;
             for (int i = 0; i < questlist.Quests.Length; i++)
@@ -90,12 +95,18 @@ namespace TerrafirmaRedux.Global.Structs
         }
 
         /// <summary>
-        /// Gets the playerquests quest list from the local player
+        /// Gets a copy of a specific quest out of a QuestList, returns an empty Quest if nothing can be found
         /// </summary>
-        /// <returns></returns>
-        public static QuestList GetLocalQuestList()
+        public static int GetQuestIndex(this QuestList questlist, Quest quest)
         {
-            return Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            for (int i = 0; i < questlist.Quests.Length; i++)
+            {
+                if (questlist.Quests[i].IsEqualsTo(quest))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
     }

@@ -16,12 +16,16 @@ using System.Linq;
 using TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode;
 using TerrafirmaRedux.Global.Structs;
 using TerrafirmaRedux.Systems.NPCQuests;
+using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestSelectorUIState : UIState
     {
+
+        public Quest selectedQuest;
 
         UIPanel MainContainer;
         UIPanel SideContainerLeft;
@@ -33,6 +37,9 @@ namespace TerrafirmaRedux.Systems.MageClass
         UIPanel[] Buttons = new UIPanel[]{};
         Quest[] Buttonquests = new Quest[]{};
         UIText[] ButtonTexts = new UIText[]{};
+
+        UIPanel CompleteButton;
+        UIText CompleteButtonText;
 
         UIText QuestName;
         UIText QuestDialogue;
@@ -56,8 +63,11 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         Texture2D EmptyStarTexture;
         Texture2D FullStarTexture;
+
+        QuestList localquestlist;
         public void Create()
         {
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
             EmptyStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/EmptyStar").Value;
             FullStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/FilledStar").Value;
 
@@ -106,12 +116,24 @@ namespace TerrafirmaRedux.Systems.MageClass
                 SideContainerLeft.Append(VerticalSlider);
             }
 
+            CompleteButton = new UIPanel(ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), 20);
+            CompleteButton.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
+            CompleteButton.Height.Pixels = 40f;
+            CompleteButton.HAlign = 1f;
+            CompleteButton.VAlign = 1f;
+            CompleteButton.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
+            CompleteButton.BorderColor = new Color(0.4f, 0.5f, 1f);
+            SideContainerRight.Append(CompleteButton);
+
+            CompleteButtonText = new UIText("Complete", 1.1f, false);
+            CompleteButtonText.Width.Pixels = 200f;
+            CompleteButtonText.VAlign = 0.5f;
+            CompleteButton.Append(CompleteButtonText);
+
             SimpleTooltip = new UIText("Tooltip", 1.05f);
             SimpleTooltip.MarginTop = Main.MouseScreen.Y + 20f;
             SimpleTooltip.MarginLeft = Main.MouseScreen.X + 20f;
             Append(SimpleTooltip);
-
-
 
         }
 
@@ -169,12 +191,50 @@ namespace TerrafirmaRedux.Systems.MageClass
                 }
             }
 
+            if (CompleteButton.IsMouseHovering)
+            {
+                CompleteButton.BackgroundColor = new Color(1f, 0.8f, 0.1f, 1f);
+                CompleteButton.BorderColor = new Color(1f, 0.8f, 0.1f);
+            }
+            else
+            {
+                CompleteButton.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
+                CompleteButton.BorderColor = new Color(0.4f, 0.5f, 1f);
+            }
+
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            if (localquestlist.Quests.Contains(selectedQuest))
+            {
+                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
+                {
+                    if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
+                    {
+                        CompleteButtonText.SetText("Complete");
+                    }
+                    else
+                    {
+                        CompleteButtonText.SetText("In Progress");
+                    }
+                }
+                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0) CompleteButtonText.SetText("Start Quest");
+            }
+
             if (MainContainer.IsMouseHovering) Main.blockMouse = true;
             else Main.blockMouse = false;
         }
-
         public override void LeftClick(UIMouseEvent evt)
         {
+
+            if (CompleteButton.IsMouseHovering)
+            {
+
+                SoundEngine.PlaySound(SoundID.MenuTick);
+                selectedQuest.Completion = 1;
+                //localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].SetInProgress(localquestlist);
+                localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
+
+            }
+
             for (int i = 0; i < Buttons.Length;i++)
             {
                 if (Buttons[i].IsMouseHovering)
@@ -183,6 +243,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
                     DifficultyRating = Buttonquests[i].Difficulty;
+                    selectedQuest = localquestlist.Quests[i];
 
                     if (SideContainerRight.HasChild(QuestName)) SideContainerRight.RemoveChild(QuestName);
                     QuestName = new UIText(Buttonquests[i].Name, 0.8f, true);
@@ -273,28 +334,35 @@ namespace TerrafirmaRedux.Systems.MageClass
 
                     }
 
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < 100; j++)
                     {
                         if (RewardsItemList.Length >= j + 1 && SideContainerRight.HasChild(RewardsItemList[j])) SideContainerRight.RemoveChild(RewardsItemList[j]);
+                        else break;
                     }
                     RewardsItemList = new UIItemSlot[] { };
                     for (int j = 0; j < Buttonquests[i].Rewards.Length; j++)
                     {
+                            
+                        if (RewardsItemList.Length >= j + 1 && SideContainerRight.HasChild(RewardsItemList[j])) SideContainerRight.RemoveChild(RewardsItemList[j]);
                         
-                            if (RewardsItemList.Length >= j + 1 && SideContainerRight.HasChild(RewardsItemList[j])) SideContainerRight.RemoveChild(RewardsItemList[j]);
-                            RewardItem = new UIItemSlot(Buttonquests[i].Rewards, j, 22);
-                            RewardItem.VAlign = 0f;
-                            RewardItem.HAlign = 0.5f;
-                            RewardItem.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + DifficultyText.Height.Pixels + 85f;
-                            RewardItem.MarginLeft = -30f + j * 110f;
-                            RewardItem.Width.Pixels = 10f;
-                            RewardItem.Height.Pixels = 10f;
-                            SideContainerRight.Append(RewardItem);
-                            RewardsItemList = RewardsItemList.Append(RewardItem).ToArray();
-                            Main.inventoryScale = 1f; 
+                        Item[] rewardlist = new Item[] { };
+                        for (int k = 0; k < Buttonquests[i].Rewards.Length; k++)
+                        {
+                            rewardlist = rewardlist.Append(new Item(Buttonquests[i].Rewards[k])).ToArray();
+                        }
+                        
+                        RewardItem = new UIItemSlot(rewardlist, j, 22);
+                        RewardItem.VAlign = 0f;
+                        RewardItem.HAlign = 0.5f;
+                        RewardItem.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + DifficultyText.Height.Pixels + 85f + (((float)Math.Floor((double)j / 6)) * 55);
+                        RewardItem.MarginLeft = -30f + ((j % 6) * 110f);
+                        RewardItem.Width.Pixels = 10f;
+                        RewardItem.Height.Pixels = 10f;
+                        SideContainerRight.Append(RewardItem);
+                        RewardsItemList = RewardsItemList.Append(RewardItem).ToArray();
+                        Main.inventoryScale = 1f; 
                         
                     }
-
                     break;
                 }
             }
@@ -302,7 +370,7 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         public void UpdateQuests()
         {
-            if (Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length > 0)
+            if (localquestlist.Quests.Length > 0)
             {
                 
 
@@ -318,7 +386,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 ButtonTexts = new UIText[] { };
                 Buttonquests = new Quest[] { };
 
-                ButtonAmount = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length;
+                ButtonAmount = localquestlist.Quests.Length;
 
                 if (ButtonAmount > 12)
                 {
@@ -331,10 +399,10 @@ namespace TerrafirmaRedux.Systems.MageClass
                     SideContainerLeft.Append(VerticalSlider);
                 }
 
-                for (int i = 0; i < Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests.Quests.Length; i++)
+                for (int i = 0; i < localquestlist.Quests.Length; i++)
                 {
                     bool allconditionsmatch = true;
-                    QuestList playerquests = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+                    QuestList playerquests = localquestlist;
                     Buttonquests = Buttonquests.Append(playerquests.Quests[i]).ToArray();
                     if (Buttonquests[i].conditions != null)
                     {

@@ -128,7 +128,7 @@ namespace TerrafirmaRedux.Pets
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D tex = TextureAssets.Projectile[Type].Value;
-            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + new Vector2(0,1), new Rectangle(0, (tex.Height / 7) * Projectile.frame, tex.Width, tex.Height / 7), Color.White ,0, new Vector2(tex.Width, tex.Height / 7) / 2f, 1, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + new Vector2(0,1), new Rectangle(0, (tex.Height / 7) * Projectile.frame, tex.Width, tex.Height / 7), lightColor ,0, new Vector2(tex.Width, tex.Height / 7) / 2f, 1, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
             return false;
         }
     }
