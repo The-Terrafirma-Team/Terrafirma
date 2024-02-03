@@ -18,6 +18,7 @@ using TerrafirmaRedux.Global.Structs;
 using TerrafirmaRedux.Systems.NPCQuests;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
+using TerrafirmaRedux.Items.Equipment.Ranged;
 
 namespace TerrafirmaRedux.Systems.MageClass
 {
@@ -123,7 +124,6 @@ namespace TerrafirmaRedux.Systems.MageClass
             CompleteButton.VAlign = 1f;
             CompleteButton.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
             CompleteButton.BorderColor = new Color(0.4f, 0.5f, 1f);
-            SideContainerRight.Append(CompleteButton);
 
             CompleteButtonText = new UIText("Complete", 1.1f, false);
             CompleteButtonText.Width.Pixels = 200f;
@@ -135,10 +135,10 @@ namespace TerrafirmaRedux.Systems.MageClass
             SimpleTooltip.MarginLeft = Main.MouseScreen.X + 20f;
             Append(SimpleTooltip);
 
+            selectedQuest = new Quest("NoQuest");
+
         }
-
         public void Flush() { RemoveAllChildren(); }
-
         public override void Update(GameTime gameTime)
         {
 
@@ -202,22 +202,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 CompleteButton.BorderColor = new Color(0.4f, 0.5f, 1f);
             }
 
-            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
-            if (localquestlist.Quests.Contains(selectedQuest))
-            {
-                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
-                {
-                    if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
-                    {
-                        CompleteButtonText.SetText("Complete");
-                    }
-                    else
-                    {
-                        CompleteButtonText.SetText("In Progress");
-                    }
-                }
-                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0) CompleteButtonText.SetText("Start Quest");
-            }
+            UpdateCompleteButton();
 
             if (MainContainer.IsMouseHovering) Main.blockMouse = true;
             else Main.blockMouse = false;
@@ -231,7 +216,16 @@ namespace TerrafirmaRedux.Systems.MageClass
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 selectedQuest.Completion = 1;
                 //localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].SetInProgress(localquestlist);
-                localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
+                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                {
+                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
+                }
+                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1 && localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
+                {
+                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 2;
+                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Complete();
+                    SideContainerRight.RemoveChild(CompleteButton);
+                }
 
             }
 
@@ -344,14 +338,8 @@ namespace TerrafirmaRedux.Systems.MageClass
                     {
                             
                         if (RewardsItemList.Length >= j + 1 && SideContainerRight.HasChild(RewardsItemList[j])) SideContainerRight.RemoveChild(RewardsItemList[j]);
-                        
-                        Item[] rewardlist = new Item[] { };
-                        for (int k = 0; k < Buttonquests[i].Rewards.Length; k++)
-                        {
-                            rewardlist = rewardlist.Append(new Item(Buttonquests[i].Rewards[k])).ToArray();
-                        }
-                        
-                        RewardItem = new UIItemSlot(rewardlist, j, 22);
+
+                        RewardItem = new UIItemSlot(Buttonquests[i].Rewards, j, 22);
                         RewardItem.VAlign = 0f;
                         RewardItem.HAlign = 0.5f;
                         RewardItem.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + DifficultyText.Height.Pixels + 85f + (((float)Math.Floor((double)j / 6)) * 55);
@@ -367,7 +355,6 @@ namespace TerrafirmaRedux.Systems.MageClass
                 }
             }
         }
-
         public void UpdateQuests()
         {
             if (localquestlist.Quests.Length > 0)
@@ -434,6 +421,35 @@ namespace TerrafirmaRedux.Systems.MageClass
 
                         ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
                     }
+                }
+            }
+        }
+        public void UpdateCompleteButton()
+        {
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            if (localquestlist.Quests.Contains(selectedQuest) && !selectedQuest.IsEqualsTo(new Quest("NoQuest")))
+            {
+                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 2)
+                {
+                    if (SideContainerRight.HasChild(CompleteButton)) SideContainerRight.RemoveChild(CompleteButton);
+                }
+                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
+                {
+                    if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
+                    {
+                        CompleteButtonText.SetText("Complete");
+                        if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
+                    }
+                    else
+                    {
+                        CompleteButtonText.SetText("In Progress");
+                        if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
+                    }
+                }
+                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                {
+                    CompleteButtonText.SetText("Start Quest");
+                    if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
                 }
             }
         }

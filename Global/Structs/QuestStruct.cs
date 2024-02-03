@@ -20,7 +20,9 @@ namespace TerrafirmaRedux.Global.Structs
         public string TaskDescription;
         public int Difficulty;
         public int[] InvolvedNPCs;
-        public int[] Rewards;
+
+        public Item[] Rewards;
+
         public Condition[] conditions;
         public int Completion;
         public Progress CompletionProgress;
@@ -35,7 +37,7 @@ namespace TerrafirmaRedux.Global.Structs
         /// <param name="involvednpcs"> Array of all NPCs that can show this quest in their quest menu </param>
         /// <param name="rewards"> List of all the quest's rewards </param>
         /// <param name="conditions"> Array of conditions that have to be met for this quest to show in the quest menu</param>
-        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, int[] rewards, Condition[] conditions = null, int completion = 0)
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
@@ -48,7 +50,7 @@ namespace TerrafirmaRedux.Global.Structs
             this.CompletionProgress = new Progress(0);
         }
 
-        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, int[] rewards, Progress completionprogress, Condition[] conditions = null, int completion = 0)
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Progress completionprogress, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
@@ -68,7 +70,7 @@ namespace TerrafirmaRedux.Global.Structs
             this.Difficulty = 0;
             this.TaskDescription = "";
             this.InvolvedNPCs = new int[] {NPCID.Guide};
-            this.Rewards = new int[] { ItemID.CopperShortsword };
+            this.Rewards = new Item[] { new Item(ItemID.CopperShortsword) };
             this.Completion = 0;
             this.CompletionProgress = new Progress(0);
         }
@@ -97,9 +99,19 @@ namespace TerrafirmaRedux.Global.Structs
         /// <summary>
         /// Sets the Quest as "Completed"
         /// </summary>
-        public static void Complete(this Quest quest)
+        public static void Complete(this Quest quest, bool GrantQuestRewards = true)
         {
             quest.Completion = 2;
+
+            if (GrantQuestRewards)
+            {
+                for (int i = 0; i < quest.Rewards.Length; i++)
+                {
+                    Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), quest.Rewards[i]);      
+                }
+            }
+            
+
         }
 
         /// <summary>
