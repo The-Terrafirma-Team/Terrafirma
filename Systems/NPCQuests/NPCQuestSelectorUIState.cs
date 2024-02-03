@@ -219,6 +219,10 @@ namespace TerrafirmaRedux.Systems.MageClass
                 if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
                 {
                     localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
+                    for (int i = 0; i < localquestlist.Quests.Length; i++)
+                    {
+                        if (localquestlist.Quests[i].Completion == 1 && !localquestlist.Quests[i].IsEqualsTo(selectedQuest)) localquestlist.Quests[i].Completion = 0;
+                    }
                 }
                 else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1 && localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
                 {
@@ -437,7 +441,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                 {
                     if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].CanBeCompleted(localquestlist, Main.LocalPlayer))
                     {
-                        CompleteButtonText.SetText("Complete");
+                        CompleteButtonText.SetText("Claim Reward");
                         if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
                     }
                     else
