@@ -10,6 +10,17 @@ using Terraria.ID;
 
 namespace TerrafirmaRedux.Global.Structs
 {
+
+    public enum QuestType
+    {
+        Explorer = 0,
+        Scavenger = 1,
+        Collector = 2,
+        Slayer = 3,
+        Destroyer = 4,
+        Final = 5
+    }
+
     /// <summary>
     /// A structure type to catalogue NPC quests
     /// </summary>
@@ -19,6 +30,7 @@ namespace TerrafirmaRedux.Global.Structs
         public string Dialogue;
         public string TaskDescription;
         public int Difficulty;
+        public QuestType Type;
         public int[] InvolvedNPCs;
 
         public Item[] Rewards;
@@ -37,7 +49,7 @@ namespace TerrafirmaRedux.Global.Structs
         /// <param name="involvednpcs"> Array of all NPCs that can show this quest in their quest menu </param>
         /// <param name="rewards"> List of all the quest's rewards </param>
         /// <param name="conditions"> Array of conditions that have to be met for this quest to show in the quest menu</param>
-        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Condition[] conditions = null, int completion = 0)
+        public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, QuestType type = QuestType.Explorer, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
@@ -47,6 +59,7 @@ namespace TerrafirmaRedux.Global.Structs
             this.Rewards = rewards;
             this.conditions = conditions;
             this.Completion = completion;
+            this.Type = type;
             this.CompletionProgress = new Progress(0);
         }
 

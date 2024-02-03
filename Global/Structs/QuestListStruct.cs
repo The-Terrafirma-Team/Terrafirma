@@ -109,5 +109,35 @@ namespace TerrafirmaRedux.Global.Structs
             return -1;
         }
 
+        public static QuestList UncompletedQuests(this QuestList questlist)
+        {
+            QuestList uncompletedquests = new QuestList();
+            for (int i = 0; i < questlist.Quests.Length; i++)
+            {
+                if (questlist.Quests[i].Completion == 0) uncompletedquests.Quests = uncompletedquests.Quests.Append(questlist.Quests[i]).ToArray();
+            }
+            return uncompletedquests;
+        }
+
+        public static QuestList OnGoingQuests(this QuestList questlist)
+        {
+            QuestList ongoingquests = new QuestList();
+            for (int i = 0; i < questlist.Quests.Length; i++)
+            {
+                if (questlist.Quests[i].Completion == 1) ongoingquests.Quests = ongoingquests.Quests.Append(questlist.Quests[i]).ToArray();
+            }
+            return ongoingquests;
+        }
+
+        public static QuestList FinishedQuests(this QuestList questlist)
+        {
+            QuestList finishedquests = new QuestList();
+            for (int i = 0; i < questlist.Quests.Length; i++)
+            {
+                if (questlist.Quests[i].Completion == 2) finishedquests.Quests = finishedquests.Quests.Append(questlist.Quests[i]).ToArray();
+            }
+            return finishedquests;
+        }
+
     }
 }
