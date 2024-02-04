@@ -18,7 +18,8 @@ namespace TerrafirmaRedux.Global.Structs
         Collector = 2,
         Slayer = 3,
         Destroyer = 4,
-        Final = 5
+        Final = 5,
+        Special = 6
     }
 
     /// <summary>
@@ -53,21 +54,20 @@ namespace TerrafirmaRedux.Global.Structs
         {
             this.Name = Name;
             this.Dialogue = dialogue;
-            this.Difficulty = Math.Clamp(difficulty, 1, 5); 
+            this.Difficulty = Math.Clamp(difficulty, 0, 5); 
             this.TaskDescription = taskdescription;
             this.InvolvedNPCs = involvednpcs;
             this.Rewards = rewards;
             this.conditions = conditions;
             this.Completion = completion;
             this.Type = type;
-            this.CompletionProgress = new Progress(0);
         }
 
         public Quest(string Name, string dialogue, string taskdescription, int difficulty, int[] involvednpcs, Item[] rewards, Progress completionprogress, Condition[] conditions = null, int completion = 0)
         {
             this.Name = Name;
             this.Dialogue = dialogue;
-            this.Difficulty = Math.Clamp(difficulty, 1, 5);
+            this.Difficulty = Math.Clamp(difficulty, 0, 5);
             this.TaskDescription = taskdescription;
             this.InvolvedNPCs = involvednpcs;
             this.Rewards = rewards;
@@ -85,7 +85,6 @@ namespace TerrafirmaRedux.Global.Structs
             this.InvolvedNPCs = new int[] {NPCID.Guide};
             this.Rewards = new Item[] { new Item(ItemID.CopperShortsword) };
             this.Completion = 0;
-            this.CompletionProgress = new Progress(0);
         }
 
     }
@@ -151,16 +150,6 @@ namespace TerrafirmaRedux.Global.Structs
         public static void Uncomplete(this Quest quest)
         {
             quest.Completion = 0;
-        }
-
-        public static bool CanBeCompleted(this Quest quest, QuestList questlist, Player player)
-        {
-            if (quest.IsEqualsTo(QuestIndex.BusinessDeal))
-            {
-                if (player.HasItemInAnyInventory(ItemID.Minishark) && player.HasItemInAnyInventory(ItemID.FlintlockPistol)) return true;
-            }
-
-            return false;
-        }
+        } 
     }
 }

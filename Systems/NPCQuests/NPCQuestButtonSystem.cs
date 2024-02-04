@@ -46,9 +46,9 @@ namespace TerrafirmaRedux.Systems.MageClass
             }
         }
 
-        public void CreateButton()
+        public void CreateButton(NPC npc)
         {
-            if (!questbuttonui.UIOpen) questbuttonui?.Create();
+            if (!questbuttonui.UIOpen) questbuttonui?.Create(npc);
             questbuttonuiinterface?.SetState(questbuttonui);
         }
 
@@ -57,12 +57,12 @@ namespace TerrafirmaRedux.Systems.MageClass
             questbuttonui?.Flush();
         }
 
-        public void OpenSelectorUI()
+        public void OpenSelectorUI(NPC npc)
         {
             Main.CloseNPCChatOrSign();
             Main.ClosePlayerChat();
             Main.playerInventory = false;
-            questselectorui?.Create();
+            questselectorui?.Create(npc);
             questselectorui.UpdateQuests();
             questbuttonuiinterface?.SetState(questselectorui);
             

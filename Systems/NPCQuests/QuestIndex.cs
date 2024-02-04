@@ -26,9 +26,15 @@ namespace TerrafirmaRedux.Systems.NPCQuests
 
         public static Quest[] quests = new Quest[] { };
 
+        //Guide Quests
+        public static Quest GuideQuest = new Quest();
+        //Arms Dealer
         public static Quest BusinessDeal = new Quest();
         public static Quest ExperimentalMarineBiology = new Quest();
         public static Quest ExperimentalMarineBiology2 = new Quest();
+        public static Quest ExperimentalMarineBiology3 = new Quest();
+        public static Quest OlReliable = new Quest();
+        public static Quest HorrorsBeyondGunComprehension = new Quest();
 
         public override void OnWorldLoad()
         {
@@ -36,12 +42,26 @@ namespace TerrafirmaRedux.Systems.NPCQuests
 
             quests = new Quest[] { };
 
+            //Guide Quests
+            GuideQuest = new Quest(
+                "Guide Quest",
+                dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
+                taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
+                difficulty: 0,
+                type: QuestType.Scavenger,
+                involvednpcs: new int[] { NPCID.Guide },
+                rewards: new Item[] { new Item(ModContent.ItemType<AmmoCan>()) }
+                );
+            quests = quests.Append(GuideQuest).ToArray();
+
+
+            //Arms Dealer Quests
             BusinessDeal = new Quest(
                 "Business Deal",
                 dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
                 taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
                 difficulty: 0,
-                type: QuestType.Scavenger,
+                type: QuestType.Explorer,
                 involvednpcs: new int[] { NPCID.ArmsDealer },
                 rewards: new Item[] { new Item(ModContent.ItemType<AmmoCan>()) }
                 );
@@ -49,12 +69,12 @@ namespace TerrafirmaRedux.Systems.NPCQuests
 
             ExperimentalMarineBiology = new Quest(
                 "Experimental Marine Biology",
-                dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
-                taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
+                dialogue: "Fish are only good for one thing only, Gunsmithing! It seems like you've already gotten your hands on one of my little experiments, so help me with my 'environmentally friendly' research by testing  that minishark on the aquatic wildlife... and don't forget to bring me some of the remians!",
+                taskdescription: "kill 30 ocean enemies with the Minishark and bring 3 shark fins",
                 difficulty: 0,
                 type: QuestType.Slayer,
                 involvednpcs: new int[] { NPCID.ArmsDealer },
-                rewards: new Item[] { new Item(ModContent.ItemType<Microshark>()) }
+                rewards: new Item[] { new Item( ItemID.Boomstick ) }
                 );
             quests = quests.Append(ExperimentalMarineBiology).ToArray();
 
@@ -68,6 +88,39 @@ namespace TerrafirmaRedux.Systems.NPCQuests
                 rewards: new Item[] { new Item(ModContent.ItemType<Microshark>()) }
                 );
             quests = quests.Append(ExperimentalMarineBiology2).ToArray();
+
+            ExperimentalMarineBiology3 = new Quest(
+                "Experimental Marine Biology III",
+                dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
+                taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
+                difficulty: 0,
+                type: QuestType.Special,
+                involvednpcs: new int[] { NPCID.ArmsDealer },
+                rewards: new Item[] { new Item(ModContent.ItemType<Microshark>()) }
+                );
+            quests = quests.Append(ExperimentalMarineBiology3).ToArray();
+
+            OlReliable = new Quest(
+                "Ol' Reliable",
+                dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
+                taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
+                difficulty: 0,
+                type: QuestType.Destroyer,
+                involvednpcs: new int[] { NPCID.ArmsDealer },
+                rewards: new Item[] { new Item(ModContent.ItemType<Microshark>()) }
+                );
+            quests = quests.Append(OlReliable).ToArray();
+
+            HorrorsBeyondGunComprehension = new Quest(
+                "Horrors Beyond Gun Comprehension",
+                dialogue: "Hey Pal, guess I'm a new face for you. All I'll tell ya is that you have an eye for guns and guns is what I sell. I see a great partnership forming between us so let's start with a bang. I have just what you want!",
+                taskdescription: "Buy the Minishark and Flintlock pistol from the arms dealer",
+                difficulty: 0,
+                type: QuestType.Collector,
+                involvednpcs: new int[] { NPCID.ArmsDealer },
+                rewards: new Item[] { new Item(ModContent.ItemType<Microshark>()) }
+                );
+            quests = quests.Append(HorrorsBeyondGunComprehension).ToArray();
         }
 
     }

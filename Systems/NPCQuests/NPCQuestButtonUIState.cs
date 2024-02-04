@@ -22,11 +22,14 @@ namespace TerrafirmaRedux.Systems.MageClass
         internal bool justHovered = false;
         internal float ChatHeight = 0f;
 
+        NPC selectednpc = null;
+
         UIText Title = null;
         Vector2 TitlePos = Vector2.Zero;
 
-        public void Create()
+        public void Create(NPC npc)
         {
+            selectednpc = npc;
 
             Title = new UIText("", 1f, false);
             Title.SetText("Quests");
@@ -46,9 +49,9 @@ namespace TerrafirmaRedux.Systems.MageClass
 
         public override void LeftClick(UIMouseEvent evt)
         {
-            if (Title.IsMouseHovering)
+            if (Title.IsMouseHovering && selectednpc != null)
             {
-                ModContent.GetInstance<NPCQuestButtonSystem>().OpenSelectorUI();
+                ModContent.GetInstance<NPCQuestButtonSystem>().OpenSelectorUI(selectednpc);
             }
 
          }

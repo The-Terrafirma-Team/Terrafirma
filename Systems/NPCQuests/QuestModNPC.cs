@@ -1,11 +1,13 @@
-﻿using System;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using TerrafirmaRedux.Systems.MageClass;
 using System.ComponentModel;
+using TerrafirmaRedux.Global.Structs;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TerrafirmaRedux.Systems.NPCQuests
 {
@@ -15,6 +17,7 @@ namespace TerrafirmaRedux.Systems.NPCQuests
         NPC armsdealer = new NPC();
         NPC guide = new NPC();
         NPC steampunker = new NPC();
+
 
         bool JustOpenedUI = false;
 
@@ -32,7 +35,7 @@ namespace TerrafirmaRedux.Systems.NPCQuests
             {
                 if (!JustOpenedUI) 
                 { 
-                    ModContent.GetInstance<NPCQuestButtonSystem>().CreateButton(); 
+                    ModContent.GetInstance<NPCQuestButtonSystem>().CreateButton(Player.TalkNPC); 
                     JustOpenedUI = true; 
 
                     for (int i = 0; i < Main.npc.Length;i++)
@@ -74,6 +77,68 @@ namespace TerrafirmaRedux.Systems.NPCQuests
 
             base.PostUpdate();
 
+        }
+
+        public Progress[] ProgressArray = new Progress[] {};
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {   
+            base.OnHitNPC(target, hit, damageDone);
+
+            //Experimental Marine Biology
+            if ( target.life <= 0 && target.type == NPCID.BlueSlime && Player.HeldItem.type == ItemID.Minishark)
+            {
+                for (int i = 0; i < ProgressArray.Length; i++)
+                {
+                    if (ProgressArray[i].Name == "EMBProgress") ProgressArray[i].CurrentValue += 1f;
+                }
+            }
+
+        }
+
+        public bool CanQuestBeCompleted(Quest quest, QuestList questlist, Player player)
+        {
+            //Business Deal
+            if (quest.IsEqualsTo(QuestIndex.BusinessDeal))
+            {
+                if (player.HasItemInAnyInventory(ItemID.Minishark) && player.HasItemInAnyInventory(ItemID.FlintlockPistol)) return true;
+            }
+            //Experimental Marine Biology
+            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
+            {
+                for (int i = 0; i < ProgressArray.Length; i++)
+                {
+                    if (ProgressArray[i].Name == "EMBProgress" && ProgressArray[i].IsCompleted()) return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Gets executed whenever a quest is started
+        /// </summary>
+        /// <param name="quest"></param>
+        public void StartQuest(Quest quest)
+        {
+            //Experimental Marine Biology
+            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
+            {
+                ProgressArray = ProgressArray.Append(new Progress("EMBProgress", 10, 0, 0)).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Gets executed whenever a quest is completed or ended
+        /// </summary>
+        /// <param name="quest"></param>
+        public void EndQuest(Quest quest)
+        {
+            //Experimental Marine Biology
+            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
+            {
+                ProgressArray = new Progress[] { };
+            }
         }
 
     }

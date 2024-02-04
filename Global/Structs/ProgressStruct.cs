@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerrafirmaRedux.Systems.NPCQuests;
 using Terraria;
 
 namespace TerrafirmaRedux.Global.Structs
@@ -12,6 +13,7 @@ namespace TerrafirmaRedux.Global.Structs
     /// </summary>
     public struct Progress
     {
+        public string Name = "";
         public float StartProgress = 0;
         public float EndProgress = 100;
         public float CurrentValue = 0;
@@ -20,16 +22,18 @@ namespace TerrafirmaRedux.Global.Structs
         /// Whether or not to allow the Current progress value to go over the End value
         /// </summary>
         public bool AllowOverProgression = false;
- 
-        public Progress(float endprogress, float startprogress = 0, float currentvalue = 0)
+
+        public Progress(string name, float endprogress, float startprogress = 0, float currentvalue = 0)
         {
+            this.Name = name;
             this.StartProgress = startprogress;
             this.EndProgress = endprogress;
             this.CurrentValue = currentvalue;
         }
 
-        public Progress(float i)
+        public Progress(string name, float i)
         {
+            this.Name = name;
             this.StartProgress = i;
             this.EndProgress = i;
             this.CurrentValue = i;
@@ -60,6 +64,11 @@ namespace TerrafirmaRedux.Global.Structs
             }
         }
 
+        public static void Add(this Progress progress, float increment)
+        {
+            progress.CurrentValue += increment;
+        }
+
         public static float CompletionPercentage(this Progress progress) => (progress.CurrentValue - progress.StartProgress) / (progress.EndProgress - progress.StartProgress);
     
         public static bool IsEmpty(this Progress progress)
@@ -72,11 +81,11 @@ namespace TerrafirmaRedux.Global.Structs
         {
             if (progress.EndProgress > progress.StartProgress)
             {
-                if (progress.StartProgress >= progress.EndProgress) return true;
+                if (progress.CurrentValue >= progress.EndProgress) return true;
             }
             else
             {
-                if (progress.StartProgress <= progress.EndProgress) return true;
+                if (progress.CurrentValue <= progress.EndProgress) return true;
             }
             return false;
         }
