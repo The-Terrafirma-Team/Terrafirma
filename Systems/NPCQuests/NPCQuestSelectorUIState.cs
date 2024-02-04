@@ -171,6 +171,11 @@ namespace Terrafirma.Systems.NPCQuests
             SimpleTooltip.MarginLeft = Main.MouseScreen.X + 20f;
             Append(SimpleTooltip);
 
+            UIProgressBar progress = new UIProgressBar();
+            progress.HAlign = 0.5f;
+            progress.VAlign = 0.5f;
+            Append(progress);
+
             //Set selected quest to NoQuest so nothing is displayed when the UI is open
             selectedQuest = new Quest("NoQuest");
 

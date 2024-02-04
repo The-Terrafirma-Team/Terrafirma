@@ -1,287 +1,649 @@
 Buffs: {
 	SlapBuff: {
+		DisplayName: Slapped!
+		Description: 100% increased movement speed
 	}
 
 	AgnomalumBurns: {
+		DisplayName: Agnomalum Burns
+		Description: Mods.Terrafirma.Buffs.AgnomalumBurns.Description
 	}
 
 	PhantasmalBurn: {
+		DisplayName: Phantasmal Burn
+		Description: Scorching Ectoplasm burns you!
 	}
 
 	SunofRaBuff: {
+		DisplayName: The Unmatched Power of the Sun
+		Description: It little warm.
 	}
 
 	OrdnanceBuff: {
+		DisplayName: Ordnance
+		Description: Increases max sentries by 1
 	}
 
 	Engineering: {
+		DisplayName: Engineering
+		Description: Your sentries are faster and have more range
 	}
 
 	KnockbackResist: {
+		DisplayName: Steadfast
+		Description: Can't be knocked back
 	}
 
 	Penetration: {
+		DisplayName: Penetration
+		Description: Weapon pierce is increased
 	}
 
 	BnuyBuff: {
+		DisplayName: Bnuy
+		Description: So Coquette!
 	}
 }
 
 Items: {
 	AngryArrow: {
+		DisplayName: Angry Arrow
+		Tooltip: Hit enemies target you
 	}
 
 	Birdshot: {
+		DisplayName: Birdshot
+		Tooltip: Shoots a bunch of little pellets
 	}
 
 	BoneBullet: {
+		DisplayName: Bone Bullet
+		Tooltip: ""
 	}
 
 	BouncyBuckshot: {
+		DisplayName: Bouncy Buckshot
+		Tooltip: Shoots a bunch bouncy of pellets
 	}
 
 	Buckshot: {
+		DisplayName: Buckshot
+		Tooltip: Shoots a bunch of pellets
 	}
 
 	CarbonFiberArrow: {
+		DisplayName: Carbon Fiber Arrow
+		Tooltip: ""
 	}
 
 	ExplosiveBuckshot: {
+		DisplayName: Explosive Buckshot
+		Tooltip: Shoots a bunch of explosive pellets
 	}
 
 	ICBA: {
+		DisplayName: I.C.B.A
+		Tooltip:
+			'''
+			Speeds up over time for extra damage
+			'Doesn't stand for International Center for Biosaline Agriculture, bozo'
+			'''
 	}
 
 	PhantasmalArrow: {
+		DisplayName: Phantasmal Arrow
+		Tooltip: ""
 	}
 
 	ShroomiteBullet: {
+		DisplayName: Shroomite Bullet
+		Tooltip: Ignores 30 points of enemy defence
 	}
 
 	LuckyBlock: {
+		DisplayName: Lucky Block
+		Tooltip:
+			'''
+			Test your Luck with this Lucky item! 
+			We're not responsible for any damages caused by opening this item.
+			'''
 	}
 
 	SlapJuice: {
+		DisplayName: Slap Juice
+		Tooltip: Greatly increases movement speed
 	}
 
 	HeartContainer: {
+		DisplayName: Heart Container
+		Tooltip: Increases max life by 50
 	}
 
 	SpringBoots: {
+		DisplayName: Spring Boots
+		Tooltip: Keep jumping to build up height and speed
 	}
 
 	AmmoCan: {
+		DisplayName: Ammo Can
+		Tooltip: Guns randomly cycle between bullets in your ammo slot
 	}
 
 	BoxOfHighPiercingRounds: {
+		DisplayName: Box Of High Piercing Rounds
+		Tooltip:
+			'''
+			66% chance to save bullets
+			5% increased ranged damage
+			'''
 	}
 
 	DrumMag: {
+		DisplayName: Drum Mag
+		Tooltip:
+			'''
+			66% chance to save bullets
+			5% increased ranged damage
+			'''
 	}
 
 	Foregrip: {
+		DisplayName: Foregrip
+		Tooltip: Increases gun accuracy and bullet velocity
 	}
 
 	SacredGreaves: {
+		DisplayName: Sacred Greaves
+		Tooltip: 4% increased movement speed
 	}
 
 	SacredHeadgear: {
+		DisplayName: Sacred Headgear
+		Tooltip:
+			'''
+			Increases maximum mana by 60
+			6% increased magic damage
+			'''
 	}
 
 	SacredHelmet: {
+		DisplayName: Sacred Helmet
+		Tooltip:
+			'''
+			8% increased ranged damage
+			4% increased critical strike chance
+			'''
 	}
 
 	SacredHood: {
+		DisplayName: Sacred Hood
+		Tooltip:
+			'''
+			Increases your max number of minions by 1
+			5% increased summon damage
+			'''
 	}
 
 	SacredMask: {
+		DisplayName: Sacred Mask
+		Tooltip:
+			'''
+			5% increased melee damage
+			5% increased melee speed
+			'''
 	}
 
 	SacredPlateMail: {
+		DisplayName: Sacred Plate Mail
+		Tooltip: 5% increased critical strike chance
 	}
 
 	IceHook: {
+		DisplayName: Ice Hook
+		Tooltip: Incredibly fast
 	}
 
 	SingularityHook: {
+		DisplayName: Singularity Hook
+		Tooltip: Grapples onto air
 	}
 
 	MajesticGel: {
+		DisplayName: Majestic Gel
+		Tooltip: ""
 	}
 
 	Uldrax: {
+		DisplayName: Uldrax
+		Tooltip: ""
 	}
 
 	KinMask: {
+		DisplayName: Kin Mask
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	KinMechanicalLegs: {
+		DisplayName: Kin Mechanical Legs
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	KinStripedSweater: {
+		DisplayName: Kin Striped Sweater
+		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	WandOfPoisoning: {
+		DisplayName: Wand Of Poisoning
+		Tooltip: Shoots a waving poison
 	}
 
 	CrystalChainBlades: {
+		DisplayName: Crystal Chain Blades
+		Tooltip: ""
 	}
 
 	Rapier: {
+		DisplayName: Rapier
+		Tooltip: ""
 	}
 
 	CarmineHook: {
+		DisplayName: Carmine Hook
+		Tooltip: Shoots an ichor stream
 	}
 
 	TheCrucible: {
+		DisplayName: The Crucible
+		Tooltip: STARSONG TEMPIRE REAL OMQ
 	}
 
 	HandCannon: {
+		DisplayName: Hand Cannon
+		Tooltip: ""
 	}
 
 	IcicleMachineGun: {
+		DisplayName: Icicle Machine Gun
+		Tooltip:
+			'''
+			Uses ice as ammo
+			'Do not use as an ice cream maker!'
+			'''
 	}
 
 	KnifeShooter: {
+		DisplayName: Knife Shooter
+		Tooltip:
+			'''
+			Uses throwing knives as ammo
+			Has a 33% chance to save ammo
+			'''
 	}
 
 	LuckyCrossbow: {
+		DisplayName: Lucky Crossbow
+		Tooltip:
+			'''
+			Shoots fast lucky arrows with a randomised pattern 
+			33% Chance to save ammo 
+			'''
 	}
 
 	PirateCrossbow: {
+		DisplayName: Pirate Crossbow
+		Tooltip: ""
 	}
 
 	ShroomiteCrossbow: {
+		DisplayName: Shroomite Crossbow
+		Tooltip:
+			'''
+			Right click to zoom out
+			Arrows travel farther before falling
+			'''
 	}
 
 	ShroomiteSMG: {
+		DisplayName: Shroomite S.M.G.
+		Tooltip:
+			'''
+			Fires a 3 round burst
+			Converts musket balls to shroomite bullets
+			'''
 	}
 
 	ShroomiteSniper: {
+		DisplayName: Shroomite Sniper Rifle
+		Tooltip:
+			'''
+			Converts musket balls to high velocity shroomite bullets
+			Right click to zoom out
+			'''
 	}
 
 	StarRevolver: {
+		DisplayName: Star Revolver
+		Tooltip:
+			'''
+			Shoots fallen stars
+			has a 33% chance to save ammo
+			'''
 	}
 
 	TommyGun: {
+		DisplayName: Tommy Gun
+		Tooltip: Rattle 'em boys.
 	}
 
 	CursedFlameSentryStaff: {
+		DisplayName: Cursed Flame Sentry Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a cursed flamethrower to melt your enemies
+			'''
 	}
 
 	IchorSentryStaff: {
+		DisplayName: Ichor Sentry Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons an ichor sentry to fight for you
+			'''
 	}
 
 	VultureStaff: {
+		DisplayName: Vulture Staff
+		Tooltip: Summons vultures to fight for you
 	}
 
 	ZombiemancyStaff: {
+		DisplayName: Zombiemancy Staff
+		Tooltip: Summons zombies to fight for you
 	}
 
 	StaffofRa: {
+		DisplayName: Staff of Ra
+		Tooltip: Provides a little bit of light
 	}
 
 	CopperChakram: {
+		DisplayName: Copper Chakram
+		Tooltip: ""
 	}
 
 	TinChakram: {
+		DisplayName: Tin Chakram
+		Tooltip: ""
 	}
 
 	CobaltChakram: {
+		DisplayName: Cobalt Chakram
+		Tooltip: ""
 	}
 
 	MythrilChakram: {
+		DisplayName: Mythril Chakram
+		Tooltip: ""
 	}
 
 	OrichalcumChakram: {
+		DisplayName: Orichalcum Chakram
+		Tooltip: ""
 	}
 
 	PalladiumChakram: {
+		DisplayName: Palladium Chakram
+		Tooltip: ""
 	}
 
 	PortableSlimeBakery: {
+		DisplayName: Portable Slime Bakery
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a factory that neverendingly produces friendly slimes  
+			'''
 	}
 
 	OrdnancePotion: {
+		DisplayName: Ordnance Potion
+		Tooltip: Increases max sentries by 1
 	}
 
 	HeroSword: {
+		DisplayName: Hero Sword
+		Tooltip: It emanates an intense colorful aura
 	}
 
 	NecromancerLocket: {
+		DisplayName: Necromancer's Locket
+		Tooltip: Boosts the attack speed of swarm summoning weapons by 15%
 	}
 
 	MetalWrench: {
+		DisplayName: Wrench
+		Tooltip: Boosts sentry attack speed
 	}
 
 	Overclock: {
+		DisplayName: Overclock
+		Tooltip: Boosts sentry attack speed by 15%
 	}
 
 	GunSword: {
+		DisplayName: Gun Sword
+		Tooltip: Just like a gun, just like a sword, just like a gun sword
 	}
 
 	Microshark: {
+		DisplayName: Microshark
+		Tooltip: Shoots a piercing typhoon bullet
 	}
 
 	Uberclock: {
+		DisplayName: Uberclock
+		Tooltip: Boosts sentry attack speed and range by 20%
 	}
 
 	UmbraWrench: {
+		DisplayName: Umbra Wrench
+		Tooltip: Makes sentires inflict shadowflame
 	}
 
 	EngineeringPotion: {
+		DisplayName: Engineering Potion
+		Tooltip: Increases sentry speed and range
 	}
 
 	Bonetwister: {
+		DisplayName: Bonetwister
+		Tooltip: Increases sentry damage
 	}
 
 	WoodenShield: {
+		DisplayName: Wooden Shield
+		Tooltip: Weakens knockback taken
 	}
 
 	KnockbackResistPotion: {
+		DisplayName: Steadfast Potion
+		Tooltip: Provides immunity to knockback
 	}
 
 	PenetrationPotion: {
+		DisplayName: Perforating Potion
+		Tooltip: Doubles weapon pierce
 	}
 
 	Eruption: {
+		DisplayName: Eruption
+		Tooltip: ""
 	}
 
 	SporeMortarStaff: {
+		DisplayName: Spore Mortar Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a spore mortar to fight for you
+			'''
 	}
 
 	CorruptedSunflowerStaff: {
+		DisplayName: Corrupted Sunflower Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a corrupted sunflower to fight for you
+			'''
 	}
 
 	MechanicsPocketDefenseSystem: {
+		DisplayName: Mechanic's Pocket Defense System
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a zapper sentry to fight for you
+			'''
 	}
 
 	MonarchWings: {
+		DisplayName: Monarch Wings
+		Tooltip: ""
 	}
 
 	ClockworkTurretStaff: {
+		DisplayName: Clockwork Turret Staff
+		Tooltip:
+			'''
+			Uses 2 sentry slots
+			Summons a clockwork turret that boosts other sentries in its radius
+			'''
 	}
 
 	CoolWrench: {
+		DisplayName: Cool Wrench
+		Tooltip:
+			'''
+			Increases Sentry range
+			'Not to be confused with Cool Ranch'
+			'''
 	}
 
 	RoyalJellyStaff: {
+		DisplayName: Royal Jelly Staff
+		Tooltip:
+			'''
+			Uses 2 sentry slots
+			Summons a royal jelly dispenser that heals all players in its radius
+			'''
 	}
 
 	BookmarkerWrench: {
+		DisplayName: Bookmarker Wrench
+		Tooltip:
+			'''
+			Bookmarks sentries so they don't get replaced when another one is placed
+			Right click to remove the bookmark
+			'''
 	}
 
 	Bnuy: {
+		DisplayName: Bnuy
+		Tooltip: ""
 	}
 
 	HollowHelmet: {
+		DisplayName: Hollow Helmet
+		Tooltip: ""
 	}
 
 	PatchouliBody: {
+		DisplayName: Purple Magician's Pajamas
+		Tooltip: ""
 	}
 
 	PatchouliHat: {
+		DisplayName: Purple Magican's Nightcap
+		Tooltip: ""
 	}
 }
 
-Projectiles.CopperChakramProjetile.DisplayName: Copper Chakram Projetile
+Projectiles: {
+	IceHookProjectile.DisplayName: Ice Hook Projectile
+	SingularityHookProjectile.DisplayName: Singularity Hook Projectile
+	RapierProjectile.DisplayName: Rapier
+	SunofRa.DisplayName: Sun of Ra
+	HolyHandGrenade.DisplayName: The Holy Hand Grenade
+	Firewall.DisplayName: Diabolical Firewall
+	InfernoFork.DisplayName: Inferno Fork
+	Poison.DisplayName: Poison
+	CarmineHookProjectile.DisplayName: Carmine Hook
+	CrucibleBeam.DisplayName: The Crucible
+	CrystalChainBladesProjectile.DisplayName: Crystal Chain Blades
+	AngryArrowProjectile.DisplayName: Angry Arrow
+	BirdshotProjectile.DisplayName: Birdshot
+	BoneBulletProjectile.DisplayName: Bone Bullet
+	BouncyBuckshotProjectile.DisplayName: Bouncy Buckshot
+	BuckshotProjectile.DisplayName: Buckshot
+	CarbonFiberArrowProjectile.DisplayName: Carbon Fiber Arrow
+	ExplosiveBuckshotProjectile.DisplayName: Explosive Buckshot
+	HighVelocityShroomiteBullet.DisplayName: High Velocity Shroomite
+	ICBAProjectile.DisplayName: Intercontinental Ballistic Arrow
+	IcicleProjectile.DisplayName: Icicle
+	LuckyArrow.DisplayName: Lucky Arrow
+	PhantasmalArrowProjectile.DisplayName: Phantasmal Arrow
+	ShroomiteBulletProjectile.DisplayName: Shroomite Bullet
+	CursedFlames.DisplayName: Cursed Flames
+	CursedFlameSentry.DisplayName: Cursed Flame Sentry
+	IchorSentry.DisplayName: Ichor Sentry
+	SummonedVulture.DisplayName: Vulture
+	ZombiemancedZombie.DisplayName: Zombiemanced Zombie
+	UldraxProjectile.DisplayName: Uldrax
+	MajesticGelShot.DisplayName: Majestic Gel Shot
+	QueenSlimeBeam.DisplayName: Queen Slime Beam
+	AuraWave.DisplayName: Aura Wave
+	BoneFragment.DisplayName: Bone Fragment
+	ColoredPrism.DisplayName: Colored Prism
+	AmberWall.DisplayName: Amber Wall
+	AmberWallCrystal.DisplayName: Amber Wall Crystal
+	DiamondTurret.DisplayName: Diamond Turret
+	ExplodingRuby.DisplayName: Exploding Ruby
+	HomingAmethyst.DisplayName: Homing Amethyst
+	PiercingEmerald.DisplayName: Piercing Emerald
+	SplittingTopaz.DisplayName: Splitting Topaz
+	IchorBubble.DisplayName: Ichor Bubble
+	WaterGeyser.DisplayName: Water Geyser
+	HealingBubble.DisplayName: Healing Bubble
+	CopperChakramProjetile.DisplayName: Copper Chakram Projetile
+	TinChakramProjetile.DisplayName: Tin Chakram Projetile
+	CobaltChakramProjectile.DisplayName: Cobalt Chakram Projectile
+	CopperChakramProjectile.DisplayName: Copper Chakram Projectile
+	MythrilChakramProjectile.DisplayName: Mythril Chakram Projectile
+	OrichalcumChakramProjectile.DisplayName: Orichalcum Chakram Projectile
+	PalladiumChakramProjectile.DisplayName: Palladium Chakram Projectile
+	MythrilChakramSplitProjectile.DisplayName: Mythril Chakram Split Projectile
+	BlueSlimeFriend.DisplayName: Blue Slime Friend
+	PortableSlimeBakery.DisplayName: Portable Slime Bakery
+	OrangeSlimeFriend.DisplayName: Orange Slime Friend
+	HeroSwordProjectile.DisplayName: Hero Sword Projectile
+	HeroSwordShot.DisplayName: Hero Sword Shot
+	InfernoFlamethrower.DisplayName: Inferno Flamethrower
+	TyphoonBulletProjectile.DisplayName: Typhoon Bullet Projectile
+	SkeletonHand.DisplayName: Skeleton Hand
+	ManaBloomProj.DisplayName: Mana Bloom Proj
+	Sportar.DisplayName: Sportar
+	SportarShot.DisplayName: Sportar Shot
+	CorruptedSunflower.DisplayName: Corrupted Sunflower
+	CorruptedSunflowerShot.DisplayName: Corrupted Sunflower Shot
+	EruptionProjectile.DisplayName: Eruption Projectile
+	EruptionFloatProjectile.DisplayName: Eruption Float Projectile
+	MechanicsPocketSentry.DisplayName: Mechanics Pocket Sentry
+	MechanicsPocketSentryLightning.DisplayName: Mechanics Pocket Sentry Lightning
+	ClockworkTurret.DisplayName: Clockwork Turret
+	RoyalJellyDispenser.DisplayName: Royal Jelly Dispenser
+	BnuyProj.DisplayName: Bnuy Proj
+}
