@@ -1,4 +1,6 @@
-﻿using Terrafirma.Items.Consumable;
+﻿using Microsoft.Xna.Framework;
+using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Items.Consumable;
 using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terraria;
 using Terraria.DataStructures;
@@ -36,6 +38,7 @@ namespace Terrafirma.Global
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
+            
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), 20, 1, 1));
 
             if(npc.type == NPCID.PirateCrossbower)
@@ -45,5 +48,10 @@ namespace Terrafirma.Global
         }
         public override bool InstancePerEntity => true;
 
+        public override void DrawEffects(NPC npc, ref Color drawColor)
+        {
+            if (npc.HasBuff(ModContent.BuffType<Inked>())) drawColor = new Color(179, 130, 237);
+            base.DrawEffects(npc, ref drawColor);
+        }
     }
 }

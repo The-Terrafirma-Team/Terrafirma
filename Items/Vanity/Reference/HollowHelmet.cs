@@ -43,11 +43,11 @@ namespace Terrafirma.Items.Vanity.Reference
         }
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
-            Player player = drawInfo.drawPlayer;
-            SpriteEffects spriteEffects;
-            if (player.gravDir == 1f)
+            Player p = drawInfo.drawPlayer;
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (p.gravDir == 1f)
             {
-                if (player.direction == 1)
+                if (p.direction == 1)
                 {
                     spriteEffects = SpriteEffects.None;
                 }
@@ -56,16 +56,16 @@ namespace Terrafirma.Items.Vanity.Reference
                     spriteEffects = SpriteEffects.FlipHorizontally;
                 }
 
-                if (!player.dead)
+                if (!p.dead)
                 {
-                    player.legPosition.Y = 0f;
-                    player.headPosition.Y = 0f;
-                    player.bodyPosition.Y = 0f;
+                    p.legPosition.Y = 0f;
+                    p.headPosition.Y = 0f;
+                    p.bodyPosition.Y = 0f;
                 }
             }
             else
             {
-                if (player.direction == 1)
+                if (p.direction == 1)
                 {
                     spriteEffects = SpriteEffects.FlipVertically;
                 }
@@ -74,31 +74,25 @@ namespace Terrafirma.Items.Vanity.Reference
                     spriteEffects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
                 }
 
-                if (!player.dead)
+                if (!p.dead)
                 {
-                    player.legPosition.Y = 6f;
-                    player.headPosition.Y = 6f;
-                    player.bodyPosition.Y = 6f;
+                    p.legPosition.Y = 6f;
+                    p.headPosition.Y = 6f;
+                    p.bodyPosition.Y = 6f;
                 }
             }
-            var headFrame = new Vector2(player.headFrame.Width * 0.5f, player.headFrame.Height * 0.4f);
-            if (player.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "HollowHelmet", EquipType.Head))
+            var vector3 = new Vector2(p.legFrame.Width * 0.5f, p.legFrame.Height * 0.4f);
+            if (p.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "HollowHelmet", EquipType.Head))
             {
-                var value = new DrawData(
-                    HelmetTexture,
-                    new Vector2(Main.screenPosition.X + 20f, Main.screenPosition.Y + 20f),
-                    player.bodyFrame,
-                    drawInfo.colorArmorHead,
-                    0,
-                    headFrame,
-                    1f,
-                    SpriteEffects.None,
-                    0);
+                var value = new DrawData(ModContent.Request<Texture2D>("Terrafirma/Items/Vanity/Reference/HollowHelmet_Head1").Value,
+                    new Vector2(
+                        (int)(drawInfo.Position.X - Main.screenPosition.X - (p.bodyFrame.Width / 2) + (p.width / 2)),
+                        (int)(drawInfo.Position.Y - Main.screenPosition.Y + p.height - p.bodyFrame.Height - 4f)) +
+                    p.headPosition + vector3, p.bodyFrame, Color.White, p.headRotation, vector3, 1f, spriteEffects, 0);
                 value.shader = drawInfo.cHead;
-
                 drawInfo.DrawDataCache.Add(value);
             }
-        } 
+        }
 
     } 
 

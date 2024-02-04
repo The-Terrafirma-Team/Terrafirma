@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terrafirma.Global.Structs;
 using Terrafirma.Items.Equipment.Ranged;
 using Terrafirma.Items.Weapons.Ranged.Guns.Hardmode;
+using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -74,7 +75,7 @@ namespace Terrafirma.Systems.NPCQuests
                 difficulty: 0,
                 type: QuestType.Slayer,
                 involvednpcs: new int[] { NPCID.ArmsDealer },
-                rewards: new Item[] { new Item( ItemID.Boomstick ) }
+                rewards: new Item[] { new Item(ModContent.ItemType<PumpCalamari>()) }
                 );
             quests = quests.Append(ExperimentalMarineBiology).ToArray();
 

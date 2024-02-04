@@ -43,6 +43,11 @@ Buffs: {
 		DisplayName: Bnuy
 		Description: So Coquette!
 	}
+
+	Inked: {
+		DisplayName: Inked
+		Description: Mods.Terrafirma.Buffs.Inked.Description
+	}
 }
 
 Items: {
@@ -570,6 +575,16 @@ Items: {
 		DisplayName: Purple Magican's Nightcap
 		Tooltip: ""
 	}
+
+	PumpCalamari: {
+		DisplayName: Pump Calamari
+		Tooltip: Fires a spread of ink blobs
+	}
+
+	TheFurnace: {
+		DisplayName: The Furnace
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -646,4 +661,6 @@ Projectiles: {
 	ClockworkTurret.DisplayName: Clockwork Turret
 	RoyalJellyDispenser.DisplayName: Royal Jelly Dispenser
 	BnuyProj.DisplayName: Bnuy Proj
+	InkProjectile.DisplayName: Ink Projectile
+	MoltenBulletProjectile.DisplayName: Molten Bullet Projectile
 }
