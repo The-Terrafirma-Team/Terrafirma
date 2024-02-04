@@ -1,12 +1,12 @@
-﻿using TerrafirmaRedux.Items.Consumable;
-using TerrafirmaRedux.Items.Weapons.Ranged.Bows;
+﻿using Terrafirma.Items.Consumable;
+using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     internal class TerrafirmaGlobalNPCInstance : GlobalNPC
     {

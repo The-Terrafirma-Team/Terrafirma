@@ -2,15 +2,15 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using System;
 using Terraria.Audio;
 using System.Linq;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Particles;
 using Terraria.DataStructures;
-using TerrafirmaRedux.Projectiles.Ranged;
+using Terrafirma.Projectiles.Ranged;
 
-namespace TerrafirmaRedux
+namespace Terrafirma
 {
     public static class TFUtils
     {

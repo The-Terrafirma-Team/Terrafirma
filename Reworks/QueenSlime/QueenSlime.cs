@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Items.Materials;
+using Terrafirma.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Reworks.QueenSlime
+namespace Terrafirma.Reworks.QueenSlime
 {
     public class QueenSlime : GlobalNPC
     {

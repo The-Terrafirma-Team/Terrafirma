@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria.Audio;
 
-namespace TerrafirmaRedux.Projectiles.Magic
+namespace Terrafirma.Projectiles.Magic
 {
     public class Firewall : ModProjectile
     {

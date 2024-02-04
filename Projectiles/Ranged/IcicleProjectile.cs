@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace Terrafirma.Projectiles.Ranged
 {
     internal class IcicleProjectile : ModProjectile
     {

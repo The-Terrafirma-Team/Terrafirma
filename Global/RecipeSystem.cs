@@ -1,9 +1,9 @@
-﻿using TerrafirmaRedux.Items.Materials;
+﻿using Terrafirma.Items.Materials;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class RecipeSystem : ModSystem
     {

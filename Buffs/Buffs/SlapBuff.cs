@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Buffs.Buffs
+namespace Terrafirma.Buffs.Buffs
 {
     internal class SlapBuff: ModBuff
     { 

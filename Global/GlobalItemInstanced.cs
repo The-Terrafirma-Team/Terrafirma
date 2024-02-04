@@ -8,7 +8,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class GlobalItemInstanced : GlobalItem
     {
@@ -128,7 +128,7 @@ namespace TerrafirmaRedux.Global
                 {
                     if (Main.rand.Next(100) < 33)
                     {
-                        Item newitem = new Item(TerrafirmaRedux.Mod.BulletArray[Main.rand.Next(TerrafirmaRedux.Mod.BulletArray.Length)]);
+                        Item newitem = new Item(Terrafirma.Mod.BulletArray[Main.rand.Next(Terrafirma.Mod.BulletArray.Length)]);
                         type = newitem.shoot;
                     }
                 }

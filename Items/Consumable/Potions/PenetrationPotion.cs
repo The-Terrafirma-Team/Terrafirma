@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using TerrafirmaRedux.Buffs.Buffs;
+using Terrafirma.Buffs.Buffs;
 
-namespace TerrafirmaRedux.Items.Consumable.Potions
+namespace Terrafirma.Items.Consumable.Potions
 {
     internal class PenetrationPotion : ModItem
     {

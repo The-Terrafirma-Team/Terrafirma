@@ -2,13 +2,13 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
-using TerrafirmaRedux.Items.Weapons.Magic;
-using TerrafirmaRedux.Items.Ammo;
-using TerrafirmaRedux.Projectiles.Hostile;
-using TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode;
+using Terrafirma.Items.Weapons.Melee.Shortswords;
+using Terrafirma.Items.Weapons.Magic;
+using Terrafirma.Items.Ammo;
+using Terrafirma.Projectiles.Hostile;
+using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
 
-namespace TerrafirmaRedux.Items.Consumable
+namespace Terrafirma.Items.Consumable
 {
     internal class LuckyBlock : ModItem
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerrafirmaRedux.Global.Structs
+namespace Terrafirma.Global.Structs
 {
     public struct SynergyData
     {

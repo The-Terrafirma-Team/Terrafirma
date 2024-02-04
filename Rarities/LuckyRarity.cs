@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Rarities
+namespace Terrafirma.Rarities
 {
     internal class LuckyRarity : ModRarity
     {

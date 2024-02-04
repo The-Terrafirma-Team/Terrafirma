@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Linq;
-using TerrafirmaRedux.Particles;
-using TerrafirmaRedux.Rarities;
+using Terrafirma.Particles;
+using Terrafirma.Rarities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class TerrafirmaGlobalItem : GlobalItem
     {

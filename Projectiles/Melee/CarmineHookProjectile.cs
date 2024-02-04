@@ -1,9 +1,9 @@
 ﻿using Terraria.ID;
 using Terraria;
-using TerrafirmaRedux.Global.Templates;
+using Terrafirma.Global.Templates;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee
 {
     public class CarmineHookProjectile: SpearTemplate
     {

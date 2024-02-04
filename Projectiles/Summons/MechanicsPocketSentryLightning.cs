@@ -5,16 +5,16 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class MechanicsPocketSentryLightning : ModProjectile
     {
 
-        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/MechanicsPocketSentry";
+        public override string Texture => "Terrafirma/Projectiles/Summons/MechanicsPocketSentry";
 
         NPC targetnpc = null;
         Vector2 origpos = Vector2.Zero;

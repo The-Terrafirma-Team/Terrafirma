@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using TerrafirmaRedux.Reworks.VanillaMagic.Projectiles;
+using Terrafirma.Reworks.VanillaMagic.Projectiles;
 using Terraria.DataStructures;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Projectiles.Summons;
-using TerrafirmaRedux.Projectiles.Magic;
+using Terrafirma.Projectiles.Summons;
+using Terrafirma.Projectiles.Magic;
 
-namespace TerrafirmaRedux.Reworks.VanillaMagic
+namespace Terrafirma.Reworks.VanillaMagic
 {
     internal class ModifyMagicSpellStats : GlobalItemInstanced
     {

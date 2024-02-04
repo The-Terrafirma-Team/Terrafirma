@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     public class BlueSlimeFriend : ModProjectile
     {

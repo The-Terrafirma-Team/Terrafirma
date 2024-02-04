@@ -8,7 +8,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     internal class TerrafirmaRecipeGroups : ModSystem
     {

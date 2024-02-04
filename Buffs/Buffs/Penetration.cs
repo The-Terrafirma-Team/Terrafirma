@@ -7,9 +7,9 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria;
 using Terraria.ID;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 
-namespace TerrafirmaRedux.Buffs.Buffs
+namespace Terrafirma.Buffs.Buffs
 {
     internal class Penetration: ModBuff
     { 

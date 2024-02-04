@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Particles
+namespace Terrafirma.Particles
 {
     internal class TyphoonParticle : Particle
     {
@@ -26,7 +26,7 @@ namespace TerrafirmaRedux.Particles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D Typhoon = ModContent.Request<Texture2D>("TerrafirmaRedux/Particles/SquishedTyphoonDust").Value;
+            Texture2D Typhoon = ModContent.Request<Texture2D>("Terrafirma/Particles/SquishedTyphoonDust").Value;
             spriteBatch.Draw(Typhoon, Position - Main.screenPosition - Velocity * 3f, new Rectangle(0, 0, Typhoon.Width, Typhoon.Height), Color * (Scale * 2f), Rotation, Typhoon.Size() / 2, Scale * 0.5f, SpriteEffects.None, 0);
             spriteBatch.Draw(Typhoon, Position - Main.screenPosition, new Rectangle(0, 0, Typhoon.Width, Typhoon.Height), Color * Scale, Rotation, Typhoon.Size() / 2, Scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Typhoon, Position - Main.screenPosition + Velocity * 3f, new Rectangle(0, 0, Typhoon.Width, Typhoon.Height), Color * (Scale / 2f), Rotation, Typhoon.Size() / 2, Scale * 2f, SpriteEffects.None, 0);

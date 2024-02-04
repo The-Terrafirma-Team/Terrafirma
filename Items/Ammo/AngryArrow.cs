@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using TerrafirmaRedux.Projectiles.Ranged.Arrows;
+using Terrafirma.Projectiles.Ranged.Arrows;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Ammo
+namespace Terrafirma.Items.Ammo
 {
     internal class AngryArrow : ModItem
     {

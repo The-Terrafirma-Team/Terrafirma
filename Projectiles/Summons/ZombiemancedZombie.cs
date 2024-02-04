@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class ZombiemancedZombie : ModProjectile
     {

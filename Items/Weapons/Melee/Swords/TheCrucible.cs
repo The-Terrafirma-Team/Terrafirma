@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Particles;
-using TerrafirmaRedux.Projectiles.Melee;
+using Terrafirma.Particles;
+using Terrafirma.Projectiles.Melee;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class TheCrucible : ModItem
     {

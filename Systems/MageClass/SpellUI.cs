@@ -4,12 +4,12 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using TerrafirmaRedux.Global.Structs;
+using Terrafirma.Global.Structs;
 using Terraria.GameContent.UI.Elements;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using System.Collections.Generic;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class SpellUI : UIState

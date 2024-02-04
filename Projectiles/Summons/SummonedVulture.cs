@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class SummonedVulture : ModProjectile
     {

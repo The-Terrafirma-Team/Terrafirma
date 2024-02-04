@@ -10,7 +10,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global.Templates;
+namespace Terrafirma.Global.Templates;
 
 public abstract class ChakramTemplate : ModProjectile 
 {

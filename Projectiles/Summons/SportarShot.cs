@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class SportarShot : ModProjectile
     {

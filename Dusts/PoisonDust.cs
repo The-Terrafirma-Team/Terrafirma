@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Dusts
+namespace Terrafirma.Dusts
 {
     internal class PoisonDust : ModDust
     {

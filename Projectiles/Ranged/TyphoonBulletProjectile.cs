@@ -2,19 +2,19 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TerrafirmaRedux.Dusts;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Dusts;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace Terrafirma.Projectiles.Ranged
 {
     internal class TyphoonBulletProjectile : ModProjectile
     {
-        public override string Texture => "TerrafirmaRedux/Projectiles/Ranged/ShroomiteBulletProjectile";
+        public override string Texture => "Terrafirma/Projectiles/Ranged/ShroomiteBulletProjectile";
         public override void SetDefaults()
         {
             Projectile.width = 8; 

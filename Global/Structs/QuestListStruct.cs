@@ -6,11 +6,11 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Systems.NPCQuests;
+using Terrafirma.Systems.NPCQuests;
 using Terraria;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Global.Structs
+namespace Terrafirma.Global.Structs
 {
     /// <summary>
     /// Creates a list of quests attached to a player, it is meant to be used to track a player's quest progression

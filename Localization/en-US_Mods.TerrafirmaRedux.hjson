@@ -6,7 +6,7 @@ Buffs: {
 
 	AgnomalumBurns: {
 		DisplayName: Agnomalum Burns
-		Description: Mods.TerrafirmaRedux.Buffs.AgnomalumBurns.Description
+		Description: Mods.Terrafirma.Buffs.AgnomalumBurns.Description
 	}
 
 	PhantasmalBurn: {

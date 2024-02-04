@@ -5,14 +5,14 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using System;
-using TerrafirmaRedux.Items.Weapons.Melee.Swords;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Items.Weapons.Melee.Swords;
+using Terrafirma.Particles;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee
 {
     public class HeroSwordShot: ModProjectile
     {
-        public override string Texture => "TerrafirmaRedux/Items/Weapons/Melee/Swords/HeroSword";
+        public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/HeroSword";
 
         public override void SetStaticDefaults()
         {
@@ -50,8 +50,8 @@ namespace TerrafirmaRedux.Projectiles.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D SwordTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Weapons/Melee/Swords/HeroSword").Value;
-            Texture2D SwordGlow = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Melee/HeroSwordGlow").Value;
+            Texture2D SwordTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Weapons/Melee/Swords/HeroSword").Value;
+            Texture2D SwordGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/HeroSwordGlow").Value;
             Main.EntitySpriteDraw(SwordGlow, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 56, 56), new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, Projectile.rotation, new Vector2(28), Projectile.scale * 0.3f, SpriteEffects.None, 0);
             for (int i = 0; i < 5; i++)
             {

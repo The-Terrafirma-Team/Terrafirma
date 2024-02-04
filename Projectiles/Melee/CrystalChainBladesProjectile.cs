@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee
 {
     internal class CrystalChainBladesProjectile : ModProjectile
     {
@@ -61,8 +61,8 @@ namespace TerrafirmaRedux.Projectiles.Melee
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> ChainSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Melee/CrystalChainBladesChain");
-            Asset<Texture2D> BladeSprite = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Melee/CrystalChainBladesProjectile");
+            Asset<Texture2D> ChainSprite = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/CrystalChainBladesChain");
+            Asset<Texture2D> BladeSprite = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/CrystalChainBladesProjectile");
 
             for (int i = 0; i < (int)(Projectile.Center.Distance(Main.player[Projectile.owner].Center) / ChainSprite.Height()); i++)
             {

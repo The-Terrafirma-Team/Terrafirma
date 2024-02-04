@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Global.Structs;
-using TerrafirmaRedux.Items.Equipment.Ranged;
-using TerrafirmaRedux.Items.Weapons.Ranged.Guns.Hardmode;
+using Terrafirma.Global.Structs;
+using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Items.Weapons.Ranged.Guns.Hardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Systems.NPCQuests
+namespace Terrafirma.Systems.NPCQuests
 {
     /// <summary>
     /// Class for all the Quests that are loaded into the game.

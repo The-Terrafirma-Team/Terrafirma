@@ -4,11 +4,11 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Projectiles.Magic;
-using TerrafirmaRedux.Systems;
-using TerrafirmaRedux.Global;
+using Terrafirma.Projectiles.Magic;
+using Terrafirma.Systems;
+using Terrafirma.Global;
 
-namespace TerrafirmaRedux.Items.Weapons.Magic
+namespace Terrafirma.Items.Weapons.Magic
 {
     public class WandOfPoisoning : ModItem
     {

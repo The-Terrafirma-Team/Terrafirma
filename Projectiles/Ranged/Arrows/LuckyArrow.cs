@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
+namespace Terrafirma.Projectiles.Ranged.Arrows
 {
     internal class LuckyArrow : ModProjectile
     {

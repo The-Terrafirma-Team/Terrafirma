@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Rarities
+namespace Terrafirma.Rarities
 {
     internal class FinalQuestRarity : ModRarity
     {

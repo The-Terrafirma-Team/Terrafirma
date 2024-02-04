@@ -6,7 +6,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Pets
+namespace Terrafirma.Pets
 {
     public class StaffofRa : ModItem
     {

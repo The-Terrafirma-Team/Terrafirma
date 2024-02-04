@@ -10,12 +10,12 @@ using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class CursedFlameSentry : ModProjectile
     {
         float sentryrot = MathHelper.PiOver2;
-        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/CursedFlameSentryBase";
+        public override string Texture => "Terrafirma/Projectiles/Summons/CursedFlameSentryBase";
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -81,9 +81,9 @@ namespace TerrafirmaRedux.Projectiles.Summons
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/CursedFlameSentryBase");
-            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/CursedFlameShooter");
-            Asset<Texture2D> SentryShooterGlow = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/CursedFlameShooterGlow");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/CursedFlameSentryBase");
+            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/CursedFlameShooter");
+            Asset<Texture2D> SentryShooterGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/CursedFlameShooterGlow");
 
             Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 0), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()/2 + 10), 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryShooterGlow.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 0), null, Color.White, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width() / 2, SentryShooter.Height() / 2 + 10), 1, SpriteEffects.None, 0);

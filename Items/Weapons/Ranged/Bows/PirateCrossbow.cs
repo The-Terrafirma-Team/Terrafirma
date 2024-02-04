@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Bows
+namespace Terrafirma.Items.Weapons.Ranged.Bows
 {
     internal class PirateCrossbow : ModItem
     {

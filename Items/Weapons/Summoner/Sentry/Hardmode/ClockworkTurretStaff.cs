@@ -1,12 +1,12 @@
-﻿using TerrafirmaRedux.Items.Weapons.Melee.Shortswords;
+﻿using Terrafirma.Items.Weapons.Melee.Shortswords;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Projectiles.Summons;
+using Terrafirma.Projectiles.Summons;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.Hardmode
+namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
 {
     internal class ClockworkTurretStaff : ModItem
     {

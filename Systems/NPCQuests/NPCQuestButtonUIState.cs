@@ -7,13 +7,13 @@ using System;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.GameContent.UI.Elements;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria.UI.Chat;
 using Terraria.GameContent;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestButtonUIState : UIState

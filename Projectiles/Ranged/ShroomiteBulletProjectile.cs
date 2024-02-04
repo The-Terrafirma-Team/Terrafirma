@@ -9,7 +9,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Projectiles.Ranged
+namespace Terrafirma.Projectiles.Ranged
 {
     internal class ShroomiteBulletProjectile : ModProjectile
     {

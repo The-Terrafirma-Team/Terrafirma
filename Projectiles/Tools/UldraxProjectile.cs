@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria;
 
-namespace TerrafirmaRedux.Projectiles.Tools
+namespace Terrafirma.Projectiles.Tools
 {
     public class UldraxProjectile: ModProjectile
     {

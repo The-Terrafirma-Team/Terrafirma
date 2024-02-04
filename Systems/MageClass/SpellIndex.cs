@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Items.Weapons.Magic;
+using Terrafirma.Items.Weapons.Magic;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     //
     // Summary:
@@ -18,7 +18,7 @@ namespace TerrafirmaRedux.Systems.MageClass
     {
         public Dictionary<int, int[]> ItemCatalogue = new Dictionary<int, int[]>();
         public Dictionary<int, Tuple<int, string, string, string, float> > SpellCatalogue = new Dictionary<int, Tuple<int, string, string, string, float> >();
-        const string AssetPath = "TerrafirmaRedux/Systems/MageClass/SpellIcons/";
+        const string AssetPath = "Terrafirma/Systems/MageClass/SpellIcons/";
         public override void OnModLoad()
         {
 

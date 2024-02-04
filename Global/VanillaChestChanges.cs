@@ -1,10 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
-using TerrafirmaRedux.Items.Weapons.Summoner.Swarm;
+using Terrafirma.Items.Weapons.Summoner.Swarm;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class ChestItemWorldGen : ModSystem
     {

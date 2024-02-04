@@ -3,9 +3,9 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Other
+namespace Terrafirma.Items.Weapons.Melee.Other
 {
     internal class CrystalChainBlades : ModItem
     {

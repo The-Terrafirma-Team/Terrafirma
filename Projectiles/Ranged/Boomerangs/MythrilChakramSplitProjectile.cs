@@ -7,10 +7,10 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using TerrafirmaRedux.Global.Templates;
+using Terrafirma.Global.Templates;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {
     public class MythrilChakramSplitProjectile : ChakramTemplate
     {

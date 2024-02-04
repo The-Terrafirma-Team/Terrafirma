@@ -1,9 +1,9 @@
-﻿using TerrafirmaRedux.Projectiles.Ranged;
+﻿using Terrafirma.Projectiles.Ranged;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     internal class AmmoTypes : GlobalItem
     {

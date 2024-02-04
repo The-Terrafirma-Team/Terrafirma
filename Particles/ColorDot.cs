@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using System;
 
-namespace TerrafirmaRedux.Particles
+namespace Terrafirma.Particles
 {
     public class ColorDot : Particle
     {
@@ -28,7 +28,7 @@ namespace TerrafirmaRedux.Particles
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(TerrafirmaRedux.AssetPath + "Particles/GlowCircle");
+            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Terrafirma.AssetPath + "Particles/GlowCircle");
             Rectangle frame = new Rectangle(0, 0, texture.Width, texture.Height);
             Vector2 frameOrigin = new Vector2(texture.Width) / 2;
             Vector2 DrawPos = Position - Main.screenPosition;

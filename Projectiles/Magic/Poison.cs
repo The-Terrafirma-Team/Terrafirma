@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace TerrafirmaRedux.Projectiles.Magic
+namespace Terrafirma.Projectiles.Magic
 {
     public class Poison : ModProjectile
     {

@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Vanity.Dedicated
+namespace Terrafirma.Items.Vanity.Dedicated
 {
     [AutoloadEquip(EquipType.Head)]
     public class KinMask : ModItem
@@ -32,7 +32,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
 
     public class KinEyeGlow : PlayerDrawLayer
     {
-        private Texture2D GlowTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Vanity/Dedicated/KinMask_Head_Glow").Value;
+        private Texture2D GlowTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Vanity/Dedicated/KinMask_Head_Glow").Value;
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Head);
         public override bool IsHeadLayer => true;
 
@@ -87,7 +87,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
                 EyeColor = new Color(gray, gray, gray,0);
             }
             var vector3 = new Vector2(p.legFrame.Width * 0.5f, p.legFrame.Height * 0.4f);
-            if (p.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "KinMask", EquipType.Head))
+            if (p.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "KinMask", EquipType.Head))
             {
                 var value = new DrawData(GlowTexture,
                     new Vector2(
@@ -160,7 +160,7 @@ namespace TerrafirmaRedux.Items.Vanity.Dedicated
         }
         public override void ResetEffects()
         {
-            if (Player.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "KinMask", EquipType.Head) && Player.body == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "KinStripedSweater", EquipType.Body) && Player.legs == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "KinMechanicalLegs", EquipType.Legs))
+            if (Player.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "KinMask", EquipType.Head) && Player.body == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "KinStripedSweater", EquipType.Body) && Player.legs == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "KinMechanicalLegs", EquipType.Legs))
             {
                 KinSet = true;
             }

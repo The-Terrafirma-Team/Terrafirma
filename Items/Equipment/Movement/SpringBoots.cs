@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Equipment.Movement
+namespace Terrafirma.Items.Equipment.Movement
 {
     [AutoloadEquip(EquipType.Shoes)]
     class SpringBoots : ModItem

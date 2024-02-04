@@ -10,13 +10,13 @@ using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class IchorSentry : ModProjectile
     {
         float sentryrot = MathHelper.PiOver2;
         float backtimer = 0;
-        public override string Texture => "TerrafirmaRedux/Projectiles/Summons/IchorSentryBase";
+        public override string Texture => "Terrafirma/Projectiles/Summons/IchorSentryBase";
         public override void SetDefaults()
         {
             Projectile.damage = 30;
@@ -83,8 +83,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryBase");
-            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/IchorSentryTentacle");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/IchorSentryBase");
+            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/IchorSentryTentacle");
 
             Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8) + new Vector2(backtimer, 0).RotatedBy(sentryrot), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 1), null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);

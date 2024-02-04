@@ -1,9 +1,9 @@
-﻿using TerrafirmaRedux.Projectiles.Tools;
+﻿using Terrafirma.Projectiles.Tools;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Tools
+namespace Terrafirma.Items.Tools
 {
     internal class Uldrax: ModItem
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Equipment.Ranged
+namespace Terrafirma.Items.Equipment.Ranged
 {
     public class DrumMag : ModItem
     {

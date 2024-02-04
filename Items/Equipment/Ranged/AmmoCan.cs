@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Linq;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 
-namespace TerrafirmaRedux.Items.Equipment.Ranged
+namespace Terrafirma.Items.Equipment.Ranged
 {
     internal class AmmoCan : ModItem
     {

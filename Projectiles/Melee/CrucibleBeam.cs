@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Buffs.Debuffs;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee
 {
     internal class CrucibleBeam : ModProjectile
     {

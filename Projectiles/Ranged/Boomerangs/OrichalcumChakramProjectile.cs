@@ -7,9 +7,9 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using TerrafirmaRedux.Global.Templates;
+using Terrafirma.Global.Templates;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {
     public class OrichalcumChakramProjectile : ChakramTemplate
     {

@@ -11,7 +11,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace TerrafirmaRedux.Reworks.QueenSlime
+namespace Terrafirma.Reworks.QueenSlime
 {
     public class QueenSlimeBeam : ModProjectile
     {

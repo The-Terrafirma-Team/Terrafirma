@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Systems.NPCQuests;
+using Terrafirma.Systems.NPCQuests;
 using Terraria;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Global.Structs
+namespace Terrafirma.Global.Structs
 {
 
     public enum QuestType

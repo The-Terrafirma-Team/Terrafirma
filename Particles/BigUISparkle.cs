@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 
-namespace TerrafirmaRedux.Particles
+namespace Terrafirma.Particles
 {
     internal class BigUISparkle : Particle
     {

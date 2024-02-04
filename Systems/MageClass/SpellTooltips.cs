@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     internal class SpellTooltips : GlobalItem
     {
@@ -31,18 +31,18 @@ namespace TerrafirmaRedux.Systems.MageClass
 
                 if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length > 1)
                 {
-                    tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
+                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
                 }
                 else
                 {
-                    tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
                 }
                 
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
                     for (int i = 0; i < ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length; i++)
                     {
-                        tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SpellDescription",
+                        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellDescription",
                         "[c/999999:" +
                         ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item3 +
                         ": " +

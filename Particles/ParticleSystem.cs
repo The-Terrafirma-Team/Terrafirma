@@ -8,7 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Particles
+namespace Terrafirma.Particles
 {
     public class ParticleSystem : ModSystem
     {

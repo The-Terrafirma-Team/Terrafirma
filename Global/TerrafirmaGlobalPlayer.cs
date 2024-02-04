@@ -4,16 +4,16 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.GameInput;
-using TerrafirmaRedux.Systems.MageClass;
-using TerrafirmaRedux.Global.Structs;
-using TerrafirmaRedux.Items.Weapons.Melee.Swords;
-using TerrafirmaRedux.Projectiles.Melee;
+using Terrafirma.Systems.MageClass;
+using Terrafirma.Global.Structs;
+using Terrafirma.Items.Weapons.Melee.Swords;
+using Terrafirma.Projectiles.Melee;
 using System;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using TerrafirmaRedux.Items.Weapons.Summoner.Wrench;
+using Terrafirma.Items.Weapons.Summoner.Wrench;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class TerrafirmaGlobalPlayer : ModPlayer
     {
@@ -95,7 +95,7 @@ namespace TerrafirmaRedux.Global
 
                     if (JumpMultiplier > 1)
                     {
-                        SoundStyle boing = new SoundStyle("TerrafirmaRedux/Sounds/Boing",SoundType.Sound);
+                        SoundStyle boing = new SoundStyle("Terrafirma/Sounds/Boing",SoundType.Sound);
                         boing.Volume = 0.8f;
                         boing.PitchRange = (-0.1f, 0.1f);
                         boing.Pitch -= JumpMultiplier / 10;

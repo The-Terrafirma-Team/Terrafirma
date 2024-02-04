@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Systems.NPCQuests;
+using Terrafirma.Systems.NPCQuests;
 using Terraria;
 
-namespace TerrafirmaRedux.Global.Structs
+namespace Terrafirma.Global.Structs
 {
     /// <summary>
     /// Struct for better organising Progress (ex. Progress from 0 to 100). This Struct is mostly used to keep track of quest progress like enemy kill.

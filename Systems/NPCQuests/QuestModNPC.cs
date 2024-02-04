@@ -3,13 +3,13 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
-using TerrafirmaRedux.Systems.MageClass;
+using Terrafirma.Systems.MageClass;
 using System.ComponentModel;
-using TerrafirmaRedux.Global.Structs;
+using Terrafirma.Global.Structs;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace TerrafirmaRedux.Systems.NPCQuests
+namespace Terrafirma.Systems.NPCQuests
 {
     internal class QuestModNPC : ModPlayer
     {

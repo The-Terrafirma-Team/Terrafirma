@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Magic
+namespace Terrafirma.Projectiles.Magic
 {
     internal class InfernoFlamethrower : ModProjectile
     {

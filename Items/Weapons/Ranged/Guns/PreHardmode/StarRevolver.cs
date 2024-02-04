@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
+namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class StarRevolver : ModItem
     {

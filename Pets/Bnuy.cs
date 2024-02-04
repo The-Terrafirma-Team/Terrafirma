@@ -6,11 +6,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Pets
+namespace Terrafirma.Pets
 {
     public class Bnuy : ModItem
     {
-        public override string Texture => "TerrafirmaRedux/Pets/BnuyItem";
+        public override string Texture => "Terrafirma/Pets/BnuyItem";
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.Swing;
@@ -73,7 +73,7 @@ namespace TerrafirmaRedux.Pets
             "this is me if u even care",
             "sometimes"
         };
-        public override string Texture => "TerrafirmaRedux/Pets/Bnuy";
+        public override string Texture => "Terrafirma/Pets/Bnuy";
         public override void SetStaticDefaults()
         {
             Main.projPet[Projectile.type] = true;

@@ -11,7 +11,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Hooks
+namespace Terrafirma.Items.Hooks
 {
 	internal class SingularityHook : ModItem
 	{
@@ -35,7 +35,7 @@ namespace TerrafirmaRedux.Items.Hooks
 		private static Asset<Texture2D> chainTexture;
 
 		public override void Load() {
-			chainTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Hooks/SingularityHookChain");
+			chainTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Hooks/SingularityHookChain");
 		}
 
         public override void Unload() { // This is called once on mod reload when this piece of content is being unloaded.

@@ -1,9 +1,9 @@
-﻿using TerrafirmaRedux.Global;
+﻿using Terrafirma.Global;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Equipment
+namespace Terrafirma.Items.Equipment
 {
     [AutoloadEquip(EquipType.Shield)]
     public class WoodenShield : ModItem

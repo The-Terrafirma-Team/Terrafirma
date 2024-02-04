@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Vanity.Reference
+namespace Terrafirma.Items.Vanity.Reference
 {
     [AutoloadEquip(EquipType.Head)]
     public class HollowHelmet : ModItem
@@ -33,7 +33,7 @@ namespace TerrafirmaRedux.Items.Vanity.Reference
 
     public class HollowHelmetDrawLayer : PlayerDrawLayer
     {
-        private Texture2D HelmetTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Vanity/Reference/HollowHelmet_Head1").Value;
+        private Texture2D HelmetTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Vanity/Reference/HollowHelmet_Head1").Value;
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Head);
         public override bool IsHeadLayer => true;
 
@@ -82,7 +82,7 @@ namespace TerrafirmaRedux.Items.Vanity.Reference
                 }
             }
             var headFrame = new Vector2(player.headFrame.Width * 0.5f, player.headFrame.Height * 0.4f);
-            if (player.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<TerrafirmaRedux>(), "HollowHelmet", EquipType.Head))
+            if (player.head == EquipLoader.GetEquipSlot(ModContent.GetInstance<Terrafirma>(), "HollowHelmet", EquipType.Head))
             {
                 var value = new DrawData(
                     HelmetTexture,

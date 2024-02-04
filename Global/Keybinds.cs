@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     internal class Keybinds : ModPlayer
     {

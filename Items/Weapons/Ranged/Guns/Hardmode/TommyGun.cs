@@ -4,7 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Hardmode
+namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class TommyGun : ModItem
     {

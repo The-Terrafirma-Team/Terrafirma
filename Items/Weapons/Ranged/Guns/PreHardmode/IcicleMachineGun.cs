@@ -4,10 +4,10 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using TerrafirmaRedux.Global;
-using TerrafirmaRedux.Projectiles.Ranged;
+using Terrafirma.Global;
+using Terrafirma.Projectiles.Ranged;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode
+namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class IcicleMachineGun : ModItem
     {

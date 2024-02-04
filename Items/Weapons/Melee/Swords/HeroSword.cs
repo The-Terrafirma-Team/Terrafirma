@@ -2,16 +2,16 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TerrafirmaRedux.Particles;
-using TerrafirmaRedux.Projectiles.Melee;
-using TerrafirmaRedux.Rarities;
+using Terrafirma.Particles;
+using Terrafirma.Projectiles.Melee;
+using Terrafirma.Rarities;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class HeroSword : ModItem
     {
@@ -59,7 +59,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
 
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
-            Texture2D SwordTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Weapons/Melee/Swords/HeroSword").Value;
+            Texture2D SwordTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Weapons/Melee/Swords/HeroSword").Value;
             spriteBatch.Draw(SwordTexture,
                 Item.position - Main.screenPosition - new Vector2(13, 13),
                 new Rectangle(0, 0, 56, 56),
@@ -107,7 +107,7 @@ namespace TerrafirmaRedux.Items.Weapons.Melee.Swords
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            Texture2D SwordTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Items/Weapons/Melee/Swords/HeroSword").Value;
+            Texture2D SwordTexture = ModContent.Request<Texture2D>("Terrafirma/Items/Weapons/Melee/Swords/HeroSword").Value;
 
             spriteBatch.Draw(SwordTexture,
                 position + new Vector2(-6, 6),

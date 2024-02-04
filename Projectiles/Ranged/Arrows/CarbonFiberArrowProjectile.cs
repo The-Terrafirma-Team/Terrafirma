@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Buffs.Debuffs;
+using Terrafirma.Buffs.Debuffs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
+namespace Terrafirma.Projectiles.Ranged.Arrows
 {
     internal class CarbonFiberArrowProjectile : ModProjectile
     {

@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class ClockworkTurret : ModProjectile
     {
@@ -72,8 +72,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/ClockworkTurret");
-            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/ClockworkTurretBorder");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/ClockworkTurret");
+            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/ClockworkTurretBorder");
 
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0,SentryBase.Height()/4) , new Rectangle(0, (SentryBase.Height() / 2 * Projectile.frame), SentryBase.Width(),SentryBase.Height()/2), lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
             

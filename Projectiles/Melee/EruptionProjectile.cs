@@ -1,11 +1,11 @@
 ﻿using Terraria.ID;
 using Terraria;
-using TerrafirmaRedux.Global.Templates;
+using Terrafirma.Global.Templates;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using System;
 
-namespace TerrafirmaRedux.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee
 {
     public class EruptionProjectile: SpearTemplate
     {

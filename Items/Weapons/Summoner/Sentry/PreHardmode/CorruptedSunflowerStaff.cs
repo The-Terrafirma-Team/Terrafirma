@@ -2,10 +2,10 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Projectiles.Summons;
+using Terrafirma.Projectiles.Summons;
 using Terraria.DataStructures;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode
+namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
     internal class CorruptedSunflowerStaff : ModItem
     {

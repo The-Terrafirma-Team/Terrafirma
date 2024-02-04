@@ -1,4 +1,4 @@
-﻿using TerrafirmaRedux.Global;
+﻿using Terrafirma.Global;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace TerrafirmaRedux.Items.Equipment.Ranged
+namespace Terrafirma.Items.Equipment.Ranged
 {
     public class BoxOfHighPiercingRounds : ModItem
     {

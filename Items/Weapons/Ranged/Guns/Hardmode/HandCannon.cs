@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Hardmode
+namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class HandCannon : ModItem
     {

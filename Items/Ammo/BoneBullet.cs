@@ -1,9 +1,9 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using TerrafirmaRedux.Projectiles.Ranged.Bullets;
+using Terrafirma.Projectiles.Ranged.Bullets;
 
-namespace TerrafirmaRedux.Items.Ammo
+namespace Terrafirma.Items.Ammo
 {
     internal class BoneBullet : ModItem
     {

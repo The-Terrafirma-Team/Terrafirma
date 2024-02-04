@@ -4,18 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using TerrafirmaRedux.Global.Structs;
-using TerrafirmaRedux.Items.Ammo;
-using TerrafirmaRedux.Items.Equipment.Healing;
-using TerrafirmaRedux.Items.Equipment.Movement;
-using TerrafirmaRedux.Items.Equipment.Ranged;
+using Terrafirma.Global.Structs;
+using Terrafirma.Items.Ammo;
+using Terrafirma.Items.Equipment.Healing;
+using Terrafirma.Items.Equipment.Movement;
+using Terrafirma.Items.Equipment.Ranged;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class AccessorySynergyPlayer : ModPlayer
     {
@@ -108,10 +108,10 @@ namespace TerrafirmaRedux.Global
                 }
 
 
-                tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyName", "[c/2BE5FF:" + pickedSynergy.Name + "]"));
+                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyName", "[c/2BE5FF:" + pickedSynergy.Name + "]"));
 
-                tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyItems", "[c/2BE5FF:" + "Synergy with " + SynergyAccessories + "]"));
-                tooltips.Add(new TooltipLine(TerrafirmaRedux.Mod, "SynergyDescription", "[c/2BE5FF:" + pickedSynergy.Description + "]"));
+                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyItems", "[c/2BE5FF:" + "Synergy with " + SynergyAccessories + "]"));
+                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyDescription", "[c/2BE5FF:" + pickedSynergy.Description + "]"));
 
 
 

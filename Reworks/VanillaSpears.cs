@@ -6,7 +6,7 @@
 //using Terraria;
 //using Terraria.ModLoader;
 
-//namespace TerrafirmaRedux.Reworks
+//namespace Terrafirma.Reworks
 //{
 //    public class VanillaSpears : GlobalItem
 //    {

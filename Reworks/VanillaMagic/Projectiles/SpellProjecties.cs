@@ -10,9 +10,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework.Graphics;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Particles;
 
-namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
+namespace Terrafirma.Reworks.VanillaMagic.Projectiles
 {
     #region Homing Amethyst
     public class HomingAmethyst : ModProjectile
@@ -119,7 +119,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Diamond Turret
     public class DiamondTurret : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/DiamondTurret";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/DiamondTurret";
         public override void SetDefaults()
         {
             Projectile.penetrate = -1;
@@ -157,7 +157,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Amber Wall Crystal
     public class AmberWallCrystal : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AmberCrystal";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/AmberCrystal";
         public override void SetDefaults()
         {
             Projectile.tileCollide = false;
@@ -197,7 +197,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     public class AmberWall : ModProjectile
     {
         float randfall = 0f;
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AmberWall";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/AmberWall";
         public override void SetDefaults()
         {
             Projectile.penetrate = 12;
@@ -248,7 +248,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     public class ColoredPrism : ModProjectile
     {
         Color ShotColor = new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0);
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/RainbowShot";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/RainbowShot";
 
         public override void SetStaticDefaults()
         {
@@ -270,7 +270,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D RainbowShot = ModContent.Request<Texture2D>("TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/RainbowShot").Value;
+            Texture2D RainbowShot = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Projectiles/RainbowShot").Value;
 
             for (int i = 0; i < 5; i++)
             {
@@ -364,7 +364,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Water Geyser
     public class WaterGeyser : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/WaterGeyser";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/WaterGeyser";
 
         public override void SetStaticDefaults()
         {
@@ -520,7 +520,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Aurawave
     public class AuraWave : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/AuraWave";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/AuraWave";
 
         Vector2 playerpos = Vector2.Zero;
         public override void SetDefaults()
@@ -577,7 +577,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Bone Fragment
     public class BoneFragment : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/BoneFragments";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/BoneFragments";
 
         Vector2 playerpos = Vector2.Zero;
 
@@ -635,7 +635,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region Healing Bubble
     public class HealingBubble : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/HealingBubble";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/HealingBubble";
         public override void SetDefaults()
         {
             Projectile.penetrate = 1;
@@ -687,7 +687,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
     #region SkeletonHand
     public class SkeletonHand : ModProjectile
     {
-        public override string Texture => $"TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/SkeletonHand";
+        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Projectiles/SkeletonHand";
 
         public override void SetStaticDefaults()
         {
@@ -774,7 +774,7 @@ namespace TerrafirmaRedux.Reworks.VanillaMagic.Projectiles
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("TerrafirmaRedux/Reworks/VanillaMagic/Projectiles/SkeletonHandBone").Value;
+            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Projectiles/SkeletonHandBone").Value;
             for (int i = 0; i < Math.Abs((Projectile.Center.Y - OriginalPos.Y) / 32); i++)
             {
                 Main.EntitySpriteDraw(

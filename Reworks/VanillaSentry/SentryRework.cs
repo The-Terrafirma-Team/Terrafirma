@@ -10,7 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace TerrafirmaRedux.Reworks.VanillaSentry
+namespace Terrafirma.Reworks.VanillaSentry
 {
     public class SentryRework : GlobalProjectile
     {

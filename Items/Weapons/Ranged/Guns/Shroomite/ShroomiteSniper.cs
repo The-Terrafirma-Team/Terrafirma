@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Projectiles.Ranged;
-using TerrafirmaRedux.Projectiles.Ranged.Bullets;
-using TerrafirmaRedux.Projectiles.Tools;
+using Terrafirma.Projectiles.Ranged;
+using Terrafirma.Projectiles.Ranged.Bullets;
+using Terrafirma.Projectiles.Tools;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Guns.Shroomite
+namespace Terrafirma.Items.Weapons.Ranged.Guns.Shroomite
 {
     internal class ShroomiteSniper : ModItem
     {

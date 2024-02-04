@@ -1,13 +1,13 @@
-﻿using TerrafirmaRedux.Items.Ammo;
-using TerrafirmaRedux.Items.Equipment.Ranged;
-using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.Hardmode;
-using TerrafirmaRedux.Items.Weapons.Summoner.Sentry.PreHardmode;
-using TerrafirmaRedux.Items.Weapons.Summoner.Wrench;
+﻿using Terrafirma.Items.Ammo;
+using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode;
+using Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode;
+using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class GlobalNPCShop : GlobalNPC
     {

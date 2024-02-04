@@ -1,9 +1,9 @@
-﻿using TerrafirmaRedux.Global;
+﻿using Terrafirma.Global;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Equipment.Summoner
+namespace Terrafirma.Items.Equipment.Summoner
 {
     public class Uberclock : ModItem
     {

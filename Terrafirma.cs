@@ -4,18 +4,18 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux
+namespace Terrafirma
 {
-	public class TerrafirmaRedux : Mod
+	public class Terrafirma : Mod
 	{
-        public static TerrafirmaRedux Mod { get; private set; } = ModContent.GetInstance<TerrafirmaRedux>();
-        public const string AssetPath = "TerrafirmaRedux/Assets/";
+        public static Terrafirma Mod { get; private set; } = ModContent.GetInstance<Terrafirma>();
+        public const string AssetPath = "Terrafirma/Assets/";
         public override void Load()
         {
             GameShaders.Misc["Terrafirma:FlameShader"] = new MiscShaderData(new Ref<Effect>(ModContent.Request<Effect>($"{Mod.Name}" + "/Effects/FlameShader", AssetRequestMode.ImmediateLoad).Value),"Effect").UseShaderSpecificData(new Vector4());

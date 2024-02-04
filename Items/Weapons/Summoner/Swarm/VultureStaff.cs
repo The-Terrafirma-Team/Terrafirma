@@ -2,10 +2,10 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Data;
-using TerrafirmaRedux.Projectiles.Summons;
+using Terrafirma.Data;
+using Terrafirma.Projectiles.Summons;
 
-namespace TerrafirmaRedux.Items.Weapons.Summoner.Swarm
+namespace Terrafirma.Items.Weapons.Summoner.Swarm
 {
     internal class VultureStaff : ModItem
     {

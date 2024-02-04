@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Buffs.Debuffs;
+using Terrafirma.Buffs.Debuffs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Arrows
+namespace Terrafirma.Projectiles.Ranged.Arrows
 {
     internal class ICBAProjectile : ModProjectile
     {

@@ -8,7 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 
-namespace TerrafirmaRedux.Items.Equipment.Wings
+namespace Terrafirma.Items.Equipment.Wings
 {
     [AutoloadEquip(EquipType.Wings)]
     public class MonarchWings : ModItem

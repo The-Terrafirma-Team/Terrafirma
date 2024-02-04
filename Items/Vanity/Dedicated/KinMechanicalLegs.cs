@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Vanity.Dedicated
+namespace Terrafirma.Items.Vanity.Dedicated
 {
     [AutoloadEquip(EquipType.Legs)]
     public class KinMechanicalLegs : ModItem

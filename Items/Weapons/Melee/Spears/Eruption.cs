@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerrafirmaRedux.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Melee.Spears
+namespace Terrafirma.Items.Weapons.Melee.Spears
 {
     internal class Eruption: ModItem
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Buffs.Buffs;
+using Terrafirma.Buffs.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Consumable.Potions
+namespace Terrafirma.Items.Consumable.Potions
 {
     public class KnockbackResistPotion : ModItem
     {

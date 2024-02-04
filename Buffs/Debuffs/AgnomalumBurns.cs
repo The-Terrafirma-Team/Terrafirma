@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Global;
-using TerrafirmaRedux.Particles;
+using Terrafirma.Global;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Buffs.Debuffs
+namespace Terrafirma.Buffs.Debuffs
 {
     internal class AgnomalumBurns : ModBuff
     {

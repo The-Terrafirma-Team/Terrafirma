@@ -5,11 +5,11 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summons
 {
     internal class MechanicsPocketSentry : ModProjectile
     {
@@ -65,8 +65,8 @@ namespace TerrafirmaRedux.Projectiles.Summons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/MechanicsPocketSentry");
-            Asset<Texture2D> SentryGlow = ModContent.Request<Texture2D>("TerrafirmaRedux/Projectiles/Summons/MechanicsPocketSentryGlow");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/MechanicsPocketSentry");
+            Asset<Texture2D> SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/MechanicsPocketSentryGlow");
 
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition , null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryGlow.Value, Projectile.Center - Main.screenPosition + Glowrand, null, new Color(255,255,255,0) * Main.rand.NextFloat(0.6f,1f), 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);

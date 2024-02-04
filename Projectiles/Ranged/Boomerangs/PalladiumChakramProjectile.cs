@@ -7,13 +7,13 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using TerrafirmaRedux.Global.Templates;
+using Terrafirma.Global.Templates;
 
-namespace TerrafirmaRedux.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {
     public class PalladiumChakramProjectile : ChakramTemplate
     {
-        public override string Texture => "TerrafirmaRedux/Items/Weapons/Ranged/Boomerangs/Chakram/PalladiumChakram";
+        public override string Texture => "Terrafirma/Items/Weapons/Ranged/Boomerangs/Chakram/PalladiumChakram";
         protected override int BounceAmount => 5;
         protected override int BounceMode => -1;
         protected override float ReturnSpeed => 22f;

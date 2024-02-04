@@ -5,11 +5,11 @@ using System.IO;
 using Terraria.ID;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
-using TerrafirmaRedux.Particles;
-using TerrafirmaRedux.Projectiles.Summons;
+using Terrafirma.Particles;
+using Terrafirma.Projectiles.Summons;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TerrafirmaRedux.Global
+namespace Terrafirma.Global
 {
     public class SentryBuffID
     {
@@ -130,7 +130,7 @@ namespace TerrafirmaRedux.Global
         {
             if (projectile.GetGlobalProjectile<SentryChanges>().Priority == true)
             {
-                Texture2D Bookmark = ModContent.Request<Texture2D>(TerrafirmaRedux.AssetPath + "Bookmark").Value;
+                Texture2D Bookmark = ModContent.Request<Texture2D>(Terrafirma.AssetPath + "Bookmark").Value;
                 Main.EntitySpriteDraw(Bookmark, projectile.Bottom - Main.screenPosition, new Rectangle(0, 0, Bookmark.Width, Bookmark.Height), Color.White, 0, new Vector2(Bookmark.Width / 2, 0), 1, SpriteEffects.None);
             }
         }

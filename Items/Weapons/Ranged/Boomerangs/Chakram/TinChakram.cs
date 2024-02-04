@@ -9,9 +9,9 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using TerrafirmaRedux.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Ranged.Boomerangs;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Boomerangs.Chakram
+namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
 {
     internal class TinChakram : ModItem
     {

@@ -29,4 +29,4 @@ While the easy solution to the second issue may just be adding more weapons and 
 
 Instead of adding more weapons and overshadowing what's in vanilla already, Terrafirma seeks to bring new life to the vanilla weapons instead to make the base experience feel new and fresh.
 
-![image](https://github.com/ItzFred/TerrafirmaRedux/assets/60478514/f0804e03-a90c-46cf-823f-2840ebd177b4)
+![image](https://github.com/ItzFred/Terrafirma/assets/60478514/f0804e03-a90c-46cf-823f-2840ebd177b4)

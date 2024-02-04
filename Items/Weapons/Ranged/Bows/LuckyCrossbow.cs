@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TerrafirmaRedux.Projectiles.Ranged.Arrows;
-using TerrafirmaRedux.Rarities;
+using Terrafirma.Projectiles.Ranged.Arrows;
+using Terrafirma.Rarities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TerrafirmaRedux.Items.Weapons.Ranged.Bows
+namespace Terrafirma.Items.Weapons.Ranged.Bows
 {
     internal class LuckyCrossbow : ModItem
     {

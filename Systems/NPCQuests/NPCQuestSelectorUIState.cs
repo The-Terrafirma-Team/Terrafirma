@@ -7,20 +7,20 @@ using System;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.GameContent.UI.Elements;
-using TerrafirmaRedux.Global;
+using Terrafirma.Global;
 using Terraria.UI.Chat;
 using Terraria.GameContent;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.Linq;
-using TerrafirmaRedux.Items.Weapons.Ranged.Guns.PreHardmode;
-using TerrafirmaRedux.Global.Structs;
-using TerrafirmaRedux.Systems.NPCQuests;
+using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
+using Terrafirma.Global.Structs;
+using Terrafirma.Systems.NPCQuests;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
-using TerrafirmaRedux.Items.Equipment.Ranged;
+using Terrafirma.Items.Equipment.Ranged;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestSelectorUIState : UIState
@@ -83,18 +83,18 @@ namespace TerrafirmaRedux.Systems.MageClass
 
             //Set Textures
             localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
-            EmptyStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/EmptyStar").Value;
-            FullStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/FilledStar").Value;
+            EmptyStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/EmptyStar").Value;
+            FullStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/FilledStar").Value;
 
             QuestTypeIcons = new Texture2D[]
             {
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Explorer").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Scavenger").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Collector").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Slayer").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Destroyer").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Final").Value,
-                ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestType_Special").Value
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Explorer").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Scavenger").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Collector").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Slayer").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Destroyer").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Final").Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Special").Value
             };
 
             //Other Vars
@@ -147,7 +147,7 @@ namespace TerrafirmaRedux.Systems.MageClass
             }
 
             //Completion Status Button - UI Element
-            CompleteButton = new UIPanel(ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), 20);
+            CompleteButton = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
             CompleteButton.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
             CompleteButton.Height.Pixels = 40f;
             CompleteButton.HAlign = 1f;
@@ -329,8 +329,8 @@ namespace TerrafirmaRedux.Systems.MageClass
                 if (Buttons[i].IsMouseHovering)
                 {
                     //Set Textures and Other Stuff
-                    EmptyStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/EmptyStar").Value;
-                    FullStarTexture = ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/FilledStar").Value;
+                    EmptyStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/EmptyStar").Value;
+                    FullStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/FilledStar").Value;
 
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
@@ -541,7 +541,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     {
 
                         //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), 20);
+                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
                         Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         Button.Height.Pixels = 40f;
                         Button.HAlign = 0f;
@@ -602,7 +602,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     {
 
                         //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), 20);
+                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
                         Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         Button.Height.Pixels = 40f;
                         Button.HAlign = 0f;
@@ -661,7 +661,7 @@ namespace TerrafirmaRedux.Systems.MageClass
                     {
 
                         //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("TerrafirmaRedux/Systems/NPCQuests/QuestButtonPanel"), 20);
+                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
                         Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         Button.Height.Pixels = 40f;
                         Button.HAlign = 0f;

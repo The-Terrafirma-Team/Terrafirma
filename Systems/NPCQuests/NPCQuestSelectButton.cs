@@ -7,7 +7,7 @@ using System;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace TerrafirmaRedux.Systems.MageClass
+namespace Terrafirma.Systems.MageClass
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestSelectbutton : UIElement
