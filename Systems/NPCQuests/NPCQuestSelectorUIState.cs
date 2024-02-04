@@ -72,7 +72,7 @@ namespace Terrafirma.Systems.NPCQuests
         Texture2D FullStarTexture;
         Texture2D[] QuestTypeIcons;
 
-        QuestList localquestlist;
+        Quest[] localquestlist;
 
         NPC selectednpc = null;
 
@@ -275,22 +275,22 @@ namespace Terrafirma.Systems.NPCQuests
                 selectedQuest.Completion = 1;
 
                 //If the current quest has not been started yet
-                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
                 {
-                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
-                    Main.LocalPlayer.GetModPlayer<QuestModNPC>().StartQuest(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)]);
+                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
+                    Main.LocalPlayer.GetModPlayer<QuestModNPC>().StartQuest(localquestlist[localquestlist.GetQuestIndex(selectedQuest)]);
 
                     //Loop through all Quests and set their status to 0 => When A quest is started, all other quests are automatically ended
-                    for (int i = 0; i < localquestlist.Quests.Length; i++)
+                    for (int i = 0; i < localquestlist.Length; i++)
                     {
-                        if (localquestlist.Quests[i].Completion == 1 && !localquestlist.Quests[i].IsEqualsTo(selectedQuest))
+                        if (localquestlist[i].Completion == 1 && !localquestlist[i].IsEqualsTo(selectedQuest))
                         {
-                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist.Quests[i]);
-                            localquestlist.Quests[i].Completion = 0;
+                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist[i]);
+                            localquestlist[i].Completion = 0;
                             //Loop through all Button Quests and set their completion
                             for (int j = 0; j < ButtonQuests.Length; j++)
                             {
-                                if (!ButtonQuests[j].IsEqualsTo(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)])) 
+                                if (!ButtonQuests[j].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) 
                                 { 
                                     ButtonQuests[j].Completion = 0;
                                     
@@ -301,23 +301,23 @@ namespace Terrafirma.Systems.NPCQuests
 
                     }
 
-                    for (int i = 0; i < localquestlist.Quests.Length; i++)
+                    for (int i = 0; i < localquestlist.Length; i++)
                     {
-                        if (localquestlist.Quests[i].IsEqualsTo(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)])) localquestlist.Quests[i].Completion = 1;
+                        if (localquestlist[i].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) localquestlist[i].Completion = 1;
                     }
                 }
                 //If the current quest is in progress and the current quest can be completed
-                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1 && Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)], localquestlist, Main.LocalPlayer))
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1 && Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist[localquestlist.GetQuestIndex(selectedQuest)], localquestlist, Main.LocalPlayer))
                 {
-                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion = 2;
-                    localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Complete();
+                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion = 2;
+                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Complete();
 
                     //Loop through all Button Quests and set their completion
                     for (int i = 0; i < ButtonQuests.Length; i++)
                     {
-                        if (ButtonQuests[i].IsEqualsTo(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)])) 
+                        if (ButtonQuests[i].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) 
                         {
-                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)]);
+                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist[localquestlist.GetQuestIndex(selectedQuest)]);
                             ButtonQuests[i].Completion = 2; 
                         }
                     }
@@ -488,7 +488,7 @@ namespace Terrafirma.Systems.NPCQuests
         /// </summary>
         public void UpdateQuests()
         {
-            if (localquestlist.Quests.Length > 0)
+            if (localquestlist.Length > 0)
             {
                 
 
@@ -508,7 +508,7 @@ namespace Terrafirma.Systems.NPCQuests
                 ButtonQuests = new Quest[] {};
                 int ButtonIndex = 0;
 
-                ButtonAmount = localquestlist.Quests.Length;
+                ButtonAmount = localquestlist.Length;
 
                 //If Amount of quest buttons is higher than 12 => Create Vertical Scrollbar
                 if (ButtonAmount > 12)
@@ -530,19 +530,19 @@ namespace Terrafirma.Systems.NPCQuests
 
                 //
                 //OnGoingQuests
-                for (int i = 0; i < localquestlist.OnGoingQuests().Quests.Length; i++)
+                for (int i = 0; i < localquestlist.OnGoingQuests().Length; i++)
                 {
                     //Check if conditions match
                     bool allconditionsmatch = true;
-                    if (localquestlist.OnGoingQuests().Quests[i].conditions != null)
+                    if (localquestlist.OnGoingQuests()[i].conditions != null)
                     {
-                        for (int k = 0; k < localquestlist.OnGoingQuests().Quests[i].conditions.Length; k++)
+                        for (int k = 0; k < localquestlist.OnGoingQuests()[i].conditions.Length; k++)
                         {
-                            if (!localquestlist.OnGoingQuests().Quests[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
+                            if (!localquestlist.OnGoingQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
                         }
                     }
                     //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.OnGoingQuests().Quests[i].InvolvedNPCs.Contains(selectednpc.type))
+                    if (!localquestlist.OnGoingQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
                     {
                         allconditionsmatch = false;
                     }
@@ -562,7 +562,7 @@ namespace Terrafirma.Systems.NPCQuests
                         Buttons = Buttons.Append(Button).ToArray();
 
                         //Button Text - UI Element
-                        string ButtonTextText = localquestlist.OnGoingQuests().Quests[i].Name;
+                        string ButtonTextText = localquestlist.OnGoingQuests()[i].Name;
                         ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
                         ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
@@ -572,7 +572,7 @@ namespace Terrafirma.Systems.NPCQuests
                         ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
 
                         //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.OnGoingQuests().Quests[i].Type]);
+                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.OnGoingQuests()[i].Type]);
                         QuestTypeImage.Width.Pixels = 32f;
                         QuestTypeImage.Height.Pixels = 32f;
                         QuestTypeImage.HAlign = 0f;
@@ -584,26 +584,26 @@ namespace Terrafirma.Systems.NPCQuests
                         QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
 
                         //Add the Button's Quest to the ButtonQuests Array
-                        ButtonQuests = ButtonQuests.Append(localquestlist.OnGoingQuests().Quests[i]).ToArray();
+                        ButtonQuests = ButtonQuests.Append(localquestlist.OnGoingQuests()[i]).ToArray();
                         
                     }
                 }
 
                 //
                 //UncompletedQuests
-                for (int i = 0; i < localquestlist.UncompletedQuests().Quests.Length; i++)
+                for (int i = 0; i < localquestlist.UncompletedQuests().Length; i++)
                 {
                     //Check if conditions match
                     bool allconditionsmatch = true;
-                    if (localquestlist.UncompletedQuests().Quests[i].conditions != null)
+                    if (localquestlist.UncompletedQuests()[i].conditions != null)
                     {
-                        for (int k = 0; k < localquestlist.UncompletedQuests().Quests[i].conditions.Length; k++)
+                        for (int k = 0; k < localquestlist.UncompletedQuests()[i].conditions.Length; k++)
                         {
-                            if (!localquestlist.UncompletedQuests().Quests[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
+                            if (!localquestlist.UncompletedQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
                         }
                     }
                     //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.UncompletedQuests().Quests[i].InvolvedNPCs.Contains(selectednpc.type))
+                    if (!localquestlist.UncompletedQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
                     {
                         allconditionsmatch = false;
                     }
@@ -623,7 +623,7 @@ namespace Terrafirma.Systems.NPCQuests
                         Buttons = Buttons.Append(Button).ToArray();
 
                         //Button Text - UI Element
-                        string ButtonTextText = localquestlist.UncompletedQuests().Quests[i].Name;
+                        string ButtonTextText = localquestlist.UncompletedQuests()[i].Name;
                         ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
                         ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
@@ -633,7 +633,7 @@ namespace Terrafirma.Systems.NPCQuests
                         ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
 
                         //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.UncompletedQuests().Quests[i].Type]);
+                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.UncompletedQuests()[i].Type]);
                         QuestTypeImage.Width.Pixels = 32f;
                         QuestTypeImage.Height.Pixels = 32f;
                         QuestTypeImage.HAlign = 0f;
@@ -644,25 +644,25 @@ namespace Terrafirma.Systems.NPCQuests
 
                         QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
 
-                        ButtonQuests = ButtonQuests.Append(localquestlist.UncompletedQuests().Quests[i]).ToArray();
+                        ButtonQuests = ButtonQuests.Append(localquestlist.UncompletedQuests()[i]).ToArray();
                     }
                 }
 
                 //
                 //FinishedQuests
-                for (int i = 0; i < localquestlist.FinishedQuests().Quests.Length; i++)
+                for (int i = 0; i < localquestlist.FinishedQuests().Length; i++)
                 {
                     //Check if conditions match
                     bool allconditionsmatch = true;
-                    if (localquestlist.FinishedQuests().Quests[i].conditions != null)
+                    if (localquestlist.FinishedQuests()[i].conditions != null)
                     {
-                        for (int k = 0; k < localquestlist.FinishedQuests().Quests[i].conditions.Length; k++)
+                        for (int k = 0; k < localquestlist.FinishedQuests()[i].conditions.Length; k++)
                         {
-                            if (!localquestlist.FinishedQuests().Quests[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
+                            if (!localquestlist.FinishedQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
                         }
                     }
                     //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.FinishedQuests().Quests[i].InvolvedNPCs.Contains(selectednpc.type))
+                    if (!localquestlist.FinishedQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
                     {
                         allconditionsmatch = false;
                     }
@@ -682,7 +682,7 @@ namespace Terrafirma.Systems.NPCQuests
                         Buttons = Buttons.Append(Button).ToArray();
 
                         //Button Text - UI Element
-                        string ButtonTextText = localquestlist.FinishedQuests().Quests[i].Name;
+                        string ButtonTextText = localquestlist.FinishedQuests()[i].Name;
                         ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
                         ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
                         ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
@@ -692,7 +692,7 @@ namespace Terrafirma.Systems.NPCQuests
                         ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
 
                         //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.FinishedQuests().Quests[i].Type]);
+                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.FinishedQuests()[i].Type]);
                         QuestTypeImage.Width.Pixels = 32f;
                         QuestTypeImage.Height.Pixels = 32f;
                         QuestTypeImage.HAlign = 0f;
@@ -704,7 +704,7 @@ namespace Terrafirma.Systems.NPCQuests
                         QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
 
                         //Add the Button's Quest to the ButtonQuests Array
-                        ButtonQuests = ButtonQuests.Append(localquestlist.FinishedQuests().Quests[i]).ToArray();
+                        ButtonQuests = ButtonQuests.Append(localquestlist.FinishedQuests()[i]).ToArray();
                     }
                 }
 
@@ -725,19 +725,19 @@ namespace Terrafirma.Systems.NPCQuests
             localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
 
             //Check if the selected quest is in the Player's quest list && Check if the selected quest is not "NoQuest"
-            if (localquestlist.Quests.Contains(selectedQuest) && !selectedQuest.IsEqualsTo(new Quest("NoQuest")))
+            if (localquestlist.Contains(selectedQuest) && !selectedQuest.IsEqualsTo(new Quest("NoQuest")))
             {
                 //If The Quest's Completion status is "Completed"
-                if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 2)
+                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 2)
                 {
                     if (SideContainerRight.HasChild(CompleteButton)) SideContainerRight.RemoveChild(CompleteButton);
                 }
 
                 //If The Quest's Completion status is "In Progress"
-                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
                 {
                     //If the Quest can be Completed
-                    if ( Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)],localquestlist, Main.LocalPlayer) )
+                    if ( Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist[localquestlist.GetQuestIndex(selectedQuest)],localquestlist, Main.LocalPlayer) )
                     {
                         CompleteButtonText.SetText("Claim Reward");
                         if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
@@ -751,7 +751,7 @@ namespace Terrafirma.Systems.NPCQuests
                 }
 
                 //If The Quest's Completion status is "Not Started"
-                else if (localquestlist.Quests[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
                 {
                     CompleteButtonText.SetText("Start Quest");
                     if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);

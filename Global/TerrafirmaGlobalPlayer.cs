@@ -12,6 +12,7 @@ using System;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
+using Terrafirma.Systems.NPCQuests;
 
 namespace Terrafirma.Global
 {
@@ -33,7 +34,7 @@ namespace Terrafirma.Global
         public bool SpellUI = false;
         internal Item HeldMagicItem = new Item(0);
 
-        public QuestList playerquests = new QuestList();
+        public Quest[] playerquests = new Quest[] { };
 
         public override void ResetEffects()
         {
@@ -116,7 +117,7 @@ namespace Terrafirma.Global
         public override void PostUpdate()
         {
             //Main.NewText(playerquests.Quests[playerquests.Quests.Keys.ToArray()[0]]);
-            if (playerquests.Quests.Length == 0) playerquests = QuestList.ImportQuestList();
+            if (playerquests.Length == 0) playerquests = QuestIndex.quests;
 
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
             else { ModContent.GetInstance<SpellUISystem>().Hide(); }            

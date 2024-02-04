@@ -130,14 +130,14 @@ namespace Terrafirma.Global.Structs
         /// Sets the Quest to "In Progress"
         /// </summary>
         /// <param name="DisableOtherQuests"> Automatically true, will turn all other quests's status in the quest list from "In Progress" to "Not Started"</param>
-        public static void SetInProgress(this Quest quest, QuestList questlist = null, bool DisableOtherQuests = true)
+        public static void SetInProgress(this Quest quest, Quest[] questlist = null, bool DisableOtherQuests = true)
         {
             quest.Completion = 1;
             if (DisableOtherQuests && questlist != null)
             {
-                for (int i = 0; i < questlist.Quests.Length; i++)
+                for (int i = 0; i < questlist.Length; i++)
                 {
-                    if (questlist.Quests[i].Completion == 1 && !questlist.Quests[i].IsEqualsTo(quest)) questlist.Quests[i].Completion = 0;
+                    if (questlist[i].Completion == 1 && !questlist[i].IsEqualsTo(quest)) questlist[i].Completion = 0;
                 }
             }
             
@@ -150,6 +150,48 @@ namespace Terrafirma.Global.Structs
         public static void Uncomplete(this Quest quest)
         {
             quest.Completion = 0;
-        } 
+        }
+
+        public static Quest[] UncompletedQuests(this Quest[] questlist)
+        {
+            Quest[] uncompletedquests = new Quest[] { };
+            for (int i = 0; i < questlist.Length; i++)
+            {
+                if (questlist[i].Completion == 0) uncompletedquests = uncompletedquests.Append(questlist[i]).ToArray();
+            }
+            return uncompletedquests;
+        }
+
+        public static Quest[] OnGoingQuests(this Quest[] questlist)
+        {
+            Quest[] ongoingquests = new Quest[] { };
+            for (int i = 0; i < questlist.Length; i++)
+            {
+                if (questlist[i].Completion == 1) ongoingquests = ongoingquests.Append(questlist[i]).ToArray();
+            }
+            return ongoingquests;
+        }
+
+        public static Quest[] FinishedQuests(this Quest[] questlist)
+        {
+            Quest[] finishedquests = new Quest[] { };
+            for (int i = 0; i < questlist.Length; i++)
+            {
+                if (questlist[i].Completion == 2) finishedquests = finishedquests.Append(questlist[i]).ToArray();
+            }
+            return finishedquests;
+        }
+
+        /// <summary>
+        /// Gets the index of the a specific quest inside of a quest array
+        /// </summary>
+        public static int GetQuestIndex(this Quest[] array, Quest quest)
+        {
+            for (int i = 0; i < array.Length; i ++)
+            {
+                if (array[i].IsEqualsTo(quest)) return i;
+            }
+            return -1;
+        }
     }
 }

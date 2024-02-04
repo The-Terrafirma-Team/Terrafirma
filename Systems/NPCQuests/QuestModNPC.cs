@@ -96,7 +96,7 @@ namespace Terrafirma.Systems.NPCQuests
 
         }
 
-        public bool CanQuestBeCompleted(Quest quest, QuestList questlist, Player player)
+        public bool CanQuestBeCompleted(Quest quest, Quest[] questlist, Player player)
         {
             //Business Deal
             if (quest.IsEqualsTo(QuestIndex.BusinessDeal))
