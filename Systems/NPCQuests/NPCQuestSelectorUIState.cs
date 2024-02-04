@@ -20,9 +20,13 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terrafirma.Items.Equipment.Ranged;
 
-namespace Terrafirma.Systems.MageClass
+namespace Terrafirma.Systems.NPCQuests
 {
     [Autoload(Side = ModSide.Client)]
+
+
+    // This code needs some major clean up, it really does
+    // Also Add a warning window for when you start a new quest
     internal class NPCQuestSelectorUIState : UIState
     {
 

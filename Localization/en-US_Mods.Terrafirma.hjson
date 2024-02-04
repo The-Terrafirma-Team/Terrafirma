@@ -1,0 +1,287 @@
+Buffs: {
+	SlapBuff: {
+	}
+
+	AgnomalumBurns: {
+	}
+
+	PhantasmalBurn: {
+	}
+
+	SunofRaBuff: {
+	}
+
+	OrdnanceBuff: {
+	}
+
+	Engineering: {
+	}
+
+	KnockbackResist: {
+	}
+
+	Penetration: {
+	}
+
+	BnuyBuff: {
+	}
+}
+
+Items: {
+	AngryArrow: {
+	}
+
+	Birdshot: {
+	}
+
+	BoneBullet: {
+	}
+
+	BouncyBuckshot: {
+	}
+
+	Buckshot: {
+	}
+
+	CarbonFiberArrow: {
+	}
+
+	ExplosiveBuckshot: {
+	}
+
+	ICBA: {
+	}
+
+	PhantasmalArrow: {
+	}
+
+	ShroomiteBullet: {
+	}
+
+	LuckyBlock: {
+	}
+
+	SlapJuice: {
+	}
+
+	HeartContainer: {
+	}
+
+	SpringBoots: {
+	}
+
+	AmmoCan: {
+	}
+
+	BoxOfHighPiercingRounds: {
+	}
+
+	DrumMag: {
+	}
+
+	Foregrip: {
+	}
+
+	SacredGreaves: {
+	}
+
+	SacredHeadgear: {
+	}
+
+	SacredHelmet: {
+	}
+
+	SacredHood: {
+	}
+
+	SacredMask: {
+	}
+
+	SacredPlateMail: {
+	}
+
+	IceHook: {
+	}
+
+	SingularityHook: {
+	}
+
+	MajesticGel: {
+	}
+
+	Uldrax: {
+	}
+
+	KinMask: {
+	}
+
+	KinMechanicalLegs: {
+	}
+
+	KinStripedSweater: {
+	}
+
+	WandOfPoisoning: {
+	}
+
+	CrystalChainBlades: {
+	}
+
+	Rapier: {
+	}
+
+	CarmineHook: {
+	}
+
+	TheCrucible: {
+	}
+
+	HandCannon: {
+	}
+
+	IcicleMachineGun: {
+	}
+
+	KnifeShooter: {
+	}
+
+	LuckyCrossbow: {
+	}
+
+	PirateCrossbow: {
+	}
+
+	ShroomiteCrossbow: {
+	}
+
+	ShroomiteSMG: {
+	}
+
+	ShroomiteSniper: {
+	}
+
+	StarRevolver: {
+	}
+
+	TommyGun: {
+	}
+
+	CursedFlameSentryStaff: {
+	}
+
+	IchorSentryStaff: {
+	}
+
+	VultureStaff: {
+	}
+
+	ZombiemancyStaff: {
+	}
+
+	StaffofRa: {
+	}
+
+	CopperChakram: {
+	}
+
+	TinChakram: {
+	}
+
+	CobaltChakram: {
+	}
+
+	MythrilChakram: {
+	}
+
+	OrichalcumChakram: {
+	}
+
+	PalladiumChakram: {
+	}
+
+	PortableSlimeBakery: {
+	}
+
+	OrdnancePotion: {
+	}
+
+	HeroSword: {
+	}
+
+	NecromancerLocket: {
+	}
+
+	MetalWrench: {
+	}
+
+	Overclock: {
+	}
+
+	GunSword: {
+	}
+
+	Microshark: {
+	}
+
+	Uberclock: {
+	}
+
+	UmbraWrench: {
+	}
+
+	EngineeringPotion: {
+	}
+
+	Bonetwister: {
+	}
+
+	WoodenShield: {
+	}
+
+	KnockbackResistPotion: {
+	}
+
+	PenetrationPotion: {
+	}
+
+	Eruption: {
+	}
+
+	SporeMortarStaff: {
+	}
+
+	CorruptedSunflowerStaff: {
+	}
+
+	MechanicsPocketDefenseSystem: {
+	}
+
+	MonarchWings: {
+	}
+
+	ClockworkTurretStaff: {
+	}
+
+	CoolWrench: {
+	}
+
+	RoyalJellyStaff: {
+	}
+
+	BookmarkerWrench: {
+	}
+
+	Bnuy: {
+	}
+
+	HollowHelmet: {
+	}
+
+	PatchouliBody: {
+	}
+
+	PatchouliHat: {
+	}
+}
+
+Projectiles.CopperChakramProjetile.DisplayName: Copper Chakram Projetile

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.Audio;
 
-namespace Terrafirma.Systems.MageClass
+namespace Terrafirma.Systems.NPCQuests
 {
     [Autoload(Side = ModSide.Client)]
     public class NPCQuestButtonSystem : ModSystem

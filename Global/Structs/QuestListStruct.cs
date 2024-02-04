@@ -15,6 +15,13 @@ namespace Terrafirma.Global.Structs
     /// <summary>
     /// Creates a list of quests attached to a player, it is meant to be used to track a player's quest progression
     /// </summary>
+    /// 
+
+    // If you're Fred and you're reading this...
+    // What the fuck were you thinking when you made this??!@?!? This is literally just an Array with extra unnecessary steps
+    // It's like trying to cook eggs but instead of just cracking the egg like any normal human being you just decide to use an egg cracker gadget
+    //
+    // Get rid of this shit ASAP and Replace it with a simple Quest Array instead
     public class QuestList
     {
         public Player QuestPlayer;
@@ -48,6 +55,8 @@ namespace Terrafirma.Global.Structs
 
     }
 
+    //Get rid of most of the stuff here since it's plain unnecessary except like a few things in here
+    //For those few methods that are actually useful, move them to the quest struct
     internal static class QuestListMethods
     {
         public static void AddQuest(this QuestList questlist, Quest quest)

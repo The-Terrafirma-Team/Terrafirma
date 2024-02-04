@@ -13,7 +13,7 @@ using Terraria.GameContent;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Terrafirma.Systems.MageClass
+namespace Terrafirma.Systems.NPCQuests
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestButtonUIState : UIState
