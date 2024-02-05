@@ -45,19 +45,21 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
         }
         public override void AI()
         {
-            switch (Projectile.ai[0])
+            if (Projectile.ai[1] == 0)
             {
-                case 0: TrailColor = new Color(60, 40, 0, 0); break;
-                case 1: TrailColor = new Color(40, 0, 0, 0); Projectile.penetrate = 4; break;
-                case 2: TrailColor = new Color(0, 60, 40, 0); Projectile.penetrate = 4; break;
-                case 3: TrailColor = new Color(60, 0, 60, 0); break;
-                case 4: TrailColor = new Color(40, 40, 40, 0); Projectile.velocity = Projectile.velocity * 0.1f; break;
-                case 5: TrailColor = new Color(0, 0, 0, 0); Projectile.velocity = Projectile.velocity * 2f; Projectile.penetrate = 10; break;
-                case 6: TrailColor = new Color(0, 60, 0, 0); Projectile.velocity = Projectile.velocity * 0.8f; break;
-                case 7: TrailColor = new Color(20, 40, 40, 0); Projectile.tileCollide = false; Projectile.penetrate = 4; break;
+                switch (Projectile.ai[0])
+                {
+                    case 0: TrailColor = new Color(60, 40, 0, 0); break;
+                    case 1: TrailColor = new Color(40, 0, 0, 0); Projectile.penetrate = 4; break;
+                    case 2: TrailColor = new Color(0, 60, 40, 0); Projectile.penetrate = 4; break;
+                    case 3: TrailColor = new Color(60, 0, 60, 0); break;
+                    case 4: TrailColor = new Color(40, 40, 40, 0); Projectile.velocity = Projectile.velocity * 0.1f; break;
+                    case 5: TrailColor = new Color(0, 0, 0, 0); Projectile.velocity = Projectile.velocity * 2f; Projectile.penetrate = 10; break;
+                    case 6: TrailColor = new Color(0, 60, 0, 0); Projectile.velocity = Projectile.velocity * 0.8f; break;
+                    case 7: TrailColor = new Color(20, 40, 40, 0); Projectile.tileCollide = false; Projectile.penetrate = 4; break;
+                }
             }
-
-            Projectile.ai[1] += 1;
+            
 
             Lighting.AddLight(Projectile.Center, new Vector3(TrailColor.R / 40, TrailColor.G / 40, TrailColor.B / 40));
             Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + (float)(90 * (Math.PI / 180));
@@ -69,13 +71,13 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
                     break;
                 case 1:
                     Projectile.velocity = Projectile.velocity.RotatedBy(5 * (Math.PI / 180) * rotdirection);
-                    if (Projectile.ai[1] % 20 == 0)
+                    if (Projectile.ai[1] % 20 == 0 && Projectile.ai[1] != 0)
                     {
                         rotdirection = Main.rand.NextBool() ? -1 : 1;
                     }
                     break;
                 case 2:
-                    if (Projectile.ai[1] % 20 == 0)
+                    if (Projectile.ai[1] % 20 == 0 && Projectile.ai[1] != 0)
                     {
                         Projectile.velocity = Projectile.velocity.RotatedBy(90 * (Math.PI / 180) * (Main.rand.NextBool() ? -1 : 1));
                     }
@@ -101,6 +103,8 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
                     break;
 
             }
+
+            Projectile.ai[1] += 1;
 
         }
 

@@ -25,6 +25,17 @@ namespace Terrafirma
 
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {
+
+            string turretlist = "";
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i].WipableTurret)
+                {
+                    turretlist = turretlist + ", " + Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority;
+                }
+            }
+            Main.NewText(turretlist);
+
             List<Projectile> list = new List<Projectile>();
             float usedslots = 0f;
             for (int i = 0; i < Main.projectile.Length; i++)
@@ -35,20 +46,23 @@ namespace Terrafirma
                     usedslots += Main.projectile[i].GetGlobalProjectile<SentryChanges>().SentrySlots;
                 }
             }
-            int num = 0;
-            while (usedslots > player.maxTurrets && ++num < Main.projectile.Length)
+            while (usedslots > player.maxTurrets)
             {
-                Projectile projectile = list[0];
-                for (int j = 1; j < list.Count; j++)
+                Projectile projectile = null;
+                for (int j = 0; j < list.Count; j++)
                 {
-                    if (list[j].timeLeft < projectile.timeLeft && list[j].GetGlobalProjectile<SentryChanges>().Priority == false)
+                    if (projectile == null && !list[j].GetGlobalProjectile<SentryChanges>().Priority)
+                    {
+                        projectile = list[j];
+                    }
+                    else if (projectile != null && list[j].timeLeft < projectile.timeLeft && !list[j].GetGlobalProjectile<SentryChanges>().Priority)
                     {
                         projectile = list[j];
                     }
                 }
+                list.Remove(projectile);
                 projectile.Kill();
                 usedslots -= projectile.GetGlobalProjectile<SentryChanges>().SentrySlots;
-                list.Remove(projectile);
             }
         }
 
