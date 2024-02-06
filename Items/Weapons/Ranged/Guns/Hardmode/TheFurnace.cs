@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Projectiles.Ranged.Bullets;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,7 +12,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
     {
         public override void SetDefaults()
         {
-            Item.damage = 65;
+            Item.damage = 56;
             Item.crit = 20;
             Item.knockBack = 6f;
 
@@ -28,9 +29,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 1, 90, 0);
 
-            Item.useAmmo = AmmoID.Bullet;
-            Item.shoot = ModContent.ProjectileType<MoltenBulletProjectile>();
-            Item.shootSpeed = 4f;
+            Item.shoot = ModContent.ProjectileType<HotCoal>();
+            Item.shootSpeed = 12f;
 
             Item.scale = 0.85f;
         }
@@ -52,7 +52,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             velocity = velocity.RotatedByRandom(0.05f);
-            type = ModContent.ProjectileType<MoltenBulletProjectile>();
+            type = ModContent.ProjectileType<HotCoal>();
             position += new Vector2(40, (-5 * player.direction) * Main.rand.Next(1,4)).RotatedBy(velocity.ToRotation());
             base.ModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
         }

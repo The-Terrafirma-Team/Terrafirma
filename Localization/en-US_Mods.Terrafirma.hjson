@@ -663,4 +663,5 @@ Projectiles: {
 	BnuyProj.DisplayName: Bnuy Proj
 	InkProjectile.DisplayName: Ink Projectile
 	MoltenBulletProjectile.DisplayName: Molten Bullet Projectile
+	HotCoal.DisplayName: Hot Coal
 }

@@ -26,16 +26,6 @@ namespace Terrafirma
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {
 
-            string turretlist = "";
-            for (int i = 0; i < Main.projectile.Length; i++)
-            {
-                if (Main.projectile[i].WipableTurret)
-                {
-                    turretlist = turretlist + ", " + Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority;
-                }
-            }
-            Main.NewText(turretlist);
-
             List<Projectile> list = new List<Projectile>();
             float usedslots = 0f;
             for (int i = 0; i < Main.projectile.Length; i++)

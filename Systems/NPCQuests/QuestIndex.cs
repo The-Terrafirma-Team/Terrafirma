@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Global.Structs;
+using Terrafirma.Items.Consumable;
 using Terrafirma.Items.Equipment.Ranged;
 using Terrafirma.Items.Weapons.Ranged.Guns.Hardmode;
 using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
