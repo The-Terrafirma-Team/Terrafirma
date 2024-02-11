@@ -595,6 +595,16 @@ Items: {
 		DisplayName: Tempire Teleport
 		Tooltip: ""
 	}
+
+	TempeslateBlock: {
+		DisplayName: Tempeslate Block
+		Tooltip: ""
+	}
+
+	TempirianSoil: {
+		DisplayName: Tempirian Soil
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
