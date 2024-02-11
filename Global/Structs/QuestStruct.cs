@@ -193,5 +193,17 @@ namespace Terrafirma.Global.Structs
             }
             return -1;
         }
+
+        /// <summary>
+        /// returns if any quest in this list has their status set to "in progress"
+        /// </summary>
+        public static bool AnyQuestInProgress(this Quest[] questlist)
+        {
+            for (int i = 0; i < questlist.Length; i++)
+            {
+                if (questlist[i].Completion == 1) return true;
+            }
+            return false;
+        }
     }
 }

@@ -585,6 +585,11 @@ Items: {
 		DisplayName: The Furnace
 		Tooltip: ""
 	}
+
+	TempireTeleport: {
+		DisplayName: Tempire Teleport
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

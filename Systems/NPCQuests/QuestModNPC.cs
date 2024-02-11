@@ -31,6 +31,7 @@ namespace Terrafirma.Systems.NPCQuests
                 if (Main.npc[i].type == NPCID.Guide) guide = Main.npc[i];
             }
 
+
             if (Player.TalkNPC == armsdealer || Player.TalkNPC == guide || Player.TalkNPC == steampunker)
             {
                 if (!JustOpenedUI) 
@@ -59,11 +60,20 @@ namespace Terrafirma.Systems.NPCQuests
                 JustOpenedUI = false; 
             }
 
-            if (Main.playerInventory) 
-            { 
-                ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton(); 
-                ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI(); 
-                JustOpenedUI = false; 
+            if (Main.npcShop == 1)
+            {
+                ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+                ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
+                ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
+                JustOpenedUI = false;
+            }
+
+            if (Main.playerInventory)
+            {
+                ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+                ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
+                ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
+                JustOpenedUI = false;
             }
 
             if (ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC != -1 &&

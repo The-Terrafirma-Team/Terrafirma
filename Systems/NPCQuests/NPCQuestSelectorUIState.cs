@@ -49,8 +49,10 @@ namespace Terrafirma.Systems.NPCQuests
         UIText CompleteButtonText;
 
         UIText QuestName;
+        UIPanel QuestDialoguePanel;
         UIText QuestDialogue;
         UIText QuestTaskTitle;
+        UIPanel QuestTaskPanel;
         UIText QuestTask;
 
         UIText DifficultyText;
@@ -357,16 +359,26 @@ namespace Terrafirma.Systems.NPCQuests
                     QuestName.MarginTop = 10f;
                     SideContainerRight.Append(QuestName);
 
+                    // Quest Dialogue Panel - UI Element
+                    if (SideContainerRight.HasChild(QuestDialoguePanel)) SideContainerRight.RemoveChild(QuestDialoguePanel);
+                    QuestDialoguePanel = new UIPanel();
+                    QuestDialoguePanel.VAlign = 0f;
+                    QuestDialoguePanel.HAlign = 0.5f;
+                    QuestDialoguePanel.BackgroundColor = new Color(20, 21, 51) * 0.4f;
+                    QuestDialoguePanel.Width.Pixels = SideContainerRight.Width.Pixels - 20f;
+                    QuestDialoguePanel.Height.Pixels = ((ButtonQuests[i].Dialogue.Length / 45) + 1) * 20f + 20f;
+                    QuestDialoguePanel.MarginTop = QuestName.Height.Pixels + 24f;
+                    SideContainerRight.Append(QuestDialoguePanel);
+
                     // Quest Dialogue - UI Element
-                    if (SideContainerRight.HasChild(QuestDialogue)) SideContainerRight.RemoveChild(QuestDialogue);
+                    if (QuestDialoguePanel.HasChild(QuestDialogue)) QuestDialoguePanel.RemoveChild(QuestDialogue);
                     QuestDialogue = new UIText(ButtonQuests[i].Dialogue, 1f);
                     QuestDialogue.VAlign = 0f;
                     QuestDialogue.HAlign = 0f;
-                    QuestDialogue.MarginTop = QuestName.Height.Pixels + 24f;
                     QuestDialogue.Height.Pixels = ((QuestDialogue.Text.Length / 45) + 1) * 20f;
                     QuestDialogue.Width.Pixels = SideContainerRight.Width.Pixels;
                     QuestDialogue.IsWrapped = true;
-                    SideContainerRight.Append(QuestDialogue);
+                    QuestDialoguePanel.Append(QuestDialogue);
 
                     // Quest Task Title - UI Element
                     if (SideContainerRight.HasChild(QuestTaskTitle)) SideContainerRight.RemoveChild(QuestTaskTitle);
@@ -376,19 +388,29 @@ namespace Terrafirma.Systems.NPCQuests
                     QuestTaskTitle.Width.Pixels = 45f;
                     QuestTaskTitle.Height.Pixels = 25f;
                     QuestTaskTitle.IsWrapped = true;
-                    QuestTaskTitle.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + 25f;
+                    QuestTaskTitle.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + 25f;
                     SideContainerRight.Append(QuestTaskTitle);
 
+                    // Quest Task Panel - UI Element
+                    if (SideContainerRight.HasChild(QuestTaskPanel)) SideContainerRight.RemoveChild(QuestTaskPanel);
+                    QuestTaskPanel = new UIPanel();
+                    QuestTaskPanel.VAlign = 0f;
+                    QuestTaskPanel.HAlign = 0.5f;
+                    QuestTaskPanel.BackgroundColor = new Color(20, 21, 51) * 0.4f;
+                    QuestTaskPanel.Width.Pixels = SideContainerRight.Width.Pixels - 20f;
+                    QuestTaskPanel.Height.Pixels = ((ButtonQuests[i].TaskDescription.Length / 45) + 1) * 20f + 20f;
+                    QuestTaskPanel.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + 50f;
+                    SideContainerRight.Append(QuestTaskPanel);
+
                     // Quest Task Description - UI Element
-                    if (SideContainerRight.HasChild(QuestTask)) SideContainerRight.RemoveChild(QuestTask);
+                    if (QuestTaskPanel.HasChild(QuestTask)) QuestTaskPanel.RemoveChild(QuestTask);
                     QuestTask = new UIText(ButtonQuests[i].TaskDescription, 1f);
                     QuestTask.VAlign = 0f;
                     QuestTask.HAlign = 0f;
-                    QuestTask.Width.Pixels = SideContainerRight.Width.Pixels;
+                    QuestTask.Width.Pixels = QuestTaskPanel.Width.Pixels;
                     QuestTask.Height.Pixels = ((QuestTask.Text.Length / 45) + 1) * 20f;
                     QuestTask.IsWrapped = true;
-                    QuestTask.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + 50f;
-                    SideContainerRight.Append(QuestTask);
+                    QuestTaskPanel.Append(QuestTask);
 
                     // Difficulty Title - UI Element
                     if (SideContainerRight.HasChild(DifficultyText)) SideContainerRight.RemoveChild(DifficultyText);
@@ -398,7 +420,7 @@ namespace Terrafirma.Systems.NPCQuests
                     DifficultyText.Width.Pixels = 90f;
                     DifficultyText.Height.Pixels = 25f;
                     DifficultyText.IsWrapped = true;
-                    DifficultyText.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + 60f;
+                    DifficultyText.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + 60f;
                     SideContainerRight.Append(DifficultyText);
 
                     // Quest Stars - UI Element
@@ -422,7 +444,7 @@ namespace Terrafirma.Systems.NPCQuests
                         DifficultyStars.Width.Pixels = 10f;
                         DifficultyStars.Height.Pixels = 10f;
                         DifficultyStars.Color = new Color(1f, 1f - (j / 7f), 1f - (j / 9f), 1f);
-                        DifficultyStars.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + DifficultyText.Height.Pixels + 75f;
+                        DifficultyStars.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + DifficultyText.Height.Pixels + 75f;
                         DifficultyStars.MarginLeft = j * 20f;
                         DifficultyStarsList = DifficultyStarsList.Append(DifficultyStars).ToArray();
                         SideContainerRight.Append(DifficultyStars);
@@ -443,7 +465,7 @@ namespace Terrafirma.Systems.NPCQuests
                         RewardText.Width.Pixels = 100f;
                         RewardText.Height.Pixels = 25f;
                         RewardText.IsWrapped = true;
-                        RewardText.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + 60f;
+                        RewardText.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + 60f;
                         SideContainerRight.Append(RewardText);
 
 
@@ -469,7 +491,7 @@ namespace Terrafirma.Systems.NPCQuests
                         RewardItem = new UIItemSlot(ButtonQuests[i].Rewards, j, 22);
                         RewardItem.VAlign = 0f;
                         RewardItem.HAlign = 0.5f;
-                        RewardItem.MarginTop = QuestName.Height.Pixels + QuestDialogue.Height.Pixels + QuestTask.Height.Pixels + DifficultyText.Height.Pixels + 85f + (((float)Math.Floor((double)j / 6)) * 55);
+                        RewardItem.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + DifficultyText.Height.Pixels + 85f + (((float)Math.Floor((double)j / 6)) * 55);
                         RewardItem.MarginLeft = -30f + ((j % 6) * 110f);
                         RewardItem.Width.Pixels = 10f;
                         RewardItem.Height.Pixels = 10f;
