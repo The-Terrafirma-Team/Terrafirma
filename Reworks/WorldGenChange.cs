@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using SubworldLibrary;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,6 @@ namespace Terrafirma.Reworks
 
             base.OnWorldUnload();
         }
-        
 
     }
 }

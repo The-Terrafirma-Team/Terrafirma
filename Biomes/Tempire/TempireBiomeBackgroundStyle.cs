@@ -41,11 +41,11 @@ namespace Terrafirma.Biomes.Tempire
 
         public override int ChooseFarTexture()
         {
-            return ModContent.GetModBackgroundSlot("Terrafirma/Backgrounds/TempireBiomeFarBackground0");
+            return ModContent.GetModBackgroundSlot("Terrafirma/Backgrounds/TempireBiomeFarBackground1");
         }
         public override int ChooseMiddleTexture()
         {
-            return ModContent.GetModBackgroundSlot("Terrafirma/Backgrounds/TempireBiomeMidBackground0");
+            return ModContent.GetModBackgroundSlot("Terrafirma/Backgrounds/TempireBiomeMidBackground1");
         }
 
         public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
