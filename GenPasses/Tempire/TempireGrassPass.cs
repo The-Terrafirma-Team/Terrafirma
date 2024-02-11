@@ -16,10 +16,10 @@ using Terrafirma.Tiles.Tempire;
 
 namespace Terrafirma.GenPasses.Tempire
 {
-    public class TestGrassGenPass : GenPass
+    public class TempireGrassPass : GenPass
     {
         //TODO: remove this once tML changes generation passes
-        public TestGrassGenPass() : base("Grass", 2) { }
+        public TempireGrassPass() : base("Grass", 2) { }
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {  
@@ -41,11 +41,16 @@ namespace Terrafirma.GenPasses.Tempire
                                 }   
                             }
                         }
-                        
+
+                        if (WorldGen.genRand.NextBool(10) && i > 10 && i < TempireSubworld.WorldWidth - 10 && j > 10 && j < TempireSubworld.WorldWidth - 10)
+                        {
+                            if(!Main.tile[i + Main.rand.Next(-6,6), j + Main.rand.Next(-6, 6)].HasTile)
+                            {
+                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<TempireGrass>();
+                            }
+                        }
                     }
                 }
-
-                
             }
         }
     }

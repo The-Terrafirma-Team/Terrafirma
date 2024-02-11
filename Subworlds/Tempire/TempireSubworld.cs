@@ -24,10 +24,14 @@ namespace Terrafirma.Subworlds.Tempire
 
         public override List<GenPass> Tasks => new List<GenPass>()
         {
-            new TestGenPass(),
-            //new TestCircleIsland(),
-            new TestHouseGenPass(),
-            new TestGrassGenPass(),
+            //new TestGenPass(),
+            ////new TestCircleIsland(),
+            //new TestHouseGenPass(),
+            //new TestGrassGenPass(),
+            //new TestSmootheningGenPass()
+            new MakeWorldNotBreakWhenItIsTallPass(),
+            new BaseTerrain(),
+            new TempireGrassPass(),
             new TestSmootheningGenPass()
         };
         public override void OnLoad()
