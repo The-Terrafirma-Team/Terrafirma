@@ -11,6 +11,8 @@ using Terrafirma.Subworlds.Tempire;
 using System.Reflection;
 using Terraria.Map;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Tiles.Tempire;
+using Terraria.ModLoader;
 
 namespace Terrafirma.GenPasses.Tempire
 {
@@ -33,13 +35,13 @@ namespace Terrafirma.GenPasses.Tempire
             Main.initMap = new bool[Main.mapTargetX, Main.mapTargetY];
             Main.mapWasContentLost = new bool[Main.mapTargetX, Main.mapTargetY];
 
-
+            Main.rockLayer = TempireSubworld.WorldHeight / 1.5;
+            Main.worldSurface = TempireSubworld.WorldHeight / 2 + 15;
 
             progress.Message = "Testing Terrain"; // Sets the text displayed for this pass
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
-                Main.rockLayer = TempireSubworld.WorldHeight;
-                Main.worldSurface = TempireSubworld.WorldHeight;
+                
                 for (int j = TempireSubworld.WorldHeight / 2; j < TempireSubworld.WorldHeight - 1; j++)
                 {
                     progress.Set(0.5f); // Controls the progress bar, should only be set between 0f and 1f
@@ -47,7 +49,7 @@ namespace Terrafirma.GenPasses.Tempire
                     {
                         Tile tile = Main.tile[i, j];
                         tile.HasTile = true;
-                        tile.TileType = TileID.Dirt;
+                        tile.TileType = (ushort)ModContent.TileType<TempireDirt>();
                     }
                 }
 

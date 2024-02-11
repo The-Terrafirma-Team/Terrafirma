@@ -11,6 +11,8 @@ using Terrafirma.Subworlds.Tempire;
 using System.Reflection;
 using Terraria.Map;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.ModLoader;
+using Terrafirma.Tiles.Tempire;
 
 namespace Terrafirma.GenPasses.Tempire
 {
@@ -27,7 +29,7 @@ namespace Terrafirma.GenPasses.Tempire
                 for (int j = 0; j < TempireSubworld.WorldHeight - 1; j++)
                 {
 
-                    if (Main.tile[i, j].HasTile && Main.tile[i,j].TileType == TileID.Dirt)
+                    if (Main.tile[i, j].HasTile && Main.tile[i,j].TileType == (ushort)ModContent.TileType<TempireDirt>())
                     {
                         for (int k = -1; k <= 1; k++)
                         {
@@ -35,7 +37,7 @@ namespace Terrafirma.GenPasses.Tempire
                             {
                                 if (i != 0 && i != TempireSubworld.WorldWidth)
                                 {
-                                    if (!Main.tile[i + k, j + c].HasTile) Main.tile[i, j].TileType = TileID.Grass;
+                                    if (!Main.tile[i + k, j + c].HasTile) Main.tile[i, j].TileType = (ushort)ModContent.TileType<TempireGrass>();
                                 }   
                             }
                         }

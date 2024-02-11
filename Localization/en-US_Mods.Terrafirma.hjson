@@ -670,3 +670,10 @@ Projectiles: {
 	MoltenBulletProjectile.DisplayName: Molten Bullet Projectile
 	HotCoal.DisplayName: Hot Coal
 }
+
+Biomes: {
+	TempireBiome: {
+		DisplayName: Tempire Biome
+		TownNPCDialogueName: the Tempire Biome
+	}
+}

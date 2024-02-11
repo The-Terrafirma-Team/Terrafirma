@@ -17,7 +17,7 @@ namespace Terrafirma.Items.Vanity.Reference
         {
             Item.width = 28;
             Item.height = 30;
-            Item.rare = ItemRarityID.Red; //ModContent.RarityType<KinRarity>();
+            Item.rare = ItemRarityID.Red; 
             Item.value = Item.sellPrice(silver: 75);
             Item.vanity = true;
             
@@ -88,7 +88,7 @@ namespace Terrafirma.Items.Vanity.Reference
                     new Vector2(
                         (int)(drawInfo.Position.X - Main.screenPosition.X - (p.bodyFrame.Width / 2) + (p.width / 2)),
                         (int)(drawInfo.Position.Y - Main.screenPosition.Y + p.height - p.bodyFrame.Height - 4f)) +
-                    p.headPosition + vector3, p.bodyFrame, Color.White, p.headRotation, vector3, 1f, spriteEffects, 0);
+                    p.headPosition + vector3, p.bodyFrame, drawInfo.colorHead, p.headRotation, vector3, 1f, spriteEffects, 0);
                 value.shader = drawInfo.cHead;
                 drawInfo.DrawDataCache.Add(value);
             }

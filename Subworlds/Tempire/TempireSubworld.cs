@@ -19,8 +19,6 @@ namespace Terrafirma.Subworlds.Tempire
         public override int Width => WorldWidth;
         public override int Height => WorldHeight;
 
-        
-
         public override bool ShouldSave => false;
         public override bool NoPlayerSaving => false;
 
@@ -37,5 +35,6 @@ namespace Terrafirma.Subworlds.Tempire
 
             Main.NewText("YIPPIE!!!");
         }
+
     }
 }
