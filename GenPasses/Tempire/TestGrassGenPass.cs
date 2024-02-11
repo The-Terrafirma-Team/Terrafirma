@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ID;
+using Terraria.IO;
+using Terraria.WorldBuilding;
+using Terraria;
+using Terrafirma.Subworlds.Tempire;
+using System.Reflection;
+using Terraria.Map;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Terrafirma.GenPasses.Tempire
+{
+    public class TestGrassGenPass : GenPass
+    {
+        //TODO: remove this once tML changes generation passes
+        public TestGrassGenPass() : base("Grass", 2) { }
+
+        protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+        {  
+            progress.Message = "Placing Grass"; // Sets the text displayed for this pass
+            for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
+            {
+                for (int j = 0; j < TempireSubworld.WorldHeight - 1; j++)
+                {
+
+                    if (Main.tile[i, j].HasTile && Main.tile[i,j].TileType == TileID.Dirt)
+                    {
+                        for (int k = -1; k <= 1; k++)
+                        {
+                            for (int c = -1; c <= 1; c++)
+                            {
+                                if (i != 0 && i != TempireSubworld.WorldWidth)
+                                {
+                                    if (!Main.tile[i + k, j + c].HasTile) Main.tile[i, j].TileType = TileID.Grass;
+                                }   
+                            }
+                        }
+                        
+                    }
+                }
+
+                
+            }
+        }
+    }
+}

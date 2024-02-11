@@ -43,9 +43,12 @@ namespace Terrafirma.GenPasses.Tempire
                 for (int j = TempireSubworld.WorldHeight / 2; j < TempireSubworld.WorldHeight - 1; j++)
                 {
                     progress.Set(0.5f); // Controls the progress bar, should only be set between 0f and 1f
-                    Tile tile = Main.tile[i, j];
-                    tile.HasTile = true;
-                    tile.TileType = TileID.Dirt;
+                    if(j > TempireSubworld.WorldHeight / 2 + ((Math.Sin(i / 10f) * 5f) + 5f))
+                    {
+                        Tile tile = Main.tile[i, j];
+                        tile.HasTile = true;
+                        tile.TileType = TileID.Dirt;
+                    }
                 }
 
                 
