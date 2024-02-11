@@ -4,6 +4,7 @@ using Terrafirma.Global.Templates;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using System;
+using Terraria.Audio;
 
 namespace Terrafirma.Projectiles.Melee
 {
@@ -26,6 +27,7 @@ namespace Terrafirma.Projectiles.Melee
 
         public override void OnTurnAround(Player player)
         {
+            SoundEngine.PlaySound(SoundID.DD2_FlameburstTowerShot, Projectile.position);
             if (Main.player[Projectile.owner] == Main.LocalPlayer)
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(80 * Projectile.direction, -90  ).RotatedBy(Projectile.rotation), Projectile.velocity * 10f, ModContent.ProjectileType<EruptionFloatProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
         }
@@ -51,7 +53,7 @@ namespace Terrafirma.Projectiles.Melee
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color(255,80,0,0) * Projectile.Opacity;
+            return Color.Lerp(new Color(255, 60, 0, 0), new Color(255, 128, 0, 0),(float)Math.Sin(Main.timeForVisualEffects * 0.01f) * 0.5f + 0.5f) * Projectile.Opacity;
         }
 
         public override void AI()
@@ -68,19 +70,21 @@ namespace Terrafirma.Projectiles.Melee
             if (Projectile.timeLeft > 60) Projectile.rotation = Projectile.velocity.ToRotation() + (float)rot;
             else
             {
+                Projectile.velocity.Y += 0.1f;
                 Projectile.Opacity = Projectile.timeLeft / 60f;
-                Projectile.rotation += 0.01f * (Math.Abs(Projectile.timeLeft - 60) / 10f);
+                Projectile.rotation += 0.01f * Projectile.direction * (Math.Abs(Projectile.timeLeft - 60) / 10f);
             }
         }
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(15, 15), DustID.Torch, Main.rand.NextVector2Circular(6, 6) + -Projectile.velocity * 2, 0);
                 d.noGravity = true;
                 d.fadeIn = Main.rand.NextFloat(0, 1.5f);
             }
+            SoundEngine.PlaySound(SoundID.Item73, Projectile.position);
         }
 
     }

@@ -48,6 +48,11 @@ Buffs: {
 		DisplayName: Inked
 		Description: Mods.Terrafirma.Buffs.Inked.Description
 	}
+
+	ElectricCharge: {
+		DisplayName: Electric Charge
+		Description: You take more damage the faster you move
+	}
 }
 
 Items: {

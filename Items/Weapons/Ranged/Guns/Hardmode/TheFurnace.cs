@@ -43,7 +43,9 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
         {
             for (int i = 0; i < 5; i++)
             {
-                Dust newdust = Dust.NewDustDirect(position, 2, 2, DustID.Torch, velocity.X * Main.rand.NextFloat(0.1f,1.5f), velocity.Y * Main.rand.NextFloat(0.1f, 0.5f), 1, default, 1.5f);
+                Dust newdust = Dust.NewDustDirect(position, 2, 2, DustID.Torch, velocity.X * Main.rand.NextFloat(0.1f,1.5f), velocity.Y * Main.rand.NextFloat(0.1f, 0.5f), 1, default, 2f);
+                newdust.customData = 1;
+                newdust.velocity.Y -= Main.rand.NextFloat(2f);
             }
 
             return base.Shoot(player, source, position, velocity, type, damage, knockback);
