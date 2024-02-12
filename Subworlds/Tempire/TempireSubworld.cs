@@ -31,8 +31,10 @@ namespace Terrafirma.Subworlds.Tempire
             //new TestSmootheningGenPass()
             new MakeWorldNotBreakWhenItIsTallPass(),
             new BaseTerrain(),
+            new Mountains(),
             new TempireGrassPass(),
-            new TestSmootheningGenPass()
+            new SmootheningGenPass(),
+
         };
         public override void OnLoad()
         {

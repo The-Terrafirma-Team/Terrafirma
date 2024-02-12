@@ -14,10 +14,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma.GenPasses.Tempire
 {
-    public class TestSmootheningGenPass : GenPass
+    public class SmootheningGenPass : GenPass
     {
         //TODO: remove this once tML changes generation passes
-        public TestSmootheningGenPass() : base("Smoothening", 3) { }
+        public SmootheningGenPass() : base("Smoothening", 3) { }
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {  
@@ -29,6 +29,7 @@ namespace Terrafirma.GenPasses.Tempire
 
                     if (Main.tile[i, j].HasTile)
                     {
+
                         if (i != 0 && i != TempireSubworld.WorldWidth && j != 0 && j != TempireSubworld.WorldHeight)
                         {
                             if (!Main.tile[i - 1, j - 1].HasTile && !Main.tile[i - 1, j].HasTile && !Main.tile[i, j - 1].HasTile)
@@ -49,6 +50,11 @@ namespace Terrafirma.GenPasses.Tempire
                             else if (!Main.tile[i + 1, j + 1].HasTile && !Main.tile[i + 1, j].HasTile && !Main.tile[i, j + 1].HasTile)
                             {
                                 WorldGen.SlopeTile(i, j, (int)SlopeType.SlopeUpLeft);
+                            }
+
+                            if (!Main.tile[i - 1, j].HasTile && !Main.tile[i, j - 1].HasTile && !Main.tile[i + 1, j].HasTile)
+                            {
+                                Main.tile[i, j].ClearTile();
                             }
                         }
                     }
