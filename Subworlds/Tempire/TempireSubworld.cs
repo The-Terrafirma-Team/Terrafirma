@@ -34,6 +34,7 @@ namespace Terrafirma.Subworlds.Tempire
             new Mountains(),
             new TempireGrassPass(),
             new SmootheningGenPass(),
+            new TempireBackGrassPass()
 
         };
         public override void OnLoad()

@@ -605,6 +605,31 @@ Items: {
 		DisplayName: Tempirian Soil
 		Tooltip: ""
 	}
+
+	WorneBlock: {
+		DisplayName: Worne Block
+		Tooltip: ""
+	}
+
+	Mistcap: {
+		DisplayName: Mistcap
+		Tooltip: ""
+	}
+
+	MonarchChestplate: {
+		DisplayName: Monarch Chestplate
+		Tooltip: ""
+	}
+
+	MonarchHelmet: {
+		DisplayName: Monarch Helmet
+		Tooltip: ""
+	}
+
+	MonarchLeggings: {
+		DisplayName: Monarch Leggings
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -692,3 +717,5 @@ Biomes: {
 		TownNPCDialogueName: the Tempire Biome
 	}
 }
+
+Tiles.TempireSurfaceGrass.MapEntry: Tempire Surface Grass
