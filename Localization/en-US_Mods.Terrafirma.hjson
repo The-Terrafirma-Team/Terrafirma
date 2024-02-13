@@ -630,6 +630,11 @@ Items: {
 		DisplayName: Monarch Leggings
 		Tooltip: ""
 	}
+
+	BottleOfPoison: {
+		DisplayName: Bottle Of Poison
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -709,6 +714,7 @@ Projectiles: {
 	InkProjectile.DisplayName: Ink Projectile
 	MoltenBulletProjectile.DisplayName: Molten Bullet Projectile
 	HotCoal.DisplayName: Hot Coal
+	BottleOfPoisonProjectile.DisplayName: Bottle Of Poison Projectile
 }
 
 Biomes: {

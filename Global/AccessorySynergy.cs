@@ -19,7 +19,9 @@ namespace Terrafirma.Global
 {
     public class AccessorySynergyPlayer : ModPlayer
     {
-
+        /// <summary>
+        /// Array of ItemIDs of all Accessories that the player has equipped (Doesn't count vanity slots). Updates Automatically
+        /// </summary>
         public int[] EquippedAccessories = new int[] { };
         public SynergyData[] ActivatedSynergies = new SynergyData[] { };
 

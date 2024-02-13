@@ -9,6 +9,7 @@ using System.Linq;
 using Terrafirma.Particles;
 using Terraria.DataStructures;
 using Terrafirma.Projectiles.Ranged;
+using Terraria.GameContent.RGB;
 
 namespace Terrafirma
 {
@@ -197,6 +198,14 @@ namespace Terrafirma
 
         }
 
+        // Sentry  Methods ____________________________________________________________________________________________________
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <returns></returns>
+
         public static float GetSentryAttackCooldownMultiplier(this Projectile projectile)
         {
             return Math.Clamp(projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier ,0.1f , 100f);
@@ -247,6 +256,9 @@ namespace Terrafirma
             return p;
         }
 
+        /// <summary>
+        /// Updates the sentry Projectile to have priority over other sentries (Bookmark Wrench Effect)
+        /// </summary>
         public static void UpdateSentryPriority(Projectile projectile, Player player = null)
         {
             if (projectile != null)
@@ -264,6 +276,21 @@ namespace Terrafirma
                     if (Main.projectile[i].WipableTurret && Main.player[Main.projectile[i].owner] == player) Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority = false;
                 }
             }
+            
+        }
+
+        //____________________________________________________________________________________________________
+
+        public static bool AnyWingsEquipped(this Player player)
+        {
+            int[] EquippedAccessories = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories;
+
+            for (int i = 0; i < EquippedAccessories.Length; i++)
+            {
+                if (new Item(EquippedAccessories[i]).wingSlot != -1) return true;
+            }
+
+            return false;
             
         }
     }
