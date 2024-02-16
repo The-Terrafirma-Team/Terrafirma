@@ -71,7 +71,9 @@ namespace Terrafirma.Pets
             "do u wanna see my everskies?",
             "i am just so shy",
             "this is me if u even care",
-            "sometimes"
+            "sometimes",
+            "me when the ground is firm",
+            "wanna collab in geometry dash"
         };
         public override string Texture => "Terrafirma/Pets/Bnuy";
         public override void SetStaticDefaults()

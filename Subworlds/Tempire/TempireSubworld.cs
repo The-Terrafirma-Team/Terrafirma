@@ -32,11 +32,15 @@ namespace Terrafirma.Subworlds.Tempire
             new MakeWorldNotBreakWhenItIsTallPass(),
             new BaseTerrain(),
             new Mountains(),
+            new Caves(),
+
+            new WormwoodIslandBaseTerrain(),
+            new WormwoodIslandBaseWall(),
+
             new TempireGrassPass(),
             new SmootheningGenPass(),
-            new TempireBackGrassPass(),
+            new TempireBackGrassPass()
 
-            new WormwoodIslandBaseTerrain()
         };
         public override void OnLoad()
         {
