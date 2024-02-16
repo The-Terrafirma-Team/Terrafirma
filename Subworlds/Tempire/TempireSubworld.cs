@@ -21,7 +21,6 @@ namespace Terrafirma.Subworlds.Tempire
 
         public override bool ShouldSave => false;
         public override bool NoPlayerSaving => false;
-
         public override List<GenPass> Tasks => new List<GenPass>()
         {
             //new TestGenPass(),

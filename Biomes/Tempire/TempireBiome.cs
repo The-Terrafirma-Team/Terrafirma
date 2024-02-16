@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Graphics.Capture;
+﻿using Terraria.Graphics.Capture;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using SubworldLibrary;
 using Terrafirma.Subworlds.Tempire;
+using Terrafirma.Backgrounds;
 
 namespace Terrafirma.Biomes.Tempire
 {
