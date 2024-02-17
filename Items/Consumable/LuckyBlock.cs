@@ -7,6 +7,7 @@ using Terrafirma.Items.Weapons.Magic;
 using Terrafirma.Items.Ammo;
 using Terrafirma.Projectiles.Hostile;
 using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
+using Terrafirma.Items.Weapons.Magic.Tempire;
 
 namespace Terrafirma.Items.Consumable
 {

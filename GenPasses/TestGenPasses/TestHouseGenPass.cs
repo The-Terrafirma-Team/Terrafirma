@@ -13,7 +13,7 @@ using Terraria.Map;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.GenPasses.Tempire
+namespace Terrafirma.GenPasses.TestGenPasses
 {
     public class TestHouseGenPass : GenPass
     {
@@ -21,13 +21,13 @@ namespace Terrafirma.GenPasses.Tempire
         public TestHouseGenPass() : base("Structure", 1) { }
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
-        {  
+        {
             progress.Message = "Making Houses"; // Sets the text displayed for this pass
             Vector2[] Randomspot = new Vector2[] { };
             Vector2[] RandomspotSize = new Vector2[] { };
             for (int i = 0; i < 9; i++)
             {
-                RandomspotSize = RandomspotSize.Append( new Vector2(WorldGen.genRand.Next(15, 20), WorldGen.genRand.Next(10, 15))).ToArray();
+                RandomspotSize = RandomspotSize.Append(new Vector2(WorldGen.genRand.Next(15, 20), WorldGen.genRand.Next(10, 15))).ToArray();
             }
 
             for (int i = 0; i < 9; i++)
@@ -42,7 +42,7 @@ namespace Terrafirma.GenPasses.Tempire
                 }
             }
 
-            for (int i = 0; i < Randomspot.Length ; i++)
+            for (int i = 0; i < Randomspot.Length; i++)
             {
                 if (WorldGen.genRand.NextBool())
                 {

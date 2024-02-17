@@ -635,6 +635,11 @@ Items: {
 		DisplayName: Bottle Of Poison
 		Tooltip: ""
 	}
+
+	Majesty: {
+		DisplayName: Majesty
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

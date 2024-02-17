@@ -19,16 +19,42 @@ namespace Terrafirma.Backgrounds
     internal class TempireBiomeBackgroundStyle : ModSurfaceBackgroundStyle
     {
         // Use this to keep far Backgrounds like the mountains.
+        float skylerp = 0f;
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch)
         {
+            if (Main.screenPosition.Y > 3000 * 16)
+            {
+                return false;
+            }
             Color ColorOfSurfaceBackgroundsModified = (Color)typeof(Main).GetField("ColorOfSurfaceBackgroundsModified", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+            Color WormwoodSkyColor = new Color((167 * (ColorOfSurfaceBackgroundsModified.R / 255f) / 255f), (173 * (ColorOfSurfaceBackgroundsModified.G / 255f) / 255f), (166 * (ColorOfSurfaceBackgroundsModified.B / 255f) / 255f));
+            
 
             Texture2D Close = ModContent.Request<Texture2D>("Terrafirma/Backgrounds/TempireBiomeMidBackground1").Value;
             Texture2D Far = ModContent.Request<Texture2D>("Terrafirma/Backgrounds/TempireBiomeFarBackground1").Value;
             Texture2D Sky = ModContent.Request<Texture2D>("Terrafirma/Backgrounds/TempireSkyBack").Value;
             Texture2D Clouds = ModContent.Request<Texture2D>("Terrafirma/Backgrounds/TempireClouds").Value;
             Texture2D Fog = ModContent.Request<Texture2D>("Terrafirma/Backgrounds/TempireFog").Value;
-            spriteBatch.Draw(Sky, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight),ColorOfSurfaceBackgroundsModified);
+
+            if (Main.screenPosition.Y > 1600 * 16)
+            {
+                skylerp = Math.Clamp(skylerp -= 0.01f, 0f, 1f);
+                spriteBatch.Draw(Sky, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight),
+                    new Color(MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.R / 255f, WormwoodSkyColor.R / 255f, skylerp),
+                              MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.G / 255f, WormwoodSkyColor.G / 255f, skylerp),
+                              MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.B / 255f, WormwoodSkyColor.B / 255f, skylerp))
+                    );
+            }
+            else
+            {
+                skylerp = Math.Clamp(skylerp += 0.01f, 0f, 1f);
+                spriteBatch.Draw(Sky, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight),
+                    new Color(MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.R / 255f, WormwoodSkyColor.R / 255f, skylerp),
+                              MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.G / 255f, WormwoodSkyColor.G / 255f, skylerp),
+                              MathHelper.Lerp(ColorOfSurfaceBackgroundsModified.B / 255f, WormwoodSkyColor.B / 255f, skylerp))
+                    );
+            }
+            
             //rawBackgroundLayer(Clouds, 0.07f, (int)(Main.timeForVisualEffects * 1f), 1350, spriteBatch, ColorOfSurfaceBackgroundsModified * 0.5f);
             DrawBackgroundLayer(Far, 0.08f, 0, 1450, spriteBatch, ColorOfSurfaceBackgroundsModified * 0.7f);
             DrawBackgroundLayer(Clouds, 0.1f, (int)(Main.timeForVisualEffects * 0.2f), 1450, spriteBatch, ColorOfSurfaceBackgroundsModified * 0.2f);

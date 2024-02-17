@@ -15,22 +15,22 @@ using Microsoft.Xna.Framework;
 namespace Terrafirma.GenPasses.Tempire
 {
     //May not be needeed at all lmao
-    public class WormwoodIslandBaseWall : GenPass
+    public class BaseWalls : GenPass
     {
         //TODO: remove this once tML changes generation passes
-        public WormwoodIslandBaseWall() : base("Terrain", 1) { }
+        public BaseWalls() : base("Terrain", 1) { }
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
             
 
-            progress.Message = "Testing Terrain"; // Sets the text displayed for this pass
+            progress.Message = "Placing Walls"; // Sets the text displayed for this pass
 
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
                 int[] columns = new int[] { };
 
-                for (int j = TempireSubworld.WorldHeight / 2 - 300; j > 600 / 2 - 300; j--)
+                for (int j = 1000; j < TempireSubworld.WorldHeight - 1; j++)
                 {
 
                     if (i != 0 && i != TempireSubworld.WorldWidth - 1)

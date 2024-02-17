@@ -12,7 +12,7 @@ using Terrafirma.Tiles.Tempire;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.GenPasses.Tempire
+namespace Terrafirma.GenPasses.TestGenPasses
 {
     public class Mountains_Old : GenPass
     {
@@ -22,7 +22,7 @@ namespace Terrafirma.GenPasses.Tempire
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
             float GenHeight;
-            int[] MountainSpawn = new int[] {};
+            int[] MountainSpawn = new int[] { };
             int[] MountainRand = new int[] { };
 
             float genint = 0;
@@ -34,14 +34,14 @@ namespace Terrafirma.GenPasses.Tempire
                 MountainRand = MountainRand.Append(WorldGen.genRand.Next(20, 50)).ToArray();
             }
 
-            progress.Message = "Testing Terrain"; 
+            progress.Message = "Testing Terrain";
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
                 genint = -20;
                 for (int k = 0; k < MountainSpawn.Length; k++)
                 {
 
-                    if ((i - MountainSpawn[k]) >= -((float)MountainRand[k] * 0.5f) * Math.PI && (i - MountainSpawn[k]) <= ((float)MountainRand[k] * 1.5f) * Math.PI)
+                    if (i - MountainSpawn[k] >= -(MountainRand[k] * 0.5f) * Math.PI && i - MountainSpawn[k] <= MountainRand[k] * 1.5f * Math.PI)
                     {
                         genint += Math.Clamp(MathF.Sin((i - MountainSpawn[k]) / (float)MountainRand[k]) * 30f + 30f, -30f, 1000f);
                     }
@@ -53,7 +53,7 @@ namespace Terrafirma.GenPasses.Tempire
                 for (int j = TempireSubworld.WorldHeight / 4; j < TempireSubworld.WorldHeight - 1; j++)
                 {
                     progress.Set(0.5f); // Controls the progress bar, should only be set between 0f and 1f
-                    if(j > TempireSubworld.WorldHeight / 2.03f - genint - 40)
+                    if (j > TempireSubworld.WorldHeight / 2.03f - genint - 40)
                     {
                         Tile tile = Main.tile[i, j];
                         tile.HasTile = true;

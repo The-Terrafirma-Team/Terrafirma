@@ -23,7 +23,7 @@ namespace Terrafirma.GenPasses.Tempire
         {
             Vector3 GenSineProgress = Vector3.Zero;
             float GenHeight;
-            progress.Message = "Testing Terrain"; // Sets the text displayed for this pass
+            progress.Message = "Generating Terrain"; // Sets the text displayed for this pass
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
                 GenSineProgress += new Vector3(WorldGen.genRand.NextFloat(-5, 5), WorldGen.genRand.NextFloat(-1, 2), WorldGen.genRand.NextFloat(-20, 20)) * 0.3f;
@@ -46,7 +46,7 @@ namespace Terrafirma.GenPasses.Tempire
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
                 GenSineProgress += new Vector3(WorldGen.genRand.NextFloat(-3, 3), WorldGen.genRand.NextFloat(-1, 2), WorldGen.genRand.NextFloat(-1, 5)) * 0.2f;
-                GenHeight = MathF.Sin(GenSineProgress.X * 0.1f) * 5f + MathF.Cos(GenSineProgress.Y * 0.05f) * 3f + MathF.Sin(GenSineProgress.Z * 0.01f) * 2f + MathF.Cos(GenSineProgress.Y * 0.01f) * 15;
+                GenHeight = MathF.Sin(GenSineProgress.X * 0.2f) * 5f + MathF.Cos(GenSineProgress.Y * 0.1f) * 3f + MathF.Sin(GenSineProgress.Z * 0.03f) * 2f + MathF.Cos(GenSineProgress.Y * 0.01f) * 30;
 
                 for (int j = TempireSubworld.WorldHeight / 4; j < TempireSubworld.WorldHeight - 1; j++)
                 {

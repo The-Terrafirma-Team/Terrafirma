@@ -13,7 +13,7 @@ using Terraria.Map;
 using Microsoft.Xna.Framework.Graphics;
 using System.Numerics;
 
-namespace Terrafirma.GenPasses.Tempire
+namespace Terrafirma.GenPasses.TestGenPasses
 {
     public class TestCircleIsland : GenPass
     {
@@ -33,11 +33,11 @@ namespace Terrafirma.GenPasses.Tempire
 
             for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
             {
-                for (int j = 0 ; j < TempireSubworld.WorldHeight / 3; j++)
+                for (int j = 0; j < TempireSubworld.WorldHeight / 3; j++)
                 {
                     for (int k = 0; k < Randomspot.Length; k++)
                     {
-                        if ( Vector2.Distance(Randomspot[k] , new Vector2(i * 16, j * 16)) < RandomspotSize[k])
+                        if (Vector2.Distance(Randomspot[k], new Vector2(i * 16, j * 16)) < RandomspotSize[k])
                         {
                             Tile tile = Main.tile[i, j];
                             tile.HasTile = true;
