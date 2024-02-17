@@ -640,6 +640,11 @@ Items: {
 		DisplayName: Majesty
 		Tooltip: ""
 	}
+
+	Scrapshot: {
+		DisplayName: Scrapshot
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

@@ -88,7 +88,7 @@ namespace Terrafirma.Projectiles.Ranged
                 Color.White,
                 Projectile.rotation,
                 texture.Size() / 2,
-                1f,
+                Projectile.scale,
                 SpriteEffects.None);
 
 
@@ -105,7 +105,7 @@ namespace Terrafirma.Projectiles.Ranged
                 new Color(1f, 0.5f, 0f, 0f) * (0.8f + 0.3f * ((float)Math.Sin((float)Main.timeForVisualEffects / 10f + Projectile.ai[1]) + 1f)) * (1- (i * 0.3f)),
                 Projectile.rotation,
                 texture.Size() / 2,
-                1.1f * (1 - (i * 0.2f)) + 0.4f * (float)Math.Sin((float)Main.timeForVisualEffects / 10f + Projectile.ai[1]),
+                (Projectile.scale * 1.1f) * (1 - (i * 0.2f)) + 0.4f * (float)Math.Sin((float)Main.timeForVisualEffects / 10f + Projectile.ai[1]),
                 SpriteEffects.None);
             }
 
