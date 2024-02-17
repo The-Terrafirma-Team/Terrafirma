@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -36,12 +37,12 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
         {
             return new Vector2(-4, 1);
         }
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            velocity *= 3;
-            base.ModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
+            Projectile P = Projectile.NewProjectileDirect(source,position, velocity * 3, type, damage, knockback,player.whoAmI);
+            P.scale *= 2;
+            return false;
         }
-
         public override bool? UseItem(Player player)
         {
             for (int i = 0; i < 5; i++)
