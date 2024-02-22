@@ -31,7 +31,10 @@ namespace Terrafirma.Tiles.Tempire
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             if (!effectOnly)
+            {
                 Main.tile[i, j].TileType = (ushort)ModContent.TileType<TempireDirt>();
+                fail = true;
+            }
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

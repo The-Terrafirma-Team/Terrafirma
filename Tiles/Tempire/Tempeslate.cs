@@ -27,6 +27,8 @@ namespace Terrafirma.Tiles.Tempire
             DustType = DustID.Stone;
             HitSound = SoundID.Tink;
             AddMapEntry(new Color(116, 112, 119));
+            MinPick = 180;
+            MineResist = 7f;
         }
         public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
         {

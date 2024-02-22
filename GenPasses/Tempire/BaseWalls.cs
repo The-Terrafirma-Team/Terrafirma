@@ -26,79 +26,104 @@ namespace Terrafirma.GenPasses.Tempire
 
             progress.Message = "Placing Walls"; // Sets the text displayed for this pass
 
-            for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
+
+            for(int x = 1; x < TempireSubworld.WorldWidth - 1; x++)
             {
-                int[] columns = new int[] { };
-
-                for (int j = 1000; j < TempireSubworld.WorldHeight - 1; j++)
+                for (int y = 1000; y < TempireSubworld.WorldHeight / 2 + 18; y++)
                 {
-
-                    if (i != 0 && i != TempireSubworld.WorldWidth - 1)
+                    if (Main.tile[x,y].TileType == ModContent.TileType<TempireDirt>() || Main.tile[x, y].TileType == ModContent.TileType<Tempeslate>())
                     {
-                        bool placewall = true;
-                        for (int k = -1; k <= 1; k++)
+                        bool place = true;
+                        for(int i = -1; i <= 1; i++)
                         {
-                            for (int c = -1; c <= 1; c++)
+                            for (int j = -1; j <= 1; j++)
                             {
-                                if (!Main.tile[i + k, j + c].HasTile)
+                                if (!Main.tile[x + i, y + j].HasTile)
                                 {
-                                    placewall = false;
+                                    place = false;
                                     break;
                                 }
                             }
                         }
-                        if (placewall)
-                        {
-                            Tile tile = Main.tile[i, j];
-                            tile.WallType = WallID.Dirt;
-                        }
-
+                        if((y < TempireSubworld.WorldHeight / 2 + 16 || Main.rand.NextBool(3)) && place)
+                        Main.tile[x, y].WallType = WallID.Dirt;
                     }
-
-                    //bool[] column = new bool[] {};
-
-                    //if (Main.tile[i, j].HasTile)
-                    //{
-                    //    for (int c = j; c > j - 21; c--)
-                    //    {
-                    //        if (!Main.tile[i, j - c].HasTile)
-                    //        {
-                    //            column = column.Append(true).ToArray();
-                    //        }
-                    //        else if (Main.tile[i, j - c].HasTile)
-                    //        {
-                    //            column = column.Append(false).ToArray();
-                    //        }
-
-                    //    }
-                    //}
-
-                    //bool canplacecolumn = false;
-
-                    //for (int c = 1; c < column.Length; c++)
-                    //{
-                    //    if (!column[c])
-                    //    {
-                    //        canplacecolumn = true; 
-                    //        break;
-                    //    }
-                    //}
-
-                    //if (canplacecolumn)
-                    //{
-                    //    for (int c = 0; c < column.Length; c++)
-                    //    {
-                    //        if (column[c])
-                    //        {
-                    //            Tile tile = Main.tile[i, j - c];
-                    //            tile.WallType = WallID.Dirt;
-                    //        }
-                    //    }
-                    //}
-
                 }
-
             }
+
+            //for (int i = 0; i < TempireSubworld.WorldWidth - 1; i++)
+            //{
+            //    int[] columns = new int[] { };
+
+            //    for (int j = 1000; j > TempireSubworld.WorldHeight - 1; j++)
+            //    {
+
+            //        if (i != 0 && i != TempireSubworld.WorldWidth - 1)
+            //        {
+            //            bool placewall = true;
+            //            for (int k = -1; k <= 1; k++)
+            //            {
+            //                for (int c = -1; c <= 1; c++)
+            //                {
+            //                    if (!Main.tile[i + k, j + c].HasTile)
+            //                    {
+            //                        placewall = false;
+            //                        break;
+            //                    }
+            //                }
+            //            }
+            //            if (placewall)
+            //            {
+            //                Tile tile = Main.tile[i, j];
+            //                tile.WallType = WallID.Dirt;
+            //            }
+
+            //        }
+
+            //        //bool[] column = new bool[] {};
+
+            //        //if (Main.tile[i, j].HasTile)
+            //        //{
+            //        //    for (int c = j; c > j - 21; c--)
+            //        //    {
+            //        //        if (!Main.tile[i, j - c].HasTile)
+            //        //        {
+            //        //            column = column.Append(true).ToArray();
+            //        //        }
+            //        //        else if (Main.tile[i, j - c].HasTile)
+            //        //        {
+            //        //            column = column.Append(false).ToArray();
+            //        //        }
+
+            //        //    }
+            //        //}
+
+            //        //bool canplacecolumn = false;
+
+            //        //for (int c = 1; c < column.Length; c++)
+            //        //{
+            //        //    if (!column[c])
+            //        //    {
+            //        //        canplacecolumn = true; 
+            //        //        break;
+            //        //    }
+            //        //}
+
+            //        //if (canplacecolumn)
+            //        //{
+            //        //    for (int c = 0; c < column.Length; c++)
+            //        //    {
+            //        //        if (column[c])
+            //        //        {
+            //        //            Tile tile = Main.tile[i, j - c];
+            //        //            tile.WallType = WallID.Dirt;
+            //        //        }
+            //        //    }
+            //        //}
+
+            //    }
+
+            //}
         }
     }
 }

@@ -42,6 +42,10 @@ namespace Terrafirma.Subworlds.Tempire
 
             new FinalTouches()
         };
+        public override void Update()
+        {
+            Main.time += 1.5d;
+        }
         public override void OnLoad()
         {
 

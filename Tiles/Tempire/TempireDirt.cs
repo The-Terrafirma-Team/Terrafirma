@@ -26,7 +26,6 @@ namespace Terrafirma.Tiles.Tempire
 
             AddMapEntry(new Color(57, 48, 54));
         }
-
         public override void NumDust(int i, int j, bool fail, ref int num)
         {
             num = fail ? 1 : 3;

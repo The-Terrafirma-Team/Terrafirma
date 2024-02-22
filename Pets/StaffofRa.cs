@@ -60,6 +60,7 @@ namespace Terrafirma.Pets
             Projectile.ignoreWater = true;
             Projectile.penetrate = -1;
             Projectile.Size = new Vector2(40);
+            Projectile.tileCollide = false;
         }
         public override void AI()
         {
