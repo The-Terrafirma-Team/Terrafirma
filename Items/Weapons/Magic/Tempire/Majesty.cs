@@ -7,6 +7,7 @@ using System;
 using Terrafirma.Projectiles.Magic;
 using Terrafirma.Systems;
 using Terrafirma.Global;
+using Terrafirma.Reworks.VanillaMagic.Projectiles;
 
 namespace Terrafirma.Items.Weapons.Magic.Tempire
 {
@@ -19,12 +20,12 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
         }
         public override void SetDefaults()
         {
-            Item.DefaultToMagicWeapon(ModContent.ProjectileType<Poison>(), 22, 8, true);
-            Item.mana = 3;
-            Item.damage = 12;
+            Item.DefaultToMagicWeapon(ModContent.ProjectileType<FantasticalDoubleHelix>(), 22, 8, true);
+            Item.mana = 5;
+            Item.damage = 100;
             Item.value = Item.sellPrice(0, 0, 20, 0);
             Item.UseSound = SoundID.Item8;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.Lime;
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

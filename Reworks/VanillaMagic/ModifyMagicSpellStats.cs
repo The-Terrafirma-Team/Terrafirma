@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Summons;
 using Terrafirma.Projectiles.Magic;
+using Terrafirma.Systems.MageClass;
 
 namespace Terrafirma.Reworks.VanillaMagic
 {
@@ -36,30 +37,7 @@ namespace Terrafirma.Reworks.VanillaMagic
         //Modify Mana Cost
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
-            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
-            {
-                case 1: mult = 1.2f; break;
-                case 3: mult = 1.2f; break;
-                case 5: mult = 1f + 2 / 6f; break;
-                case 7: mult = 1f + 2 / 7f; break;
-                case 9: mult = 5f; break;
-                case 11: mult = 1f + 1 / 6f; break;
-                case 12: mult = 2f; break;
-
-                case 14: mult = 16 / 18f; break;
-                case 15: mult = 1f + 6 / 18f; break;
-                case 18: mult = 1.6f; break;
-                case 19: mult = 1.2f; break;
-                case 23: mult = 2 / 18f; break;
-                case 27: mult = 12 / 7f; break;
-                case 28: mult = 40 / 18f; break;
-
-                case 30: mult = 4 / 9f; break;
-
-                case 25: mult = 4 / 20f; break;
-
-                case 31: mult = 0f; break;
-            }
+            mult = ModContent.GetInstance<SpellIndex>().SpellCatalogue[item.GetGlobalItem<GlobalItemInstanced>().Spell].Item5 / item.mana;
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
 
@@ -95,7 +73,9 @@ namespace Terrafirma.Reworks.VanillaMagic
 
                 case 25: return 0.15f;
 
-                case 31: return (10f / item.useAnimation) * 5f;
+                case 31: return (1f / (float)item.useTime) * 50f;
+
+                case 33: return 20 / 4f;
             }
             return base.UseTimeMultiplier(item, player);
         }
@@ -115,7 +95,11 @@ namespace Terrafirma.Reworks.VanillaMagic
 
                 case 25: return 0.15f;
 
-                case 31: return ( 10f / item.useAnimation) * 5f;
+                case 31: return (1f / (float)item.useAnimation) * 50f;
+
+                case 33: return 5f;
+
+
             }
             return base.UseAnimationMultiplier(item, player);
         }
@@ -277,6 +261,14 @@ namespace Terrafirma.Reworks.VanillaMagic
                     type = ModContent.ProjectileType<ColoredPrism>();
                     damage = (int)(damage * 1.1f);
                     velocity = velocity.RotatedByRandom(0.1f);
+                    break;
+
+                //Tempire
+                case 32:
+                    type = ModContent.ProjectileType<FantasticalDoubleHelix>();
+                    break;
+                case 33:
+                    type = ModContent.ProjectileType<GlitterBomb>();
                     break;
 
                 //Accessories

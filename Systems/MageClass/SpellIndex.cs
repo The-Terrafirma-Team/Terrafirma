@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Items.Weapons.Magic;
+using Terrafirma.Items.Weapons.Magic.Tempire;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,9 +20,9 @@ namespace Terrafirma.Systems.MageClass
         public Dictionary<int, int[]> ItemCatalogue = new Dictionary<int, int[]>();
         public Dictionary<int, Tuple<int, string, string, string, float> > SpellCatalogue = new Dictionary<int, Tuple<int, string, string, string, float> >();
         const string AssetPath = "Terrafirma/Systems/MageClass/SpellIcons/";
-        public override void OnModLoad()
+        public override void OnWorldLoad()
         {
-
+            ItemCatalogue.Clear();
             //// Weapons
             //Gem Staves
             ItemCatalogue.Add(ItemID.AmethystStaff, new [] { 0 , 1 });
@@ -41,6 +42,8 @@ namespace Terrafirma.Systems.MageClass
             ItemCatalogue.Add(ItemID.AquaScepter, new[] { 26, 27 });
             //Other
             ItemCatalogue.Add(ItemID.RainbowGun, new[] { 24, 25 });
+            //Tempire
+            ItemCatalogue.Add(ModContent.ItemType<Majesty>(), new[] { 32, 33 });
             //TEST
             //ItemCatalogue.Add(ItemID.WandofFrosting, new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 });
 
@@ -53,7 +56,7 @@ namespace Terrafirma.Systems.MageClass
             ItemCatalogue.Add(ItemID.ManaCloak, new[] { 31 });
 
 
-
+            SpellCatalogue.Clear();
             //// Spells
             /// Gem Staves
             //Amethyst Staff
@@ -109,10 +112,15 @@ namespace Terrafirma.Systems.MageClass
             SpellCatalogue.Add(24, new Tuple<int, string, string, string, float>(24, AssetPath + "Hardmode/PiercingRainbow", "Piercing Rainbow", "Shoots a rainbow that does continuous damage", 20));
             SpellCatalogue.Add(25, new Tuple<int, string, string, string, float>(25, AssetPath + "Hardmode/PrismRain", "Prism Rain", "Shoots a barrage of colored glass prisms", 4));
 
+            /// Tempire
+            //Majesty
+            SpellCatalogue.Add(32, new Tuple<int, string, string, string, float>(32, AssetPath + "Tempire/FantasticalDoubleHelix", "Fantastical Double Helix", "Shoots a double helix bolt", 5));
+            SpellCatalogue.Add(33, new Tuple<int, string, string, string, float>(33, AssetPath + "Tempire/GlitterBomb", "Glitter Bomb", "Shoots a bomb of glitter that explodes on contact", 20));
+
             /// Accessories
             SpellCatalogue.Add(31, new Tuple<int, string, string, string, float>(31, AssetPath + "Accessories/ManaBloom", "Mana Bloom", "Regenerates 10 mana but slows the player down", 0));
 
-            base.OnModLoad();
+            base.OnWorldLoad();
         }
     }
 }

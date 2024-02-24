@@ -857,6 +857,72 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
             newDust.noGravity = true;
             
         }
+    }
+    #endregion
+
+    #region Fantastical Double Helix
+    public class FantasticalDoubleHelix : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.AmethystBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.Size = new Vector2(16);
+            Projectile.friendly = true;
+            Projectile.Opacity = 0;
+        }
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+
+            if (Projectile.ai[1] == 0)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1, 0);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 2, 0);
+                Projectile.Kill();
+            }
+            if (Projectile.ai[1] == 1)
+            {
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, Color.Yellow);
+                dust.noGravity = true;
+                Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin((Projectile.ai[0] - 0.07f) * 0.2f + MathHelper.PiOver2) * 0.1f);
+            }
+            if (Projectile.ai[1] == 2)
+            {
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, Color.Pink);
+                dust.noGravity = true;
+                Projectile.velocity = Projectile.velocity.RotatedBy(-Math.Sin((Projectile.ai[0] - 0.07f) * 0.2f + MathHelper.PiOver2) * 0.1f);
+            }
+
+        }
+    }
+    #endregion
+
+    #region Glitterbomb
+    public class GlitterBomb : ModProjectile
+    {
+        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Projectiles/GlitterBomb";
+        public override void SetDefaults()
+        {
+            Projectile.Size = new Vector2(20);
+            Projectile.friendly = true;
+            Projectile.timeLeft = 60 * 20;
+        }
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+
+            if (Projectile.ai[0] > 20) Projectile.velocity *= 0.92f;
+
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D tex = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Projectiles/GlitterBomb").Value;
+            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, Color.White, 0, tex.Size() / 2, 1f, SpriteEffects.None);
+            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, new Color(1f,1f,1f,0f) * (0.8f - (float)Math.Sin((Main.timeForVisualEffects % 80f) / 40f)), 0, tex.Size() / 2, 0.8f + (float)Math.Sin((Main.timeForVisualEffects % 80f) / 20f), SpriteEffects.None);
+            
+            return false;
+        }
     } 
     #endregion
 }

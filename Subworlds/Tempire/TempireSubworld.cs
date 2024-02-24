@@ -31,10 +31,10 @@ namespace Terrafirma.Subworlds.Tempire
             new MakeWorldNotBreakWhenItIsTallPass(),
             new BaseTerrain(),
             new Mountains(),
-            new BaseWalls(),
-            new Caves(),
-
             new WormwoodIslandBaseTerrain(),
+            new BaseWalls(),
+
+            new Caves(),
 
             new TempireGrassPass(),
             new SmootheningGenPass(),

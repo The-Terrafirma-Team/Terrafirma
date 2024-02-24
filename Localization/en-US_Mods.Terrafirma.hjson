@@ -645,6 +645,21 @@ Items: {
 		DisplayName: Scrapshot
 		Tooltip: ""
 	}
+
+	TempeslateWallBlock: {
+		DisplayName: Tempeslate Wall Block
+		Tooltip: ""
+	}
+
+	TempirianSoilWallBlock: {
+		DisplayName: Tempirian Soil Wall Block
+		Tooltip: ""
+	}
+
+	WorneWallBlock: {
+		DisplayName: Worne Wall Block
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -725,6 +740,8 @@ Projectiles: {
 	MoltenBulletProjectile.DisplayName: Molten Bullet Projectile
 	HotCoal.DisplayName: Hot Coal
 	BottleOfPoisonProjectile.DisplayName: Bottle Of Poison Projectile
+	FantasticalDoubleHelix.DisplayName: Fantastical Double Helix
+	GlitterBomb.DisplayName: Glitter Bomb
 }
 
 Biomes: {
@@ -734,4 +751,7 @@ Biomes: {
 	}
 }
 
-Tiles.TempireSurfaceGrass.MapEntry: Tempire Surface Grass
+Tiles: {
+	TempireSurfaceGrass.MapEntry: Tempire Surface Grass
+	BigTempireGrass.MapEntry: Big Tempire Grass
+}

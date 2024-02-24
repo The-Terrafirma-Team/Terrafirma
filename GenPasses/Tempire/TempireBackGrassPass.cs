@@ -32,11 +32,13 @@ namespace Terrafirma.GenPasses.Tempire
                     {
                         if (WorldGen.genRand.NextBool(4))
                         {
-                            WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<TempireSurfaceGrass>(), WorldGen.genRand.Next(7,12));
+                            if (WorldGen.genRand.NextBool(3)) WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<BigTempireGrass>(), WorldGen.genRand.Next(10,16));
+                            else WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<TempireSurfaceGrass>(), WorldGen.genRand.Next(6, 12));
                         }
                         else
                         {
-                            WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<TempireSurfaceGrass>(), WorldGen.genRand.Next(6));
+                            if (WorldGen.genRand.NextBool(3))  WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<BigTempireGrass>(), WorldGen.genRand.Next(11));
+                            else WorldGen.Place1xX(i, j, (ushort)ModContent.TileType<TempireSurfaceGrass>(), WorldGen.genRand.Next(6));
                         }
                         
                     }

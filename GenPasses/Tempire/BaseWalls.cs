@@ -11,6 +11,8 @@ using Terrafirma.Subworlds.Tempire;
 using Terrafirma.Tiles.Tempire;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terrafirma.Walls.Tempire;
+using Terrafirma.Items.Placeable.Tempire;
 
 namespace Terrafirma.GenPasses.Tempire
 {
@@ -29,9 +31,9 @@ namespace Terrafirma.GenPasses.Tempire
 
             for(int x = 1; x < TempireSubworld.WorldWidth - 1; x++)
             {
-                for (int y = 1000; y < TempireSubworld.WorldHeight / 2 + 18; y++)
+                for (int y = 500; y < TempireSubworld.WorldHeight / 2 + 18; y++)
                 {
-                    if (Main.tile[x,y].TileType == ModContent.TileType<TempireDirt>() || Main.tile[x, y].TileType == ModContent.TileType<Tempeslate>())
+                    if (Main.tile[x,y].TileType == ModContent.TileType<TempireDirt>() || Main.tile[x, y].TileType == ModContent.TileType<Tempeslate>() || Main.tile[x, y].TileType == ModContent.TileType<Worne>())
                     {
                         bool place = true;
                         for(int i = -1; i <= 1; i++)
@@ -46,7 +48,13 @@ namespace Terrafirma.GenPasses.Tempire
                             }
                         }
                         if((y < TempireSubworld.WorldHeight / 2 + 16 || Main.rand.NextBool(3)) && place)
-                        Main.tile[x, y].WallType = WallID.Dirt;
+                        {
+
+                            if (Main.tile[x, y].TileType == ModContent.TileType<Tempeslate>()) Main.tile[x, y].WallType = (ushort)ModContent.WallType<TempeslateWall>();
+                            else if (Main.tile[x, y].TileType == ModContent.TileType<TempireDirt>()) Main.tile[x, y].WallType = (ushort)ModContent.WallType<TempirianSoilWall>();
+                            else if (Main.tile[x, y].TileType == ModContent.TileType<Worne>()) Main.tile[x, y].WallType = (ushort)ModContent.WallType<WorneWall>();
+                            else Main.tile[x, y].WallType = WallID.Dirt;
+                        }
                     }
                 }
             }
