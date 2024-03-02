@@ -660,6 +660,11 @@ Items: {
 		DisplayName: Worne Wall Block
 		Tooltip: ""
 	}
+
+	AgnomalumBar: {
+		DisplayName: Agnomalum Bar
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
