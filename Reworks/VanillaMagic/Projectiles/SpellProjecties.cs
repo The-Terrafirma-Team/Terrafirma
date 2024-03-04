@@ -11,6 +11,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Particles;
+using System.IO;
 
 namespace Terrafirma.Reworks.VanillaMagic.Projectiles
 {
@@ -781,7 +782,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
                 SkeletonHandBone,
                 (Projectile.Center + new Vector2(-6, 28 + (i * 32))) - Main.screenPosition,
                 SkeletonHandBone.Frame(),
-                Color.White,
+                lightColor,
                 0,
                 Vector2.Zero,
                 1f,
@@ -823,6 +824,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
             Projectile.Size = new Vector2(4);
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
+            Projectile.light = 0.5f;
         }
 
         public override void AI()
@@ -852,9 +854,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
                 {
                     Projectile.velocity *= 0.925f;
                 }
+                
             }
             Dust newDust = Dust.NewDustPerfect(Projectile.Center, DustID.ManaRegeneration, Vector2.Zero, 0, new Color(255, 255, 255, 0), 1f);
             newDust.noGravity = true;
+            newDust.noLight = true;
             
         }
     }
@@ -885,13 +889,56 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, Color.Yellow);
                 dust.noGravity = true;
                 Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin((Projectile.ai[0] - 0.07f) * 0.2f + MathHelper.PiOver2) * 0.1f);
+
+                if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
+                {
+                    ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                }
             }
             if (Projectile.ai[1] == 2)
             {
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, Color.Pink);
                 dust.noGravity = true;
                 Projectile.velocity = Projectile.velocity.RotatedBy(-Math.Sin((Projectile.ai[0] - 0.07f) * 0.2f + MathHelper.PiOver2) * 0.1f);
+
+                if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
+                {
+                    ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                }
             }
+
+        }
+    }
+    #endregion
+
+    #region Glitter Bolt
+    public class GlitterBolt : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.AmethystBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.Size = new Vector2(16);
+            Projectile.friendly = true;
+            Projectile.Opacity = 0;
+        }
+        public override void AI()
+        {
+            Projectile.ai[0]++;
+
+            if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
+            {
+                ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+            }
+
+            if (Projectile.ai[1] == 0)
+            {
+                Projectile.velocity.X *= 0.99f;
+                Projectile.velocity.Y = Math.Clamp(Projectile.velocity.Y + 0.1f, -12f, 12f);
+            }
+
+            Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.AmberBolt, Vector2.Zero, 0, Color.Pink);
+            dust.noGravity = true;
+            Projectile.velocity = Projectile.velocity.RotatedBy(-Math.Sin((Projectile.ai[0] - 0.07f) * 0.2f + MathHelper.PiOver2) * 0.1f);
 
         }
     }
@@ -913,6 +960,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
 
             if (Projectile.ai[0] > 20) Projectile.velocity *= 0.92f;
 
+            if (Projectile.ai[0] % 40 == 0)
+            {
+                ParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12,12), Vector2.Zero, new Color(1f,0.3f,0.2f,0), 0, Main.rand.Next(8,12), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+            }
+
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -922,6 +974,15 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, new Color(1f,1f,1f,0f) * (0.8f - (float)Math.Sin((Main.timeForVisualEffects % 80f) / 40f)), 0, tex.Size() / 2, 0.8f + (float)Math.Sin((Main.timeForVisualEffects % 80f) / 20f), SpriteEffects.None);
             
             return false;
+        }
+
+        public override void Kill(int timeLeft)
+        {
+            int maxproj = 8;
+            for(int i = 0; i < maxproj; i++)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(5f,0f).RotatedBy(((Math.PI * 2) / maxproj) * i), ModContent.ProjectileType<GlitterBolt>(), Projectile.damage / (int)(maxproj * 0.75f), Projectile.knockBack, Projectile.owner, 0, 0, 0 );
+            }
         }
     } 
     #endregion
