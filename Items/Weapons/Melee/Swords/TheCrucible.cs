@@ -22,6 +22,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.useTime *= 2;
             Item.shoot = ModContent.ProjectileType<CrucibleBeam>();
             Item.shootSpeed = 10;
+            Item.rare = ItemRarityID.Yellow;
         }
         public override void SetStaticDefaults()
         {
