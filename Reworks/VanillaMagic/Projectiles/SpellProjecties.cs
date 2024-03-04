@@ -984,6 +984,44 @@ namespace Terrafirma.Reworks.VanillaMagic.Projectiles
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(5f,0f).RotatedBy(((Math.PI * 2) / maxproj) * i), ModContent.ProjectileType<GlitterBolt>(), Projectile.damage / (int)(maxproj * 0.75f), Projectile.knockBack, Projectile.owner, 0, 0, 0 );
             }
         }
-    } 
+    }
+    #endregion
+
+    #region SkySpears
+    public class SkySpear : ModProjectile
+    {
+        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Projectiles/SkySpears";
+
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Type] = 8;
+        }
+        public override void SetDefaults()
+        {
+            Projectile.Size = new Vector2(20);
+            Projectile.friendly = true;
+            Projectile.alpha = 0;
+
+            DrawOffsetX = 5;
+            DrawOriginOffsetY = -25;
+
+            Projectile.extraUpdates = 1;
+        }
+        public override void AI()
+        {
+            if (Projectile.ai[0] == 0)
+            {
+                Projectile.frame = Main.rand.Next(8);
+                Projectile.velocity = Projectile.position.DirectionTo(Main.MouseWorld) * 16f;
+            }
+            Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
+            Projectile.ai[0]++;
+        }
+
+
+        public override void Kill(int timeLeft)
+        {
+        }
+    }
     #endregion
 }

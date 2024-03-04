@@ -753,6 +753,7 @@ Projectiles: {
 	FantasticalDoubleHelix.DisplayName: Fantastical Double Helix
 	GlitterBomb.DisplayName: Glitter Bomb
 	GlitterBolt.DisplayName: Glitter Bolt
+	SkySpear.DisplayName: Sky Spear
 }
 
 Biomes: {

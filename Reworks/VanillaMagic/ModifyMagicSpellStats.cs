@@ -28,6 +28,7 @@ namespace Terrafirma.Reworks.VanillaMagic
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
+            
             if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.Keys.Contains(entity.type)){
                 entity.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[entity.type][0] ].Item1;
             }
@@ -147,6 +148,19 @@ namespace Terrafirma.Reworks.VanillaMagic
                     damage *= 3;
                     break;
                 case 30:
+                    type = ModContent.ProjectileType<CursedFlames>();
+                    velocity *= 0.8f;
+                    damage = (int)(damage * 0.5f);
+                    break;
+                case 34:
+                    type = ProjectileID.SkyFracture;
+                    break;
+                case 35:
+                    type = ModContent.ProjectileType<SkySpear>();
+                    damage = (int)(damage * 1.1f);
+                    position = Main.MouseWorld - new Vector2(Main.rand.Next(-100, 100), 500);
+                    break;
+                case 36:
                     type = ModContent.ProjectileType<CursedFlames>();
                     velocity *= 0.8f;
                     damage = (int)(damage * 0.5f);

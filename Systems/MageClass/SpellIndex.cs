@@ -39,6 +39,7 @@ namespace Terrafirma.Systems.MageClass
             //Evil Weapons
             ItemCatalogue.Add(ItemID.GoldenShower, new[] { 20, 21 });
             ItemCatalogue.Add(ItemID.CursedFlames, new[] { 29, 30 });
+            ItemCatalogue.Add(ItemID.SkyFracture, new[] { 34, 35, 36 });
             //Dungeon Weapons
             ItemCatalogue.Add(ItemID.InfernoFork, new[] { 14, 15, 16 });
             ItemCatalogue.Add(ItemID.WaterBolt, new[] { 17, 18, 19 });
@@ -92,6 +93,10 @@ namespace Terrafirma.Systems.MageClass
             //Cursed Flames
             SpellCatalogue.Add(29, new Tuple<int, string, string, string, float, int, int>(29, AssetPath + "Hardmode/CursedFlame", "Cursed Flame", "Summons unholy fire balls", 9, 15, 15));
             SpellCatalogue.Add(30, new Tuple<int, string, string, string, float, int, int>(30, AssetPath + "Hardmode/CursedFlamethrower", "Cursed Flamethrower", "Summons a wall of cursed fire", 4, 4, 20));
+            //Sky Fracture
+            SpellCatalogue.Add(34, new Tuple<int, string, string, string, float, int, int>(34, AssetPath + "Hardmode/DanceOfBlades", "Dance of Blades", "Shoots magic blades", 1, 5, 5));
+            SpellCatalogue.Add(35, new Tuple<int, string, string, string, float, int, int>(35, AssetPath + "Hardmode/SkyFracture", "Sky Fracture", "Summons magic spears from the sky", 1, 4, 4));
+            SpellCatalogue.Add(36, new Tuple<int, string, string, string, float, int, int>(36, AssetPath + "Hardmode/AeonsEternity", "The Aeon's Eternity", "Summons a giant magic blade that follows your mouse", 1, 5, 5));
 
             /// Dungeon Weapons
             //Inferno Fork
