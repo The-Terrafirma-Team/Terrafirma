@@ -28,81 +28,36 @@ namespace Terrafirma.Reworks.VanillaMagic
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
-
+            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.Keys.Contains(entity.type)){
+                entity.GetGlobalItem<GlobalItemInstanced>().Spell = ModContent.GetInstance<SpellIndex>().SpellCatalogue[ ModContent.GetInstance<SpellIndex>().ItemCatalogue[entity.type][0] ].Item1;
+            }
             if (entity.type == ItemID.InfernoFork) entity.UseSound = null;
             if (entity.type == ItemID.GoldenShower || entity.type == ItemID.CursedFlames) entity.UseSound = null;
             if (entity.type == ItemID.RainbowGun) entity.shoot = ModContent.ProjectileType<ColoredPrism>();
         }
 
+        #region Preset Values
         //Modify Mana Cost
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
-            mult = ModContent.GetInstance<SpellIndex>().SpellCatalogue[item.GetGlobalItem<GlobalItemInstanced>().Spell].Item5 / item.mana;
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != -1) mult = ModContent.GetInstance<SpellIndex>().SpellCatalogue[item.GetGlobalItem<GlobalItemInstanced>().Spell].Item5 / item.mana;
             base.ModifyManaCost(item, player, ref reduce, ref mult);
-        }
-
-        //Use Speed Multiplier
-        public override float UseSpeedMultiplier(Item item, Player player)
-        {
-            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
-            {
-                case 0: return 1.2f;
-                case 2: return 1.2f;
-                case 3: return 1.1f;
-                case 5: return 0.85f;
-                case 7: return 0.6f;
-                case 9: return 0.2f;
-                case 11: return 0.75f;
-            }
-            return base.UseSpeedMultiplier(item, player);
         }
 
         //Use Time Multiplier
         public override float UseTimeMultiplier(Item item, Player player)
         {
-            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
-            {
-                case 21: return 9;
-                case 30: return 0.4f;
-
-                case 15: return 0.14f;
-                case 16: return 0.3f;
-                case 18: return 1.8f;
-                case 23: return 0.3f;
-                case 27: return 5f;
-
-                case 25: return 0.15f;
-
-                case 31: return (1f / (float)item.useTime) * 50f;
-
-                case 33: return 20 / 4f;
-            }
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != -1) return (float)ModContent.GetInstance<SpellIndex>().SpellCatalogue[item.GetGlobalItem<GlobalItemInstanced>().Spell].Item6 / item.useTime;
             return base.UseTimeMultiplier(item, player);
         }
 
         //Use Animation Multiplier
         public override float UseAnimationMultiplier(Item item, Player player)
         {
-            switch (item.GetGlobalItem<GlobalItemInstanced>().Spell)
-            {
-                case 21: return 3;
-                case 30: return 0.4f;
-
-                case 16: return 1.2f;
-                case 18: return 1.8f;
-                case 23: return 0.3f;
-                case 27: return 2f;
-
-                case 25: return 0.15f;
-
-                case 31: return (1f / (float)item.useAnimation) * 50f;
-
-                case 33: return 5f;
-
-
-            }
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != -1) return (float)ModContent.GetInstance<SpellIndex>().SpellCatalogue[item.GetGlobalItem<GlobalItemInstanced>().Spell].Item7 / item.useAnimation;
             return base.UseAnimationMultiplier(item, player);
-        }
+        } 
+        #endregion
 
         //Can Use Item
         public override bool CanUseItem(Item item, Player player)

@@ -36,7 +36,7 @@ namespace Terrafirma.Global
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
-            Spell = 0;
+            Spell = -1;
 
        
 

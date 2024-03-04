@@ -665,6 +665,11 @@ Items: {
 		DisplayName: Agnomalum Bar
 		Tooltip: ""
 	}
+
+	GlimmerWand: {
+		DisplayName: Glimmer Wand
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -747,6 +752,7 @@ Projectiles: {
 	BottleOfPoisonProjectile.DisplayName: Bottle Of Poison Projectile
 	FantasticalDoubleHelix.DisplayName: Fantastical Double Helix
 	GlitterBomb.DisplayName: Glitter Bomb
+	GlitterBolt.DisplayName: Glitter Bolt
 }
 
 Biomes: {
