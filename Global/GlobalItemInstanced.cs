@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -12,18 +13,18 @@ namespace Terrafirma.Global
 {
     public class GlobalItemInstanced : GlobalItem
     {
-        public int Spell = -1;
+        public Spell Spell = null;
         public override bool InstancePerEntity => true;
 
         //Net Send & Recieve
-        public override void NetSend(Item item, BinaryWriter writer)
-        {
-            writer.Write(Spell);
-        }
-        public override void NetReceive(Item item, BinaryReader reader)
-        {
-            Spell = reader.ReadInt32();
-        }
+        //public override void NetSend(Item item, BinaryWriter writer)
+        //{
+        //    writer.Write(Spell);
+        //}
+        //public override void NetReceive(Item item, BinaryReader reader)
+        //{
+        //    Spell = reader.ReadInt32();
+        //}
 
         //Modify Tooltips
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -36,7 +37,6 @@ namespace Terrafirma.Global
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
-            Spell = -1;
 
        
 

@@ -13,6 +13,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terrafirma.Systems.NPCQuests;
+using Terrafirma.Reworks.VanillaMagic.Spells;
 
 namespace Terrafirma.Global
 {
@@ -77,7 +78,7 @@ namespace Terrafirma.Global
             }
             if (Player.ItemAnimationActive && Player.HeldItem.type != 0)
             {
-                if (Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell == 31)
+                if (Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell != null && Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.GetSpellName() == "Mana Bloom")
                 {
                     Player.accRunSpeed = 2f;
                 }
@@ -127,7 +128,7 @@ namespace Terrafirma.Global
         {
             if (triggersSet.MouseRight) {  
                 
-                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
+                if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
                 {
                     if (!SpellUI)
                     {
@@ -147,19 +148,16 @@ namespace Terrafirma.Global
             else
             {
                 SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell[0] != -1)
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null)
                 {
                     if (Player.HeldItem.type > 0 &&
-                        ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
-                        ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index[0] + 1 &&
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue.ContainsKey(ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type][ModContent.GetInstance<SpellUISystem>().Index[0]]) &&
-                        ModContent.GetInstance<SpellUISystem>().Index[0] <= ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Length )
+                        SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
+                        SpellIndex.ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1 &&
+                        ModContent.GetInstance<SpellUISystem>().Index <= SpellIndex.ItemCatalogue[Player.HeldItem.type].Length )
                     {
-                        if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[Player.HeldItem.type].Contains(ModContent.GetInstance<SpellUISystem>().SelectedSpell[0]) && ModContent.GetInstance<SpellUISystem>().SelectedSpell[1] == 0 || ModContent.GetInstance<SpellUISystem>().SelectedSpell[1] == 1)
-                        {
-                            Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
-                            ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[ModContent.GetInstance<SpellUISystem>().Index[1]][ModContent.GetInstance<SpellUISystem>().Index[0]]].Item1;
-                        }
+
+                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
+                        ModContent.GetInstance<SpellUISystem>().SelectedSpell;
                     }
                 }
 

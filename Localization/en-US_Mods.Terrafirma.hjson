@@ -767,3 +767,17 @@ Tiles: {
 	TempireSurfaceGrass.MapEntry: Tempire Surface Grass
 	BigTempireGrass.MapEntry: Big Tempire Grass
 }
+
+Spells: {
+	Name: {
+		AmethystBolt: Amethyst Bolt
+		HomingAmethystBolt: Homing Amethyst Bolt
+		ManaBloom: Mana Bloom
+	}
+
+	Desc: {
+		AmethystBolt: Shoots a Bolt of Mana
+		HomingAmethystBolt: Shoots a bolt of homing mana
+		ManaBloom: Regenerates 10 mana but slows the player down
+	}
+}

@@ -19,9 +19,8 @@ namespace Terrafirma.Systems.MageClass
         public Vector2 position = Vector2.Zero;
         public string icon = "";
 
-        public int[] Index;
-        public int SelectedSpell;
-        public int Accessory = 0;
+        public int Index;
+        public Spell SelectedSpell;
 
         internal float timer;
         internal float postimer = 0.1f;
@@ -31,11 +30,12 @@ namespace Terrafirma.Systems.MageClass
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Texture2D iconglow = (Texture2D)ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellIconGlow");
             if (icon == ""){ spellicon = (Texture2D)ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/PlaceholderSpellIcon"); }
             else { spellicon = (Texture2D)ModContent.Request<Texture2D>(icon); }
            
+            spriteBatch.Draw(iconglow, position, new Rectangle(0, 0, iconglow.Width, iconglow.Height), new Color(47, 215, 237, 0) * MathHelper.Lerp(0f, dist, timer) * 0.5f, 0, iconglow.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 0.9f, SpriteEffects.None, 0);
             spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1.1f, SpriteEffects.None, 0);
-
         }
 
         public override void Update(GameTime gameTime)
@@ -53,7 +53,7 @@ namespace Terrafirma.Systems.MageClass
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
                 dist = 1f;
-                ModContent.GetInstance<SpellUISystem>().SelectedSpell = new int[2] { SelectedSpell, Accessory };
+                ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
                 ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
@@ -65,7 +65,7 @@ namespace Terrafirma.Systems.MageClass
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
                 dist = 1f;
-                ModContent.GetInstance<SpellUISystem>().SelectedSpell = new int[2] { SelectedSpell, Accessory };
+                ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
                 ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }

@@ -23,32 +23,32 @@ namespace Terrafirma.Systems.MageClass
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<SpellIndex>().ItemCatalogue.ContainsKey(item.type) )
+            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) )
             {
 
                 var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
                 tooltips.Remove(manaremove);
 
-                if (ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length > 1)
+                if (SpellIndex.ItemCatalogue[item.type].Length > 1)
                 {
-                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
+                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
                 }
                 else
                 {
-                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
                 }
                 
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
-                    for (int i = 0; i < ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type].Length; i++)
+                    for (int i = 0; i < SpellIndex.ItemCatalogue[item.type].Length; i++)
                     {
                         tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellDescription",
                         "[c/999999:" +
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item3 +
+                        SpellIndex.ItemCatalogue[item.type][i].GetSpellName() +
                         ": " +
-                        ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item4 +
+                        SpellIndex.ItemCatalogue[item.type][i].GetSpellDesc() +
                         ". Uses " +
-                        (int)(ModContent.GetInstance<SpellIndex>().SpellCatalogue[ModContent.GetInstance<SpellIndex>().ItemCatalogue[item.type][i]].Item5 * getplayer.manaCost) +
+                        (int)(SpellIndex.ItemCatalogue[item.type][i].ManaCost * getplayer.manaCost) +
                         " Mana ]"
                         ));
                     }
