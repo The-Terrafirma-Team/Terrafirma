@@ -1,20 +1,42 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Terrafirma.Systems.MageClass;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Projectiles.Magic
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 {
-    internal class InfernoFlamethrower : ModProjectile
+    internal class InfernoFlamethrower : Spell
+    {
+        public override int UseAnimation => 20;
+        public override int UseTime => 5;
+        public override int ManaCost => 16;
+        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/InfernoFlamethrower";
+        public override int[] SpellItem => new int[] { ItemID.InfernoFork };
+
+        public override void SetDefaults(Item entity)
+        {
+            entity.UseSound = null;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            type = ModContent.ProjectileType<InfernoFlamethrowerProj>();
+            damage = (int)(damage * 0.6f);
+            velocity *= 0.9f;
+            position += Vector2.Normalize(velocity) * 30;
+
+            if (player.ItemAnimationJustStarted) SoundEngine.PlaySound(SoundID.Item34, player.position);
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
+            return false;
+        }
+    }
+
+    internal class InfernoFlamethrowerProj : ModProjectile
     {
 
         Color flamecolor = new Color(255, 255, 2, 128);
@@ -22,7 +44,7 @@ namespace Terrafirma.Projectiles.Magic
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color(255,248,2, 128);
+            return new Color(255, 248, 2, 128);
         }
 
         public override void SetStaticDefaults()
@@ -77,7 +99,7 @@ namespace Terrafirma.Projectiles.Magic
                 Projectile.frame++;
                 Projectile.frameCounter = 0;
             }
-            if(Projectile.frame > 3)
+            if (Projectile.frame > 3)
             {
                 flamecolor = Color.Lerp(flamecolor, Color.Black * 0.4f, 0.1f);
                 Projectile.Opacity -= 0.4f;
@@ -122,7 +144,7 @@ namespace Terrafirma.Projectiles.Magic
         {
             Texture2D Flame = TextureAssets.Projectile[ProjectileID.Flames].Value;
             Main.EntitySpriteDraw(Flame, Projectile.Center - Main.screenPosition, new Rectangle(0, (Flame.Height / 7) * Projectile.frame, Flame.Width, Flame.Height / 7), flamecolor, Projectile.rotation, new Vector2(Flame.Width / 2, (Flame.Height / 7) / 2), Projectile.scale * 1.2f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Flame, Projectile.Center - Main.screenPosition, new Rectangle(0, (Flame.Height / 7) * Projectile.frame, Flame.Width, Flame.Height / 7), new Color(flamecolor.R * 1, flamecolor.G * 1f,flamecolor.B * 2, 0f) * Projectile.Opacity, Projectile.rotation * 0.5f, new Vector2(Flame.Width / 2, (Flame.Height / 7) / 2), Projectile.scale * 0.7f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(Flame, Projectile.Center - Main.screenPosition, new Rectangle(0, (Flame.Height / 7) * Projectile.frame, Flame.Width, Flame.Height / 7), new Color(flamecolor.R * 1, flamecolor.G * 1f, flamecolor.B * 2, 0f) * Projectile.Opacity, Projectile.rotation * 0.5f, new Vector2(Flame.Width / 2, (Flame.Height / 7) / 2), Projectile.scale * 0.7f, SpriteEffects.None, 0);
 
             return false;
         }

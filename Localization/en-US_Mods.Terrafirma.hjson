@@ -670,6 +670,30 @@ Items: {
 		DisplayName: Glimmer Wand
 		Tooltip: ""
 	}
+
+	BarbedWireCanister: {
+		DisplayName: Barbed Wire Canister
+		Tooltip:
+			'''
+			Uses half a sentry slot
+			Summons a barbed wire canister that connects to other barbed wire canisters
+			'''
+	}
+
+	DemolitionHammer: {
+		DisplayName: Demolition Hammer
+		Tooltip: Can destroy sentries
+	}
+
+	GREAT: {
+		DisplayName: G.R.E.A.T
+		Tooltip:
+			'''
+			Uses 3 sentry slots
+			Summons a giant laser sentry that deals increasing damage the longer it's targetting a specific enemy
+			"Stands for Gargantuan Radiation Emitting Apex Turret"
+			'''
+	}
 }
 
 Projectiles: {
@@ -754,6 +778,19 @@ Projectiles: {
 	GlitterBomb.DisplayName: Glitter Bomb
 	GlitterBolt.DisplayName: Glitter Bolt
 	SkySpear.DisplayName: Sky Spear
+	AmberWallProj.DisplayName: Amber Wall Proj
+	DiamondTurretProj.DisplayName: Diamond Turret Proj
+	IchorBubbleProj.DisplayName: Ichor Bubble Proj
+	InfernoFlamethrowerProj.DisplayName: Inferno Flamethrower Proj
+	InfernoForkProj.DisplayName: Inferno Fork Proj
+	AuraWaveProj.DisplayName: Aura Wave Proj
+	WaterGeyserProj.DisplayName: Water Geyser Proj
+	SkeletonHandProj.DisplayName: Skeleton Hand Proj
+	FantasticalDoubleHelixProj.DisplayName: Fantastical Double Helix Proj
+	GlitterBombProj.DisplayName: Glitter Bomb Proj
+	BarbedWireCanisterSentry.DisplayName: Barbed Wire Canister Sentry
+	DemolitionHammerProjectile.DisplayName: Demolition Hammer Projectile
+	GREATSentry.DisplayName: G R E A T Sentry
 }
 
 Biomes: {
@@ -772,12 +809,80 @@ Spells: {
 	Name: {
 		AmethystBolt: Amethyst Bolt
 		HomingAmethystBolt: Homing Amethyst Bolt
+		TopazBolt: Topaz Bolt
+		SplittingTopazBolt: Splitting Topaz Bolt
+		EmeraldBolt: Emerald Bolt
+		PiercingEmeraldBolt: Piercing Emerald Bolt
+		RubyBolt: Ruby Bolt
+		ExplosiveRubyBolt: Explosive Ruby Bolt
+		SapphireBolt: Sapphire Bolt
+		QuickSapphireBolt: Quick Sapphire Bolt
+		DiamondBolt: Diamond Bolt
+		DiamondTurret: Diamond Turret
+		AmberBolt: Amber Bolt
+		AmberWall: Amber Wall
 		ManaBloom: Mana Bloom
+		GoldenShower: Golden Shower
+		IchorBubble: Ichor Bubble
+		CursedFlame: Cursed Flames
+		CursedFlamethrower: Cursed Flamethrower
+		InfernoFork: Inferno Fork
+		InfernoFlamethrower: Hellfire Breath
+		InfernoWall: Diabolical Firewall
+		WaterBolt: Water Bolt
+		WaterGeyser: Water Geyser
+		AuraWave: Aura Wave
+		FlyingSkull: Flying Skull
+		BoneFragmentStorm: Bone Fragment Storm:
+		SkeletonHand: Skeleton Hand
+		WaterStream: Water Stream
+		WaterTreatment: Water Treatment
+		RainbowGunRainbow: Piercing Rainbow
+		PrismRain: Prism Rain
+		FantasticalDoubleHelix: Fantastical Double Helix
+		GlitterBomb: Glitter Bomb
+		DanceOfBlades: Dance of Blades
+		SkySpears: Sky Spears
+		TheAeonsEternity: The Aeon's Eternity
 	}
 
 	Desc: {
 		AmethystBolt: Shoots a Bolt of Mana
 		HomingAmethystBolt: Shoots a bolt of homing mana
+		TopazBolt: Shoots a Bolt of Mana
+		SplittingTopazBolt: Shoots a bolt of splitting mana
+		EmeraldBolt: Shoots a Bolt of Mana
+		PiercingEmeraldBolt: Shoots a bolt of piercing mana
+		RubyBolt: Shoots a Bolt of Mana
+		ExplosiveRubyBolt: Shoots a bolt of exploding mana
+		SapphireBolt: Shoots a Bolt of Mana
+		QuickSapphireBolt: Shoots a quick bolt of mana
+		DiamondBolt: Shoots a Bolt of Mana
+		DiamondTurret: Shoots out a diamond turret
+		AmberBolt: Shoots a Bolt of Mana
+		AmberWall: Shoots a bolt of mana that expands into a wall
 		ManaBloom: Regenerates 10 mana but slows the player down
+		GoldenShower: Sprays a shower of ichor
+		IchorBubble: Shoots a big explosive bubble of boiling Ichor
+		CursedFlame: Summons unholy fire balls
+		CursedFlamethrower: Summons a wall of cursed fire
+		InfernoFork: Shoots an inferno fork that explodes into a lingering ball of fire
+		InfernoFlamethrower: Shoots a blast of flame
+		InfernoWall: Summons a wall of fire
+		WaterBolt: Shoots a bolt of bouncy water
+		WaterGeyser: Summons a water geyser
+		AuraWave: Shoots a wavee to splash enemies away
+		FlyingSkull: Shoots a flying flaming skull
+		BoneFragmentStorm: Shoots multiple bone fragments
+		SkeletonHand: Summons a skeletal hand that roasts all enemies in its vicinity
+		WaterStream: Sprays out a shower of water
+		WaterTreatment: Shoots out a bubble of healing water
+		RainbowGunRainbow: Shoots a rainbow that does continuous damage
+		PrismRain: Shoots a barrage of colored glass prisms
+		FantasticalDoubleHelix: Shoots a double helix bolt
+		GlitterBomb: Shoots a bomb of glitter that explodes on contact
+		DanceOfBlades: Shoots magic blades
+		SkySpears: Summons magic spears from the sky
+		TheAeonsEternity: Summons a giant magic blade that follows your mouse
 	}
 }

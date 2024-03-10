@@ -30,7 +30,7 @@ namespace Terrafirma
             float usedslots = 0f;
             for (int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Main.projectile[i].WipableTurret)
+                if (Main.projectile[i].WipableTurret && Main.projectile[i].active)
                 {
                     list.Add(Main.projectile[i]);
                     usedslots += Main.projectile[i].GetGlobalProjectile<SentryChanges>().SentrySlots;
@@ -54,6 +54,7 @@ namespace Terrafirma
                 projectile.Kill();
                 usedslots -= projectile.GetGlobalProjectile<SentryChanges>().SentrySlots;
             }
+
         }
 
         List<int> BulletList = new List<int>();

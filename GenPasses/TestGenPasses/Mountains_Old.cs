@@ -21,7 +21,6 @@ namespace Terrafirma.GenPasses.TestGenPasses
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
-            float GenHeight;
             int[] MountainSpawn = new int[] { };
             int[] MountainRand = new int[] { };
 

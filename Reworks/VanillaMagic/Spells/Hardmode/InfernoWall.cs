@@ -1,14 +1,40 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terrafirma.Systems.MageClass;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.Audio;
 
-namespace Terrafirma.Projectiles.Magic
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 {
+    internal class InfernoWall : Spell
+    {
+        public override int UseAnimation => 51;
+        public override int UseTime => 17;
+        public override int ManaCost => 24;
+        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/InfernoWall";
+        public override int[] SpellItem => new int[] { ItemID.InfernoFork };
+
+        public override void SetDefaults(Item entity)
+        {
+            entity.UseSound = null;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            type = ModContent.ProjectileType<Firewall>();
+            velocity = Vector2.Normalize(velocity) * 0.01f;
+            damage = (int)(damage * 0.5f);
+            position = Main.MouseWorld;
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
+            return false;
+        }
+    }
+
     public class Firewall : ModProjectile
     {
+        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/Firewall";
         public override void SetDefaults()
         {
             Projectile.friendly = true;

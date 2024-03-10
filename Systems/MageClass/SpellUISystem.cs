@@ -16,7 +16,6 @@ namespace Terrafirma.Systems.MageClass
         private UserInterface spellwheel;
 
         public Spell SelectedSpell;
-        public int Index;
 
         public override void Load()
         {
@@ -46,6 +45,7 @@ namespace Terrafirma.Systems.MageClass
         public void Flush()
         {
             spellui?.Flush();
+            spellui.UIOpen = false;
         }
 
         public void Create( int item, Player player)

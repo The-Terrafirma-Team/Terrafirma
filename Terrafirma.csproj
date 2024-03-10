@@ -19,4 +19,7 @@
       <HintPath>..\..\..\..\..\..\Downloads\SubworldLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reworks\VanillaMagic\Spells\PreHardmode\" />
+  </ItemGroup>
 </Project>

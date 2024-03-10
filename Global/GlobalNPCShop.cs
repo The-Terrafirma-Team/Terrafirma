@@ -1,5 +1,6 @@
 ﻿using Terrafirma.Items.Ammo;
 using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Items.Tools;
 using Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode;
 using Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
@@ -32,6 +33,8 @@ namespace Terrafirma.Global
             if (shop.NpcType == NPCID.Mechanic)
             {
                 shop.InsertAfter(ItemID.EngineeringHelmet, ModContent.ItemType<MechanicsPocketDefenseSystem>());
+                shop.InsertAfter(ModContent.ItemType<MechanicsPocketDefenseSystem>(), ModContent.ItemType<BarbedWireCanister>(), Condition.Hardmode);
+                shop.InsertAfter(ModContent.ItemType<BarbedWireCanister>(), ModContent.ItemType<DemolitionHammer>(), Condition.Hardmode);
 
             }
 

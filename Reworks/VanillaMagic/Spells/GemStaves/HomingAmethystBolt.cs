@@ -1,17 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Reworks.VanillaMagic.Projectiles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells
+namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
 {
     internal class HomingAmethystBolt : Spell
     {

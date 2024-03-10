@@ -1,14 +1,9 @@
-
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using System;
-using Terrafirma.Projectiles.Magic;
-using Terrafirma.Systems;
-using Terrafirma.Global;
-using Terrafirma.Reworks.VanillaMagic.Projectiles;
 using Terraria.DataStructures;
+using Terrafirma.Reworks.VanillaMagic.Spells.Tempire;
 
 namespace Terrafirma.Items.Weapons.Magic.Tempire
 {

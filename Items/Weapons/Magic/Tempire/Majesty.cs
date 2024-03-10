@@ -3,11 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using System;
-using Terrafirma.Projectiles.Magic;
-using Terrafirma.Systems;
-using Terrafirma.Global;
-using Terrafirma.Reworks.VanillaMagic.Projectiles;
+using Terrafirma.Reworks.VanillaMagic.Spells.Tempire;
 
 namespace Terrafirma.Items.Weapons.Magic.Tempire
 {
@@ -20,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
         }
         public override void SetDefaults()
         {
-            Item.DefaultToMagicWeapon(ModContent.ProjectileType<FantasticalDoubleHelix>(), 22, 8, true);
+            Item.DefaultToMagicWeapon(ModContent.ProjectileType<FantasticalDoubleHelixProj>(), 22, 8, true);
             Item.mana = 5;
             Item.damage = 100;
             Item.value = Item.sellPrice(0, 0, 20, 0);

@@ -126,6 +126,7 @@ namespace Terrafirma.Global
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
+
             if (triggersSet.MouseRight) {  
                 
                 if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
@@ -144,18 +145,16 @@ namespace Terrafirma.Global
                     ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
                 }
                 SpellUI = true;
+             
             }
             else
-            {
-                SpellUI = false;
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null)
+            {  
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null && SpellUI == true)
                 {
                     if (Player.HeldItem.type > 0 &&
-                        SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
-                        SpellIndex.ItemCatalogue[Player.HeldItem.type].Length >= ModContent.GetInstance<SpellUISystem>().Index + 1 &&
-                        ModContent.GetInstance<SpellUISystem>().Index <= SpellIndex.ItemCatalogue[Player.HeldItem.type].Length )
+                        SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
                     {
-
+                        SpellUI = false;
                         Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
                         ModContent.GetInstance<SpellUISystem>().SelectedSpell;
                     }

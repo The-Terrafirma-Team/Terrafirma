@@ -14,7 +14,6 @@ namespace Terrafirma.Systems.MageClass
     {
         public override bool InstancePerEntity => true;
         internal Player getplayer;
-        internal float manacost;
 
         public override void UpdateInventory(Item item, Player player)
         {

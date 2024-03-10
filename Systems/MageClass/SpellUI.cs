@@ -9,6 +9,7 @@ using Terraria.GameContent.UI.Elements;
 using Terrafirma.Global;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -24,6 +25,8 @@ namespace Terrafirma.Systems.MageClass
 
         int effecttimer;
         float sizefloat;
+        public bool UIOpen = false;
+        public Spell[] SpellList = new Spell[]{};
         public void Flush()
         {
             RemoveAllChildren();
@@ -39,59 +42,52 @@ namespace Terrafirma.Systems.MageClass
             Flush();
             if (SpellIndex.ItemCatalogue.ContainsKey(weapon))
             {
-                int SpellAmount = SpellIndex.ItemCatalogue[weapon].Length;
-                int WeaponSpellAmount = SpellIndex.ItemCatalogue[weapon].Length;
-                int AccessorySpellAmount = 0;
+                UIOpen = true;
+                SpellList = new Spell[]{};
 
-                
                 if (accessoriesincluded)
                 {
-                        //Check all accessory spells so the indexes match later
+                        //Add all Accessory Spells to Spell List
                         for (int i = 0; i < player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
                         {
                             if (SpellIndex.ItemCatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                             {
                                 int accessory = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                                SpellAmount += SpellIndex.ItemCatalogue[accessory].Length;
-                                AccessorySpellAmount += SpellIndex.ItemCatalogue[accessory].Length;
-                            }
-                        }
-
-                        //Create Spell Buttons for Accessory spells
-                        for (int i = 0; i < player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
-                        {
-                            if (SpellIndex.ItemCatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
-                            {
-                                
-                                int accessory = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-
                                 for (int j = 0; j < SpellIndex.ItemCatalogue[accessory].Length; j++)
                                 {
-                                    SpellButton accessoryspellicon = new SpellButton();
-                                    accessoryspellicon.angle = (360 / SpellAmount) * j;
-                                    accessoryspellicon.anglespace = 360 / SpellAmount;
-                                    accessoryspellicon.icon = SpellIndex.ItemCatalogue[accessory][j].TexurePath;
-                                    accessoryspellicon.Index = j;
-                                    accessoryspellicon.SelectedSpell = SpellIndex.ItemCatalogue[accessory][j];
-                                    Append(accessoryspellicon);
-                                    
+                                    if (!SpellList.Contains(SpellIndex.ItemCatalogue[accessory][j]))
+                                    {
+                                        SpellList = SpellList.Append(SpellIndex.ItemCatalogue[accessory][j]).ToArray();
+                                    }
                                 }
-                                
+
                             }
                         }
                 }
 
-                //Create Spell Buttons for Weapon spells
+                //Add all Weapon Spells to Spell list
                 for (int i = 0; i < SpellIndex.ItemCatalogue[weapon].Length; i++)
                 {
-                    SpellButton spellicon = new SpellButton();
-                    spellicon.angle = (360 / SpellAmount) * (i + AccessorySpellAmount);
-                    spellicon.anglespace = 360 / SpellAmount;
-                    spellicon.icon = SpellIndex.ItemCatalogue[weapon][i].TexurePath;
-                    spellicon.Index = i;
-                    spellicon.SelectedSpell = SpellIndex.ItemCatalogue[weapon][i];
-                    Append(spellicon);
+                    if (!SpellList.Contains(SpellIndex.ItemCatalogue[weapon][i]))
+                    {
+                        SpellList = SpellList.Append(SpellIndex.ItemCatalogue[weapon][i]).ToArray();
+                    }
+
                 }
+
+                //Create Spell Buttons
+                for (int i = 0; i < SpellList.Length; i++)
+                {
+                    SpellButton spellicon = new SpellButton();
+                    spellicon.angle = (360 / SpellList.Length) * i;
+                    spellicon.anglespace = 360 / SpellList.Length;
+                    spellicon.icon = SpellList[i].TexurePath;
+                    spellicon.Index = i;
+                    spellicon.SelectedSpell = SpellList[i];
+                    Append(spellicon);
+                    
+                }
+
 
             }
 
@@ -152,13 +148,15 @@ namespace Terrafirma.Systems.MageClass
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D UICircle = ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellUICircle").Value;
-            Texture2D UICircle2 = ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellUICircle3").Value;
-            for (int i = 0; i < 4; i++)
+            if (UIOpen)
             {
-                spriteBatch.Draw(UICircle2, new Vector2(Main.screenWidth, Main.screenHeight) / 2, UICircle2.Bounds, new Color(47, 215 / (i+1), 237 / (i+1), 0) * (0.5f / i), ((float)Main.timeForVisualEffects / (40f - (i * 5f)) ), UICircle2.Size() / 2, MathHelper.Lerp(0f, 0.85f, sizefloat) - (i / 10f), SpriteEffects.None, 0f);
+                Texture2D UICircle = ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellUICircle").Value;
+                Texture2D UICircle2 = ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellUICircle3").Value;
+                for (int i = 0; i < 4; i++)
+                {
+                    spriteBatch.Draw(UICircle2, new Vector2(Main.screenWidth, Main.screenHeight) / 2, UICircle2.Bounds, new Color(47, 215 / (i + 1), 237 / (i + 1), 0) * (0.5f / i), ((float)Main.timeForVisualEffects / (40f - (i * 5f))), UICircle2.Size() / 2, MathHelper.Lerp(0f, 0.85f, sizefloat) - (i / 10f), SpriteEffects.None, 0f);
+                }
             }
-            
             base.Draw(spriteBatch);
         }
 

@@ -15,9 +15,25 @@ namespace Terrafirma.Systems.MageClass
     public abstract class Spell : ModType
     {
         public virtual string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PlaceholderSpellIcon";
-        public virtual int ManaCost => 1;
-        public virtual int UseTime => 15;
-        public virtual int UseAnimation => 15;
+        /// <summary>
+        /// Sets the ReuseDelay of the spell's ManaCost. Set to -1 to use the item's default ManaCost
+        /// </summary>
+        public virtual int ManaCost => -1;
+        /// <summary>
+        /// Sets the ReuseDelay of the spell's item. Set to -1 to use the item's default ReuseDelay
+        /// </summary>
+        public virtual int UseTime => -1;
+        /// <summary>
+        /// Sets the UseTime of the spell's item. Set to -1 to use the item's default UseTime
+        /// </summary>
+        public virtual int ReuseDelay => -1;
+        /// <summary>
+        /// Sets the UseAnimation of the spell's item. Set to -1 to use the item's default UseAnimation
+        /// </summary>
+        public virtual int UseAnimation => -1;
+        /// <summary>
+        /// Array of all items that can use this spell. Works for all Weapons and Accessories, doesn't have any effect on other items.
+        /// </summary>
         public virtual int[] SpellItem => new int[]{1};
 
         public override void Load()
@@ -66,10 +82,17 @@ namespace Terrafirma.Systems.MageClass
             ModTypeLookup<Spell>.Register(this);
         }
 
+
     }
 
     public static class SpellMethods
     {
+        //Compares two spells. Returns true if both spells match.
+        public static bool IsEqualsTo(this Spell basespell, Spell spell)
+        {
+            if (basespell.GetSpellName() == spell.GetSpellName()) return true;
+            return false;
+        }
         public static bool ContainsSpell(this Spell[] spellarray, Spell spell)
         {
             if (spell != null)

@@ -35,7 +35,7 @@ namespace Terrafirma.Systems.MageClass
             else { spellicon = (Texture2D)ModContent.Request<Texture2D>(icon); }
            
             spriteBatch.Draw(iconglow, position, new Rectangle(0, 0, iconglow.Width, iconglow.Height), new Color(47, 215, 237, 0) * MathHelper.Lerp(0f, dist, timer) * 0.5f, 0, iconglow.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 0.9f, SpriteEffects.None, 0);
-            spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1.1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1f, SpriteEffects.None, 0);
         }
 
         public override void Update(GameTime gameTime)
@@ -54,7 +54,6 @@ namespace Terrafirma.Systems.MageClass
                 }
                 dist = 1f;
                 ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
-                ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
             else if (Math.Abs((angle * (Math.PI / 180)) - (mouseangle - Math.PI*2)) < (anglespace * (Math.PI / 180)) / 2)
@@ -66,7 +65,6 @@ namespace Terrafirma.Systems.MageClass
                 }
                 dist = 1f;
                 ModContent.GetInstance<SpellUISystem>().SelectedSpell = SelectedSpell;
-                ModContent.GetInstance<SpellUISystem>().Index = Index;
                 timer = Math.Clamp(timer *= 1 + (1 - timer) / 10, 0.5f, 1f);
             }
             else
