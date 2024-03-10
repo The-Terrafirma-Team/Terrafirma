@@ -59,7 +59,7 @@ namespace Terrafirma.Projectiles.Summons
             {
                 if (Projectile.Center.Distance(Main.projectile[i].Center) < turretradius + 5f && Main.projectile[i].sentry)
                 {
-                    Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[SentryBuffID.ClockworkTurret] = 10;
+                    Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[SentryBuffID.ClockworkTurret] = 10;
                 }
             }
 

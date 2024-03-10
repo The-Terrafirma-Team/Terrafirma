@@ -33,7 +33,7 @@ namespace Terrafirma
                 if (Main.projectile[i].WipableTurret && Main.projectile[i].active)
                 {
                     list.Add(Main.projectile[i]);
-                    usedslots += Main.projectile[i].GetGlobalProjectile<SentryChanges>().SentrySlots;
+                    usedslots += Main.projectile[i].GetGlobalProjectile<SentryStats>().SentrySlots;
                 }
             }
             while (usedslots > player.maxTurrets)
@@ -41,18 +41,18 @@ namespace Terrafirma
                 Projectile projectile = null;
                 for (int j = 0; j < list.Count; j++)
                 {
-                    if (projectile == null && !list[j].GetGlobalProjectile<SentryChanges>().Priority)
+                    if (projectile == null && !list[j].GetGlobalProjectile<SentryStats>().Priority)
                     {
                         projectile = list[j];
                     }
-                    else if (projectile != null && list[j].timeLeft < projectile.timeLeft && !list[j].GetGlobalProjectile<SentryChanges>().Priority)
+                    else if (projectile != null && list[j].timeLeft < projectile.timeLeft && !list[j].GetGlobalProjectile<SentryStats>().Priority)
                     {
                         projectile = list[j];
                     }
                 }
                 list.Remove(projectile);
                 projectile.Kill();
-                usedslots -= projectile.GetGlobalProjectile<SentryChanges>().SentrySlots;
+                usedslots -= projectile.GetGlobalProjectile<SentryStats>().SentrySlots;
             }
 
         }

@@ -14,6 +14,7 @@ namespace Terrafirma.Global
     {
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
+        public float WrenchBuffTimeMultiplier = 1f;
         public float SwarmSpeedMultiplier = 1f;
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
@@ -23,10 +24,15 @@ namespace Terrafirma.Global
             SentryRangeMultiplier = 0f;
             SwarmSpeedMultiplier = 1f;
             KnockbackResist = 1f;
-            ExtraWeaponPierceMultiplier = 1;
+            ExtraWeaponPierceMultiplier = 1f;
+            WrenchBuffTimeMultiplier = 1f;
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
+            if(KnockbackResist <= 0)
+            {
+                Player.noKnockback = true;
+            }
             modifiers.Knockback *= MathHelper.Clamp(KnockbackResist, 0, 10);
         }
         public override float UseSpeedMultiplier(Item item)

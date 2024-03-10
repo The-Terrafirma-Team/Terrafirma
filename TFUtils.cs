@@ -208,23 +208,23 @@ namespace Terrafirma
 
         public static float GetSentryAttackCooldownMultiplier(this Projectile projectile)
         {
-            return Math.Clamp(projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier ,0.1f , 100f);
+            return Math.Clamp(projectile.GetGlobalProjectile<SentryStats>().SpeedMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier ,0.1f , 100f);
         }
         public static float GetSentryAttackCooldownMultiplierInverse(this Projectile projectile)
         {
-            return Math.Clamp((1 - projectile.GetGlobalProjectile<SentryChanges>().SpeedMultiplier - Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier) + 1, 0.1f, 100f);
+            return Math.Clamp((1 - projectile.GetGlobalProjectile<SentryStats>().SpeedMultiplier - Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentrySpeedMultiplier) + 1, 0.1f, 100f);
         }
         public static float GetSentryRangeMultiplier(this Projectile projectile)
         {
-            return projectile.GetGlobalProjectile<SentryChanges>().RangeMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentryRangeMultiplier;
+            return projectile.GetGlobalProjectile<SentryStats>().RangeMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentryRangeMultiplier;
         }
         public static void WrenchHitSentry(this Player player, Rectangle hitbox, int WrenchBuffID, int Duration)
         {
             for(int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
+                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
                 {
-                    Main.projectile[i].GetGlobalProjectile<SentryChanges>().BuffTime[WrenchBuffID] = Duration;
+                    Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] = (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier);
                     SoundEngine.PlaySound(SoundID.Item37, player.position);
                     Main.projectile[i].netUpdate = true;
 
@@ -241,7 +241,7 @@ namespace Terrafirma
         public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile sentry, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0, bool RangeDoesNotAffectVelocity = false)
         {
             //Do Stuff in here for buffs it's like modify shoot stats
-            SentryChanges sentryGlobal = sentry.GetGlobalProjectile<SentryChanges>();
+            SentryStats sentryGlobal = sentry.GetGlobalProjectile<SentryStats>();
 
             if(!RangeDoesNotAffectVelocity)
                 velocity *= sentry.GetSentryRangeMultiplier();
@@ -263,17 +263,17 @@ namespace Terrafirma
         {
             if (projectile != null)
             {
-                projectile.GetGlobalProjectile<SentryChanges>().Priority = true;
+                projectile.GetGlobalProjectile<SentryStats>().Priority = true;
                 for (int i = 0; i < Main.projectile.Length; ++i)
                 {
-                    if (Main.projectile[i] != projectile && Main.projectile[i].owner == projectile.owner && Main.projectile[i].WipableTurret) Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority = false;
+                    if (Main.projectile[i] != projectile && Main.projectile[i].owner == projectile.owner && Main.projectile[i].WipableTurret) Main.projectile[i].GetGlobalProjectile<SentryStats>().Priority = false;
                 }
             }
             else if (player != null)
             {
                 for (int i = 0; i < Main.projectile.Length; ++i)
                 {
-                    if (Main.projectile[i].WipableTurret && Main.player[Main.projectile[i].owner] == player) Main.projectile[i].GetGlobalProjectile<SentryChanges>().Priority = false;
+                    if (Main.projectile[i].WipableTurret && Main.player[Main.projectile[i].owner] == player) Main.projectile[i].GetGlobalProjectile<SentryStats>().Priority = false;
                 }
             }
             
