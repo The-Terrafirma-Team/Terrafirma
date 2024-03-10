@@ -689,7 +689,7 @@ Items: {
 		DisplayName: G.R.E.A.T
 		Tooltip:
 			'''
-			Uses 3 sentry slots
+			Uses 4 sentry slots
 			Summons a giant laser sentry that deals increasing damage the longer it's targetting a specific enemy
 			"Stands for Gargantuan Radiation Emitting Apex Turret"
 			'''

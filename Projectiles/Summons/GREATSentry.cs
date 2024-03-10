@@ -67,7 +67,7 @@ namespace Terrafirma.Projectiles.Summons
             //    dust.noGravity = true;
             //}
 
-            if (Main.player[Projectile.owner].HasMinionAttackTargetNPC && Projectile.Center.Distance(Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC].Center) < 600f)
+            if (Main.player[Projectile.owner].HasMinionAttackTargetNPC && Projectile.Center.Distance(Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC].Center) < 600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]))
             {
                 closestnpc = Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC];
 
@@ -90,9 +90,9 @@ namespace Terrafirma.Projectiles.Summons
                     Projectile.ai[0] = Math.Clamp(Projectile.ai[0] + 1, 0, 600);
                 }
 
-                if (closestnpc == null || !closestnpc.active || Projectile.Center.Distance(closestnpc.Center) > 600f)
+                if (closestnpc == null || !closestnpc.active || Projectile.Center.Distance(closestnpc.Center) > 600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]) )
                 {
-                    NPC closestsnpcsearch = TFUtils.FindClosestNPC(600f, Projectile.Center);
+                    NPC closestsnpcsearch = TFUtils.FindClosestNPC(600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]), Projectile.Center);
                     closestnpc = null;
 
                     if (Math.Abs(Projectile.rotation) > MathHelper.PiOver2)
