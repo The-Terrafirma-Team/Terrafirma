@@ -14,7 +14,7 @@ namespace Terrafirma.Global
     public class SentryBuffID
     {
         public const int MetalWrench = 0;
-        public const int DemoniteWrench = 1;
+        public const int InflictShadowflame = 1;
         public const int CrimtaneWrench = 2;
         public const int ClockworkTurret = 3;
         public const int CoolWrench = 4;
@@ -61,7 +61,7 @@ namespace Terrafirma.Global
             {    
                 TFUtils.UpdateSentryPriority(projectile);
             }
-            if (BuffTime[SentryBuffID.DemoniteWrench] > 0 && Main.rand.NextBool(5))
+            if (BuffTime[SentryBuffID.InflictShadowflame] > 0 && Main.rand.NextBool(5))
             {
                 Dust d = Dust.NewDustDirect(projectile.BottomLeft + new Vector2(0, -4), projectile.width, 0, DustID.Shadowflame, 0, -projectile.height / 10);
                 d.noGravity = true;

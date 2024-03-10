@@ -249,7 +249,7 @@ namespace Terrafirma
             Projectile p = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
             SentryBulletBuff bulletGlobal = p.GetGlobalProjectile<SentryBulletBuff>();
 
-            if (sentryGlobal.BuffTime[SentryBuffID.DemoniteWrench] > 0)
+            if (sentryGlobal.BuffTime[SentryBuffID.InflictShadowflame] > 0)
             {
                 bulletGlobal.Demonite = true;
             }

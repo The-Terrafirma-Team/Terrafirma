@@ -21,7 +21,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            player.WrenchHitSentry(hitbox, SentryBuffID.DemoniteWrench, 60 * 3);
+            player.WrenchHitSentry(hitbox, SentryBuffID.InflictShadowflame, 60 * 3);
         }
         public override void AddRecipes()
         {
