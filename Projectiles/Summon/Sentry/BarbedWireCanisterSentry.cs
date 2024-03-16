@@ -11,7 +11,7 @@ using Terraria.ID;
 using System.Linq;
 using Terrafirma.Global;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
     internal class BarbedWireCanisterSentry : ModProjectile
     {
@@ -68,8 +68,8 @@ namespace Terrafirma.Projectiles.Summons
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/BarbedWireCanisterSentry").Value;
-            Texture2D BarbedWire = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/BarbedWire").Value;
+            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/BarbedWireCanisterSentry").Value;
+            Texture2D BarbedWire = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/BarbedWire").Value;
             for (int i = 0; i < Projectile.whoAmI; i++)
             {
                 if (Main.projectile[i].sentry && Main.projectile[i].type == Type && Main.projectile[i].whoAmI < Projectile.whoAmI && Main.projectile[i].active && Projectile.Center.Distance(Main.projectile[i].Center) < 400f)

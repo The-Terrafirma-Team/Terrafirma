@@ -10,7 +10,7 @@ using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
     internal class GREATSentry : ModProjectile
     {
@@ -130,10 +130,10 @@ namespace Terrafirma.Projectiles.Summons
         public override bool PreDraw(ref Color lightColor)
         {
             float ChargeUpFloat;
-            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/GREATSentry").Value;
-            Texture2D SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/GREATSentryGlow").Value;
-            Texture2D SentryLaser = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/GREATLaser").Value;
-            Texture2D SentryLaserBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/GREATLaserHead").Value;
+            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATSentry").Value;
+            Texture2D SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATSentryGlow").Value;
+            Texture2D SentryLaser = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATLaser").Value;
+            Texture2D SentryLaserBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATLaserHead").Value;
 
             
 

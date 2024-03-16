@@ -6,7 +6,7 @@ using Terraria.ID;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Terrafirma.Particles;
-using Terrafirma.Projectiles.Summons;
+using Terrafirma.Projectiles.Summon.Sentry;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma.Global

@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
     public class CorruptedSunflower : ModProjectile
     {

@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Swarm
 {
     internal class ZombiemancedZombie : ModProjectile
     {
@@ -62,13 +62,13 @@ namespace Terrafirma.Projectiles.Summons
             {
                 if (Projectile.velocity.Y > 0.5f || Projectile.velocity.Y < -0.5f)
                 {
-                    Projectile.frame = 2 + (3*Variant);
+                    Projectile.frame = 2 + 3 * Variant;
                 }
                 else
                 {
-                    if (Projectile.frame == 2 + (3 * Variant))
+                    if (Projectile.frame == 2 + 3 * Variant)
                     {
-                        Projectile.frame = 0 + (3 * Variant);
+                        Projectile.frame = 0 + 3 * Variant;
                     }
                     else
                     {
@@ -79,14 +79,14 @@ namespace Terrafirma.Projectiles.Summons
             }
 
             NPC closestnpc = TFUtils.FindClosestNPC(600f, Projectile.position);
-           
+
             if (closestnpc != null && Projectile.ai[1] % 10 == 0)
             {
                 if (Math.Abs(closestnpc.position.X - Projectile.Center.X) < 100f)
                 {
                     if (Jumps > 0)
                     {
-                        if( (-Math.Abs(closestnpc.position.Y - Projectile.Center.Y) / 10) < -MaxHeight)
+                        if (-Math.Abs(closestnpc.position.Y - Projectile.Center.Y) / 10 < -MaxHeight)
                         {
                             Projectile.velocity.Y = -MaxHeight;
                         }
@@ -109,7 +109,7 @@ namespace Terrafirma.Projectiles.Summons
             }
 
 
-           
+
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -119,11 +119,11 @@ namespace Terrafirma.Projectiles.Summons
             {
                 if (oldVelocity.X > 0)
                 {
-                        MovementDirection = 0;
+                    MovementDirection = 0;
                 }
                 else
                 {
-                        MovementDirection = 1;
+                    MovementDirection = 1;
                 }
 
                 Projectile.velocity.X = 0;
@@ -139,7 +139,7 @@ namespace Terrafirma.Projectiles.Summons
 
         public override void SendExtraAI(BinaryWriter writer)
         {
-            writer.Write7BitEncodedInt( (int)(MaxSpeed * 10f));
+            writer.Write7BitEncodedInt((int)(MaxSpeed * 10f));
             writer.Write7BitEncodedInt((int)(MaxHeight * 10f));
             base.SendExtraAI(writer);
         }
@@ -170,7 +170,7 @@ namespace Terrafirma.Projectiles.Summons
                 Dust.NewDust(Projectile.Center, 10, 10, DustID.Smoke, Main.rand.Next(-2, 2), Main.rand.Next(-2, 2), 0, default, Main.rand.NextFloat(1.8f, 2.5f));
             }
 
-            if (Main.rand.Next(0,21) == 20) 
+            if (Main.rand.Next(0, 21) == 20)
             {
                 Variant = 1;
             }

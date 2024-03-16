@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Swarm
 {
     internal class SummonedVulture : ModProjectile
     {
@@ -71,13 +71,13 @@ namespace Terrafirma.Projectiles.Summons
             if (ClosestNPC != null)
             {
                 Projectile.velocity += -Vector2.Normalize(Projectile.Center - ClosestNPC.Center) * 0.4f;
-                Projectile.velocity.X = MathHelper.Clamp(Projectile.velocity.X, -5f , 5f);
+                Projectile.velocity.X = MathHelper.Clamp(Projectile.velocity.X, -5f, 5f);
 
                 if (Vector2.Distance(Projectile.Center, ClosestNPC.Center) < 100f)
                 {
-                    Projectile.velocity.Y = (MathHelper.Clamp(Projectile.velocity.Y, -2f , 2f) + (float)Math.Sin(Projectile.ai[1] / 10)  * 0.5f);
+                    Projectile.velocity.Y = MathHelper.Clamp(Projectile.velocity.Y, -2f, 2f) + (float)Math.Sin(Projectile.ai[1] / 10) * 0.5f;
                 }
-                else 
+                else
                 {
                     Projectile.velocity.Y = MathHelper.Clamp(Projectile.velocity.Y, -2f, 2f);
                 }
@@ -90,11 +90,11 @@ namespace Terrafirma.Projectiles.Summons
                     Projectile.velocity += -Vector2.Normalize(Projectile.Center - new Vector2(player.MountedCenter.X, player.MountedCenter.Y - 100f)) * 0.4f;
                 }
 
-                Projectile.velocity.X = MathHelper.Clamp(Projectile.velocity.X, -5f, 5f) ;
+                Projectile.velocity.X = MathHelper.Clamp(Projectile.velocity.X, -5f, 5f);
 
                 if (Vector2.Distance(Projectile.Center, new Vector2(player.MountedCenter.X, player.MountedCenter.Y - 100f)) < 60f)
                 {
-                    Projectile.velocity.Y = (MathHelper.Clamp(Projectile.velocity.Y, -2f, 2f) + (float)Math.Sin(Projectile.ai[1] / 20) * 0.2f);
+                    Projectile.velocity.Y = MathHelper.Clamp(Projectile.velocity.Y, -2f, 2f) + (float)Math.Sin(Projectile.ai[1] / 20) * 0.2f;
                 }
                 else
                 {
@@ -116,8 +116,8 @@ namespace Terrafirma.Projectiles.Summons
         }
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCHit28 , Projectile.position);
-            
+            SoundEngine.PlaySound(SoundID.NPCHit28, Projectile.position);
+
             for (int i = 0; i < 24; i++)
             {
                 Dust.NewDust(Projectile.Center, 10, 10, DustID.Smoke, Main.rand.NextFloat(-0.5f, 0.5f) * 4, Main.rand.NextFloat(-0.5f, 0.5f) * 4, 0, default, Main.rand.NextFloat(1.1f, 1.5f));

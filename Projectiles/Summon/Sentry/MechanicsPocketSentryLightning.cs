@@ -9,12 +9,12 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
     internal class MechanicsPocketSentryLightning : ModProjectile
     {
 
-        public override string Texture => "Terrafirma/Projectiles/Summons/MechanicsPocketSentry";
+        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/MechanicsPocketSentry";
 
         NPC targetnpc = null;
         Vector2 origpos = Vector2.Zero;

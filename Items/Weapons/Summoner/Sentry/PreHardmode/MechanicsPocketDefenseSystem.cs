@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summons;
+using Terrafirma.Projectiles.Summon.Sentry;
 using Terraria.DataStructures;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
@@ -31,7 +31,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 
             Item.rare = ItemRarityID.Green;
             Item.value = Item.buyPrice(0, 12, 0, 0);
-            Item.shoot = ModContent.ProjectileType<Projectiles.Summons.MechanicsPocketSentry>();
+            Item.shoot = ModContent.ProjectileType<MechanicsPocketSentry>();
 
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

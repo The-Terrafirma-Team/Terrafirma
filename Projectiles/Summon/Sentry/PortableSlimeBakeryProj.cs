@@ -9,9 +9,9 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
-    internal class PortableSlimeBakery : ModProjectile
+    internal class PortableSlimeBakeryProj : ModProjectile
     {
         public override void SetDefaults()
         {

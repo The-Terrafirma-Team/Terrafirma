@@ -2,8 +2,8 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summons;
 using Terraria.DataStructures;
+using Terrafirma.Projectiles.Summon.Sentry;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
@@ -31,7 +31,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 4, 05, 0);
-            Item.shoot = ModContent.ProjectileType<Projectiles.Summons.PortableSlimeBakery>();
+            Item.shoot = ModContent.ProjectileType<PortableSlimeBakeryProj>();
 
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

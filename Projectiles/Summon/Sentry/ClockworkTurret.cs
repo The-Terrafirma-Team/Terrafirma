@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terrafirma.Global;
 
-namespace Terrafirma.Projectiles.Summons
+namespace Terrafirma.Projectiles.Summon.Sentry
 {
     internal class ClockworkTurret : ModProjectile
     {
@@ -72,8 +72,8 @@ namespace Terrafirma.Projectiles.Summons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/ClockworkTurret");
-            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summons/ClockworkTurretBorder");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/ClockworkTurret");
+            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/ClockworkTurretBorder");
 
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0,SentryBase.Height()/4) , new Rectangle(0, (SentryBase.Height() / 2 * Projectile.frame), SentryBase.Width(),SentryBase.Height()/2), lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
             

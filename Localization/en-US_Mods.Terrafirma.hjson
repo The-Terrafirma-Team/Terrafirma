@@ -53,6 +53,11 @@ Buffs: {
 		DisplayName: Electric Charge
 		Description: You take more damage the faster you move
 	}
+
+	AirshipBuff: {
+		DisplayName: Airship Fleet
+		Description: The airship fleet will fight for you
+	}
 }
 
 Items: {
@@ -694,6 +699,11 @@ Items: {
 			"Stands for Gargantuan Radiation Emitting Apex Turret"
 			'''
 	}
+
+	AirshipMarshallingWand: {
+		DisplayName: Airship Marshalling Wand
+		Tooltip: Summons an airship to fight for you
+	}
 }
 
 Projectiles: {
@@ -791,6 +801,8 @@ Projectiles: {
 	BarbedWireCanisterSentry.DisplayName: Barbed Wire Canister Sentry
 	DemolitionHammerProjectile.DisplayName: Demolition Hammer Projectile
 	GREATSentry.DisplayName: G R E A T Sentry
+	PortableSlimeBakeryProj.DisplayName: Portable Slime Bakery Proj
+	Airship.DisplayName: Airship
 }
 
 Biomes: {
@@ -833,7 +845,7 @@ Spells: {
 		WaterGeyser: Water Geyser
 		AuraWave: Aura Wave
 		FlyingSkull: Flying Skull
-		BoneFragmentStorm: Bone Fragment Storm:
+		BoneFragmentStorm: Bone Fragment Storm
 		SkeletonHand: Skeleton Hand
 		WaterStream: Water Stream
 		WaterTreatment: Water Treatment
