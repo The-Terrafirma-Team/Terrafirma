@@ -707,9 +707,10 @@ Items: {
 
 	LeatherChestplate: {
 		DisplayName: Leather Chestplate
-		Tooltip: ""
+		Tooltip: Melee weapons have an additional 2 flat damage
 		SetBonus:
 			'''
+			Melee weapons have an additional 2 flat damage
 			Double tap a direction to roll
 			Rolling reduces incoming damage by 50%
 			'''
@@ -717,7 +718,7 @@ Items: {
 
 	LeatherPants: {
 		DisplayName: Leather Pants
-		Tooltip: ""
+		Tooltip: Melee weapons have an additional 1 flat damage
 	}
 }
 

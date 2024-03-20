@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Global;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -17,11 +18,11 @@ namespace Terrafirma.Items.Equipment.Melee
     {
         public override void SetDefaults()
         {
-            base.SetDefaults();
+            Item.defense = 3;
         }
         public override void UpdateEquip(Player player)
         {
-            base.UpdateEquip(player);
+            player.PlayerStats().MeleeFlatDamage += 1;
         }
     }
     [AutoloadEquip(EquipType.Body)]
@@ -29,11 +30,11 @@ namespace Terrafirma.Items.Equipment.Melee
     {
         public override void SetDefaults()
         {
-            base.SetDefaults();
+            Item.defense = 5;
         }
         public override void UpdateEquip(Player player)
         {
-            base.UpdateEquip(player);
+            player.PlayerStats().MeleeFlatDamage += 2;
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
@@ -42,6 +43,9 @@ namespace Terrafirma.Items.Equipment.Melee
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.LeatherChestplate.SetBonus");
+
+            player.PlayerStats().MeleeFlatDamage += 2;
+
             if (player.dashType == DashID.None && !player.mount.Active)
                 player.GetModPlayer<LeatherArmorRoll>().CanRoll = true;
         }

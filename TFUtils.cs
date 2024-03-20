@@ -78,6 +78,11 @@ namespace Terrafirma
             item.UseSound = SoundID.Item1;
             item.Size = new Vector2(16, 16);
         }
+
+        public static PlayerStats PlayerStats(this Player player)
+        {
+            return player.GetModPlayer<PlayerStats>();
+        }
         public static bool PlayerDoublePressedSetBonusActivateKey(this Player player)
         {
             return (player.doubleTapCardinalTimer[Main.ReversedUpDownArmorSetBonuses ? 1 : 0] < 15 && ((player.releaseUp && Main.ReversedUpDownArmorSetBonuses && player.controlUp) || (player.releaseDown && !Main.ReversedUpDownArmorSetBonuses && player.controlDown)));
