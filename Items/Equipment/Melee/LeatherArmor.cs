@@ -52,6 +52,23 @@ namespace Terrafirma.Items.Equipment.Melee
         bool isRolling;
         int RollTimer = -80;
         int RollDirection = 0;
+
+        public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+        {
+            if (isRolling)
+            {
+                modifiers.HitDirectionOverride = 0;
+                modifiers.FinalDamage *= 0.5f;
+            }
+        }
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
+        {
+            if (isRolling)
+            {
+                modifiers.HitDirectionOverride = 0;
+                modifiers.FinalDamage *= 0.5f;
+            }
+        }
         public override void ResetEffects()
         {
             if (CanRoll && RollTimer < -80)
