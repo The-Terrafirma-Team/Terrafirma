@@ -704,6 +704,21 @@ Items: {
 		DisplayName: Airship Marshalling Wand
 		Tooltip: Summons an airship to fight for you
 	}
+
+	LeatherChestplate: {
+		DisplayName: Leather Chestplate
+		Tooltip: ""
+		SetBonus:
+			'''
+			Double tap a direction to roll
+			Rolling reduces incoming damage by 50%
+			'''
+	}
+
+	LeatherPants: {
+		DisplayName: Leather Pants
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
