@@ -92,7 +92,6 @@ namespace Terrafirma.Items.Equipment.Melee
             {
                 if (Player.controlRight && Player.releaseRight && Player.doubleTapCardinalTimer[2] < 15)
                 {
-                    SoundEngine.PlaySound(SoundID.MaxMana,Player.position);
                     isRolling = true;
                     RollDirection = 1;
                     RollTimer = 20;

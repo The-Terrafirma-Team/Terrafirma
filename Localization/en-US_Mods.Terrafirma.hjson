@@ -734,8 +734,8 @@ Items: {
 		DisplayName: Mahogany Shaman Greaves
 		Tooltip:
 			'''
+			Increases movement speed by 10%
 			Boosts the attack speed of swarm summoning weapons by 5%
-			Increases movement speed by 5%
 			'''
 	}
 
@@ -746,7 +746,7 @@ Items: {
 			Increases max mana by 40
 			Boosts the attack speed of swarm summoning weapons by 5%
 			'''
-		SetBonus: idk man lolz
+		SetBonus: Swarm weapons have a chance to summon an empowered minion
 	}
 }
 

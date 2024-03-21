@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Global;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -27,22 +29,21 @@ namespace Terrafirma.Items.Equipment.Summoner
         }
         public override void UpdateArmorSet(Player player)
         {
+            Lighting.AddLight(player.Center, new Vector3(0, 0.2f, 0));
+            player.GetModPlayer<MahoganyShamanPlayer>().active = true;
             player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.MahoganyShamanMask.SetBonus");
         }
         public override void UpdateVanitySet(Player player)
         {
-            //if (Main.timeForVisualEffects % 2 == 0 && (MathF.Abs(player.velocity.X) > player.maxRunSpeed || player.velocity.Y != 0))
-            //{
-            //    Dust d = Dust.NewDustDirect(player.position, player.width, player.height, DustID.Terra);
-            //    d.velocity = player.velocity;
-            //}
+            player.GetModPlayer<PlayerDrawEffects>().SineDarken = true;
             for (int i = 0; i < 2; i++)
             {
-                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 + i*6) * player.direction, -10 + player.gfxOffY + (player.LegFrameIsOneThatRaisesTheBody() ? -2 : 0) * player.gravDir), DustID.GemEmerald);
+                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 + i*6) * player.direction, -10 + player.gfxOffY + (player.LegFrameIsOneThatRaisesTheBody() ? -2 : 0) * player.gravDir).RotatedBy(player.fullRotation), DustID.GemEmerald);
                 d.scale = 0.6f;
                 d.velocity = Vector2.Zero;
                 d.alpha = 128;
                 d.noGravity = true;
+                d.noLightEmittence = true;
             }
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -76,8 +77,16 @@ namespace Terrafirma.Items.Equipment.Summoner
         }
         public override void UpdateEquip(Player player)
         {
-            player.moveSpeed += 0.05f;
+            player.moveSpeed += 0.10f;
             player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
+        }
+    }
+    public class MahoganyShamanPlayer : ModPlayer
+    {
+        public bool active = false;
+        public override void ResetEffects()
+        {
+            active = false;
         }
     }
 }
