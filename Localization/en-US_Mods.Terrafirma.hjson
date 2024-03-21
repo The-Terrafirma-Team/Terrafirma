@@ -720,6 +720,34 @@ Items: {
 		DisplayName: Leather Pants
 		Tooltip: Melee weapons have an additional 1 flat damage
 	}
+
+	MahoganyShamanBody: {
+		DisplayName: Mahogany Shaman Body
+		Tooltip:
+			'''
+			Increases summon damage by 10%
+			Boosts the attack speed of swarm summoning weapons by 5%
+			'''
+	}
+
+	MahoganyShamanLegs: {
+		DisplayName: Mahogany Shaman Greaves
+		Tooltip:
+			'''
+			Boosts the attack speed of swarm summoning weapons by 5%
+			Increases movement speed by 5%
+			'''
+	}
+
+	MahoganyShamanMask: {
+		DisplayName: Mahogany Shaman Chestplate
+		Tooltip:
+			'''
+			Increases max mana by 40
+			Boosts the attack speed of swarm summoning weapons by 5%
+			'''
+		SetBonus: idk man lolz
+	}
 }
 
 Projectiles: {

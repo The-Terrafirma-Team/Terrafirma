@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Global;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
@@ -16,8 +17,14 @@ namespace Terrafirma.Items.Equipment.Melee
     [AutoloadEquip(EquipType.Legs)]
     public class LeatherPants : ModItem
     {
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddIngredient(ItemID.Leather, 8).AddRecipeGroup(RecipeGroupID.IronBar, 4).AddTile(TileID.WorkBenches).Register();
+        }
         public override void SetDefaults()
         {
+            Item.value = Item.sellPrice(0,0,10,0);
+            Item.rare = ItemRarityID.Blue;
             Item.defense = 3;
         }
         public override void UpdateEquip(Player player)
@@ -28,8 +35,14 @@ namespace Terrafirma.Items.Equipment.Melee
     [AutoloadEquip(EquipType.Body)]
     public class LeatherChestplate : ModItem
     {
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddIngredient(ItemID.Leather, 12).AddRecipeGroup(RecipeGroupID.IronBar, 6).AddTile(TileID.WorkBenches).Register();
+        }
         public override void SetDefaults()
         {
+            Item.value = Item.sellPrice(0, 0, 10, 0);
+            Item.rare = ItemRarityID.Blue;
             Item.defense = 5;
         }
         public override void UpdateEquip(Player player)
@@ -79,6 +92,7 @@ namespace Terrafirma.Items.Equipment.Melee
             {
                 if (Player.controlRight && Player.releaseRight && Player.doubleTapCardinalTimer[2] < 15)
                 {
+                    SoundEngine.PlaySound(SoundID.MaxMana,Player.position);
                     isRolling = true;
                     RollDirection = 1;
                     RollTimer = 20;
@@ -89,6 +103,10 @@ namespace Terrafirma.Items.Equipment.Melee
                     RollDirection = -1;
                     RollTimer = 20;
                 }
+            }
+            else if(RollTimer == -79)
+            {
+                SoundEngine.PlaySound(SoundID.MaxMana);
             }
             RollTimer--;
             CanRoll = false;
@@ -115,6 +133,7 @@ namespace Terrafirma.Items.Equipment.Melee
             }
             if(RollTimer == 0)
             {
+                Player.velocity.X = Player.maxRunSpeed * RollDirection;
                 isRolling = false;
                 Player.fullRotation = 0;
                 Player.fullRotationOrigin = Vector2.Zero;
