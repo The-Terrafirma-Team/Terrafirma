@@ -80,7 +80,7 @@ namespace Terrafirma
         }
         public static bool LegFrameIsOneThatRaisesTheBody(this Player player)
         {
-            return (player.legFrame.Y >= 392 && player.legFrame.Y < 560) || (player.legFrame.Y >= 784 && player.legFrame.Y < 952);
+            return (player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560) || (player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952);
         }
         public static PlayerStats PlayerStats(this Player player)
         {
