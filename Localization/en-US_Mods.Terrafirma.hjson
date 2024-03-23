@@ -748,6 +748,11 @@ Items: {
 			'''
 		SetBonus: Swarm weapons have a chance to summon an empowered minion
 	}
+
+	DruidStaff: {
+		DisplayName: Druid Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -847,6 +852,7 @@ Projectiles: {
 	GREATSentry.DisplayName: G R E A T Sentry
 	PortableSlimeBakeryProj.DisplayName: Portable Slime Bakery Proj
 	Airship.DisplayName: Airship
+	DruidStaff.DisplayName: Druid Staff
 }
 
 Biomes: {
