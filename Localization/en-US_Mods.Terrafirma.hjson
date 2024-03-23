@@ -739,6 +739,11 @@ Items: {
 			'''
 	}
 
+	SauteedMushroom: {
+		DisplayName: Sauteed Mushroom
+		Tooltip: ""
+	}
+
 	MahoganyShamanMask: {
 		DisplayName: Mahogany Shaman Chestplate
 		Tooltip:

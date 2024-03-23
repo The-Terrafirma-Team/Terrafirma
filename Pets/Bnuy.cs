@@ -73,7 +73,10 @@ namespace Terrafirma.Pets
             "this is me if u even care",
             "sometimes",
             "me when the ground is firm",
-            "wanna collab in geometry dash"
+            "wanna collab in geometry dash",
+            "things",
+            "my uncle works for relogic you're getting banned",
+            "I am Ayumu Kasuga"
         };
         public override string Texture => "Terrafirma/Pets/Bnuy";
         public override void SetStaticDefaults()

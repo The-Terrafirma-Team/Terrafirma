@@ -82,13 +82,9 @@ namespace Terrafirma.Systems.NPCQuests
         /// Creates the UI
         /// </summary>
         /// <param name="npc">The NPC that the Player is currently talking to</param>
-        public void Create(NPC npc)
+        public override void OnActivate()
         {
-            //Selected NPC for getting the right quest list later
-            selectednpc = npc;
-
             //Set Textures
-            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
             EmptyStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/EmptyStar").Value;
             FullStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/FilledStar").Value;
 
@@ -102,6 +98,14 @@ namespace Terrafirma.Systems.NPCQuests
                 ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Final").Value,
                 ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Special").Value
             };
+
+            base.OnActivate();
+        }
+        public void Create(NPC npc)
+        {
+            //Selected NPC for getting the right quest list later
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            selectednpc = npc;  
 
             //Other Vars
             DifficultyRating = 2;
@@ -178,8 +182,12 @@ namespace Terrafirma.Systems.NPCQuests
             progress.VAlign = 0.5f;
             Append(progress);
 
+            UpdateQuests();
+            UpdateCompleteButton();
+            UpdateQuestButton();
+
             //Set selected quest to NoQuest so nothing is displayed when the UI is open
-            selectedQuest = new Quest("NoQuest");
+            selectedQuest = null;
 
         }
 
@@ -202,39 +210,23 @@ namespace Terrafirma.Systems.NPCQuests
             SimpleTooltip.MarginTop = Main.MouseScreen.Y + 20f;
             SimpleTooltip.MarginLeft = Main.MouseScreen.X + 20f;
 
-            if (DifficultyText != null && DifficultyText.IsMouseHovering)
+            for (int i = 0; i < DifficultyStarsList.Length; i++)
             {
-                switch (DifficultyRating)
+                if (DifficultyStarsList != null && DifficultyStarsList[i].IsMouseHovering)
                 {
-                    case 0: SimpleTooltip.SetText("Effortless"); break;
-                    case 1: SimpleTooltip.SetText("Easy"); break;
-                    case 2: SimpleTooltip.SetText("Intermediate"); break;
-                    case 3: SimpleTooltip.SetText("Difficult"); break;
-                    case 4: SimpleTooltip.SetText("Intense"); break;
-                    case 5: SimpleTooltip.SetText("Deranged"); break;
+                    switch (DifficultyRating)
+                    {
+                        case 0: SimpleTooltip.SetText("Effortless"); break;
+                        case 1: SimpleTooltip.SetText("Easy"); break;
+                        case 2: SimpleTooltip.SetText("Intermediate"); break;
+                        case 3: SimpleTooltip.SetText("Difficult"); break;
+                        case 4: SimpleTooltip.SetText("Intense"); break;
+                        case 5: SimpleTooltip.SetText("Deranged"); break;
+                    }
+
+                    ShowSimpleTooltip = true;
                 }
-
-                ShowSimpleTooltip = true;
             }
-
-            //for (int i = 0; i < QuestTypeImages.Length; i++)
-            //{
-            //    if (QuestTypeImage.IsMouseHovering)
-            //    {
-                    
-            //        switch ((int)ButtonQuests[i].Type)
-            //        {
-            //            case 0: SimpleTooltip.SetText("Explorer"); break;
-            //            case 1: SimpleTooltip.SetText("Scavenger"); break;
-            //            case 2: SimpleTooltip.SetText("Collector"); break;
-            //            case 3: SimpleTooltip.SetText("Slayer"); break;
-            //            case 4: SimpleTooltip.SetText("Destroyer"); break;
-            //            case 5: SimpleTooltip.SetText("Final"); break;
-            //        }
-
-            //        ShowSimpleTooltip = true;
-            //    }
-            //}
 
             if (ShowSimpleTooltip) SimpleTooltip.TextColor = Color.White;
             else SimpleTooltip.TextColor = new Color(0f, 0f, 0f, 0f);
@@ -274,27 +266,24 @@ namespace Terrafirma.Systems.NPCQuests
             {
 
                 SoundEngine.PlaySound(SoundID.MenuTick);
-                selectedQuest.Completion = 1;
 
                 //If the current quest has not been started yet
-                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status == (byte)QuestStatus.NotStarted)
                 {
-                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion = 1;
-                    Main.LocalPlayer.GetModPlayer<QuestModNPC>().StartQuest(localquestlist[localquestlist.GetQuestIndex(selectedQuest)]);
+                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status = (byte)QuestStatus.InProgress;
 
                     //Loop through all Quests and set their status to 0 => When A quest is started, all other quests are automatically ended
                     for (int i = 0; i < localquestlist.Length; i++)
                     {
-                        if (localquestlist[i].Completion == 1 && !localquestlist[i].IsEqualsTo(selectedQuest))
+                        if (localquestlist[i].Status == (byte)QuestStatus.InProgress && localquestlist[i].Name != selectedQuest.Name)
                         {
-                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist[i]);
-                            localquestlist[i].Completion = 0;
+                            localquestlist[i].Status = (byte)QuestStatus.NotStarted;
                             //Loop through all Button Quests and set their completion
                             for (int j = 0; j < ButtonQuests.Length; j++)
                             {
-                                if (!ButtonQuests[j].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) 
+                                if (!( ButtonQuests[j].Name == localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Name)) 
                                 { 
-                                    ButtonQuests[j].Completion = 0;
+                                    ButtonQuests[j].Status = (byte)QuestStatus.NotStarted;
                                     
                                 }
                             }
@@ -305,23 +294,29 @@ namespace Terrafirma.Systems.NPCQuests
 
                     for (int i = 0; i < localquestlist.Length; i++)
                     {
-                        if (localquestlist[i].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) localquestlist[i].Completion = 1;
+                        if (localquestlist[i].Name == localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Name ) localquestlist[i].Status = (byte)QuestStatus.InProgress;
                     }
                 }
                 //If the current quest is in progress and the current quest can be completed
-                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1 && Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist[localquestlist.GetQuestIndex(selectedQuest)], localquestlist, Main.LocalPlayer))
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status == (byte)QuestStatus.InProgress && localquestlist[localquestlist.GetQuestIndex(selectedQuest)].QuestCompletion(Main.LocalPlayer))
                 {
-                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion = 2;
-                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Complete();
+                    localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status = (byte)QuestStatus.Completed;
 
                     //Loop through all Button Quests and set their completion
                     for (int i = 0; i < ButtonQuests.Length; i++)
                     {
-                        if (ButtonQuests[i].IsEqualsTo(localquestlist[localquestlist.GetQuestIndex(selectedQuest)])) 
+                        if (ButtonQuests[i].Name == localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Name) 
                         {
-                            Main.LocalPlayer.GetModPlayer<QuestModNPC>().EndQuest(localquestlist[localquestlist.GetQuestIndex(selectedQuest)]);
-                            ButtonQuests[i].Completion = 2; 
+                            ButtonQuests[i].Status = (byte)QuestStatus.Completed; 
                         }
+                    }
+
+                    //Give Player the reward
+                    for (int i = 0; i < localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Rewards.Length; i++)
+                    {
+                        Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), 
+                            localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Rewards[i], 
+                            localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Rewards[i].stack);
                     }
 
                     //Remove Status Button as the quest has been completed
@@ -398,13 +393,13 @@ namespace Terrafirma.Systems.NPCQuests
                     QuestTaskPanel.HAlign = 0.5f;
                     QuestTaskPanel.BackgroundColor = new Color(20, 21, 51) * 0.4f;
                     QuestTaskPanel.Width.Pixels = SideContainerRight.Width.Pixels - 20f;
-                    QuestTaskPanel.Height.Pixels = ((ButtonQuests[i].TaskDescription.Length / 45) + 1) * 20f + 20f;
+                    QuestTaskPanel.Height.Pixels = ((ButtonQuests[i].Description.Length / 45) + 1) * 20f + 20f;
                     QuestTaskPanel.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + 50f;
                     SideContainerRight.Append(QuestTaskPanel);
 
                     // Quest Task Description - UI Element
                     if (QuestTaskPanel.HasChild(QuestTask)) QuestTaskPanel.RemoveChild(QuestTask);
-                    QuestTask = new UIText(ButtonQuests[i].TaskDescription, 1f);
+                    QuestTask = new UIText(ButtonQuests[i].Description, 1f);
                     QuestTask.VAlign = 0f;
                     QuestTask.HAlign = 0f;
                     QuestTask.Width.Pixels = QuestTaskPanel.Width.Pixels;
@@ -441,8 +436,8 @@ namespace Terrafirma.Systems.NPCQuests
 
                         DifficultyStars.VAlign = 0f;
                         DifficultyStars.HAlign = 0f;
-                        DifficultyStars.Width.Pixels = 10f;
-                        DifficultyStars.Height.Pixels = 10f;
+                        DifficultyStars.Width.Pixels = 30f;
+                        DifficultyStars.Height.Pixels = 30f;
                         DifficultyStars.Color = new Color(1f, 1f - (j / 7f), 1f - (j / 9f), 1f);
                         DifficultyStars.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + DifficultyText.Height.Pixels + 75f;
                         DifficultyStars.MarginLeft = j * 20f;
@@ -482,7 +477,7 @@ namespace Terrafirma.Systems.NPCQuests
 
                     RewardsItemList = new UIItemSlot[] { };
 
-                    //Loop through the length of the Rewards Array's length for each item slot
+                        //Loop through the length of the Rewards Array's length for each item slot
                     for (int j = 0; j < ButtonQuests[i].Rewards.Length; j++)
                     {
                             
@@ -491,10 +486,10 @@ namespace Terrafirma.Systems.NPCQuests
                         RewardItem = new UIItemSlot(ButtonQuests[i].Rewards, j, 22);
                         RewardItem.VAlign = 0f;
                         RewardItem.HAlign = 0.5f;
-                        RewardItem.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + DifficultyText.Height.Pixels + 85f + (((float)Math.Floor((double)j / 6)) * 55);
+                        RewardItem.MarginTop = QuestName.Height.Pixels + (QuestDialoguePanel.Height.Pixels + 20f) + (QuestTaskPanel.Height.Pixels + 20f) + DifficultyText.Height.Pixels + 70f + (((float)Math.Floor((double)j / 6)) * 55);
                         RewardItem.MarginLeft = -30f + ((j % 6) * 110f);
-                        RewardItem.Width.Pixels = 10f;
-                        RewardItem.Height.Pixels = 10f;
+                        RewardItem.Width.Pixels = 60f;
+                        RewardItem.Height.Pixels = 60f;
                         SideContainerRight.Append(RewardItem);
                         RewardsItemList = RewardsItemList.Append(RewardItem).ToArray();
                         Main.inventoryScale = 1f; 
@@ -522,7 +517,7 @@ namespace Terrafirma.Systems.NPCQuests
                     RemoveChild(QuestTypeImages[i]);
                 }
 
-                RemoveChild(VerticalSlider);
+                if (VerticalSlider != null) RemoveChild(VerticalSlider);
 
                 Buttons = new UIPanel[] { };
                 ButtonTexts = new UIText[] { };
@@ -550,184 +545,79 @@ namespace Terrafirma.Systems.NPCQuests
                 //In Progress quest are put to the top, quests that have not been started yet in the middle and completed quests at the bottom of the list
                 //
 
-                //
-                //OnGoingQuests
-                for (int i = 0; i < localquestlist.OnGoingQuests().Length; i++)
+                for (int p = 0; p < 3; p++)
                 {
-                    //Check if conditions match
-                    bool allconditionsmatch = true;
-                    if (localquestlist.OnGoingQuests()[i].conditions != null)
+                    Quest[] Checkedlist = new Quest[] {};
+                    switch (p)
                     {
-                        for (int k = 0; k < localquestlist.OnGoingQuests()[i].conditions.Length; k++)
+                        case 0: Checkedlist = localquestlist.OnGoingQuests(); break;
+                        case 1: Checkedlist = localquestlist.UncompletedQuests(); break;
+                        case 2: Checkedlist = localquestlist.FinishedQuests(); break;
+                    }
+
+                    for (int i = 0; i < Checkedlist.Length; i++)
+                    {
+                        //Check if conditions match
+                        bool allconditionsmatch = true;
+                        if (Checkedlist[i].Conditions != null)
                         {
-                            if (!localquestlist.OnGoingQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
+                            for (int k = 0; k < Checkedlist[i].Conditions.Length; k++)
+                            {
+                                if (!Checkedlist[i].Conditions[k].IsMet()) { allconditionsmatch = false; break; }
+                            }
+                        }
+                        //Check if the quest NPC matches the NPC that is being talked to
+                        if (!Checkedlist[i].NPCs.Contains(selectednpc.type))
+                        {
+                            allconditionsmatch = false;
+                        }
+                        if (!Checkedlist[i].QuestActivation(Main.LocalPlayer))
+                        {
+                            allconditionsmatch = false;
+                        }
+                        if (allconditionsmatch)
+                        {
+
+                            //Button - UI Element
+                            Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
+                            Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
+                            Button.Height.Pixels = 40f;
+                            Button.HAlign = 0f;
+                            Button.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
+                            Button.BorderColor = new Color(0.4f, 0.5f, 1f);
+                            Button.MarginTop = ((Button.Height.Pixels + 5) * ButtonIndex);
+                            ButtonIndex++;
+
+                            Buttons = Buttons.Append(Button).ToArray();
+
+                            //Button Text - UI Element
+                            string ButtonTextText = Checkedlist[i].Name;
+                            ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
+                            ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
+                            ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
+                            ButtonText.VAlign = 0.5f;
+                            Button.Append(ButtonText);
+
+                            ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
+
+                            //Button Icon - UI Element
+                            QuestTypeImage = new UIImage(QuestTypeIcons[(int)Checkedlist[i].Type]);
+                            QuestTypeImage.Width.Pixels = 32f;
+                            QuestTypeImage.Height.Pixels = 32f;
+                            QuestTypeImage.HAlign = 0f;
+                            QuestTypeImage.VAlign = 0f;
+                            QuestTypeImage.MarginTop = -QuestTypeImage.Height.Pixels / 2;
+                            QuestTypeImage.MarginLeft = -QuestTypeImage.Width.Pixels / 2;
+                            Button.Append(QuestTypeImage);
+
+                            QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
+
+                            //Add the Button's Quest to the ButtonQuests Array
+                            ButtonQuests = ButtonQuests.Append(Checkedlist[i]).ToArray();
+
                         }
                     }
-                    //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.OnGoingQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
-                    {
-                        allconditionsmatch = false;
-                    }
-                    if (allconditionsmatch)
-                    {
 
-                        //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
-                        Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        Button.Height.Pixels = 40f;
-                        Button.HAlign = 0f;
-                        Button.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
-                        Button.BorderColor = new Color(0.4f, 0.5f, 1f);
-                        Button.MarginTop = ((Button.Height.Pixels + 5) * ButtonIndex);
-                        ButtonIndex++;
-
-                        Buttons = Buttons.Append(Button).ToArray();
-
-                        //Button Text - UI Element
-                        string ButtonTextText = localquestlist.OnGoingQuests()[i].Name;
-                        ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
-                        ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
-                        ButtonText.VAlign = 0.5f;
-                        Button.Append(ButtonText);
-
-                        ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
-
-                        //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.OnGoingQuests()[i].Type]);
-                        QuestTypeImage.Width.Pixels = 32f;
-                        QuestTypeImage.Height.Pixels = 32f;
-                        QuestTypeImage.HAlign = 0f;
-                        QuestTypeImage.VAlign = 0f;
-                        QuestTypeImage.MarginTop = -QuestTypeImage.Height.Pixels / 2;
-                        QuestTypeImage.MarginLeft = -QuestTypeImage.Width.Pixels / 2;
-                        Button.Append(QuestTypeImage);
-
-                        QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
-
-                        //Add the Button's Quest to the ButtonQuests Array
-                        ButtonQuests = ButtonQuests.Append(localquestlist.OnGoingQuests()[i]).ToArray();
-                        
-                    }
-                }
-
-                //
-                //UncompletedQuests
-                for (int i = 0; i < localquestlist.UncompletedQuests().Length; i++)
-                {
-                    //Check if conditions match
-                    bool allconditionsmatch = true;
-                    if (localquestlist.UncompletedQuests()[i].conditions != null)
-                    {
-                        for (int k = 0; k < localquestlist.UncompletedQuests()[i].conditions.Length; k++)
-                        {
-                            if (!localquestlist.UncompletedQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
-                        }
-                    }
-                    //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.UncompletedQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
-                    {
-                        allconditionsmatch = false;
-                    }
-                    if (allconditionsmatch)
-                    {
-
-                        //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
-                        Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        Button.Height.Pixels = 40f;
-                        Button.HAlign = 0f;
-                        Button.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
-                        Button.BorderColor = new Color(0.4f, 0.5f, 1f);
-                        Button.MarginTop = ((Button.Height.Pixels + 5) * ButtonIndex);
-                        ButtonIndex++;
-
-                        Buttons = Buttons.Append(Button).ToArray();
-
-                        //Button Text - UI Element
-                        string ButtonTextText = localquestlist.UncompletedQuests()[i].Name;
-                        ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
-                        ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
-                        ButtonText.VAlign = 0.5f;
-                        Button.Append(ButtonText);
-
-                        ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
-
-                        //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.UncompletedQuests()[i].Type]);
-                        QuestTypeImage.Width.Pixels = 32f;
-                        QuestTypeImage.Height.Pixels = 32f;
-                        QuestTypeImage.HAlign = 0f;
-                        QuestTypeImage.VAlign = 0f;
-                        QuestTypeImage.MarginTop = -QuestTypeImage.Height.Pixels / 2;
-                        QuestTypeImage.MarginLeft = -QuestTypeImage.Width.Pixels / 2;
-                        Button.Append(QuestTypeImage);
-
-                        QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
-
-                        ButtonQuests = ButtonQuests.Append(localquestlist.UncompletedQuests()[i]).ToArray();
-                    }
-                }
-
-                //
-                //FinishedQuests
-                for (int i = 0; i < localquestlist.FinishedQuests().Length; i++)
-                {
-                    //Check if conditions match
-                    bool allconditionsmatch = true;
-                    if (localquestlist.FinishedQuests()[i].conditions != null)
-                    {
-                        for (int k = 0; k < localquestlist.FinishedQuests()[i].conditions.Length; k++)
-                        {
-                            if (!localquestlist.FinishedQuests()[i].conditions[k].IsMet()) { allconditionsmatch = false; break; }
-                        }
-                    }
-                    //Check if the quest NPC matches the NPC that is being talked to
-                    if (!localquestlist.FinishedQuests()[i].InvolvedNPCs.Contains(selectednpc.type))
-                    {
-                        allconditionsmatch = false;
-                    }
-                    if (allconditionsmatch)
-                    {
-
-                        //Button - UI Element
-                        Button = new UIPanel(ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestButtonPanel"), 20);
-                        Button.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        Button.Height.Pixels = 40f;
-                        Button.HAlign = 0f;
-                        Button.BackgroundColor = new Color(0.4f, 0.5f, 1f, 1f);
-                        Button.BorderColor = new Color(0.4f, 0.5f, 1f);
-                        Button.MarginTop = ((Button.Height.Pixels + 5) * ButtonIndex);
-                        ButtonIndex++;
-
-                        Buttons = Buttons.Append(Button).ToArray();
-
-                        //Button Text - UI Element
-                        string ButtonTextText = localquestlist.FinishedQuests()[i].Name;
-                        ButtonText = new UIText(ButtonTextText, Math.Clamp(1f / (ButtonTextText.Length / 20f), 0.5f, 1.1f));
-                        ButtonText.Width.Pixels = ButtonAmount > 12 ? 220f : 250f;
-                        ButtonText.MarginLeft = ButtonText.Text.Length > 15 ? ButtonText.Text.Length / 2 : 0;
-                        ButtonText.VAlign = 0.5f;
-                        Button.Append(ButtonText);
-
-                        ButtonTexts = ButtonTexts.Append(ButtonText).ToArray();
-
-                        //Button Icon - UI Element
-                        QuestTypeImage = new UIImage(QuestTypeIcons[(int)localquestlist.FinishedQuests()[i].Type]);
-                        QuestTypeImage.Width.Pixels = 32f;
-                        QuestTypeImage.Height.Pixels = 32f;
-                        QuestTypeImage.HAlign = 0f;
-                        QuestTypeImage.VAlign = 0f;
-                        QuestTypeImage.MarginTop = -QuestTypeImage.Height.Pixels / 2;
-                        QuestTypeImage.MarginLeft = -QuestTypeImage.Width.Pixels / 2;
-                        Button.Append(QuestTypeImage);
-
-                        QuestTypeImages = QuestTypeImages.Append(QuestTypeImage).ToArray();
-
-                        //Add the Button's Quest to the ButtonQuests Array
-                        ButtonQuests = ButtonQuests.Append(localquestlist.FinishedQuests()[i]).ToArray();
-                    }
                 }
 
                 //Loop through the whole Buttons array and append each Button to the Left Side COntainer
@@ -747,19 +637,19 @@ namespace Terrafirma.Systems.NPCQuests
             localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
 
             //Check if the selected quest is in the Player's quest list && Check if the selected quest is not "NoQuest"
-            if (localquestlist.Contains(selectedQuest) && !selectedQuest.IsEqualsTo(new Quest("NoQuest")))
+            if (localquestlist.Contains(selectedQuest) && selectedQuest.Name != null)
             {
                 //If The Quest's Completion status is "Completed"
-                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 2)
+                if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status == 2)
                 {
                     if (SideContainerRight.HasChild(CompleteButton)) SideContainerRight.RemoveChild(CompleteButton);
                 }
 
                 //If The Quest's Completion status is "In Progress"
-                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 1)
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status == 1)
                 {
                     //If the Quest can be Completed
-                    if ( Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(localquestlist[localquestlist.GetQuestIndex(selectedQuest)],localquestlist, Main.LocalPlayer) )
+                    if ( localquestlist[localquestlist.GetQuestIndex(selectedQuest)].QuestCompletion(Main.LocalPlayer) )
                     {
                         CompleteButtonText.SetText("Claim Reward");
                         if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
@@ -773,7 +663,7 @@ namespace Terrafirma.Systems.NPCQuests
                 }
 
                 //If The Quest's Completion status is "Not Started"
-                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Completion == 0)
+                else if (localquestlist[localquestlist.GetQuestIndex(selectedQuest)].Status == 0)
                 {
                     CompleteButtonText.SetText("Start Quest");
                     if (!SideContainerRight.HasChild(CompleteButton)) SideContainerRight.Append(CompleteButton);
@@ -788,7 +678,7 @@ namespace Terrafirma.Systems.NPCQuests
         {
             for (int i = 0; i < ButtonQuests.Length; i++)
             {
-                switch (ButtonQuests[i].Completion)
+                switch (ButtonQuests[i].Status)
                 {
                     //If The Quest's Completion status is "Completed"
                     case 0:
@@ -802,7 +692,7 @@ namespace Terrafirma.Systems.NPCQuests
                     case 1:
                         // If the Quest can be completed
                         // Master Mode Color
-                        if (Main.LocalPlayer.GetModPlayer<QuestModNPC>().CanQuestBeCompleted(ButtonQuests[i], localquestlist, Main.LocalPlayer))
+                        if (ButtonQuests[i].QuestCompletion(Main.LocalPlayer))
                         {
                             if (Buttons[i].IsMouseHovering)
                             { Buttons[i].BackgroundColor = new Color(1f, 0.8f, 0.1f, 1f); Buttons[i].BorderColor = new Color(1f, 0.8f, 0.1f); }

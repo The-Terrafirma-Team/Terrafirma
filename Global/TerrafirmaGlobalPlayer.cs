@@ -35,7 +35,7 @@ namespace Terrafirma.Global
         public bool SpellUI = false;
         internal Item HeldMagicItem = new Item(0);
 
-        public Quest[] playerquests = new Quest[] { };
+        public Quest[] playerquests = new Quest[]{};
 
         public override void ResetEffects()
         {

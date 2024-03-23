@@ -89,68 +89,6 @@ namespace Terrafirma.Systems.NPCQuests
 
         }
 
-        public Progress[] ProgressArray = new Progress[] {};
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {   
-            base.OnHitNPC(target, hit, damageDone);
-
-            //Experimental Marine Biology
-            if ( target.life <= 0 && target.type == NPCID.BlueSlime && Player.HeldItem.type == ItemID.Minishark)
-            {
-                for (int i = 0; i < ProgressArray.Length; i++)
-                {
-                    if (ProgressArray[i].Name == "EMBProgress") ProgressArray[i].CurrentValue += 1f;
-                }
-            }
-
-        }
-
-        public bool CanQuestBeCompleted(Quest quest, Quest[] questlist, Player player)
-        {
-            //Business Deal
-            if (quest.IsEqualsTo(QuestIndex.BusinessDeal))
-            {
-                if (player.HasItemInAnyInventory(ItemID.Minishark) && player.HasItemInAnyInventory(ItemID.FlintlockPistol)) return true;
-            }
-            //Experimental Marine Biology
-            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
-            {
-                for (int i = 0; i < ProgressArray.Length; i++)
-                {
-                    if (ProgressArray[i].Name == "EMBProgress" && ProgressArray[i].IsCompleted()) return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Gets executed whenever a quest is started
-        /// </summary>
-        /// <param name="quest"></param>
-        public void StartQuest(Quest quest)
-        {
-            //Experimental Marine Biology
-            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
-            {
-                ProgressArray = ProgressArray.Append(new Progress("EMBProgress", 10, 0, 0)).ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Gets executed whenever a quest is completed or ended
-        /// </summary>
-        /// <param name="quest"></param>
-        public void EndQuest(Quest quest)
-        {
-            //Experimental Marine Biology
-            if (quest.IsEqualsTo(QuestIndex.ExperimentalMarineBiology))
-            {
-                ProgressArray = new Progress[] { };
-            }
-        }
-
     }
 
 }
