@@ -758,6 +758,16 @@ Items: {
 		DisplayName: Druid Staff
 		Tooltip: ""
 	}
+
+	FireShield: {
+		Tooltip: ""
+		DisplayName: Fire Shield
+	}
+
+	Fireaxe: {
+		DisplayName: Fireaxe
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -858,6 +868,7 @@ Projectiles: {
 	PortableSlimeBakeryProj.DisplayName: Portable Slime Bakery Proj
 	Airship.DisplayName: Airship
 	DruidStaff.DisplayName: Druid Staff
+	FireaxeSlash.DisplayName: Fireaxe Slash
 }
 
 Biomes: {
@@ -953,3 +964,5 @@ Spells: {
 		TheAeonsEternity: Summons a giant magic blade that follows your mouse
 	}
 }
+
+NPCs.FlameElemental.DisplayName: Flame Elemental

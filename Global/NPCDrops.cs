@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Terrafirma.Items.Equipment;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -15,6 +16,11 @@ namespace Terrafirma.Global
             if (DropsLeather.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5));
+            }
+            int[] DropsFireShield = new int[] { NPCID.FireImp,NPCID.LavaSlime, NPCID.MeteorHead,NPCID.SkeletonArcher};
+            if (DropsFireShield.Contains(npc.type))
+            {
+                npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<FireShield>(),100));
             }
         }
     }
