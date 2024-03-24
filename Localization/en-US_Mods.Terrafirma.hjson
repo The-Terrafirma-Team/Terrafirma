@@ -760,7 +760,7 @@ Items: {
 	}
 
 	FireShield: {
-		Tooltip: ""
+		Tooltip: Provides immunity to being lit aflame
 		DisplayName: Fire Shield
 	}
 
