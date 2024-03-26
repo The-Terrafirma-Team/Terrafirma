@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    public class HiResFlame : Particle
+    public class HiResFlame : LegacyParticle
     {
         int Frame = 0;
         int FrameX = 0;
@@ -20,8 +20,8 @@ namespace Terrafirma.Particles
         {
             Frame = Main.rand.Next(4);
             Scale = Main.rand.NextFloat(0.2f, 0.7f);
-            variance = Main.rand.NextFloat(0.01f,0.03f);
-            if(Main.rand.NextBool())
+            variance = Main.rand.NextFloat(0.01f, 0.03f);
+            if (Main.rand.NextBool())
                 effect = SpriteEffects.FlipHorizontally;
             emitLight = Main.rand.NextBool(10);
         }
@@ -29,13 +29,13 @@ namespace Terrafirma.Particles
         {
             Rotation = -2.3f + Velocity.X * 0.1f;
             Velocity.Y -= variance * 10;
-            if (TimeInWorld % (int)(60 / 15) == 0)
+            if (TimeInWorld % (60 / 15) == 0)
                 FrameX++;
             Velocity = Velocity.RotatedBy(Math.Sin(Main.timeForVisualEffects) * variance);
             Position += Velocity;
-            if(TimeInWorld > 60)
+            if (TimeInWorld > 60)
                 Active = false;
-            else if(TimeInWorld < 10)
+            else if (TimeInWorld < 10)
             {
                 ai3 += 0.1f;
             }
@@ -58,7 +58,7 @@ namespace Terrafirma.Particles
 
             Texture2D tex = ModContent.Request<Texture2D>(Terrafirma.AssetPath + "Particles/TinyFlame").Value;
             //spriteBatch.Draw(tex, Position - Main.screenPosition, new Rectangle(0,Frame * 128,128,128), new Color(1f,1f,1f,0), Rotation, tex.Size() / new Vector2(2,8), Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(tex, Position - Main.screenPosition, new Rectangle(FrameX * 51, Frame * tex.Width / 15, tex.Width / 15, tex.Width / 15), Color.Lerp(new Color(0.4f,1f,1f,0),Color,ai1), Rotation, new Vector2(25.5f), Scale * ai1 * ai3 * 0.8f, effect, 0);
+            spriteBatch.Draw(tex, Position - Main.screenPosition, new Rectangle(FrameX * 51, Frame * tex.Width / 15, tex.Width / 15, tex.Width / 15), Color.Lerp(new Color(0.4f, 1f, 1f, 0), Color, ai1), Rotation, new Vector2(25.5f), Scale * ai1 * ai3 * 0.8f, effect, 0);
             //spriteBatch.Draw(tex, Position - Main.screenPosition, new Rectangle(0, Frame * 128, 128, 128), new Color(Color.R * 2f, Color.G * 2f, Color.B * 2f, 0) * 0.5f, Rotation, tex.Size() / new Vector2(2, 8), Scale * ai1 * 1.1f, SpriteEffects.None, 0);
 
             //Main.spriteBatch.End();

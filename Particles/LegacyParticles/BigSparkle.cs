@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    internal class BigSparkle : Particle
+    internal class BigSparkle : LegacyParticle
     {
         public override void OnSpawn()
         {
@@ -39,7 +39,7 @@ namespace Terrafirma.Particles
             spriteBatch.Draw(Sparkle, Position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), Color, 0 + Rotation, Sparkle.Size() / 2, ai1 * Scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Sparkle, Position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), Color, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, ai1 * Scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Sparkle, Position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), new Color(1f, 1f, 1f, 0f), 0 + Rotation, Sparkle.Size() / 2, ai1 * 0.5f * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, Position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), new Color(1f,1f,1f,0f), MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, ai1 * 0.5f * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, Position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), new Color(1f, 1f, 1f, 0f), MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, ai1 * 0.5f * Scale, SpriteEffects.None, 0);
         }
     }
 }

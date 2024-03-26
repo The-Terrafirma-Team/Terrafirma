@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Global;
-using Terrafirma.Particles;
+using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Ranged;
 using Terraria;
 using Terraria.Audio;
@@ -57,7 +57,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             {
                 Projectile.NewProjectileDirect(source, position, velocity * 0.8f, Grenades[Main.rand.Next(Grenades.Length)], damage * 3, knockback, player.whoAmI);
             }
-            ParticleSystem.AddParticle(new BigSparkle(), position + Vector2.Normalize(velocity) * 60,default,new Color(255,Main.rand.Next(150),24,0),1,10,10,1,Main.rand.NextFloat(-1,1));
+            LegacyParticleSystem.AddParticle(new BigSparkle(), position + Vector2.Normalize(velocity) * 60,default,new Color(255,Main.rand.Next(150),24,0),1,10,10,1,Main.rand.NextFloat(-1,1));
             return false;
             //return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }

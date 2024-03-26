@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terrafirma.Particles;
+using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
 using Terrafirma.Rarities;
 using Terraria;
@@ -99,7 +99,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 
             if (Main.timeForVisualEffects % 40 == 0)
             {
-                ParticleSystem.AddParticle(new BigSparkle(), Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20,40).RotatedBy(MathHelper.PiOver4) - new Vector2(0,20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                LegacyParticleSystem.AddParticle(new BigSparkle(), Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20,40).RotatedBy(MathHelper.PiOver4) - new Vector2(0,20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
             }
 
             return false;
@@ -150,7 +150,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            LegacyParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
             base.OnHitNPC(player, target, hit, damageDone);
         }
     }

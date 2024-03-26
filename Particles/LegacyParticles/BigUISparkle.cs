@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    internal class BigUISparkle : Particle
+    internal class BigUISparkle : LegacyParticle
     {
         public override void OnSpawn()
         {

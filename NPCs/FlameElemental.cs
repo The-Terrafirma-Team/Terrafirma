@@ -52,9 +52,9 @@ namespace Terrafirma.NPCs
             NPC.ai[0]++;
 
             if (NPC.collideX)
-                NPC.velocity.X *= -1f;
+                NPC.velocity.X = NPC.oldVelocity.X * -1f;
             if (NPC.collideY)
-                NPC.velocity.Y *= -1f;
+                NPC.velocity.Y = NPC.oldVelocity.Y * -1f;
 
             if (NPC.ai[1] == 0)
                 NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(160).RotatedBy(NPC.ai[0] * 0.01f)) * 0.1f;

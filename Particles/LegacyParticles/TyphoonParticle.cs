@@ -9,13 +9,13 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    internal class TyphoonParticle : Particle
+    internal class TyphoonParticle : LegacyParticle
     {
         public override void OnSpawn()
         {
-            
+
         }
         public override void Update()
         {

@@ -4,24 +4,24 @@ using Terraria;
 using Terraria.ModLoader;
 using System;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    public class ColorDot : Particle
+    public class ColorDot : LegacyParticle
     {
         public override void Update()
         {
             ai2 += Main.rand.NextFloat(3);
-            Velocity = Velocity.RotatedBy(Math.Sin((ai2 * 0.1f) - MathHelper.PiOver2) * 0.05f) * Main.rand.NextFloat(0.8f,1.1f);
+            Velocity = Velocity.RotatedBy(Math.Sin(ai2 * 0.1f - MathHelper.PiOver2) * 0.05f) * Main.rand.NextFloat(0.8f, 1.1f);
             Velocity.Y += 0.01f;
 
             Position += Velocity;
 
             float scale = Velocity.Length() / 8f;
-            if(scale <= 0.01f)
+            if (scale <= 0.01f)
             {
                 Active = false;
             }
-            if(TimeInWorld > 60)
+            if (TimeInWorld > 60)
             {
                 Velocity *= 0.9f;
             }
@@ -40,7 +40,7 @@ namespace Terrafirma.Particles
 
             spriteBatch.Draw(texture, DrawPos, frame, Color * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, Velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale, 1), scale) * ai1, SpriteEffects.None, 0);
 
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, Velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale,1),scale) * 0.8f * ai1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, Velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale, 1), scale) * 0.8f * ai1, SpriteEffects.None, 0);
         }
     }
 }

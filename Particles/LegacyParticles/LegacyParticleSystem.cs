@@ -8,14 +8,14 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Particles
+namespace Terrafirma.Particles.LegacyParticles
 {
-    public class ParticleSystem : ModSystem
+    public class LegacyParticleSystem : ModSystem
     {
-        static List<Particle> Particles;
+        static List<LegacyParticle> Particles;
         static int MaxParticles = 3000;
-        static List<Particle> UIParticles;
-        
+        static List<LegacyParticle> UIParticles;
+
         public static void DrawUIParticle(Vector2 Linepos)
         {
             Main.spriteBatch.End();
@@ -23,7 +23,7 @@ namespace Terrafirma.Particles
 
             for (int i = 0; i < UIParticles.Count; i++)
             {
-                Particle particle = UIParticles[i];
+                LegacyParticle particle = UIParticles[i];
                 if (particle.Active)
                 {
                     particle.DrawInUI(Main.spriteBatch, Linepos);
@@ -35,8 +35,8 @@ namespace Terrafirma.Particles
         }
         public override void Load()
         {
-            UIParticles = new List<Particle>(MaxParticles);
-            Particles = new List<Particle>(MaxParticles);
+            UIParticles = new List<LegacyParticle>(MaxParticles);
+            Particles = new List<LegacyParticle>(MaxParticles);
             On_Main.DrawCapture += On_Main_DrawCapture;
             On_Main.DrawDust += On_Main_DrawDust;
             On_Main.Draw += On_Main_Draw;
@@ -70,7 +70,7 @@ namespace Terrafirma.Particles
         {
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles[i];
+                LegacyParticle particle = Particles[i];
                 if (particle.Active)
                 {
                     particle.TimeInWorld++;
@@ -84,7 +84,7 @@ namespace Terrafirma.Particles
 
             for (int i = 0; i < UIParticles.Count; i++)
             {
-                Particle particle = UIParticles[i];
+                LegacyParticle particle = UIParticles[i];
                 if (particle.Active)
                 {
                     particle.TimeInWorld++;
@@ -104,7 +104,7 @@ namespace Terrafirma.Particles
 
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles[i];
+                LegacyParticle particle = Particles[i];
                 if (particle.Active && particle.FrontLayer == FrontLayer)
                 {
                     particle.Draw(spriteBatch);
@@ -113,7 +113,7 @@ namespace Terrafirma.Particles
 
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles[i];
+                LegacyParticle particle = Particles[i];
                 if (particle.Active)
                 {
                     particle.PostDraw(spriteBatch);
@@ -122,7 +122,7 @@ namespace Terrafirma.Particles
 
             Main.spriteBatch.End();
         }
-        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
+        public static LegacyParticle AddParticle(LegacyParticle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
         {
             if (Particles.Count == MaxParticles)
             {
@@ -141,7 +141,7 @@ namespace Terrafirma.Particles
             return Particles.Last();
         }
 
-        public static Particle AddUIParticle(Particle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
+        public static LegacyParticle AddUIParticle(LegacyParticle type, Vector2 position, Vector2 velocity = default, Color color = default, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 0, float rotation = 0)
         {
             if (UIParticles.Count == MaxParticles)
             {
@@ -160,7 +160,7 @@ namespace Terrafirma.Particles
             return UIParticles.Last();
         }
     }
-    public abstract class Particle
+    public abstract class LegacyParticle
     {
         public Vector2 Position;
         public Vector2 Velocity;
@@ -186,7 +186,7 @@ namespace Terrafirma.Particles
         public virtual void Draw(SpriteBatch spriteBatch)
         {
         }
-        
+
         public virtual void DrawInUI(SpriteBatch spriteBatch, Vector2 linePos)
         {
         }

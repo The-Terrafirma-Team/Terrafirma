@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
-using Terrafirma.Particles;
+using Terrafirma.Particles.LegacyParticles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -40,9 +40,9 @@ namespace Terrafirma.Projectiles.Melee
 
             if (Projectile.timeLeft % 2 == 0)
             {
-                ParticleSystem.AddParticle(new HiResFlame(), Projectile.Center + Projectile.velocity, Projectile.velocity.RotatedByRandom(0.2f) * -0.1f, Color.Lerp(TFUtils.getAgnomalumFlameColor(), new Color(1f, Main.masterColor * 0.7f, 0f, 0f), Projectile.ai[0] / 60), 2);
+                LegacyParticleSystem.AddParticle(new HiResFlame(), Projectile.Center + Projectile.velocity, Projectile.velocity.RotatedByRandom(0.2f) * -0.1f, Color.Lerp(TFUtils.getAgnomalumFlameColor(), new Color(1f, Main.masterColor * 0.7f, 0f, 0f), Projectile.ai[0] / 60), 2);
                 if (Main.rand.NextBool(5))
-                    ParticleSystem.AddParticle(new ColorDot(), Projectile.Center + Projectile.velocity, Projectile.velocity.RotatedByRandom(0.2f) * Main.rand.NextFloat(-1, 1), TFUtils.getAgnomalumFlameColor(), 0.2f);
+                    LegacyParticleSystem.AddParticle(new ColorDot(), Projectile.Center + Projectile.velocity, Projectile.velocity.RotatedByRandom(0.2f) * Main.rand.NextFloat(-1, 1), TFUtils.getAgnomalumFlameColor(), 0.2f);
             }
             Projectile.ai[0]++;
             if (Projectile.ai[0] > 60)
@@ -55,10 +55,10 @@ namespace Terrafirma.Projectiles.Melee
 
             for (int i = 0; i < 20; i++)
             {
-                ParticleSystem.AddParticle(new HiResFlame(), Projectile.Center, Main.rand.NextVector2Circular(5, 5), TFUtils.getAgnomalumFlameColor(), 5);
+                LegacyParticleSystem.AddParticle(new HiResFlame(), Projectile.Center, Main.rand.NextVector2Circular(5, 5), TFUtils.getAgnomalumFlameColor(), 5);
                 if (Main.rand.NextBool())
                 {
-                    ParticleSystem.AddParticle(new ColorDot(), Projectile.Center, Main.rand.NextVector2Circular(10, 10), TFUtils.getAgnomalumFlameColor(), 0.4f);
+                    LegacyParticleSystem.AddParticle(new ColorDot(), Projectile.Center, Main.rand.NextVector2Circular(10, 10), TFUtils.getAgnomalumFlameColor(), 0.4f);
                 }
             }
         }

@@ -6,10 +6,10 @@ using Terrafirma.Global;
 using System;
 using Terraria.Audio;
 using System.Linq;
-using Terrafirma.Particles;
 using Terraria.DataStructures;
 using Terrafirma.Projectiles.Ranged;
 using Terraria.GameContent.RGB;
+using Terrafirma.Particles.LegacyParticles;
 
 namespace Terrafirma
 {
@@ -236,7 +236,7 @@ namespace Terrafirma
                     SoundEngine.PlaySound(SoundID.Item37, player.position);
                     Main.projectile[i].netUpdate = true;
 
-                    ParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
+                    LegacyParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
                     for(int j = 0; j < 3; j++)
                     {
                         Dust d = Dust.NewDustPerfect(hitbox.ClosestPointInRect(Main.projectile[i].Center), DustID.Torch, -Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(5));

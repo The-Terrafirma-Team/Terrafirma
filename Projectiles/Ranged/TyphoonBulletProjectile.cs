@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Dusts;
 using Terrafirma.Particles;
+using Terrafirma.Particles.LegacyParticles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -57,7 +58,7 @@ namespace Terrafirma.Projectiles.Ranged
             if (Projectile.ai[0] % 20 == 0)
             {
                 
-                ParticleSystem.AddParticle(new TyphoonParticle(), Projectile.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, (1000f - Projectile.Center.Distance(Main.player[Projectile.owner].MountedCenter)) / 500f , Projectile.rotation);
+                LegacyParticleSystem.AddParticle(new TyphoonParticle(), Projectile.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, (1000f - Projectile.Center.Distance(Main.player[Projectile.owner].MountedCenter)) / 500f , Projectile.rotation);
             }
             if (Projectile.ai[0] % 80 == 0) SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
         }
@@ -85,7 +86,7 @@ namespace Terrafirma.Projectiles.Ranged
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ParticleSystem.AddParticle(new TyphoonParticle(), target.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, 1f, Projectile.rotation);
+            LegacyParticleSystem.AddParticle(new TyphoonParticle(), target.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, 1f, Projectile.rotation);
             for (int i = 0; i < 10; i++)
             {
                 Dust newdust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Water_Jungle, Main.rand.NextVector2Circular(10,10).X, Main.rand.NextVector2Circular(10, 10).Y, 0, new Color(190, 200, 215, 1), Main.rand.NextFloat(1.2f, 2f));
