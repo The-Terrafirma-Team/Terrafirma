@@ -143,7 +143,7 @@ namespace Terrafirma.Global.Templates
             if (grade == -1) return;
 
             Texture2D startexture = ModContent.Request<Texture2D>("Terrafirma/Global/Templates/GradeStars").Value;
-            Vector2 Starpos = new Vector2(14f, -14f);
+            Vector2 Starpos = new Vector2(14f, 14f);
             Rectangle StarBounds = new Rectangle(0, 0, 0, 0);
 
             switch (grade)

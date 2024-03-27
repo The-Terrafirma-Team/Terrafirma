@@ -85,18 +85,18 @@ namespace Terrafirma.Systems.NPCQuests
         public override void OnActivate()
         {
             //Set Textures
-            EmptyStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/EmptyStar").Value;
-            FullStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/FilledStar").Value;
+            EmptyStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/EmptyStar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            FullStarTexture = ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/FilledStar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
             QuestTypeIcons = new Texture2D[]
             {
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Explorer").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Scavenger").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Collector").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Slayer").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Destroyer").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Final").Value,
-                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Special").Value
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Explorer", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Scavenger", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Collector", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Slayer", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Destroyer", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Final", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                ModContent.Request<Texture2D>("Terrafirma/Systems/NPCQuests/QuestType_Special", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value
             };
 
             base.OnActivate();

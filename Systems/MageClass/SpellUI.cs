@@ -116,7 +116,28 @@ namespace Terrafirma.Systems.MageClass
             TextPanel.Append(ManaCost);
             TextPanel.Append(Title);
             TextPanel.Append(Description);
-            
+
+            //Description Stuff
+            if (SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
+            {
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
+                {
+                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * manacost) + " Mana");
+                }
+                else
+                {
+                    ManaCost.SetText("");
+                }
+                Title.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellDesc());
+                Description.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellName());
+
+                TextPanel.Width.Set(Description.MinWidth.Pixels > Title.MinWidth.Pixels * 1.1f ? Description.MinWidth.Pixels : Title.MinWidth.Pixels * 1.1f + 20, 0);
+                TextPanel.Height.Set(Description.MinHeight.Pixels + Title.MinHeight.Pixels + ManaCost.MinHeight.Pixels + 40, 0);
+            }
+
+            effecttimer++;
+            if (effecttimer < 40) sizefloat = (float)Math.Sin(effecttimer / 23f);
+
             Append(TextPanel);
 
         }

@@ -1,4 +1,6 @@
-﻿using Terrafirma.Items.Materials;
+﻿using System.Collections.Generic;
+using Terrafirma.Items.Materials;
+using Terrafirma.Systems.Cooking;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -141,6 +143,146 @@ namespace Terrafirma.Global
             Recipe EncumberingStone = Recipe.Create(ItemID.EncumberingStone);
             EncumberingStone.AddIngredient(ItemID.StoneBlock, 250);
             EncumberingStone.Register();
+            #endregion
+
+            #region Cooking Recipes
+
+            CookingRecipe AppleJuice = new CookingRecipe(ItemID.AppleJuice);
+            AppleJuice.RegisterVariant( new List<int> { ItemID.Apple, ItemID.Bottle });
+
+            CookingRecipe BloodyMoscato = new CookingRecipe(ItemID.BloodyMoscato);
+            BloodyMoscato.RegisterVariant(new List<int> { ItemID.Rambutan, ItemID.Bottle, ItemID.BloodOrange });
+
+            CookingRecipe BowlOfSoup = new CookingRecipe(ItemID.BowlofSoup);
+            BowlOfSoup.RegisterVariant(new List<int> { ItemID.Mushroom, ItemID.Goldfish });
+
+            CookingRecipe BunnyStew = new CookingRecipe(ItemID.BunnyStew);
+            BunnyStew.RegisterVariant( ItemID.Bunny );
+
+            CookingRecipe CookedFish = new CookingRecipe(ItemID.CookedFish);
+            CookedFish.RegisterVariant(new List<int> { ItemID.Bass });
+            CookedFish.RegisterVariant(new List<int> { ItemID.Trout });
+            CookedFish.RegisterVariant(new List<int> { ItemID.AtlanticCod });
+
+            CookingRecipe CookedShrimp = new CookingRecipe(ItemID.CookedShrimp);
+            CookedShrimp.RegisterVariant(new List<int> { ItemID.Shrimp });
+
+            CookingRecipe Escargot = new CookingRecipe(ItemID.Escargot);
+            Escargot.RegisterVariant(new List<int> { ItemID.Snail });
+
+            CookingRecipe FroggleBunwich = new CookingRecipe(ItemID.FroggleBunwich);
+            FroggleBunwich.RegisterVariant(new List<int> { ItemID.Frog, ItemID.Frog });
+
+            CookingRecipe BananaDaiquiri = new CookingRecipe(ItemID.BananaDaiquiri);
+            BananaDaiquiri.RegisterVariant(new List<int> { ItemID.Banana, ItemID.SnowBlock, ItemID.Bottle });
+
+            CookingRecipe FruitJuice = new CookingRecipe(ItemID.FruitJuice);
+            FruitJuice.AddIngredient(ItemID.Bottle);
+            FruitJuice.AddRecipeGroup(RecipeGroupID.Fruit);
+            FruitJuice.AddRecipeGroup(RecipeGroupID.Fruit);
+            FruitJuice.Register();
+
+            CookingRecipe FruitSalad = new CookingRecipe(ItemID.FruitSalad);
+            FruitSalad.AddIngredient(ItemID.Bowl);
+            FruitSalad.AddRecipeGroup(RecipeGroupID.Fruit);
+            FruitSalad.AddRecipeGroup(RecipeGroupID.Fruit);
+            FruitSalad.Register();
+
+            CookingRecipe GoldenDelight = new CookingRecipe(ItemID.GoldenDelight);
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldWaterStrider });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldSeahorse });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldFrog });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldLadyBug });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldDragonfly });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldWorm });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldGrasshopper });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.SquirrelGold });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldMouse });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldBunny });
+            GoldenDelight.RegisterVariant(new List<int> { ItemID.GoldBird });
+
+            CookingRecipe GrapeJuice = new CookingRecipe(ItemID.GrapeJuice);
+            GrapeJuice.RegisterVariant(new List<int> { ItemID.Grapes, ItemID.Grapes, ItemID.Bottle });
+
+            CookingRecipe GrilledSquirrel = new CookingRecipe(ItemID.GrilledSquirrel);
+            GrilledSquirrel.RegisterVariant(new List<int> { ItemID.Squirrel});
+            GrilledSquirrel.RegisterVariant(new List<int> { ItemID.SquirrelRed });
+
+            CookingRecipe GrubSoup = new CookingRecipe(ItemID.GrubSoup);
+            GrubSoup.RegisterVariant(new List<int> { ItemID.Grubby, ItemID.Sluggy, ItemID.Buggy });
+
+            CookingRecipe Lemonade = new CookingRecipe(ItemID.Lemonade);
+            Lemonade.RegisterVariant(new List<int> { ItemID.Lemon, ItemID.Bottle });
+
+            CookingRecipe LobsterTail = new CookingRecipe(ItemID.LobsterTail);
+            LobsterTail.RegisterVariant(new List<int> { ItemID.RockLobster });
+
+            CookingRecipe MonsterLasagna = new CookingRecipe(ItemID.MonsterLasagna);
+            MonsterLasagna.RegisterVariant(new List<int> { ItemID.Vertebrae, ItemID.Vertebrae, ItemID.Vertebrae });
+            MonsterLasagna.RegisterVariant(new List<int> { ItemID.RottenChunk, ItemID.RottenChunk, ItemID.RottenChunk });
+
+            CookingRecipe peachsangria = new CookingRecipe(ItemID.PeachSangria);
+            peachsangria.RegisterVariant(new List<int> { ItemID.Peach, ItemID.Bottle });
+
+            CookingRecipe PinaColada = new CookingRecipe(ItemID.PinaColada);
+            PinaColada.RegisterVariant(new List<int> { ItemID.Pineapple, ItemID.Coconut, ItemID.Bottle });
+
+            CookingRecipe PrismaticPunch = new CookingRecipe(ItemID.PrismaticPunch);
+            PrismaticPunch.RegisterVariant(new List<int> { ItemID.Starfruit, ItemID.Dragonfruit, ItemID.Bottle });
+
+            CookingRecipe RoastedBird = new CookingRecipe(ItemID.RoastedBird);
+            RoastedBird.RegisterVariant(new List<int> { ItemID.Bird });
+            RoastedBird.RegisterVariant(new List<int> { ItemID.Cardinal });
+            RoastedBird.RegisterVariant(new List<int> { ItemID.BlueJay });
+            RoastedBird.RegisterVariant(new List<int> { ItemID.Penguin });
+            RoastedBird.RegisterVariant(new List<int> { ItemID.Seagull });
+
+            CookingRecipe RoastedDuck = new CookingRecipe(ItemID.RoastedDuck);
+            RoastedDuck.RegisterVariant(new List<int> { ItemID.Grebe });
+            RoastedDuck.RegisterVariant(new List<int> { ItemID.MallardDuck });
+            RoastedDuck.RegisterVariant(new List<int> { ItemID.Duck });
+
+            CookingRecipe SauteedFrogLegs = new CookingRecipe(ItemID.SauteedFrogLegs);
+            SauteedFrogLegs.RegisterVariant(new List<int> { ItemID.Frog });
+
+            CookingRecipe SeafoodDinner = new CookingRecipe(ItemID.SeafoodDinner);
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.ArmoredCavefish, ItemID.ArmoredCavefish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Stinkfish, ItemID.Stinkfish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.SpecularFish, ItemID.SpecularFish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Prismite, ItemID.Prismite });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.PrincessFish, ItemID.PrincessFish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Obsidifish, ItemID.Obsidifish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.VariegatedLardfish, ItemID.VariegatedLardfish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.NeonTetra, ItemID.NeonTetra });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Honeyfin, ItemID.Honeyfin });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Hemopiranha, ItemID.Hemopiranha });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.FrostMinnow, ItemID.FrostMinnow });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.FlarefinKoi, ItemID.FlarefinKoi });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Ebonkoi, ItemID.Ebonkoi });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.DoubleCod, ItemID.DoubleCod });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.Damselfish, ItemID.Damselfish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.CrimsonTigerfish, ItemID.CrimsonTigerfish });
+            SeafoodDinner.RegisterVariant(new List<int> { ItemID.ChaosFish, ItemID.ChaosFish });
+
+            CookingRecipe SmoothieofDarkness = new CookingRecipe(ItemID.SmoothieofDarkness);
+            SmoothieofDarkness.RegisterVariant(new List<int> { ItemID.BlackCurrant, ItemID.Elderberry, ItemID.Bottle });
+
+            CookingRecipe TropicalSmoothie = new CookingRecipe(ItemID.TropicalSmoothie);
+            TropicalSmoothie.RegisterVariant(new List<int> { ItemID.Mango, ItemID.Pineapple, ItemID.Bottle });
+
+            CookingRecipe PumpkinPie = new CookingRecipe(ItemID.PumpkinPie);
+            PumpkinPie.RegisterVariant(new List<int> { ItemID.Pumpkin, ItemID.Pumpkin, ItemID.Pumpkin });
+
+            CookingRecipe Teacup = new CookingRecipe(ItemID.Teacup);
+            Teacup.RegisterVariant(new List<int> { ItemID.BottledWater});
+
+            CookingRecipe Sashimi = new CookingRecipe(ItemID.Sashimi);
+            Sashimi.RegisterVariant(new List<int> { ItemID.Flounder});
+            Sashimi.RegisterVariant(new List<int> { ItemID.RedSnapper });
+            Sashimi.RegisterVariant(new List<int> { ItemID.Salmon });
+            Sashimi.RegisterVariant(new List<int> { ItemID.Tuna });
+
+
             #endregion
         }
     }
