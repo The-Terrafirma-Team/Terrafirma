@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Enums;
+using Terrafirma.Data;
 
 namespace Terrafirma.Items.Weapons.Melee.Shortswords
 {
@@ -57,7 +58,10 @@ namespace Terrafirma.Items.Weapons.Melee.Shortswords
             get => (int)Projectile.ai[0];
             set => Projectile.ai[0] = value;
         }
-
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.scale = 1.5f;

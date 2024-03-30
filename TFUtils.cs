@@ -10,6 +10,7 @@ using Terraria.DataStructures;
 using Terrafirma.Projectiles.Ranged;
 using Terraria.GameContent.RGB;
 using Terrafirma.Particles.LegacyParticles;
+using Terrafirma.Data;
 
 namespace Terrafirma
 {
@@ -92,7 +93,7 @@ namespace Terrafirma
         }
         public static bool IsTrueMeleeProjectile(this Projectile projectile)
         {
-            return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis || TrueMeleeArmorPenetrationGlobalProjectile.TrueMeleeProjectiles[projectile.type]);
+            return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis || ProjectileSets.TrueMeleeProjectiles[projectile.type]);
         }
         public static void Explode(this Projectile projectile, int Diameter)
         {
