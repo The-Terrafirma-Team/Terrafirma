@@ -7,43 +7,40 @@ using Terraria;
 using Terrafirma.Buffs.Buffs;
 using Terrafirma.Global.Templates;
 using Terrafirma.Items.Materials;
+using Terraria.DataStructures;
+using Terrafirma.Systems.Cooking;
 
 namespace Terrafirma.Items.Consumable.Food
 {
     internal class SauteedMushroom : FoodTemplate
     {
+        
         public override void SetDefaults()
         {
-            Item.width = 31;
-            Item.height = 16;
-
-            Item.useStyle = ItemUseStyleID.EatFood;
-            Item.useAnimation = 15;
-            Item.useTime = 15;
-            Item.useTurn = true;
-            Item.UseSound = SoundID.Item2;
-
-            Item.maxStack = Item.CommonMaxStack;
-            Item.consumable = true;
+            Item.DefaultToFood(31, 16, BuffID.WellFed3, 3600 * 10);
 
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(silver: 2);
-
-            Item.buffType = BuffID.WellFed;
-            Item.buffTime = 3600 * 10;
         }
 
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 20;
+            Main.RegisterItemAnimation(Type, new DrawAnimationVertical(int.MaxValue, 3));
+            ItemID.Sets.FoodParticleColors[Item.type] = new Color[3] {
+                new Color(147, 77, 34),
+                new Color(104, 42, 12),
+                new Color(80, 153, 39)
+            };
+            ItemID.Sets.IsFood[Type] = true;
         }
 
         public override void AddRecipes()
         {
-            Recipe.Create(Type, 1)
-                .AddIngredient(ModContent.ItemType<Mistcap>())
-                .Register();
-            base.AddRecipes();
+            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Type);
+            recipe.AddIngredient(ModContent.ItemType<Mistcap>());
+            recipe.AddIngredient(ModContent.ItemType<Mistcap>());
+            recipe.Register();
         }
     }
 }

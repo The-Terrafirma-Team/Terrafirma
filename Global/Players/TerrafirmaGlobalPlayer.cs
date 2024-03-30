@@ -14,12 +14,13 @@ using System.Linq;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terrafirma.Systems.NPCQuests;
 using Terrafirma.Reworks.VanillaMagic.Spells;
+using Terrafirma.Global.Items;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Players
 {
     public class TerrafirmaGlobalPlayer : ModPlayer
     {
-        
+
         public bool Foregrip = false;
         public bool DrumMag = false;
         public bool AmmoCan = false;
@@ -35,7 +36,7 @@ namespace Terrafirma.Global
         public bool SpellUI = false;
         internal Item HeldMagicItem = new Item(0);
 
-        public Quest[] playerquests = new Quest[]{};
+        public Quest[] playerquests = new Quest[] { };
 
         public override void ResetEffects()
         {
@@ -56,7 +57,7 @@ namespace Terrafirma.Global
                 return false;
             }
 
-            if (ammo.ammo == AmmoID.Bullet && Main.rand.NextBool(2,3) && DrumMag)
+            if (ammo.ammo == AmmoID.Bullet && Main.rand.NextBool(2, 3) && DrumMag)
             {
                 return false;
             }
@@ -87,7 +88,7 @@ namespace Terrafirma.Global
 
         public override void PreUpdateMovement()
         {
-            
+
             if (SpringBoots)
             {
                 Player.frogLegJumpBoost = true;
@@ -97,7 +98,7 @@ namespace Terrafirma.Global
 
                     if (JumpMultiplier > 1)
                     {
-                        SoundStyle boing = new SoundStyle("Terrafirma/Sounds/Boing",SoundType.Sound);
+                        SoundStyle boing = new SoundStyle("Terrafirma/Sounds/Boing", SoundType.Sound);
                         boing.Volume = 0.8f;
                         boing.PitchRange = (-0.1f, 0.1f);
                         boing.Pitch -= JumpMultiplier / 10;
@@ -121,14 +122,15 @@ namespace Terrafirma.Global
             if (playerquests.Length == 0) playerquests = QuestIndex.quests;
 
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
-            else { ModContent.GetInstance<SpellUISystem>().Hide(); }            
+            else { ModContent.GetInstance<SpellUISystem>().Hide(); }
         }
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
 
-            if (triggersSet.MouseRight) {  
-                
+            if (triggersSet.MouseRight)
+            {
+
                 if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
                 {
                     if (!SpellUI)
@@ -145,10 +147,10 @@ namespace Terrafirma.Global
                     ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
                 }
                 SpellUI = true;
-             
+
             }
             else
-            {  
+            {
                 if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null && SpellUI == true)
                 {
                     if (Player.HeldItem.type > 0 &&
@@ -160,7 +162,7 @@ namespace Terrafirma.Global
                     }
                 }
 
-                ModContent.GetInstance<SpellUISystem>().Flush(); 
+                ModContent.GetInstance<SpellUISystem>().Flush();
             }
 
 
@@ -173,12 +175,12 @@ namespace Terrafirma.Global
                     TFUtils.UpdateSentryPriority(null, Player);
                 }
             }
-                
-            
+
+
         }
         public override bool CanUseItem(Item item)
         {
-            if (Player.HeldItem.type == ModContent.ItemType<HeroSword>() )
+            if (Player.HeldItem.type == ModContent.ItemType<HeroSword>())
             {
                 if (Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1) return true;
                 else return false;
