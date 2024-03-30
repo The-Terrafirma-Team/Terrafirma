@@ -21,7 +21,7 @@ namespace Terrafirma.Items.Consumable.Food
             Item.useAnimation = 15;
             Item.useTime = 15;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item3;
+            Item.UseSound = SoundID.Item2;
 
             Item.maxStack = Item.CommonMaxStack;
             Item.consumable = true;

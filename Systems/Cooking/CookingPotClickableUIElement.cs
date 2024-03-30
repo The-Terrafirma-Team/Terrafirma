@@ -7,6 +7,8 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terrafirma.Particles.LegacyParticles;
+using static Humanizer.In;
 
 namespace Terrafirma.Systems.Cooking
 {
@@ -21,6 +23,7 @@ namespace Terrafirma.Systems.Cooking
         bool Active = false;
 
         public bool Clicked = false;
+        bool Clicked2 = false;
         public override void OnInitialize()
         {
             TexFrameX = Main.rand.Next(ClickableTex.Width / 38);
@@ -42,6 +45,22 @@ namespace Terrafirma.Systems.Cooking
                 SpriteEffects.None,
                 0f);
             }
+            if (Clicked2 && Timer == 52)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    LegacyParticleSystem.AddUIParticle(new BigUISparkle(), 
+                        new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), 
+                        new Vector2(3f,0).RotatedBy(MathHelper.Pi * 0.33f * i), 
+                        new Color(213,123,11,0) * 0.2f, 
+                        0.1f, 
+                        8, 
+                        0.05f, 
+                        2f, 
+                        Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                }    
+            }
+            LegacyParticleSystem.DrawUIParticle(Vector2.Zero);
             base.Draw(spriteBatch);
         }
 
@@ -51,8 +70,8 @@ namespace Terrafirma.Systems.Cooking
             {
                 Timer = 50;
                 Clicked = true;
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                
+                Clicked2 = true;
+                SoundEngine.PlaySound(SoundID.Item29 with { Volume = 0.1f });
             }
 
             base.LeftClick(evt);

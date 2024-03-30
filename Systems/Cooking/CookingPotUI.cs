@@ -413,8 +413,8 @@ namespace Terrafirma.Systems.Cooking
                     }
 
                     Item ResultItem = new Item(possibleresults[randitem].Result);
-                    if (MinigameScore == 5) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 2;
-                    else if (MinigameScore >= 3) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 1;
+                    if (MinigameScore >= 9) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 2;
+                    else if (MinigameScore >= 5) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 1;
                     else ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = -1;
 
                     Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ResultItem, possibleresults[randitem].Stack);
@@ -431,8 +431,8 @@ namespace Terrafirma.Systems.Cooking
                     }
 
                     Item ResultItem = new Item(possibleresults[0].Result);
-                    if (MinigameScore == 5) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 2;
-                    else if (MinigameScore >= 3) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 1;
+                    if (MinigameScore >= 9) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 2;
+                    else if (MinigameScore >= 5) ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = 1;
                     else ResultItem.GetGlobalItem<FoodTemplateGlobalItem>().grade = -1;
 
                     Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ResultItem, possibleresults[0].Stack);
@@ -443,7 +443,7 @@ namespace Terrafirma.Systems.Cooking
         public void SetupMinigame()
         {
 
-            if (MinigameTimer % 60 == 0 && MinigameTimer > 60)
+            if (MinigameTimer % 30 == 0 && MinigameTimer > 60)
             {
                 PotMinigameClickable = new CookingPotClickableUIElement();
                 PotMinigameClickable.HAlign = 0.5f;

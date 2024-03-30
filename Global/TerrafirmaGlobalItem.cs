@@ -27,13 +27,10 @@ namespace Terrafirma.Global
 
                 if (line.Name == "ItemName") 
                 { 
-                    if (Main.timeForVisualEffects % 15 == 0) LegacyParticleSystem.AddUIParticle(new BigUISparkle(), Vector2.Zero + new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(20f)), Vector2.Zero, line.Color, 0, 20, 1, Main.rand.NextFloat(0.3f,1.2f), Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                    if (Main.timeForVisualEffects % 15 == 0) LegacyParticleSystem.AddUIParticle(new BigUISparkle(), Vector2.Zero + new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(20f)), Vector2.Zero, line.Color, 0, 20, 0.1f, Main.rand.NextFloat(0.3f,1.2f), Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
                     LegacyParticleSystem.DrawUIParticle(new Vector2(line.X, line.Y));
                     
                 }
-                
-
-
 
             }
         }
