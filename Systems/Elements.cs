@@ -108,6 +108,53 @@ namespace Terrafirma.Systems
                 if (Air) mod += WeakDamageBonus;
                 if (Electric) mod += StrongDamageBonus;
             }
+            if (Elements.iceNPC.Contains(target.type))
+            {
+                if (Fire) mod += WeakDamageBonus;
+                if (Earth) mod += StrongDamageBonus;
+                if (Air) mod += WeakDamageBonus;
+                if (Ice) mod += WeakDamageBonus;
+                if (Poison) mod += StrongDamageBonus;
+                if (Electric) mod += StrongDamageBonus;
+            }
+            if (Elements.poisonNPC.Contains(target.type))
+            {
+                if (Fire) mod += WeakDamageBonus;
+                if (Water) mod += StrongDamageBonus;
+                if (Earth) mod += StrongDamageBonus;
+                if (Air) mod += StrongDamageBonus;
+                if (Ice) mod += WeakDamageBonus;
+                if (Poison) mod += WeakDamageBonus;
+                if (Light) mod += WeakDamageBonus;
+                if (Electric) mod += WeakDamageBonus;
+            }
+            if (Elements.lightNPC.Contains(target.type))
+            {
+                if (Earth) mod += WeakDamageBonus;
+                if (Ice) mod += StrongDamageBonus;
+                if (Poison) mod += StrongDamageBonus;
+                if (Light) mod += WeakDamageBonus;
+                if (Dark) mod += SuperStrongDamageBonus;
+            }
+            if (Elements.darkNPC.Contains(target.type))
+            {
+                if (Earth) mod += StrongDamageBonus;
+                if (Light) mod += WeakDamageBonus;
+                if (Dark) mod += WeakDamageBonus;
+                if (Electric) mod += WeakDamageBonus;
+            }
+            if (Elements.electricNPC.Contains(target.type))
+            {
+                if (Magic) mod += StrongDamageBonus;
+                if (Fire) mod += WeakDamageBonus;
+                if (Water) mod += SuperStrongDamageBonus;
+                if (Earth) mod += WeakDamageBonus;
+                if (Air) mod += WeakDamageBonus;
+                if (Ice) mod += WeakDamageBonus;
+                if (Poison) mod += StrongDamageBonus;
+                if (Dark) mod += SuperStrongDamageBonus;
+                if (Electric) mod += WeakDamageBonus;
+            }
             return mod;
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)

@@ -12,15 +12,15 @@ using Terrafirma.Systems.Cooking;
 
 namespace Terrafirma.Items.Consumable.Food
 {
-    internal class SauteedMushroom : FoodTemplate
+    internal class LatiaoSticks : FoodTemplate
     {
         
         public override void SetDefaults()
         {
-            Item.DefaultToFood(31, 16, BuffID.WellFed, 3600 * 10);
+            Item.DefaultToFood(31, 16, BuffID.WellFed, 3600 * 15);
 
-            Item.rare = ItemRarityID.Blue;
-            Item.value = Item.buyPrice(silver: 2);
+            Item.rare = ItemRarityID.Green;
+            Item.value = Item.buyPrice(silver: 30);
         }
 
         public override void SetStaticDefaults()
@@ -28,19 +28,11 @@ namespace Terrafirma.Items.Consumable.Food
             Item.ResearchUnlockCount = 20;
             Main.RegisterItemAnimation(Type, new DrawAnimationVertical(int.MaxValue, 3));
             ItemID.Sets.FoodParticleColors[Item.type] = new Color[3] {
-                new Color(147, 77, 34),
-                new Color(104, 42, 12),
-                new Color(80, 153, 39)
+                new Color(174, 31, 12),
+                new Color(200, 62, 16),
+                new Color(234, 170, 106)
             };
             ItemID.Sets.IsFood[Type] = true;
-        }
-
-        public override void AddRecipes()
-        {
-            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Type);
-            recipe.AddIngredient(ModContent.ItemType<Mistcap>());
-            recipe.AddIngredient(ModContent.ItemType<Mistcap>());
-            recipe.Register();
         }
     }
 }

@@ -768,6 +768,11 @@ Items: {
 		DisplayName: Fireaxe
 		Tooltip: ""
 	}
+
+	LatiaoSticks: {
+		DisplayName: Latiao Sticks
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
