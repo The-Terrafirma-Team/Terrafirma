@@ -12,14 +12,22 @@ using Terraria.ModLoader.IO;
 
 namespace Terrafirma.Systems.Cooking
 {
-    public sealed class CookingRecipe(int Result, int Stack = 1)
+    public sealed class CookingRecipe
     {
         public List<Item> items = new List<Item>();
         public List<RecipeGroup> groups = new List<RecipeGroup>();
 
-        public int Result= Result;
-        public int Stack = Stack;
+        public int Result;
+        public int Stack;
         public int Tile = TileID.CookingPots;
+
+        public static CookingRecipe createCookingRecipe(int Result, int Stack = 1)
+        {
+            CookingRecipe rec = new CookingRecipe();
+            rec.Result = Result;
+            rec.Stack = Stack;
+            return rec;
+        }
 
         /// <summary>
         /// returns true if the list contains all this recipe's ingredients
@@ -205,21 +213,21 @@ namespace Terrafirma.Systems.Cooking
 
         public void RegisterVariant(int itemid)
         {
-            CookingRecipe recipe = new CookingRecipe(Result, Stack);
+            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Result, Stack);
             recipe.AddIngredient(itemid);
             recipe.Register();
         }
 
         public void RegisterVariant(Item item)
         {
-            CookingRecipe recipe = new CookingRecipe(Result, Stack);
+            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Result, Stack);
             recipe.AddIngredient(item);
             recipe.Register();
         }
 
         public void RegisterVariant(List<int> itemids)
         {
-            CookingRecipe recipe = new CookingRecipe(Result, Stack);
+            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Result, Stack);
             for (int i  = 0; i < itemids.Count; i++)
             {
                 recipe.AddIngredient(itemids[i] );
@@ -229,7 +237,7 @@ namespace Terrafirma.Systems.Cooking
 
         public void RegisterVariant(List<Item> items)
         {
-            CookingRecipe recipe = new CookingRecipe(Result, Stack);
+            CookingRecipe recipe = CookingRecipe.createCookingRecipe(Result, Stack);
             recipe.items = items;
             recipe.Register();
         }
