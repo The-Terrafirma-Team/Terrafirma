@@ -4,7 +4,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using Terrafirma.Global;
+using Terrafirma.Global.Items;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma
 {
-	public class Terrafirma : Mod
+    public class Terrafirma : Mod
 	{
         public static Terrafirma Mod { get; private set; } = ModContent.GetInstance<Terrafirma>();
         public const string AssetPath = "Terrafirma/Assets/";

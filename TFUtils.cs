@@ -2,7 +2,6 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using Terrafirma.Global;
 using System;
 using Terraria.Audio;
 using System.Linq;
@@ -11,6 +10,8 @@ using Terrafirma.Projectiles.Ranged;
 using Terraria.GameContent.RGB;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Data;
+using Terrafirma.Global.Items;
+using Terrafirma.Global.Players;
 
 namespace Terrafirma
 {

@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terrafirma.Items.Weapons.Melee.Shortswords;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class TrueMeleeArmorPenetrationGlobalItem : GlobalItem
     {

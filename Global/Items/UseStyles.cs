@@ -7,7 +7,7 @@ using Terraria.Graphics.CameraModifiers;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class UseStyles
     {

@@ -8,7 +8,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.NPCs
 {
     internal class TerrafirmaGlobalNPCInstance : GlobalNPC
     {
@@ -24,7 +24,7 @@ namespace Terrafirma.Global
 
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
-            if (PhantasmalBurn) 
+            if (PhantasmalBurn)
             {
                 damage += 15;
                 npc.lifeRegen -= 60;
@@ -45,10 +45,10 @@ namespace Terrafirma.Global
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            
+
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), 20, 1, 1));
 
-            if(npc.type == NPCID.PirateCrossbower)
+            if (npc.type == NPCID.PirateCrossbower)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
             }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Global;
+using Terrafirma.Global.Items;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Ranged;
 using Terraria;

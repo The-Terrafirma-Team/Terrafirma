@@ -7,7 +7,6 @@ using System;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.GameContent.UI.Elements;
-using Terrafirma.Global;
 using Terraria.UI.Chat;
 using Terraria.GameContent;
 using ReLogic.Graphics;
@@ -19,6 +18,7 @@ using Terrafirma.Systems.NPCQuests;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Global.Players;
 
 namespace Terrafirma.Systems.NPCQuests
 {

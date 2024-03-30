@@ -15,7 +15,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class AccessorySynergyPlayer : ModPlayer
     {

@@ -8,7 +8,7 @@ using Terrafirma.Data;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Players
 {
     public class PlayerStats : ModPlayer
     {
@@ -39,7 +39,7 @@ namespace Terrafirma.Global
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if(item.DamageType == DamageClass.Melee || item.DamageType == DamageClass.MeleeNoSpeed)
+            if (item.DamageType == DamageClass.Melee || item.DamageType == DamageClass.MeleeNoSpeed)
             {
                 damage.Flat += MeleeFlatDamage;
             }
@@ -58,7 +58,7 @@ namespace Terrafirma.Global
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if(KnockbackResist <= 0)
+            if (KnockbackResist <= 0)
             {
                 Player.noKnockback = true;
             }

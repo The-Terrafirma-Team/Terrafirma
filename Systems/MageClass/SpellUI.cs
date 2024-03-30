@@ -6,10 +6,10 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terrafirma.Global.Structs;
 using Terraria.GameContent.UI.Elements;
-using Terrafirma.Global;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Terrafirma.Global.Items;
 
 namespace Terrafirma.Systems.MageClass
 {

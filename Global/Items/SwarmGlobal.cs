@@ -10,13 +10,13 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class SwarmGlobal : GlobalProjectile
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if(source is EntitySource_ItemUse parent && parent.Entity is Player player && player.GetModPlayer<MahoganyShamanPlayer>().active && ItemSets.isSwarmSummonItem[player.HeldItem.type])
+            if (source is EntitySource_ItemUse parent && parent.Entity is Player player && player.GetModPlayer<MahoganyShamanPlayer>().active && ItemSets.isSwarmSummonItem[player.HeldItem.type])
             {
                 if (Main.rand.NextBool(3))
                 {
@@ -24,7 +24,7 @@ namespace Terrafirma.Global
                     projectile.damage += 4;
                     projectile.knockBack += 0.2f;
 
-                    for(int i = 0; i < 12; i++)
+                    for (int i = 0; i < 12; i++)
                     {
                         Dust d = Dust.NewDustPerfect(projectile.Center, DustID.GemEmerald, Main.rand.NextVector2Circular(6, 6));
                         d.noGravity = true;

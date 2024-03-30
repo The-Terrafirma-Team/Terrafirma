@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Linq;
-using Terrafirma.Global;
+using Terrafirma.Global.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

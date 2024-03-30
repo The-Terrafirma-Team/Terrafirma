@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Terrafirma.Global.Players;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,7 +10,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class GlobalItemInstanced : GlobalItem
     {
@@ -29,8 +30,8 @@ namespace Terrafirma.Global
         //Modify Tooltips
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if ( item.type == ItemID.ManaFlower || item.type == ItemID.ManaCloak || item.type == ItemID.MagnetFlower || item.type == ItemID.ArcaneFlower ) tooltips.Remove(tooltips.Where(tooltip => tooltip.Name == "Tooltip1").FirstOrDefault());
-            
+            if (item.type == ItemID.ManaFlower || item.type == ItemID.ManaCloak || item.type == ItemID.MagnetFlower || item.type == ItemID.ArcaneFlower) tooltips.Remove(tooltips.Where(tooltip => tooltip.Name == "Tooltip1").FirstOrDefault());
+
             base.ModifyTooltips(item, tooltips);
         }
 
@@ -38,11 +39,11 @@ namespace Terrafirma.Global
         public override void SetDefaults(Item entity)
         {
 
-       
+
 
             if (entity.type == ItemID.ManaFlower)
             {
-                
+
             }
 
             if (entity.DamageType == DamageClass.Summon && entity.type <= 5455 && !entity.sentry)
@@ -66,7 +67,7 @@ namespace Terrafirma.Global
                 entity.type == ItemID.LightDisc ||
                 entity.type == ItemID.FlyingKnife ||
                 entity.type == ItemID.PossessedHatchet ||
-                entity.type == ItemID.PaladinsHammer 
+                entity.type == ItemID.PaladinsHammer
             )
             {
                 entity.DamageType = DamageClass.Ranged;

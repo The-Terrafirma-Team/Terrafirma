@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Global;
+using Terrafirma.Global.NPC;
 using Terrafirma.Particles.LegacyParticles;
 using Terraria;
 using Terraria.ID;

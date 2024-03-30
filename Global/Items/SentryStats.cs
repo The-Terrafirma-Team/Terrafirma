@@ -9,7 +9,7 @@ using Terrafirma.Particles;
 using Terrafirma.Projectiles.Summon.Sentry;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Items
 {
     public class SentryBuffID
     {
@@ -35,7 +35,7 @@ namespace Terrafirma.Global
         }
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
         {
-            
+
             return entity.sentry;
         }
 
@@ -58,7 +58,7 @@ namespace Terrafirma.Global
                     BuffTime[i]--;
             }
             if (BuffTime[SentryBuffID.SentryPriority] == 29)
-            {    
+            {
                 TFUtils.UpdateSentryPriority(projectile);
             }
             if (BuffTime[SentryBuffID.InflictShadowflame] > 0 && Main.rand.NextBool(5))
@@ -177,7 +177,7 @@ namespace Terrafirma.Global
         {
             if (Demonite && Main.rand.NextBool(2))
             {
-                target.AddBuff(BuffID.ShadowFlame,60 * 3);
+                target.AddBuff(BuffID.ShadowFlame, 60 * 3);
             }
         }
         public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)

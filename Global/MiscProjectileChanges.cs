@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Buffs;
+using Terrafirma.Global.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
