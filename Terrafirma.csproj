@@ -22,6 +22,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Items\Placeable\" />
     <Folder Include="Reworks\VanillaMagic\Spells\PreHardmode\" />
+    <Folder Include="Walls\" />
   </ItemGroup>
 </Project>

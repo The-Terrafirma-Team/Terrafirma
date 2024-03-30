@@ -50,7 +50,7 @@ namespace Terrafirma.Systems.Cooking
 
         int UIMode = 0;
         float TransitionFloat = -0.01f;
-        int MinigameTimer = 0;
+        int MinigameTimer = 60 * 6;
         int MinigameScore = 0;
 
         bool Active = false;
