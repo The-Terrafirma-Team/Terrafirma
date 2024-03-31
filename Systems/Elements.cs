@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using rail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,11 +39,166 @@ namespace Terrafirma.Systems
 
         public override void Load()
         {
-            //FireNPC
-            fireNPC.Add(NPCID.LavaSlime);
-            //WaterItems
-            waterItem.Add(ItemID.Muramasa);
-            waterItem.Add(ItemID.WaterBolt);
+            AddNPCSToSets();
+            AddItemsToSets();
+        }
+        private void AddNPCSToSets()
+        {
+            #region fire
+            AddIDRange(fireNPC, 23, 25);
+            AddIDRange(fireNPC, 29, 30);
+            AddIDRange(fireNPC, 59, 60);
+            fireNPC.Add(72);
+            fireNPC.Add(151);
+            AddIDRange(earthNPC, 245, 249);
+            AddIDRange(fireNPC, 277, 280);
+            fireNPC.Add(325);
+            fireNPC.Add(378);
+            AddIDRange(fireNPC, 412, 418);
+            AddIDRange(fireNPC, 471, 472);
+            AddIDRange(fireNPC, 516, 519);
+            fireNPC.Add(527);
+            fireNPC.Add(533);
+            fireNPC.Add(551);
+            AddIDRange(fireNPC, 572, 575);
+            fireNPC.Add(614);
+            fireNPC.Add(665);
+            #endregion fire
+            #region water
+            //Should take another look through this at some point
+            AddIDRange(waterNPC, -55, -54);
+            AddIDRange(waterNPC, 32, 33);
+            AddIDRange(waterNPC, 63, 64);
+            AddIDRange(waterNPC, 220, 221);
+            AddIDRange(waterNPC, 223, 225);
+            waterNPC.Add(250);
+            waterNPC.Add(268);
+            AddIDRange(waterNPC, 370, 373);
+            waterNPC.Add(465);
+            waterNPC.Add(526);
+            waterNPC.Add(587);
+            AddIDRange(waterNPC, 618, 623);
+            #endregion water
+            #region earth
+            AddIDRange(earthNPC, -53, -46);
+            AddIDRange(earthNPC, 7, 15);
+            earthNPC.Add(21);
+            earthNPC.Add(23);
+            AddIDRange(earthNPC, 43, 45);
+            earthNPC.Add(56);
+            earthNPC.Add(69);
+            earthNPC.Add(77);
+            AddIDRange(earthNPC, 95, 101);
+            earthNPC.Add(153);
+            AddIDRange(earthNPC, 163, 165);
+            AddIDRange(earthNPC, 201, 203);
+            AddIDRange(earthNPC, 236, 238);
+            AddIDRange(earthNPC, 245, 249);
+            AddIDRange(earthNPC, 254, 261);
+            AddIDRange(earthNPC, 262, 265);
+            AddIDRange(earthNPC, 449, 452);
+            AddIDRange(earthNPC, 494, 506);
+            earthNPC.Add(8);
+            AddIDRange(earthNPC, 510, 515);
+            AddIDRange(earthNPC, 524, 532);
+            earthNPC.Add(537);
+            AddIDRange(earthNPC, 542, 545);
+            AddIDRange(earthNPC, 568, 569);
+            AddIDRange(earthNPC, 580, 582);
+            earthNPC.Add(635);
+            earthNPC.Add(631);
+            #endregion earth
+            #region air
+            AddIDRange(airNPC, -65, -56);
+            AddIDRange(airNPC, -43, -38);
+            AddIDRange(airNPC, -23, -16);
+            AddIDRange(airNPC, -12, -11);
+            airNPC.Add(2);
+            AddIDRange(airNPC, 4, 6);
+            airNPC.Add(34);
+            airNPC.Add(42);
+            AddIDRange(airNPC, 48, 49);
+            airNPC.Add(51);
+            AddIDRange(airNPC, 60, 62);
+            airNPC.Add(66);
+            AddIDRange(airNPC, 87, 94);
+            AddIDRange(airNPC, 121, 122);
+            airNPC.Add(133);
+            airNPC.Add(137);
+            AddIDRange(airNPC, 150, 152);
+            airNPC.Add(156);
+            AddIDRange(airNPC, 170, 171);
+            airNPC.Add(173);
+            airNPC.Add(176);
+            airNPC.Add(180);
+            airNPC.Add(182);
+            AddIDRange(airNPC, 190, 194);
+            airNPC.Add(205);
+            airNPC.Add(224);
+            airNPC.Add(226);
+            AddIDRange(airNPC, 231, 235);
+            airNPC.Add(252);
+            airNPC.Add(258);
+            AddIDRange(airNPC, 317, 318);
+            AddIDRange(airNPC, 327, 328);
+            airNPC.Add(347);
+            airNPC.Add(370);
+            airNPC.Add(388);
+            AddIDRange(airNPC, 407, 408);
+            AddIDRange(airNPC, 412, 414);
+            AddIDRange(airNPC, 418, 421);
+            AddIDRange(airNPC, 426, 428);
+            AddIDRange(airNPC, 454, 459);
+            airNPC.Add(509);
+            airNPC.Add(541);
+            airNPC.Add(551);
+            AddIDRange(airNPC, 558, 560);
+            AddIDRange(airNPC, 574, 575);
+            airNPC.Add(581);
+            airNPC.Add(587);
+            #endregion air
+            #region ice
+            #endregion ice
+            #region poison
+            #endregion poison
+            #region light
+            #endregion light
+            #region dark
+            #endregion dark
+            #region electric
+            #endregion electric
+            #region magic
+            #endregion magic
+        }
+        private void AddItemsToSets()
+        {
+            #region fire
+            #endregion fire
+            #region water
+            #endregion water
+            #region earth
+            #endregion earth
+            #region air
+            #endregion air
+            #region ice
+            #endregion ice
+            #region poison
+            #endregion poison
+            #region light
+            #endregion light
+            #region dark
+            #endregion dark
+            #region electric
+            #endregion electric
+            #region magic
+            #endregion magic
+        }
+        private void AddIDRange(HashSet<int> set, int start, int end)
+        {
+            for(int i = start; i <= end; i++)
+            {
+                set.Add(i);
+            }
         }
         public override void Unload()
         {
@@ -79,7 +235,7 @@ namespace Terrafirma.Systems
             bool Elementless = !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Magic;
             bool targetElementless = true;
 
-            if (Elements.fireNPC.Contains(target.type))
+            if (Elements.fireNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
@@ -88,7 +244,7 @@ namespace Terrafirma.Systems
                 if (Air) mod += StrongDamageBonus;
                 if (Ice) mod += StrongDamageBonus;
             }
-            if (Elements.waterNPC.Contains(target.type))
+            if (Elements.waterNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Fire) mod += StrongDamageBonus;
@@ -98,7 +254,7 @@ namespace Terrafirma.Systems
                 if (Poison) mod += StrongDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            if (Elements.earthNPC.Contains(target.type))
+            if (Elements.earthNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Magic) mod += WeakDamageBonus;
@@ -109,7 +265,7 @@ namespace Terrafirma.Systems
                 if (Light) mod += StrongDamageBonus;
                 if (Electric) mod += StrongDamageBonus;
             }
-            if (Elements.airNPC.Contains(target.type))
+            if (Elements.airNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Magic) mod += WeakDamageBonus;
@@ -117,7 +273,7 @@ namespace Terrafirma.Systems
                 if (Air) mod += WeakDamageBonus;
                 if (Electric) mod += StrongDamageBonus;
             }
-            if (Elements.iceNPC.Contains(target.type))
+            if (Elements.iceNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
@@ -127,7 +283,7 @@ namespace Terrafirma.Systems
                 if (Poison) mod += StrongDamageBonus;
                 if (Electric) mod += StrongDamageBonus;
             }
-            if (Elements.poisonNPC.Contains(target.type))
+            if (Elements.poisonNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
@@ -139,7 +295,7 @@ namespace Terrafirma.Systems
                 if (Light) mod += WeakDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            if (Elements.lightNPC.Contains(target.type))
+            if (Elements.lightNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Earth) mod += WeakDamageBonus;
@@ -148,7 +304,7 @@ namespace Terrafirma.Systems
                 if (Light) mod += WeakDamageBonus;
                 if (Dark) mod += SuperStrongDamageBonus;
             }
-            if (Elements.darkNPC.Contains(target.type))
+            if (Elements.darkNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Earth) mod += StrongDamageBonus;
@@ -156,7 +312,7 @@ namespace Terrafirma.Systems
                 if (Dark) mod += WeakDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            if (Elements.electricNPC.Contains(target.type))
+            if (Elements.electricNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Magic) mod += StrongDamageBonus;
@@ -169,7 +325,7 @@ namespace Terrafirma.Systems
                 if (Dark) mod += SuperStrongDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            if (Elements.magicNPC.Contains(target.type))
+            if (Elements.magicNPC.Contains(target.netID))
             {
                 targetElementless = false;
                 if (Magic) mod += WeakDamageBonus;
