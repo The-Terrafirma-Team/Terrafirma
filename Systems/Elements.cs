@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static tModPorter.ProgressUpdate;
 
 namespace Terrafirma.Systems
 {
@@ -37,7 +39,7 @@ namespace Terrafirma.Systems
         public override void Load()
         {
             //FireNPC
-            fireNPC.Add(NPCID.Lavabat);
+            fireNPC.Add(NPCID.LavaSlime);
             //WaterItems
             waterItem.Add(ItemID.Muramasa);
             waterItem.Add(ItemID.WaterBolt);
@@ -74,8 +76,12 @@ namespace Terrafirma.Systems
         public static float getItemToNPCModifer(bool Fire, bool Water, bool Earth, bool Air, bool Ice, bool Poison, bool Light, bool Dark, bool Electric, bool Magic, NPC target)
         {
             float mod = 1f;
+            bool Elementless = !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Magic;
+            bool targetElementless = true;
+
             if (Elements.fireNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
                 if (Water) mod += WeakDamageBonus;
                 if (Earth) mod += StrongDamageBonus;
@@ -84,6 +90,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.waterNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Fire) mod += StrongDamageBonus;
                 if (Water) mod += WeakDamageBonus;
                 if (Earth) mod += StrongDamageBonus;
@@ -93,6 +100,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.earthNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Magic) mod += WeakDamageBonus;
                 if (Earth) mod += WeakDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
@@ -103,6 +111,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.airNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Magic) mod += WeakDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
                 if (Air) mod += WeakDamageBonus;
@@ -110,6 +119,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.iceNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
                 if (Earth) mod += StrongDamageBonus;
                 if (Air) mod += WeakDamageBonus;
@@ -119,6 +129,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.poisonNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Fire) mod += WeakDamageBonus;
                 if (Water) mod += StrongDamageBonus;
                 if (Earth) mod += StrongDamageBonus;
@@ -130,6 +141,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.lightNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Earth) mod += WeakDamageBonus;
                 if (Ice) mod += StrongDamageBonus;
                 if (Poison) mod += StrongDamageBonus;
@@ -138,6 +150,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.darkNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Earth) mod += StrongDamageBonus;
                 if (Light) mod += WeakDamageBonus;
                 if (Dark) mod += WeakDamageBonus;
@@ -145,6 +158,7 @@ namespace Terrafirma.Systems
             }
             if (Elements.electricNPC.Contains(target.type))
             {
+                targetElementless = false;
                 if (Magic) mod += StrongDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
                 if (Water) mod += SuperStrongDamageBonus;
@@ -155,20 +169,38 @@ namespace Terrafirma.Systems
                 if (Dark) mod += SuperStrongDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            return mod;
+            if (Elements.magicNPC.Contains(target.type))
+            {
+                targetElementless = false;
+                if (Magic) mod += WeakDamageBonus;
+                if (Fire) mod += StrongDamageBonus;
+                if (Water) mod += StrongDamageBonus;
+                if (Air) mod += StrongDamageBonus;
+                if (Fire) mod += StrongDamageBonus;
+                if(Elementless) mod += WeakDamageBonus;
+            }
+            if (targetElementless)
+            {
+                if(Magic) mod += StrongDamageBonus;
+            }
+            return MathHelper.Clamp(mod,0.1f,3f);
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
+            target.life = target.lifeMax;
             ElementProjectile eProj = proj.GetGlobalProjectile<ElementProjectile>();
-            getItemToNPCModifer(eProj.Fire,eProj.Water,eProj.Earth,eProj.Air,eProj.Ice,eProj.Poison,eProj.Light,eProj.Dark,eProj.Electric,eProj.Magic, target);
+            modifiers.FinalDamage *= getItemToNPCModifer(eProj.Fire,eProj.Water,eProj.Earth,eProj.Air,eProj.Ice,eProj.Poison,eProj.Light,eProj.Dark,eProj.Electric,eProj.Magic, target);
         }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyHitNPCWithItem(item, target, ref modifiers);
+            target.life = target.lifeMax;
+            modifiers.FinalDamage *= getItemToNPCModifer(Elements.fireItem.Contains(item.type), Elements.waterItem.Contains(item.type), Elements.earthItem.Contains(item.type), Elements.airItem.Contains(item.type), Elements.iceItem.Contains(item.type), Elements.poisonItem.Contains(item.type), Elements.lightItem.Contains(item.type), Elements.darkItem.Contains(item.type), Elements.electricItem.Contains(item.type), Elements.magicItem.Contains(item.type), target);
         }
     }
     public class ElementProjectile : GlobalProjectile
     {
+        public override bool InstancePerEntity => true;
+
         public bool Fire = false;
         public bool Water = false;
         public bool Earth = false;
@@ -189,30 +221,27 @@ namespace Terrafirma.Systems
             // sets the element based on the item
             if (!ProjectileSets.DontInheritElementFromWeapon[projectile.type])
             {
-                if(source is EntitySource_ItemUse eSource)
-                {
-                    int item = eSource.Item.type;
-                    if (Elements.fireItem.Contains(item))
-                        Fire = true;
-                    if (Elements.waterItem.Contains(item))
-                        Water = true;
-                    if (Elements.earthItem.Contains(item))
-                        Earth = true;
-                    if (Elements.airItem.Contains(item))
-                        Air = true;
-                    if (Elements.iceItem.Contains(item))
-                        Ice = true;
-                    if (Elements.poisonItem.Contains(item))
-                        Poison = true;
-                    if (Elements.lightItem.Contains(item))
-                        Light = true;
-                    if (Elements.darkItem.Contains(item))
-                        Dark = true;
-                    if (Elements.electricItem.Contains(item))
-                        Electric = true;
-                    if (Elements.magicItem.Contains(item))
-                        Magic = true;
-                }
+                int item = Main.player[projectile.owner].HeldItem.type;
+                if (Elements.fireItem.Contains(item))
+                    Fire = true;
+                if (Elements.waterItem.Contains(item))
+                    Water = true;
+                if (Elements.earthItem.Contains(item))
+                    Earth = true;
+                if (Elements.airItem.Contains(item))
+                    Air = true;
+                if (Elements.iceItem.Contains(item))
+                    Ice = true;
+                if (Elements.poisonItem.Contains(item))
+                    Poison = true;
+                if (Elements.lightItem.Contains(item))
+                    Light = true;
+                if (Elements.darkItem.Contains(item))
+                    Dark = true;
+                if (Elements.electricItem.Contains(item))
+                    Electric = true;
+                if (Elements.magicItem.Contains(item))
+                    Magic = true;
             }
         }
     }
