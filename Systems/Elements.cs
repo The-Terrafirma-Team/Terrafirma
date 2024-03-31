@@ -69,6 +69,7 @@ namespace Terrafirma.Systems
             AddIDRange(waterNPC, -55, -54);
             AddIDRange(waterNPC, 32, 33);
             AddIDRange(waterNPC, 63, 64);
+            waterNPC.Add(166);
             AddIDRange(waterNPC, 220, 221);
             AddIDRange(waterNPC, 223, 225);
             waterNPC.Add(250);
@@ -76,6 +77,7 @@ namespace Terrafirma.Systems
             AddIDRange(waterNPC, 370, 373);
             waterNPC.Add(465);
             waterNPC.Add(526);
+            waterNPC.Add(586);
             waterNPC.Add(587);
             AddIDRange(waterNPC, 618, 623);
             #endregion water
@@ -92,6 +94,7 @@ namespace Terrafirma.Systems
             earthNPC.Add(153);
             AddIDRange(earthNPC, 163, 165);
             AddIDRange(earthNPC, 201, 203);
+            AddIDRange(earthNPC, 218, 220);
             AddIDRange(earthNPC, 236, 238);
             AddIDRange(earthNPC, 245, 249);
             AddIDRange(earthNPC, 254, 261);
@@ -158,14 +161,41 @@ namespace Terrafirma.Systems
             airNPC.Add(587);
             #endregion air
             #region ice
+            iceNPC.Add(147);
+            iceNPC.Add(150);
+            AddIDRange(iceNPC, 154, 155);
+            iceNPC.Add(161);
+            AddIDRange(iceNPC, 168, 171);
+            iceNPC.Add(180);
+            AddIDRange(iceNPC, 184, 185);
+            iceNPC.Add(206);
+            iceNPC.Add(218);
+            iceNPC.Add(243);
+            iceNPC.Add(343);
+            iceNPC.Add(345);
+            iceNPC.Add(352);
+            iceNPC.Add(431);
+            iceNPC.Add(628);
             #endregion ice
             #region poison
+            AddIDRange(poisonNPC, -65, -56);
+            AddIDRange(poisonNPC, -21, -16);
+            poisonNPC.Add(41);
+            poisonNPC.Add(141);
+            AddIDRange(poisonNPC, 163, 165);
+            poisonNPC.Add(176);
+            poisonNPC.Add(204);
+            AddIDRange(poisonNPC, 231, 238);
+            AddIDRange(poisonNPC, 262, 265);
+            AddIDRange(poisonNPC, 530, 531);
             #endregion poison
             #region light
             #endregion light
             #region dark
+            // add mimics and dungeon skeletons to this list plz
             #endregion dark
             #region electric
+            // basically just martians and jellyfish
             #endregion electric
             #region magic
             #endregion magic
