@@ -4,11 +4,16 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terrafirma.Projectiles.Summon.Sentry;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
     internal class PortableSlimeBakery : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.waterItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 30;

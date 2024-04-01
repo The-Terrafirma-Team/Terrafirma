@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Data;
 using Terrafirma.Projectiles.Summon.Swarm;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Summoner.Swarm
 {
@@ -11,6 +12,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Swarm
     {
         public override void SetStaticDefaults()
         {
+            Elements.airItem.Add(Type);
             Item.staff[Item.type] = true;
             ItemSets.isSwarmSummonItem[Type] = true;
         }

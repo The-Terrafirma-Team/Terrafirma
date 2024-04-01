@@ -339,6 +339,7 @@ namespace Terrafirma.Systems
             fireItem.Add(ItemID.SolarEruption);
             #endregion fire
             #region water
+            waterItem.Add(ItemID.PalmWoodSword);
             waterItem.Add(ItemID.Muramasa);
             waterItem.Add(ItemID.PurpleClubberfish);
             waterItem.Add(ItemID.Bladetongue);
@@ -367,6 +368,7 @@ namespace Terrafirma.Systems
             airItem.Add(ItemID.BouncingShield);
             #endregion air
             #region ice
+            iceItem.Add(ItemID.BorealWoodSword);
             iceItem.Add(ItemID.IceBlade);
             iceItem.Add(ItemID.IceSickle);
             iceItem.Add(ItemID.Frostbrand);
@@ -377,6 +379,7 @@ namespace Terrafirma.Systems
             #region poison
             poisonItem.Add(ItemID.Flymeal);
             poisonItem.Add(ItemID.BladeofGrass);
+            poisonItem.Add(ItemID.RichMahoganySword);
             poisonItem.Add(ItemID.BeeKeeper);
             poisonItem.Add(ItemID.HiveFive);
             #endregion poison
@@ -480,6 +483,7 @@ namespace Terrafirma.Systems
             fireItem.Add(ItemID.ElfMelter);
             #endregion fire
             #region water
+            waterItem.Add(ItemID.PalmWoodBow);
             waterItem.Add(ItemID.BloodRainBow);
             waterItem.Add(ItemID.Tsunami);
             waterItem.Add(ItemID.Megashark);
@@ -502,6 +506,7 @@ namespace Terrafirma.Systems
 
             #endregion air
             #region ice
+            iceItem.Add(ItemID.BorealWoodBow);
             iceItem.Add(ItemID.IceBow);
             iceItem.Add(ItemID.SnowmanCannon);
             iceItem.Add(ItemID.Snowball);
@@ -510,6 +515,7 @@ namespace Terrafirma.Systems
             iceItem.Add(ItemID.ElfMelter);
             #endregion ice
             #region poison
+            poisonItem.Add(ItemID.RichMahoganyBow);
             poisonItem.Add(ItemID.PoisonedKnife);
             poisonItem.Add(ItemID.RottenEgg);
             poisonItem.Add(ItemID.BeesKnees);

@@ -7,6 +7,7 @@ using Terrafirma.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Melee.Spears
 {
@@ -35,6 +36,8 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 1;
+            Elements.darkItem.Add(Type);
+            Elements.waterItem.Add(Type);
         }
 
         public override void AddRecipes()

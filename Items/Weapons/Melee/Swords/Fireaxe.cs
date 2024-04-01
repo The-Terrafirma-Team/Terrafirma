@@ -1,4 +1,5 @@
 ﻿using Terrafirma.Projectiles.Melee;
+using Terrafirma.Systems;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,6 +7,10 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class Fireaxe : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.fireItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.DefaultToSword(30, 35, 4);

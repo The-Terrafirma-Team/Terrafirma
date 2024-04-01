@@ -7,6 +7,7 @@ using Terrafirma.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Melee.Spears
 {
@@ -34,6 +35,7 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
 
         public override void SetStaticDefaults()
         {
+            Elements.fireItem.Add(Type);
             Item.ResearchUnlockCount = 1;
         }
     }

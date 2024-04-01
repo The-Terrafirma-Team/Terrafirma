@@ -2,6 +2,7 @@
 using Terrafirma.Global.Items;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Ranged;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -12,6 +13,10 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class Scrapshot : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.fireItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 90;

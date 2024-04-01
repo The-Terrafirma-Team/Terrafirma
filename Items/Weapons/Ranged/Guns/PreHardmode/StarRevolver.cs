@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,12 +29,11 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.shoot = ProjectileID.FallingStar;
             Item.shootSpeed = 16f;
         }
-
         public override void SetStaticDefaults()
         {
+            Elements.lightItem.Add(Type);
             Item.ResearchUnlockCount = 1;
         }
-
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             if (Main.rand.NextBool(3))

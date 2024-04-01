@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -15,6 +16,7 @@ namespace Terrafirma.Items.Weapons.Magic
     {
         public override void SetStaticDefaults()
         {
+            Elements.earthItem.Add(Type);
             Item.staff[Type] = true;
         }
         public override void SetDefaults()

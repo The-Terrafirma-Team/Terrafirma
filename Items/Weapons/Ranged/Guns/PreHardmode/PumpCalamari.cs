@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Projectiles.Ranged;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -39,17 +40,14 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 
 
         }
-
         public override void SetStaticDefaults()
         {
-            Item.ResearchUnlockCount = 1;
+            Elements.waterItem.Add(Type);
         }
-
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-15, -4);
         }
-
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (type == ProjectileID.Bullet)
@@ -65,7 +63,5 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             }
             return false;
         }
-
-
     }
 }

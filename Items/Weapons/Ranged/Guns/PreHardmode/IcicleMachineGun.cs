@@ -6,11 +6,16 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terrafirma.Global;
 using Terrafirma.Projectiles.Ranged;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class IcicleMachineGun : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.iceItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 9;
@@ -38,12 +43,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 
             Item.scale = 0.85f;
         }
-
-        public override void SetStaticDefaults()
-        {
-            Item.ResearchUnlockCount = 1;
-        }
-
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-12, 3);

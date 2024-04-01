@@ -4,11 +4,17 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Summon.Sentry;
 using Terraria.DataStructures;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
-    internal class SporeMortarStaff : ModItem
+    public class SporeMortarStaff : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.earthItem.Add(Type);
+            Elements.lightItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 20;

@@ -2,6 +2,7 @@
 using System;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -26,6 +27,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
         }
         public override void SetStaticDefaults()
         {
+            Elements.fireItem.Add(Type);
             Item.ResearchUnlockCount = 1;
         }
 

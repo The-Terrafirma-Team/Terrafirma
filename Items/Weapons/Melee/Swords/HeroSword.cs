@@ -5,6 +5,7 @@ using System;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
 using Terrafirma.Rarities;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -15,6 +16,11 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class HeroSword : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.lightItem.Add(Type);
+            Elements.magicItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 100;

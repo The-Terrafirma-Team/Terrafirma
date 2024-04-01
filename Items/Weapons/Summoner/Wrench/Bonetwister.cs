@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Global.Items;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,6 +14,10 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
     public class Bonetwister : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.darkItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.DefaultToWrench(18, 30);

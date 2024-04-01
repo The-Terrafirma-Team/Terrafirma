@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Projectiles.Ranged.Bullets;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -10,6 +11,10 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class TheFurnace : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.fireItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 56;

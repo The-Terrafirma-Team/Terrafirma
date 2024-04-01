@@ -5,11 +5,17 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Summon.Sentry;
 using Terraria.DataStructures;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
 {
     internal class GREAT : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Elements.lightItem.Add(Type);
+            Elements.electricItem.Add(Type);
+        }
         public override void SetDefaults()
         {
             Item.damage = 30;

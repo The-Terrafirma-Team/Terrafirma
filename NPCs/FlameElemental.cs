@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Global.Templates;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,6 +21,7 @@ namespace Terrafirma.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 5;
+            Elements.fireNPC.Add(Type);
         }
         public override void SetDefaults()
         {

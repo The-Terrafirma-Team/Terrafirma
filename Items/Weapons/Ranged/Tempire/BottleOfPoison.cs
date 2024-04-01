@@ -5,6 +5,7 @@ using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Projectiles.Ranged.Arrows;
 using Terrafirma.Projectiles.Ranged.Tempire;
 using Terrafirma.Rarities;
+using Terrafirma.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -39,12 +40,10 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
             Item.shoot = ModContent.ProjectileType<BottleOfPoisonProjectile>();
             Item.shootSpeed = 8f;
         }
-
         public override void SetStaticDefaults()
         {
-            Item.ResearchUnlockCount = 1;
+            Elements.poisonItem.Add(Type);
         }
-
         public override void AddRecipes()
         {
             Recipe.Create(Type, 10)

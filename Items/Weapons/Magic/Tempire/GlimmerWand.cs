@@ -4,6 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terrafirma.Reworks.VanillaMagic.Spells.Tempire;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Magic.Tempire
 {
@@ -12,7 +13,7 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
         public override void SetStaticDefaults()
         {
             Item.staff[Item.type] = true;
-            Item.ResearchUnlockCount = 1;
+            Elements.lightItem.Add(Type);
         }
         public override void SetDefaults()
         {

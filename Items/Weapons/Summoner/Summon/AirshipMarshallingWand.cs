@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Input;
 using Terrafirma.Projectiles.Summon.Summons;
 using Terrafirma.Buffs.Minions;
+using Terrafirma.Systems;
 
 namespace Terrafirma.Items.Weapons.Summoner.Summon
 {
@@ -14,6 +15,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
     {
         public override void SetStaticDefaults()
         {
+            Elements.airItem.Add(Type);
+            Elements.electricItem.Add(Type);
+
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
 
