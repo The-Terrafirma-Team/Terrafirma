@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using System;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {

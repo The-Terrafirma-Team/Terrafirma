@@ -7,7 +7,7 @@ using Terrafirma.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Melee.Spears
 {

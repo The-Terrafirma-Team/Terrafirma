@@ -2,7 +2,7 @@
 using System;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;

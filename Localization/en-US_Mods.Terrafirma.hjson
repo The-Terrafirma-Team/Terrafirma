@@ -881,6 +881,56 @@ Biomes: {
 		DisplayName: Tempire Biome
 		TownNPCDialogueName: the Tempire Biome
 	}
+
+	Air: {
+		DisplayName: Air
+		TownNPCDialogueName: the Air
+	}
+
+	Dark: {
+		DisplayName: Dark
+		TownNPCDialogueName: the Dark
+	}
+
+	Earth: {
+		DisplayName: Earth
+		TownNPCDialogueName: the Earth
+	}
+
+	Electric: {
+		DisplayName: Electric
+		TownNPCDialogueName: the Electric
+	}
+
+	Fire: {
+		DisplayName: Fire
+		TownNPCDialogueName: the Fire
+	}
+
+	Ice: {
+		DisplayName: Ice
+		TownNPCDialogueName: the Ice
+	}
+
+	Light: {
+		DisplayName: Light
+		TownNPCDialogueName: the Light
+	}
+
+	Magic: {
+		DisplayName: Magic
+		TownNPCDialogueName: the Magic
+	}
+
+	Poison: {
+		DisplayName: Poison
+		TownNPCDialogueName: the Poison
+	}
+
+	Water: {
+		DisplayName: Water
+		TownNPCDialogueName: the Water
+	}
 }
 
 Tiles: {

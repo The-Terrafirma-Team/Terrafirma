@@ -5,8 +5,8 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Projectiles.Magic;
-using Terrafirma.Systems;
 using Terrafirma.Global;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Magic
 {

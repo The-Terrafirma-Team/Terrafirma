@@ -5,7 +5,7 @@ using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Projectiles.Ranged.Arrows;
 using Terrafirma.Projectiles.Ranged.Tempire;
 using Terrafirma.Rarities;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

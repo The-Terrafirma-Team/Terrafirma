@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;

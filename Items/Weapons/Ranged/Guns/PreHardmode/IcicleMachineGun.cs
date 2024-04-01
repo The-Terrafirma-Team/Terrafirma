@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terrafirma.Global;
 using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {

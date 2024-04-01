@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Input;
 using Terrafirma.Projectiles.Summon.Summons;
 using Terrafirma.Buffs.Minions;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Summoner.Summon
 {

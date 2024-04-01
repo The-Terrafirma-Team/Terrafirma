@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Data;
 using Terrafirma.Projectiles.Summon.Swarm;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Summoner.Swarm
 {

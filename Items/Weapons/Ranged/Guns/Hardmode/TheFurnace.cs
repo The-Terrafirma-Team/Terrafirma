@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Projectiles.Ranged.Bullets;
-using Terrafirma.Systems;
+using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

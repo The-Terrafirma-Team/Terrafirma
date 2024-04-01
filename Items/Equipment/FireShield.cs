@@ -18,9 +18,5 @@ namespace Terrafirma.Items.Equipment
             player.buffImmune[BuffID.OnFire] = true;
             player.buffImmune[BuffID.OnFire3] = true;
         }
-        public override void AddRecipes()
-        {
-            Recipe.Create(Type).AddRecipeGroup(RecipeGroupID.Wood,25).AddRecipeGroup(RecipeGroupID.IronBar, 5).AddTile(TileID.WorkBenches).Register();
-        }
     }
 }
