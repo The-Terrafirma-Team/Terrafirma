@@ -37,7 +37,6 @@ namespace Terrafirma.Systems
         public static HashSet<int> electricItem = new HashSet<int>();
         public static HashSet<int> magicNPC = new HashSet<int>();
         public static HashSet<int> magicItem = new HashSet<int>();
-
         public override void Load()
         {
             AddNPCSToSets();

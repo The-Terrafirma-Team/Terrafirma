@@ -12,6 +12,7 @@ using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Data;
 using Terrafirma.Global.Items;
 using Terrafirma.Global.Players;
+using Terrafirma.Systems;
 
 namespace Terrafirma
 {
@@ -206,6 +207,38 @@ namespace Terrafirma
 
             return AreaNPCs;
 
+        }
+        public static void CloneItemElements(this Item item, int itemToClone)
+        {
+            if (Elements.fireItem.Contains(itemToClone))
+                Elements.fireItem.Add(item.type);
+
+            if (Elements.waterItem.Contains(itemToClone))
+                Elements.waterItem.Add(item.type);
+
+            if (Elements.earthItem.Contains(itemToClone))
+                Elements.earthItem.Add(item.type);
+
+            if (Elements.airItem.Contains(itemToClone))
+                Elements.airItem.Add(item.type);
+
+            if (Elements.iceItem.Contains(itemToClone))
+                Elements.iceItem.Add(item.type);
+
+            if (Elements.poisonItem.Contains(itemToClone))
+                Elements.poisonItem.Add(item.type);
+
+            if (Elements.lightItem.Contains(itemToClone))
+                Elements.lightItem.Add(item.type);
+
+            if (Elements.darkItem.Contains(itemToClone))
+                Elements.darkItem.Add(item.type);
+
+            if (Elements.electricItem.Contains(itemToClone))
+                Elements.electricItem.Add(item.type);
+
+            if (Elements.magicItem.Contains(itemToClone))
+                Elements.magicItem.Add(item.type);
         }
 
         // Sentry  Methods ____________________________________________________________________________________________________
