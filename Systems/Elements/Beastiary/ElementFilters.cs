@@ -28,7 +28,7 @@ namespace Terrafirma.Systems.Elements.Beastiary
     public class Light : ModBiome
     {
     }
-    public class Magic : ModBiome
+    public class Arcane : ModBiome
     {
     }
     public class Poison : ModBiome

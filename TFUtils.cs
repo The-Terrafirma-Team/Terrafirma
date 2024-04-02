@@ -237,8 +237,8 @@ namespace Terrafirma
             if (Elements.electricItem.Contains(itemToClone))
                 Elements.electricItem.Add(item.type);
 
-            if (Elements.magicItem.Contains(itemToClone))
-                Elements.magicItem.Add(item.type);
+            if (Elements.arcaneItem.Contains(itemToClone))
+                Elements.arcaneItem.Add(item.type);
         }
 
         // Sentry  Methods ____________________________________________________________________________________________________

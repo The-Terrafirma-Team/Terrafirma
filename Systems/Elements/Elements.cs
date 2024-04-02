@@ -35,8 +35,8 @@ namespace Terrafirma.Systems.Elements
         public static HashSet<int> darkItem = new HashSet<int>();
         public static HashSet<int> electricNPC = new HashSet<int>();
         public static HashSet<int> electricItem = new HashSet<int>();
-        public static HashSet<int> magicNPC = new HashSet<int>();
-        public static HashSet<int> magicItem = new HashSet<int>();
+        public static HashSet<int> arcaneNPC = new HashSet<int>();
+        public static HashSet<int> arcaneItem = new HashSet<int>();
         public override void Load()
         {
             AddNPCSToSets();
@@ -300,24 +300,24 @@ namespace Terrafirma.Systems.Elements
             electricNPC.Add(467);
             electricNPC.Add(578);
             #endregion electric
-            #region magic
-            AddIDRange(magicNPC, 29, 30);
-            AddIDRange(magicNPC, 32, 34);
-            magicNPC.Add(45);
-            AddIDRange(magicNPC, 83, 84);
-            magicNPC.Add(120);
-            magicNPC.Add(179);
-            AddIDRange(magicNPC, 281, 286);
-            AddIDRange(magicNPC, 420, 421);
-            AddIDRange(magicNPC, 423, 424);
-            AddIDRange(magicNPC, 437, 440);
-            AddIDRange(magicNPC, 454, 459);
-            AddIDRange(magicNPC, 471, 472);
-            magicNPC.Add(533);
-            magicNPC.Add(549);
-            AddIDRange(magicNPC, 564, 565);
+            #region arcane
+            AddIDRange(arcaneNPC, 29, 30);
+            AddIDRange(arcaneNPC, 32, 34);
+            arcaneNPC.Add(45);
+            AddIDRange(arcaneNPC, 83, 84);
+            arcaneNPC.Add(120);
+            arcaneNPC.Add(179);
+            AddIDRange(arcaneNPC, 281, 286);
+            AddIDRange(arcaneNPC, 420, 421);
+            AddIDRange(arcaneNPC, 423, 424);
+            AddIDRange(arcaneNPC, 437, 440);
+            AddIDRange(arcaneNPC, 454, 459);
+            AddIDRange(arcaneNPC, 471, 472);
+            arcaneNPC.Add(533);
+            arcaneNPC.Add(549);
+            AddIDRange(arcaneNPC, 564, 565);
 
-            #endregion magic
+            #endregion arcane
         }
         private void AddMeleeItemsToSets()
         {
@@ -446,18 +446,18 @@ namespace Terrafirma.Systems.Elements
             electricItem.Add(ItemID.InfluxWaver);
             electricItem.Add(ItemID.ThunderSpear);
             #endregion electric
-            #region magic
-            magicItem.Add(ItemID.Starfury);
-            magicItem.Add(ItemID.EnchantedSword);
-            magicItem.Add(ItemID.BeamSword);
-            magicItem.Add(ItemID.TerraBlade);
-            magicItem.Add(ItemID.StarWrath);
-            magicItem.Add(ItemID.Meowmere);
-            magicItem.Add(ItemID.Terrarian);
-            magicItem.Add(3836);
-            magicItem.Add(ItemID.EnchantedBoomerang);
-            magicItem.Add(ItemID.Trimarang);
-            #endregion magic
+            #region arcane
+            arcaneItem.Add(ItemID.Starfury);
+            arcaneItem.Add(ItemID.EnchantedSword);
+            arcaneItem.Add(ItemID.BeamSword);
+            arcaneItem.Add(ItemID.TerraBlade);
+            arcaneItem.Add(ItemID.StarWrath);
+            arcaneItem.Add(ItemID.Meowmere);
+            arcaneItem.Add(ItemID.Terrarian);
+            arcaneItem.Add(3836);
+            arcaneItem.Add(ItemID.EnchantedBoomerang);
+            arcaneItem.Add(ItemID.Trimarang);
+            #endregion arcane
         }
 
         private void AddRangedItemsToSets()
@@ -555,9 +555,9 @@ namespace Terrafirma.Systems.Elements
             electricItem.Add(ItemID.VortexBeater);
             electricItem.Add(ItemID.ElectrosphereLauncher);
             #endregion electric
-            #region magic
+            #region arcane
 
-            #endregion magic
+            #endregion arcane
         }
 
         private void AddMagicItemsToSets()
@@ -654,16 +654,16 @@ namespace Terrafirma.Systems.Elements
             electricItem.Add(ItemID.ChargedBlasterCannon);
             electricItem.Add(ItemID.MagnetSphere);
             #endregion electric
-            #region magic
-            magicItem.Add(3852);
-            magicItem.Add(ItemID.SpectreStaff);
-            magicItem.Add(ItemID.LunarFlareBook);
-            magicItem.Add(ItemID.MagicDagger);
-            magicItem.Add(ItemID.MagicalHarp);
-            magicItem.Add(ItemID.NebulaArcanum);
-            magicItem.Add(ItemID.NebulaBlaze);
-            magicItem.Add(ItemID.LastPrism);
-            #endregion magic
+            #region arcane
+            arcaneItem.Add(3852);
+            arcaneItem.Add(ItemID.SpectreStaff);
+            arcaneItem.Add(ItemID.LunarFlareBook);
+            arcaneItem.Add(ItemID.MagicDagger);
+            arcaneItem.Add(ItemID.MagicalHarp);
+            arcaneItem.Add(ItemID.NebulaArcanum);
+            arcaneItem.Add(ItemID.NebulaBlaze);
+            arcaneItem.Add(ItemID.LastPrism);
+            #endregion arcane
         }
 
         private void AddSummonerItemsToSets()
@@ -727,10 +727,10 @@ namespace Terrafirma.Systems.Elements
             electricItem.Add(ItemID.DD2LightningAuraT2Popper);
             electricItem.Add(ItemID.DD2LightningAuraT3Popper);
             #endregion electric
-            #region magic
-            magicItem.Add(ItemID.AbigailsFlower);
-            magicItem.Add(3569);
-            #endregion magic
+            #region arcane
+            arcaneItem.Add(ItemID.AbigailsFlower);
+            arcaneItem.Add(3569);
+            #endregion arcane
         }
 
         private void AddIDRange(HashSet<int> set, int start, int end)
@@ -760,8 +760,8 @@ namespace Terrafirma.Systems.Elements
             darkItem.Clear();
             electricNPC.Clear();
             electricItem.Clear();
-            magicNPC.Clear();
-            magicItem.Clear();
+            arcaneNPC.Clear();
+            arcaneItem.Clear();
         }
     }
     public class ElementPlayer : ModPlayer
@@ -769,10 +769,10 @@ namespace Terrafirma.Systems.Elements
         const float SuperStrongDamageBonus = 0.5f;
         const float StrongDamageBonus = 0.2f;
         const float WeakDamageBonus = -0.2f;
-        public static float getItemToNPCModifer(bool Fire, bool Water, bool Earth, bool Air, bool Ice, bool Poison, bool Light, bool Dark, bool Electric, bool Magic, NPC target)
+        public static float getItemToNPCModifer(bool Fire, bool Water, bool Earth, bool Air, bool Ice, bool Poison, bool Light, bool Dark, bool Electric, bool Arcane, NPC target)
         {
             float mod = 1f;
-            bool Elementless = !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Magic;
+            bool Elementless = !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Arcane;
             bool targetElementless = true;
 
             if (Elements.fireNPC.Contains(target.netID))
@@ -797,7 +797,7 @@ namespace Terrafirma.Systems.Elements
             if (Elements.earthNPC.Contains(target.netID))
             {
                 targetElementless = false;
-                if (Magic) mod += WeakDamageBonus;
+                if (Arcane) mod += WeakDamageBonus;
                 if (Earth) mod += WeakDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
                 if (Air) mod += WeakDamageBonus;
@@ -808,7 +808,7 @@ namespace Terrafirma.Systems.Elements
             if (Elements.airNPC.Contains(target.netID))
             {
                 targetElementless = false;
-                if (Magic) mod += WeakDamageBonus;
+                if (Arcane) mod += WeakDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
                 if (Air) mod += WeakDamageBonus;
                 if (Electric) mod += StrongDamageBonus;
@@ -855,7 +855,7 @@ namespace Terrafirma.Systems.Elements
             if (Elements.electricNPC.Contains(target.netID))
             {
                 targetElementless = false;
-                if (Magic) mod += StrongDamageBonus;
+                if (Arcane) mod += StrongDamageBonus;
                 if (Fire) mod += WeakDamageBonus;
                 if (Water) mod += SuperStrongDamageBonus;
                 if (Earth) mod += WeakDamageBonus;
@@ -865,10 +865,10 @@ namespace Terrafirma.Systems.Elements
                 if (Dark) mod += SuperStrongDamageBonus;
                 if (Electric) mod += WeakDamageBonus;
             }
-            if (Elements.magicNPC.Contains(target.netID))
+            if (Elements.arcaneNPC.Contains(target.netID))
             {
                 targetElementless = false;
-                if (Magic) mod += WeakDamageBonus;
+                if (Arcane) mod += WeakDamageBonus;
                 if (Fire) mod += StrongDamageBonus;
                 if (Water) mod += StrongDamageBonus;
                 if (Air) mod += StrongDamageBonus;
@@ -877,7 +877,7 @@ namespace Terrafirma.Systems.Elements
             }
             if (targetElementless)
             {
-                if (Magic) mod += StrongDamageBonus;
+                if (Arcane) mod += StrongDamageBonus;
             }
             return MathHelper.Clamp(mod, 0.1f, 3f);
         }
@@ -885,18 +885,18 @@ namespace Terrafirma.Systems.Elements
         {
             target.life = target.lifeMax;
             ElementProjectile eProj = proj.GetGlobalProjectile<ElementProjectile>();
-            modifiers.FinalDamage *= getItemToNPCModifer(eProj.Fire, eProj.Water, eProj.Earth, eProj.Air, eProj.Ice, eProj.Poison, eProj.Light, eProj.Dark, eProj.Electric, eProj.Magic, target);
+            modifiers.FinalDamage *= getItemToNPCModifer(eProj.Fire, eProj.Water, eProj.Earth, eProj.Air, eProj.Ice, eProj.Poison, eProj.Light, eProj.Dark, eProj.Electric, eProj.Arcane, target);
         }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             target.life = target.lifeMax;
-            modifiers.FinalDamage *= getItemToNPCModifer(Elements.fireItem.Contains(item.type), Elements.waterItem.Contains(item.type), Elements.earthItem.Contains(item.type), Elements.airItem.Contains(item.type), Elements.iceItem.Contains(item.type), Elements.poisonItem.Contains(item.type), Elements.lightItem.Contains(item.type), Elements.darkItem.Contains(item.type), Elements.electricItem.Contains(item.type), Elements.magicItem.Contains(item.type), target);
+            modifiers.FinalDamage *= getItemToNPCModifer(Elements.fireItem.Contains(item.type), Elements.waterItem.Contains(item.type), Elements.earthItem.Contains(item.type), Elements.airItem.Contains(item.type), Elements.iceItem.Contains(item.type), Elements.poisonItem.Contains(item.type), Elements.lightItem.Contains(item.type), Elements.darkItem.Contains(item.type), Elements.electricItem.Contains(item.type), Elements.arcaneItem.Contains(item.type), target);
         }
     }
     public class ElementItem : GlobalItem
     {
         private static Asset<Texture2D> elementIcons;
-        public static HashSet<int>[] elementItemLists = new HashSet<int>[] { Elements.magicItem, Elements.fireItem, Elements.waterItem, Elements.earthItem, Elements.airItem, Elements.lightItem, Elements.darkItem, Elements.iceItem, Elements.poisonItem, Elements.electricItem };
+        public static HashSet<int>[] elementItemLists = new HashSet<int>[] { Elements.arcaneItem, Elements.fireItem, Elements.waterItem, Elements.earthItem, Elements.airItem, Elements.lightItem, Elements.darkItem, Elements.iceItem, Elements.poisonItem, Elements.electricItem };
         public override bool InstancePerEntity => true;
         public int[] elements = new int[0];
         public override void SetStaticDefaults()
@@ -957,11 +957,11 @@ namespace Terrafirma.Systems.Elements
         public bool Light = false;
         public bool Dark = false;
         public bool Electric = false;
-        public bool Magic = false;
+        public bool Arcane = false;
         public bool Elementless
         {
-            get { return !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Magic; }
-            set { Fire = false; Water = false; Earth = false; Air = false; Ice = false; Poison = false; Light = false; Dark = false; Electric = false; Magic = false; }
+            get { return !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Arcane; }
+            set { Fire = false; Water = false; Earth = false; Air = false; Ice = false; Poison = false; Light = false; Dark = false; Electric = false; Arcane = false; }
         }
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
@@ -987,8 +987,8 @@ namespace Terrafirma.Systems.Elements
                     Dark = true;
                 if (Elements.electricItem.Contains(item))
                     Electric = true;
-                if (Elements.magicItem.Contains(item))
-                    Magic = true;
+                if (Elements.arcaneItem.Contains(item))
+                    Arcane = true;
             }
         }
     }
@@ -1000,7 +1000,7 @@ namespace Terrafirma.Systems.Elements
         }
         public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
-            if (Elements.magicNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Magic>());
+            if (Elements.arcaneNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Arcane>());
             if (Elements.fireNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Fire>());
             if (Elements.waterNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Water>());
             if (Elements.earthNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Earth>());

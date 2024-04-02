@@ -24,7 +24,7 @@ namespace Terrafirma.Global.Players
         public float IceDamage = 1f;
         public float PoisonDamage = 1f;
         public float ElectricDamage = 1f;
-        public float MagicDamage = 1f;
+        public float ArcaneDamage = 1f;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -41,7 +41,7 @@ namespace Terrafirma.Global.Players
             IceDamage = 1;
             PoisonDamage = 1;
             ElectricDamage = 1;
-            MagicDamage = 1;
+            ArcaneDamage = 1;
 
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;

@@ -13,7 +13,7 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
         public override void SetStaticDefaults()
         {
             Item.staff[Item.type] = true;
-            Elements.magicItem.Add(Type);
+            Elements.arcaneItem.Add(Type);
         }
         public override void SetDefaults()
         {
