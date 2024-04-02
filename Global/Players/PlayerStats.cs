@@ -32,6 +32,17 @@ namespace Terrafirma.Global.Players
         public int SummonFlatDamage = 0;
         public override void ResetEffects()
         {
+            FireDamage = 1;
+            WaterDamage = 1;
+            EarthDamage = 1;
+            AirDamage = 1;
+            LightDamage = 1;
+            DarkDamage = 1;
+            IceDamage = 1;
+            PoisonDamage = 1;
+            ElectricDamage = 1;
+            MagicDamage = 1;
+
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;
             MagicFlatDamage = 0;
@@ -49,39 +60,39 @@ namespace Terrafirma.Global.Players
             #region Elemental Damage
             if (FireDamage != 1 && Elements.fireItem.Contains(item.type))
             {
-                damage.Base *= FireDamage;
+                damage *= FireDamage;
             }
             if (WaterDamage != 1 && Elements.waterItem.Contains(item.type))
             {
-                damage.Base *= WaterDamage;
+                damage *= WaterDamage;
             }
             if (EarthDamage != 1 && Elements.earthItem.Contains(item.type))
             {
-                damage.Base *= EarthDamage;
+                damage *= EarthDamage;
             }
             if (AirDamage != 1 && Elements.airItem.Contains(item.type))
             {
-                damage.Base *= AirDamage;
+                damage *= AirDamage;
             }
             if (LightDamage != 1 && Elements.lightItem.Contains(item.type))
             {
-                damage.Base *= LightDamage;
+                damage *= LightDamage;
             }
             if (DarkDamage != 1 && Elements.darkItem.Contains(item.type))
             {
-                damage.Base *= DarkDamage;
+                damage *= DarkDamage;
             }
             if (IceDamage != 1 && Elements.iceItem.Contains(item.type))
             {
-                damage.Base *= IceDamage;
+                damage *= IceDamage;
             }
             if (PoisonDamage != 1 && Elements.poisonItem.Contains(item.type))
             {
-                damage.Base *= PoisonDamage;
+                damage *= PoisonDamage;
             }
             if (ElectricDamage != 1 && Elements.electricItem.Contains(item.type))
             {
-                damage.Base *= ElectricDamage;
+                damage *= ElectricDamage;
             }
             #endregion Elemental Damage
             #region Flat Damage

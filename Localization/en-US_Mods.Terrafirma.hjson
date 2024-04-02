@@ -629,6 +629,7 @@ Items: {
 	MonarchHelmet: {
 		DisplayName: Monarch Helmet
 		Tooltip: ""
+		SetBonus: Grants monarch wings
 	}
 
 	MonarchLeggings: {
@@ -772,6 +773,39 @@ Items: {
 	LatiaoSticks: {
 		DisplayName: Latiao Sticks
 		Tooltip: ""
+	}
+
+	GraniteChestplate: {
+		DisplayName: Granite Chestplate
+		Tooltip:
+			'''
+			Movement speed increased by 5%
+			Mining speed increased by 10%
+			Earth damage increased by 5%
+			'''
+	}
+
+	GraniteGreaves: {
+		DisplayName: Granite Greaves
+		Tooltip:
+			'''
+			Movement speed increased by 5%
+			Earth damage increased by 5%
+			'''
+	}
+
+	GraniteHelmet: {
+		DisplayName: Granite Helmet
+		Tooltip:
+			'''
+			Mining speed increased by 10%
+			Earth damage increased by 5%
+			'''
+		SetBonus:
+			'''
+			Mining speed increased by 10%
+			Earth damage increased by 15%
+			'''
 	}
 }
 
