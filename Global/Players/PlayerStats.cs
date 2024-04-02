@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Data;
+using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -18,6 +14,17 @@ namespace Terrafirma.Global.Players
         public float SwarmSpeedMultiplier = 1f;
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
+
+        public float FireDamage = 1f;
+        public float WaterDamage = 1f;
+        public float EarthDamage = 1f;
+        public float AirDamage = 1f;
+        public float LightDamage = 1f;
+        public float DarkDamage = 1f;
+        public float IceDamage = 1f;
+        public float PoisonDamage = 1f;
+        public float ElectricDamage = 1f;
+        public float MagicDamage = 1f;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -39,6 +46,45 @@ namespace Terrafirma.Global.Players
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
+            #region Elemental Damage
+            if (FireDamage != 1 && Elements.fireItem.Contains(item.type))
+            {
+                damage.Base *= FireDamage;
+            }
+            if (WaterDamage != 1 && Elements.waterItem.Contains(item.type))
+            {
+                damage.Base *= WaterDamage;
+            }
+            if (EarthDamage != 1 && Elements.earthItem.Contains(item.type))
+            {
+                damage.Base *= EarthDamage;
+            }
+            if (AirDamage != 1 && Elements.airItem.Contains(item.type))
+            {
+                damage.Base *= AirDamage;
+            }
+            if (LightDamage != 1 && Elements.lightItem.Contains(item.type))
+            {
+                damage.Base *= LightDamage;
+            }
+            if (DarkDamage != 1 && Elements.darkItem.Contains(item.type))
+            {
+                damage.Base *= DarkDamage;
+            }
+            if (IceDamage != 1 && Elements.iceItem.Contains(item.type))
+            {
+                damage.Base *= IceDamage;
+            }
+            if (PoisonDamage != 1 && Elements.poisonItem.Contains(item.type))
+            {
+                damage.Base *= PoisonDamage;
+            }
+            if (ElectricDamage != 1 && Elements.electricItem.Contains(item.type))
+            {
+                damage.Base *= ElectricDamage;
+            }
+            #endregion Elemental Damage
+            #region Flat Damage
             if (item.DamageType == DamageClass.Melee || item.DamageType == DamageClass.MeleeNoSpeed)
             {
                 damage.Flat += MeleeFlatDamage;
@@ -55,6 +101,7 @@ namespace Terrafirma.Global.Players
             {
                 damage.Flat += SummonFlatDamage;
             }
+            #endregion Flat Damage
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
