@@ -45,15 +45,11 @@ public abstract class ChakramTemplate : ModProjectile
         Projectile.friendly = true;
         Projectile.DamageType = DamageClass.Ranged;
     }
-
-    public override void OnSpawn(IEntitySource source)
-    {
-        spawndirection = Projectile.direction;
-    }
     public override void AI()
     {
         Projectile.ai[0]++;
         Projectile.ai[1] = Math.Clamp(Projectile.ai[1] += ReturnAcc, 0f, 1f);
+        if (Projectile.ai[0] == 0) spawndirection = Projectile.direction;
         if (BounceMode == 1 || BounceMode == 2)
         {
             if (targetNPC != null && Projectile.penetrate > -BounceAmount - 1 && Projectile.ai[0] < AttackTime)
@@ -72,7 +68,8 @@ public abstract class ChakramTemplate : ModProjectile
             Projectile.velocity = Projectile.velocity.LengthClamp(ReturnSpeed);
         }
         Projectile.rotation += Projectile.velocity.Length() / 20f * -spawndirection;
-        if (Projectile.ai[0] % 8 == 0)
+
+        if (Projectile.ai[0] % 8 == 0 && Main.netMode != NetmodeID.Server)
         {
             SoundEngine.PlaySound(SoundID.Item7, Projectile.Center);
         }
@@ -82,12 +79,10 @@ public abstract class ChakramTemplate : ModProjectile
 
     public override void SendExtraAI(BinaryWriter writer)
     {
-        writer.Write(targetNPC.whoAmI);
         writer.Write(AttackTime);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
-        targetNPC = Main.npc[reader.ReadInt32()];
         AttackTime = reader.ReadInt32();
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

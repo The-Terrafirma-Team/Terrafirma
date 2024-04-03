@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Terrafirma.Systems.Elements.Beastiary
 {
     public class Air : ModBiome
-    { 
+    {
     }
     public class Dark : ModBiome
     {

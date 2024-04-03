@@ -13,7 +13,6 @@ using Terrafirma.Global.Items;
 
 namespace Terrafirma.Systems.MageClass
 {
-    [Autoload(Side = ModSide.Client)]
     internal class SpellUI : UIState
     {
 

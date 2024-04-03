@@ -21,7 +21,6 @@ using Terrafirma.Systems.UIElements;
 
 namespace Terrafirma.Systems.Cooking
 {
-    [Autoload(Side = ModSide.Client)]
     internal class CookingPotUI : UIState
     {   
 

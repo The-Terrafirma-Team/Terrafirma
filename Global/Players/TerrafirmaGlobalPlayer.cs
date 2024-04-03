@@ -122,13 +122,13 @@ namespace Terrafirma.Global.Players
             if (playerquests.Length == 0) playerquests = QuestIndex.quests;
 
             if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
-            else { ModContent.GetInstance<SpellUISystem>().Hide(); }
-        }
+            else if (ModContent.GetInstance<SpellUISystem>() != null) { ModContent.GetInstance<SpellUISystem>().Hide(); }
 
+            
+        }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-
-            if (triggersSet.MouseRight)
+            if (triggersSet.MouseRight && Main.playerInventory == false)
             {
 
                 if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
@@ -180,6 +180,7 @@ namespace Terrafirma.Global.Players
         }
         public override bool CanUseItem(Item item)
         {
+            
             if (Player.HeldItem.type == ModContent.ItemType<HeroSword>())
             {
                 if (Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1) return true;

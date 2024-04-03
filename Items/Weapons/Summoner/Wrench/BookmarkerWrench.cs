@@ -23,10 +23,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
         {
             player.WrenchHitSentry(hitbox, SentryBuffID.SentryPriority, 30);
         }
-        public override void AddRecipes()
-        {
-            CreateRecipe().AddRecipeGroup(RecipeGroupID.IronBar, 15).AddTile(TileID.Anvils).Register();
-        }
 
         public override bool MeleePrefix()
         {

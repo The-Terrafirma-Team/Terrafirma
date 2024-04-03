@@ -46,5 +46,10 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             }
             return false;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddIngredient(ItemID.BeeWax, 12).AddIngredient(ItemID.BottledHoney, 5).AddTile(TileID.Anvils).Register();
+        }
     }
 }

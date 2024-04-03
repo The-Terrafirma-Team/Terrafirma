@@ -44,6 +44,7 @@ namespace Terrafirma.Systems.Elements
             AddMagicItemsToSets();
             AddRangedItemsToSets();
             AddSummonerItemsToSets();
+            AddBossSummonItemsToSets();
         }
         private void AddNPCSToSets()
         {
@@ -733,6 +734,19 @@ namespace Terrafirma.Systems.Elements
             #endregion arcane
         }
 
+        private void AddBossSummonItemsToSets()
+        {
+            darkItem.Add(ItemID.SuspiciousLookingEye);
+            darkItem.Add(ItemID.WormFood);
+            darkItem.Add(ItemID.BloodySpine);
+            poisonItem.Add(ItemID.Abeemination);
+            iceItem.Add(ItemID.DeerThing);
+            lightItem.Add(4988);
+            electricItem.Add(ItemID.MechanicalEye);
+            electricItem.Add(ItemID.MechanicalSkull);
+            electricItem.Add(ItemID.MechanicalWorm);
+        }
+
         private void AddIDRange(HashSet<int> set, int start, int end)
         {
             for (int i = start; i <= end; i++)
@@ -883,13 +897,11 @@ namespace Terrafirma.Systems.Elements
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            target.life = target.lifeMax;
             ElementProjectile eProj = proj.GetGlobalProjectile<ElementProjectile>();
             modifiers.FinalDamage *= getItemToNPCModifer(eProj.Fire, eProj.Water, eProj.Earth, eProj.Air, eProj.Ice, eProj.Poison, eProj.Light, eProj.Dark, eProj.Electric, eProj.Arcane, target);
         }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            target.life = target.lifeMax;
             modifiers.FinalDamage *= getItemToNPCModifer(Elements.fireItem.Contains(item.type), Elements.waterItem.Contains(item.type), Elements.earthItem.Contains(item.type), Elements.airItem.Contains(item.type), Elements.iceItem.Contains(item.type), Elements.poisonItem.Contains(item.type), Elements.lightItem.Contains(item.type), Elements.darkItem.Contains(item.type), Elements.electricItem.Contains(item.type), Elements.arcaneItem.Contains(item.type), target);
         }
     }

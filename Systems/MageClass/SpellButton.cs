@@ -9,7 +9,6 @@ using Terraria.ID;
 
 namespace Terrafirma.Systems.MageClass
 {
-    [Autoload(Side = ModSide.Client)]
     internal class SpellButton : UIElement
     {
         internal Texture2D spellicon;

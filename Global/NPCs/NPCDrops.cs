@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Terrafirma.Items.Equipment;
+using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -21,6 +22,10 @@ namespace Terrafirma.Global
             if (DropsFireShield.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<FireShield>(),100));
+            }
+            if (npc.type == NPCID.PirateCrossbower)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
             }
         }
     }

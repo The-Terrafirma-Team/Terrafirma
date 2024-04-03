@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
-using Mono.Cecil;
 using Terrafirma.Projectiles.Ranged.Boomerangs;
 
 namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram

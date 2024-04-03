@@ -15,8 +15,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.damage = 11;
             Item.knockBack = 2f;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useAnimation = 8;
-            Item.useTime = 8;
+            Item.useAnimation = 12;
+            Item.useTime = 12;
             Item.width = 44;
             Item.height = 22;
             Item.UseSound = SoundID.Item11;

@@ -42,17 +42,6 @@ namespace Terrafirma.Global.NPCs
                 npc.lifeRegen -= (int)(npc.velocity.Length() * 4f) - 1;
             }
         }
-
-        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
-        {
-
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LuckyBlock>(), 20, 1, 1));
-
-            if (npc.type == NPCID.PirateCrossbower)
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
-            }
-        }
         public override bool InstancePerEntity => true;
 
         public override void DrawEffects(NPC npc, ref Color drawColor)

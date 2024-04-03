@@ -23,6 +23,7 @@ namespace Terrafirma.Systems.NPCQuests
 
         public override void PostUpdate()
         {
+            if (ModContent.GetInstance<NPCQuestButtonSystem>() == null) return;
             
             for (int i = 0; i < Main.npc.Length; i++)
             {
