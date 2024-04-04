@@ -803,8 +803,8 @@ Items: {
 			'''
 		SetBonus:
 			'''
-			Mining speed increased by 10%
-			Earth damage increased by 15%
+			Mining ores generates a shield
+			The shield can block up to 15 damage
 			'''
 	}
 }
@@ -964,6 +964,11 @@ Biomes: {
 	Water: {
 		DisplayName: Water
 		TownNPCDialogueName: the Water
+	}
+
+	Arcane: {
+		DisplayName: Arcane
+		TownNPCDialogueName: the Arcane
 	}
 }
 
