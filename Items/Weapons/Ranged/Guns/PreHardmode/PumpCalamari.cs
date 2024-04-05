@@ -42,7 +42,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
         }
         public override void SetStaticDefaults()
         {
-            Elements.waterItem.Add(Type);
+            AddElementsToVanillaContent.waterItem.Add(Type);
         }
         public override Vector2? HoldoutOffset()
         {

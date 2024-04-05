@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
     {
         public override void SetStaticDefaults()
         {
-            Elements.darkItem.Add(Type);
+            AddElementsToVanillaContent.darkItem.Add(Type);
         }
         public override void SetDefaults()
         {

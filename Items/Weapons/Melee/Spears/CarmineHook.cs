@@ -36,8 +36,8 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 1;
-            Elements.darkItem.Add(Type);
-            Elements.waterItem.Add(Type);
+            AddElementsToVanillaContent.darkItem.Add(Type);
+            AddElementsToVanillaContent.waterItem.Add(Type);
         }
 
         public override void AddRecipes()

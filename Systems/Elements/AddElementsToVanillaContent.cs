@@ -1,21 +1,162 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Terrafirma.Data;
 using Terrafirma.Items.Weapons.Magic;
-using Terrafirma.Systems.Elements.Beastiary;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Systems.Elements
 {
-    public class Elements : ModSystem
+    public struct ElementData
+    {
+        public bool Fire;
+        public bool Water;
+        public bool Earth;
+        public bool Air;
+        public bool Light;
+        public bool Dark;
+        public bool Ice;
+        public bool Poison;
+        public bool Electric;
+        public bool Arcane;
+        public bool Typeless 
+        { 
+            set { Fire = Water = Earth = Air = Light = Dark = Ice = Poison = Electric = Arcane = false; }
+            readonly get { return !Fire && !Water && !Earth && !Air && !Light && !Dark && !Ice && !Poison && !Electric && !Arcane; }
+        }
+        //const float SuperStrongDamageBonus = 0.5f;
+        //const float StrongDamageBonus = 0.2f;
+        //const float WeakDamageBonus = -0.2f;
+
+        public static float StrongDamageBonus
+        {
+            get { return 0.2f + (Main.expertMode ? 0.2f : 0) + (Main.masterMode ? 0.1f : 0); }
+        }
+        public static float WeakDamageBonus
+        {
+            get { return -0.2f + (Main.expertMode ? -0.2f : 0) + (Main.masterMode ? -0.2f : 0); }
+        }
+        public static float SuperStrongDamageBonus
+        {
+            get { return 0.5f + (Main.expertMode ? 0.25f : 0) + (Main.masterMode ? 0.15f : 0); }
+        }
+        public static ElementData cloneElements(ElementData dataToClone)
+        {
+            var clone = new ElementData();
+            clone.Fire = dataToClone.Fire;
+            clone.Water = dataToClone.Water;
+            clone.Earth = dataToClone.Earth;
+            clone.Air = dataToClone.Air;
+            clone.Light = dataToClone.Light;
+            clone.Dark = dataToClone.Dark;
+            clone.Ice = dataToClone.Ice;
+            clone.Poison = dataToClone.Poison;
+            clone.Electric = dataToClone.Electric;
+            clone.Arcane = dataToClone.Arcane;
+            return clone;
+        }
+        public static float getElementalBonus(ElementData attacker, ElementData defender)
+        {
+            float mod = 1;
+
+            if (defender.Fire)
+            {
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Water) mod += StrongDamageBonus;
+                if (attacker.Earth) mod += StrongDamageBonus;
+                if (attacker.Air) mod += StrongDamageBonus;
+                if (attacker.Ice) mod += StrongDamageBonus;
+            }
+            if (defender.Water)
+            {
+                if (attacker.Fire) mod += StrongDamageBonus;
+                if (attacker.Water) mod += WeakDamageBonus;
+                if (attacker.Earth) mod += StrongDamageBonus;
+                if (attacker.Ice) mod += WeakDamageBonus;
+                if (attacker.Poison) mod += StrongDamageBonus;
+                if (attacker.Electric) mod += WeakDamageBonus;
+            }
+            if (defender.Earth)
+            {
+                if (attacker.Arcane) mod += WeakDamageBonus;
+                if (attacker.Earth) mod += WeakDamageBonus;
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Air) mod += WeakDamageBonus;
+                if (attacker.Poison) mod += StrongDamageBonus;
+                if (attacker.Light) mod += StrongDamageBonus;
+                if (attacker.Electric) mod += StrongDamageBonus;
+            }
+            if (defender.Air)
+            {
+                if (attacker.Arcane) mod += WeakDamageBonus;
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Air) mod += WeakDamageBonus;
+                if (attacker.Electric) mod += StrongDamageBonus;
+            }
+            if (defender.Ice)
+            {
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Earth) mod += StrongDamageBonus;
+                if (attacker.Air) mod += WeakDamageBonus;
+                if (attacker.Ice) mod += WeakDamageBonus;
+                if (attacker.Poison) mod += StrongDamageBonus;
+                if (attacker.Electric) mod += StrongDamageBonus;
+            }
+            if (defender.Poison)
+            {
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Water) mod += StrongDamageBonus;
+                if (attacker.Earth) mod += StrongDamageBonus;
+                if (attacker.Air) mod += StrongDamageBonus;
+                if (attacker.Ice) mod += WeakDamageBonus;
+                if (attacker.Poison) mod += WeakDamageBonus;
+                if (attacker.Light) mod += WeakDamageBonus;
+                if (attacker.Electric) mod += WeakDamageBonus;
+            }
+            if (defender.Light)
+            {
+                if (attacker.Earth) mod += WeakDamageBonus;
+                if (attacker.Ice) mod += StrongDamageBonus;
+                if (attacker.Poison) mod += StrongDamageBonus;
+                if (attacker.Light) mod += WeakDamageBonus;
+                if (attacker.Dark) mod += SuperStrongDamageBonus;
+            }
+            if (defender.Dark)
+            {
+                if (attacker.Earth) mod += StrongDamageBonus;
+                if (attacker.Light) mod += WeakDamageBonus;
+                if (attacker.Dark) mod += WeakDamageBonus;
+                if (attacker.Electric) mod += WeakDamageBonus;
+            }
+            if (defender.Electric)
+            {
+                if (attacker.Arcane) mod += StrongDamageBonus;
+                if (attacker.Fire) mod += WeakDamageBonus;
+                if (attacker.Water) mod += SuperStrongDamageBonus;
+                if (attacker.Earth) mod += WeakDamageBonus;
+                if (attacker.Air) mod += WeakDamageBonus;
+                if (attacker.Ice) mod += WeakDamageBonus;
+                if (attacker.Poison) mod += StrongDamageBonus;
+                if (attacker.Dark) mod += SuperStrongDamageBonus;
+                if (attacker.Electric) mod += WeakDamageBonus;
+            }
+            if (defender.Arcane)
+            {
+                if (attacker.Arcane) mod += WeakDamageBonus;
+                if (attacker.Fire) mod += StrongDamageBonus;
+                if (attacker.Water) mod += StrongDamageBonus;
+                if (attacker.Air) mod += StrongDamageBonus;
+                if (attacker.Fire) mod += StrongDamageBonus;
+                if (attacker.Typeless) mod += WeakDamageBonus;
+            }
+            else if (defender.Typeless)
+            {
+                if (attacker.Arcane) mod += StrongDamageBonus;
+            }
+            return MathHelper.Clamp(mod, 0.1f, 3f);
+        }
+    }
+    public class AddElementsToVanillaContent : ModSystem
     {
         public static HashSet<int> fireNPC = new HashSet<int>();
         public static HashSet<int> fireItem = new HashSet<int>();
@@ -776,252 +917,6 @@ namespace Terrafirma.Systems.Elements
             electricItem.Clear();
             arcaneNPC.Clear();
             arcaneItem.Clear();
-        }
-    }
-    public class ElementPlayer : ModPlayer
-    {
-        const float SuperStrongDamageBonus = 0.5f;
-        const float StrongDamageBonus = 0.2f;
-        const float WeakDamageBonus = -0.2f;
-        public static float getItemToNPCModifer(bool Fire, bool Water, bool Earth, bool Air, bool Ice, bool Poison, bool Light, bool Dark, bool Electric, bool Arcane, NPC target)
-        {
-            float mod = 1f;
-            bool Elementless = !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Arcane;
-            bool targetElementless = true;
-
-            if (Elements.fireNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Fire) mod += WeakDamageBonus;
-                if (Water) mod += WeakDamageBonus;
-                if (Earth) mod += StrongDamageBonus;
-                if (Air) mod += StrongDamageBonus;
-                if (Ice) mod += StrongDamageBonus;
-            }
-            if (Elements.waterNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Fire) mod += StrongDamageBonus;
-                if (Water) mod += WeakDamageBonus;
-                if (Earth) mod += StrongDamageBonus;
-                if (Ice) mod += WeakDamageBonus;
-                if (Poison) mod += StrongDamageBonus;
-                if (Electric) mod += WeakDamageBonus;
-            }
-            if (Elements.earthNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Arcane) mod += WeakDamageBonus;
-                if (Earth) mod += WeakDamageBonus;
-                if (Fire) mod += WeakDamageBonus;
-                if (Air) mod += WeakDamageBonus;
-                if (Poison) mod += StrongDamageBonus;
-                if (Light) mod += StrongDamageBonus;
-                if (Electric) mod += StrongDamageBonus;
-            }
-            if (Elements.airNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Arcane) mod += WeakDamageBonus;
-                if (Fire) mod += WeakDamageBonus;
-                if (Air) mod += WeakDamageBonus;
-                if (Electric) mod += StrongDamageBonus;
-            }
-            if (Elements.iceNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Fire) mod += WeakDamageBonus;
-                if (Earth) mod += StrongDamageBonus;
-                if (Air) mod += WeakDamageBonus;
-                if (Ice) mod += WeakDamageBonus;
-                if (Poison) mod += StrongDamageBonus;
-                if (Electric) mod += StrongDamageBonus;
-            }
-            if (Elements.poisonNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Fire) mod += WeakDamageBonus;
-                if (Water) mod += StrongDamageBonus;
-                if (Earth) mod += StrongDamageBonus;
-                if (Air) mod += StrongDamageBonus;
-                if (Ice) mod += WeakDamageBonus;
-                if (Poison) mod += WeakDamageBonus;
-                if (Light) mod += WeakDamageBonus;
-                if (Electric) mod += WeakDamageBonus;
-            }
-            if (Elements.lightNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Earth) mod += WeakDamageBonus;
-                if (Ice) mod += StrongDamageBonus;
-                if (Poison) mod += StrongDamageBonus;
-                if (Light) mod += WeakDamageBonus;
-                if (Dark) mod += SuperStrongDamageBonus;
-            }
-            if (Elements.darkNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Earth) mod += StrongDamageBonus;
-                if (Light) mod += WeakDamageBonus;
-                if (Dark) mod += WeakDamageBonus;
-                if (Electric) mod += WeakDamageBonus;
-            }
-            if (Elements.electricNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Arcane) mod += StrongDamageBonus;
-                if (Fire) mod += WeakDamageBonus;
-                if (Water) mod += SuperStrongDamageBonus;
-                if (Earth) mod += WeakDamageBonus;
-                if (Air) mod += WeakDamageBonus;
-                if (Ice) mod += WeakDamageBonus;
-                if (Poison) mod += StrongDamageBonus;
-                if (Dark) mod += SuperStrongDamageBonus;
-                if (Electric) mod += WeakDamageBonus;
-            }
-            if (Elements.arcaneNPC.Contains(target.netID))
-            {
-                targetElementless = false;
-                if (Arcane) mod += WeakDamageBonus;
-                if (Fire) mod += StrongDamageBonus;
-                if (Water) mod += StrongDamageBonus;
-                if (Air) mod += StrongDamageBonus;
-                if (Fire) mod += StrongDamageBonus;
-                if (Elementless) mod += WeakDamageBonus;
-            }
-            if (targetElementless)
-            {
-                if (Arcane) mod += StrongDamageBonus;
-            }
-            return MathHelper.Clamp(mod, 0.1f, 3f);
-        }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            ElementProjectile eProj = proj.GetGlobalProjectile<ElementProjectile>();
-            modifiers.FinalDamage *= getItemToNPCModifer(eProj.Fire, eProj.Water, eProj.Earth, eProj.Air, eProj.Ice, eProj.Poison, eProj.Light, eProj.Dark, eProj.Electric, eProj.Arcane, target);
-        }
-        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            modifiers.FinalDamage *= getItemToNPCModifer(Elements.fireItem.Contains(item.type), Elements.waterItem.Contains(item.type), Elements.earthItem.Contains(item.type), Elements.airItem.Contains(item.type), Elements.iceItem.Contains(item.type), Elements.poisonItem.Contains(item.type), Elements.lightItem.Contains(item.type), Elements.darkItem.Contains(item.type), Elements.electricItem.Contains(item.type), Elements.arcaneItem.Contains(item.type), target);
-        }
-    }
-    public class ElementItem : GlobalItem
-    {
-        private static Asset<Texture2D> elementIcons;
-        public static HashSet<int>[] elementItemLists = new HashSet<int>[] { Elements.arcaneItem, Elements.fireItem, Elements.waterItem, Elements.earthItem, Elements.airItem, Elements.lightItem, Elements.darkItem, Elements.iceItem, Elements.poisonItem, Elements.electricItem };
-        public override bool InstancePerEntity => true;
-        public int[] elements = new int[0];
-        public override void SetStaticDefaults()
-        {
-            elementIcons = ModContent.Request<Texture2D>("Terrafirma/Assets/ElementIcons");
-        }
-        public override void SetDefaults(Item item)
-        {
-            for (int i = 0; i < elementItemLists.Length; i++)
-            {
-                if (elementItemLists[i].Contains(item.type))
-                {
-                    elements = elements.Append(i).ToArray();
-                }
-            }
-        }
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (elements.Length > 0)
-            {
-                TooltipLine elementLine = new TooltipLine(Mod, "elementLine", "a");
-                tooltips.Add(elementLine);
-            }
-        }
-        public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
-        {
-            if (line.Name == "elementLine")
-            {
-                int xOffset = 0;
-                for (int i = 0; i < elements.Length; i++)
-                {
-                    Main.spriteBatch.Draw(elementIcons.Value, new Vector2(line.X + xOffset, line.Y - 2), new Rectangle(elements[i] * 26, 0, 26, 24), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                    xOffset += 26;
-                }
-                return false;
-            }
-            return base.PreDrawTooltipLine(item, line, ref yOffset);
-        }
-        public override void PostDrawTooltip(Item item, ReadOnlyCollection<DrawableTooltipLine> lines)
-        {
-            base.PostDrawTooltip(item, lines);
-        }
-        public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
-        {
-            base.PostDrawTooltipLine(item, line);
-        }
-    }
-    public class ElementProjectile : GlobalProjectile
-    {
-        public override bool InstancePerEntity => true;
-
-        public bool Fire = false;
-        public bool Water = false;
-        public bool Earth = false;
-        public bool Air = false;
-        public bool Ice = false;
-        public bool Poison = false;
-        public bool Light = false;
-        public bool Dark = false;
-        public bool Electric = false;
-        public bool Arcane = false;
-        public bool Elementless
-        {
-            get { return !Fire && !Water && !Earth && !Air && !Ice && !Poison && !Light && !Dark && !Electric && !Arcane; }
-            set { Fire = false; Water = false; Earth = false; Air = false; Ice = false; Poison = false; Light = false; Dark = false; Electric = false; Arcane = false; }
-        }
-        public override void OnSpawn(Projectile projectile, IEntitySource source)
-        {
-            // sets the element based on the item
-            if (!ProjectileSets.DontInheritElementFromWeapon[projectile.type])
-            {
-                int item = Main.player[projectile.owner].HeldItem.type;
-                if (Elements.fireItem.Contains(item))
-                    Fire = true;
-                if (Elements.waterItem.Contains(item))
-                    Water = true;
-                if (Elements.earthItem.Contains(item))
-                    Earth = true;
-                if (Elements.airItem.Contains(item))
-                    Air = true;
-                if (Elements.iceItem.Contains(item))
-                    Ice = true;
-                if (Elements.poisonItem.Contains(item))
-                    Poison = true;
-                if (Elements.lightItem.Contains(item))
-                    Light = true;
-                if (Elements.darkItem.Contains(item))
-                    Dark = true;
-                if (Elements.electricItem.Contains(item))
-                    Electric = true;
-                if (Elements.arcaneItem.Contains(item))
-                    Arcane = true;
-            }
-        }
-    }
-    public class ElementNPC : GlobalNPC
-    {
-        private void addIcon(BestiaryEntry bestiaryEntry, ModBiome element)
-        {
-            bestiaryEntry.Info.Add(new ModBiomeBestiaryInfoElement(Mod, element.DisplayName.Value, element.BestiaryIcon, "", null));
-        }
-        public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-        {
-            if (Elements.arcaneNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Arcane>());
-            if (Elements.fireNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Fire>());
-            if (Elements.waterNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Water>());
-            if (Elements.earthNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Earth>());
-            if (Elements.airNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Air>());
-            if (Elements.lightNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Light>());
-            if (Elements.darkNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Dark>());
-            if (Elements.iceNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Ice>());
-            if (Elements.poisonNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Poison>());
-            if (Elements.electricNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Electric>());
         }
     }
 }

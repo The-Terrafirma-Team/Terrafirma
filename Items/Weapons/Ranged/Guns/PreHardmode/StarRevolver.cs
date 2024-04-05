@@ -31,7 +31,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
         }
         public override void SetStaticDefaults()
         {
-            Elements.lightItem.Add(Type);
+            AddElementsToVanillaContent.lightItem.Add(Type);
             Item.ResearchUnlockCount = 1;
         }
         public override bool CanConsumeAmmo(Item ammo, Player player)

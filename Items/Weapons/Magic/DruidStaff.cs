@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Magic
     {
         public override void SetStaticDefaults()
         {
-            Elements.earthItem.Add(Type);
+            AddElementsToVanillaContent.earthItem.Add(Type);
             Item.staff[Type] = true;
         }
         public override void SetDefaults()

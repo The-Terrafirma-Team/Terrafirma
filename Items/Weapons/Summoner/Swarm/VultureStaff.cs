@@ -12,7 +12,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Swarm
     {
         public override void SetStaticDefaults()
         {
-            Elements.airItem.Add(Type);
+            AddElementsToVanillaContent.airItem.Add(Type);
             Item.staff[Item.type] = true;
             ItemSets.isSwarmSummonItem[Type] = true;
         }

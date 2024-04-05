@@ -13,7 +13,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
     {
         public override void SetStaticDefaults()
         {
-            Elements.fireItem.Add(Type);
+            AddElementsToVanillaContent.fireItem.Add(Type);
         }
         public override void SetDefaults()
         {

@@ -58,39 +58,39 @@ namespace Terrafirma.Global.Players
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             #region Elemental Damage
-            if (FireDamage != 1 && Elements.fireItem.Contains(item.type))
+            if (FireDamage != 1 && AddElementsToVanillaContent.fireItem.Contains(item.type))
             {
                 damage *= FireDamage;
             }
-            if (WaterDamage != 1 && Elements.waterItem.Contains(item.type))
+            if (WaterDamage != 1 && AddElementsToVanillaContent.waterItem.Contains(item.type))
             {
                 damage *= WaterDamage;
             }
-            if (EarthDamage != 1 && Elements.earthItem.Contains(item.type))
+            if (EarthDamage != 1 && AddElementsToVanillaContent.earthItem.Contains(item.type))
             {
                 damage *= EarthDamage;
             }
-            if (AirDamage != 1 && Elements.airItem.Contains(item.type))
+            if (AirDamage != 1 && AddElementsToVanillaContent.airItem.Contains(item.type))
             {
                 damage *= AirDamage;
             }
-            if (LightDamage != 1 && Elements.lightItem.Contains(item.type))
+            if (LightDamage != 1 && AddElementsToVanillaContent.lightItem.Contains(item.type))
             {
                 damage *= LightDamage;
             }
-            if (DarkDamage != 1 && Elements.darkItem.Contains(item.type))
+            if (DarkDamage != 1 && AddElementsToVanillaContent.darkItem.Contains(item.type))
             {
                 damage *= DarkDamage;
             }
-            if (IceDamage != 1 && Elements.iceItem.Contains(item.type))
+            if (IceDamage != 1 && AddElementsToVanillaContent.iceItem.Contains(item.type))
             {
                 damage *= IceDamage;
             }
-            if (PoisonDamage != 1 && Elements.poisonItem.Contains(item.type))
+            if (PoisonDamage != 1 && AddElementsToVanillaContent.poisonItem.Contains(item.type))
             {
                 damage *= PoisonDamage;
             }
-            if (ElectricDamage != 1 && Elements.electricItem.Contains(item.type))
+            if (ElectricDamage != 1 && AddElementsToVanillaContent.electricItem.Contains(item.type))
             {
                 damage *= ElectricDamage;
             }

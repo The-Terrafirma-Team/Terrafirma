@@ -13,6 +13,7 @@ using Terrafirma.Data;
 using Terrafirma.Global.Items;
 using Terrafirma.Global.Players;
 using Terrafirma.Systems.Elements;
+using static Terrafirma.Systems.Elements.ElementGlobals;
 
 namespace Terrafirma
 {
@@ -208,37 +209,18 @@ namespace Terrafirma
             return AreaNPCs;
 
         }
-        public static void CloneItemElements(this Item item, int itemToClone)
+
+        public static ElementData GetElementData(this NPC npc)
         {
-            if (Elements.fireItem.Contains(itemToClone))
-                Elements.fireItem.Add(item.type);
-
-            if (Elements.waterItem.Contains(itemToClone))
-                Elements.waterItem.Add(item.type);
-
-            if (Elements.earthItem.Contains(itemToClone))
-                Elements.earthItem.Add(item.type);
-
-            if (Elements.airItem.Contains(itemToClone))
-                Elements.airItem.Add(item.type);
-
-            if (Elements.iceItem.Contains(itemToClone))
-                Elements.iceItem.Add(item.type);
-
-            if (Elements.poisonItem.Contains(itemToClone))
-                Elements.poisonItem.Add(item.type);
-
-            if (Elements.lightItem.Contains(itemToClone))
-                Elements.lightItem.Add(item.type);
-
-            if (Elements.darkItem.Contains(itemToClone))
-                Elements.darkItem.Add(item.type);
-
-            if (Elements.electricItem.Contains(itemToClone))
-                Elements.electricItem.Add(item.type);
-
-            if (Elements.arcaneItem.Contains(itemToClone))
-                Elements.arcaneItem.Add(item.type);
+            return npc.GetGlobalNPC<ElementNPC>().elementData;
+        }
+        public static ElementData GetElementData(this Projectile projectile)
+        {
+            return projectile.GetGlobalProjectile<ElementProjectile>().elementData;
+        }
+        public static ElementData GetElementData(this Item item)
+        {
+            return item.GetGlobalItem<ElementItem>().elementData;
         }
 
         // Sentry  Methods ____________________________________________________________________________________________________

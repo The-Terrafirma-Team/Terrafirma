@@ -12,7 +12,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
     {
         public override void SetStaticDefaults()
         {
-            Elements.waterItem.Add(Type);
+            AddElementsToVanillaContent.waterItem.Add(Type);
         }
         public override void SetDefaults()
         {

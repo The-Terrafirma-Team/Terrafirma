@@ -11,7 +11,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
     {
         public override void SetStaticDefaults()
         {
-            Elements.iceItem.Add(Type);
+            AddElementsToVanillaContent.iceItem.Add(Type);
         }
         public override void SetDefaults()
         {

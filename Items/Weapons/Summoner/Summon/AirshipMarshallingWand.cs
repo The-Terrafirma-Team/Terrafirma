@@ -15,8 +15,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
     {
         public override void SetStaticDefaults()
         {
-            Elements.airItem.Add(Type);
-            Elements.electricItem.Add(Type);
+            AddElementsToVanillaContent.airItem.Add(Type);
+            AddElementsToVanillaContent.electricItem.Add(Type);
 
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

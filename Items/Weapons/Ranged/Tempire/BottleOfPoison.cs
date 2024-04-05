@@ -42,7 +42,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
         }
         public override void SetStaticDefaults()
         {
-            Elements.poisonItem.Add(Type);
+            AddElementsToVanillaContent.poisonItem.Add(Type);
         }
         public override void AddRecipes()
         {

@@ -12,8 +12,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
     {
         public override void SetStaticDefaults()
         {
-            Elements.earthItem.Add(Type);
-            Elements.darkItem.Add(Type);
+            AddElementsToVanillaContent.earthItem.Add(Type);
+            AddElementsToVanillaContent.darkItem.Add(Type);
         }
         public override void SetDefaults()
         {

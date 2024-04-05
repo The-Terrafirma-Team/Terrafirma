@@ -27,7 +27,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
         }
         public override void SetStaticDefaults()
         {
-            Elements.fireItem.Add(Type);
+            AddElementsToVanillaContent.fireItem.Add(Type);
             Item.ResearchUnlockCount = 1;
         }
 

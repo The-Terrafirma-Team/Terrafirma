@@ -26,7 +26,8 @@ namespace Terrafirma.Items.Equipment.Elemental
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            modifiers.FinalDamage -= (15 * power);
+            modifiers.FinalDamage -= (45 * power);
+            power = 0;
         }
     }
 

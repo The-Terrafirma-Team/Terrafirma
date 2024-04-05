@@ -13,8 +13,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
     {
         public override void SetStaticDefaults()
         {
-            Elements.lightItem.Add(Type);
-            Elements.electricItem.Add(Type);
+            AddElementsToVanillaContent.lightItem.Add(Type);
+            AddElementsToVanillaContent.electricItem.Add(Type);
         }
         public override void SetDefaults()
         {

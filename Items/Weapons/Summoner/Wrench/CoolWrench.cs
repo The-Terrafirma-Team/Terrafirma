@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
     {
         public override void SetStaticDefaults()
         {
-            Elements.iceItem.Add(Type);
+            AddElementsToVanillaContent.iceItem.Add(Type);
         }
         public override void SetDefaults()
         {

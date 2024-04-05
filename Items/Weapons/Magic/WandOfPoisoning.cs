@@ -14,7 +14,7 @@ namespace Terrafirma.Items.Weapons.Magic
     {
         public override void SetStaticDefaults()
         {
-            Elements.poisonItem.Add(Type);
+            AddElementsToVanillaContent.poisonItem.Add(Type);
             Item.staff[Item.type] = true;
         }
         public override void SetDefaults()

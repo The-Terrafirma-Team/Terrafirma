@@ -21,7 +21,7 @@ namespace Terrafirma.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 5;
-            Elements.fireNPC.Add(Type);
+            AddElementsToVanillaContent.fireNPC.Add(Type);
         }
         public override void SetDefaults()
         {

@@ -18,8 +18,8 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
     {
         public override void SetStaticDefaults()
         {
-            Elements.lightItem.Add(Type);
-            Elements.arcaneItem.Add(Type);
+            AddElementsToVanillaContent.lightItem.Add(Type);
+            AddElementsToVanillaContent.arcaneItem.Add(Type);
         }
         public override void SetDefaults()
         {
