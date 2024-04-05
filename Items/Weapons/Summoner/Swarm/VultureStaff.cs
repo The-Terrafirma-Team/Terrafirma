@@ -12,12 +12,12 @@ namespace Terrafirma.Items.Weapons.Summoner.Swarm
     {
         public override void SetStaticDefaults()
         {
-            AddElementsToVanillaContent.airItem.Add(Type);
             Item.staff[Item.type] = true;
             ItemSets.isSwarmSummonItem[Type] = true;
         }
         public override void SetDefaults()
         {
+            Item.GetElementItem().elementData.Air = true;
             Item.damage = 14;
             Item.knockBack = 4f;
             Item.mana = 15;

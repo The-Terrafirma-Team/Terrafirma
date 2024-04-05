@@ -886,6 +886,8 @@ namespace Terrafirma.Systems.Elements
             electricItem.Add(ItemID.MechanicalEye);
             electricItem.Add(ItemID.MechanicalSkull);
             electricItem.Add(ItemID.MechanicalWorm);
+            darkItem.Add(ItemID.ClothierVoodooDoll);
+            darkItem.Add(ItemID.GuideVoodooDoll);
         }
 
         private void AddIDRange(HashSet<int> set, int start, int end)

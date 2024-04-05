@@ -38,11 +38,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.DamageType = DamageClass.Ranged;
 
-
-        }
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.waterItem.Add(Type);
+            Item.GetElementItem().elementData.Water = true;
         }
         public override Vector2? HoldoutOffset()
         {

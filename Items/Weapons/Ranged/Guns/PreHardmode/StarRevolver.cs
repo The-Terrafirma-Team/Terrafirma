@@ -28,11 +28,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.useAmmo = AmmoID.FallenStar;
             Item.shoot = ProjectileID.FallingStar;
             Item.shootSpeed = 16f;
-        }
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.lightItem.Add(Type);
-            Item.ResearchUnlockCount = 1;
+
+            Item.GetElementItem().elementData.Light = true;
         }
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {

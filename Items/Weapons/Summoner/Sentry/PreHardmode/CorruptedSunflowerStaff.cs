@@ -10,11 +10,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
     internal class CorruptedSunflowerStaff : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.earthItem.Add(Type);
-            AddElementsToVanillaContent.darkItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 12;
@@ -37,6 +32,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 15, 0);
             Item.shoot = ModContent.ProjectileType<CorruptedSunflower>();
+
+            Item.GetElementItem().elementData.Earth = true;
+            Item.GetElementItem().elementData.Dark = true;
         }
         public override void AddRecipes()
         {

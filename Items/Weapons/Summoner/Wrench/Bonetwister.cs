@@ -14,15 +14,12 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
     public class Bonetwister : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.darkItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.DefaultToWrench(18, 30);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1);
+            Item.GetElementItem().elementData.Dark = true;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {

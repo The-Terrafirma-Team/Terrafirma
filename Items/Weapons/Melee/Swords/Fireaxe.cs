@@ -7,10 +7,6 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class Fireaxe : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.fireItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.DefaultToSword(30, 35, 4);
@@ -19,6 +15,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.shootSpeed = 10;
             Item.rare = ItemRarityID.Yellow;
             Item.scale = 1.5f;
+            Item.GetElementItem().elementData.Fire = true;
         }
     }
 }

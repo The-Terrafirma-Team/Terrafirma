@@ -21,7 +21,6 @@ namespace Terrafirma.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 5;
-            AddElementsToVanillaContent.fireNPC.Add(Type);
         }
         public override void SetDefaults()
         {
@@ -33,6 +32,7 @@ namespace Terrafirma.NPCs
             NPC.damage = 20;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
+            NPC.GetElementNPC().elementData.Fire = true;
         }
 
         public override void HitEffect(NPC.HitInfo hit)

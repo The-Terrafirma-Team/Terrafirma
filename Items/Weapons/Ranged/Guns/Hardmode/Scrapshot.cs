@@ -13,10 +13,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class Scrapshot : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.fireItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 90;
@@ -37,6 +33,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.shoot = ModContent.ProjectileType<HotCoal>();
             Item.shootSpeed = 24f;
             Item.scale = 0.9f;
+            Item.GetElementItem().elementData.Fire = true;
         }
         public override Vector2? HoldoutOffset()
         {

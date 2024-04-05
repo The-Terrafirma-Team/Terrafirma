@@ -14,12 +14,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
     public class CoolWrench : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.iceItem.Add(Type);
-        }
         public override void SetDefaults()
         {
+            Item.GetElementItem().elementData.Ice = true;
             Item.DefaultToWrench(12, 28);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 2, 0);

@@ -16,11 +16,11 @@ namespace Terrafirma.Systems.Elements
         {
             public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
             {
-                modifiers.FinalDamage *= ElementData.getElementalBonus(proj.GetElementData(),target.GetElementData());
+                modifiers.FinalDamage *= ElementData.getElementalBonus(proj.GetElementProjectile().elementData,target.GetElementNPC().elementData);
             }
             public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
             {
-                modifiers.FinalDamage *= ElementData.getElementalBonus(item.GetElementData(), target.GetElementData());
+                modifiers.FinalDamage *= ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
             }
         }
         public class ElementItem : GlobalItem
@@ -102,7 +102,7 @@ namespace Terrafirma.Systems.Elements
             {
                 if (!ProjectileSets.DontInheritElementFromWeapon[projectile.type])
                 {
-                    elementData = ElementData.cloneElements(Main.player[projectile.owner].HeldItem.GetElementData());
+                    elementData = ElementData.cloneElements(Main.player[projectile.owner].HeldItem.GetElementItem().elementData);
                 }
             }
         }

@@ -16,11 +16,6 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 {
     public class HeroSword : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.lightItem.Add(Type);
-            AddElementsToVanillaContent.arcaneItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 100;
@@ -36,6 +31,8 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.rare = ModContent.RarityType<FinalQuestRarity>();
             Item.value = Item.sellPrice(gold: 20, silver: 00);
             Item.shootSpeed = 20;
+            Item.GetElementItem().elementData.Light = true;
+            Item.GetElementItem().elementData.Arcane = true;
         }
         public override bool CanUseItem(Player player)
         {

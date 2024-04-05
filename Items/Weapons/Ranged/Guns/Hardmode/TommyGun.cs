@@ -9,10 +9,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class TommyGun : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.iceItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 17;
@@ -35,6 +31,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 16f;
             Item.scale = 0.85f;
+
+            Item.GetElementItem().elementData.Ice = true;
         }
         public override Vector2? HoldoutOffset()
         {

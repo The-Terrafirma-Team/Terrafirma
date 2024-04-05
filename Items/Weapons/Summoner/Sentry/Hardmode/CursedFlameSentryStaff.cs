@@ -11,11 +11,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
 {
     internal class CursedFlameSentryStaff : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.darkItem.Add(Type);
-            AddElementsToVanillaContent.fireItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 25;
@@ -40,6 +35,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
             Item.value = Item.sellPrice(0, 2, 0, 0);
             Item.shoot = ModContent.ProjectileType<CursedFlameSentry>();
 
+            Item.GetElementItem().elementData.Fire = true;
+            Item.GetElementItem().elementData.Dark = true;
         }
 
         public override void AddRecipes()

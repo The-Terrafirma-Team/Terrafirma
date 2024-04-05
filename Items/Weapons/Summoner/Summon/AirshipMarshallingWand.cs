@@ -15,9 +15,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
     {
         public override void SetStaticDefaults()
         {
-            AddElementsToVanillaContent.airItem.Add(Type);
-            AddElementsToVanillaContent.electricItem.Add(Type);
-
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
 
@@ -25,6 +22,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
         }
         public override void SetDefaults()
         {
+            Item.GetElementItem().elementData.Air = true;
+            Item.GetElementItem().elementData.Electric = true;
+
             Item.damage = 25;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;

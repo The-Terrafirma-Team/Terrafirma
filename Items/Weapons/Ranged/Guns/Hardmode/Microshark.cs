@@ -40,7 +40,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.DamageType = DamageClass.Ranged;
             Item.scale = 0.9f;
 
-
+            Item.GetElementItem().elementData.Water = true;
         }
 
         public override void UseItemHitbox(Player player, ref Rectangle hitbox, ref bool noHitbox)
@@ -50,11 +50,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             hitbox.X = (int)player.MountedCenter.X + (int)new Vector2(60, 0).RotatedBy(player.itemRotation).X * player.direction - 10;
             hitbox.Y = (int)player.MountedCenter.Y + (int)new Vector2(60, 0).RotatedBy(player.itemRotation).Y * player.direction - 10;
             base.UseItemHitbox(player, ref hitbox, ref noHitbox);
-        }
-
-        public override void SetStaticDefaults()
-        {
-            Item.ResearchUnlockCount = 1;
         }
 
         public override Vector2? HoldoutOffset()

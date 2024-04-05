@@ -11,11 +11,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
 {
     internal class IchorSentryStaff : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.darkItem.Add(Type);
-            AddElementsToVanillaContent.waterItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 30;
@@ -40,6 +35,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
             Item.value = Item.sellPrice(0, 4, 05, 0);
             Item.shoot = ModContent.ProjectileType<IchorSentry>();
 
+            Item.GetElementItem().elementData.Dark = true;
+            Item.GetElementItem().elementData.Water = true;
         }
 
         public override void AddRecipes()

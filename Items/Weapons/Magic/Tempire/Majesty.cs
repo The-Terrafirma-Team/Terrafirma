@@ -13,7 +13,6 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
         public override void SetStaticDefaults()
         {
             Item.staff[Item.type] = true;
-            AddElementsToVanillaContent.arcaneItem.Add(Type);
         }
         public override void SetDefaults()
         {
@@ -23,6 +22,7 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
             Item.value = Item.sellPrice(0, 0, 20, 0);
             Item.UseSound = SoundID.Item8;
             Item.rare = ItemRarityID.Lime;
+            Item.GetElementItem().elementData.Arcane = true;
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

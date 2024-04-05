@@ -12,10 +12,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {
     internal class IcicleMachineGun : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.iceItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 9;
@@ -42,6 +38,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.shootSpeed = 20f;
 
             Item.scale = 0.85f;
+
+            Item.GetElementItem().elementData.Ice = true;
         }
         public override Vector2? HoldoutOffset()
         {

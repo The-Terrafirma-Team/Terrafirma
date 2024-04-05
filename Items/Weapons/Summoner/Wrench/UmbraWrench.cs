@@ -14,12 +14,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
     public class UmbraWrench : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.darkItem.Add(Type);
-        }
         public override void SetDefaults()
         {
+            Item.GetElementItem().elementData.Dark = true;
             Item.DefaultToWrench(16, 30);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1);

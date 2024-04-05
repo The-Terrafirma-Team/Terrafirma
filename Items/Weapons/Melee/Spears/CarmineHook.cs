@@ -31,15 +31,10 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
 
             Item.shoot = ModContent.ProjectileType<CarmineHookProjectile>();
             Item.shootSpeed = 10;
-        }
 
-        public override void SetStaticDefaults()
-        {
-            Item.ResearchUnlockCount = 1;
-            AddElementsToVanillaContent.darkItem.Add(Type);
-            AddElementsToVanillaContent.waterItem.Add(Type);
+            Item.GetElementItem().elementData.Dark = true;
+            Item.GetElementItem().elementData.Water = true;
         }
-
         public override void AddRecipes()
         {
             CreateRecipe()

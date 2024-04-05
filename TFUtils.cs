@@ -210,17 +210,17 @@ namespace Terrafirma
 
         }
 
-        public static ElementData GetElementData(this NPC npc)
+        public static ElementNPC GetElementNPC(this NPC npc)
         {
-            return npc.GetGlobalNPC<ElementNPC>().elementData;
+            return npc.GetGlobalNPC<ElementNPC>();
         }
-        public static ElementData GetElementData(this Projectile projectile)
+        public static ElementProjectile GetElementProjectile(this Projectile projectile)
         {
-            return projectile.GetGlobalProjectile<ElementProjectile>().elementData;
+            return projectile.GetGlobalProjectile<ElementProjectile>();
         }
-        public static ElementData GetElementData(this Item item)
+        public static ElementItem GetElementItem(this Item item)
         {
-            return item.GetGlobalItem<ElementItem>().elementData;
+            return item.GetGlobalItem<ElementItem>();
         }
 
         // Sentry  Methods ____________________________________________________________________________________________________

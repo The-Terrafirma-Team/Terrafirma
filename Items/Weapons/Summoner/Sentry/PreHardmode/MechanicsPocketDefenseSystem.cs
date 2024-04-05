@@ -10,10 +10,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
     internal class MechanicsPocketDefenseSystem : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.electricItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 10;
@@ -38,6 +34,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.value = Item.buyPrice(0, 12, 0, 0);
             Item.shoot = ModContent.ProjectileType<MechanicsPocketSentry>();
 
+            Item.GetElementItem().elementData.Electric = true;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

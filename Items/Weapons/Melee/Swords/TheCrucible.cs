@@ -24,13 +24,8 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.shoot = ModContent.ProjectileType<CrucibleBeam>();
             Item.shootSpeed = 10;
             Item.rare = ItemRarityID.Yellow;
+            Item.GetElementItem().elementData.Fire = true;
         }
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.fireItem.Add(Type);
-            Item.ResearchUnlockCount = 1;
-        }
-
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for(int i = 0; i < 5; i++)

@@ -16,7 +16,6 @@ namespace Terrafirma.Items.Weapons.Magic
     {
         public override void SetStaticDefaults()
         {
-            AddElementsToVanillaContent.earthItem.Add(Type);
             Item.staff[Type] = true;
         }
         public override void SetDefaults()
@@ -25,6 +24,7 @@ namespace Terrafirma.Items.Weapons.Magic
             Item.mana = 6;
             Item.UseSound = SoundID.Item24;
             Item.damage = 12;
+            Item.GetElementItem().elementData.Earth = true;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

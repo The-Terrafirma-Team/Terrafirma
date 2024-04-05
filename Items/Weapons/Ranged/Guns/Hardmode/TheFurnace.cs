@@ -11,10 +11,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {
     internal class TheFurnace : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.fireItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 56;
@@ -38,6 +34,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.shootSpeed = 12f;
 
             Item.scale = 0.85f;
+
+            Item.GetElementItem().elementData.Fire = true;
         }
         public override Vector2? HoldoutOffset()
         {

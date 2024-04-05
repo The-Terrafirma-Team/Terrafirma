@@ -10,10 +10,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
     internal class PortableSlimeBakery : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.waterItem.Add(Type);
-        }
         public override void SetDefaults()
         {
             Item.damage = 30;

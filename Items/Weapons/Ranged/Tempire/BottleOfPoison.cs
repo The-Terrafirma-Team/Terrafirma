@@ -39,10 +39,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
             Item.value = Item.sellPrice(0, 40, 0, 0);
             Item.shoot = ModContent.ProjectileType<BottleOfPoisonProjectile>();
             Item.shootSpeed = 8f;
-        }
-        public override void SetStaticDefaults()
-        {
-            AddElementsToVanillaContent.poisonItem.Add(Type);
+
+            Item.GetElementItem().elementData.Poison = true;
         }
         public override void AddRecipes()
         {
