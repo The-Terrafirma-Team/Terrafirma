@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.DataStructures;
 using Terrafirma.Global.Items;
+using System.IO;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
@@ -28,6 +29,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.penetrate = -1;
             Projectile.sentry = true;
             Projectile.hide = true;
+           
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -71,19 +73,38 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             Projectile.ai[0]++;
 
-            for (int i = 0; i < Projectile.GetGlobalProjectile<SentryStats>().BuffTime.Length; i++)
+            if (Main.netMode == NetmodeID.SinglePlayer)
             {
-                if (Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > 0)
+                for (int i = 0; i < Projectile.GetGlobalProjectile<SentryStats>().BuffTime.Length; i++)
                 {
-                    for (int k = 0; k < Main.projectile.Length; k++)
+                    if (Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > 0)
                     {
-                        if (Main.projectile[k].owner == Projectile.owner && Main.projectile[k].type == ModContent.ProjectileType<CrimsonHeartSentryHeart>() && Main.projectile[k].active)
+                        for (int k = 0; k < Main.projectile.Length; k++)
                         {
-                            Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i] = Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i];
+                            if (Main.projectile[k].owner == Projectile.owner &&
+                                Main.projectile[k].type == ModContent.ProjectileType<CrimsonHeartSentryHeart>() &&
+                                Main.projectile[k].active &&
+                                Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i]
+                                )
+                            {
+                                Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i] = Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i];
+                            }
                         }
                     }
                 }
             }
+
+        }
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            base.ReceiveExtraAI(reader);
         }
 
         public override bool PreDraw(ref Color lightColor)

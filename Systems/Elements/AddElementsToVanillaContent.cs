@@ -474,6 +474,8 @@ namespace Terrafirma.Systems.Elements
             fireItem.Add(3858);
             fireItem.Add(ItemID.DayBreak);
             fireItem.Add(ItemID.SolarEruption);
+            fireItem.Add(ItemID.ButchersChainsaw);
+            fireItem.Add(ItemID.Cascade);
             #endregion fire
             #region water
             waterItem.Add(ItemID.PalmWoodSword);
@@ -499,6 +501,10 @@ namespace Terrafirma.Systems.Elements
             earthItem.Add(ItemID.ThornChakram);
             earthItem.Add(ItemID.FlowerPow);
             earthItem.Add(3835);
+            earthItem.Add(ItemID.GolemFist);
+            earthItem.Add(ItemID.ChainKnife);
+            earthItem.Add(ItemID.Rally);
+            earthItem.Add(ItemID.FormatC);
             #endregion earth
             #region air
             airItem.Add(ItemID.BatBat);
@@ -551,6 +557,9 @@ namespace Terrafirma.Systems.Elements
             lightItem.Add(ItemID.DaoofPow);
             lightItem.Add(ItemID.HallowJoustingLance);
             lightItem.Add(ItemID.PiercingStarlight);
+            lightItem.Add(ItemID.Hammush);
+            lightItem.Add(ItemID.Chik);
+            lightItem.Add(ItemID.Arkhalis);
             #endregion light
             #region dark
             darkItem.Add(ItemID.EbonwoodSword);
@@ -579,6 +588,8 @@ namespace Terrafirma.Systems.Elements
             darkItem.Add(ItemID.ScourgeoftheCorruptor);
             darkItem.Add(ItemID.VampireKnives);
             darkItem.Add(ItemID.ShadowJoustingLance);
+            darkItem.Add(ItemID.ZombieArm);
+            darkItem.Add(ItemID.DeathSickle);
             #endregion dark
             #region electric
             electricItem.Add(ItemID.InfluxWaver);
@@ -764,6 +775,7 @@ namespace Terrafirma.Systems.Elements
             lightItem.Add(4852);
             lightItem.Add(ItemID.SparkleGuitar);
             lightItem.Add(ItemID.LastPrism);
+            lightItem.Add(4952); //Nightglow
             #endregion light
             #region dark
             darkItem.Add(ItemID.Vilethorn);
@@ -781,6 +793,7 @@ namespace Terrafirma.Systems.Elements
             darkItem.Add(ItemID.SpiritFlame);
             darkItem.Add(ItemID.ShadowflameHadesDye);
             darkItem.Add(4270);
+            darkItem.Add(ItemID.ShadowFlameHexDoll);
             #endregion dark
             #region electric
             electricItem.Add(ItemID.ThunderStaff);

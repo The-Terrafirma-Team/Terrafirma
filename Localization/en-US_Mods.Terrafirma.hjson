@@ -915,6 +915,7 @@ Projectiles: {
 	FireaxeSlash.DisplayName: Fireaxe Slash
 	CrimsonHeartSentry.DisplayName: Crimson Heart Sentry
 	CrimsonHeartSentryHeart.DisplayName: Crimson Heart Sentry Heart
+	CrimsonHeartSentryInvisProj.DisplayName: Crimson Heart Sentry Invis Proj
 }
 
 Biomes: {

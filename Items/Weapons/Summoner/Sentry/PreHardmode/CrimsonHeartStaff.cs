@@ -12,7 +12,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
     {
         public override void SetDefaults()
         {
-            Item.damage = 12;
+            Item.damage = 20;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
@@ -30,13 +30,13 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.mana = 20;
 
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 15, 0);
+            Item.value = Item.sellPrice(0, 0, 25, 0);
             Item.shoot = ModContent.ProjectileType<CrimsonHeartSentry>();
             Item.GetElementItem().elementData.Dark = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.Sunflower,5).AddIngredient(ItemID.VilePowder,25).AddTile(TileID.DemonAltar).Register();
+            CreateRecipe().AddIngredient(ItemID.CrimtaneBar,12).AddTile(TileID.Anvils).Register();
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

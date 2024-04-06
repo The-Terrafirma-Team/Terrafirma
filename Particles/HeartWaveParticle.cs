@@ -16,9 +16,12 @@ namespace Terrafirma.Particles
 {
     public class HeartWaveParticle : Particle
     {
+        public int timeleft = 60;
+        public float Scale = 1f;
         private static Asset<Texture2D> HeartWave; 
         public override void OnSpawn()
         {
+            
             base.OnSpawn();
         }
         public override void SetStaticDefaults()
@@ -27,7 +30,8 @@ namespace Terrafirma.Particles
         }
         public override void Update()
         {
-            if (TimeInWorld > 60) Active = false;
+            Scale = 1f + (timeleft - 60) * 0.015f;
+            if (TimeInWorld > timeleft) Active = false;
             base.Update();
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -39,7 +43,7 @@ namespace Terrafirma.Particles
                 new Color(200, 10, 0, 0) * ((60 - TimeInWorld) / 60f),
                 TimeInWorld * 0.06f, 
                 HeartWave.Size() / 2,
-                (float)Math.Sin(TimeInWorld * 0.08f) * 0.6f, 
+                (float)Math.Sin(TimeInWorld * 0.08f) * 0.6f * Scale, 
                 SpriteEffects.None, 
                 0);
         }

@@ -12,7 +12,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
     {
         public override void SetDefaults()
         {
-            Item.damage = 30;
+            Item.damage = 6;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
@@ -30,8 +30,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.mana = 20;
 
 
-            Item.rare = ItemRarityID.Pink;
-            Item.value = Item.sellPrice(0, 4, 05, 0);
+            Item.rare = ItemRarityID.Blue;
+            Item.value = Item.sellPrice(0, 0, 30, 0);
             Item.shoot = ModContent.ProjectileType<PortableSlimeBakeryProj>();
 
         }

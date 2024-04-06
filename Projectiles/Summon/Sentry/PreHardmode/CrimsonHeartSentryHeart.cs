@@ -61,7 +61,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             return false;
         }
-
         public override void OnSpawn(IEntitySource source)
         {
             for (int i = 0; i < Main.projectile.Length; i++)
@@ -72,14 +71,14 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 }
             }
 
-            if (BaseProj != null)
-            {
-                c = new Vector2(BaseProj.Center.X + (Projectile.Center.X - BaseProj.Center.X) * 0.5f, Math.Max(Projectile.Center.Y, BaseProj.Center.Y) + 40);
-                Vector2 PosA = Projectile.Center - c;
-                Vector2 PosB = BaseProj.Center - c;
-                a = (PosA.Y * PosB.X - PosB.Y * PosA.X) / (PosA.X * PosB.X * (PosA.X * PosB.X));
-                b = (PosB.Y - a * (float)Math.Pow(PosB.X, 2)) / PosB.X;
-            } 
+            //if (BaseProj != null)
+            //{
+            //    c = new Vector2(BaseProj.Center.X + (Projectile.Center.X - BaseProj.Center.X) * 0.5f, Math.Max(Projectile.Center.Y, BaseProj.Center.Y) + 40);
+            //    Vector2 PosA = Projectile.Center - c;
+            //    Vector2 PosB = BaseProj.Center - c;
+            //    a = (PosA.Y * PosB.X - PosB.Y * PosA.X) / (PosA.X * PosB.X * (PosA.X * PosB.X));
+            //    b = (PosB.Y - a * (float)Math.Pow(PosB.X, 2)) / PosB.X;
+            //} 
             base.OnSpawn(source);
         }
         public override void AI()
@@ -87,20 +86,41 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             if (BaseProj == null || BaseProj.active == false) Projectile.Kill();
 
-            NPC ClosestNPC = TFUtils.FindClosestNPC(120f, Projectile.Center);
+            NPC ClosestNPC = TFUtils.FindClosestNPC(120f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center);
 
-            if (Projectile.ai[0] % 24 == 0 && ClosestNPC != null) 
-            { 
-                ParticleSystem.AddParticle(new HeartWaveParticle(), Projectile.Center); 
+            if (Projectile.ai[0] % (int)(24 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) == 0 && ClosestNPC != null) 
+            {
+                HeartWaveParticle HeartWave = new HeartWaveParticle();
+                HeartWave.timeleft = (int)(60 * TFUtils.GetSentryRangeMultiplier(Projectile));
+                ParticleSystem.AddParticle(HeartWave, Projectile.Center);
+
+                NPC[] NpcArray = TFUtils.GetAllNPCsInArea(120f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center);
+                for (int i = 0; i < NpcArray.Length; i++)
+                {
+                    TFUtils.NewProjectileButWithChangesFromSentryBuffs(Projectile, Projectile.GetSource_FromThis(), NpcArray[i].Center, Vector2.Zero, ModContent.ProjectileType<CrimsonHeartSentryInvisProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                }
+
                 for (int i = 0; i < 8; i++)
                 {
                     Dust dust = Dust.NewDustDirect(Projectile.position, 16, 16, DustID.Blood, Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-0.5f, 1f));
                 }
             }
 
-            if (ClosestNPC != null) Projectile.ai[0]++;
-            else if (Projectile.ai[0] % 24 != 0)  Projectile.ai[0]++;
-  
+            if (ClosestNPC != null) 
+            {
+                Projectile.ai[0]++;
+            }
+            else if (Projectile.ai[0] % (int)(24 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) != 0) Projectile.ai[0]++;
+
+
+            if (Projectile.ai[1] % 12 == 0)
+            {
+                for (int i = 0; i < Projectile.Center.Distance(BaseProj.Center) / 10; i++)
+                {
+                    Dust dust = Dust.NewDustPerfect(Projectile.Center + Projectile.DirectionTo(BaseProj.Center) * 10 * i, DustID.Blood, Vector2.Zero, newColor: Color.White * 0.5f);
+                    dust.noGravity = true;
+                }
+            }
 
             Projectile.ai[1]++;
 
@@ -109,26 +129,26 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool PreDraw(ref Color lightColor)
         {
 
-            if (BaseProj != null)
-            {
-                for (int i = 0; i < Math.Abs(Projectile.Center.X - BaseProj.Center.X) / 10; i++)
-                {
-                    Main.EntitySpriteDraw(BaseTex.Value,
-                        BaseProj.Center - Main.screenPosition + 
-                        new Vector2(i * 10, (a * (float)Math.Pow(BaseProj.Center.X + (i * 10) - c.X, 2) + b * (BaseProj.Center.X + (i * 10) - c.X)) * -1),
-                        i % 2 == 0 ? new Rectangle(24, 0, 14, 10) : new Rectangle(40, 0, 14, 10),
-                        lightColor * 0.3f,
-                        0,
-                        new Vector2(7, 5),
-                        1,
-                        SpriteEffects.None,
-                        0);
-                }
-            }
+            //if (BaseProj != null)
+            //{
+            //    for (int i = 0; i < Math.Abs(Projectile.Center.X - BaseProj.Center.X) / 10; i++)
+            //    {
+            //        Main.EntitySpriteDraw(BaseTex.Value,
+            //            BaseProj.Center - Main.screenPosition + 
+            //            new Vector2(i * 10, (a * (float)Math.Pow(BaseProj.Center.X + (i * 10) - c.X, 2) + b * (BaseProj.Center.X + (i * 10) - c.X)) * -1),
+            //            i % 2 == 0 ? new Rectangle(24, 0, 14, 10) : new Rectangle(40, 0, 14, 10),
+            //            lightColor * 0.3f,
+            //            0,
+            //            new Vector2(7, 5),
+            //            1,
+            //            SpriteEffects.None,
+            //            0);
+            //    }
+            //}
 
-            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % 4), HeartTex.Width(), HeartTex.Height() / 4), lightColor * 0.3f, 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1.1f + ((float)Math.Sin(Main.timeForVisualEffects / 20) + 1) * 0.1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % 4), HeartTex.Width(), HeartTex.Height()/4), lightColor, 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % 4), HeartTex.Width(), HeartTex.Height() / 4), new Color(50,30,50,0), 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % (int)(4 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile))), HeartTex.Width(), HeartTex.Height() / 4), lightColor * 0.3f, 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1.1f + ((float)Math.Sin(Main.timeForVisualEffects / 20) + 1) * 0.1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % (int)(4 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile))), HeartTex.Width(), HeartTex.Height()/4), lightColor, 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(HeartTex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, HeartTex.Height() / 4 * (int)((Projectile.ai[0] / 6) % (int)(4 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile))), HeartTex.Width(), HeartTex.Height() / 4), new Color(50,30,50,0), 0, new Vector2(HeartTex.Width(), HeartTex.Height() / 4) / 2, 1, SpriteEffects.None, 0);
 
             return false;
         }
