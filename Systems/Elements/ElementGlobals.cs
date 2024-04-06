@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terrafirma.Data;
+using Terrafirma.Systems.Elements.Beastiary;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -142,16 +143,18 @@ namespace Terrafirma.Systems.Elements
             }
             public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
             {
-                //if (Elements.arcaneNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Arcane>());
-                //if (Elements.fireNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Fire>());
-                //if (Elements.waterNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Water>());
-                //if (Elements.earthNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Earth>());
-                //if (Elements.airNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Air>());
-                //if (Elements.lightNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Light>());
-                //if (Elements.darkNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Dark>());
-                //if (Elements.iceNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Ice>());
-                //if (Elements.poisonNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Poison>());
-                //if (Elements.electricNPC.Contains(npc.type)) addIcon(bestiaryEntry, ModContent.GetInstance<Electric>());
+                npc.SetDefaults(npc.type);
+                ElementData data = npc.GetElementNPC().elementData;
+                if (data.Arcane) AddIcon(bestiaryEntry, ModContent.GetInstance<Arcane>());
+                if (data.Light) AddIcon(bestiaryEntry, ModContent.GetInstance<Light>());
+                if (data.Dark) AddIcon(bestiaryEntry, ModContent.GetInstance<Dark>());
+                if (data.Fire) AddIcon(bestiaryEntry, ModContent.GetInstance<Fire>());
+                if (data.Water) AddIcon(bestiaryEntry, ModContent.GetInstance<Water>());
+                if (data.Earth) AddIcon(bestiaryEntry, ModContent.GetInstance<Earth>());
+                if (data.Air) AddIcon(bestiaryEntry, ModContent.GetInstance<Air>());
+                if (data.Ice) AddIcon(bestiaryEntry, ModContent.GetInstance<Ice>());
+                if (data.Poison) AddIcon(bestiaryEntry, ModContent.GetInstance<Poison>());
+                if (data.Electric) AddIcon(bestiaryEntry, ModContent.GetInstance<Electric>());
             }
         }
     }

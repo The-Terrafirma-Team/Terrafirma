@@ -24,10 +24,6 @@ namespace Terrafirma.Systems.Elements
             set { Fire = Water = Earth = Air = Light = Dark = Ice = Poison = Electric = Arcane = false; }
             readonly get { return !Fire && !Water && !Earth && !Air && !Light && !Dark && !Ice && !Poison && !Electric && !Arcane; }
         }
-        //const float SuperStrongDamageBonus = 0.5f;
-        //const float StrongDamageBonus = 0.2f;
-        //const float WeakDamageBonus = -0.2f;
-
         public static float StrongDamageBonus
         {
             get { return 0.2f + (Main.expertMode ? 0.2f : 0) + (Main.masterMode ? 0.1f : 0); }
@@ -883,6 +879,7 @@ namespace Terrafirma.Systems.Elements
             poisonItem.Add(ItemID.Abeemination);
             iceItem.Add(ItemID.DeerThing);
             lightItem.Add(4988);
+            lightItem.Add(ItemID.EmpressButterfly);
             electricItem.Add(ItemID.MechanicalEye);
             electricItem.Add(ItemID.MechanicalSkull);
             electricItem.Add(ItemID.MechanicalWorm);
