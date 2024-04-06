@@ -9,7 +9,7 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class PortableSlimeBakeryProj : ModProjectile
     {

@@ -9,7 +9,7 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class MechanicsPocketSentry : ModProjectile
     {
@@ -55,7 +55,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             {
                 SoundEngine.PlaySound(SoundID.DD2_LightningBugZap, Projectile.Center);
                 Projectile.ai[0] = 0;
-                Projectile newproj = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(14,-8), Vector2.Zero, ModContent.ProjectileType<MechanicsPocketSentryLightning>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, TFUtils.FindClosestNPC(350f * Projectile.GetSentryRangeMultiplier(),Projectile.Center).whoAmI, 0);
+                Projectile newproj = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(14, -8), Vector2.Zero, ModContent.ProjectileType<MechanicsPocketSentryLightning>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, TFUtils.FindClosestNPC(350f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).whoAmI, 0);
             }
 
             if (Projectile.ai[0] % 3 == 0) Glowrand = Main.rand.NextVector2Circular(1, 1);
@@ -65,11 +65,11 @@ namespace Terrafirma.Projectiles.Summon.Sentry
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/MechanicsPocketSentry");
-            Asset<Texture2D> SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/MechanicsPocketSentryGlow");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/MechanicsPocketSentry");
+            Asset<Texture2D> SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/MechanicsPocketSentryGlow");
 
-            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition , null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(SentryGlow.Value, Projectile.Center - Main.screenPosition + Glowrand, null, new Color(255,255,255,0) * Main.rand.NextFloat(0.6f,1f), 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition, null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryGlow.Value, Projectile.Center - Main.screenPosition + Glowrand, null, new Color(255, 255, 255, 0) * Main.rand.NextFloat(0.6f, 1f), 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryGlow.Value, Projectile.Center - Main.screenPosition + new Vector2(-4, 4) + Main.rand.NextVector2Circular(2, 2), null, new Color(255, 255, 255, 0) * Main.rand.NextFloat(0.2f, 0.4f), 0, SentryBase.Size() / 2, 1.3f, SpriteEffects.None, 0);
 
             return false;

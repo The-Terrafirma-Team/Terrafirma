@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terrafirma.Global;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class RoyalJellyDispenser : ModProjectile
     {
@@ -81,7 +81,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/RoyalJellyDispenserBorder");
+            Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/RoyalJellyDispenserBorder");
 
             for (int i = 0; i < (int)(turretradius / 10); i++)
             {

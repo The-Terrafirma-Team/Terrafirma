@@ -10,7 +10,7 @@ using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {
     internal class GREATSentry : ModProjectile
     {
@@ -28,7 +28,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             Projectile.penetrate = -1;
 
             Projectile.sentry = true;
-            
+
 
         }
 
@@ -44,14 +44,14 @@ namespace Terrafirma.Projectiles.Summon.Sentry
         }
         public override bool? CanHitNPC(NPC target)
         {
-            return Projectile.ai[0] > 180 && Projectile.ai[1] % (int)(10 * TFUtils.GetSentryAttackCooldownMultiplier(Main.projectile[Projectile.whoAmI])) == 0;
+            return Projectile.ai[0] > 180 && Projectile.ai[1] % (int)(10 * Main.projectile[Projectile.whoAmI].GetSentryAttackCooldownMultiplier()) == 0;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float collsionPoint = 0;
             return Collision.CheckAABBvLineCollision(targetHitbox.Center(), targetHitbox.Size(),
                     Projectile.TopLeft + new Vector2(37, 45) - new Vector2(0, 12).RotatedBy(Projectile.rotation),
-                    (Projectile.TopLeft + new Vector2(37, 45)) + new Vector2(1800, 0).RotatedBy(Projectile.rotation) - new Vector2(0, 12).RotatedBy(Projectile.rotation),
+                    Projectile.TopLeft + new Vector2(37, 45) + new Vector2(1800, 0).RotatedBy(Projectile.rotation) - new Vector2(0, 12).RotatedBy(Projectile.rotation),
                     80,
                     ref collsionPoint);
         }
@@ -67,11 +67,11 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             //    dust.noGravity = true;
             //}
 
-            if (Main.player[Projectile.owner].HasMinionAttackTargetNPC && Projectile.Center.Distance(Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC].Center) < 600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]))
+            if (Main.player[Projectile.owner].HasMinionAttackTargetNPC && Projectile.Center.Distance(Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC].Center) < 600f * Main.projectile[Projectile.whoAmI].GetSentryRangeMultiplier())
             {
                 closestnpc = Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC];
 
-                Projectile.rotation = Utils.AngleLerp(Projectile.rotation, (Projectile.TopLeft + new Vector2(37, 37)).AngleTo(closestnpc.Center), 0.07f);
+                Projectile.rotation = Projectile.rotation.AngleLerp((Projectile.TopLeft + new Vector2(37, 37)).AngleTo(closestnpc.Center), 0.07f);
 
                 if (Math.Abs(Projectile.rotation) > MathHelper.PiOver2) Projectile.spriteDirection = -1;
                 else Projectile.spriteDirection = 1;
@@ -82,7 +82,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             {
                 if (closestnpc != null)
                 {
-                    Projectile.rotation = Utils.AngleLerp(Projectile.rotation, (Projectile.TopLeft + new Vector2(37, 37)).AngleTo(closestnpc.Center), 0.07f);
+                    Projectile.rotation = Projectile.rotation.AngleLerp((Projectile.TopLeft + new Vector2(37, 37)).AngleTo(closestnpc.Center), 0.07f);
 
                     if (Math.Abs(Projectile.rotation) > MathHelper.PiOver2) Projectile.spriteDirection = -1;
                     else Projectile.spriteDirection = 1;
@@ -90,19 +90,19 @@ namespace Terrafirma.Projectiles.Summon.Sentry
                     Projectile.ai[0] = Math.Clamp(Projectile.ai[0] + 1, 0, 600);
                 }
 
-                if (closestnpc == null || !closestnpc.active || Projectile.Center.Distance(closestnpc.Center) > 600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]) )
+                if (closestnpc == null || !closestnpc.active || Projectile.Center.Distance(closestnpc.Center) > 600f * Main.projectile[Projectile.whoAmI].GetSentryRangeMultiplier())
                 {
-                    NPC closestsnpcsearch = TFUtils.FindClosestNPC(600f * TFUtils.GetSentryRangeMultiplier(Main.projectile[Projectile.whoAmI]), Projectile.Center);
+                    NPC closestsnpcsearch = TFUtils.FindClosestNPC(600f * Main.projectile[Projectile.whoAmI].GetSentryRangeMultiplier(), Projectile.Center);
                     closestnpc = null;
 
                     if (Math.Abs(Projectile.rotation) > MathHelper.PiOver2)
                     {
-                        Projectile.rotation = Utils.AngleLerp(Projectile.rotation, (float)Math.PI, 0.01f);
+                        Projectile.rotation = Projectile.rotation.AngleLerp((float)Math.PI, 0.01f);
                         Projectile.spriteDirection = -1;
                     }
                     else
                     {
-                        Projectile.rotation = Utils.AngleLerp(Projectile.rotation, 0f, 0.01f);
+                        Projectile.rotation = Projectile.rotation.AngleLerp(0f, 0.01f);
                         Projectile.spriteDirection = 1;
                     }
 
@@ -115,12 +115,12 @@ namespace Terrafirma.Projectiles.Summon.Sentry
                 }
             }
             Projectile.ai[1]++;
-            
+
             if (Projectile.ai[0] > 120 && Projectile.ai[1] % 4 == 0)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Dust dust = Dust.NewDustPerfect((Projectile.TopLeft + new Vector2(37, 45)) + new Vector2(1820, -10 + i * 4).RotatedBy(Projectile.rotation) - new Vector2(0, 12 * Projectile.spriteDirection).RotatedBy(Projectile.rotation), DustID.DungeonSpirit, Vector2.Zero, 1, Color.White, 1.5f);
+                    Dust dust = Dust.NewDustPerfect(Projectile.TopLeft + new Vector2(37, 45) + new Vector2(1820, -10 + i * 4).RotatedBy(Projectile.rotation) - new Vector2(0, 12 * Projectile.spriteDirection).RotatedBy(Projectile.rotation), DustID.DungeonSpirit, Vector2.Zero, 1, Color.White, 1.5f);
                     dust.noGravity = true;
                 }
             }
@@ -130,28 +130,28 @@ namespace Terrafirma.Projectiles.Summon.Sentry
         public override bool PreDraw(ref Color lightColor)
         {
             float ChargeUpFloat;
-            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATSentry").Value;
-            Texture2D SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATSentryGlow").Value;
-            Texture2D SentryLaser = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATLaser").Value;
-            Texture2D SentryLaserBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/GREATLaserHead").Value;
+            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/GREATSentry").Value;
+            Texture2D SentryGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/GREATSentryGlow").Value;
+            Texture2D SentryLaser = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/GREATLaser").Value;
+            Texture2D SentryLaserBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/GREATLaserHead").Value;
 
-            
 
-            Main.EntitySpriteDraw(SentryBase, Projectile.Bottom - Main.screenPosition , new Rectangle(0,40,80,34), lightColor, 0, new Vector2(32, 35), 1f, SpriteEffects.None, 0f);
-            Main.EntitySpriteDraw(SentryBase, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), lightColor, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
+
+            Main.EntitySpriteDraw(SentryBase, Projectile.Bottom - Main.screenPosition, new Rectangle(0, 40, 80, 34), lightColor, 0, new Vector2(32, 35), 1f, SpriteEffects.None, 0f);
+            Main.EntitySpriteDraw(SentryBase, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), lightColor, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
             Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * 0.2f, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f + Math.Abs((float)Math.Sin(Main.timeForVisualEffects / 40f)) / 20f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
             ChargeUpFloat = Math.Clamp(Projectile.ai[0] / 120f, 0f, 1f);
-            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), new Color(1f,1f,1f,0) * ChargeUpFloat, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
+            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * ChargeUpFloat, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
 
             ChargeUpFloat = MathHelper.Lerp(0f, 1f, Math.Clamp((Projectile.ai[0] - 120f) / 480f, 0f, 1f));
-            Main.EntitySpriteDraw(SentryLaser, 
-                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0,5), 
-                SentryLaser.Bounds, 
+            Main.EntitySpriteDraw(SentryLaser,
+                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 5),
+                SentryLaser.Bounds,
                 new Color(1f, 1f, 1f, 0) * ChargeUpFloat,
-                Projectile.rotation, 
-                new Vector2(-0.23f, SentryLaser.Height / 2), 
-                new Vector2(100f, ChargeUpFloat), 
-                SpriteEffects.None, 
+                Projectile.rotation,
+                new Vector2(-0.23f, SentryLaser.Height / 2),
+                new Vector2(100f, ChargeUpFloat),
+                SpriteEffects.None,
                 0f);
             Main.EntitySpriteDraw(SentryLaser,
                 Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 5),
@@ -175,7 +175,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
 
             Main.EntitySpriteDraw(SentryLaserBase,
                 Projectile.Center - Main.screenPosition + new Vector2(0, 5),
-                new Rectangle(0, ((int)(Main.timeForVisualEffects / 4f ) % 4) * SentryLaserBase.Height / 4, SentryLaserBase.Width, SentryLaserBase.Height / 4),
+                new Rectangle(0, (int)(Main.timeForVisualEffects / 4f) % 4 * SentryLaserBase.Height / 4, SentryLaserBase.Width, SentryLaserBase.Height / 4),
                 new Color(1f, 1f, 1f, 0) * ChargeUpFloat,
                 Projectile.rotation,
                 new Vector2(-20 / ChargeUpFloat, Projectile.spriteDirection == 1 ? 52 : 26),

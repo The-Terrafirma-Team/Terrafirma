@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summon.Sentry;
+using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria.DataStructures;
 using Terrafirma.Systems.Elements;
 

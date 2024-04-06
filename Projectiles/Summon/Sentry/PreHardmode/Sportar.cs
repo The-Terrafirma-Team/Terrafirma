@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using static Humanizer.In;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     public class Sportar : ModProjectile
     {

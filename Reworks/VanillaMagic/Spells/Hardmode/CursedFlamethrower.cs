@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summon.Sentry;
+using Terrafirma.Projectiles.Summon.Sentry.Hardmode;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;

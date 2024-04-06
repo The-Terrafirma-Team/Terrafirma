@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class CorruptedSunflowerShot : ModProjectile
     {
@@ -32,12 +32,12 @@ namespace Terrafirma.Projectiles.Summon.Sentry
 
         public override void OnKill(int timeLeft)
         {
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Corruption, Main.rand.NextVector2CircularEdge(3, 3));
                 d.noGravity = !Main.rand.NextBool(6);
             }
-            SoundEngine.PlaySound(SoundID.Dig,Projectile.position);
+            SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         }
     }
 }

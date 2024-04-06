@@ -9,12 +9,12 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class MechanicsPocketSentryLightning : ModProjectile
     {
 
-        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/MechanicsPocketSentry";
+        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/PreHardmode/MechanicsPocketSentry";
 
         NPC targetnpc = null;
         Vector2 origpos = Vector2.Zero;
@@ -34,10 +34,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry
         public override void AI()
         {
             targetnpc = Main.npc[(int)Projectile.ai[1]];
-            if (Projectile.ai[0] % 30 == 0 && targetnpc != null) 
+            if (Projectile.ai[0] % 30 == 0 && targetnpc != null)
             {
                 float minimalise = 50f * Math.Clamp(Projectile.ai[0] / 100f, 2f, 10f);
-                Projectile.velocity = Projectile.Center.DirectionTo(targetnpc.Center).RotatedByRandom(Projectile.Center.Distance(targetnpc.Center) / minimalise); 
+                Projectile.velocity = Projectile.Center.DirectionTo(targetnpc.Center).RotatedByRandom(Projectile.Center.Distance(targetnpc.Center) / minimalise);
             }
 
             if (Projectile.ai[0] % 3 == 0 && !Projectile.Hitbox.Intersects(targetnpc.Hitbox))

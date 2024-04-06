@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 using Terrafirma.Particles;
 using Terrafirma.Projectiles.Summon.Sentry;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Projectiles.Summon.Sentry.Hardmode;
+using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 
 namespace Terrafirma.Global.Items
 {
@@ -31,7 +33,10 @@ namespace Terrafirma.Global.Items
             if (entity.type == ModContent.ProjectileType<ClockworkTurret>()) SentrySlots = 2f;
             if (entity.type == ModContent.ProjectileType<RoyalJellyDispenser>()) SentrySlots = 2f;
             if (entity.type == ModContent.ProjectileType<BarbedWireCanisterSentry>()) SentrySlots = 0.5f;
+            if (entity.type == ModContent.ProjectileType<GREATSentry>()) SentrySlots = 4f;
+            if (entity.type == ModContent.ProjectileType<CrimsonHeartSentry>()) SentrySlots = 0f;
             Priority = false;
+
         }
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
         {

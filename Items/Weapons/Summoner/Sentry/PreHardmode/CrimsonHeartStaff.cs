@@ -2,13 +2,13 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summon.Sentry;
 using Terraria.DataStructures;
 using Terrafirma.Systems.Elements;
+using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
-    internal class CorruptedSunflowerStaff : ModItem
+    internal class CrimsonHeartStaff : ModItem
     {
         public override void SetDefaults()
         {
@@ -31,9 +31,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 15, 0);
-            Item.shoot = ModContent.ProjectileType<CorruptedSunflower>();
-
-            Item.GetElementItem().elementData.Earth = true;
+            Item.shoot = ModContent.ProjectileType<CrimsonHeartSentry>();
             Item.GetElementItem().elementData.Dark = true;
         }
         public override void AddRecipes()
@@ -44,13 +42,22 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
         {
             if (player == Main.LocalPlayer)
             {
-                int WorldX;
-                int WorldY;
-                int PushUpY;
-                Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
+                if (player.ownedProjectileCounts[Item.shoot] == 0) {
+                    int WorldX;
+                    int WorldY;
+                    int PushUpY;
+                    Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
 
-                Projectile.NewProjectile(default, new Vector2(WorldX, WorldY - PushUpY - 6), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
-                player.UpdateMaxTurrets();
+                    Projectile.NewProjectile(default, new Vector2(WorldX, WorldY - PushUpY + 7), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
+                    Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<CrimsonHeartSentryHeart>(), damage, 0, player.whoAmI, 0, 0, 0);
+                    player.UpdateMaxTurrets();
+                }
+                else
+                {
+
+                    Projectile.NewProjectile(default, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<CrimsonHeartSentryHeart>(), damage, 0, player.whoAmI, 0, 0, 1);
+                    player.UpdateMaxTurrets();
+                }
             }
             return false;
         }

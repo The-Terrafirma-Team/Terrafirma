@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     public class BlueSlimeFriend : ModProjectile
     {
@@ -43,16 +43,16 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             Player owner = Main.player[Projectile.owner];
             //Visuals
             if (Projectile.alpha > 64)
-                Projectile.alpha-= 24;
+                Projectile.alpha -= 24;
 
-            if(Projectile.timeLeft > 400 && Main.rand.NextBool(3))
+            if (Projectile.timeLeft > 400 && Main.rand.NextBool(3))
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0, -2f, 600 - Projectile.timeLeft);
                 d.velocity *= 0.2f;
                 d.velocity += Projectile.velocity * 0.2f;
             }
 
-            if (Projectile.frameCounter > 100) 
+            if (Projectile.frameCounter > 100)
             {
                 Projectile.frameCounter = 0;
                 Projectile.frame = Projectile.frame == 0 ? 1 : 0;
@@ -75,13 +75,13 @@ namespace Terrafirma.Projectiles.Summon.Sentry
                 Projectile.frame = 1;
                 Projectile.ai[0] = 0;
                 Projectile.ai[1]++;
-                Projectile.velocity.Y -= (Projectile.ai[1] % 3 == 0)? 15 : 10;
+                Projectile.velocity.Y -= Projectile.ai[1] % 3 == 0 ? 15 : 10;
                 float difference = 0;
                 if (Projectile.ai[2] != -1)
                 {
                     difference = Projectile.Center.X - Main.npc[(int)Projectile.ai[2]].Center.X;
                     Projectile.direction = Math.Sign(difference);
-                    Projectile.velocity.X += -Math.Clamp(difference * 0.02f,-5,5);
+                    Projectile.velocity.X += -Math.Clamp(difference * 0.02f, -5, 5);
                 }
                 else
                     Projectile.velocity.X += Projectile.direction * 5;

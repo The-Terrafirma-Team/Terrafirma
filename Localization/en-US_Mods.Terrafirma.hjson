@@ -807,6 +807,11 @@ Items: {
 			The shield can block up to 45 damage
 			'''
 	}
+
+	CrimsonHeartStaff: {
+		DisplayName: Crimson Heart Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -908,6 +913,8 @@ Projectiles: {
 	Airship.DisplayName: Airship
 	DruidStaff.DisplayName: Druid Staff
 	FireaxeSlash.DisplayName: Fireaxe Slash
+	CrimsonHeartSentry.DisplayName: Crimson Heart Sentry
+	CrimsonHeartSentryHeart.DisplayName: Crimson Heart Sentry Heart
 }
 
 Biomes: {

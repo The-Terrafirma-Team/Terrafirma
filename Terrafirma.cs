@@ -44,11 +44,11 @@ namespace Terrafirma
                 Projectile projectile = null;
                 for (int j = 0; j < list.Count; j++)
                 {
-                    if (projectile == null && !list[j].GetGlobalProjectile<SentryStats>().Priority)
+                    if (projectile == null && !list[j].GetGlobalProjectile<SentryStats>().Priority && list[j].GetGlobalProjectile<SentryStats>().SentrySlots > 0f)
                     {
                         projectile = list[j];
                     }
-                    else if (projectile != null && list[j].timeLeft < projectile.timeLeft && !list[j].GetGlobalProjectile<SentryStats>().Priority)
+                    else if (projectile != null && list[j].timeLeft < projectile.timeLeft && !list[j].GetGlobalProjectile<SentryStats>().Priority && list[j].GetGlobalProjectile<SentryStats>().SentrySlots > 0f)
                     {
                         projectile = list[j];
                     }

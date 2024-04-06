@@ -10,13 +10,13 @@ using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {
     internal class IchorSentry : ModProjectile
     {
         float sentryrot = MathHelper.PiOver2;
         float backtimer = 0;
-        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/IchorSentryBase";
+        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/Hardmode/IchorSentryBase";
         public override void SetDefaults()
         {
             Projectile.damage = 30;
@@ -31,7 +31,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             Projectile.penetrate = -1;
 
             Projectile.sentry = true;
-            
+
 
         }
 
@@ -63,7 +63,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             else if (TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
             {
                 float toenemyrot = (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation();
-                if ( sentryrot - toenemyrot < toenemyrot + (float)Math.PI * 2f - sentryrot)
+                if (sentryrot - toenemyrot < toenemyrot + (float)Math.PI * 2f - sentryrot)
                 {
                     sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation(), 0.1f);
                 }
@@ -71,7 +71,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry
                 {
                     sentryrot = MathHelper.Lerp(sentryrot, (Projectile.Center - TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center).Center).ToRotation() + (float)Math.PI * 2f, 0.1f);
                 }
-                    sentryrot = sentryrot % ((float)Math.PI * 2f);
+                sentryrot = sentryrot % ((float)Math.PI * 2f);
 
             }
 
@@ -83,10 +83,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/IchorSentryBase");
-            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/IchorSentryTentacle");
+            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/IchorSentryBase");
+            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/IchorSentryTentacle");
 
-            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8) + new Vector2(backtimer, 0).RotatedBy(sentryrot), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width()/2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, -8) + new Vector2(backtimer, 0).RotatedBy(sentryrot), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width() / 2, SentryShooter.Height()), 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 1), null, lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
 
             return false;

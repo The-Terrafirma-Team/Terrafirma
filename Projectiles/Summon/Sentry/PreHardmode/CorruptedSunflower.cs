@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Terrafirma.Projectiles.Summon.Sentry
+namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     public class CorruptedSunflower : ModProjectile
     {
@@ -29,9 +29,9 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             Rectangle StemFrame = new Rectangle(2, 4, 32, 44);
             Rectangle FlowerFrame = new Rectangle(36, 2, 34, 34);
             Rectangle EyeFrame = new Rectangle(48, 38, 10, 10);
-            Main.EntitySpriteDraw(tex, Projectile.Bottom - Main.screenPosition, StemFrame, lightColor,0,new Vector2(StemFrame.Width / 2, StemFrame.Height),1,SpriteEffects.None);
+            Main.EntitySpriteDraw(tex, Projectile.Bottom - Main.screenPosition, StemFrame, lightColor, 0, new Vector2(StemFrame.Width / 2, StemFrame.Height), 1, SpriteEffects.None);
 
-            Main.EntitySpriteDraw(tex, Projectile.Center + new Vector2(-1,-14) - Main.screenPosition, FlowerFrame, lightColor, (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f, FlowerFrame.Size() / 2, 1, SpriteEffects.None);
+            Main.EntitySpriteDraw(tex, Projectile.Center + new Vector2(-1, -14) - Main.screenPosition, FlowerFrame, lightColor, (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f, FlowerFrame.Size() / 2, 1, SpriteEffects.None);
 
             Main.EntitySpriteDraw(tex, Projectile.Center + new Vector2(-1, -14) - Main.screenPosition, EyeFrame, lightColor, Projectile.rotation, EyeFrame.Size() / 2, 1, SpriteEffects.None);
 
@@ -81,11 +81,11 @@ namespace Terrafirma.Projectiles.Summon.Sentry
             if (Projectile.ai[2] != -1)
             {
                 NPC target = Main.npc[(int)Projectile.ai[2]];
-                Projectile.rotation = Utils.AngleLerp(EyePos.DirectionTo(target.Center).ToRotation(),Projectile.rotation,0.9f);
+                Projectile.rotation = EyePos.DirectionTo(target.Center).ToRotation().AngleLerp(Projectile.rotation, 0.9f);
             }
             else
             {
-                Projectile.rotation = Utils.AngleLerp(EyePos.DirectionTo(owner.Center).ToRotation(), Projectile.rotation, 0.96f);
+                Projectile.rotation = EyePos.DirectionTo(owner.Center).ToRotation().AngleLerp(Projectile.rotation, 0.96f);
             }
 
             int shotTime = 90;
@@ -95,8 +95,8 @@ namespace Terrafirma.Projectiles.Summon.Sentry
                 if (Main.LocalPlayer == owner)
                 {
                     NPC target = Main.npc[(int)Projectile.ai[2]];
-                    for(int i = 0; i < 2; i++)
-                    Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), EyePos, EyePos.DirectionTo(target.Center + (target.velocity * MathHelper.Clamp(target.Center.Distance(EyePos) * 0.1f,0,4))).RotatedByRandom(0.1f) * 10f, ModContent.ProjectileType<CorruptedSunflowerShot>(), Projectile.damage,Projectile.knockBack,Projectile.owner);
+                    for (int i = 0; i < 2; i++)
+                        Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), EyePos, EyePos.DirectionTo(target.Center + target.velocity * MathHelper.Clamp(target.Center.Distance(EyePos) * 0.1f, 0, 4)).RotatedByRandom(0.1f) * 10f, ModContent.ProjectileType<CorruptedSunflowerShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     SoundEngine.PlaySound(SoundID.Item42, Projectile.position);
                 }
             }
