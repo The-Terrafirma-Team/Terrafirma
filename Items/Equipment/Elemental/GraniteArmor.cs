@@ -100,6 +100,7 @@ namespace Terrafirma.Items.Equipment.Elemental
             Item.height = 16;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(silver: 75);
+            Item.defense = 2;
         }
         public override void UpdateEquip(Player player)
         {
@@ -121,6 +122,7 @@ namespace Terrafirma.Items.Equipment.Elemental
             Item.height = 16;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(silver: 75);
+            Item.defense = 3;
         }
         public override void UpdateEquip(Player player)
         {
@@ -139,6 +141,7 @@ namespace Terrafirma.Items.Equipment.Elemental
         }
         public override void SetDefaults()
         {
+            Item.defense = 1;
             Item.width = 16;
             Item.height = 16;
             Item.rare = ItemRarityID.Blue;
