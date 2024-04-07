@@ -58,39 +58,39 @@ namespace Terrafirma.Global.Players
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             #region Elemental Damage
-            if (FireDamage != 1 && AddElementsToVanillaContent.fireItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Fire)
             {
                 damage *= FireDamage;
             }
-            if (WaterDamage != 1 && AddElementsToVanillaContent.waterItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Water)
             {
                 damage *= WaterDamage;
             }
-            if (EarthDamage != 1 && AddElementsToVanillaContent.earthItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Earth)
             {
                 damage *= EarthDamage;
             }
-            if (AirDamage != 1 && AddElementsToVanillaContent.airItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Air)
             {
                 damage *= AirDamage;
             }
-            if (LightDamage != 1 && AddElementsToVanillaContent.lightItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Light)
             {
                 damage *= LightDamage;
             }
-            if (DarkDamage != 1 && AddElementsToVanillaContent.darkItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Dark)
             {
                 damage *= DarkDamage;
             }
-            if (IceDamage != 1 && AddElementsToVanillaContent.iceItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Ice)
             {
                 damage *= IceDamage;
             }
-            if (PoisonDamage != 1 && AddElementsToVanillaContent.poisonItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Poison)
             {
                 damage *= PoisonDamage;
             }
-            if (ElectricDamage != 1 && AddElementsToVanillaContent.electricItem.Contains(item.type))
+            if (item.GetElementItem().elementData.Electric)
             {
                 damage *= ElectricDamage;
             }
