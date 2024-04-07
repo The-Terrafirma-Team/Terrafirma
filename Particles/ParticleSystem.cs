@@ -1,12 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Particles.LegacyParticles;
-using Terrafirma.Systems.NPCQuests;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -97,9 +91,11 @@ namespace Terrafirma.Particles
             }
         }
 
-        public static void AddParticle(Particle particle, Vector2 Position, bool TooltipParticle = false)
+        public static void AddParticle(Particle particle, Vector2 Position, Vector2? Velocity = null, Color? color = null, bool TooltipParticle = false)
         {
-            particle.Position = Position;
+            particle.position = Position;
+            particle.velocity = (Vector2)(Velocity == null ? Vector2.Zero : Velocity);
+            particle.color = (Color)(color == null ? Color.White : color);
             if (!TooltipParticle)
             {
                 if (Particles.Count == MaxParticles)
@@ -116,7 +112,9 @@ namespace Terrafirma.Particles
     }
     public abstract class Particle : ModType
     {
-        public Vector2 Position;
+        public Vector2 position;
+        public Vector2 velocity;
+        public Color color;
         public int TimeInWorld;
         public bool Active = true;
         protected override void Register()

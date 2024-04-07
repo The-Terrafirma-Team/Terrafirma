@@ -1,12 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Systems.Elements.Beastiary;
-using Terraria.GameContent;
 using Terraria;
 using Terraria.ModLoader;
 using ReLogic.Content;
@@ -24,10 +17,6 @@ namespace Terrafirma.Particles
             
             base.OnSpawn();
         }
-        public override void SetStaticDefaults()
-        {
-            HeartWave = ModContent.Request<Texture2D>("Terrafirma/Particles/LegacyParticles/CrimsonHeartSentryWaveEffect");
-        }
         public override void Update()
         {
             Scale = 1f + (timeleft - 60) * 0.015f;
@@ -36,9 +25,10 @@ namespace Terrafirma.Particles
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            HeartWave = ModContent.Request<Texture2D>("Terrafirma/Particles/LegacyParticles/CrimsonHeartSentryWaveEffect");
+            if(HeartWave == null)
+            HeartWave = ModContent.Request<Texture2D>(Terrafirma.AssetPath + "Particles/CrimsonHeartSentryWaveEffect");
             spriteBatch.Draw(HeartWave.Value, 
-                Position - Main.screenPosition, 
+                position - Main.screenPosition, 
                 HeartWave.Value.Bounds, 
                 new Color(200, 10, 0, 0) * ((60 - TimeInWorld) / 60f),
                 TimeInWorld * 0.06f, 

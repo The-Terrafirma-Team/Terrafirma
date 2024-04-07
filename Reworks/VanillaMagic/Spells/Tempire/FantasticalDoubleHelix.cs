@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Items.Weapons.Magic.Tempire;
-using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Particles;
 using Terraria;
@@ -7,8 +6,6 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Terrafirma.Particles.LegacyParticles;
-using static Humanizer.In;
 
 namespace Terrafirma.Systems.Cooking
 {
@@ -49,18 +46,15 @@ namespace Terrafirma.Systems.Cooking
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    LegacyParticleSystem.AddUIParticle(new BigUISparkle(), 
-                        new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), 
-                        new Vector2(3f,0).RotatedBy(MathHelper.Pi * 0.33f * i), 
-                        new Color(213,123,11,0) * 0.2f, 
-                        0.1f, 
-                        8, 
-                        0.05f, 
-                        2f, 
-                        Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                    BigSparkle p = new BigSparkle();
+                    p.Scale = 2;
+                    p.fadeInTime = 8;
+                    p.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+                    p.smallestSize = 0.05f;
+                    ParticleSystem.AddParticle(p, new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), new Vector2(3f, 0).RotatedBy(MathHelper.Pi * 0.33f * i), new Color(213, 123, 11, 0) * 0.2f, true);
                 }    
             }
-            LegacyParticleSystem.DrawUIParticle(Vector2.Zero);
+            ParticleSystem.DrawUIParticle(Vector2.Zero);
             base.Draw(spriteBatch);
         }
 

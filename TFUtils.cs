@@ -6,13 +6,9 @@ using System;
 using Terraria.Audio;
 using System.Linq;
 using Terraria.DataStructures;
-using Terrafirma.Projectiles.Ranged;
-using Terraria.GameContent.RGB;
-using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Data;
 using Terrafirma.Global.Items;
 using Terrafirma.Global.Players;
-using Terrafirma.Systems.Elements;
 using static Terrafirma.Systems.Elements.ElementGlobals;
 
 namespace Terrafirma

@@ -1,15 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Global.Items;
-using Terrafirma.Global.Players;
-using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 

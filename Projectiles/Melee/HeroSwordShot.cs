@@ -3,10 +3,6 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.Audio;
-using System;
-using Terrafirma.Items.Weapons.Melee.Swords;
-using Terrafirma.Particles.LegacyParticles;
 
 namespace Terrafirma.Projectiles.Melee
 {

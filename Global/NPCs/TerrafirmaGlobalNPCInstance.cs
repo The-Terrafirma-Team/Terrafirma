@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
-using Terrafirma.Items.Consumable;
-using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Global.NPCs
@@ -13,15 +8,12 @@ namespace Terrafirma.Global.NPCs
     internal class TerrafirmaGlobalNPCInstance : GlobalNPC
     {
         public bool PhantasmalBurn;
-        public bool AgnomalumBurns;
         public bool ElectricCharge;
         public override void ResetEffects(NPC npc)
         {
             PhantasmalBurn = false;
-            AgnomalumBurns = false;
             ElectricCharge = false;
         }
-
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
             if (PhantasmalBurn)
@@ -29,13 +21,6 @@ namespace Terrafirma.Global.NPCs
                 damage += 15;
                 npc.lifeRegen -= 60;
             }
-
-            if (AgnomalumBurns)
-            {
-                damage += 15;
-                npc.lifeRegen -= 60;
-            }
-
             if (ElectricCharge)
             {
                 damage = 5;
@@ -43,7 +28,6 @@ namespace Terrafirma.Global.NPCs
             }
         }
         public override bool InstancePerEntity => true;
-
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
             if (npc.HasBuff(ModContent.BuffType<Inked>())) drawColor = new Color(179, 130, 237);

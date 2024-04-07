@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;

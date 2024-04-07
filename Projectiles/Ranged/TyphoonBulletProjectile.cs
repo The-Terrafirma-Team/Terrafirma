@@ -1,10 +1,6 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terrafirma.Dusts;
 using Terrafirma.Particles;
-using Terrafirma.Particles.LegacyParticles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -57,8 +53,10 @@ namespace Terrafirma.Projectiles.Ranged
             newdust.noGravity = true;
             if (Projectile.ai[0] % 20 == 0)
             {
-                
-                LegacyParticleSystem.AddParticle(new TyphoonParticle(), Projectile.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, (1000f - Projectile.Center.Distance(Main.player[Projectile.owner].MountedCenter)) / 500f , Projectile.rotation);
+                TyphoonParticle p = new TyphoonParticle();
+                p.Scale = (1000f - Projectile.Center.Distance(Main.player[Projectile.owner].MountedCenter)) / 500f;
+                p.Rotation = Projectile.rotation;
+                ParticleSystem.AddParticle(p, Projectile.Center, -Projectile.velocity * 2f);
             }
             if (Projectile.ai[0] % 80 == 0) SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
         }
@@ -86,7 +84,9 @@ namespace Terrafirma.Projectiles.Ranged
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            LegacyParticleSystem.AddParticle(new TyphoonParticle(), target.Center, -Projectile.velocity * 2f, Color.White, 0, 0, 0, 1f, Projectile.rotation);
+            TyphoonParticle p = new TyphoonParticle();
+            p.Scale = 1; p.Rotation = Projectile.rotation;
+            ParticleSystem.AddParticle(p, Projectile.Center, -Projectile.velocity * 2f);
             for (int i = 0; i < 10; i++)
             {
                 Dust newdust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Water_Jungle, Main.rand.NextVector2Circular(10,10).X, Main.rand.NextVector2Circular(10, 10).Y, 0, new Color(190, 200, 215, 1), Main.rand.NextFloat(1.2f, 2f));
@@ -96,7 +96,6 @@ namespace Terrafirma.Projectiles.Ranged
         }
         public override void OnKill(int timeLeft)
         {
-
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         }

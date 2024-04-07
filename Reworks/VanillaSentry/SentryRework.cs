@@ -24,6 +24,8 @@ namespace Terrafirma.Reworks.VanillaSentry
         }
         public override bool PreAI(Projectile projectile)
         {
+            if(projectile.type is >= 688 and <= 690)
+                return true;
             return false;
         }
         public override void PostAI(Projectile projectile)
