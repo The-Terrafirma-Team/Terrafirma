@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
@@ -68,23 +69,44 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 
             if (Projectile.timeLeft == 300)
             {
-                LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 46f, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = 10;
+                bigsparkle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                bigsparkle.Scale = 1f;
+                ParticleSystem.AddParticle(bigsparkle, Projectile.Center + Vector2.Normalize(Projectile.velocity) * 46f, Vector2.Zero, ShotColor);
+                //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 46f, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
             }
 
             if (Main.rand.NextBool(10))
             {
-                LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor * 0.3f, 0, 8, Main.rand.NextFloat(0.3f, 0.8f), 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = 8;
+                bigsparkle.smallestSize = Main.rand.NextFloat(0.3f, 0.8f);
+                bigsparkle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                bigsparkle.Scale = 1f;
+                ParticleSystem.AddParticle(bigsparkle, Projectile.Center, Vector2.Zero, ShotColor * 0.3f);
+                //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor * 0.3f, 0, 8, Main.rand.NextFloat(0.3f, 0.8f), 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
             }
         }
 
         public override void OnKill(int timeLeft)
         {
-            LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = 10;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            bigsparkle.Scale = 1f;
+            ParticleSystem.AddParticle(bigsparkle, Projectile.Center, Vector2.Zero, ShotColor);
+            //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = 10;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            bigsparkle.Scale = 1f;
+            ParticleSystem.AddParticle(bigsparkle, Projectile.Center, Vector2.Zero, ShotColor);
+            //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, ShotColor, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
         }
     }
 

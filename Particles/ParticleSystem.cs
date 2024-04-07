@@ -108,6 +108,7 @@ namespace Terrafirma.Particles
             {
                 TooltipParticles.Add(particle);
             }
+            particle.OnSpawn();
         }
     }
     public abstract class Particle : ModType

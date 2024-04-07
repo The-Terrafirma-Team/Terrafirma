@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using System;
 using Terrafirma.Items.Weapons.Melee.Swords;
+using Terrafirma.Particles;
 
 namespace Terrafirma.Projectiles.Melee
 {
@@ -95,13 +96,23 @@ namespace Terrafirma.Projectiles.Melee
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = 10;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            ParticleSystem.AddParticle(bigsparkle, Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0));
+            //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+           
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnKill(int timeLeft)
         {
-            LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 2f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = 10;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            bigsparkle.Scale = 2f;
+            ParticleSystem.AddParticle(bigsparkle, Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0));
+            //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 2f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
         }
         public override bool PreDraw(ref Color lightColor)
         {

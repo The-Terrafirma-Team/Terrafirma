@@ -10,6 +10,7 @@ using Terrafirma.Data;
 using Terrafirma.Global.Items;
 using Terrafirma.Global.Players;
 using static Terrafirma.Systems.Elements.ElementGlobals;
+using Terrafirma.Particles;
 
 namespace Terrafirma
 {
@@ -249,7 +250,12 @@ namespace Terrafirma
                     SoundEngine.PlaySound(SoundID.Item37, player.position);
                     Main.projectile[i].netUpdate = true;
 
-                    LegacyParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
+                    BigSparkle bigsparkle = new BigSparkle();
+                    bigsparkle.fadeInTime = 6;
+                    bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
+                    bigsparkle.Scale = 3f;
+                    ParticleSystem.AddParticle(bigsparkle, hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f);
+                    //LegacyParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
                     for(int j = 0; j < 3; j++)
                     {
                         Dust d = Dust.NewDustPerfect(hitbox.ClosestPointInRect(Main.projectile[i].Center), DustID.Torch, -Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(5));

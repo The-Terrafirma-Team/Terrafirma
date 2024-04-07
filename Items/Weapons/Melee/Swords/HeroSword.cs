@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terrafirma.Particles;
 using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
 using Terrafirma.Rarities;
@@ -102,7 +103,12 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 
             if (Main.timeForVisualEffects % 40 == 0)
             {
-                LegacyParticleSystem.AddParticle(new BigSparkle(), Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20,40).RotatedBy(MathHelper.PiOver4) - new Vector2(0,20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = 10;
+                bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+                bigsparkle.Scale = 1f;
+                ParticleSystem.AddParticle(bigsparkle, Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20, 40).RotatedBy(MathHelper.PiOver4) - new Vector2(0, 20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f);
+                //LegacyParticleSystem.AddParticle(new BigSparkle(), Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20,40).RotatedBy(MathHelper.PiOver4) - new Vector2(0,20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
             }
 
             return false;
@@ -153,7 +159,13 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            LegacyParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = 10;
+            bigsparkle.smallestSize = 0.1f;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            bigsparkle.Scale = 1f;
+            ParticleSystem.AddParticle(bigsparkle, target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0));
+            //LegacyParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
             base.OnHitNPC(player, target, hit, damageDone);
         }
     }

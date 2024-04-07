@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Items.Weapons.Magic.Tempire;
+using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
@@ -50,7 +51,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
 
                 if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
                 {
-                    LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                    BigSparkle bigsparkle = new BigSparkle();
+                    bigsparkle.fadeInTime = Main.rand.Next(6, 10);
+                    bigsparkle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                    bigsparkle.Scale = 1f;
+                    ParticleSystem.AddParticle(bigsparkle, Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0));
+                    //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
                 }
             }
             if (Projectile.ai[1] == 2)
@@ -61,7 +67,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
 
                 if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
                 {
-                    LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                    BigSparkle bigsparkle = new BigSparkle();
+                    bigsparkle.fadeInTime = Main.rand.Next(6, 10);
+                    bigsparkle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                    bigsparkle.Scale = 1f;
+                    ParticleSystem.AddParticle(bigsparkle, Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0));
+                    //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
                 }
             }
 
@@ -82,7 +93,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
 
             if (Projectile.ai[0] % Main.rand.Next(6, 10) == 0)
             {
-                LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = Main.rand.Next(6, 10);
+                bigsparkle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                bigsparkle.Scale = 1f;
+                ParticleSystem.AddParticle(bigsparkle, Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0));
+                //LegacyParticleSystem.AddParticle(new BigSparkle(), Projectile.Center + Main.rand.NextVector2Circular(12, 12), Vector2.Zero, new Color(1f, 0.3f, 0.2f, 0), 0, Main.rand.Next(6, 10), 1, 1f, Main.rand.NextFloat(-0.1f, 0.1f));
             }
 
             if (Projectile.ai[1] == 0)

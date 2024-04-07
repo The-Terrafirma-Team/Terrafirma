@@ -29,7 +29,7 @@ namespace Terrafirma.Particles
                 sizeMultiplier *= 0.9f;
             }
 
-            if (sizeMultiplier <= 0.1f)
+            if (sizeMultiplier < smallestSize)
             {
                 Active = false;
             }
