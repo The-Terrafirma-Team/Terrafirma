@@ -110,7 +110,8 @@ namespace Terrafirma.Systems.Elements
             {
                 if (!ProjectileSets.DontInheritElementFromWeapon[projectile.type])
                 {
-                    elementData = ElementData.cloneElements(Main.player[projectile.owner].HeldItem.GetElementItem().elementData);
+                    if(source is EntitySource_ItemUse_WithAmmo src)
+                        elementData = ElementData.cloneElements(Main.player[projectile.owner].HeldItem.GetElementItem().elementData);
                 }
             }
         }
