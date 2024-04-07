@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Global
+namespace Terrafirma.Global.Tiles
 {
     internal class TileMerge // Thanks blah :)
     {
@@ -72,7 +72,7 @@ namespace Terrafirma.Global
         {
             if (Main.tile[x, y] == null || x < 0 || x >= Main.maxTilesX || y < 0 || y >= Main.maxTilesY)
             {
-                mergedUp = (mergedLeft = (mergedRight = (mergedDown = false)));
+                mergedUp = mergedLeft = mergedRight = mergedDown = false;
                 return;
             }
             Main.tileMerge[myType][mergeType] = false;
@@ -84,10 +84,10 @@ namespace Terrafirma.Global
             Tile tileTopRight = Main.tile[x + 1, y - 1];
             Tile tileBottomLeft = Main.tile[x - 1, y + 1];
             Tile check = Main.tile[x + 1, y + 1];
-            Similarity leftSim = ((!forceSameLeft) ? GetSimilarity(tileLeft, myType, mergeType) : Similarity.Same);
-            Similarity rightSim = ((!forceSameRight) ? GetSimilarity(tileRight, myType, mergeType) : Similarity.Same);
-            Similarity upSim = ((!forceSameUp) ? GetSimilarity(tileUp, myType, mergeType) : Similarity.Same);
-            Similarity downSim = ((!forceSameDown) ? GetSimilarity(tileDown, myType, mergeType) : Similarity.Same);
+            Similarity leftSim = !forceSameLeft ? GetSimilarity(tileLeft, myType, mergeType) : Similarity.Same;
+            Similarity rightSim = !forceSameRight ? GetSimilarity(tileRight, myType, mergeType) : Similarity.Same;
+            Similarity upSim = !forceSameUp ? GetSimilarity(tileUp, myType, mergeType) : Similarity.Same;
+            Similarity downSim = !forceSameDown ? GetSimilarity(tileDown, myType, mergeType) : Similarity.Same;
             Similarity topLeftSim = GetSimilarity(tileTopLeft, myType, mergeType);
             Similarity topRightSim = GetSimilarity(tileTopRight, myType, mergeType);
             Similarity bottomLeftSim = GetSimilarity(tileBottomLeft, myType, mergeType);
@@ -103,7 +103,7 @@ namespace Terrafirma.Global
             {
                 randomFrame = Main.tile[x, y].TileFrameNumber;
             }
-            mergedDown = (mergedLeft = (mergedRight = (mergedUp = false)));
+            mergedDown = mergedLeft = mergedRight = mergedUp = false;
             switch (leftSim)
             {
                 case Similarity.None:
@@ -121,7 +121,7 @@ namespace Terrafirma.Global
 
                                         case Similarity.Merge:
                                             mergedRight = true;
-                                            SetFrame(x, y, 234 + (18 * randomFrame), 36);
+                                            SetFrame(x, y, 234 + 18 * randomFrame, 36);
                                             break;
 
                                         default:
@@ -135,16 +135,16 @@ namespace Terrafirma.Global
                                     {
                                         case Similarity.Same:
                                             mergedDown = true;
-                                            SetFrame(x, y, 72, 90 + (18 * randomFrame));
+                                            SetFrame(x, y, 72, 90 + 18 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
-                                            SetFrame(x, y, 108 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 108 + 18 * randomFrame, 54);
                                             break;
 
                                         default:
                                             mergedDown = true;
-                                            SetFrame(x, y, 126, 90 + (18 * randomFrame));
+                                            SetFrame(x, y, 126, 90 + 18 * randomFrame);
                                             break;
                                     }
                                     break;
@@ -156,7 +156,7 @@ namespace Terrafirma.Global
                                     }
                                     else
                                     {
-                                        SetFrame(x, y, 108 + (18 * randomFrame), 54);
+                                        SetFrame(x, y, 108 + 18 * randomFrame, 54);
                                     }
                                     break;
                             }
@@ -170,16 +170,16 @@ namespace Terrafirma.Global
                                     {
                                         case Similarity.Same:
                                             mergedUp = true;
-                                            SetFrame(x, y, 72, 144 + (18 * randomFrame));
+                                            SetFrame(x, y, 72, 144 + 18 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
-                                            SetFrame(x, y, 108 + (18 * randomFrame), 0);
+                                            SetFrame(x, y, 108 + 18 * randomFrame, 0);
                                             break;
 
                                         default:
                                             mergedUp = true;
-                                            SetFrame(x, y, 126, 144 + (18 * randomFrame));
+                                            SetFrame(x, y, 126, 144 + 18 * randomFrame);
                                             break;
                                     }
                                     break;
@@ -192,13 +192,13 @@ namespace Terrafirma.Global
                                             break;
 
                                         case Similarity.Merge:
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                             break;
 
                                         default:
                                             mergedUp = true;
                                             mergedDown = true;
-                                            SetFrame(x, y, 108, 216 + (18 * randomFrame));
+                                            SetFrame(x, y, 108, 216 + 18 * randomFrame);
                                             break;
                                     }
                                     break;
@@ -211,12 +211,12 @@ namespace Terrafirma.Global
                                             break;
 
                                         case Similarity.Merge:
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                             break;
 
                                         default:
                                             mergedUp = true;
-                                            SetFrame(x, y, 108, 144 + (18 * randomFrame));
+                                            SetFrame(x, y, 108, 144 + 18 * randomFrame);
                                             break;
                                     }
                                     break;
@@ -233,7 +233,7 @@ namespace Terrafirma.Global
                                         break;
                                     }
                                     _ = 1;
-                                    SetFrame(x, y, 108 + (18 * randomFrame), 0);
+                                    SetFrame(x, y, 108 + 18 * randomFrame, 0);
                                     break;
 
                                 case Similarity.Merge:
@@ -244,12 +244,12 @@ namespace Terrafirma.Global
                                             break;
 
                                         case Similarity.Merge:
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                             break;
 
                                         default:
                                             mergedDown = true;
-                                            SetFrame(x, y, 108, 90 + (18 * randomFrame));
+                                            SetFrame(x, y, 108, 90 + 18 * randomFrame);
                                             break;
                                     }
                                     break;
@@ -263,11 +263,11 @@ namespace Terrafirma.Global
 
                                         case Similarity.Merge:
                                             mergedRight = true;
-                                            SetFrame(x, y, 54 + (18 * randomFrame), 234);
+                                            SetFrame(x, y, 54 + 18 * randomFrame, 234);
                                             break;
 
                                         default:
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                             break;
                                     }
                                     break;
@@ -287,18 +287,18 @@ namespace Terrafirma.Global
                                     {
                                         case Similarity.Same:
                                             mergedLeft = true;
-                                            SetFrame(x, y, 162, 126 + (18 * randomFrame));
+                                            SetFrame(x, y, 162, 126 + 18 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
                                             mergedLeft = true;
                                             mergedRight = true;
-                                            SetFrame(x, y, 180, 126 + (18 * randomFrame));
+                                            SetFrame(x, y, 180, 126 + 18 * randomFrame);
                                             break;
 
                                         default:
                                             mergedLeft = true;
-                                            SetFrame(x, y, 234 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 234 + 18 * randomFrame, 54);
                                             break;
                                     }
                                     break;
@@ -307,17 +307,17 @@ namespace Terrafirma.Global
                                     switch (rightSim)
                                     {
                                         case Similarity.Same:
-                                            mergedLeft = (mergedDown = true);
-                                            SetFrame(x, y, 36, 108 + (36 * randomFrame));
+                                            mergedLeft = mergedDown = true;
+                                            SetFrame(x, y, 36, 108 + 36 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
-                                            mergedLeft = (mergedRight = (mergedDown = true));
-                                            SetFrame(x, y, 198, 144 + (18 * randomFrame));
+                                            mergedLeft = mergedRight = mergedDown = true;
+                                            SetFrame(x, y, 198, 144 + 18 * randomFrame);
                                             break;
 
                                         default:
-                                            SetFrame(x, y, 108 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 108 + 18 * randomFrame, 54);
                                             break;
                                     }
                                     break;
@@ -330,7 +330,7 @@ namespace Terrafirma.Global
                                     }
                                     else
                                     {
-                                        SetFrame(x, y, 108 + (18 * randomFrame), 54);
+                                        SetFrame(x, y, 108 + 18 * randomFrame, 54);
                                     }
                                     break;
                             }
@@ -343,17 +343,17 @@ namespace Terrafirma.Global
                                     switch (rightSim)
                                     {
                                         case Similarity.Same:
-                                            mergedUp = (mergedLeft = true);
-                                            SetFrame(x, y, 36, 90 + (36 * randomFrame));
+                                            mergedUp = mergedLeft = true;
+                                            SetFrame(x, y, 36, 90 + 36 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
-                                            mergedLeft = (mergedRight = (mergedUp = true));
-                                            SetFrame(x, y, 198, 90 + (18 * randomFrame));
+                                            mergedLeft = mergedRight = mergedUp = true;
+                                            SetFrame(x, y, 198, 90 + 18 * randomFrame);
                                             break;
 
                                         default:
-                                            SetFrame(x, y, 108 + (18 * randomFrame), 0);
+                                            SetFrame(x, y, 108 + 18 * randomFrame, 0);
                                             break;
                                     }
                                     break;
@@ -362,17 +362,17 @@ namespace Terrafirma.Global
                                     switch (rightSim)
                                     {
                                         case Similarity.Same:
-                                            mergedUp = (mergedLeft = (mergedDown = true));
-                                            SetFrame(x, y, 216, 90 + (18 * randomFrame));
+                                            mergedUp = mergedLeft = mergedDown = true;
+                                            SetFrame(x, y, 216, 90 + 18 * randomFrame);
                                             break;
 
                                         case Similarity.Merge:
-                                            mergedDown = (mergedLeft = (mergedRight = (mergedUp = true)));
-                                            SetFrame(x, y, 108 + (18 * randomFrame), 198);
+                                            mergedDown = mergedLeft = mergedRight = mergedUp = true;
+                                            SetFrame(x, y, 108 + 18 * randomFrame, 198);
                                             break;
 
                                         default:
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                             break;
                                     }
                                     break;
@@ -384,7 +384,7 @@ namespace Terrafirma.Global
                                     }
                                     else
                                     {
-                                        SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                        SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                     }
                                     break;
                             }
@@ -402,7 +402,7 @@ namespace Terrafirma.Global
                                     else
                                     {
                                         _ = 1;
-                                        SetFrame(x, y, 108 + (18 * randomFrame), 0);
+                                        SetFrame(x, y, 108 + 18 * randomFrame, 0);
                                     }
                                     break;
 
@@ -413,7 +413,7 @@ namespace Terrafirma.Global
                                         break;
                                     }
                                     _ = 1;
-                                    SetFrame(x, y, 162 + (18 * randomFrame), 54);
+                                    SetFrame(x, y, 162 + 18 * randomFrame, 54);
                                     break;
 
                                 default:
@@ -425,8 +425,8 @@ namespace Terrafirma.Global
                                             break;
 
                                         case Similarity.Merge:
-                                            mergedRight = (mergedLeft = true);
-                                            SetFrame(x, y, 162 + (18 * randomFrame), 198);
+                                            mergedRight = mergedLeft = true;
+                                            SetFrame(x, y, 162 + 18 * randomFrame, 198);
                                             break;
 
                                         default:
@@ -453,19 +453,19 @@ namespace Terrafirma.Global
                                     {
                                         if (bottomRightSim == Similarity.Merge)
                                         {
-                                            SetFrame(x, y, 0, 90 + (36 * randomFrame));
+                                            SetFrame(x, y, 0, 90 + 36 * randomFrame);
                                         }
                                         else if (bottomLeftSim == Similarity.Merge)
                                         {
-                                            SetFrame(x, y, 18, 90 + (36 * randomFrame));
+                                            SetFrame(x, y, 18, 90 + 36 * randomFrame);
                                         }
                                         else if (topRightSim == Similarity.Merge)
                                         {
-                                            SetFrame(x, y, 0, 108 + (36 * randomFrame));
+                                            SetFrame(x, y, 0, 108 + 36 * randomFrame);
                                         }
                                         else
                                         {
-                                            SetFrame(x, y, 18, 108 + (36 * randomFrame));
+                                            SetFrame(x, y, 18, 108 + 36 * randomFrame);
                                         }
                                         break;
                                     }
@@ -476,15 +476,15 @@ namespace Terrafirma.Global
                                             {
                                                 if (bottomLeftSim == Similarity.Same)
                                                 {
-                                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                                 }
                                                 else if (bottomRightSim == Similarity.Same)
                                                 {
-                                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                                 }
                                                 else
                                                 {
-                                                    SetFrame(x, y, 108 + (18 * randomFrame), 36);
+                                                    SetFrame(x, y, 108 + 18 * randomFrame, 36);
                                                 }
                                                 return;
                                             }
@@ -496,11 +496,11 @@ namespace Terrafirma.Global
                                             {
                                                 if (topRightSim == Similarity.Merge)
                                                 {
-                                                    SetFrame(x, y, 0, 108 + (36 * randomFrame));
+                                                    SetFrame(x, y, 0, 108 + 36 * randomFrame);
                                                 }
                                                 else
                                                 {
-                                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                                 }
                                             }
                                             else
@@ -514,25 +514,25 @@ namespace Terrafirma.Global
                                             {
                                                 if (bottomRightSim == Similarity.Same)
                                                 {
-                                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                                 }
                                                 else
                                                 {
-                                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                                 }
                                             }
                                             else
                                             {
-                                                SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                                SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                             }
                                             return;
                                     }
-                                    SetFrame(x, y, 18 + (18 * randomFrame), 18);
+                                    SetFrame(x, y, 18 + 18 * randomFrame, 18);
                                     break;
 
                                 case Similarity.Merge:
                                     mergedRight = true;
-                                    SetFrame(x, y, 144, 126 + (18 * randomFrame));
+                                    SetFrame(x, y, 144, 126 + 18 * randomFrame);
                                     break;
 
                                 default:
@@ -546,17 +546,17 @@ namespace Terrafirma.Global
                             {
                                 case Similarity.Same:
                                     mergedDown = true;
-                                    SetFrame(x, y, 144 + (18 * randomFrame), 90);
+                                    SetFrame(x, y, 144 + 18 * randomFrame, 90);
                                     break;
 
                                 case Similarity.Merge:
-                                    mergedDown = (mergedRight = true);
-                                    SetFrame(x, y, 54, 108 + (36 * randomFrame));
+                                    mergedDown = mergedRight = true;
+                                    SetFrame(x, y, 54, 108 + 36 * randomFrame);
                                     break;
 
                                 default:
                                     mergedDown = true;
-                                    SetFrame(x, y, 90, 90 + (18 * randomFrame));
+                                    SetFrame(x, y, 90, 90 + 18 * randomFrame);
                                     break;
                             }
                             break;
@@ -565,16 +565,16 @@ namespace Terrafirma.Global
                             switch (rightSim)
                             {
                                 case Similarity.Same:
-                                    SetFrame(x, y, 18 + (18 * randomFrame), 36);
+                                    SetFrame(x, y, 18 + 18 * randomFrame, 36);
                                     break;
 
                                 case Similarity.Merge:
                                     mergedRight = true;
-                                    SetFrame(x, y, 54 + (18 * randomFrame), 216);
+                                    SetFrame(x, y, 54 + 18 * randomFrame, 216);
                                     break;
 
                                 default:
-                                    SetFrame(x, y, 18 + (36 * randomFrame), 72);
+                                    SetFrame(x, y, 18 + 36 * randomFrame, 72);
                                     break;
                             }
                             break;
@@ -589,17 +589,17 @@ namespace Terrafirma.Global
                             {
                                 case Similarity.Same:
                                     mergedUp = true;
-                                    SetFrame(x, y, 144 + (18 * randomFrame), 108);
+                                    SetFrame(x, y, 144 + 18 * randomFrame, 108);
                                     break;
 
                                 case Similarity.Merge:
-                                    mergedRight = (mergedUp = true);
-                                    SetFrame(x, y, 54, 90 + (36 * randomFrame));
+                                    mergedRight = mergedUp = true;
+                                    SetFrame(x, y, 54, 90 + 36 * randomFrame);
                                     break;
 
                                 default:
                                     mergedUp = true;
-                                    SetFrame(x, y, 90, 144 + (18 * randomFrame));
+                                    SetFrame(x, y, 90, 144 + 18 * randomFrame);
                                     break;
                             }
                             break;
@@ -608,13 +608,13 @@ namespace Terrafirma.Global
                             switch (rightSim)
                             {
                                 case Similarity.Same:
-                                    mergedUp = (mergedDown = true);
-                                    SetFrame(x, y, 144 + (18 * randomFrame), 180);
+                                    mergedUp = mergedDown = true;
+                                    SetFrame(x, y, 144 + 18 * randomFrame, 180);
                                     break;
 
                                 case Similarity.Merge:
-                                    mergedUp = (mergedRight = (mergedDown = true));
-                                    SetFrame(x, y, 216, 144 + (18 * randomFrame));
+                                    mergedUp = mergedRight = mergedDown = true;
+                                    SetFrame(x, y, 216, 144 + 18 * randomFrame);
                                     break;
 
                                 default:
@@ -627,7 +627,7 @@ namespace Terrafirma.Global
                             if (rightSim == Similarity.Same)
                             {
                                 mergedUp = true;
-                                SetFrame(x, y, 234 + (18 * randomFrame), 18);
+                                SetFrame(x, y, 234 + 18 * randomFrame, 18);
                             }
                             else
                             {
@@ -643,16 +643,16 @@ namespace Terrafirma.Global
                     switch (rightSim)
                     {
                         case Similarity.Same:
-                            SetFrame(x, y, 18 + (18 * randomFrame), 0);
+                            SetFrame(x, y, 18 + 18 * randomFrame, 0);
                             break;
 
                         case Similarity.Merge:
                             mergedRight = true;
-                            SetFrame(x, y, 54 + (18 * randomFrame), 198);
+                            SetFrame(x, y, 54 + 18 * randomFrame, 198);
                             break;
 
                         default:
-                            SetFrame(x, y, 18 + (36 * randomFrame), 54);
+                            SetFrame(x, y, 18 + 36 * randomFrame, 54);
                             break;
                     }
                     break;
@@ -661,7 +661,7 @@ namespace Terrafirma.Global
                     if (rightSim == Similarity.Same)
                     {
                         mergedDown = true;
-                        SetFrame(x, y, 234 + (18 * randomFrame), 0);
+                        SetFrame(x, y, 234 + 18 * randomFrame, 0);
                     }
                     else
                     {
@@ -673,12 +673,12 @@ namespace Terrafirma.Global
                     switch (rightSim)
                     {
                         case Similarity.Same:
-                            SetFrame(x, y, 108 + (18 * randomFrame), 72);
+                            SetFrame(x, y, 108 + 18 * randomFrame, 72);
                             break;
 
                         case Similarity.Merge:
                             mergedRight = true;
-                            SetFrame(x, y, 54 + (18 * randomFrame), 252);
+                            SetFrame(x, y, 54 + 18 * randomFrame, 252);
                             break;
 
                         default:

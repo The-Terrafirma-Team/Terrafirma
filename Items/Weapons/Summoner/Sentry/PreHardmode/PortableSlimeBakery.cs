@@ -8,11 +8,11 @@ using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
-    internal class PortableSlimeBakery : ModItem
+    public class PortableSlimeBakery : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 6;
+            Item.damage = 16    ;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;

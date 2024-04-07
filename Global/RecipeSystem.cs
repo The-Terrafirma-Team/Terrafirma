@@ -32,6 +32,12 @@ namespace Terrafirma.Global
                 {
                     recipe.AddIngredient(ModContent.ItemType<MajesticGel>(), 10);
                 }
+
+                if (recipe.HasResult(ItemID.Leather))
+                {
+                    recipe.RemoveIngredient(ItemID.RottenChunk);
+                    recipe.AddIngredient(ItemID.RottenChunk, 3);
+                }
             }
             #region Uncraftable to Craftable
             Recipe HermesBoots = Recipe.Create(ItemID.HermesBoots);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Global;
+using Terrafirma.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -50,6 +51,15 @@ namespace Terrafirma.Items.Equipment.Summoner
         {
             return body.type == ModContent.ItemType<MahoganyShamanBody>() && legs.type == ModContent.ItemType<MahoganyShamanLegs>();
         }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = Recipe.Create(Type)
+                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.RichMahogany, 20)
+                .AddIngredient(ModContent.ItemType<MahoganyLeaf>(), 10)
+                .Register();
+        }
     }
     [AutoloadEquip(EquipType.Body)]
     public class MahoganyShamanBody : ModItem
@@ -65,6 +75,15 @@ namespace Terrafirma.Items.Equipment.Summoner
             player.GetDamage(DamageClass.Summon) += 0.1f;
             player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
         }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = Recipe.Create(Type)
+                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.RichMahogany, 30)
+                .AddIngredient(ModContent.ItemType<MahoganyLeaf>(), 15)
+                .Register();
+        }
     }
     [AutoloadEquip(EquipType.Legs)]
     public class MahoganyShamanLegs : ModItem
@@ -79,6 +98,15 @@ namespace Terrafirma.Items.Equipment.Summoner
         {
             player.moveSpeed += 0.10f;
             player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
+        }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = Recipe.Create(Type)
+                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.RichMahogany, 25)
+                .AddIngredient(ModContent.ItemType<MahoganyLeaf>(), 12)
+                .Register();
         }
     }
     public class MahoganyShamanPlayer : ModPlayer

@@ -29,8 +29,15 @@ namespace Terrafirma.Systems.Elements
             public ElementData elementData = new ElementData();
             private static Asset<Texture2D> elementIcons;
             public override bool InstancePerEntity => true;
+
+            public override void OnCreated(Item item, ItemCreationContext context)
+            {
+                elementData = new ElementData();
+                base.OnCreated(item, context);
+            }
             public override void SetDefaults(Item item)
             {
+
                 if(item.ModItem == null)
                 {
                     if (AddElementsToVanillaContent.fireItem.Contains(item.type))

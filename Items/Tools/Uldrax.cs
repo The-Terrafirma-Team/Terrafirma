@@ -18,7 +18,7 @@ namespace Terrafirma.Items.Tools
             Item.noMelee = true;
 
             Item.pick = 200;
-            Item.axe = 110;
+            Item.axe = 22;
             Item.tileBoost = -1;
             Item.shoot = ModContent.ProjectileType<UldraxProjectile>();
 

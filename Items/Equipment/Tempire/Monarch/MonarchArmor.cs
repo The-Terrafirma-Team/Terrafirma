@@ -29,7 +29,7 @@ namespace Terrafirma.Items.Equipment.Tempire.Monarch
         public override void UpdateArmorSet(Player player)
         {
             int WingId = new Item(ModContent.ItemType<MonarchWings>()).wingSlot;
-            player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.MonarchChestplate.SetBonus");
+            player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.MonarchHelmet.SetBonus");
             if (!TFUtils.AnyWingsEquipped(player))
             {
                 player.wings = WingId;

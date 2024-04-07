@@ -812,6 +812,11 @@ Items: {
 		DisplayName: Crimson Heart Staff
 		Tooltip: ""
 	}
+
+	MahoganyLeaf: {
+		DisplayName: Mahogany Leaf
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
