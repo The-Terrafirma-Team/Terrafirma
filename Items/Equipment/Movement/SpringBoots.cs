@@ -23,10 +23,10 @@ namespace Terrafirma.Items.Equipment.Movement
             player.autoJump = true;
             player.noFallDmg = true;
 
-            player.jumpSpeedBoost = (player.GetModPlayer<TerrafirmaGlobalPlayer>().JumpMultiplier) * (player.GetModPlayer<TerrafirmaGlobalPlayer>().JumpMultiplier) / 2;
-            player.maxRunSpeed = 3 * (player.GetModPlayer<TerrafirmaGlobalPlayer>().JumpMultiplier);
+            player.jumpSpeedBoost = (player.GetModPlayer<TerrafirmaModPlayer>().JumpMultiplier) * (player.GetModPlayer<TerrafirmaModPlayer>().JumpMultiplier) / 2;
+            player.maxRunSpeed = 3 * (player.GetModPlayer<TerrafirmaModPlayer>().JumpMultiplier);
 
-            player.GetModPlayer<TerrafirmaGlobalPlayer>().SpringBoots = true;
+            player.GetModPlayer<TerrafirmaModPlayer>().SpringBoots = true;
         }
 
         public override void AddRecipes()

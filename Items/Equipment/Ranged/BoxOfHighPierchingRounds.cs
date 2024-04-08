@@ -24,7 +24,7 @@ namespace Terrafirma.Items.Equipment.Ranged
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<TerrafirmaGlobalPlayer>().BoxOfHighPiercingRounds = true;
+            player.GetModPlayer<TerrafirmaModPlayer>().BoxOfHighPiercingRounds = true;
         }
         public class BoxOfHighPiercingRoundsProjectile : GlobalProjectile
         {
@@ -32,7 +32,7 @@ namespace Terrafirma.Items.Equipment.Ranged
             public override bool InstancePerEntity => true;
             public override void OnSpawn(Projectile projectile, IEntitySource source)
             {
-                if (source is IEntitySource_WithStatsFromItem parent && parent.Player.GetModPlayer<TerrafirmaGlobalPlayer>().BoxOfHighPiercingRounds && parent.Item.useAmmo == AmmoID.Bullet)
+                if (source is IEntitySource_WithStatsFromItem parent && parent.Player.GetModPlayer<TerrafirmaModPlayer>().BoxOfHighPiercingRounds && parent.Item.useAmmo == AmmoID.Bullet)
                 {
                     projectile.penetrate += 3;
                     projectile.usesLocalNPCImmunity = true;

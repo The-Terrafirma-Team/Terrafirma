@@ -23,14 +23,14 @@ namespace Terrafirma.Items.Equipment.Ranged
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<TerrafirmaGlobalPlayer>().Foregrip = true;
+            player.GetModPlayer<TerrafirmaModPlayer>().Foregrip = true;
         }
     }
     public class ForegripProjectile : GlobalProjectile
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (source is IEntitySource_WithStatsFromItem parent && parent.Player.GetModPlayer<TerrafirmaGlobalPlayer>().Foregrip && parent.Item.useAmmo == AmmoID.Bullet)
+            if (source is IEntitySource_WithStatsFromItem parent && parent.Player.GetModPlayer<TerrafirmaModPlayer>().Foregrip && parent.Item.useAmmo == AmmoID.Bullet)
             {
                 projectile.velocity = Vector2.Lerp(projectile.Center.DirectionTo(Main.MouseWorld) * projectile.velocity.Length(), projectile.velocity, 0.2f) * 1.2f;
             }

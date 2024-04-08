@@ -83,7 +83,7 @@ namespace Terrafirma.Global.Items
 
             #region Ammo Can
             //Ammo Can
-            if (weapon.useAmmo == AmmoID.Bullet && player.GetModPlayer<TerrafirmaGlobalPlayer>().AmmoCan)
+            if (weapon.useAmmo == AmmoID.Bullet && player.GetModPlayer<TerrafirmaModPlayer>().AmmoCan)
             {
                 BulletSlots = new int[] { };
                 for (int i = 54; i < 58; i++)
@@ -108,7 +108,7 @@ namespace Terrafirma.Global.Items
 
             #region Ammo Can
             //Ammo Can
-            if (item.useAmmo == AmmoID.Bullet && player.GetModPlayer<TerrafirmaGlobalPlayer>().AmmoCan && BulletSlots.Length != 0)
+            if (item.useAmmo == AmmoID.Bullet && player.GetModPlayer<TerrafirmaModPlayer>().AmmoCan && BulletSlots.Length != 0)
             {
 
 

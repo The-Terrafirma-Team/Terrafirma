@@ -34,8 +34,9 @@ namespace Terrafirma.Systems.MageClass
         /// <summary>
         /// Creates Spell UI
         /// </summary>
-        public void Create(int weapon, Player player, bool accessoriesincluded = true)
+        public void Create(int weapon, bool accessoriesincluded = true)
         {
+            Player player = Main.LocalPlayer;
             effecttimer = 0;
             sizefloat = 0f;
             Flush();

@@ -48,9 +48,9 @@ namespace Terrafirma.Systems.MageClass
             spellui.UIOpen = false;
         }
 
-        public void Create( int item, Player player)
+        public void Create( int item)
         {
-            spellui?.Create(item, player);
+            spellui?.Create(item);
         }
 
         public void UpdateMana (float manacost)

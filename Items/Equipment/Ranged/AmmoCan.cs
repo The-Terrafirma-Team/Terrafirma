@@ -20,7 +20,7 @@ namespace Terrafirma.Items.Equipment.Ranged
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<TerrafirmaGlobalPlayer>().AmmoCan = true;
+            player.GetModPlayer<TerrafirmaModPlayer>().AmmoCan = true;
         }
 
         public override void SetStaticDefaults()

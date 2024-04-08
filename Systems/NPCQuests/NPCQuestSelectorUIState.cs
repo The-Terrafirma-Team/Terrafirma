@@ -104,7 +104,7 @@ namespace Terrafirma.Systems.NPCQuests
         public void Create(NPC npc)
         {
             //Selected NPC for getting the right quest list later
-            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaModPlayer>().playerquests;
             selectednpc = npc;  
 
             //Other Vars
@@ -634,7 +634,7 @@ namespace Terrafirma.Systems.NPCQuests
         /// </summary>
         public void UpdateCompleteButton()
         {
-            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaGlobalPlayer>().playerquests;
+            localquestlist = Main.LocalPlayer.GetModPlayer<TerrafirmaModPlayer>().playerquests;
 
             //Check if the selected quest is in the Player's quest list && Check if the selected quest is not "NoQuest"
             if (localquestlist.Contains(selectedQuest) && selectedQuest.Name != null)

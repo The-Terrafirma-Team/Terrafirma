@@ -18,7 +18,7 @@ using Terrafirma.Global.Items;
 
 namespace Terrafirma.Global.Players
 {
-    public class TerrafirmaGlobalPlayer : ModPlayer
+    public class TerrafirmaModPlayer : ModPlayer
     {
 
         public bool Foregrip = false;
@@ -118,52 +118,59 @@ namespace Terrafirma.Global.Players
 
         public override void PostUpdate()
         {
-            //Main.NewText(playerquests.Quests[playerquests.Quests.Keys.ToArray()[0]]);
             if (playerquests.Length == 0) playerquests = QuestIndex.quests;
 
-            if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
-            else if (ModContent.GetInstance<SpellUISystem>() != null) { ModContent.GetInstance<SpellUISystem>().Hide(); }
+            //if (SpellUI && HeldMagicItem.type != 0) { ModContent.GetInstance<SpellUISystem>().Show(); }
+            //else if (ModContent.GetInstance<SpellUISystem>() != null) { ModContent.GetInstance<SpellUISystem>().Hide(); }
 
-            
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (triggersSet.MouseRight && Main.playerInventory == false)
+            if (triggersSet.MouseRight)
             {
-
-                if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
-                {
-                    if (!SpellUI)
-                    {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type, Player);
-                        HeldMagicItem = Player.HeldItem;
-                    }
-
-                    if (HeldMagicItem != Player.HeldItem)
-                    {
-                        ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type, Player);
-                        HeldMagicItem = Player.HeldItem;
-                    }
-                    ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
-                }
+                if (!SpellUI) ModContent.GetInstance<SpellUISystem>().Create(ItemID.AquaScepter);
                 SpellUI = true;
-
             }
             else
             {
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null && SpellUI == true)
-                {
-                    if (Player.HeldItem.type > 0 &&
-                        SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
-                    {
-                        SpellUI = false;
-                        Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
-                        ModContent.GetInstance<SpellUISystem>().SelectedSpell;
-                    }
-                }
-
-                ModContent.GetInstance<SpellUISystem>().Flush();
+                SpellUI = false;
             }
+
+            //if (triggersSet.MouseRight && Main.playerInventory == false)
+            //{
+            //    if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1)
+            //    {
+            //        if (!SpellUI)
+            //        {                   
+            //            ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+            //            HeldMagicItem = Player.HeldItem;
+            //        }
+
+            //        if (HeldMagicItem != Player.HeldItem)
+            //        {
+            //            ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
+            //            HeldMagicItem = Player.HeldItem;
+            //        }
+            //        ModContent.GetInstance<SpellUISystem>().UpdateMana(Player.manaCost);
+            //    }
+            //    SpellUI = true;
+
+            //}
+            //else
+            //{
+            //    if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null && SpellUI == true)
+            //    {
+            //        if (Player.HeldItem.type > 0 &&
+            //            SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+            //        {
+            //            SpellUI = false;
+            //            Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
+            //            ModContent.GetInstance<SpellUISystem>().SelectedSpell;
+            //        }
+            //    }
+
+            //    ModContent.GetInstance<SpellUISystem>().Flush();
+            //}
 
 
             //Item Right Click

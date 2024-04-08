@@ -23,7 +23,7 @@ namespace Terrafirma.Items.Equipment.Ranged
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<TerrafirmaGlobalPlayer>().DrumMag = true;
+            player.GetModPlayer<TerrafirmaModPlayer>().DrumMag = true;
             player.GetDamage(DamageClass.Ranged) *= 1.05f;
         }
     }
