@@ -4,7 +4,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using Terrafirma.Global.Items;
+using Terrafirma.Common.Items;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;

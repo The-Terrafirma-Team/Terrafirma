@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Systems.Elements;
 

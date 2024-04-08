@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.ID;

@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Terrafirma.Buffs.Buffs;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 using Terrafirma.Items.Materials;
 using Terraria.DataStructures;
 using Terrafirma.Systems.Cooking;

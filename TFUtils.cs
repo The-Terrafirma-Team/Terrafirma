@@ -7,8 +7,8 @@ using Terraria.Audio;
 using System.Linq;
 using Terraria.DataStructures;
 using Terrafirma.Data;
-using Terrafirma.Global.Items;
-using Terrafirma.Global.Players;
+using Terrafirma.Common.Items;
+using Terrafirma.Common.Players;
 using static Terrafirma.Systems.Elements.ElementGlobals;
 using Terrafirma.Particles;
 

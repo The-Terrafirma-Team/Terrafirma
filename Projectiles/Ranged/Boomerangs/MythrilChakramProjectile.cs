@@ -7,7 +7,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 using Microsoft.Xna.Framework;
 
 namespace Terrafirma.Projectiles.Ranged.Boomerangs

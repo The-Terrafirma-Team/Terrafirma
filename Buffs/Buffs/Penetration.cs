@@ -7,7 +7,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria;
 using Terraria.ID;
-using Terrafirma.Global.Players;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Buffs.Buffs
 {

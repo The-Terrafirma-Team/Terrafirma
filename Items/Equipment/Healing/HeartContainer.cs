@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

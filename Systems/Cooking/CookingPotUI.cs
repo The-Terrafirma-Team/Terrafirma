@@ -4,9 +4,9 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using Terrafirma.Global.Structs;
+using Terrafirma.Common.Structs;
 using Terraria.GameContent.UI.Elements;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using System.Collections.Generic;
 using System;
 using System.Linq;
@@ -16,7 +16,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework.Input;
 using static Terraria.GameContent.UI.States.UIVirtualKeyboard;
 using Terraria.ModLoader.UI;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 using Terrafirma.Systems.UIElements;
 
 namespace Terrafirma.Systems.Cooking

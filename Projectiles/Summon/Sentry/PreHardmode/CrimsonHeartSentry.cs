@@ -9,7 +9,7 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.DataStructures;
-using Terrafirma.Global.Items;
+using Terrafirma.Common.Items;
 using System.IO;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode

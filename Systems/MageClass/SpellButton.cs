@@ -6,12 +6,14 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria.Audio;
 using Terraria.ID;
+using Terrafirma.Common;
 
 namespace Terrafirma.Systems.MageClass
 {
     internal class SpellButton : UIElement
     {
         internal Texture2D spellicon;
+        ClientConfig clientConfig = ModContent.GetInstance<ClientConfig>();
 
         public float angle = 0;
         public float anglespace = 90;
@@ -34,9 +36,9 @@ namespace Terrafirma.Systems.MageClass
             if (icon == ""){ spellicon = (Texture2D)ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/PlaceholderSpellIcon"); }
             else { spellicon = (Texture2D)ModContent.Request<Texture2D>(icon); }
            
-            spriteBatch.Draw(iconglow, position, new Rectangle(0, 0, iconglow.Width, iconglow.Height), new Color(47, 215, 237, 0) * MathHelper.Lerp(0f, dist, timer) * 0.5f, 0, iconglow.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 0.9f, SpriteEffects.None, 0);
+            spriteBatch.Draw(iconglow, position, new Rectangle(0, 0, iconglow.Width, iconglow.Height), new Color(clientConfig.SpellR, clientConfig.SpellG, clientConfig.SpellB, 0) * MathHelper.Lerp(0f, dist, timer) * 0.5f, 0, iconglow.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 0.9f, SpriteEffects.None, 0);
             spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(iconBorder, position, new Rectangle((iconBorder.Width / 5) * 3, 0, iconBorder.Width / 5, iconBorder.Height), new Color(1, 1, 1, postimer), 0, new Vector2(iconBorder.Height / 2), MathHelper.Lerp(0.5f, dist, timer) * 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(iconBorder, position, new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height), new Color(1, 1, 1, postimer), 0, new Vector2(iconBorder.Height / 2), MathHelper.Lerp(0.5f, dist, timer) * 1f, SpriteEffects.None, 0);
         }
 
         public override void Update(GameTime gameTime)

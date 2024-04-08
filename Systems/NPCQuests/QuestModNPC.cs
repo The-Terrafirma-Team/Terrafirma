@@ -5,7 +5,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terrafirma.Systems.MageClass;
 using System.ComponentModel;
-using Terrafirma.Global.Structs;
+using Terrafirma.Common.Structs;
 using System.Linq;
 using System.Collections.Generic;
 

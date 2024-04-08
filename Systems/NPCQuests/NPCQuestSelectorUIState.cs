@@ -13,12 +13,12 @@ using ReLogic.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.Linq;
 using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
-using Terrafirma.Global.Structs;
+using Terrafirma.Common.Structs;
 using Terrafirma.Systems.NPCQuests;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terrafirma.Items.Equipment.Ranged;
-using Terrafirma.Global.Players;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Systems.NPCQuests
 {

@@ -1,5 +1,5 @@
 ﻿using Terraria;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {

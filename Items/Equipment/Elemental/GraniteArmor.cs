@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

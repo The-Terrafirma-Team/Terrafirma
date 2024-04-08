@@ -1,4 +1,4 @@
-﻿using Terrafirma.Global.Players;
+﻿using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

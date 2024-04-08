@@ -8,7 +8,7 @@ using ReLogic.Content;
 using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
-using Terrafirma.Global;
+using Terrafirma.Common;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {

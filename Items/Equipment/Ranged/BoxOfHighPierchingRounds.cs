@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System;
-using Terrafirma.Global.Players;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Items.Equipment.Ranged
 {

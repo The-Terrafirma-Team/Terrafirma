@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Global.Items;
+using Terrafirma.Common.Items;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria;
 using Terraria.ID;

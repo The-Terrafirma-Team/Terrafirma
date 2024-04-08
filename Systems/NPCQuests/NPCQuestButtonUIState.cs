@@ -7,7 +7,7 @@ using System;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.GameContent.UI.Elements;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terraria.UI.Chat;
 using Terraria.GameContent;
 using ReLogic.Graphics;

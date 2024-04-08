@@ -1074,3 +1074,41 @@ Spells: {
 
 UIElements.CookingPot.InputAmount: Amount
 NPCs.FlameElemental.DisplayName: Flame Elemental
+
+Configs: {
+	ClientConfig: {
+		DisplayName: Client Config
+		Headers.SpellVisuals: Spell Visuals
+
+		SpellR: {
+			Label: Spell Selection Wheel R
+			Tooltip: Changes how red the spell selection wheel is
+		}
+
+		SpellG: {
+			Label: Spell Selection Wheel G
+			Tooltip: Changes how green the spell selection wheel is
+		}
+
+		SpellB: {
+			Label: Spell Selection Wheel B
+			Tooltip: Changes how blue the spell selection wheel is
+		}
+
+		SpellBorder: {
+			Label: Spell Border
+			Tooltip:
+				'''
+				Changes the border on the spell icons.
+				0 = Default
+				1 = Retro
+				2 = Valkyrie
+				3 = Gilded
+				4 = StoneGold
+				5 = Corroboros
+				'''
+		}
+
+		SpellVisuals: Spell Border Header
+	}
+}

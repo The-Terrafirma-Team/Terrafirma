@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.ID;

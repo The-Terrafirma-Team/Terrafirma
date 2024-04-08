@@ -1,6 +1,6 @@
 ﻿using Terraria.ID;
 using Terraria;
-using Terrafirma.Global.Templates;
+using Terrafirma.Common.Templates;
 using Microsoft.Xna.Framework;
 
 namespace Terrafirma.Projectiles.Melee

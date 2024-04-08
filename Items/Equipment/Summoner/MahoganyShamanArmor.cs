@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using Terrafirma.Global;
+using Terrafirma.Common;
 using Terrafirma.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;

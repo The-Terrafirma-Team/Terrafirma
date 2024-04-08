@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Global.Players;
+using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
