@@ -1,14 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Particles;
-using Terrafirma.Particles.LegacyParticles;
 using Terrafirma.Projectiles.Melee;
 using Terrafirma.Rarities;
-using Terrafirma.Systems.Elements;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
