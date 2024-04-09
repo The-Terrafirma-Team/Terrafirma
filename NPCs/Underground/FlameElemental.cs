@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,11 @@ using System.Threading.Tasks;
 using Terrafirma.Common.Templates;
 using Terrafirma.Systems.Elements;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.NPCs
+namespace Terrafirma.NPCs.Underground
 {
     public class FlameElemental : TfirmaNPC
     {
@@ -21,6 +24,8 @@ namespace Terrafirma.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 5;
+            NPCID.Sets.TrailCacheLength[NPC.type] = 5;
+            NPCID.Sets.TrailingMode[NPC.type] = 7;
         }
         public override void SetDefaults()
         {
@@ -37,13 +42,13 @@ namespace Terrafirma.NPCs
 
         public override void HitEffect(NPC.HitInfo hit)
         {
-            if(NPC.life <= 0)
+            if (NPC.life <= 0)
             {
-                for(int i = 0; i < 30; i++)
+                for (int i = 0; i < 30; i++)
                 {
                     Dust d = Dust.NewDustPerfect(NPC.Center, DustID.InfernoFork, Main.rand.NextVector2Circular(6, 6));
                     d.noGravity = !Main.rand.NextBool(3);
-                    if(d.noGravity)
+                    if (d.noGravity)
                         d.fadeIn = 1.4f;
                 }
             }
@@ -80,7 +85,7 @@ namespace Terrafirma.NPCs
                 {
                     if ((NPC.ai[2] - 20) % 30 == 0 && target == Main.LocalPlayer)
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.2f) * 8,ProjectileID.Fireball,30,3);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.2f) * 8, ProjectileID.Fireball, 30, 3);
                     }
                     if (NPC.ai[2] > 110)
                     {
@@ -92,11 +97,24 @@ namespace Terrafirma.NPCs
 
             NPC.spriteDirection = -MathF.Sign(NPC.Center.X - target.Center.X);
             NPC.rotation = NPC.velocity.X * 0.05f;
-            Dust d = Dust.NewDustDirect(NPC.Bottom + new Vector2(-10,-10), 20, 3, DustID.Torch);
-            d.velocity = new Vector2(0, Main.rand.NextFloat(1,3) + NPC.velocity.Y);
+            Dust d = Dust.NewDustDirect(NPC.Bottom + new Vector2(-10, -10), 20, 3, DustID.Torch);
+            d.velocity = new Vector2(0, Main.rand.NextFloat(1, 3) + NPC.velocity.Y);
             d.noGravity = true;
             d.scale = 1.2f;
             d.customData = 1;
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            drawColor.A = 0;
+            Asset<Texture2D> tex = TextureAssets.Npc[Type];
+            for(int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
+            {
+                spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2, NPC.frame, drawColor * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i], new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]), NPC.scale + (i * NPC.velocity.Length() * 0.01f) + (i * 0.05f), NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+            }
+            drawColor.A = 128;
+            spriteBatch.Draw(tex.Value, NPC.Center - Main.screenPosition, NPC.frame, drawColor, NPC.rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]),NPC.scale,NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+            return false;
         }
         public override void FindFrame(int frameHeight)
         {
@@ -106,7 +124,7 @@ namespace Terrafirma.NPCs
                 if (NPC.frameCounter == 10)
                 {
                     NPC.frameCounter = 0;
-                    NPC.frame.Y = NPC.frame.Y == 0? frameHeight: 0;
+                    NPC.frame.Y = NPC.frame.Y == 0 ? frameHeight : 0;
                 }
             }
             else
