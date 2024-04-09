@@ -3,10 +3,7 @@ using Terraria.UI;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Terraria.ID;
-using Terrafirma.Common.Structs;
 using Terraria.GameContent.UI.Elements;
-using System.Collections.Generic;
 using System;
 using System.Linq;
 using Terrafirma.Common.Items;
@@ -14,9 +11,9 @@ using Terrafirma.Common;
 
 namespace Terrafirma.Systems.MageClass
 {
-    internal class SpellUI : UIState
+    public class SpellUI : UIState
     {
-        ClientConfig clientConfig = ModContent.GetInstance<ClientConfig>();
+        static ClientConfig clientConfig = ModContent.GetInstance<ClientConfig>();
 
         UIText Title;
         UIText Description;
@@ -169,6 +166,16 @@ namespace Terrafirma.Systems.MageClass
             base.Update(gameTime);
         }
 
+        public static Color ringColor
+        {
+            get 
+            {
+                Color color = new Color(clientConfig.SpellR, clientConfig.SpellG, clientConfig.SpellB);
+                if (Main.LocalPlayer.hasRainbowCursor)
+                    color = Main.DiscoColor;
+                return color;
+            }
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (UIOpen)
@@ -177,7 +184,7 @@ namespace Terrafirma.Systems.MageClass
                 Texture2D UICircle2 = ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellUICircle3").Value;
                 for (int i = 0; i < 4; i++)
                 {
-                    spriteBatch.Draw(UICircle2, new Vector2(Main.screenWidth, Main.screenHeight) / 2, UICircle2.Bounds, new Color(clientConfig.SpellR, clientConfig.SpellG / (i + 1), clientConfig.SpellB / (i + 1), 0) * (0.5f / i), ((float)Main.timeForVisualEffects / (40f - (i * 5f))), UICircle2.Size() / 2, MathHelper.Lerp(0f, 0.85f, sizefloat) - (i / 10f), SpriteEffects.None, 0f);
+                    spriteBatch.Draw(UICircle2, new Vector2(Main.screenWidth, Main.screenHeight) / 2, UICircle2.Bounds, new Color(ringColor.R, ringColor.G / (i + 1), ringColor.B / (i + 1), 0) * (0.5f / i), ((float)Main.timeForVisualEffects / (40f - (i * 5f))), UICircle2.Size() / 2, MathHelper.Lerp(0f, 0.85f, sizefloat) - (i / 10f), SpriteEffects.None, 0f);
                 }
             }
             base.Draw(spriteBatch);
