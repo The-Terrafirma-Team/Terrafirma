@@ -15,6 +15,7 @@ namespace Terrafirma.Particles
         public float gravity = 0;
         public bool affectedByLight = false;
         public bool outlineAffectedByLight = false;
+        public bool tileCollide = false;
         public override void Update()
         {
             position += velocity;
@@ -23,6 +24,17 @@ namespace Terrafirma.Particles
             scale -= 0.1f;
             if (scale < 0)
                 Active = false;
+            if (tileCollide)
+            {
+                if (Collision.SolidCollision(position - new Vector2(1) + velocity, 2, 2))
+                {
+                    Vector2 mhm = Collision.AnyCollision(position - new Vector2(1), velocity, 2, 2);
+                    if (mhm.X != velocity.X)
+                        velocity.X *= -1;
+                    if (mhm.X != velocity.Y)
+                        velocity.Y *= -1;
+                }
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

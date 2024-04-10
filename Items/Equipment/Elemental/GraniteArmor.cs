@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Particles;
+using Terraria.Audio;
 
 namespace Terrafirma.Items.Equipment.Elemental
 {
@@ -27,11 +28,22 @@ namespace Terrafirma.Items.Equipment.Elemental
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            modifiers.FinalDamage -= (45 * power);
-            power = 0;
+            if (power > 0)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath45,Player.position);
+                for (int x = 0; x < 8; x++)
+                {
+                    PixelCircle p = new PixelCircle();
+                    p.outlineColor = new Color(183, 247, 255);
+                    p.scale = Main.rand.NextFloat(2, 4);
+                    p.gravity = 0.2f;
+                    ParticleSystem.AddParticle(p, Player.Center, Main.rand.NextVector2Circular(6, 6) + new Vector2(0, -3), new Color(0, 192, 255));
+                }
+                modifiers.IncomingDamageMultiplier *= (0.5f + (1 - power) * 0.5f);
+                power = 0;
+            }
         }
     }
-
     public class GraniteSetGlobalTile : GlobalTile
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
@@ -46,6 +58,7 @@ namespace Terrafirma.Items.Equipment.Elemental
                     p.outlineColor = new Color(183,247,255);
                     p.scale = Main.rand.NextFloat(2,4);
                     p.gravity = 0.2f;
+                    p.tileCollide = true;
                     ParticleSystem.AddParticle(p, new Vector2((i * 16) + 8, (j * 16) + 8), Main.rand.NextVector2Circular(4, 4) + new Vector2(0,-3), new Color(0, 192, 255));
                     //Dust d = Dust.NewDustPerfect(new Vector2((i * 16) + 8, (j * 16) + 8),DustID.GemSapphire,Main.rand.NextVector2Circular(4,4));
                     //d.noGravity = true;
