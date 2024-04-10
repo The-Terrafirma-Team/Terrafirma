@@ -9,11 +9,13 @@ namespace Terrafirma.Particles
     public class ParticleSystem : ModSystem
     {
         static List<Particle> Particles;
+        static List<Particle> PostDrawParticles;
         const int MaxParticles = 3000;
         static List<Particle> TooltipParticles;
         public override void Load()
         {
             TooltipParticles = new List<Particle>(MaxParticles);
+            PostDrawParticles = new List<Particle>(MaxParticles);
             Particles = new List<Particle>(MaxParticles);
             On_Main.DrawCapture += On_Main_DrawCapture;
             On_Main.DrawDust += On_Main_DrawDust;
@@ -48,16 +50,27 @@ namespace Terrafirma.Particles
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
             SpriteBatch spriteBatch = Main.spriteBatch;
-
+            bool postDraw = false;
             for (int i = 0; i < Particles.Count; i++)
             {
                 Particle particle = Particles[i];
                 if (particle.Active)
                 {
+                    if (particle.HasPartsDrawnAfterOtherParticles)
+                    {
+                        postDraw = true;
+                    }
                     particle.Draw(spriteBatch);
                 }
             }
-
+            if (postDraw)
+            {
+                for (int i = 0; i < Particles.Count; i++)
+                {
+                    Particle particle = Particles[i];
+                    particle.DrawAfter(spriteBatch);
+                }
+            }
             Main.spriteBatch.End();
         }
         public override void PostUpdateDusts()
@@ -118,6 +131,7 @@ namespace Terrafirma.Particles
         public Color color;
         public int TimeInWorld;
         public bool Active = true;
+        public virtual bool HasPartsDrawnAfterOtherParticles => false;
         protected override void Register()
         {
             ModTypeLookup<Particle>.Register(this);
@@ -129,6 +143,9 @@ namespace Terrafirma.Particles
         {
         }
         public virtual void Draw(SpriteBatch spriteBatch)
+        {
+        }
+        public virtual void DrawAfter(SpriteBatch spriteBatch)
         {
         }
         public virtual void DrawInUI(SpriteBatch spriteBatch, Vector2 linePos)
