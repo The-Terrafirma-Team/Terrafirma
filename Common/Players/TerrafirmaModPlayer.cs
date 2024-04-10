@@ -128,7 +128,7 @@ namespace Terrafirma.Common.Players
         {
             if (triggersSet.MouseRight)
             {
-                if (!SpellUI) ModContent.GetInstance<SpellUISystem>().Create(ItemID.AquaScepter);
+                if (!SpellUI) ModContent.GetInstance<SpellUISystem>().Flush();
                 SpellUI = true;
             }
             else

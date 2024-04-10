@@ -8,6 +8,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Particles;
 
 namespace Terrafirma.Items.Equipment.Elemental
 {
@@ -41,8 +42,13 @@ namespace Terrafirma.Items.Equipment.Elemental
             {
                 for(int x = 0; x < 4; x++)
                 {
-                    Dust d = Dust.NewDustPerfect(new Vector2((i * 16) + 8, (j * 16) + 8),DustID.GemSapphire,Main.rand.NextVector2Circular(4,4));
-                    d.noGravity = true;
+                    PixelCircle p = new PixelCircle();
+                    p.outlineColor = new Color(183,247,255);
+                    p.scale = Main.rand.NextFloat(2,4);
+                    p.gravity = 0.2f;
+                    ParticleSystem.AddParticle(p, new Vector2((i * 16) + 8, (j * 16) + 8), Main.rand.NextVector2Circular(4, 4) + new Vector2(0,-3), new Color(0, 192, 255));
+                    //Dust d = Dust.NewDustPerfect(new Vector2((i * 16) + 8, (j * 16) + 8),DustID.GemSapphire,Main.rand.NextVector2Circular(4,4));
+                    //d.noGravity = true;
                 }
 
                 setPlayer.powerGoDownTimer = 60 * 30;

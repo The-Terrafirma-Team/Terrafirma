@@ -51,7 +51,7 @@ namespace Terrafirma.Systems.Cooking
                     p.fadeInTime = 8;
                     p.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
                     p.smallestSize = 0.05f;
-                    ParticleSystem.AddParticle(p, new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), new Vector2(3f, 0).RotatedBy(MathHelper.Pi * 0.33f * i), new Color(213, 123, 11, 0) * 0.2f, true);
+                    ParticleSystem.AddParticle(p, new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), new Vector2(3f, 0).RotatedBy(MathHelper.Pi * 0.33f * i), new Color(213, 123, 11, 0) * 0.2f, ParticleLayer.UI);
                 }    
             }
             ParticleSystem.DrawUIParticle(Vector2.Zero);
