@@ -33,7 +33,7 @@ namespace Terrafirma.Common
                     recipe.AddIngredient(ModContent.ItemType<MajesticGel>(), 10);
                 }
 
-                if (recipe.HasResult(ItemID.Leather))
+                if (recipe.HasResult(ItemID.Leather) && recipe.Mod == null)
                 {
                     recipe.RemoveIngredient(ItemID.RottenChunk);
                     recipe.AddIngredient(ItemID.RottenChunk, 3);
@@ -126,28 +126,23 @@ namespace Terrafirma.Common
             AnkletoftheWind.AddTile(TileID.WorkBenches);
             AnkletoftheWind.Register();
 
-            Recipe BandofStarpower = Recipe.Create(ItemID.BandofStarpower);
-            BandofStarpower.AddIngredient(ItemID.Sapphire, 1);
-            BandofStarpower.AddIngredient(ItemID.Star, 5);
-            BandofStarpower.AddRecipeGroup(RecipeGroupID.IronBar, 5);
-            BandofStarpower.AddTile(TileID.Anvils);
-            BandofStarpower.Register();
+            //Recipe BandofStarpower = Recipe.Create(ItemID.BandofStarpower);
+            //BandofStarpower.AddIngredient(ItemID.Sapphire, 1);
+            //BandofStarpower.AddIngredient(ItemID.Star, 5);
+            //BandofStarpower.AddRecipeGroup(RecipeGroupID.IronBar, 5);
+            //BandofStarpower.AddTile(TileID.Anvils);
+            //BandofStarpower.Register();
 
-            Recipe BandofRegeneration = Recipe.Create(ItemID.BandofRegeneration);
-            BandofRegeneration.AddIngredient(ItemID.Ruby, 1);
-            BandofRegeneration.AddIngredient(ItemID.Star, 5);
-            BandofRegeneration.AddRecipeGroup(RecipeGroupID.IronBar, 5);
-            BandofRegeneration.AddTile(TileID.Anvils);
-            BandofRegeneration.Register();
-
-            Recipe PocketMirror = Recipe.Create(ItemID.PocketMirror);
-            PocketMirror.AddIngredient(ItemID.GoldBar, 5);
-            PocketMirror.AddIngredient(ItemID.SilverBar, 2);
-            PocketMirror.AddTile(TileID.Anvils);
-            PocketMirror.Register();
+            //Recipe BandofRegeneration = Recipe.Create(ItemID.BandofRegeneration);
+            //BandofRegeneration.AddIngredient(ItemID.Ruby, 1);
+            //BandofRegeneration.AddIngredient(ItemID.Star, 5);
+            //BandofRegeneration.AddRecipeGroup(RecipeGroupID.IronBar, 5);
+            //BandofRegeneration.AddTile(TileID.Anvils);
+            //BandofRegeneration.Register();
 
             Recipe EncumberingStone = Recipe.Create(ItemID.EncumberingStone);
             EncumberingStone.AddIngredient(ItemID.StoneBlock, 250);
+            EncumberingStone.AddTile(TileID.HeavyWorkBench);
             EncumberingStone.Register();
             #endregion
 

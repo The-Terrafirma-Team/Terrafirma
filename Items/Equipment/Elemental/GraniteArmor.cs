@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Particles;
 using Terraria.Audio;
+using Terrafirma.Items.Materials;
 
 namespace Terrafirma.Items.Equipment.Elemental
 {
@@ -98,7 +99,7 @@ namespace Terrafirma.Items.Equipment.Elemental
     {
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 30).AddIngredient(ItemID.Sapphire, 2).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 30).AddIngredient(ItemID.Sapphire, 2).AddIngredient(ModContent.ItemType<EnchantedStone>()).Register();
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
@@ -133,7 +134,7 @@ namespace Terrafirma.Items.Equipment.Elemental
     {
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 40).AddIngredient(ItemID.Sapphire, 5).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 40).AddIngredient(ItemID.Sapphire, 5).AddIngredient(ModContent.ItemType<EnchantedStone>(),2).Register();
         }
         public override void SetDefaults()
         {
@@ -156,7 +157,7 @@ namespace Terrafirma.Items.Equipment.Elemental
     {
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 25).AddIngredient(ItemID.Sapphire, 3).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 25).AddIngredient(ItemID.Sapphire, 3).AddIngredient(ModContent.ItemType<EnchantedStone>()).Register();
         }
         public override void SetDefaults()
         {

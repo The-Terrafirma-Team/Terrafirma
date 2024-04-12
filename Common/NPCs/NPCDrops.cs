@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Terrafirma.Items.Equipment;
+using Terrafirma.Items.Materials;
 using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode;
 using Terraria;
@@ -28,10 +29,22 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
             }
+            if (npc.type == NPCID.GraniteGolem || npc.type == NPCID.GraniteFlyer)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnchantedStone>(), 5, 1, 1));
+            }
             if (npc.type == NPCID.KingSlime)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
+                npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
             }
+        }
+    }
+    public class BossBags : GlobalItem
+    {
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+        {
+            if(item.type == ItemID.KingSlimeBossBag)
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
         }
     }
 }

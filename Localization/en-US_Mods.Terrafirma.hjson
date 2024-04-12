@@ -817,6 +817,11 @@ Items: {
 		DisplayName: Mahogany Leaf
 		Tooltip: ""
 	}
+
+	BlueDemonMask: {
+		DisplayName: Blue Demon Mask
+		Tooltip: It's not even blue
+	}
 }
 
 Projectiles: {

@@ -206,7 +206,6 @@ namespace Terrafirma
             return AreaNPCs;
 
         }
-
         public static ElementNPC GetElementNPC(this NPC npc)
         {
             return npc.GetGlobalNPC<ElementNPC>();
