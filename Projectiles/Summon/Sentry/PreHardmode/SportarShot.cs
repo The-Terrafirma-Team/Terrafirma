@@ -8,11 +8,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class SportarShot : ModProjectile
     {
+        NPC target;
         public override void SetDefaults()
         {
             Projectile.width = 24;
@@ -23,18 +25,11 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
         }
+
         public override void AI()
-        {
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-            NPC target = Main.npc[(int)Projectile.ai[2]];
-            if(target.Center.Y > Projectile.Center.Y || !target.active)
-            {
-                Projectile.velocity.Y += 0.45f;
-            }
-            else
-            {
-                Projectile.velocity.Y += 0.2f;
-            }
+        {    
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;         
+            Projectile.velocity.Y += 0.3f;
         }
 
         public override void OnKill(int timeLeft)

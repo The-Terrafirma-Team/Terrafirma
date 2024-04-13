@@ -49,10 +49,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
 
-            if (Main.rand.NextBool(64))
-            {
-                Dust.NewDustDirect(Projectile.Left, Projectile.width, Projectile.height / 2, DustID.GlowingMushroom);
-            }
+            if (Main.rand.NextBool(64)) Dust.NewDustDirect(Projectile.Left, Projectile.width, Projectile.height / 2, DustID.GlowingMushroom);
 
             Player owner = Main.player[Projectile.owner];
             NPC potentialTarget = TFUtils.FindClosestNPC(600 * Projectile.GetSentryRangeMultiplier(), Projectile.Center);
@@ -75,9 +72,13 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     NPC target = Main.npc[(int)Projectile.ai[2]];
                     SoundEngine.PlaySound(SoundID.Item42, Projectile.position);
 
-                    Vector2 ShotVelocity = new Vector2((target.Center.X - Projectile.Center.X) * Main.rand.NextFloat(0.015f,0.025f),-10 + MathHelper.Clamp((target.Center.X - Projectile.Center.X) * Main.rand.NextFloat(0.01f, 0.012f),-5,0) + MathHelper.Clamp((target.Center.Y - Projectile.Center.Y) * Main.rand.NextFloat(0.02f, 0.022f), 0, 5));
+                    Vector2 relativetarget = new Vector2(Math.Abs(target.Center.X - Projectile.Center.X), Projectile.Center.Y - target.Center.Y);
+                    Vector2 ProjVel = new Vector2(
+                        target.Center.X > Projectile.Center.X ? 4f : -4f,
+                        (relativetarget.Y / relativetarget.X - 0.3f * relativetarget.X) / 8f
+                        ) ;
 
-                    Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Top + new Vector2(0, 6), ShotVelocity, ModContent.ProjectileType<SportarShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner,target.whoAmI, RangeDoesNotAffectVelocity: true);
+                    Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Top + new Vector2(0, 6), ProjVel, ModContent.ProjectileType<SportarShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner,target.whoAmI, ai2: target.whoAmI, RangeDoesNotAffectVelocity: true);
                 }
                 Projectile.frame = 1;
                 Projectile.ai[1] = 1;

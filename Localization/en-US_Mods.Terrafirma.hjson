@@ -812,8 +812,8 @@ Items: {
 		DisplayName: Crimson Heart Staff
 		Tooltip:
 			'''
-				Summons a sentry
-				Summons a beating heart that damages enemies in its range
+			Summons a sentry
+			Summons a beating heart that damages enemies in its range
 			'''
 	}
 
@@ -834,7 +834,11 @@ Items: {
 
 	CorruptedEyeStaff: {
 		DisplayName: Corrupted Eye Staff
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a beating heart that damages enemies in its range
+			'''
 	}
 }
 
