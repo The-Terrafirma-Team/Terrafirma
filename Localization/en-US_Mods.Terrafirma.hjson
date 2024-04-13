@@ -810,7 +810,11 @@ Items: {
 
 	CrimsonHeartStaff: {
 		DisplayName: Crimson Heart Staff
-		Tooltip: ""
+		Tooltip:
+			'''
+				Summons a sentry
+				Summons a beating heart that damages enemies in its range
+			'''
 	}
 
 	MahoganyLeaf: {
@@ -821,6 +825,11 @@ Items: {
 	BlueDemonMask: {
 		DisplayName: Blue Demon Mask
 		Tooltip: It's not even blue
+	}
+
+	EnchantedStone: {
+		DisplayName: Enchanted Stone
+		Tooltip: ""
 	}
 }
 

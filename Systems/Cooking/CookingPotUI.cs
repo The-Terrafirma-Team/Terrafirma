@@ -24,7 +24,7 @@ namespace Terrafirma.Systems.Cooking
     internal class CookingPotUI : UIState
     {   
 
-        Item[] PotSlots = new Item[] { new Item(0), new Item(0), new Item(0) };
+        static Item[] PotSlots = new Item[] { new Item(0), new Item(0), new Item(0) };
         UIItemSlot Itemslot = new UIItemSlot(new Item[] { }, 0, 3);
         UIItemSlot[] ItemslotArray = new UIItemSlot[] { };
 

@@ -121,7 +121,7 @@ namespace Terrafirma.Systems.MageClass
             {
                 if (ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
                 {
-                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * manacost) + " Mana");
+                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost) + " Mana");
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace Terrafirma.Systems.MageClass
             {
                 if ( ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
                 {
-                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * manacost) + " Mana");
+                    ManaCost.SetText("Costs " + ((int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost)).ToString() + " Mana");
                 }
                 else
                 {
