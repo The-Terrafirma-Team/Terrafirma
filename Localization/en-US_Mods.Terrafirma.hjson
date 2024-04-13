@@ -831,6 +831,11 @@ Items: {
 		DisplayName: Enchanted Stone
 		Tooltip: ""
 	}
+
+	CorruptedEyeStaff: {
+		DisplayName: Corrupted Eye Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -936,6 +941,8 @@ Projectiles: {
 	CrimsonHeartSentryHeart.DisplayName: Crimson Heart Sentry Heart
 	CrimsonHeartSentryInvisProj.DisplayName: Crimson Heart Sentry Invis Proj
 	FireaxeBlob.DisplayName: Fireaxe Blob
+	CorruptedEyeSentry.DisplayName: Corrupted Eye Sentry
+	PsychicRing.DisplayName: Psychic Ring
 }
 
 Biomes: {
