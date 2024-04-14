@@ -241,15 +241,6 @@ namespace Terrafirma
             ElementProjectile data = type.GetGlobalProjectile<ElementProjectile>();
             data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
         }
-        //public static void setElementsForModCall(Entity type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
-        //{
-        //   if(type is NPC npc)
-        //        npc.setElements(fire,water, earth, air, light, dark, ice, poison, electric, arcane);
-        //    else if (type is Item item)
-        //        item.setElements(fire, water, earth, air, light, dark, ice, poison, electric, arcane);
-        //    else if (type is Projectile projectile)
-        //        projectile.setElements(fire, water, earth, air, light, dark, ice, poison, electric, arcane);
-        //}
         public static object setElementsForModCall(params object[] args)
         {
             if (args[0] is not Entity)
