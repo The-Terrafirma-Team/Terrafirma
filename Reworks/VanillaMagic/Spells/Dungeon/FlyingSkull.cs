@@ -11,7 +11,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override int UseAnimation => 26;
         public override int UseTime => 26;
         public override int ManaCost => 18;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/SpellBooks/FlyingSkull";
         public override int[] SpellItem => new int[] { ItemID.BookofSkulls };
 
 

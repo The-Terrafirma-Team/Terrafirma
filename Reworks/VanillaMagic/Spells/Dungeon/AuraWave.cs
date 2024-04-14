@@ -8,12 +8,11 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
 {
-    internal class PiercingRainbow : Spell
+    internal class AuraWave : Spell
     {
         public override int UseAnimation => 19;
         public override int UseTime => 19;
         public override int ManaCost => 12;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/SpellBooks/WaterAura";
         public override int[] SpellItem => new int[] { ItemID.WaterBolt };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -29,7 +28,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
     }
     internal class AuraWaveProj : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/AuraWave";
 
         Vector2 playerpos = Vector2.Zero;
         public override void SetDefaults()

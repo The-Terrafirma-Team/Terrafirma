@@ -14,7 +14,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override int UseAnimation => 60;
         public override int UseTime => 60;
         public override int ManaCost => 40;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/SpellBooks/SkeletonHand";
         public override int[] SpellItem => new int[] { ItemID.BookofSkulls };
 
         public override void SetDefaults(Item entity)
@@ -36,7 +35,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
     }
     public class SkeletonHandProj : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/SkeletonHand";
 
         public override void SetStaticDefaults()
         {

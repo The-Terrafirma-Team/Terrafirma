@@ -11,7 +11,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         public override int UseAnimation => 34;
         public override int UseTime => 34;
         public override int ManaCost => 6;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/GemStaff/SapphireBolt";
         public override int[] SpellItem => new int[] { ItemID.SapphireStaff };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

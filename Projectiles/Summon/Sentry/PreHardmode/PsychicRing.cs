@@ -40,7 +40,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             for (int i = 0; i < 4; i++)
             {
-                Dust dust = Dust.NewDustDirect(Projectile.Center, 16, 16, DustID.GemDiamond, Main.rand.NextFloat(-0.5f, 0.5f), Main.rand.NextFloat(-0.5f, 0.5f), 0, new Color(240, 200, 255, 0));
+                Dust dust = Dust.NewDustDirect(Projectile.Center, 16, 16, DustID.GemAmethyst, Main.rand.NextFloat(-0.5f, 0.5f), Main.rand.NextFloat(-0.5f, 0.5f), 0, new Color(240, 200, 255, 0));
                 dust.noGravity = true;
             }
             base.OnKill(timeLeft);
@@ -52,7 +52,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Main.EntitySpriteDraw(tex.Value,
                 Projectile.Center - Main.screenPosition,
                 tex.Value.Bounds,
-                new Color(240, 200, 255, 0),
+                new Color(180, 20, 255, 0) * 0.6f,
                 0,
                 tex.Value.Size() / 2,
                 1f,

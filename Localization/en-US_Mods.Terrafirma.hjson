@@ -837,8 +837,18 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons a beating heart that damages enemies in its range
+			Summons a pillar with an eye that shoots psychic rings
 			'''
+	}
+
+	EngineerGoggles: {
+		DisplayName: Engineering Goggles
+		Tooltip: Boosts sentry range by 20%
+	}
+
+	EngineerGauntlet: {
+		DisplayName: Engineer Gauntlet
+		Tooltip: Doubles wrench buff duration
 	}
 }
 

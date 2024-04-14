@@ -25,6 +25,9 @@
   <ItemGroup>
     <Folder Include="Items\Placeable\" />
     <Folder Include="Reworks\VanillaMagic\Spells\PreHardmode\" />
+    <Folder Include="Systems\MageClass\SpellIcons\Accessories\" />
+    <Folder Include="Systems\MageClass\SpellIcons\PreHardmode\GemStaff\" />
+    <Folder Include="Systems\MageClass\SpellIcons\Tempire\" />
     <Folder Include="Walls\" />
   </ItemGroup>
 </Project>

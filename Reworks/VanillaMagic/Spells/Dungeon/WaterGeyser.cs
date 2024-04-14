@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override int UseAnimation => 26;
         public override int UseTime => 26;
         public override int ManaCost => 16;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/SpellBooks/WaterGeyser";
         public override int[] SpellItem => new int[] { ItemID.WaterBolt };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -30,7 +29,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
     }
     internal class WaterGeyserProj : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/WaterGeyser";
 
         public override void SetStaticDefaults()
         {
@@ -117,7 +115,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
             }
 
 
-            if (Projectile.ai[0] == 4 && Projectile.ai[2] <= 10)
+            if (Projectile.ai[0] == 4 && Projectile.ai[2] <= 10 && Main.LocalPlayer.whoAmI == Projectile.owner)
             {
                 if (Collision.SolidCollision(OriginalPos + new Vector2(0, -Projectile.height + 4), Projectile.width, Projectile.height))
                 {
@@ -139,9 +137,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
 
                     }
                 }
-
-
-
             }
 
             for (int i = 0; i < Main.player.Length; i++)

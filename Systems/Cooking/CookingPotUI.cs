@@ -70,35 +70,7 @@ namespace Terrafirma.Systems.Cooking
 
         public void SwitchUIMode()
         {
-            if (UIMode == 0)
-            {
-                UIMode = 1;
-
-                //RemoveChild(PotBG);
-                //for (int i = 0; i < ItemslotArray.Length; i++)
-                //{
-                //    RemoveChild(ItemslotArray[i]);
-                //}
-                //RemoveChild(AmountInput);
-
-                //Append(PotMinigameBG);
-
-            }
-            else
-            {
-                UIMode = 0;
-
-                //Append(PotBG);
-                //for (int i = 0; i < ItemslotArray.Length; i++)
-                //{
-                //    Append(ItemslotArray[i]);
-                //}
-                //Append(AmountInput);
-                //RemoveChild(Button);
-                //Append(Button);
-
-                //RemoveChild(PotMinigameBG);
-            }
+            UIMode = UIMode == 0 ? 1 : 0;
         }
 
         public void Create(Vector2 tilepos)
@@ -179,17 +151,6 @@ namespace Terrafirma.Systems.Cooking
        
         public override void Update(GameTime gameTime)
         {
-            //if (tileposition != Vector2.Zero)
-            //{
-            //    for (int i = 0; i < ItemslotArray.Length; i++)
-            //    {
-            //        ItemslotArray[i].Top.Pixels = (tileposition.Y - Main.screenPosition.Y) / Main.UIScale;
-            //        ItemslotArray[i].Left.Pixels = (tileposition.X + ItemslotArray[i].Width.Pixels * i - Main.screenPosition.X) / Main.UIScale;
-            //    }
-            //}
-            //Button.Top.Pixels = (tileposition.Y - Main.screenPosition.Y) / Main.UIScale;
-            //Button.Left.Pixels = (tileposition.X - (Button.Width.Pixels / 2) - Main.screenPosition.X) / Main.UIScale;
-
 
             if (Button.IsMouseHovering)
             {

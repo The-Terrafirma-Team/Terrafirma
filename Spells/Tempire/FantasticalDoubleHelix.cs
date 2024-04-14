@@ -8,14 +8,13 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
+namespace Terrafirma.Spells.Tempire
 {
     internal class FantasticalDoubleHelix : Spell
     {
         public override int UseAnimation => 22;
         public override int UseTime => 22;
         public override int ManaCost => 5;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Tempire/FantasticalDoubleHelix";
         public override int[] SpellItem => new int[] { ModContent.ItemType<Majesty>() };
 
 

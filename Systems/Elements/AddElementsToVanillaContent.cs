@@ -120,7 +120,7 @@ namespace Terrafirma.Systems.Elements
             if (defender.Dark)
             {
                 if (attacker.Earth) mod += StrongDamageBonus;
-                if (attacker.Light) mod += WeakDamageBonus;
+                if (attacker.Light) mod += SuperStrongDamageBonus;
                 if (attacker.Dark) mod += WeakDamageBonus;
                 if (attacker.Electric) mod += WeakDamageBonus;
             }

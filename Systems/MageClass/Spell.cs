@@ -14,7 +14,7 @@ namespace Terrafirma.Systems.MageClass
     
     public abstract class Spell : ModType
     {
-        public virtual string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PlaceholderSpellIcon";
+        public virtual string TexurePath => (base.GetType().Namespace + "." + this.Name).Replace('.', '/');
         /// <summary>
         /// Sets the ReuseDelay of the spell's ManaCost. Set to -1 to use the item's default ManaCost
         /// </summary>
@@ -49,6 +49,7 @@ namespace Terrafirma.Systems.MageClass
                 {
                     SpellIndex.ItemCatalogue.Add(SpellItem[i], new Spell[] { this });
                 }
+
             }
             
         }

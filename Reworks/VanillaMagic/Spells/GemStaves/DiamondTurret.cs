@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         public override int UseAnimation => 80;
         public override int UseTime => 80;
         public override int ManaCost => 40;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/GemStaff/DiamondTurret";
         public override int[] SpellItem => new int[] { ItemID.DiamondStaff };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -34,7 +33,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
 
     public class DiamondTurretProj : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/GemStaves/DiamondTurret";
         public override void SetDefaults()
         {
             Projectile.penetrate = -1;

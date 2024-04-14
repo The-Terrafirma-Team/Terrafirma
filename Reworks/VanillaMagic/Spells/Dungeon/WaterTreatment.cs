@@ -12,7 +12,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override int UseAnimation => 30;
         public override int UseTime => 30;
         public override int ManaCost => 12;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/WaterHealing";
         public override int[] SpellItem => new int[] { ItemID.AquaScepter };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

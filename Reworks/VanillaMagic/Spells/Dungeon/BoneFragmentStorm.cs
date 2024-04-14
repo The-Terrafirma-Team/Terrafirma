@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override int UseAnimation => 5;
         public override int UseTime => 5;
         public override int ManaCost => 4;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/SpellBooks/BoneFragmentStorm";
         public override int[] SpellItem => new int[] { ItemID.BookofSkulls };
 
         public override void SetDefaults(Item entity)

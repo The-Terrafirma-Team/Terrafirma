@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Terrafirma.Items.Equipment;
+using Terrafirma.Items.Equipment.Summoner;
 using Terrafirma.Items.Materials;
 using Terrafirma.Items.Weapons.Ranged.Bows;
 using Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode;
@@ -16,7 +17,7 @@ namespace Terrafirma.Common
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             int[] DropsLeather = new int[] {NPCID.FireImp,NPCID.Demon,NPCID.FaceMonster,NPCID.DesertGhoul,NPCID.DesertGhoulCorruption,NPCID.DesertGhoulCrimson,NPCID.DesertGhoulHallow};
-            if (DropsLeather.Contains(npc.type))
+            if (NPCID.Sets.Zombies[npc.type] || DropsLeather.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5));
             }
@@ -37,6 +38,13 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
             }
+        }
+
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
+            globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(),ModContent.ItemType<Overclock>(), 149));
+
+            base.ModifyGlobalLoot(globalLoot);
         }
     }
     public class BossBags : GlobalItem

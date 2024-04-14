@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Equipment.Summoner
         {
             Item.DefaultToAccessory();
             Item.value = Item.sellPrice(0, 0, 25, 0);
-            Item.rare = ItemRarityID.Orange;
+            Item.rare = ItemRarityID.Blue;
         }
         public override void UpdateEquip(Player player)
         {

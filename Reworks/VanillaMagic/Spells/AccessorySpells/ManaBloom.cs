@@ -12,7 +12,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.AccessorySpells
         public override int UseAnimation => 45;
         public override int UseTime => 45;
         public override int ManaCost => 0;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Accessories/ManaBloom";
         public override int[] SpellItem => new int[] {
             ItemID.ManaFlower,
             ItemID.ArcaneFlower,

@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         public override int UseAnimation => 40;
         public override int UseTime => 40;
         public override int ManaCost => 14;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/GemStaff/AmberWall";
         public override int[] SpellItem => new int[] { ItemID.AmberStaff };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -70,7 +69,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
     public class AmberWallProj : ModProjectile
     {
         float randfall = 0f;
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/GemStaves/AmberWall";
         public override void SetDefaults()
         {
             Projectile.penetrate = 12;

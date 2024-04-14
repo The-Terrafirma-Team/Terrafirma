@@ -8,14 +8,13 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
+namespace Terrafirma.Spells.Tempire
 {
     internal class GlitterBomb : Spell
     {
         public override int UseAnimation => 80;
         public override int UseTime => 80;
         public override int ManaCost => 20;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Tempire/GlitterBomb";
         public override int[] SpellItem => new int[] { ModContent.ItemType<Majesty>() };
 
 
@@ -29,7 +28,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
     }
     public class GlitterBombProj : ModProjectile
     {
-        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Tempire/GlitterBomb";
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(20);
@@ -58,7 +56,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
         {
             Texture2D tex = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Spells/Tempire/GlitterBomb").Value;
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, Color.White, 0, tex.Size() / 2, 1f, SpriteEffects.None);
-            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, new Color(1f, 1f, 1f, 0f) * (0.8f - (float)Math.Sin((Main.timeForVisualEffects % 80f) / 40f)), 0, tex.Size() / 2, 0.8f + (float)Math.Sin((Main.timeForVisualEffects % 80f) / 20f), SpriteEffects.None);
+            Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, tex.Bounds, new Color(1f, 1f, 1f, 0f) * (0.8f - (float)Math.Sin(Main.timeForVisualEffects % 80f / 40f)), 0, tex.Size() / 2, 0.8f + (float)Math.Sin(Main.timeForVisualEffects % 80f / 20f), SpriteEffects.None);
 
             return false;
         }
@@ -68,7 +66,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Tempire
             int maxproj = 8;
             for (int i = 0; i < maxproj; i++)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(5f, 0f).RotatedBy(((Math.PI * 2) / maxproj) * i), ModContent.ProjectileType<GlitterBolt>(), Projectile.damage / (int)(maxproj * 0.75f), Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(5f, 0f).RotatedBy(Math.PI * 2 / maxproj * i), ModContent.ProjectileType<GlitterBolt>(), Projectile.damage / (int)(maxproj * 0.75f), Projectile.knockBack, Projectile.owner, 0, 0, 0);
             }
         }
     }

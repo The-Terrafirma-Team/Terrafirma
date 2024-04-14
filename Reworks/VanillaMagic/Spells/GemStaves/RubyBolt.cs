@@ -11,7 +11,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         public override int UseAnimation => 28;
         public override int UseTime => 28;
         public override int ManaCost => 7;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/PreHardmode/GemStaff/RubyBolt";
         public override int[] SpellItem => new int[] { ItemID.RubyStaff };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

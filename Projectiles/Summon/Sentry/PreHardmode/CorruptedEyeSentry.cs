@@ -46,7 +46,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             AttackTimer = 60f * TFUtils.GetSentryAttackCooldownMultiplier(Projectile);
 
-            NPC ClosestNPC = TFUtils.FindClosestNPC(600f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center);
+            NPC ClosestNPC = TFUtils.FindClosestNPC(600f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center, TargetThroughWalls: true);
             if (TargetNPC == null &&
                 ClosestNPC != null)               
             {
@@ -62,23 +62,28 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             if (TargetNPC != null)
             {
                 Projectile.ai[0] = Projectile.ai[0] > AttackTimer ? 0 : Projectile.ai[0] += 1;
+                if (!Collision.CanHitLine(Projectile.Center, 8, 8, TargetNPC.Center, TargetNPC.width, TargetNPC.height))
+                {
+                    TargetNPC = null;
+                }
             }
             if (Projectile.ai[0] >= AttackTimer && TargetNPC != null)
             {
                 Vector2 Dist = (Projectile.Center - new Vector2(2, 6)).DirectionTo(TargetNPC.Center) * ((Projectile.Center - new Vector2(2, 6)).Distance(TargetNPC.Center) * 0.05f);
                 for (int i = 0; i < 8; i++)
                 {
-                    Dust dust = Dust.NewDustDirect(Projectile.Center + Dist, 4, 4, DustID.GemDiamond, Main.rand.NextFloat(-0.5f, 0.5f), Main.rand.NextFloat(-0.5f, 0.5f), 0, new Color(240, 200, 255, 0));
+                    Dust dust = Dust.NewDustDirect(Projectile.Center + Dist, 4, 4, DustID.GemAmethyst, Main.rand.NextFloat(-0.5f, 0.5f), Main.rand.NextFloat(-0.5f, 0.5f), 0, new Color(180, 20, 255, 0));
                     dust.noGravity = true;
                 }    
-                Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + Dist, Vector2.Zero, ModContent.ProjectileType<PsychicRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner, TargetNPC.whoAmI);
+                if (Main.LocalPlayer.whoAmI == Projectile.owner) Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + Dist, Vector2.Zero, ModContent.ProjectileType<PsychicRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner, TargetNPC.whoAmI);
                 SoundEngine.PlaySound(SoundID.Item8,Projectile.Center);
             }
         }
         
-
         public override bool PreDraw(ref Color lightColor)
         {
+            Color GlowColor = new Color(180, 20, 255,0);
+
             Asset<Texture2D> tex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CorruptedEyeSentry", AssetRequestMode.ImmediateLoad);
             Main.EntitySpriteDraw(tex.Value,
                 Projectile.Center - Main.screenPosition,
@@ -103,7 +108,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Dist,
                     new Rectangle(54, 32, 36, 30),
-                    new Color(255, 255, 255, 0) * (Projectile.ai[0] / AttackTimer),
+                    GlowColor * (Projectile.ai[0] / AttackTimer),
                     0,
                     new Vector2(18, 22),
                     1f,
@@ -111,7 +116,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Dist,
                     new Rectangle(54, 32, 36, 30),
-                    new Color(255, 255, 255, 0) * (Projectile.ai[0] / AttackTimer) * 0.3f,
+                    GlowColor * (Projectile.ai[0] / AttackTimer) * 0.3f,
                     0,
                     new Vector2(18, 22),
                     1.5f,
@@ -131,7 +136,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(0, 8),
                     new Rectangle(26, 32, 22, 30),
-                    new Color(255, 255, 255, 0) * (Projectile.ai[0] / AttackTimer),
+                    GlowColor * (Projectile.ai[0] / AttackTimer),
                     rot,
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? new Vector2(6, 12) : new Vector2(6, 19),
                     1f,
@@ -139,7 +144,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(0, 8),
                     new Rectangle(26, 32, 22, 30),
-                    new Color(255, 255, 255, 0) * (Projectile.ai[0] / AttackTimer) * 0.3f,
+                    GlowColor * (Projectile.ai[0] / AttackTimer) * 0.3f,
                     rot,
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? new Vector2(6, 12) : new Vector2(6, 19),
                     1.2f,

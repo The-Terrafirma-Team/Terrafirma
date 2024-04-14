@@ -122,7 +122,11 @@ namespace Terrafirma.Common.Players
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (HeldMagicItem != Player.HeldItem && triggersSet.MouseRight)
+            //Check if Mouse
+            Tile tile = Main.tile[(Main.MouseWorld / 16).ToPoint()];
+            bool TileInteract = TileID.Sets.InteractibleByNPCs[tile.TileType] || TileID.Sets.HasOutlines[tile.TileType];
+
+            if (HeldMagicItem != Player.HeldItem && triggersSet.MouseRight && Player.inventory[Player.selectedItem].damage != -1 && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)
             {
                 if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type))
                 {
@@ -135,7 +139,7 @@ namespace Terrafirma.Common.Players
             if (triggersSet.MouseRight)
             {
                 HeldMagicItem = Player.HeldItem;
-                if (!SpellUI && SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1 && HeldMagicItem == Player.HeldItem)
+                if (!SpellUI && SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1 && HeldMagicItem == Player.HeldItem && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)
                 {
                     ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
                     SpellUI = true;
