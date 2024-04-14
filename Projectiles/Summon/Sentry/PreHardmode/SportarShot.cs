@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
     internal class SportarShot : ModProjectile
     {
         NPC target;
+
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Type] = 4;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 24;
@@ -30,13 +29,21 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {    
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;         
             Projectile.velocity.Y += 0.3f;
-        }
 
+            Projectile.frameCounter++;
+            if(Projectile.frameCounter > 5)
+            {
+                Projectile.frameCounter = 0;
+                Projectile.frame++;
+                if (Projectile.frame == 4)
+                    Projectile.frame = 0;
+            }
+        }
         public override void OnKill(int timeLeft)
         {
             Projectile.Explode(16 * 6);
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact,Projectile.position);
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.GlowingMushroom);
                 d.velocity = Main.rand.NextVector2CircularEdge(24, 24) * Main.rand.NextFloat(0.5f, 1f);

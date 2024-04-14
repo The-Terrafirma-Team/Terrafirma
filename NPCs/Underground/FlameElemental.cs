@@ -10,7 +10,9 @@ using Terrafirma.Common.Templates;
 using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.NPCs.Underground
@@ -26,6 +28,35 @@ namespace Terrafirma.NPCs.Underground
             Main.npcFrameCount[Type] = 5;
             NPCID.Sets.TrailCacheLength[NPC.type] = 5;
             NPCID.Sets.TrailingMode[NPC.type] = 7;
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+            {
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Terrafirma.Bestiary.FlameElemental"))
+            });
+        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        {
+            if(!TFUtils.NotPreBoss(false))
+            {
+                return 0;
+            }
+            float chance = 0;
+            int size = 30;
+            for(int x = -size; x <= size; x++)
+            {
+                for (int y = -size; y <= size; y++)
+                {
+                    if (Main.tile[spawnInfo.SpawnTileX + x,spawnInfo.SpawnTileY + y].LiquidAmount > 0 && Main.tile[spawnInfo.SpawnTileX + x, spawnInfo.SpawnTileY + y].LiquidType == LiquidID.Lava)
+                    {
+                        chance += 0.0002f;
+                    }
+                }
+            }
+            return chance;
         }
         public override void SetDefaults()
         {

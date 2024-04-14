@@ -13,15 +13,17 @@ namespace Terrafirma.Particles
         public Color outlineColor = Color.Black;
         public float scale;
         public float gravity = 0;
+        public float deceleration = 0.96f;
+        public float scaleDecreaseOverTime = 0.1f;
         public bool affectedByLight = false;
         public bool outlineAffectedByLight = false;
         public bool tileCollide = false;
         public override void Update()
         {
             position += velocity;
-            velocity *= 0.96f;
+            velocity *= deceleration;
             velocity.Y += gravity;
-            scale -= 0.1f;
+            scale -= scaleDecreaseOverTime;
             if (scale < 0)
                 Active = false;
             if (tileCollide)

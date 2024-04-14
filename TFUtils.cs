@@ -11,6 +11,7 @@ using Terrafirma.Common.Items;
 using Terrafirma.Common.Players;
 using static Terrafirma.Systems.Elements.ElementGlobals;
 using Terrafirma.Particles;
+using Terrafirma.Systems.Elements;
 
 namespace Terrafirma
 {
@@ -206,6 +207,13 @@ namespace Terrafirma
             return AreaNPCs;
 
         }
+
+        public static bool NotPreBoss(bool includeKingSlime = true)
+        {
+            if (includeKingSlime)
+                return (NPC.downedBoss1 || NPC.downedBoss2 || NPC.downedBoss3 || NPC.downedSlimeKing || Main.hardMode);
+            return (NPC.downedBoss1 || NPC.downedBoss2 || NPC.downedBoss3 || Main.hardMode);
+        }
         public static ElementNPC GetElementNPC(this NPC npc)
         {
             return npc.GetGlobalNPC<ElementNPC>();
@@ -218,7 +226,49 @@ namespace Terrafirma
         {
             return item.GetGlobalItem<ElementItem>();
         }
-
+        public static void setElementsI(Item type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
+        {
+            ElementItem data = type.GetGlobalItem<ElementItem>();
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+        }
+        public static void setElementsN(NPC type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
+        {
+            ElementNPC data = type.GetGlobalNPC<ElementNPC>();
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+        }
+        public static void setElementsP(Projectile type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
+        {
+            ElementProjectile data = type.GetGlobalProjectile<ElementProjectile>();
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+        }
+        //public static void setElementsForModCall(Entity type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
+        //{
+        //   if(type is NPC npc)
+        //        npc.setElements(fire,water, earth, air, light, dark, ice, poison, electric, arcane);
+        //    else if (type is Item item)
+        //        item.setElements(fire, water, earth, air, light, dark, ice, poison, electric, arcane);
+        //    else if (type is Projectile projectile)
+        //        projectile.setElements(fire, water, earth, air, light, dark, ice, poison, electric, arcane);
+        //}
+        public static object setElementsForModCall(params object[] args)
+        {
+            if (args[0] is not Entity)
+                return "First argument wasn't an entity";
+            for(int i = 1; i < 11; i++)
+            {
+                if (args[i] is not bool)
+                    return "an argument between 1 and 10 (inclusive) is not a bool, silly goose!";
+            }
+            Entity type = (Entity)args[0];
+            if (type is NPC npc)
+                setElementsN(npc, (bool)args[1], (bool)args[2], (bool)args[3], (bool)args[4], (bool)args[5], (bool)args[6], (bool)args[7], (bool)args[8], (bool)args[9], (bool)args[10]);
+            else if (type is Item item)
+                setElementsI(item, (bool)args[1], (bool)args[2], (bool)args[3], (bool)args[4], (bool)args[5], (bool)args[6], (bool)args[7], (bool)args[8], (bool)args[9], (bool)args[10]);
+            else if (type is Projectile proj)
+                setElementsP(proj, (bool)args[1], (bool)args[2], (bool)args[3], (bool)args[4], (bool)args[5], (bool)args[6], (bool)args[7], (bool)args[8], (bool)args[9], (bool)args[10]);
+            
+            return "You did it right! Probably.";
+        }
         // Sentry  Methods ____________________________________________________________________________________________________
 
         /// <summary>
