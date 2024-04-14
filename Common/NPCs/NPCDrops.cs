@@ -38,14 +38,13 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
             }
+            if (npc.type == NPCID.BloodZombie || npc.type == NPCID.Drippler || NPCID.Sets.Zombies[npc.type])
+            {
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<Overclock>(), 149, 75));
+
+            }
         }
 
-        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
-        {
-            globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(),ModContent.ItemType<Overclock>(), 149));
-
-            base.ModifyGlobalLoot(globalLoot);
-        }
     }
     public class BossBags : GlobalItem
     {
