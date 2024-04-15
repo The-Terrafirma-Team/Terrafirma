@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using Terrafirma.Data;
 using Terrafirma.Systems.Elements.Beastiary;
@@ -17,11 +18,33 @@ namespace Terrafirma.Systems.Elements
         {
             public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
             {
-                modifiers.FinalDamage *= ElementData.getElementalBonus(proj.GetElementProjectile().elementData,target.GetElementNPC().elementData);
+                modifiers.HideCombatText();
+                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
+                modifiers.FinalDamage *= mod;
             }
             public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
             {
-                modifiers.FinalDamage *= ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
+                modifiers.HideCombatText();
+                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
+                modifiers.FinalDamage *= mod;
+            }
+            public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+            {
+                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
+                DamageNumber(target, mod, hit, damageDone);
+            }
+            public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+            {
+                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
+                DamageNumber(target, mod, hit, damageDone);
+            }
+            private void DamageNumber(NPC target, float Mod, NPC.HitInfo hit, int damageDone)
+            {
+                Color color = hit.Crit ? CombatText.DamagedHostileCrit : CombatText.DamagedHostile;
+
+                color = Color.Lerp(color, (Mod > 1) ? Color.Red : Color.Gray, MathF.Abs(Mod - 1) / (Mod > 1 ? 2 : 1));
+
+                CombatText.NewText(target.Hitbox, color,damageDone,hit.Crit);
             }
         }
         public class ElementItem : GlobalItem
@@ -29,7 +52,6 @@ namespace Terrafirma.Systems.Elements
             public ElementData elementData = new ElementData();
             private static Asset<Texture2D> elementIcons;
             public override bool InstancePerEntity => true;
-
             public override void OnCreated(Item item, ItemCreationContext context)
             {
                 elementData = new ElementData();

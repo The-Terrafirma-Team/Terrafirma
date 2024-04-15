@@ -772,7 +772,7 @@ namespace Terrafirma.Systems.Elements
             lightItem.Add(ItemID.RainbowGun);
             lightItem.Add(ItemID.CrystalStorm);
             lightItem.Add(ItemID.MedusaHead);
-            lightItem.Add(4852);
+            lightItem.Add(4952);
             lightItem.Add(ItemID.SparkleGuitar);
             lightItem.Add(ItemID.LastPrism);
             lightItem.Add(4952); //Nightglow
