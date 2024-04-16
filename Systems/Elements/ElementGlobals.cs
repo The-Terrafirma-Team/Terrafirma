@@ -45,6 +45,7 @@ namespace Terrafirma.Systems.Elements
                 color = Color.Lerp(color, (Mod > 1) ? Color.Red : Color.Gray, MathF.Abs(Mod - 1) / (Mod > 1 ? 2 : 1));
 
                 CombatText.NewText(target.Hitbox, color,damageDone,hit.Crit);
+                Main.NewText(Mod);
             }
         }
         public class ElementItem : GlobalItem
@@ -130,10 +131,26 @@ namespace Terrafirma.Systems.Elements
             public ElementData elementData = new ElementData();
             public override void OnSpawn(Projectile projectile, IEntitySource source)
             {
-                if (!ProjectileSets.DontInheritElementFromWeapon[projectile.type])
+                //Main.NewText(source);
+                if (!ProjectileSets.DontInheritElementFromSource[projectile.type])
                 {
-                    if(source is EntitySource_ItemUse_WithAmmo src)
+                    if(source is EntitySource_ItemUse_WithAmmo)
                         elementData = ElementData.cloneElements(Main.player[projectile.owner].HeldItem.GetElementItem().elementData);
+                    else if (source is EntitySource_ItemUse itemUse)
+                    {
+                        elementData = ElementData.cloneElements(itemUse.Item.GetElementItem().elementData);
+                    }
+                    else if (source is EntitySource_Parent src)
+                    {
+                        ElementData data = elementData;
+                        if (src.Entity is NPC npc)
+                            data = npc.GetElementNPC().elementData;
+                        else if (src.Entity is Item item)
+                            data = item.GetElementItem().elementData;
+                        else if (src.Entity is Projectile proj)
+                            data = proj.GetElementProjectile().elementData;
+                        elementData = ElementData.cloneElements(data);
+                    }
                 }
             }
         }
