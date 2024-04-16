@@ -17,9 +17,13 @@ namespace Terrafirma.Common
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             int[] DropsLeather = new int[] {NPCID.FireImp,NPCID.Demon,NPCID.FaceMonster,NPCID.DesertGhoul,NPCID.DesertGhoulCorruption,NPCID.DesertGhoulCrimson,NPCID.DesertGhoulHallow};
-            if (NPCID.Sets.Zombies[npc.type] || DropsLeather.Contains(npc.type))
+            if (DropsLeather.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5));
+            }
+            if (NPCID.Sets.Zombies[npc.type])
+            {
+                npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 12));
             }
             int[] DropsFireShield = new int[] { NPCID.FireImp,NPCID.LavaSlime, NPCID.MeteorHead,NPCID.SkeletonArcher};
             if (DropsFireShield.Contains(npc.type))
@@ -38,7 +42,7 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
             }
-            if (npc.type == NPCID.BloodZombie || npc.type == NPCID.Drippler || NPCID.Sets.Zombies[npc.type])
+            if (npc.type == NPCID.BloodZombie || npc.type == NPCID.Drippler)
             {
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<Overclock>(), 149, 75));
 
