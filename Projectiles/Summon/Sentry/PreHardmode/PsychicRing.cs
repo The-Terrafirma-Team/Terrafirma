@@ -9,6 +9,7 @@ using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Humanizer.In;
+using Terraria.GameContent;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
@@ -23,7 +24,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             Projectile.tileCollide = false;
             Projectile.timeLeft = 3600;
-            Projectile.penetrate = 1;
+            Projectile.usesLocalNPCImmunity = true;
         }
         public override void AI()
         {
@@ -48,15 +49,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> tex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/PsychicRing");
-            Main.EntitySpriteDraw(tex.Value,
-                Projectile.Center - Main.screenPosition,
-                tex.Value.Bounds,
-                new Color(180, 20, 255, 0) * 0.6f,
-                0,
-                tex.Value.Size() / 2,
-                1f,
-                SpriteEffects.None);
+            Asset<Texture2D> tex = TextureAssets.Projectile[Type];
+            Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition,tex.Value.Bounds,new Color(180, 20, 255, 0) * 0.6f,0,tex.Value.Size() / 2,1f,SpriteEffects.None);
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Projectile.velocity - Main.screenPosition, tex.Value.Bounds, new Color(180, 20, 255, 0) * 0.4f, 0, tex.Value.Size() / 2, 1.1f, SpriteEffects.None);
+
             return false;
         }
     }

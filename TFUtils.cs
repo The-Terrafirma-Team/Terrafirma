@@ -134,7 +134,7 @@ namespace Terrafirma
         /// <summary>
         /// Finds the closest NPC to the given position and returns that NPC
         /// </summary>
-        public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position, bool HostileOnly = true, NPC[] excludedNPCs = null, bool TargetThroughWalls = false)
+        public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position, bool HostileOnly = true, NPC[] excludedNPCs = null, bool TargetThroughWalls = true)
         {
             NPC closestNPC = null;
 
@@ -144,7 +144,7 @@ namespace Terrafirma
             {
                 NPC target = Main.npc[k];
 
-                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null && target.lifeMax > 5 && Collision.CanHitLine(position, 8, 8, target.Center, target.width, target.height))
+                if (target.CanBeChasedBy() && (!HostileOnly || !target.friendly) && target != null && target.lifeMax > 5 && (!TargetThroughWalls ? Collision.CanHitLine(position - new Vector2(4), 8, 8, target.position, target.width, target.height) : true))
                 {
                     if (excludedNPCs != null && !excludedNPCs.Contains(target))
                     {

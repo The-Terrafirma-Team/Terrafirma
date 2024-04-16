@@ -131,7 +131,6 @@ namespace Terrafirma.Systems.Elements
             public ElementData elementData = new ElementData();
             public override void OnSpawn(Projectile projectile, IEntitySource source)
             {
-                //Main.NewText(source);
                 if (!ProjectileSets.DontInheritElementFromSource[projectile.type])
                 {
                     if(source is EntitySource_ItemUse_WithAmmo)
@@ -142,13 +141,20 @@ namespace Terrafirma.Systems.Elements
                     }
                     else if (source is EntitySource_Parent src)
                     {
+
                         ElementData data = elementData;
                         if (src.Entity is NPC npc)
+                        {
                             data = npc.GetElementNPC().elementData;
+                        }
                         else if (src.Entity is Item item)
+                        {
                             data = item.GetElementItem().elementData;
+                        }
                         else if (src.Entity is Projectile proj)
+                        {
                             data = proj.GetElementProjectile().elementData;
+                        }
                         elementData = ElementData.cloneElements(data);
                     }
                 }

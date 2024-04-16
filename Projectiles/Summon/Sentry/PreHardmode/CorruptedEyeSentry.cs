@@ -62,7 +62,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             if (TargetNPC != null)
             {
                 Projectile.ai[0] = Projectile.ai[0] > AttackTimer ? 0 : Projectile.ai[0] += 1;
-                if (!Collision.CanHitLine(Projectile.Center, 8, 8, TargetNPC.Center, TargetNPC.width, TargetNPC.height))
+                if (!Collision.CanHitLine(Projectile.Center, 8, 8, TargetNPC.position, TargetNPC.width, TargetNPC.height))
                 {
                     TargetNPC = null;
                 }
@@ -77,7 +77,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 }    
                 if (Main.LocalPlayer.whoAmI == Projectile.owner) Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + Dist, Vector2.Zero, ModContent.ProjectileType<PsychicRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner, TargetNPC.whoAmI);
                 SoundEngine.PlaySound(SoundID.Item8,Projectile.Center);
+                Projectile.ai[0] = 0;
             }
+            if(TargetNPC == null)
+                Projectile.ai[1] *= 0.95f;
         }
         
         public override bool PreDraw(ref Color lightColor)
@@ -85,6 +88,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Color GlowColor = new Color(180, 20, 255,0);
 
             Asset<Texture2D> tex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CorruptedEyeSentry", AssetRequestMode.ImmediateLoad);
+            // Body
             Main.EntitySpriteDraw(tex.Value,
                 Projectile.Center - Main.screenPosition,
                 new Rectangle(0, 0, 24, 36),
@@ -97,6 +101,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             if (TargetNPC != null && (Projectile.Center - new Vector2(2, 6)).Distance(TargetNPC.Center) < 200f)
             {
                 Vector2 Dist = TargetNPC != null ? (Projectile.Center - new Vector2(2, 6)).DirectionTo(TargetNPC.Center) * ((Projectile.Center - new Vector2(2, 6)).Distance(TargetNPC.Center) * 0.05f) : Vector2.Zero;
+                // Head forwards
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Dist,
                     new Rectangle(54, 0, 36, 30),
@@ -105,6 +110,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     new Vector2(18, 22),
                     1f,
                     SpriteEffects.None);
+                // Head forwards glow
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Dist,
                     new Rectangle(54, 32, 36, 30),
@@ -113,6 +119,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     new Vector2(18, 22),
                     1f,
                     SpriteEffects.None);
+                // Head forwards big glow
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Dist,
                     new Rectangle(54, 32, 36, 30),
@@ -125,6 +132,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             else if (TargetNPC != null)
             {
                 float rot = Projectile.Center.DirectionTo(TargetNPC.Center).ToRotation();
+                // Head side
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(0, 8),
                     new Rectangle(26, 0, 22, 30),
@@ -133,6 +141,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? new Vector2(6, 12) : new Vector2(6, 19),
                     1f,
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? SpriteEffects.FlipVertically : SpriteEffects.None);
+                // Head side glow
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(0, 8),
                     new Rectangle(26, 32, 22, 30),
@@ -141,6 +150,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? new Vector2(6, 12) : new Vector2(6, 19),
                     1f,
                     Math.Abs(rot) > (float)MathHelper.PiOver2 ? SpriteEffects.FlipVertically : SpriteEffects.None);
+                // Head side big glow
                 Main.EntitySpriteDraw(tex.Value,
                     Projectile.Center - Main.screenPosition - new Vector2(0, 8),
                     new Rectangle(26, 32, 22, 30),
@@ -152,10 +162,9 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             }
             else
             {
-                Projectile.ai[1] *= 0.95f;
                 Vector2 Dist = (Projectile.Center - new Vector2(2, 6)).DirectionTo(LastRecordedPos) * ((Projectile.Center - new Vector2(2, 6)).Distance(LastRecordedPos) * 0.02f);   
                 Main.EntitySpriteDraw(tex.Value,
-                    Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Vector2.Lerp(Dist, Vector2.Zero, 1f - Projectile.ai[1]),
+                    Projectile.Center - Main.screenPosition - new Vector2(2, 6) + Vector2.Lerp(Dist, Vector2.Zero, 1f - MathHelper.Clamp(Projectile.ai[1],0,1)),
                     new Rectangle(54, 0, 36, 30),
                     lightColor,
                     0,

@@ -15,7 +15,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
     internal class CursedFlameSentry : ModProjectile
     {
         float sentryrot = MathHelper.PiOver2;
-        public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/Hardmode/CursedFlameSentryBase";
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -50,6 +49,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
         }
         public override void AI()
         {
+            //Main.NewText("test",Main.DiscoColor);
             Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
             Projectile.ai[1]--;
@@ -79,11 +79,17 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 
             }
         }
+        private static Asset<Texture2D> SentryBase;
+        private static Asset<Texture2D> SentryShooter;
+        private static Asset<Texture2D> SentryShooterGlow;
+        public override void SetStaticDefaults()
+        {
+            SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/CursedFlameSentry");
+            SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/CursedFlameShooter");
+            SentryShooterGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/CursedFlameShooterGlow");
+        }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/CursedFlameSentryBase");
-            Asset<Texture2D> SentryShooter = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/CursedFlameShooter");
-            Asset<Texture2D> SentryShooterGlow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/CursedFlameShooterGlow");
 
             Main.EntitySpriteDraw(SentryShooter.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 0), null, lightColor, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width() / 2, SentryShooter.Height() / 2 + 10), 1, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(SentryShooterGlow.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 0), null, Color.White, sentryrot - MathHelper.PiOver2, new Vector2(SentryShooter.Width() / 2, SentryShooter.Height() / 2 + 10), 1, SpriteEffects.None, 0);
