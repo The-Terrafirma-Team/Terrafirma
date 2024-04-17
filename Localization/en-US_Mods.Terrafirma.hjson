@@ -854,10 +854,15 @@ Items: {
 	ScorchedCommandments: {
 		DisplayName: Scorched Commandments
 		Tooltip:
-		'''
-		Fire attacks inflicted oiled on critical hits
-		Killed enemies create a fire explosion
-		'''
+			'''
+			Fire attacks inflicted oiled on critical hits
+			Killed enemies create a fire explosion
+			'''
+	}
+
+	MoonlightCharm: {
+		DisplayName: Moonlight Charm
+		Tooltip: Dark attacks instantly kill if the target has less than double the damage taken
 	}
 }
 

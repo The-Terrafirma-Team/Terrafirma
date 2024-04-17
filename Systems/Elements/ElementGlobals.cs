@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Terrafirma.Common.Players;
 using Terrafirma.Data;
+using Terrafirma.Particles;
 using Terrafirma.Systems.Elements.Beastiary;
 using Terraria;
 using Terraria.Audio;
@@ -24,7 +25,7 @@ namespace Terrafirma.Systems.Elements
                 PlayerStats stats = Player.PlayerStats();
                 if (target.lifeMax < 5)
                     return;
-                if(stats.FireEnhancement && elementData.Fire)
+                if (stats.FireEnhancement && elementData.Fire)
                 {
                     if (hit.Crit)
                         target.AddBuff(BuffID.Oiled, 60 * 15);
@@ -62,6 +63,23 @@ namespace Terrafirma.Systems.Elements
                                 }
                             }
                         }
+                    }
+                }
+                if (stats.DarkEnhancement && elementData.Dark && target.life <= damageDone)
+                {
+                    bool previousHideStrike = target.HideStrikeDamage;
+                    target.HideStrikeDamage = true;
+                    target.StrikeInstantKill();
+                    target.HideStrikeDamage = previousHideStrike;
+
+                    for(int i = 0; i < 12; i++)
+                    {
+                        PixelCircle p = new PixelCircle();
+                        p.outlineColor = Color.DarkViolet;
+                        p.scale = Main.rand.NextFloat(4, 5);
+                        p.deceleration = 0.9f;
+                        p.outlineAffectedByLight = true;
+                        ParticleSystem.AddParticle(p, target.Center, Main.rand.NextVector2Circular(hit.Crit ? 12 : 6, hit.Crit ? 12 : 6), Color.Black);
                     }
                 }
             }
