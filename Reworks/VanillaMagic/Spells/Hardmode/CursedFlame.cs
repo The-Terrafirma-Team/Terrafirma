@@ -11,7 +11,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 15;
         public override int UseTime => 15;
         public override int ManaCost => 9;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/CursedFlame";
         public override int[] SpellItem => new int[] { ItemID.CursedFlames };
 
         public override void SetDefaults(Item entity)

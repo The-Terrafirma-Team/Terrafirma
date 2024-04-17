@@ -3,11 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
+using Terrafirma.Common.Players;
 using Terrafirma.Data;
 using Terrafirma.Systems.Elements.Beastiary;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Systems.Elements
@@ -16,6 +19,52 @@ namespace Terrafirma.Systems.Elements
     {
         public class ElementPlayer : ModPlayer
         {
+            public void ElementEffect(NPC target, NPC.HitInfo hit, int damageDone, ElementData elementData)
+            {
+                PlayerStats stats = Player.PlayerStats();
+                if (target.lifeMax < 5)
+                    return;
+                if(stats.FireEnhancement && elementData.Fire)
+                {
+                    if (hit.Crit)
+                        target.AddBuff(BuffID.Oiled, 60 * 15);
+                    SoundEngine.PlaySound(SoundID.Item74, target.position);
+                    if (target.life <= 0)
+                    {
+                        for (int i = 0; i < 30; i++)
+                        {
+                            Dust d = Dust.NewDustPerfect(target.Center, DustID.InfernoFork, Main.rand.NextVector2Circular(Math.Max(target.width, target.height) / 6, Math.Max(target.width, target.height) / 6));
+                            d.noGravity = !Main.rand.NextBool(3);
+                            if (d.noGravity)
+                            {
+                                d.velocity *= 2;
+                                d.fadeIn = 1.4f;
+                            }
+                        }
+                        for (int i = 0; i < Main.npc.Length; i++)
+                        {
+                            NPC npc = Main.npc[i];
+                            if (!npc.friendly && npc.lifeMax > 5 && npc.Center.Distance(target.Center) <= Math.Max(target.width, target.height) * 3)
+                            {
+                                if (hit.Crit)
+                                    npc.AddBuff(BuffID.Oiled, 60 * 15);
+                                npc.AddBuff(BuffID.OnFire, 60 * 5);
+
+                                for (int x = 0; x < 10; x++)
+                                {
+                                    Dust d = Dust.NewDustPerfect(npc.Center, DustID.InfernoFork, Main.rand.NextVector2Circular(5, 5));
+                                    d.noGravity = !Main.rand.NextBool(3);
+                                    if (d.noGravity)
+                                    {
+                                        d.velocity *= 2;
+                                        d.fadeIn = 1.4f;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
             {
                 modifiers.HideCombatText();
@@ -32,11 +81,13 @@ namespace Terrafirma.Systems.Elements
             {
                 float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
                 DamageNumber(target, mod, hit, damageDone);
+                ElementEffect(target,hit,damageDone, item.GetElementItem().elementData);
             }
             public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
             {
                 float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
                 DamageNumber(target, mod, hit, damageDone);
+                ElementEffect(target, hit, damageDone, proj.GetElementProjectile().elementData);
             }
             private void DamageNumber(NPC target, float Mod, NPC.HitInfo hit, int damageDone)
             {
@@ -45,7 +96,7 @@ namespace Terrafirma.Systems.Elements
                 color = Color.Lerp(color, (Mod > 1) ? Color.Red : Color.Gray, MathF.Abs(Mod - 1) / (Mod > 1 ? 2 : 1));
 
                 CombatText.NewText(target.Hitbox, color,damageDone,hit.Crit);
-                Main.NewText(Mod);
+                //Main.NewText(Mod);
             }
         }
         public class ElementItem : GlobalItem

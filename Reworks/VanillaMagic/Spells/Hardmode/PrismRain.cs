@@ -4,6 +4,7 @@ using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +15,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 6;
         public override int UseTime => 6;
         public override int ManaCost => 4;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/PrismRain";
         public override int[] SpellItem => new int[] { ItemID.RainbowGun };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -30,8 +30,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
     public class ColoredPrism : ModProjectile
     {
         Color ShotColor = new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0);
-        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/RainbowShot";
-
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
@@ -52,7 +50,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D RainbowShot = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/RainbowShot").Value;
+            Texture2D RainbowShot = TextureAssets.Projectile[Type].Value;
 
             for (int i = 0; i < 5; i++)
             {

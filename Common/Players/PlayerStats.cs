@@ -15,6 +15,7 @@ namespace Terrafirma.Common.Players
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
 
+        // Elemental
         public float FireDamage = 1f;
         public float WaterDamage = 1f;
         public float EarthDamage = 1f;
@@ -25,6 +26,17 @@ namespace Terrafirma.Common.Players
         public float PoisonDamage = 1f;
         public float ElectricDamage = 1f;
         public float ArcaneDamage = 1f;
+
+        public bool FireEnhancement;
+        public bool WaterEnhancement;
+        public bool EarthEnhancement;
+        public bool AirEnhancement;
+        public bool LightEnhancement;
+        public bool DarkEnhancement;
+        public bool IceEnhancement;
+        public bool PoisonEnhancement;
+        public bool ElectricEnhancement;
+        public bool ArcaneEnhancement;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -42,6 +54,17 @@ namespace Terrafirma.Common.Players
             PoisonDamage = 1;
             ElectricDamage = 1;
             ArcaneDamage = 1;
+
+            FireEnhancement = false;
+            WaterEnhancement = false;
+            EarthEnhancement = false;
+            AirEnhancement = false;
+            LightEnhancement = false;
+            DarkEnhancement = false;
+            IceEnhancement = false;
+            PoisonEnhancement = false;
+            ElectricEnhancement = false;
+            ArcaneEnhancement = false;
 
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;

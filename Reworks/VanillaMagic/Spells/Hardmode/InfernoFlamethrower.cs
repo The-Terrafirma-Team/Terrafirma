@@ -15,7 +15,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 20;
         public override int UseTime => 5;
         public override int ManaCost => 16;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/InfernoFlamethrower";
         public override int[] SpellItem => new int[] { ItemID.InfernoFork };
 
         public override void SetDefaults(Item entity)

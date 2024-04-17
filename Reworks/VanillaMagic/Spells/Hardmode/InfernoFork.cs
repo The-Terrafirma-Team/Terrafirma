@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 30;
         public override int UseTime => 30;
         public override int ManaCost => 18;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/InfernoFork";
         public override int[] SpellItem => new int[] { ItemID.InfernoFork };
 
         public override void SetDefaults(Item entity)
@@ -34,7 +33,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 
     public class InfernoForkProj : ModProjectile
     {
-        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/InfernoFork";
         public override void SetDefaults()
         {
             Projectile.friendly = true;

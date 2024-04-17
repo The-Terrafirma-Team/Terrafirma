@@ -5,6 +5,7 @@ using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -33,8 +34,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 
     public class SkySpear : ModProjectile
     {
-        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/SkySpears";
-
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 8;
@@ -51,7 +50,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 
             Projectile.extraUpdates = 3;
         }
-
         public override void OnSpawn(IEntitySource source)
         {
             for (int i = 0; i < 20; i++)
@@ -75,10 +73,9 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             Projectile.ai[0]++;
 
         }
-
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D tex = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/SkySpears").Value;
+            Texture2D tex = TextureAssets.Projectile[Type].Value;
             for (int i = 0; i < 5; i++)
             {
                 Main.EntitySpriteDraw(tex, 
@@ -91,15 +88,13 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
                     SpriteEffects.None, 
                     0f);
             }
-            
             return false;
         }
-
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Collision.TileCollision(Projectile.position, Projectile.velocity, 4, 4, true);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-            
+
             for (int i = 0; i < 3; i++)
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position + Projectile.velocity * 3, 2, 2, DustID.DungeonSpirit, -Projectile.velocity.X / 2f, -Projectile.velocity.Y / 2f, 0, Color.White, 2f);
@@ -107,10 +102,9 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             }
             for (int i = 0; i < 3; i++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.position + Projectile.velocity * 3, DustID.DungeonSpirit, Main.rand.NextVector2Circular(5,5),0,Color.White, 2f);
+                Dust dust = Dust.NewDustPerfect(Projectile.position + Projectile.velocity * 3, DustID.DungeonSpirit, Main.rand.NextVector2Circular(5, 5), 0, Color.White, 2f);
                 dust.noGravity = true;
             }
         }
     }
-
 }

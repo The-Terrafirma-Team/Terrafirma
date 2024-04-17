@@ -14,7 +14,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 40;
         public override int UseTime => 40;
         public override int ManaCost => 7;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/IchorBubble";
         public override int[] SpellItem => new int[] { ItemID.GoldenShower };
 
         public override void SetDefaults(Item entity)
@@ -35,7 +34,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
     }
     public class IchorBubbleProj : ModProjectile
     {
-        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/Hardmode/IchorBubble";
         public override Color? GetAlpha(Color lightColor)
         {
             return new Color(1f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.14f) * 0.3f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.12f) * 0.3f, 0.4f) * (0.8f + (float)Math.Sin(Projectile.timeLeft * 0.1f) * 0.2f);

@@ -8,6 +8,20 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\Accessories\**" />
+    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
+    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\Tempire\**" />
+    <Compile Remove="Systems\MageClass\SpellIcons\Accessories\**" />
+    <Compile Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
+    <Compile Remove="Systems\MageClass\SpellIcons\Tempire\**" />
+    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\Accessories\**" />
+    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
+    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\Tempire\**" />
+    <None Remove="Systems\MageClass\SpellIcons\Accessories\**" />
+    <None Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
+    <None Remove="Systems\MageClass\SpellIcons\Tempire\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Effects\CookingPotVaporShader.fx" />
     <None Remove="Projectiles\Ranged\Boomerangs\CopperChakramProjectile.png" />
     <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
@@ -25,9 +39,6 @@
   <ItemGroup>
     <Folder Include="Items\Placeable\" />
     <Folder Include="Reworks\VanillaMagic\Spells\PreHardmode\" />
-    <Folder Include="Systems\MageClass\SpellIcons\Accessories\" />
-    <Folder Include="Systems\MageClass\SpellIcons\PreHardmode\GemStaff\" />
-    <Folder Include="Systems\MageClass\SpellIcons\Tempire\" />
     <Folder Include="Walls\" />
   </ItemGroup>
 </Project>

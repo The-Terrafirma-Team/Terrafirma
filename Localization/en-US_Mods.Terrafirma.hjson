@@ -850,6 +850,15 @@ Items: {
 		DisplayName: Engineer Gauntlet
 		Tooltip: Doubles wrench buff duration
 	}
+
+	ScorchedCommandments: {
+		DisplayName: Scorched Commandments
+		Tooltip:
+		'''
+		Fire attacks inflicted oiled on critical hits
+		Killed enemies create a fire explosion
+		'''
+	}
 }
 
 Projectiles: {

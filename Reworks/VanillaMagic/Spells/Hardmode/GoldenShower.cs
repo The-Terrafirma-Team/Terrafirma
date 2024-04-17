@@ -12,7 +12,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 18;
         public override int UseTime => 6;
         public override int ManaCost => 7;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/GoldenShower";
         public override int[] SpellItem => new int[] { ItemID.GoldenShower };
         public override void SetDefaults(Item entity)
         {
