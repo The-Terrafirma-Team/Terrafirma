@@ -18,6 +18,7 @@ namespace Terrafirma.Common
         public override void Load()
         {
             TextureAssets.Item[ItemID.DemonScythe] = ModContent.Request<Texture2D>(AssetFolder + "ShadowCodex");
+            TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "VileStaff");
         }
     }
 }
