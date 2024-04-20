@@ -93,7 +93,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 HeartWaveParticle HeartWave = new HeartWaveParticle();
                 HeartWave.timeleft = (int)(60 * TFUtils.GetSentryRangeMultiplier(Projectile));
                 ParticleSystem.AddParticle(HeartWave, Projectile.Center);
-
+                SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/CrimsonHeart") { PitchVariance = 0.1f,MaxInstances = 10},Projectile.position);
                 NPC[] NpcArray = TFUtils.GetAllNPCsInArea(120f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center);
                 for (int i = 0; i < NpcArray.Length; i++)
                 {
