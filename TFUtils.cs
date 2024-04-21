@@ -80,10 +80,6 @@ namespace Terrafirma
             item.UseSound = SoundID.Item1;
             item.Size = new Vector2(16, 16);
         }
-        public static bool LegFrameIsOneThatRaisesTheBody(this Player player)
-        {
-            return (player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560) || (player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952);
-        }
         public static PlayerStats PlayerStats(this Player player)
         {
             return player.GetModPlayer<PlayerStats>();

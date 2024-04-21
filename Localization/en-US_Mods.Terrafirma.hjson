@@ -855,7 +855,7 @@ Items: {
 		DisplayName: Scorched Commandments
 		Tooltip:
 			'''
-			Fire attacks inflicted oiled on critical hits
+			Fire attacks inflict oiled on critical hits
 			Killed enemies create a fire explosion
 			'''
 	}
@@ -971,6 +971,7 @@ Projectiles: {
 	FireaxeBlob.DisplayName: Fireaxe Blob
 	CorruptedEyeSentry.DisplayName: Corrupted Eye Sentry
 	PsychicRing.DisplayName: Psychic Ring
+	VileStaffDark.DisplayName: Vile Staff Dark
 }
 
 Biomes: {

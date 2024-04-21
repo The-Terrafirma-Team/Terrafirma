@@ -76,7 +76,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                     dust.noGravity = true;
                 }    
                 if (Main.LocalPlayer.whoAmI == Projectile.owner) Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + Dist, Vector2.Zero, ModContent.ProjectileType<PsychicRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner, TargetNPC.whoAmI);
-                SoundEngine.PlaySound(SoundID.Item8,Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/CorruptEye") { Pitch = MathF.Sin((float)Main.timeForVisualEffects * 0.03f) * 0.3f, MaxInstances = 10, Volume = 0.5f }, Projectile.position);
                 Projectile.ai[0] = 0;
             }
             if(TargetNPC == null)
