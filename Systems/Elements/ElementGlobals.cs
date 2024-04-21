@@ -87,23 +87,23 @@ namespace Terrafirma.Systems.Elements
             {
                 modifiers.HideCombatText();
                 float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
-                modifiers.FinalDamage *= mod;
+                modifiers.FinalDamage *= mod * Player.PlayerStats().ElementalDamageVariance;
             }
             public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
             {
                 modifiers.HideCombatText();
                 float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
-                modifiers.FinalDamage *= mod;
+                modifiers.FinalDamage *= mod * Player.PlayerStats().ElementalDamageVariance;
             }
             public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
             {
-                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
+                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData) * Player.PlayerStats().ElementalDamageVariance;
                 DamageNumber(target, mod, hit, damageDone);
                 ElementEffect(target,hit,damageDone, item.GetElementItem().elementData);
             }
             public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
             {
-                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
+                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData) * Player.PlayerStats().ElementalDamageVariance;
                 DamageNumber(target, mod, hit, damageDone);
                 ElementEffect(target, hit, damageDone, proj.GetElementProjectile().elementData);
             }

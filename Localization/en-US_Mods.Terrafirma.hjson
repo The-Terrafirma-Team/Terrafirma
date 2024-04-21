@@ -56,7 +56,42 @@ Buffs: {
 
 	AirshipBuff: {
 		DisplayName: Airship Fleet
-		Description: The airship fleet will fight for you
+		Description: The airship fleet will fight for you.
+	}
+
+	AmberPenetrationBuff: {
+		DisplayName: Amber Penetration
+		Description: Increases armor penetration by 5.
+	}
+
+	AmethystElementalDamage: {
+		DisplayName: Amethyst Elemental Damage
+		Description: Increases the intensity of elemental damage.
+	}
+
+	DiamondPierceBuff: {
+		DisplayName: Diamond Pierce
+		Description: Increases weapon pierce.
+	}
+
+	EmeraldRegenBuff: {
+		DisplayName: Emerald Regeneration
+		Description: Increases life regeneration by 1 health per second and increases mana regeneration.
+	}
+
+	RubyDamageBuff: {
+		DisplayName: Ruby Damage
+		Description: Increases damage dealt with weapons by 7%.
+	}
+
+	SapphireMovementBuff: {
+		DisplayName: Sapphire Dexterity
+		Description: Increases movement speed by 33% and increases jump height.
+	}
+
+	TopazDefenseBuff: {
+		DisplayName: Topaz Defense
+		Description: Increases defense by two and melee attackers take a small amount of damage upon harming the player.
 	}
 }
 
@@ -864,6 +899,41 @@ Items: {
 		DisplayName: Moonlight Charm
 		Tooltip: Dark attacks instantly kill if the target has less than double the damage taken
 	}
+
+	AmethystCane: {
+		DisplayName: Amethyst Cane
+		Tooltip: ""
+	}
+
+	AmberCane: {
+		DisplayName: Amber Cane
+		Tooltip: ""
+	}
+
+	DiamondCane: {
+		DisplayName: Diamond Cane
+		Tooltip: ""
+	}
+
+	EmeraldCane: {
+		DisplayName: Emerald Cane
+		Tooltip: ""
+	}
+
+	RubyCane: {
+		DisplayName: Ruby Cane
+		Tooltip: ""
+	}
+
+	SapphireCane: {
+		DisplayName: Sapphire Cane
+		Tooltip: ""
+	}
+
+	TopazCane: {
+		DisplayName: Topaz Cane
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -971,6 +1041,7 @@ Projectiles: {
 	FireaxeBlob.DisplayName: Fireaxe Blob
 	CorruptedEyeSentry.DisplayName: Corrupted Eye Sentry
 	PsychicRing.DisplayName: Psychic Ring
+	GemSentry.DisplayName: Gem Sentry
 	VileStaffDark.DisplayName: Vile Staff Dark
 }
 

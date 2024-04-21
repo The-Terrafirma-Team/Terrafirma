@@ -22,6 +22,25 @@ namespace Terrafirma.Common.Items
         public const int CoolWrench = 4;
         public const int SentryPriority = 5;
     }
+    
+    public class SentryItemChanges : GlobalItem
+    {
+        public override bool InstancePerEntity => true;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.sentry;
+        }
+        public override bool CanUseItem(Item item, Player player)
+        {
+            Projectile proj = new Projectile();
+            proj.SetDefaults(item.shoot);
+            if (proj.GetGlobalProjectile<SentryStats>().SentrySlots > player.maxTurrets)
+            {
+                return false;
+            }
+            return base.CanUseItem(item, player);
+        }
+    }
     public class SentryStats : GlobalProjectile
     {
         public float SentrySlots = 1f;
@@ -93,7 +112,7 @@ namespace Terrafirma.Common.Items
             }
             if (BuffTime[SentryBuffID.CoolWrench] > 0)
             {
-                RangeMultiplier += 1f;
+                RangeMultiplier += 0.6f;
                 if (Main.rand.NextBool(5))
                 {
                     Dust d = Dust.NewDustDirect(projectile.Center - projectile.Size / 4, projectile.width / 2, projectile.height / 2, DustID.Ice, 0, -projectile.height / 20);

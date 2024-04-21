@@ -25,7 +25,7 @@ namespace Terrafirma.Items.Equipment.Summoner
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<PlayerStats>().SentryRangeMultiplier += 1f;
+            player.GetModPlayer<PlayerStats>().SentryRangeMultiplier += 0.2f;
         }
     }
 }

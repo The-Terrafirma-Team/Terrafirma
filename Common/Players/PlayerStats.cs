@@ -16,6 +16,7 @@ namespace Terrafirma.Common.Players
         public float ExtraWeaponPierceMultiplier = 1;
 
         // Elemental
+        public float ElementalDamageVariance = 1f;
         public float FireDamage = 1f;
         public float WaterDamage = 1f;
         public float EarthDamage = 1f;
@@ -42,8 +43,10 @@ namespace Terrafirma.Common.Players
         public int RangedFlatDamage = 0;
         public int MagicFlatDamage = 0;
         public int SummonFlatDamage = 0;
+
         public override void ResetEffects()
         {
+            ElementalDamageVariance = 1f;
             FireDamage = 1;
             WaterDamage = 1;
             EarthDamage = 1;
@@ -153,5 +156,6 @@ namespace Terrafirma.Common.Players
             }
             return base.UseSpeedMultiplier(item);
         }
+
     }
 }

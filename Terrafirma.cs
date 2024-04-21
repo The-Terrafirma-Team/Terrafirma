@@ -19,9 +19,9 @@ namespace Terrafirma
         public const string AssetPath = "Terrafirma/Assets/";
         public override void Load()
         {
-            GameShaders.Misc["Terrafirma:FlameShader"] = new MiscShaderData(new Ref<Effect>(ModContent.Request<Effect>($"{Mod.Name}" + "/Effects/FlameShader", AssetRequestMode.ImmediateLoad).Value),"Effect").UseShaderSpecificData(new Vector4());
-            Ref<Effect> vaporref = new Ref<Effect>(ModContent.Request<Effect>($"{Mod.Name}" + "/Effects/CookingPotVaporShader", AssetRequestMode.ImmediateLoad).Value);
-            Filters.Scene["Terrafirma:VaporShader"] = new Filter(new ScreenShaderData(vaporref, "VaporShader"), EffectPriority.Low);
+            //GameShaders.Misc["Terrafirma:FlameShader"] = new MiscShaderData(new Ref<Effect>(ModContent.Request<Effect>($"{Mod.Name}" + "/Effects/FlameShader", AssetRequestMode.ImmediateLoad).Value),"Effect").UseShaderSpecificData(new Vector4());
+            //Ref<Effect> vaporref = new Ref<Effect>(ModContent.Request<Effect>($"{Mod.Name}" + "/Effects/CookingPotVaporShader", AssetRequestMode.ImmediateLoad).Value);
+            //Filters.Scene["Terrafirma:VaporShader"] = new Filter(new ScreenShaderData(vaporref, "VaporShader"), EffectPriority.Low);
 
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
         }

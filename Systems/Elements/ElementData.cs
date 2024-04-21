@@ -27,15 +27,15 @@ namespace Terrafirma.Systems.Elements
         }
         public static float EffectiveBonus
         {
-            get { return 0.2f + (Main.expertMode ? 0.2f : 0) + (Main.masterMode ? 0.1f : 0); }
+            get { return 0.1f + (Main.expertMode ? 0.05f : 0) + (Main.masterMode ? 0.05f : 0); }
         }
         public static float WeakBonus
         {
-            get { return -0.2f + (Main.expertMode ? -0.2f : 0) + (Main.masterMode ? -0.2f : 0); }
+            get { return -0.1f + (Main.expertMode ? -0.05f : 0) + (Main.masterMode ? -0.05f : 0); }
         }
         public static float SuperBonus
         {
-            get { return 0.5f + (Main.expertMode ? 0.25f : 0) + (Main.masterMode ? 0.15f : 0); }
+            get { return 0.2f + (Main.expertMode ? 0.1f : 0) + (Main.masterMode ? 0.1f : 0); }
         }
         public static ElementData cloneElements(ElementData dataToClone)
         {
