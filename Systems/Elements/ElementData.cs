@@ -58,7 +58,7 @@ namespace Terrafirma.Systems.Elements
 
             if (defender.Fire)
             {
-                if (attacker.Fire) mod += WeakBonus;
+                //if (attacker.Fire) mod += WeakBonus;
                 if (attacker.Water) mod += EffectiveBonus;
                 if (attacker.Earth) mod += WeakBonus;
                 if (attacker.Air) mod += WeakBonus;
@@ -69,7 +69,7 @@ namespace Terrafirma.Systems.Elements
             {
                 if (attacker.Arcane) mod += EffectiveBonus;
                 if (attacker.Fire) mod += WeakBonus;
-                if (attacker.Water) mod += WeakBonus;
+                //if (attacker.Water) mod += WeakBonus;
                 if (attacker.Ice) mod += WeakBonus;
                 if (attacker.Poison) mod += EffectiveBonus;
                 if (attacker.Electric) mod += SuperBonus;
@@ -77,7 +77,7 @@ namespace Terrafirma.Systems.Elements
             if (defender.Earth)
             {
                 if (attacker.Arcane) mod += EffectiveBonus;
-                if (attacker.Earth) mod += WeakBonus;
+                //if (attacker.Earth) mod += WeakBonus;
                 if (attacker.Fire) mod += EffectiveBonus;
                 if (attacker.Ice) mod += EffectiveBonus;
                 if (attacker.Poison) mod += EffectiveBonus;
@@ -89,7 +89,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Arcane) mod += EffectiveBonus;
                 if (attacker.Fire) mod += EffectiveBonus;
                 if (attacker.Earth) mod += WeakBonus;
-                if (attacker.Air) mod += WeakBonus;
+                //if (attacker.Air) mod += WeakBonus;
                 if (attacker.Ice) mod += WeakBonus;
                 if (attacker.Poison) mod += EffectiveBonus;
                 if (attacker.Electric) mod += WeakBonus;
@@ -101,7 +101,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Fire) mod += EffectiveBonus;
                 if (attacker.Water) mod += WeakBonus;
                 if (attacker.Air) mod += WeakBonus;
-                if (attacker.Ice) mod += WeakBonus;
+                //if (attacker.Ice) mod += WeakBonus;
                 if (attacker.Light) mod += EffectiveBonus;
                 if (attacker.Electric) mod += WeakBonus;
             }
@@ -111,7 +111,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Water) mod += EffectiveBonus;
                 if (attacker.Earth) mod += EffectiveBonus;
                 if (attacker.Ice) mod += EffectiveBonus;
-                if (attacker.Poison) mod += WeakBonus;
+                //if (attacker.Poison) mod += WeakBonus;
                 if (attacker.Light) mod += EffectiveBonus;
                 if (attacker.Electric) mod += EffectiveBonus;
             }
@@ -120,14 +120,14 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Earth) mod += EffectiveBonus;
                 if (attacker.Air) mod += WeakBonus;
                 if (attacker.Poison) mod += WeakBonus;
-                if (attacker.Light) mod += WeakBonus;
+                //if (attacker.Light) mod += WeakBonus;
                 if (attacker.Dark) mod += SuperBonus;
             }
             if (defender.Dark)
             {
                 if (attacker.Fire) mod += EffectiveBonus;
                 if (attacker.Light) mod += SuperBonus;
-                if (attacker.Dark) mod += WeakBonus;
+                //if (attacker.Dark) mod += WeakBonus;
                 if (attacker.Electric) mod += EffectiveBonus;
             }
             if (defender.Electric)
@@ -138,11 +138,11 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Ice) mod += EffectiveBonus;
                 if (attacker.Poison) mod += WeakBonus;
                 if (attacker.Dark) mod += WeakBonus;
-                if (attacker.Electric) mod += WeakBonus;
+                //if (attacker.Electric) mod += WeakBonus;
             }
             if (defender.Arcane)
             {
-                if (attacker.Arcane) mod += WeakBonus;
+                //if (attacker.Arcane) mod += WeakBonus;
                 if (attacker.Typeless) mod += EffectiveBonus;
                 if (attacker.Electric) mod += EffectiveBonus;
                 //if (attacker.Fire) mod += WeakBonus;

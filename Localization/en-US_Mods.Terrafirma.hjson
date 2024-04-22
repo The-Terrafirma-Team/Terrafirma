@@ -1043,6 +1043,9 @@ Projectiles: {
 	PsychicRing.DisplayName: Psychic Ring
 	GemSentry.DisplayName: Gem Sentry
 	VileStaffDark.DisplayName: Vile Staff Dark
+	DarkBolt.DisplayName: Dark Bolt
+	VileStaffThorn.DisplayName: Vile Staff Thorn
+	VileThornProj.DisplayName: Vile Thorn Proj
 }
 
 Biomes: {
@@ -1151,6 +1154,8 @@ Spells: {
 		DanceOfBlades: Dance of Blades
 		SkySpears: Sky Spears
 		TheAeonsEternity: The Aeon's Eternity
+		DarkBolts: Shadow Scales
+		Vilethorn: Vilethorn
 	}
 
 	Desc: {
@@ -1191,6 +1196,8 @@ Spells: {
 		DanceOfBlades: Shoots magic blades
 		SkySpears: Summons magic spears from the sky
 		TheAeonsEternity: Summons a giant magic blade that follows your mouse
+		DarkBolts: Charges up to 4 shadow scales
+		Vilethorn: Charges up a lingering vile thorn
 	}
 }
 
