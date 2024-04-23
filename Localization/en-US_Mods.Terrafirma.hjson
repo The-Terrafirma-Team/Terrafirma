@@ -934,6 +934,11 @@ Items: {
 		DisplayName: Topaz Cane
 		Tooltip: ""
 	}
+
+	ArmoredDummyItem: {
+		DisplayName: Armored Dummy Item
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1202,7 +1207,11 @@ Spells: {
 }
 
 UIElements.CookingPot.InputAmount: Amount
-NPCs.FlameElemental.DisplayName: Flame Elemental
+
+NPCs: {
+	FlameElemental.DisplayName: Flame Elemental
+	ArmoredDummyNPC.DisplayName: Armored Dummy N P C
+}
 
 Configs: {
 	ClientConfig: {
@@ -1235,6 +1244,7 @@ Configs: {
 				3 = Gilded
 				4 = StoneGold
 				5 = Corroboros
+				6 = Thin
 				'''
 		}
 

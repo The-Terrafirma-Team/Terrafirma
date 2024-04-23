@@ -6,7 +6,7 @@ namespace Terrafirma.Common
 {
     public class ClientConfig : ModConfig
     {
-        public const int MaxSpellBorders = 6;
+        public const int MaxSpellBorders = 7;
         public override ConfigScope Mode => ConfigScope.ClientSide;
         [Header("$Mods.Terrafirma.Configs.ClientConfig.SpellVisuals")]
 
