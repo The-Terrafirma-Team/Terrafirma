@@ -20,11 +20,11 @@ namespace Terrafirma.Tiles.Purity
             GlowTex = ModContent.Request<Texture2D>(Texture + "Glow");
             Main.tileFrameImportant[Type] = true;
             TileObjectData.newTile.Width = 4;
-            TileObjectData.newTile.Height = 7;
+            TileObjectData.newTile.Height = 9;
             TileObjectData.newTile.Origin = new Point16(2, 6);
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.UsesCustomCanPlace = true;
-            TileObjectData.newTile.CoordinateHeights = new int[7] { 16, 16, 16, 16, 16, 16, 16 };
+            TileObjectData.newTile.CoordinateHeights = new int[9] { 16, 16, 16, 16, 16, 16, 16, 16, 16 };
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
             TileObjectData.newTile.AnchorValidTiles = new int[6] { 2, 477, 109, 60, 492, 633 };
@@ -61,7 +61,7 @@ namespace Terrafirma.Tiles.Purity
             if (!closer || !(Main.tile[i, j].TileFrameX == 0 || Main.tile[i, j].TileFrameX != 18*5) || Main.tile[i, j].TileFrameY != 0 || !Main.rand.NextBool(120))
                 return;
 
-            Vector2 coords = new Point(i + 1, j + 2).ToWorldCoordinates(0, 0);
+            Vector2 coords = new Point(i + 2, j + 2).ToWorldCoordinates(0, 0);
 
             //Dust.NewDustPerfect(coords, DustID.Terra);
             SunflowerBeam p = new SunflowerBeam();
