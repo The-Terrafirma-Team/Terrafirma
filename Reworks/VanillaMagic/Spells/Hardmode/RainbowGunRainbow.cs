@@ -12,7 +12,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 40;
         public override int UseTime => 40;
         public override int ManaCost => 20;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/PiercingRainbow";
         public override int[] SpellItem => new int[] { ItemID.RainbowGun };
 
         public override void SetDefaults(Item entity)

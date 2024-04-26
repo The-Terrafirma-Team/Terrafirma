@@ -939,6 +939,16 @@ Items: {
 		DisplayName: Armored Dummy Item
 		Tooltip: ""
 	}
+
+	GiantSunflower: {
+		DisplayName: Giant Sunflower
+		Tooltip: ""
+	}
+
+	BigSunflower: {
+		DisplayName: Big Sunflower
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1051,6 +1061,7 @@ Projectiles: {
 	DarkBolt.DisplayName: Dark Bolt
 	VileStaffThorn.DisplayName: Vile Staff Thorn
 	VileThornProj.DisplayName: Vile Thorn Proj
+	TestScary.DisplayName: Test Scary
 }
 
 Biomes: {
