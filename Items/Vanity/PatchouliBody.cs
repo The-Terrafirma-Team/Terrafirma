@@ -29,5 +29,9 @@ namespace Terrafirma.Items.Vanity
             Item.vanity = true;
             Item.maxStack = 1;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.Loom).AddIngredient(ItemID.Silk, 8).AddRecipeGroup(RecipeGroupID.Wood,25).AddRecipeGroup(RecipeGroupID.IronBar,2).AddIngredient(ItemID.HellstoneBar, 2).Register();
+        }
     }
 }

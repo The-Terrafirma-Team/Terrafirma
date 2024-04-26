@@ -15,5 +15,9 @@ namespace Terrafirma.Items.Vanity
             Item.value = Item.sellPrice(silver: 75);
             Item.vanity = true;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.MushroomGrassSeeds, 10).AddIngredient(ItemID.FamiliarWig).AddIngredient(ItemID.DemoniteBar,2).Register();
+        }
     }
 }

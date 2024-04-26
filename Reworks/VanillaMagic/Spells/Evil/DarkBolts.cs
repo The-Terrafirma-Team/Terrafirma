@@ -56,7 +56,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
                 if (Projectile.ai[0] % 30 == 0)
                 {
                     //SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
-                    SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/VileCharge") { PitchVariance = 0.2f, MaxInstances = 10, Volume = 0.1f + Projectile.ai[1] * 0.1f }, Projectile.position);
+                    SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/VileCharge") { PitchVariance = 0.2f, MaxInstances = 10, Volume = 0.1f + Projectile.ai[1] * 0.1f, Pitch = Projectile.ai[1] * 0.1f }, Projectile.position);
                     BigSparkle p = new BigSparkle();
                     p.Scale = 1.5f;
                     p.fadeInTime = 5;
@@ -93,7 +93,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
                     }
                     for (int i = 0; i < Projectile.ai[1]; i++)
                     {
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(30, -30).RotatedBy(Projectile.rotation), new Vector2(1, 0).RotatedBy(Projectile.rotation - MathHelper.PiOver4 + Main.rand.NextFloat(-0.1f, 0.1f)) * Projectile.velocity.Length() * Main.rand.NextFloat(0.9f,1.1f), ModContent.ProjectileType<DarkBolt>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(30, -30).RotatedBy(Projectile.rotation), new Vector2(0.6f + Projectile.ai[1]*0.15f, 0).RotatedBy(Projectile.rotation - MathHelper.PiOver4 + Main.rand.NextFloat(-0.1f, 0.1f)) * Projectile.velocity.Length() * Main.rand.NextFloat(0.9f,1.1f), ModContent.ProjectileType<DarkBolt>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     }
                     SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
                 }
@@ -114,6 +114,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
             Projectile.aiStyle = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.timeLeft = 120;
+            Projectile.Size = new Vector2(16);
         }
         public override void AI()
         {
