@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Tiles;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,6 +18,10 @@ namespace Terrafirma.Items.Placeable.Statues
             Item.CloneDefaults(ItemID.SlimeStatue);
             Item.createTile = ModContent.TileType<Tiles.Statues>();
             Item.placeStyle = style;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.HeavyWorkBench).AddIngredient(ItemID.StoneBlock, 100).Register();
         }
     }
     public class ExcaliburStatue : StrangeBulbStatue
