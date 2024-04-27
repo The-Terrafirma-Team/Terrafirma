@@ -949,6 +949,41 @@ Items: {
 		DisplayName: Big Sunflower
 		Tooltip: ""
 	}
+
+	CrossStatue: {
+		DisplayName: Cross Statue
+		Tooltip: ""
+	}
+
+	ExcaliburStatue: {
+		DisplayName: Excalibur Statue
+		Tooltip: ""
+	}
+
+	FourPointedStarStatue: {
+		DisplayName: Four Pointed Star Statue
+		Tooltip: ""
+	}
+
+	JewelStatue: {
+		DisplayName: Jewel Statue
+		Tooltip: ""
+	}
+
+	OverseeingStatue: {
+		DisplayName: Overseeing Statue
+		Tooltip: ""
+	}
+
+	StrangeBulbStatue: {
+		DisplayName: Strange Bulb Statue
+		Tooltip: ""
+	}
+
+	WrenchStatue: {
+		DisplayName: Wrench Statue
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
