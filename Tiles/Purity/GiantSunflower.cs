@@ -32,6 +32,7 @@ namespace Terrafirma.Tiles.Purity
             TileObjectData.newTile.RandomStyleRange = 2;
             TileObjectData.newTile.LavaDeath = true;
             TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;
+            DustType = DustID.Grass;
             TileObjectData.addTile(Type);
             Main.tileLighted[Type] = true;
         }
