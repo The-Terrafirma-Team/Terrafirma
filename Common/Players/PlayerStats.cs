@@ -133,7 +133,7 @@ namespace Terrafirma.Common.Players
             {
                 damage *= IceDamage;
             }
-            if (item.GetElementItem().elementData.Poison)
+            if (item.GetElementItem().elementData.Toxin)
             {
                 damage *= PoisonDamage;
             }

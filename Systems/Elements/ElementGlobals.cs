@@ -146,8 +146,8 @@ namespace Terrafirma.Systems.Elements
                         elementData.Dark = true;
                     if (AddElementsToVanillaContent.iceItem.Contains(item.type))
                         elementData.Ice = true;
-                    if (AddElementsToVanillaContent.poisonItem.Contains(item.type))
-                        elementData.Poison = true;
+                    if (AddElementsToVanillaContent.toxinItem.Contains(item.type))
+                        elementData.Toxin = true;
                     if (AddElementsToVanillaContent.electricItem.Contains(item.type))
                         elementData.Electric = true;
                     if (AddElementsToVanillaContent.arcaneItem.Contains(item.type))
@@ -181,7 +181,7 @@ namespace Terrafirma.Systems.Elements
                             || i == 5 && elementData.Light
                             || i == 6 && elementData.Dark
                             || i == 7 && elementData.Ice
-                            || i == 8 && elementData.Poison
+                            || i == 8 && elementData.Toxin
                             || i == 9 && elementData.Electric) // The scary block
                         {
                             Main.spriteBatch.Draw(elementIcons.Value, new Vector2(line.X + xOffset, line.Y - 2), new Rectangle(i * 26, 0, 26, 24), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
@@ -251,8 +251,8 @@ namespace Terrafirma.Systems.Elements
                         elementData.Dark = true;
                     if (AddElementsToVanillaContent.iceNPC.Contains(npc.type))
                         elementData.Ice = true;
-                    if (AddElementsToVanillaContent.poisonNPC.Contains(npc.type))
-                        elementData.Poison = true;
+                    if (AddElementsToVanillaContent.toxinNPC.Contains(npc.type))
+                        elementData.Toxin = true;
                     if (AddElementsToVanillaContent.electricNPC.Contains(npc.type))
                         elementData.Electric = true;
                     if (AddElementsToVanillaContent.arcaneNPC.Contains(npc.type))
@@ -275,7 +275,7 @@ namespace Terrafirma.Systems.Elements
                 if (data.Earth) AddIcon(bestiaryEntry, ModContent.GetInstance<Earth>());
                 if (data.Air) AddIcon(bestiaryEntry, ModContent.GetInstance<Air>());
                 if (data.Ice) AddIcon(bestiaryEntry, ModContent.GetInstance<Ice>());
-                if (data.Poison) AddIcon(bestiaryEntry, ModContent.GetInstance<Poison>());
+                if (data.Toxin) AddIcon(bestiaryEntry, ModContent.GetInstance<Toxin>());
                 if (data.Electric) AddIcon(bestiaryEntry, ModContent.GetInstance<Electric>());
             }
         }

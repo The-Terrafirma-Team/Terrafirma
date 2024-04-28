@@ -40,7 +40,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
             Item.shoot = ModContent.ProjectileType<BottleOfPoisonProjectile>();
             Item.shootSpeed = 8f;
 
-            Item.GetElementItem().elementData.Poison = true;
+            Item.GetElementItem().elementData.Toxin = true;
         }
         public override void AddRecipes()
         {

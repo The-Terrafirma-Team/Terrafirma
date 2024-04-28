@@ -225,17 +225,17 @@ namespace Terrafirma
         public static void setElementsI(Item type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
         {
             ElementItem data = type.GetGlobalItem<ElementItem>();
-            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Toxin = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
         }
         public static void setElementsN(NPC type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
         {
             ElementNPC data = type.GetGlobalNPC<ElementNPC>();
-            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Toxin = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
         }
         public static void setElementsP(Projectile type, bool fire = false, bool water = false, bool earth = false, bool air = false, bool light = false, bool dark = false, bool ice = false, bool poison = false, bool electric = false, bool arcane = false)
         {
             ElementProjectile data = type.GetGlobalProjectile<ElementProjectile>();
-            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Poison = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
+            data.elementData.Fire = fire; data.elementData.Water = water; data.elementData.Earth = earth; data.elementData.Air = air; data.elementData.Light = light; data.elementData.Dark = dark; data.elementData.Ice = ice; data.elementData.Toxin = poison; data.elementData.Electric = electric; data.elementData.Arcane = arcane;
         }
         public static object setElementsForModCall(params object[] args)
         {

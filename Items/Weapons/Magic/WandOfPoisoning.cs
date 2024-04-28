@@ -24,7 +24,7 @@ namespace Terrafirma.Items.Weapons.Magic
             Item.value = Item.sellPrice(0, 0, 20, 0);
             Item.UseSound = SoundID.Item8;
             Item.rare = ItemRarityID.Blue;
-            Item.GetElementItem().elementData.Poison = true;
+            Item.GetElementItem().elementData.Toxin = true;
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

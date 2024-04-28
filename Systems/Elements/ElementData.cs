@@ -17,13 +17,13 @@ namespace Terrafirma.Systems.Elements
         public bool Light;
         public bool Dark;
         public bool Ice;
-        public bool Poison;
+        public bool Toxin;
         public bool Electric;
         public bool Arcane;
         public bool Typeless 
         { 
-            set { Fire = Water = Earth = Air = Light = Dark = Ice = Poison = Electric = Arcane = false; }
-            readonly get { return !Fire && !Water && !Earth && !Air && !Light && !Dark && !Ice && !Poison && !Electric && !Arcane; }
+            set { Fire = Water = Earth = Air = Light = Dark = Ice = Toxin = Electric = Arcane = false; }
+            readonly get { return !Fire && !Water && !Earth && !Air && !Light && !Dark && !Ice && !Toxin && !Electric && !Arcane; }
         }
         public static float EffectiveBonus
         {
@@ -47,7 +47,7 @@ namespace Terrafirma.Systems.Elements
             clone.Light = dataToClone.Light;
             clone.Dark = dataToClone.Dark;
             clone.Ice = dataToClone.Ice;
-            clone.Poison = dataToClone.Poison;
+            clone.Toxin = dataToClone.Toxin;
             clone.Electric = dataToClone.Electric;
             clone.Arcane = dataToClone.Arcane;
             return clone;
@@ -71,7 +71,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Fire) mod += WeakBonus * Variance;
                 //if (attacker.Water) mod += WeakBonus;
                 if (attacker.Ice) mod += WeakBonus * Variance;
-                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Toxin) mod += EffectiveBonus * Variance;
                 if (attacker.Electric) mod += SuperBonus * Variance;
             }
             if (defender.Earth)
@@ -80,7 +80,7 @@ namespace Terrafirma.Systems.Elements
                 //if (attacker.Earth) mod += WeakBonus;
                 if (attacker.Fire) mod += EffectiveBonus * Variance;
                 if (attacker.Ice) mod += EffectiveBonus * Variance;
-                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Toxin) mod += EffectiveBonus * Variance;
                 if (attacker.Light) mod += WeakBonus * Variance;
                 if (attacker.Electric) mod += WeakBonus * Variance;
             }
@@ -91,7 +91,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Earth) mod += WeakBonus * Variance;
                 //if (attacker.Air) mod += WeakBonus;
                 if (attacker.Ice) mod += WeakBonus * Variance;
-                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Toxin) mod += EffectiveBonus * Variance;
                 if (attacker.Electric) mod += WeakBonus * Variance;
                 if (attacker.Light) mod += EffectiveBonus * Variance;
             }
@@ -105,7 +105,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Light) mod += EffectiveBonus * Variance;
                 if (attacker.Electric) mod += WeakBonus * Variance;
             }
-            if (defender.Poison)
+            if (defender.Toxin)
             {
                 if (attacker.Fire) mod += EffectiveBonus * Variance;
                 if (attacker.Water) mod += EffectiveBonus * Variance;
@@ -119,7 +119,7 @@ namespace Terrafirma.Systems.Elements
             {
                 if (attacker.Earth) mod += EffectiveBonus * Variance;
                 if (attacker.Air) mod += WeakBonus * Variance;
-                if (attacker.Poison) mod += WeakBonus * Variance;
+                if (attacker.Toxin) mod += WeakBonus * Variance;
                 //if (attacker.Light) mod += WeakBonus;
                 if (attacker.Dark) mod += SuperBonus * Variance;
             }
@@ -136,7 +136,7 @@ namespace Terrafirma.Systems.Elements
                 if (attacker.Earth) mod += EffectiveBonus * Variance;
                 if (attacker.Air) mod += EffectiveBonus * Variance;
                 if (attacker.Ice) mod += EffectiveBonus * Variance;
-                if (attacker.Poison) mod += WeakBonus * Variance;
+                if (attacker.Toxin) mod += WeakBonus * Variance;
                 if (attacker.Dark) mod += WeakBonus * Variance;
                 //if (attacker.Electric) mod += WeakBonus;
             }
@@ -170,8 +170,8 @@ namespace Terrafirma.Systems.Elements
         public static HashSet<int> airItem = new HashSet<int>();
         public static HashSet<int> iceNPC = new HashSet<int>();
         public static HashSet<int> iceItem = new HashSet<int>();
-        public static HashSet<int> poisonNPC = new HashSet<int>();
-        public static HashSet<int> poisonItem = new HashSet<int>();
+        public static HashSet<int> toxinNPC = new HashSet<int>();
+        public static HashSet<int> toxinItem = new HashSet<int>();
         public static HashSet<int> lightNPC = new HashSet<int>();
         public static HashSet<int> lightItem = new HashSet<int>();
         public static HashSet<int> darkNPC = new HashSet<int>();
@@ -325,19 +325,19 @@ namespace Terrafirma.Systems.Elements
             iceNPC.Add(431);
             iceNPC.Add(628);
             #endregion ice
-            #region poison
-            AddIDRange(poisonNPC, -65, -56);
-            AddIDRange(poisonNPC, -21, -16);
-            poisonNPC.Add(41);
-            poisonNPC.Add(141);
-            AddIDRange(poisonNPC, 163, 165);
-            poisonNPC.Add(176);
-            poisonNPC.Add(204);
-            AddIDRange(poisonNPC, 231, 238);
-            AddIDRange(poisonNPC, 262, 265);
-            poisonNPC.Add(468);
-            AddIDRange(poisonNPC, 530, 531);
-            #endregion poison
+            #region toxin
+            AddIDRange(toxinNPC, -65, -56);
+            AddIDRange(toxinNPC, -21, -16);
+            toxinNPC.Add(41);
+            toxinNPC.Add(141);
+            AddIDRange(toxinNPC, 163, 165);
+            toxinNPC.Add(176);
+            toxinNPC.Add(204);
+            AddIDRange(toxinNPC, 231, 238);
+            AddIDRange(toxinNPC, 262, 265);
+            toxinNPC.Add(468);
+            AddIDRange(toxinNPC, 530, 531);
+            #endregion toxin
             #region light
             lightNPC.Add(44);
             lightNPC.Add(75);
@@ -525,13 +525,13 @@ namespace Terrafirma.Systems.Elements
             iceItem.Add(ItemID.NorthPole);
             iceItem.Add(ItemID.IceBoomerang);
             #endregion ice
-            #region poison
-            poisonItem.Add(ItemID.Flymeal);
-            poisonItem.Add(ItemID.BladeofGrass);
-            poisonItem.Add(ItemID.RichMahoganySword);
-            poisonItem.Add(ItemID.BeeKeeper);
-            poisonItem.Add(ItemID.HiveFive);
-            #endregion poison
+            #region toxin
+            toxinItem.Add(ItemID.Flymeal);
+            toxinItem.Add(ItemID.BladeofGrass);
+            toxinItem.Add(ItemID.RichMahoganySword);
+            toxinItem.Add(ItemID.BeeKeeper);
+            toxinItem.Add(ItemID.HiveFive);
+            #endregion toxin
             #region light
             lightItem.Add(ItemID.BluePhaseblade);
             lightItem.Add(ItemID.GreenPhaseblade);
@@ -668,17 +668,17 @@ namespace Terrafirma.Systems.Elements
             iceItem.Add(ItemID.SnowballCannon);
             iceItem.Add(ItemID.ElfMelter);
             #endregion ice
-            #region poison
-            poisonItem.Add(ItemID.RichMahoganyBow);
-            poisonItem.Add(ItemID.PoisonedKnife);
-            poisonItem.Add(ItemID.RottenEgg);
-            poisonItem.Add(ItemID.BeesKnees);
-            poisonItem.Add(ItemID.Beenade);
-            poisonItem.Add(ItemID.Blowgun);
-            poisonItem.Add(ItemID.Toxikarp);
-            poisonItem.Add(ItemID.DartPistol);
-            poisonItem.Add(ItemID.DartRifle);
-            #endregion poison
+            #region toxin
+            toxinItem.Add(ItemID.RichMahoganyBow);
+            toxinItem.Add(ItemID.PoisonedKnife);
+            toxinItem.Add(ItemID.RottenEgg);
+            toxinItem.Add(ItemID.BeesKnees);
+            toxinItem.Add(ItemID.Beenade);
+            toxinItem.Add(ItemID.Blowgun);
+            toxinItem.Add(ItemID.Toxikarp);
+            toxinItem.Add(ItemID.DartPistol);
+            toxinItem.Add(ItemID.DartRifle);
+            #endregion toxin
             #region light
             lightItem.Add(ItemID.PearlwoodBow);
             lightItem.Add(ItemID.DaedalusStormbow);
@@ -761,14 +761,14 @@ namespace Terrafirma.Systems.Elements
             iceItem.Add(ItemID.BlizzardStaff);
             iceItem.Add(ItemID.IceRod);
             #endregion ice
-            #region poison
-            poisonItem.Add(ModContent.ItemType<WandOfPoisoning>());
-            poisonItem.Add(ItemID.PoisonStaff);
-            poisonItem.Add(ItemID.VenomStaff);
-            poisonItem.Add(ItemID.BeeGun);
-            poisonItem.Add(ItemID.WaspGun);
-            poisonItem.Add(ItemID.ToxicFlask);
-            #endregion poison
+            #region toxin
+            toxinItem.Add(ModContent.ItemType<WandOfPoisoning>());
+            toxinItem.Add(ItemID.PoisonStaff);
+            toxinItem.Add(ItemID.VenomStaff);
+            toxinItem.Add(ItemID.BeeGun);
+            toxinItem.Add(ItemID.WaspGun);
+            toxinItem.Add(ItemID.ToxicFlask);
+            #endregion toxin
             #region light
             lightItem.Add(ItemID.MagicMissile);
             lightItem.Add(ItemID.CrystalSerpent);
@@ -853,12 +853,12 @@ namespace Terrafirma.Systems.Elements
             iceItem.Add(ItemID.StaffoftheFrostHydra);
             iceItem.Add(ItemID.CoolWhip);
             #endregion ice
-            #region poison
-            poisonItem.Add(ItemID.HornetStaff);
-            poisonItem.Add(ItemID.SpiderStaff);
-            poisonItem.Add(ItemID.QueenSpiderStaff);
-            poisonItem.Add(4913);
-            #endregion poison
+            #region toxin
+            toxinItem.Add(ItemID.HornetStaff);
+            toxinItem.Add(ItemID.SpiderStaff);
+            toxinItem.Add(ItemID.QueenSpiderStaff);
+            toxinItem.Add(4913);
+            #endregion toxin
             #region light
             lightItem.Add(4758);
             lightItem.Add(5005);
@@ -895,7 +895,7 @@ namespace Terrafirma.Systems.Elements
             darkItem.Add(ItemID.SuspiciousLookingEye);
             darkItem.Add(ItemID.WormFood);
             darkItem.Add(ItemID.BloodySpine);
-            poisonItem.Add(ItemID.Abeemination);
+            toxinItem.Add(ItemID.Abeemination);
             iceItem.Add(ItemID.DeerThing);
             lightItem.Add(4988);
             lightItem.Add(ItemID.EmpressButterfly);
@@ -925,8 +925,8 @@ namespace Terrafirma.Systems.Elements
             airItem.Clear();
             iceNPC.Clear();
             iceItem.Clear();
-            poisonNPC.Clear();
-            poisonItem.Clear();
+            toxinNPC.Clear();
+            toxinItem.Clear();
             lightNPC.Clear();
             lightItem.Clear();
             darkNPC.Clear();

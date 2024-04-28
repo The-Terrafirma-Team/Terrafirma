@@ -31,7 +31,7 @@ namespace Terrafirma.Systems.Elements.Beastiary
     public class Arcane : ModBiome
     {
     }
-    public class Poison : ModBiome
+    public class Toxin : ModBiome
     {
     }
     public class Water : ModBiome
