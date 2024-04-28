@@ -31,7 +31,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         {
             Projectile.CloneDefaults(ProjectileID.TopazBolt);
             AIType = ProjectileID.TopazBolt;
-            Projectile.ai[2] = 0;
+            Projectile.ai[2] = 0; 
             Projectile.Size = new Vector2(16);
         }
 
@@ -39,15 +39,27 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         {
             Projectile.ai[0]++;
 
-            if (Projectile.ai[0] > 20 && Projectile.ai[2] == 0)
+            if (Projectile.ai[0] > 20 && Projectile.ai[2] == 0 && Projectile.owner == Main.LocalPlayer.whoAmI)
             {
                 for (int i = -1; i < 2; i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity.RotatedBy(20 * (Math.PI / 180) * i), Projectile.type, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, 0, 2);
-
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity.RotatedBy(20 * (Math.PI / 180) * i), ModContent.ProjectileType<SplitTopaz>(), (int)(Projectile.damage * 0.75f), Projectile.knockBack, Projectile.owner, 0, 0, 0);
                 }
                 Projectile.Kill();
             }
+        }
+    }
+
+    public class SplitTopaz : ModProjectile
+    {
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TopazBolt}";
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.TopazBolt);
+            AIType = ProjectileID.TopazBolt;
+            Projectile.ai[2] = 0;
+            Projectile.timeLeft = 80;
+            Projectile.Size = new Vector2(16);
         }
     }
 }
