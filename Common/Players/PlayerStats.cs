@@ -2,12 +2,17 @@
 using Terrafirma.Data;
 using Terrafirma.Systems.Elements;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Players
 {
     public class PlayerStats : ModPlayer
     {
+        Item lastHeldItem = null;
+        public bool hasSwappedItems = false;
+        public uint TimesHeldWeaponHasBeenSwung = 0;
+
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
         public float WrenchBuffTimeMultiplier = 1f;
@@ -46,6 +51,8 @@ namespace Terrafirma.Common.Players
 
         public override void ResetEffects()
         {
+            hasSwappedItems = false;
+
             ElementalDamageVariance = 1f;
             FireDamage = 1;
             WaterDamage = 1;
@@ -80,6 +87,20 @@ namespace Terrafirma.Common.Players
             KnockbackResist = 1f;
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
+
+            if(Player.HeldItem != lastHeldItem)
+                hasSwappedItems = true;
+
+            lastHeldItem = Player.HeldItem;
+
+            if (hasSwappedItems || !Player.controlUseItem)
+                TimesHeldWeaponHasBeenSwung = 0;
+        }
+
+        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            TimesHeldWeaponHasBeenSwung++;
+            return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {

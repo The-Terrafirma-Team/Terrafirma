@@ -53,9 +53,13 @@ namespace Terrafirma.Common.Templates
 
         //Drawing
 
-        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex)
+        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, float scale = 1)
         {
-            Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(),tex.Height() / Main.projFrames[Type]), color, Projectile.rotation, new Vector2(0,tex.Height() / Main.projFrames[Type]),Projectile.scale,Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(),tex.Height() / Main.projFrames[Type]), color, Projectile.rotation, new Vector2(0,tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+        }
+        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, Vector2 scale)
+        {
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(), tex.Height() / Main.projFrames[Type]), color, Projectile.rotation, new Vector2(0, tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
         }
     }
 }
