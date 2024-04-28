@@ -52,108 +52,108 @@ namespace Terrafirma.Systems.Elements
             clone.Arcane = dataToClone.Arcane;
             return clone;
         }
-        public static float getElementalBonus(ElementData attacker, ElementData defender)
+        public static float getElementalBonus(ElementData attacker, ElementData defender, float Variance = 1f)
         {
             float mod = 1;
 
             if (defender.Fire)
             {
                 //if (attacker.Fire) mod += WeakBonus;
-                if (attacker.Water) mod += EffectiveBonus;
-                if (attacker.Earth) mod += WeakBonus;
-                if (attacker.Air) mod += WeakBonus;
-                if (attacker.Arcane) mod += EffectiveBonus;
-                if (attacker.Electric) mod += WeakBonus;
+                if (attacker.Water) mod += EffectiveBonus * Variance;
+                if (attacker.Earth) mod += WeakBonus * Variance;
+                if (attacker.Air) mod += WeakBonus * Variance;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += WeakBonus * Variance;
             }
             if (defender.Water)
             {
-                if (attacker.Arcane) mod += EffectiveBonus;
-                if (attacker.Fire) mod += WeakBonus;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
+                if (attacker.Fire) mod += WeakBonus * Variance;
                 //if (attacker.Water) mod += WeakBonus;
-                if (attacker.Ice) mod += WeakBonus;
-                if (attacker.Poison) mod += EffectiveBonus;
-                if (attacker.Electric) mod += SuperBonus;
+                if (attacker.Ice) mod += WeakBonus * Variance;
+                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += SuperBonus * Variance;
             }
             if (defender.Earth)
             {
-                if (attacker.Arcane) mod += EffectiveBonus;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
                 //if (attacker.Earth) mod += WeakBonus;
-                if (attacker.Fire) mod += EffectiveBonus;
-                if (attacker.Ice) mod += EffectiveBonus;
-                if (attacker.Poison) mod += EffectiveBonus;
-                if (attacker.Light) mod += WeakBonus;
-                if (attacker.Electric) mod += WeakBonus;
+                if (attacker.Fire) mod += EffectiveBonus * Variance;
+                if (attacker.Ice) mod += EffectiveBonus * Variance;
+                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Light) mod += WeakBonus * Variance;
+                if (attacker.Electric) mod += WeakBonus * Variance;
             }
             if (defender.Air)
             {
-                if (attacker.Arcane) mod += EffectiveBonus;
-                if (attacker.Fire) mod += EffectiveBonus;
-                if (attacker.Earth) mod += WeakBonus;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
+                if (attacker.Fire) mod += EffectiveBonus * Variance;
+                if (attacker.Earth) mod += WeakBonus * Variance;
                 //if (attacker.Air) mod += WeakBonus;
-                if (attacker.Ice) mod += WeakBonus;
-                if (attacker.Poison) mod += EffectiveBonus;
-                if (attacker.Electric) mod += WeakBonus;
-                if (attacker.Light) mod += EffectiveBonus;
+                if (attacker.Ice) mod += WeakBonus * Variance;
+                if (attacker.Poison) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += WeakBonus * Variance;
+                if (attacker.Light) mod += EffectiveBonus * Variance;
             }
             if (defender.Ice)
             {
-                if (attacker.Arcane) mod += EffectiveBonus;
-                if (attacker.Fire) mod += EffectiveBonus;
-                if (attacker.Water) mod += WeakBonus;
-                if (attacker.Air) mod += WeakBonus;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
+                if (attacker.Fire) mod += EffectiveBonus * Variance;
+                if (attacker.Water) mod += WeakBonus * Variance;
+                if (attacker.Air) mod += WeakBonus * Variance;
                 //if (attacker.Ice) mod += WeakBonus;
-                if (attacker.Light) mod += EffectiveBonus;
-                if (attacker.Electric) mod += WeakBonus;
+                if (attacker.Light) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += WeakBonus * Variance;
             }
             if (defender.Poison)
             {
-                if (attacker.Fire) mod += EffectiveBonus;
-                if (attacker.Water) mod += EffectiveBonus;
-                if (attacker.Earth) mod += EffectiveBonus;
-                if (attacker.Ice) mod += EffectiveBonus;
+                if (attacker.Fire) mod += EffectiveBonus * Variance;
+                if (attacker.Water) mod += EffectiveBonus * Variance;
+                if (attacker.Earth) mod += EffectiveBonus * Variance;
+                if (attacker.Ice) mod += EffectiveBonus * Variance;
                 //if (attacker.Poison) mod += WeakBonus;
-                if (attacker.Light) mod += EffectiveBonus;
-                if (attacker.Electric) mod += EffectiveBonus;
+                if (attacker.Light) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += EffectiveBonus * Variance;
             }
             if (defender.Light)
             {
-                if (attacker.Earth) mod += EffectiveBonus;
-                if (attacker.Air) mod += WeakBonus;
-                if (attacker.Poison) mod += WeakBonus;
+                if (attacker.Earth) mod += EffectiveBonus * Variance;
+                if (attacker.Air) mod += WeakBonus * Variance;
+                if (attacker.Poison) mod += WeakBonus * Variance;
                 //if (attacker.Light) mod += WeakBonus;
-                if (attacker.Dark) mod += SuperBonus;
+                if (attacker.Dark) mod += SuperBonus * Variance;
             }
             if (defender.Dark)
             {
-                if (attacker.Fire) mod += EffectiveBonus;
-                if (attacker.Light) mod += SuperBonus;
+                if (attacker.Fire) mod += EffectiveBonus * Variance;
+                if (attacker.Light) mod += SuperBonus * Variance;
                 //if (attacker.Dark) mod += WeakBonus;
-                if (attacker.Electric) mod += EffectiveBonus;
+                if (attacker.Electric) mod += EffectiveBonus * Variance;
             }
             if (defender.Electric)
             {
-                if (attacker.Water) mod += WeakBonus;
-                if (attacker.Earth) mod += EffectiveBonus;
-                if (attacker.Air) mod += EffectiveBonus;
-                if (attacker.Ice) mod += EffectiveBonus;
-                if (attacker.Poison) mod += WeakBonus;
-                if (attacker.Dark) mod += WeakBonus;
+                if (attacker.Water) mod += WeakBonus * Variance;
+                if (attacker.Earth) mod += EffectiveBonus * Variance;
+                if (attacker.Air) mod += EffectiveBonus * Variance;
+                if (attacker.Ice) mod += EffectiveBonus * Variance;
+                if (attacker.Poison) mod += WeakBonus * Variance;
+                if (attacker.Dark) mod += WeakBonus * Variance;
                 //if (attacker.Electric) mod += WeakBonus;
             }
             if (defender.Arcane)
             {
                 //if (attacker.Arcane) mod += WeakBonus;
-                if (attacker.Typeless) mod += EffectiveBonus;
-                if (attacker.Electric) mod += EffectiveBonus;
+                if (attacker.Typeless) mod += EffectiveBonus * Variance;
+                if (attacker.Electric) mod += EffectiveBonus * Variance;
                 //if (attacker.Fire) mod += WeakBonus;
                 //if (attacker.Water) mod += WeakBonus;
-                if (attacker.Earth) mod += WeakBonus;
-                if (attacker.Air) mod += WeakBonus;
-                if (attacker.Ice) mod += WeakBonus;
+                if (attacker.Earth) mod += WeakBonus * Variance;
+                if (attacker.Air) mod += WeakBonus * Variance;
+                if (attacker.Ice) mod += WeakBonus * Variance;
             }
             else if (defender.Typeless)
             {
-                if (attacker.Arcane) mod += EffectiveBonus;
+                if (attacker.Arcane) mod += EffectiveBonus * Variance;
             }
             return MathHelper.Clamp(mod, 0.1f, 3f);
         }

@@ -86,24 +86,24 @@ namespace Terrafirma.Systems.Elements
             public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
             {
                 modifiers.HideCombatText();
-                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData);
-                modifiers.FinalDamage *= mod * Player.PlayerStats().ElementalDamageVariance;
+                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData, Player.PlayerStats().ElementalDamageVariance);
+                modifiers.FinalDamage *= mod;
             }
             public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
             {
                 modifiers.HideCombatText();
-                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData);
-                modifiers.FinalDamage *= mod * Player.PlayerStats().ElementalDamageVariance;
+                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData, Player.PlayerStats().ElementalDamageVariance);
+                modifiers.FinalDamage *= mod;
             }
             public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
             {
-                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData) * Player.PlayerStats().ElementalDamageVariance;
+                float mod = ElementData.getElementalBonus(item.GetElementItem().elementData, target.GetElementNPC().elementData, Player.PlayerStats().ElementalDamageVariance);
                 DamageNumber(target, mod, hit, damageDone);
                 ElementEffect(target,hit,damageDone, item.GetElementItem().elementData);
             }
             public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
             {
-                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData) * Player.PlayerStats().ElementalDamageVariance;
+                float mod = ElementData.getElementalBonus(proj.GetElementProjectile().elementData, target.GetElementNPC().elementData, Player.PlayerStats().ElementalDamageVariance);
                 DamageNumber(target, mod, hit, damageDone);
                 ElementEffect(target, hit, damageDone, proj.GetElementProjectile().elementData);
             }
