@@ -1,5 +1,6 @@
 ﻿using Terrafirma.Items.Ammo;
 using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Items.Placeable;
 using Terrafirma.Items.Tools;
 using Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode;
 using Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode;
@@ -22,6 +23,11 @@ namespace Terrafirma.Common
                 shop.InsertAfter(ItemID.SilverBullet, ModContent.ItemType<Buckshot>(), Condition.DownedSkeletron);
                 shop.InsertAfter(ModContent.ItemType<Buckshot>(), ModContent.ItemType<Birdshot>(), Condition.DownedSkeletron, Condition.BloodMoon);
 
+            }
+            if(shop.NpcType == NPCID.Dryad)
+            {
+                shop.InsertAfter(ItemID.Sunflower,ModContent.ItemType<BigSunflower>());
+                shop.InsertAfter(ModContent.ItemType<BigSunflower>(), ModContent.ItemType<GiantSunflower>());
             }
 
             if (shop.NpcType == NPCID.Cyborg)
