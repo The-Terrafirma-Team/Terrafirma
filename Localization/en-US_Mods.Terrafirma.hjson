@@ -902,37 +902,65 @@ Items: {
 
 	AmethystCane: {
 		DisplayName: Amethyst Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons an amethyst sentry that increases the strength of elemental damage
+			'''
 	}
 
 	AmberCane: {
 		DisplayName: Amber Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons an amber sentry that increases armor penetration
+			'''
 	}
 
 	DiamondCane: {
 		DisplayName: Diamond Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a diamond sentry that increases the weapon pierce
+			'''
 	}
 
 	EmeraldCane: {
 		DisplayName: Emerald Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons an emerald sentry that increases health and mana regeneration
+			'''
 	}
 
 	RubyCane: {
 		DisplayName: Ruby Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a ruby sentry that increases damage
+			'''
 	}
 
 	SapphireCane: {
 		DisplayName: Sapphire Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a sapphire sentry that increases movement speed and jump height
+			'''
 	}
 
 	TopazCane: {
 		DisplayName: Topaz Cane
-		Tooltip: ""
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a topaz sentry that increases defense and grants thorn damage
+			'''
 	}
 
 	ArmoredDummyItem: {
@@ -1097,6 +1125,7 @@ Projectiles: {
 	VileStaffThorn.DisplayName: Vile Staff Thorn
 	VileThornProj.DisplayName: Vile Thorn Proj
 	TestScary.DisplayName: Test Scary
+	SplitTopaz.DisplayName: Split Topaz
 }
 
 Biomes: {

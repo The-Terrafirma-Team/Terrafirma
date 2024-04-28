@@ -39,7 +39,10 @@ namespace Terrafirma.Common.Items
         public override void SetDefaults(Item entity)
         {
 
-
+            if (entity.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(entity.type))
+            {
+                entity.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[entity.type][0];
+            }
 
             if (entity.type == ItemID.ManaFlower)
             {
