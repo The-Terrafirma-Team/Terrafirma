@@ -16,5 +16,9 @@ namespace Terrafirma.Items.Equipment.Elemental.ElementEnhancement
         {
             player.PlayerStats().FireEnhancement = true;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.Hellforge).AddIngredient(ItemID.HellstoneBar,15).AddIngredient(ItemID.AshBlock, 15).AddIngredient(ItemID.Fireblossom, 5).Register();
+        }
     }
 }

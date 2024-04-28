@@ -16,5 +16,10 @@ namespace Terrafirma.Items.Equipment.Elemental.ElementEnhancement
         {
             player.PlayerStats().DarkEnhancement = true;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.BlackLens).AddIngredient(ItemID.Chain, 5).AddIngredient(ItemID.UnholyWater,20).Register();
+            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.BlackLens).AddIngredient(ItemID.Chain, 5).AddIngredient(ItemID.BloodWater, 20).Register();
+        }
     }
 }
