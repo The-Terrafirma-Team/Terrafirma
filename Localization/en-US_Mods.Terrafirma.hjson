@@ -1012,6 +1012,20 @@ Items: {
 		DisplayName: Wrench Statue
 		Tooltip: ""
 	}
+
+	EngineeringForDummies: {
+		DisplayName: Engineering For Dummies
+		Tooltip: Increase your max number of sentries by 1
+	}
+
+	HellfireGargoyleStaff: {
+		DisplayName: Hellfire Gargoyle Staff
+		Tooltip:
+			'''
+			Summons a sentry
+			Summons a hellfire gargoyle that shoots fireballs at the strongest enemy
+			'''
+	}
 }
 
 Projectiles: {
@@ -1126,6 +1140,8 @@ Projectiles: {
 	VileThornProj.DisplayName: Vile Thorn Proj
 	TestScary.DisplayName: Test Scary
 	SplitTopaz.DisplayName: Split Topaz
+	HellfireGargoyleSentry.DisplayName: Hellfire Gargoyle Sentry
+	HellfireBall.DisplayName: Hellfire Ball
 }
 
 Biomes: {

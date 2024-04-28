@@ -64,11 +64,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 
         public override void AI()
         {
-
+            Projectile.velocity.Y += 0.5f;
         }
         public override bool PreDraw(ref Color lightColor)
-        {
-            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/BarbedWireCanisterSentry").Value;
+        {      
             Texture2D BarbedWire = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/BarbedWire").Value;
             for (int i = 0; i < Projectile.whoAmI; i++)
             {
@@ -89,16 +88,21 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
                 }
             }
 
-            Main.EntitySpriteDraw(SentryBase,
-                            Projectile.Center + new Vector2(0, 6) - Main.screenPosition,
-                            SentryBase.Bounds,
-                            lightColor,
-                            0,
-                            SentryBase.Size() / 2,
-                            1f,
-                            SpriteEffects.None);
-
             return false;
+        }
+
+        public override void PostDraw(Color lightColor)
+        {
+            Texture2D SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/BarbedWireCanisterSentry").Value;
+            Main.EntitySpriteDraw(SentryBase,
+                Projectile.Center + new Vector2(0, 9) - Main.screenPosition,
+                SentryBase.Bounds,
+                lightColor,
+                0,
+                SentryBase.Size() / 2,
+                1f,
+                SpriteEffects.None);
+            base.PostDraw(lightColor);
         }
     }
 }

@@ -280,7 +280,7 @@ namespace Terrafirma
         {
             for(int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] < Duration - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
+                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] < (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
                 {
                     Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] = (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier);
                     SoundEngine.PlaySound(SoundID.Item37, player.position);

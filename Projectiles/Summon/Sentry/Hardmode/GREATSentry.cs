@@ -20,7 +20,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
             Projectile.friendly = true;
 
             Projectile.height = 80;
-            Projectile.width = 74;
+            Projectile.width = 40;
             Projectile.DamageType = DamageClass.Summon;
 
             Projectile.tileCollide = true;
@@ -57,6 +57,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
         }
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             Projectile.damage = (int)(Projectile.originalDamage * (Math.Clamp((Projectile.ai[0] - 120f) / 240f, 0f, 2f) + 1f));
 
             if (Projectile.ai[1] % 27 == 0) SoundEngine.PlaySound(SoundID.Item15 with { Volume = Math.Clamp(Projectile.ai[0] / 480f, 0.05f, 1f), IsLooped = false }, Projectile.Center);
@@ -137,15 +138,15 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 
 
 
-            Main.EntitySpriteDraw(SentryBase, Projectile.Bottom - Main.screenPosition, new Rectangle(0, 40, 80, 34), lightColor, 0, new Vector2(32, 35), 1f, SpriteEffects.None, 0f);
-            Main.EntitySpriteDraw(SentryBase, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), lightColor, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
-            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * 0.2f, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f + Math.Abs((float)Math.Sin(Main.timeForVisualEffects / 40f)) / 20f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
+            Main.EntitySpriteDraw(SentryBase, Projectile.Bottom - Main.screenPosition + new Vector2(0, 3), new Rectangle(0, 40, 80, 34), lightColor, 0, new Vector2(32, 35), 1f, SpriteEffects.None, 0f);
+            Main.EntitySpriteDraw(SentryBase, Projectile.Center - Main.screenPosition + new Vector2(0, 8), new Rectangle(0, 0, 80, 38), lightColor, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
+            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 8), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * 0.2f, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f + Math.Abs((float)Math.Sin(Main.timeForVisualEffects / 40f)) / 20f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
             ChargeUpFloat = Math.Clamp(Projectile.ai[0] / 120f, 0f, 1f);
-            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 5), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * ChargeUpFloat, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
+            Main.EntitySpriteDraw(SentryGlow, Projectile.Center - Main.screenPosition + new Vector2(0, 8), new Rectangle(0, 0, 80, 38), new Color(1f, 1f, 1f, 0) * ChargeUpFloat, Projectile.rotation, new Vector2(32, Projectile.spriteDirection == 1 ? 28 : 10), 1f, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0f);
 
             ChargeUpFloat = MathHelper.Lerp(0f, 1f, Math.Clamp((Projectile.ai[0] - 120f) / 480f, 0f, 1f));
             Main.EntitySpriteDraw(SentryLaser,
-                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 5),
+                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 8),
                 SentryLaser.Bounds,
                 new Color(1f, 1f, 1f, 0) * ChargeUpFloat,
                 Projectile.rotation,
@@ -154,7 +155,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
                 SpriteEffects.None,
                 0f);
             Main.EntitySpriteDraw(SentryLaser,
-                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 5),
+                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 8),
                 SentryLaser.Bounds,
                 new Color(1f, 1f, 1f, 0) * (ChargeUpFloat / 3f),
                 Projectile.rotation,
@@ -163,7 +164,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
                 SpriteEffects.None,
                 0f);
             Main.EntitySpriteDraw(SentryLaser,
-                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 5),
+                Projectile.Center - Main.screenPosition + new Vector2(0, 11 * -Projectile.spriteDirection).RotatedBy(Projectile.rotation) + new Vector2(0, 8),
                 SentryLaser.Bounds,
                 new Color(1f, 1f, 1f, 0) * (ChargeUpFloat / 10f),
                 Projectile.rotation,
@@ -174,7 +175,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 
 
             Main.EntitySpriteDraw(SentryLaserBase,
-                Projectile.Center - Main.screenPosition + new Vector2(0, 5),
+                Projectile.Center - Main.screenPosition + new Vector2(0, 8),
                 new Rectangle(0, (int)(Main.timeForVisualEffects / 4f) % 4 * SentryLaserBase.Height / 4, SentryLaserBase.Width, SentryLaserBase.Height / 4),
                 new Color(1f, 1f, 1f, 0) * ChargeUpFloat,
                 Projectile.rotation,

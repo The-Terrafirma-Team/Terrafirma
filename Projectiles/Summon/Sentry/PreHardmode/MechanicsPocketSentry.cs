@@ -19,7 +19,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             Projectile.friendly = true;
             Projectile.height = 46;
-            Projectile.width = 44;
+            Projectile.width = 30;
             Projectile.DamageType = DamageClass.Summon;
 
             Projectile.tileCollide = true;
@@ -49,6 +49,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         }
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             Projectile.ai[0]++;
 
             if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && Main.myPlayer == Projectile.owner && TFUtils.FindClosestNPC(350f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)

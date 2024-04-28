@@ -53,6 +53,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
         }
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             turretradius = 300f * Projectile.GetSentryRangeMultiplier();
             Projectile.ai[0]++;
             for (int i = 0; i < Main.projectile.Length; i++)
@@ -75,7 +76,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
             Asset<Texture2D> SentryBase = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/ClockworkTurret");
             Asset<Texture2D> SentryBorder = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/Hardmode/ClockworkTurretBorder");
 
-            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, SentryBase.Height() / 4), new Rectangle(0, SentryBase.Height() / 2 * Projectile.frame, SentryBase.Width(), SentryBase.Height() / 2), lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(SentryBase.Value, Projectile.Center - Main.screenPosition + new Vector2(0, (SentryBase.Height() / 4) + 3), new Rectangle(0, SentryBase.Height() / 2 * Projectile.frame, SentryBase.Width(), SentryBase.Height() / 2), lightColor, 0, SentryBase.Size() / 2, 1, SpriteEffects.None, 0);
 
             for (int i = 0; i < (int)(turretradius / 8); i++)
             {

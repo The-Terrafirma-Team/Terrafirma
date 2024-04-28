@@ -48,6 +48,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         }
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             turretradius = 200f * Projectile.GetSentryRangeMultiplier();
 
             for(int i = 0; i < Main.player.Length; i++)

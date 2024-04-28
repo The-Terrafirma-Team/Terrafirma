@@ -56,7 +56,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
                 int PushUpY;
                 Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
 
-                Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY + 12), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
+                Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY - 6), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
                 player.UpdateMaxTurrets();
             }
             return false;

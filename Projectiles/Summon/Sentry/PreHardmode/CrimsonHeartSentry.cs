@@ -58,6 +58,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             if (Projectile.ai[0] > 3)
             {
                 bool HeartExists = false;

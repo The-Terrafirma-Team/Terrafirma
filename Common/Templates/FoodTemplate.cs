@@ -142,7 +142,7 @@ namespace Terrafirma.Common.Templates
         {
             if (grade == -1) return;
 
-            Texture2D startexture = ModContent.Request<Texture2D>("Terrafirma/Global/Templates/GradeStars").Value;
+            Texture2D startexture = ModContent.Request<Texture2D>("Terrafirma/Common/Templates/GradeStars").Value;
             Vector2 Starpos = new Vector2(12f, 12f);
             Rectangle StarBounds = new Rectangle(0, 0, 0, 0);
 

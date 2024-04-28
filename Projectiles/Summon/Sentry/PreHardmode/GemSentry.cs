@@ -51,6 +51,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
         public override void AI()
         {
+            Projectile.velocity.Y += 0.5f;
             turretradius = 200f * Projectile.GetSentryRangeMultiplier();
             Projectile.ai[0]++;
 
@@ -109,7 +110,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             //Base
             Main.EntitySpriteDraw(SentrySprite.Value,
-                Projectile.Center - Main.screenPosition + new Vector2(0,13),
+                Projectile.Center - Main.screenPosition + new Vector2(0,21),
                 BaseRect,
                 Color.Lerp(lightColor, Color.White, 0.6f),
                 0,
@@ -118,7 +119,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 SpriteEffects.None);
             //Gem
             Main.EntitySpriteDraw(SentrySprite.Value,
-                Projectile.Center - Main.screenPosition - new Vector2(0, 13 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
+                Projectile.Center - Main.screenPosition - new Vector2(0, 12 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
                 GemGlowRect,
                 GemGlowColor * 0.05f,
                 0,
@@ -126,7 +127,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 1.2f + (float)(Math.Sin((Main.timeForVisualEffects + 40) * 0.03f) + 1f) * 0.2f,
                 SpriteEffects.None);
             Main.EntitySpriteDraw(SentrySprite.Value,
-                Projectile.Center - Main.screenPosition - new Vector2(0, 13 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
+                Projectile.Center - Main.screenPosition - new Vector2(0, 12 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
                 GemGlowRect,
                 GemGlowColor * 0.1f,
                 0,
@@ -134,7 +135,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 1.1f + (float)(Math.Sin(Main.timeForVisualEffects * 0.03f) + 1f) * 0.1f,
                 SpriteEffects.None);
             Main.EntitySpriteDraw(SentrySprite.Value,
-                Projectile.Center - Main.screenPosition - new Vector2(0, 13 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
+                Projectile.Center - Main.screenPosition - new Vector2(0, 12 + (float)(Math.Sin(Main.timeForVisualEffects * 0.05f) * 3)),
                 GemRect,
                 Color.Lerp(lightColor, Color.White, 0.6f),
                 0,
