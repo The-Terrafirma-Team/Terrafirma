@@ -96,11 +96,6 @@ namespace Terrafirma.Common.Players
             if (hasSwappedItems || !Player.controlUseItem)
                 TimesHeldWeaponHasBeenSwung = 0;
         }
-        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            TimesHeldWeaponHasBeenSwung++;
-            return base.Shoot(item, source, position, velocity, type, damage, knockback);
-        }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             #region Elemental Damage

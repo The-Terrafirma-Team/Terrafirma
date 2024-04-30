@@ -77,7 +77,7 @@ namespace Terrafirma.Common.Templates.Melee
             for(int i = 0; i < 6; i++)
             {
                 if(Projectile.oldRot[i] != 0)
-                commonDiagonalItemDrawManualRotation(new Color(1f,1f,1f,0f) * (0.3f - (i*0.05f)), TextureAssets.Projectile[Type], Projectile.scale + extend * 0.2f, Projectile.oldRot[i]);
+                commonDiagonalItemDrawManualRotation(new Color(lightColor.R, lightColor.G, lightColor.B, 0) * (0.3f - (i*0.05f)), TextureAssets.Projectile[Type], Projectile.scale + extend * 0.2f, Projectile.oldRot[i]);
             }
 
             commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], Projectile.scale + extend * 0.2f);
