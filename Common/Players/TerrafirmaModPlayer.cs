@@ -15,6 +15,8 @@ using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terrafirma.Systems.NPCQuests;
 using Terrafirma.Reworks.VanillaMagic.Spells;
 using Terrafirma.Common.Items;
+using Terrafirma.Items.Consumable;
+using Terraria.GameContent.UI;
 
 namespace Terrafirma.Common.Players
 {
@@ -37,6 +39,8 @@ namespace Terrafirma.Common.Players
         internal Item HeldMagicItem = new Item(0);
 
         public Quest[] playerquests = new Quest[] { };
+
+        internal bool RightMouseSwitch = false;
 
         public override void ResetEffects()
         {
@@ -184,5 +188,30 @@ namespace Terrafirma.Common.Players
             }
             return base.CanUseItem(item);
         }
+
+        public override bool HoverSlot(Item[] inventory, int context, int slot)
+        {
+            if (Main.mouseRight && !RightMouseSwitch)
+            {      
+                if (Main.mouseItem.type == ModContent.ItemType<RepairKit>() && inventory[slot].rare <= 2 && inventory[slot].CanHavePrefixes())
+                {
+                    inventory[slot].Prefix(-1);
+                    SoundEngine.PlaySound(SoundID.Item37);
+                    Main.mouseItem.stack--;
+                    //CombatText.NewText(Player.Hitbox, ItemRarity.GetColor(inventory[slot].rare), inventory[slot].HoverName);
+                    PopupText.NewText(
+                        new AdvancedPopupRequest()
+                        {
+                            Text = inventory[slot].HoverName,
+                            DurationInFrames = 60,
+                            Color = ItemRarity.GetColor(inventory[slot].rare),
+                        }, Player.Center - new Vector2(0,40));
+                }
+                RightMouseSwitch = true;
+            }
+            if (!Main.mouseRight) RightMouseSwitch = false;
+            return base.HoverSlot(inventory, context, slot);
+        }
+
     }
 }

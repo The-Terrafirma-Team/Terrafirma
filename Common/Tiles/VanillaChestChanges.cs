@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Terrafirma.Items.Consumable;
 using Terrafirma.Items.Weapons.Summoner.Swarm;
 using Terraria;
 using Terraria.ID;
@@ -21,7 +22,7 @@ namespace Terrafirma.Common.Tiles
                     if (chestTile.TileType == TileID.Containers2 && chestTile.TileFrameX == 10 * 36)
                     {
                         //Desert Chest
-                        //1/8 Chance for Main Item to be Vulture Staff
+                        //1/8 Chance for Main Item to be Vulture Staff, 5 max per World
 
                         int desertchest_maxitems = 5;
                         int desertchest_itemsplaced = 0;
@@ -33,10 +34,10 @@ namespace Terrafirma.Common.Tiles
                         }
 
                     }
-                    else if (chestTile.TileType == TileID.Containers2 && chestTile.TileFrameX == 2 * 36)
+                    else if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 36)
                     {
                         //Gold Chest
-                        //1/3 Chance for Leather to be added
+                        //1/3 Chance for 2 to 6 Leather to be added
 
                         if (WorldGen.genRand.NextBool(3))
                         {
@@ -45,6 +46,20 @@ namespace Terrafirma.Common.Tiles
                                 if (chest.item[i].type == 0)
                                 {
                                     chest.item[i] = new Item(ItemID.Leather, WorldGen.genRand.Next(2, 6));
+                                    break;
+                                }
+                            }
+                        }
+
+                        //60% Chance for 1 to 2 Repair Kits to be added
+
+                        if (WorldGen.genRand.Next(5) < 2)
+                        {
+                            for (int i = 0; i < chest.item.Length; i++)
+                            {
+                                if (chest.item[i].type == 0)
+                                {
+                                    chest.item[i] = new Item(ModContent.ItemType<RepairKit>(), WorldGen.genRand.Next(1, 3));
                                     break;
                                 }
                             }

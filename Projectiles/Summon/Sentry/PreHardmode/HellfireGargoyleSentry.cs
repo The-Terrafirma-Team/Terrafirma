@@ -46,6 +46,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 if (Projectile.Center.Distance(Main.npc[i].Center) < maxrange &&
                     Main.npc[i].lifeMax > highestHP &&
                     Main.npc[i].active &&
+                    Main.npc[i].type != NPCID.TargetDummy &&
                     Collision.CanHitLine(Projectile.Center, 8, 8, Main.npc[i].position, Main.npc[i].width, Main.npc[i].height))
                 {
                     highestHP = Main.npc[i].lifeMax;
@@ -89,7 +90,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             tex = TextureAssets.Projectile[Type];
             texglow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/HellfireGargoyleSentryGlow");
-            Rectangle TexFrame = new Rectangle(0,70 * (int)((Projectile.ai[0] + 2) / 8 % shoottime),64,68);
+            Rectangle TexFrame = new Rectangle(0,70 * (int)((Projectile.ai[0] - 2) / 8 % shoottime),64,68);
             Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0,2), TexFrame, lightColor, 0, TexFrame.Size()/2, 1, Projectile.ai[2] == 1? SpriteEffects.None: SpriteEffects.FlipHorizontally);
             Main.EntitySpriteDraw(texglow.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 2), TexFrame, Color.White, 0, TexFrame.Size() / 2, 1, Projectile.ai[2] == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
 
