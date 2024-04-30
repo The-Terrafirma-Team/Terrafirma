@@ -1042,6 +1042,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	RepairKit: {
+		DisplayName: Repair Kit
+		Tooltip: Right click on a reforgable item of green quality or lower to reforge it
+	}
+
 	SteelPickaxe: {
 		DisplayName: Steel Pickaxe
 		Tooltip: ""
