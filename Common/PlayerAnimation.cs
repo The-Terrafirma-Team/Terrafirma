@@ -7,12 +7,12 @@ namespace Terrafirma.Common
 {
     public static class PlayerAnimation
     {
-        const int PointDown = 0;
-        const int PointUp = 1;
-        const int PointUpRight = 2;
-        const int PointRight = 3;
-        const int PointDownRight = 4;
-        const int Jump = 5;
+        public const int PointDown = 0;
+        public const int PointUp = 1;
+        public const int PointUpRight = 2;
+        public const int PointRight = 3;
+        public const int PointDownRight = 4;
+        public const int Jump = 5;
 
         /// <summary>
         /// Only works on the swinging and jumping frames for now

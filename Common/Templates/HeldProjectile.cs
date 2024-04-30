@@ -53,13 +53,17 @@ namespace Terrafirma.Common.Templates
 
         //Drawing
 
-        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, float scale = 1)
+        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, float scale = 1, float rotationOffset = 0f)
         {
-            Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(),tex.Height() / Main.projFrames[Type]), color, Projectile.rotation, new Vector2(0,tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(),tex.Height() / Main.projFrames[Type]), color, Projectile.rotation + rotationOffset, new Vector2(0,tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
         }
-        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, Vector2 scale)
+        public void commonDiagonalItemDrawManualRotation(Color color, Asset<Texture2D> tex, float scale = 1, float rotation = 0f)
         {
-            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(), tex.Height() / Main.projFrames[Type]), color, Projectile.rotation, new Vector2(0, tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(), tex.Height() / Main.projFrames[Type]), color, rotation, new Vector2(0, tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+        }
+        public void commonDiagonalItemDraw(Color color, Asset<Texture2D> tex, Vector2 scale, float rotationOffset = 0f)
+        {
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, tex.Height() / Main.projFrames[Type] * Projectile.frame, tex.Width(), tex.Height() / Main.projFrames[Type]), color, Projectile.rotation + rotationOffset, new Vector2(0, tex.Height() / Main.projFrames[Type]), scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
         }
     }
 }

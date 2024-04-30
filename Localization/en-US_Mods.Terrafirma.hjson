@@ -1026,6 +1026,26 @@ Items: {
 			Summons a hellfire gargoyle that shoots fireballs at the strongest enemy
 			'''
 	}
+
+	SteelGreatsword: {
+		DisplayName: Steel Greatsword
+		Tooltip: ""
+	}
+
+	TestSword: {
+		DisplayName: Test Sword
+		Tooltip: ""
+	}
+
+	SteelBar: {
+		DisplayName: Steel Bar
+		Tooltip: ""
+	}
+
+	SteelPickaxe: {
+		DisplayName: Steel Pickaxe
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1142,6 +1162,9 @@ Projectiles: {
 	SplitTopaz.DisplayName: Split Topaz
 	HellfireGargoyleSentry.DisplayName: Hellfire Gargoyle Sentry
 	HellfireBall.DisplayName: Hellfire Ball
+	SteelGreatsword.DisplayName: Steel Greatsword
+	TestSwordBlade.DisplayName: Test Sword Blade
+	SteelGreatswordSlash.DisplayName: Steel Greatsword Slash
 }
 
 Biomes: {
@@ -1203,6 +1226,11 @@ Biomes: {
 	Arcane: {
 		DisplayName: Arcane
 		TownNPCDialogueName: the Arcane
+	}
+
+	Toxin: {
+		DisplayName: Toxin
+		TownNPCDialogueName: the Toxin
 	}
 }
 

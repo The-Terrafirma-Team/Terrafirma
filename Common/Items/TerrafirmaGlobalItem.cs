@@ -17,6 +17,11 @@ namespace Terrafirma.Common.Items
             }
             base.SetDefaults(entity);
         }
+        public override bool? UseItem(Item item, Player player)
+        {
+            player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
+            return base.UseItem(item, player);
+        }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {
             if (item.rare == ModContent.RarityType<FinalQuestRarity>())
