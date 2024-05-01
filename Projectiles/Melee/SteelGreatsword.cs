@@ -4,6 +4,7 @@ using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Projectiles.Melee
