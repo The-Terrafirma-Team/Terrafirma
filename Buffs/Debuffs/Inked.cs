@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Common;
+using Terrafirma.Common.NPCs;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.ID;
@@ -16,6 +17,7 @@ namespace Terrafirma.Buffs.Debuffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
+            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().Inked = true;
             npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.5f);
             if (Main.rand.NextBool(5))Dust.NewDust(npc.Center + Main.rand.NextVector2Circular(npc.width / 2f,npc.height / 2f), 2, 2, DustID.Poop, npc.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), npc.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, Color.Black, Main.rand.NextFloat(0.8f, 1f));
         } 

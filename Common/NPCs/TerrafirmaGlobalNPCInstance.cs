@@ -9,10 +9,14 @@ namespace Terrafirma.Common.NPCs
     {
         public bool PhantasmalBurn;
         public bool ElectricCharge;
+        public bool Stunned;
+        public bool Inked;
         public override void ResetEffects(NPC npc)
         {
             PhantasmalBurn = false;
             ElectricCharge = false;
+            Stunned = false;
+            Inked = false;
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
@@ -30,8 +34,7 @@ namespace Terrafirma.Common.NPCs
         public override bool InstancePerEntity => true;
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            if (npc.HasBuff(ModContent.BuffType<Inked>())) drawColor = new Color(179, 130, 237);
-            base.DrawEffects(npc, ref drawColor);
+            if (Inked) drawColor = new Color(179, 130, 237);
         }
     }
 }

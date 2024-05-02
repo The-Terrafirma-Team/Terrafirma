@@ -93,6 +93,11 @@ Buffs: {
 		DisplayName: Topaz Defense
 		Description: Increases defense by two and melee attackers take a small amount of damage upon harming the player.
 	}
+
+	Stunned: {
+		DisplayName: Stunned
+		Description: Mods.Terrafirma.Buffs.Stunned.Description
+	}
 }
 
 Items: {
@@ -1029,7 +1034,7 @@ Items: {
 
 	SteelGreatsword: {
 		DisplayName: Steel Greatsword
-		Tooltip: ""
+		Tooltip: Hit enemies to build up energy, right click to release it
 	}
 
 	TestSword: {

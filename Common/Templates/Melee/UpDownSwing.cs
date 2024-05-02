@@ -24,6 +24,7 @@ namespace Terrafirma.Common.Templates.Melee
             Projectile.friendly = true;
             Projectile.penetrate = 3;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            Projectile.tileCollide = false;
         }
         public override void OnSpawn(IEntitySource source)
         {

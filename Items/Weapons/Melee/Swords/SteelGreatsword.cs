@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Items.Materials;
+using Terrafirma.Projectiles.Melee;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -21,16 +22,23 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 45, 0);
         }
+        public override bool AltFunctionUse(Player player)
+        {
+            return true;
+        }
         public override bool MeleePrefix()
         {
             return true;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            if (player.altFunctionUse == 2 && player.PlayerStats().SteelBladeHits == 12)
+            {
+                player.PlayerStats().SteelBladeHits = 0;
+                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
+            }
             int mhm = player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0 ? 1 : 0;
             Projectile.NewProjectile(source,position,velocity,type, damage, knockback,player.whoAmI, mhm);
-            //if(mhm == 1)
-                //Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), (int)(damage * 0.5f), knockback, player.whoAmI);
             return false;
         }
 

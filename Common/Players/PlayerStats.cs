@@ -49,6 +49,8 @@ namespace Terrafirma.Common.Players
         public int MagicFlatDamage = 0;
         public int SummonFlatDamage = 0;
 
+        public byte SteelBladeHits;
+
         public override void ResetEffects()
         {
             hasSwappedItems = false;
