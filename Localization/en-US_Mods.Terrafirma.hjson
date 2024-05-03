@@ -753,7 +753,7 @@ Items: {
 			'''
 			Melee weapons have an additional 2 flat damage
 			Double tap a direction to roll
-			Rolling reduces incoming damage by 50%
+			Rolling reduces incoming damage by 75%
 			'''
 	}
 
@@ -1054,6 +1054,21 @@ Items: {
 
 	SteelPickaxe: {
 		DisplayName: Steel Pickaxe
+		Tooltip: ""
+	}
+
+	SteelChestplate: {
+		DisplayName: Steel Chestplate
+		Tooltip: ""
+	}
+
+	SteelGreaves: {
+		DisplayName: Steel Greaves
+		Tooltip: ""
+	}
+
+	SteelHelmet: {
+		DisplayName: Steel Helmet
 		Tooltip: ""
 	}
 }

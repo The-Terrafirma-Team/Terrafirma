@@ -25,7 +25,7 @@ namespace Terrafirma.Items.Equipment.Melee
         {
             Item.value = Item.sellPrice(0,0,10,0);
             Item.rare = ItemRarityID.Blue;
-            Item.defense = 3;
+            Item.defense = 2;
         }
         public override void UpdateEquip(Player player)
         {
@@ -43,7 +43,7 @@ namespace Terrafirma.Items.Equipment.Melee
         {
             Item.value = Item.sellPrice(0, 0, 10, 0);
             Item.rare = ItemRarityID.Blue;
-            Item.defense = 5;
+            Item.defense = 3;
         }
         public override void UpdateEquip(Player player)
         {
@@ -75,7 +75,7 @@ namespace Terrafirma.Items.Equipment.Melee
             if (isRolling)
             {
                 modifiers.HitDirectionOverride = 0;
-                modifiers.FinalDamage *= 0.5f;
+                modifiers.FinalDamage *= 0.25f;
             }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -83,7 +83,7 @@ namespace Terrafirma.Items.Equipment.Melee
             if (isRolling)
             {
                 modifiers.HitDirectionOverride = 0;
-                modifiers.FinalDamage *= 0.5f;
+                modifiers.FinalDamage *= 0.25f;
             }
         }
         public override void ResetEffects()

@@ -84,6 +84,9 @@ namespace Terrafirma.Items.Equipment.Elemental
         }
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
+            if (drawInfo.shadow != 0)
+                return;
+
             GraniteSetBonus setPlayer = drawInfo.drawPlayer.GetModPlayer<GraniteSetBonus>();
 
             Vector2 position = drawInfo.Center - Main.screenPosition;

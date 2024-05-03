@@ -86,6 +86,9 @@ namespace Terrafirma.Projectiles.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Player player = Main.player[Projectile.owner];
+            if (player.PlayerStats().SteelBladeHits < 12)
+                player.PlayerStats().SteelBladeHits++;
             for (int i = 0; i < 4; i++)
             {
                 BigSparkle p = new BigSparkle();
