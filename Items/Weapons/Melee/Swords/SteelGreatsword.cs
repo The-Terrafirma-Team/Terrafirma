@@ -13,7 +13,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
     {
         public override void SetDefaults()
         {
-            Item.DefaultToSword(25, 30, 4);
+            Item.DefaultToSword(45, 30, 4);
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.SteelGreatsword>();

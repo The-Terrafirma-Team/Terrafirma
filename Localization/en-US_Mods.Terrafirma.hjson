@@ -98,6 +98,16 @@ Buffs: {
 		DisplayName: Stunned
 		Description: Mods.Terrafirma.Buffs.Stunned.Description
 	}
+
+	Confidence: {
+		DisplayName: Confidence
+		Description: You suddenly feel like you can take on the world
+	}
+
+	ShutUp: {
+		DisplayName: Shut Up!
+		Description: PLEASE.
+	}
 }
 
 Items: {
@@ -1054,22 +1064,31 @@ Items: {
 
 	SteelPickaxe: {
 		DisplayName: Steel Pickaxe
-		Tooltip: ""
+		Tooltip: Can mine hellstone
 	}
 
 	SteelChestplate: {
 		DisplayName: Steel Chestplate
-		Tooltip: ""
+		Tooltip:
+			'''
+			Melee weapon size increased by 20%
+			Increases length of invincibility after taking damage
+			'''
 	}
 
 	SteelGreaves: {
 		DisplayName: Steel Greaves
-		Tooltip: ""
+		Tooltip: Movement speed and jump height are increased
 	}
 
 	SteelHelmet: {
 		DisplayName: Steel Helmet
-		Tooltip: ""
+		SetBonus: Double tap {0} to buff yourself and nearby allies
+		Tooltip:
+			'''
+			10% chance to save ammo
+			Whip range increased by 30%
+			'''
 	}
 }
 

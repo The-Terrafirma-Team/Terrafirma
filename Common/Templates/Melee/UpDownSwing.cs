@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Templates.Melee
 {
@@ -25,11 +26,13 @@ namespace Terrafirma.Common.Templates.Melee
             Projectile.penetrate = 3;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = false;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public override void OnSpawn(IEntitySource source)
         {
             player = Main.player[Projectile.owner];
-            Projectile.timeLeft = player.HeldItem.useTime;
+            Projectile.timeLeft = player.itemAnimationMax;
+            Projectile.ai[1] = player.itemAnimationMax;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -38,9 +41,7 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override void AI()
         {
-            Projectile.ai[1] = player.HeldItem.useTime;
-
-            Projectile.scale = player.HeldItem.scale;
+            Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
 
             float extend = MathF.Sin(Projectile.timeLeft / Projectile.ai[1] * MathHelper.Pi);
             if (Projectile.ai[0] == 0)

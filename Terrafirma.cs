@@ -15,6 +15,10 @@ namespace Terrafirma
 {
     public class Terrafirma : Mod
 	{
+        public static string SetBonusKey
+        {
+            get { return Main.setKey == 1 ? "UP" : "DOWN"; }
+        }
         public static Terrafirma Mod { get; private set; } = ModContent.GetInstance<Terrafirma>();
         public const string AssetPath = "Terrafirma/Assets/";
         public override void Load()

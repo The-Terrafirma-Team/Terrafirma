@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using Terrafirma.Buffs.Buffs;
+using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,6 +13,44 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Equipment
 {
+    public class SteelSetBonus : ModPlayer
+    {
+        public bool active;
+        public bool ShutUp;
+        public override void ResetEffects()
+        {
+            active = false;
+            ShutUp = false;
+        }
+        public override void PostUpdateEquips()
+        {
+            if (Player.PlayerDoublePressedSetBonusActivateKey() && !ShutUp)
+            {
+                Player.AddBuff(ModContent.BuffType<ShutUp>(),60 * 60);
+                float rot = 60;
+                for(int i = 0; i < rot; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(Player.MountedCenter, DustID.GemTopaz, new Vector2(50, 0).RotatedBy(i / rot * MathHelper.TwoPi));
+                    d.noGravity = true;
+                    d.scale = 3;
+
+                    Dust d2 = Dust.NewDustPerfect(Player.MountedCenter, DustID.GemTopaz, new Vector2(25, 0).RotatedBy(i / rot * MathHelper.TwoPi));
+                    d2.noGravity = true;
+                    d2.scale = 2;
+                    d2.alpha = 64;
+                }
+
+                for(int i = 0; i < Main.player.Length; i++)
+                {
+                    Player p = Main.player[i];
+                    if(p.Center.Distance(Player.Center) < 550)
+                    {
+                        p.AddBuff(ModContent.BuffType<Confidence>(), 60 * 5);
+                    }
+                }
+            }
+        }
+    }
     public class SteelHelmetPlume : PlayerDrawLayer
     {
         Asset<Texture2D> tex;
@@ -61,13 +101,19 @@ namespace Terrafirma.Items.Equipment
     [AutoloadEquip(EquipType.Head)]
     public class SteelHelmet : ModItem
     {
+        public static LocalizedText SetBonusText { get; private set; }
+        public override void SetStaticDefaults()
+        {
+            SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(Terrafirma.SetBonusKey);
+        }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ModContent.ItemType<SteelChestplate>() && legs.type == ModContent.ItemType<SteelGreaves>();
         }
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.SteelHelmet.SetBonus");
+            player.setBonus = SetBonusText.Value;
+            player.GetModPlayer<SteelSetBonus>().active = true;
         }
         public override void UpdateVanitySet(Player player)
         {
@@ -79,10 +125,12 @@ namespace Terrafirma.Items.Equipment
             Item.height = 16;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(silver: 75);
-            Item.defense = 3;
+            Item.defense = 2;
         }
         public override void UpdateEquip(Player player)
         {
+            player.PlayerStats().AmmoSaveChance += 0.1f;
+            player.whipRangeMultiplier += 0.3f;
         }
     }
 
@@ -99,10 +147,12 @@ namespace Terrafirma.Items.Equipment
             Item.height = 16;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(silver: 75);
-            Item.defense = 5;
+            Item.defense = 4;
         }
         public override void UpdateEquip(Player player)
         {
+            player.PlayerStats().MeleeWeaponScale += 0.2f;
+            player.longInvince = true;
         }
     }
 
@@ -111,7 +161,7 @@ namespace Terrafirma.Items.Equipment
     {
         public override void SetDefaults()
         {
-            Item.defense = 3;
+            Item.defense = 2;
             Item.width = 16;
             Item.height = 16;
             Item.rare = ItemRarityID.Orange;
@@ -119,6 +169,8 @@ namespace Terrafirma.Items.Equipment
         }
         public override void UpdateEquip(Player player)
         {
+            player.moveSpeed += 0.1f;
+            player.jumpSpeedBoost += 1;
         }
     }
 }

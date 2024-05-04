@@ -3,6 +3,7 @@ using Terrafirma.Data;
 using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Players
@@ -19,6 +20,9 @@ namespace Terrafirma.Common.Players
         public float SwarmSpeedMultiplier = 1f;
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
+        public float MeleeWeaponScale = 0;
+        public float ImmunityTimeMultiplier = 1f;
+        public float AmmoSaveChance;
 
         // Elemental
         public float ElementalDamageVariance = 1f;
@@ -54,7 +58,7 @@ namespace Terrafirma.Common.Players
         public override void ResetEffects()
         {
             hasSwappedItems = false;
-
+            MeleeWeaponScale = 0;
             ElementalDamageVariance = 1f;
             FireDamage = 1;
             WaterDamage = 1;
@@ -97,6 +101,17 @@ namespace Terrafirma.Common.Players
 
             if (hasSwappedItems || !Player.controlUseItem)
                 TimesHeldWeaponHasBeenSwung = 0;
+        }
+        public override bool CanConsumeAmmo(Item weapon, Item ammo)
+        {
+            if(Main.rand.NextFloat() < AmmoSaveChance)
+                return false;
+
+            return base.CanConsumeAmmo(weapon, ammo);
+        }
+        public override void ModifyItemScale(Item item, ref float scale)
+        {
+            scale += MeleeWeaponScale;
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
