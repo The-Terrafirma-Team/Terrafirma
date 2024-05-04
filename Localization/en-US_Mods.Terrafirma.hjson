@@ -1090,6 +1090,11 @@ Items: {
 			Whip range increased by 30%
 			'''
 	}
+
+	TheBlunderbuss: {
+		DisplayName: The Blunderbuss
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1209,6 +1214,7 @@ Projectiles: {
 	SteelGreatsword.DisplayName: Steel Greatsword
 	TestSwordBlade.DisplayName: Test Sword Blade
 	SteelGreatswordSlash.DisplayName: Steel Greatsword Slash
+	Blunderball.DisplayName: Blunderball
 }
 
 Biomes: {

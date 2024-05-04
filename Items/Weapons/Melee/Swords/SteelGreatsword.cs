@@ -17,7 +17,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.SteelGreatsword>();
-            Item.UseSound = new SoundStyle("Terrafirma/Sounds/SwordSound2") { PitchVariance = 0.3f, Pitch = -0.3f, MaxInstances = 10 };
+            Item.UseSound = new SoundStyle("Terrafirma/Sounds/SwordSound2") { PitchVariance = 0.3f, Pitch = -0.45f, MaxInstances = 10 };
             Item.shootSpeed = 8;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 45, 0);
