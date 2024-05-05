@@ -35,6 +35,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.timeLeft = 60 * 5;
             Projectile.penetrate = -1;
             Projectile.sentry = true;
+            Projectile.extraUpdates = 1;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

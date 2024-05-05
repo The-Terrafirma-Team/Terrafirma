@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terrafirma.Common;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -12,6 +13,16 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
 {
     internal class BuckshotProjectile : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Type] = 8;
+            ProjectileID.Sets.TrailingMode[Type] = 0;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            BulletVisuals.drawBullet(Projectile, new Color(1f, 1f, 0.5f, 0f), new Color(1f, 0.1f, 0f, 0.5f), 0.7f);
+            return false;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 8;
@@ -50,22 +61,6 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
             {
                 Lighting.AddLight(Projectile.position, new Vector3(0.4f, 0.4f, 0));
             }
-        }
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Main.instance.LoadProjectile(Projectile.type);
-            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-
-            Vector2 drawOrigin = new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f);
-            for (int k = 0; k < Projectile.oldPos.Length; k++)
-            {
-                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
-            }
-
-            return true;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
