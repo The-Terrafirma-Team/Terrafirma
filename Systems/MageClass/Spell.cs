@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
+using Humanizer;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -52,16 +53,23 @@ namespace Terrafirma.Systems.MageClass
 
             }
 
-            Language.GetOrRegister("Mods.Terrafirma.Spells.Name." + $"{this.GetType().Name}");
-            Language.GetOrRegister("Mods.Terrafirma.Spells.Desc." + $"{this.GetType().Name}");
+            Language.GetOrRegister("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Name", CreateSpellName);
+            Language.GetOrRegister("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Description", CreateSpellDescription);       
+
         }
+
+        string CreateSpellName() => this.GetType().Name.Humanize();
+
+        static string CreateSpellDescription() => "";
+
+
         public string GetSpellName()
         {
-            return Language.GetTextValue("Mods.Terrafirma.Spells.Name." + $"{this.GetType().Name}");
+            return Language.GetTextValue("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Name");
         }
         public string GetSpellDesc()
         {
-            return Language.GetTextValue("Mods.Terrafirma.Spells.Desc." + $"{this.GetType().Name}");
+            return Language.GetTextValue("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Description");
         }
 
 

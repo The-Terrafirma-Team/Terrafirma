@@ -1291,96 +1291,220 @@ Tiles: {
 }
 
 Spells: {
-	Name: {
-		AmethystBolt: Amethyst Bolt
-		HomingAmethystBolt: Homing Amethyst Bolt
-		TopazBolt: Topaz Bolt
-		SplittingTopazBolt: Splitting Topaz Bolt
-		EmeraldBolt: Emerald Bolt
-		PiercingEmeraldBolt: Piercing Emerald Bolt
-		RubyBolt: Ruby Bolt
-		ExplosiveRubyBolt: Explosive Ruby Bolt
-		SapphireBolt: Sapphire Bolt
-		QuickSapphireBolt: Quick Sapphire Bolt
-		DiamondBolt: Diamond Bolt
-		DiamondTurret: Diamond Turret
-		AmberBolt: Amber Bolt
-		AmberWall: Amber Wall
-		ManaBloom: Mana Bloom
-		GoldenShower: Golden Shower
-		IchorBubble: Ichor Bubble
-		CursedFlame: Cursed Flames
-		CursedFlamethrower: Cursed Flamethrower
-		InfernoFork: Inferno Fork
-		InfernoFlamethrower: Hellfire Breath
-		InfernoWall: Diabolical Firewall
-		WaterBolt: Water Bolt
-		WaterGeyser: Water Geyser
-		AuraWave: Aura Wave
-		FlyingSkull: Flying Skull
-		BoneFragmentStorm: Bone Fragment Storm
-		SkeletonHand: Skeleton Hand
-		WaterStream: Water Stream
-		WaterTreatment: Water Treatment
-		RainbowGunRainbow: Piercing Rainbow
-		PrismRain: Prism Rain
-		FantasticalDoubleHelix: Fantastical Double Helix
-		GlitterBomb: Glitter Bomb
-		DanceOfBlades: Dance of Blades
-		SkySpears: Sky Spears
-		TheAeonsEternity: The Aeon's Eternity
-		DarkBolts: Shadow Scales
-		Vilethorn: Vilethorn
-		ZapperBolt: Zapper Bolt
-		Thunderbeam: Thunderbeam
-		IceBlockSpell: Ice Block
-		IceBoulderSpell: Ice Boulder
+
+	ManaBloom: {
+		Name: Mana Bloom
+		Description: Regenerates 10 mana but slows the player down
 	}
 
-	Desc: {
-		AmethystBolt: Shoots a Bolt of Mana
-		HomingAmethystBolt: Shoots a bolt of homing mana
-		TopazBolt: Shoots a Bolt of Mana
-		SplittingTopazBolt: Shoots a bolt of splitting mana
-		EmeraldBolt: Shoots a Bolt of Mana
-		PiercingEmeraldBolt: Shoots a bolt of piercing mana
-		RubyBolt: Shoots a Bolt of Mana
-		ExplosiveRubyBolt: Shoots a bolt of exploding mana
-		SapphireBolt: Shoots a Bolt of Mana
-		QuickSapphireBolt: Shoots a quick bolt of mana
-		DiamondBolt: Shoots a Bolt of Mana
-		DiamondTurret: Shoots out a diamond turret
-		AmberBolt: Shoots a Bolt of Mana
-		AmberWall: Shoots a bolt of mana that expands into a wall
-		ManaBloom: Regenerates 10 mana but slows the player down
-		GoldenShower: Sprays a shower of ichor
-		IchorBubble: Shoots a big explosive bubble of boiling Ichor
-		CursedFlame: Summons unholy fire balls
-		CursedFlamethrower: Summons a wall of cursed fire
-		InfernoFork: Shoots an inferno fork that explodes into a lingering ball of fire
-		InfernoFlamethrower: Shoots a blast of flame
-		InfernoWall: Summons a wall of fire
-		WaterBolt: Shoots a bolt of bouncy water
-		WaterGeyser: Summons a water geyser
-		AuraWave: Shoots a wavee to splash enemies away
-		FlyingSkull: Shoots a flying flaming skull
-		BoneFragmentStorm: Shoots multiple bone fragments
-		SkeletonHand: Summons a skeletal hand that roasts all enemies in its vicinity
-		WaterStream: Sprays out a shower of water
-		WaterTreatment: Shoots out a bubble of healing water
-		RainbowGunRainbow: Shoots a rainbow that does continuous damage
-		PrismRain: Shoots a barrage of colored glass prisms
-		FantasticalDoubleHelix: Shoots a double helix bolt
-		GlitterBomb: Shoots a bomb of glitter that explodes on contact
-		DanceOfBlades: Shoots magic blades
-		SkySpears: Summons magic spears from the sky
-		TheAeonsEternity: Summons a giant magic blade that follows your mouse
-		DarkBolts: Charges up to 4 shadow scales
-		Vilethorn: Charges up a lingering vile thorn
-		ZapperBolt: Shoots a bolt of thunder
-		Thunderbeam: Shoots multiple lightning bolts that home in on close enemies
-		IceBlockSpell: Mods.Terrafirma.Spells.Desc.IceBlockSpell
-		IceBoulderSpell: Mods.Terrafirma.Spells.Desc.IceBoulderSpell
+	AuraWave: {
+		Name: Aura Wave
+		Description: Shoots a wavee to splash enemies away
+	}
+
+	BoneFragmentStorm: {
+		Name: Bone Fragment Storm
+		Description: Shoots multiple bone fragments
+	}
+
+	FlyingSkull: {
+		Name: Flying Skull
+		Description: Shoots a flying flaming skull
+	}
+
+	SkeletonHand: {
+		Name: Skeleton Hand
+		Description: Summons a skeletal hand that roasts all enemies in its vicinity	
+	}
+
+	WaterBolt: {
+		Name: Water Bolt
+		Description: Shoots a bolt of bouncy water
+	}
+
+	WaterGeyser: {
+		Name: Water Geyser
+		Description: Summons a water geyser
+	}
+
+	WaterStream: {
+		Name: Water Stream
+		Description: Sprays out a shower of water	
+	}
+
+	WaterTreatment: {
+		Name: Water Treatment
+		Description: Shoots out a bubble of healing water
+	}
+
+	DarkBolts: {
+		Name: Dark Bolts
+		Description: Charges up to 4 shadow scales	
+	}
+
+	Vilethorn: {
+		Name: Vilethorn
+		Description: Charges up a lingering vile thorn
+	}
+
+	AmberBolt: {
+		Name: Amber Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	AmberWall: {
+		Name: Amber Wall
+		Description: Shoots a bolt of mana that expands into a wall
+	}
+
+	AmethystBolt: {
+		Name: Amethyst Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	DiamondBolt: {
+		Name: Diamond Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	DiamondTurret: {
+		Name: Diamond Turret
+		Description: Shoots out a diamond turret
+	}
+
+	EmeraldBolt: {
+		Name: Emerald Bold
+		Description: Shoots a Bolt of Mana
+	}
+
+	ExplosiveRubyBolt: {
+		Name: Ruby Bolt
+		Description: Shoots a bolt of exploding mana
+	}
+
+	HomingAmethystBolt: {
+		Name: Amethyst Bolt
+		Description: Shoots a bolt of homing mana
+	}
+
+	PiercingEmeraldBolt: {
+		Name: Emerald Bolt
+		Description: Shoots a bolt of piercing mana
+	}
+
+	QuickSapphireBolt: {
+		Name: Sapphire Bolt
+		Description: Shoots a quick bolt of mana
+	}
+
+	RubyBolt: {
+		Name: Ruby Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	SapphireBolt: {
+		Name: Sapphire Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	SplittingTopazBolt: {
+		Name: Splitting Topaz Bolt
+		Description: Shoots a bolt of splitting mana
+	}
+
+	TopazBolt: {
+		Name: Topaz Bolt
+		Description: Shoots a Bolt of Mana
+	}
+
+	CursedFlame: {
+		Name: Cursed Flame
+		Description: Summons unholy fire balls	
+	}
+
+	CursedFlamethrower: {
+		Name: Cursed Flamethrower
+		Description: Summons a wall of cursed fire	
+	}
+
+	DanceOfBlades: {
+		Name: Dance of Blades
+		Description: DanceOfBlades: Shoots magic blades
+	}
+
+	GoldenShower: {
+		Name: Golden Shower
+		Description: Sprays a shower of ichor
+	}
+
+	IceBlockSpell: {
+		Name: Ice Block
+		Description: Shoots a block of magical ice that gets placed at your mouse cursor	
+	}
+
+	IceBoulderSpell: {
+		Name: Ice Boulder
+		Description: Summons a falling ice boulder that stuns hit enemies for a while
+	}
+
+	IchorBubble: {
+		Name: Ichor Bubble
+		Description: Shoots a big explosive bubble of boiling Ichor	
+	}
+
+	InfernoFlamethrower: {
+		Name: Inferno Flamethrower
+		Description: Shoots a blast of flame
+	}
+
+	InfernoFork: {
+		Name: Inferno Fork
+		Description: Shoots an inferno fork that explodes into a lingering ball of fire	
+	}
+
+	InfernoWall: {
+		Name: Inferno Wall
+		Description: Summons a wall of fire
+	}
+
+	PrismRain: {
+		Name: Prism Rain
+		Description: Shoots a barrage of colored glass prisms	
+	}
+
+	RainbowGunRainbow: {
+		Name: Piercing Rainbow
+		Description: Shoots a rainbow that does continuous damage	
+	}
+
+	SkySpears: {
+		Name: Sky Spears
+		Description: Summons magic spears from the sky
+	}
+
+	TheAeonsEternity: {
+		Name: The Aeon's Eternity
+		Description: Summons a giant magic blade that follows your mouse
+	}
+
+	FantasticalDoubleHelix: {
+		Name: Fantastical Double Helix
+		Description: Shoots a double helix bolt
+	}
+
+	GlitterBomb: {
+		Name: Glitter Bomb
+		Description: Shoots a bomb of glitter that explodes on contact	
+	}
+
+	Thunderbeam: {
+		Name: Thunderbeam
+		Description: Shoots multiple lightning bolts that home in on close enemies	
+	}
+
+	ZapperBolt: {
+		Name: Zapper bolt
+		Description: Shoots a bolt of thunder	
 	}
 }
 
