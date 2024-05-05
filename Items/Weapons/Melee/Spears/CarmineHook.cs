@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Projectiles.Melee;
+﻿using Terrafirma.Projectiles.Melee;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Melee.Spears
 {
@@ -31,9 +25,6 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
 
             Item.shoot = ModContent.ProjectileType<CarmineHookProjectile>();
             Item.shootSpeed = 10;
-
-            Item.GetElementItem().elementData.Dark = true;
-            Item.GetElementItem().elementData.Water = true;
         }
         public override void AddRecipes()
         {

@@ -29,11 +29,6 @@ namespace Terrafirma
 
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
         }
-
-        public override object Call(params object[] args)
-        {
-            return TFUtils.setElementsForModCall(args);
-        }
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {
 

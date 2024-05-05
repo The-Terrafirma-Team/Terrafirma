@@ -831,7 +831,6 @@ Items: {
 			'''
 			Movement speed increased by 5%
 			Mining speed increased by 10%
-			Earth damage increased by 5%
 			'''
 	}
 
@@ -840,7 +839,6 @@ Items: {
 		Tooltip:
 			'''
 			Movement speed increased by 5%
-			Earth damage increased by 5%
 			'''
 	}
 
@@ -849,7 +847,6 @@ Items: {
 		Tooltip:
 			'''
 			Mining speed increased by 10%
-			Earth damage increased by 5%
 			'''
 		SetBonus:
 			'''

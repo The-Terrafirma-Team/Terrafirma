@@ -2,12 +2,9 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Summon.Sentry;
 using Terraria.DataStructures;
-using Microsoft.Xna.Framework.Input;
 using Terrafirma.Projectiles.Summon.Summons;
 using Terrafirma.Buffs.Minions;
-using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Summoner.Summon
 {
@@ -22,8 +19,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
         }
         public override void SetDefaults()
         {
-            Item.GetElementItem().elementData.Air = true;
-            Item.GetElementItem().elementData.Electric = true;
 
             Item.damage = 25;
             Item.knockBack = 1f;

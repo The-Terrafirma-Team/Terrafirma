@@ -3,7 +3,6 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using Terrafirma.Systems.Elements;
 using Terrafirma.Spells.Tempire;
 
 namespace Terrafirma.Items.Weapons.Magic.Tempire
@@ -23,7 +22,6 @@ namespace Terrafirma.Items.Weapons.Magic.Tempire
             Item.UseSound = SoundID.Item8;
             Item.rare = ItemRarityID.Lime;
             Item.scale = 0.9f;
-            Item.GetElementItem().elementData.Light = true;
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

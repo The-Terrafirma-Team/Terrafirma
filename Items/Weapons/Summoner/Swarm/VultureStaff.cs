@@ -4,7 +4,6 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Data;
 using Terrafirma.Projectiles.Summon.Swarm;
-using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Summoner.Swarm
 {
@@ -17,7 +16,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Swarm
         }
         public override void SetDefaults()
         {
-            Item.GetElementItem().elementData.Air = true;
             Item.damage = 14;
             Item.knockBack = 4f;
             Item.mana = 15;

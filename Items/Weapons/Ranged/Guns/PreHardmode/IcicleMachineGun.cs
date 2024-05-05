@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terrafirma.Common;
 using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {
@@ -38,8 +35,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.shootSpeed = 20f;
 
             Item.scale = 0.85f;
-
-            Item.GetElementItem().elementData.Ice = true;
         }
         public override Vector2? HoldoutOffset()
         {

@@ -1,13 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terrafirma.Items.Materials;
-using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Projectiles.Ranged.Arrows;
+﻿using Terrafirma.Items.Materials;
 using Terrafirma.Projectiles.Ranged.Tempire;
-using Terrafirma.Rarities;
-using Terrafirma.Systems.Elements;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -39,8 +32,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
             Item.value = Item.sellPrice(0, 40, 0, 0);
             Item.shoot = ModContent.ProjectileType<BottleOfPoisonProjectile>();
             Item.shootSpeed = 8f;
-
-            Item.GetElementItem().elementData.Toxin = true;
         }
         public override void AddRecipes()
         {
@@ -48,8 +39,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Tempire
                 .AddIngredient(ItemID.BottledWater, 10)
                 .AddIngredient(ModContent.ItemType<Mistcap>())
                 .Register();
-
-           
         }
     }
 }

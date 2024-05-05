@@ -128,7 +128,6 @@ namespace Terrafirma.Items.Equipment.Elemental
         public override void UpdateEquip(Player player)
         {
             player.pickSpeed -= 0.1f;
-            player.PlayerStats().EarthDamage += 0.05f;
         }
     }
 
@@ -151,7 +150,6 @@ namespace Terrafirma.Items.Equipment.Elemental
         {
             player.moveSpeed += 0.05f;
             player.pickSpeed -= 0.1f;
-            player.PlayerStats().EarthDamage += 0.05f;
         }
     }
 
@@ -173,7 +171,6 @@ namespace Terrafirma.Items.Equipment.Elemental
         public override void UpdateEquip(Player player)
         {
             player.moveSpeed += 0.05f;
-            player.PlayerStats().EarthDamage += 0.05f;
         }
     }
 }

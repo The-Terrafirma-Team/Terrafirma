@@ -1,10 +1,8 @@
-﻿using Terrafirma.Items.Weapons.Melee.Shortswords;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using Terrafirma.Systems.Elements;
 using Terrafirma.Projectiles.Summon.Sentry.Hardmode;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
@@ -34,9 +32,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.buyPrice(0, 50, 0, 0);
             Item.shoot = ModContent.ProjectileType<GREATSentry>();
-
-            Item.GetElementItem().elementData.Light = true;
-            Item.GetElementItem().elementData.Electric = true;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

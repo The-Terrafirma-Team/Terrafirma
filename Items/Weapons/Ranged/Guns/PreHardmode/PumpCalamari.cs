@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -37,8 +36,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.rare = ItemRarityID.Green;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.DamageType = DamageClass.Ranged;
-
-            Item.GetElementItem().elementData.Water = true;
         }
         public override Vector2? HoldoutOffset()
         {

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Ranged;
-using Terrafirma.Projectiles.Ranged.Bullets;
-using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -34,8 +32,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.shootSpeed = 12f;
 
             Item.scale = 0.85f;
-
-            Item.GetElementItem().elementData.Fire = true;
         }
         public override Vector2? HoldoutOffset()
         {

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Localization;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 using Terraria;
-using Terraria.ID;
-using Terrafirma.Common.Players;
 
 namespace Terrafirma.Buffs.Buffs
 {
@@ -15,7 +7,7 @@ namespace Terrafirma.Buffs.Buffs
     { 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.PlayerStats().ElementalDamageVariance += 0.2f;
+            Main.NewText("FIND A NEW PURPOSE", 255, 0, 0);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,8 +27,6 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             Item.useAmmo = AmmoID.FallenStar;
             Item.shoot = ProjectileID.FallingStar;
             Item.shootSpeed = 16f;
-
-            Item.GetElementItem().elementData.Light = true;
         }
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {

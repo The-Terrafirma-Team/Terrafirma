@@ -28,8 +28,6 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
             Item.rare = ModContent.RarityType<FinalQuestRarity>();
             Item.value = Item.sellPrice(gold: 20, silver: 00);
             Item.shootSpeed = 20;
-            Item.GetElementItem().elementData.Light = true;
-            Item.GetElementItem().elementData.Arcane = true;
         }
         public override bool CanUseItem(Player player)
         {

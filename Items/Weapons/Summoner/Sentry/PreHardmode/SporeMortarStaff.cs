@@ -4,7 +4,6 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria.DataStructures;
-using Terrafirma.Systems.Elements;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
 {
@@ -32,9 +31,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 15, 0);
             Item.shoot = ModContent.ProjectileType<Sportar>();
-
-            Item.GetElementItem().elementData.Earth = true;
-            Item.GetElementItem().elementData.Light = true;
         }
         public override void AddRecipes()
         {

@@ -3,7 +3,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using Terrafirma.Systems.Elements;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
@@ -29,7 +28,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
             Item.rare = ItemRarityID.White;
             Item.value = Item.sellPrice(0, 0, 4, 0);
             Item.shoot = ModContent.ProjectileType<GemSentry>();
-
         }
         public override void AddRecipes()
         {

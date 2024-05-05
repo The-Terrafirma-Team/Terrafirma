@@ -1,10 +1,8 @@
-﻿using Terrafirma.Items.Weapons.Melee.Shortswords;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using Terrafirma.Systems.Elements;
 using Terrafirma.Projectiles.Summon.Sentry.Hardmode;
 
 namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
@@ -34,9 +32,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 2, 0, 0);
             Item.shoot = ModContent.ProjectileType<CursedFlameSentry>();
-
-            Item.GetElementItem().elementData.Fire = true;
-            Item.GetElementItem().elementData.Dark = true;
         }
 
         public override void AddRecipes()

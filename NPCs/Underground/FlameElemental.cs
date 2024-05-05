@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Common.Templates;
-using Terrafirma.Systems.Elements;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
@@ -68,7 +67,6 @@ namespace Terrafirma.NPCs.Underground
             NPC.damage = 20;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
-            NPC.GetElementNPC().elementData.Fire = true;
         }
 
         public override void HitEffect(NPC.HitInfo hit)
