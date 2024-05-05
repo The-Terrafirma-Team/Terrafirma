@@ -13,7 +13,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
     {
         public override void SetDefaults()
         {
-            Item.damage = 25;
+            Item.damage = 15;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;

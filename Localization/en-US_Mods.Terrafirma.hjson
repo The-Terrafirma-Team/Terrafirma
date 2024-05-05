@@ -1059,7 +1059,7 @@ Items: {
 
 	RepairKit: {
 		DisplayName: Repair Kit
-		Tooltip: Right click on a reforgable item of green quality or lower to reforge it
+		Tooltip: Right click on an item with a bad prefix to reforge them
 	}
 
 	SteelPickaxe: {
@@ -1214,6 +1214,7 @@ Projectiles: {
 	SteelGreatsword.DisplayName: Steel Greatsword
 	TestSwordBlade.DisplayName: Test Sword Blade
 	SteelGreatswordSlash.DisplayName: Steel Greatsword Slash
+	ThunderbeamProj.DisplayName: Thunderbeam Proj
 	Blunderball.DisplayName: Blunderball
 }
 
@@ -1330,6 +1331,10 @@ Spells: {
 		TheAeonsEternity: The Aeon's Eternity
 		DarkBolts: Shadow Scales
 		Vilethorn: Vilethorn
+		ZapperBolt: Zapper Bolt
+		Thunderbeam: Thunderbeam
+		IceBlockSpell: Ice Block
+		IceBoulderSpell: Ice Boulder
 	}
 
 	Desc: {
@@ -1372,6 +1377,10 @@ Spells: {
 		TheAeonsEternity: Summons a giant magic blade that follows your mouse
 		DarkBolts: Charges up to 4 shadow scales
 		Vilethorn: Charges up a lingering vile thorn
+		ZapperBolt: Shoots a bolt of thunder
+		Thunderbeam: Shoots multiple lightning bolts that home in on close enemies
+		IceBlockSpell: Mods.Terrafirma.Spells.Desc.IceBlockSpell
+		IceBoulderSpell: Mods.Terrafirma.Spells.Desc.IceBoulderSpell
 	}
 }
 

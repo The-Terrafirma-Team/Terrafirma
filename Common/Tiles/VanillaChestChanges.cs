@@ -39,17 +39,17 @@ namespace Terrafirma.Common.Tiles
                         //Gold Chest
                         //1/3 Chance for 2 to 6 Leather to be added
 
-                        if (WorldGen.genRand.NextBool(3))
-                        {
-                            for (int i = 0; i < chest.item.Length; i++)
-                            {
-                                if (chest.item[i].type == 0)
-                                {
-                                    chest.item[i] = new Item(ItemID.Leather, WorldGen.genRand.Next(2, 6));
-                                    break;
-                                }
-                            }
-                        }
+                        //if (WorldGen.genRand.NextBool(3))
+                        //{
+                        //    for (int i = 0; i < chest.item.Length; i++)
+                        //    {
+                        //        if (chest.item[i].type == 0)
+                        //        {
+                        //            chest.item[i] = new Item(ItemID.Leather, WorldGen.genRand.Next(2, 6));
+                        //            break;
+                        //        }
+                        //    }
+                        //}
 
                         //60% Chance for 1 to 2 Repair Kits to be added
 

@@ -34,7 +34,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Reworks\VanillaMagic\Spells\PreHardmode\" />
     <Folder Include="Walls\" />
   </ItemGroup>
 </Project>

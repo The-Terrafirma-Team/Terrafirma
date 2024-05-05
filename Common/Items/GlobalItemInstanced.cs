@@ -39,11 +39,6 @@ namespace Terrafirma.Common.Items
         public override void SetDefaults(Item entity)
         {
 
-            if (entity.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(entity.type))
-            {
-                entity.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[entity.type][0];
-            }
-
             if (entity.type == ItemID.ManaFlower)
             {
 
@@ -53,27 +48,6 @@ namespace Terrafirma.Common.Items
             {
                 entity.useTime = entity.useAnimation = 16;
                 entity.mana = 0;
-            }
-
-            if (
-                entity.type == ItemID.EnchantedBoomerang ||
-                entity.type == ItemID.FruitcakeChakram ||
-                entity.type == ItemID.IceBoomerang ||
-                entity.type == ItemID.Shroomerang ||
-                entity.type == ItemID.WoodenBoomerang ||
-                entity.type == ItemID.BloodyMachete ||
-                entity.type == ItemID.CombatWrench ||
-                entity.type == ItemID.Flamarang ||
-                entity.type == ItemID.ThornChakram ||
-                entity.type == ItemID.Trimarang ||
-                entity.type == ItemID.Bananarang ||
-                entity.type == ItemID.LightDisc ||
-                entity.type == ItemID.FlyingKnife ||
-                entity.type == ItemID.PossessedHatchet ||
-                entity.type == ItemID.PaladinsHammer
-            )
-            {
-                entity.DamageType = DamageClass.Ranged;
             }
         }
 

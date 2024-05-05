@@ -128,7 +128,7 @@ namespace Terrafirma
         }
 
         /// <summary>
-        /// Finds the closest NPC to the given position and returns that NPC
+        /// Finds the closest NPC to the given position and returns that NPC. If no NPC can be found, returns null
         /// </summary>
         public static NPC FindClosestNPC(float maxDetectDistance, Vector2 position, bool HostileOnly = true, NPC[] excludedNPCs = null, bool TargetThroughWalls = true)
         {

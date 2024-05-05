@@ -51,7 +51,9 @@ namespace Terrafirma.Systems.MageClass
                 }
 
             }
-            
+
+            Language.GetOrRegister("Mods.Terrafirma.Spells.Name." + $"{this.GetType().Name}");
+            Language.GetOrRegister("Mods.Terrafirma.Spells.Desc." + $"{this.GetType().Name}");
         }
         public string GetSpellName()
         {

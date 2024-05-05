@@ -28,7 +28,6 @@ namespace Terrafirma.Items.Weapons.Summoner.Summon
             Item.damage = 25;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Summon;
-            Item.sentry = true;
 
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 20;

@@ -50,6 +50,8 @@ namespace Terrafirma.Common.Items
         public override void SetDefaults(Projectile entity)
         {
             if (entity.type == ModContent.ProjectileType<ClockworkTurret>()) SentrySlots = 2f;
+            if (entity.type == ModContent.ProjectileType<IchorSentry>()) SentrySlots = 1.5f;
+            if (entity.type == ModContent.ProjectileType<CursedFlameSentry>()) SentrySlots = 1.5f;
             if (entity.type == ModContent.ProjectileType<RoyalJellyDispenser>()) SentrySlots = 2f;
             if (entity.type == ModContent.ProjectileType<BarbedWireCanisterSentry>()) SentrySlots = 0.5f;
             if (entity.type == ModContent.ProjectileType<GREATSentry>()) SentrySlots = 4f;

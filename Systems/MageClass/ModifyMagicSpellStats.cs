@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Terrafirma.Common.Items;
+using Terraria.ID;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -32,30 +33,35 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void UpdateInventory(Item item, Player player)
         {
+
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(item.type))
+            {
+                item.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[item.type][0];
+            }
+
             if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 Item newitem = new Item(item.type);
 
                 if (item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay != -1)
-                { if (item.reuseDelay != item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay) item.reuseDelay = item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay; }
+                { item.reuseDelay = item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay; }
                 else
                 { item.reuseDelay = newitem.reuseDelay; }
 
                 if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation != -1)
-                { if (item.useAnimation != item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay) item.useAnimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation; }
+                { item.useAnimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation; }
                 else
                 { item.useAnimation = newitem.useAnimation; }
 
                 if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime != -1)
-                { if (item.useTime != item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime) item.useTime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime; }
+                { item.useTime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime; }
                 else
                 { item.useTime = newitem.useTime; }
 
                 if (item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost != -1)
-                { if (item.mana != item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost) item.mana = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost; }
+                { item.mana = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost; }
                 else
                 { item.mana = newitem.mana; }
-
             }
             base.UpdateInventory(item, player);
         }

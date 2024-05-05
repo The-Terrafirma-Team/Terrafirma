@@ -13,7 +13,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int UseAnimation => 5;
         public override int UseTime => 5;
         public override int ManaCost => 1;
-        public override string TexurePath => "Terrafirma/Systems/MageClass/SpellIcons/Hardmode/AeonsEternity";
         public override int[] SpellItem => new int[] { ItemID.SkyFracture };
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

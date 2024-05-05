@@ -193,12 +193,12 @@ namespace Terrafirma.Common.Players
         {
             if (Main.mouseRight && !RightMouseSwitch)
             {      
-                if (Main.mouseItem.type == ModContent.ItemType<RepairKit>() && inventory[slot].rare <= 2 && inventory[slot].CanHavePrefixes())
+                if (Main.mouseItem.type == ModContent.ItemType<RepairKit>() && inventory[slot].CanHavePrefixes() && inventory[slot].rare < new Item(inventory[slot].type).rare)
                 {
+                    inventory[slot].SetDefaults(inventory[slot].type);
                     inventory[slot].Prefix(-1);
                     SoundEngine.PlaySound(SoundID.Item37);
                     Main.mouseItem.stack--;
-                    //CombatText.NewText(Player.Hitbox, ItemRarity.GetColor(inventory[slot].rare), inventory[slot].HoverName);
                     PopupText.NewText(
                         new AdvancedPopupRequest()
                         {
