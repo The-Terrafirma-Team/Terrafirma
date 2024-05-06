@@ -76,6 +76,9 @@ namespace Terrafirma.Systems.MageClass
         public virtual void SetDefaults(Item entity)
         {
         }
+        public virtual void Update(Item item, Player player)
+        {
+        }
         public virtual bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             return true;

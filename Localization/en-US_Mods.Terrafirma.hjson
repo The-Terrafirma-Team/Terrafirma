@@ -1207,6 +1207,7 @@ Projectiles: {
 	SteelGreatswordSlash.DisplayName: Steel Greatsword Slash
 	ThunderbeamProj.DisplayName: Thunderbeam Proj
 	Blunderball.DisplayName: Blunderball
+	IceBoulder.DisplayName: Ice Boulder
 }
 
 Biomes: {
@@ -1537,6 +1538,17 @@ Configs: {
 				4 = StoneGold
 				5 = Corroboros
 				6 = Thin
+				'''
+		}
+
+		MeleeDamageMultiplier: {
+			Label: Meele Damage Multiplier Display
+			Tooltip:
+				'''
+				Changes the melee damage multiplier display that appears 
+				when wearing feral claws and its upgrades.
+				0 = Bar
+				1 = Circle
 				'''
 		}
 

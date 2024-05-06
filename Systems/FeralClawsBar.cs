@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Common;
 using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.ModLoader;
@@ -20,7 +21,7 @@ namespace Terrafirma.Systems
         {
             PlayerStats stats = Main.LocalPlayer.PlayerStats();
 
-            if (stats.FeralChargeMax == 0)
+            if (stats.FeralChargeMax == 0 || ModContent.GetInstance<ClientConfig>().MeleeDamageMultiplier != 0)
                 return;
 
             int segments = (int)stats.FeralChargeMax;

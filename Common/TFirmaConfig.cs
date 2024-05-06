@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Terrafirma.Systems;
 using Terraria.ModLoader.Config;
 
 namespace Terrafirma.Common
@@ -25,5 +26,9 @@ namespace Terrafirma.Common
         [Range(12, 255)]
         [DefaultValue(237)]
         public byte SpellB;
+
+        [Range(0, 1)]
+        [DefaultValue(0)]
+        public int MeleeDamageMultiplier;
     }
 }

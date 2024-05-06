@@ -33,6 +33,7 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void UpdateInventory(Item item, Player player)
         {
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)  item.GetGlobalItem<GlobalItemInstanced>().Spell.Update(item, player);
 
             if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(item.type))
             {

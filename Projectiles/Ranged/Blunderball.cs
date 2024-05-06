@@ -45,6 +45,7 @@ namespace Terrafirma.Projectiles.Ranged
             Projectile.velocity.X *= 0.96f;
             Projectile.ai[1] = 1;
             Projectile.extraUpdates = 0;
+            Projectile.knockBack = 2f;
             return false;
         }
         public override bool? CanHitNPC(NPC target)
@@ -63,6 +64,7 @@ namespace Terrafirma.Projectiles.Ranged
         {
             Projectile.velocity = Vector2.Normalize(-Projectile.velocity)*6 + new Vector2(0,-3);
             Projectile.extraUpdates = 0;
+            Projectile.knockBack = 2f;
         }
 
         public override void AI()
