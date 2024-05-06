@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using Terrafirma.Data;
 using Terraria;
 using Terraria.DataStructures;
@@ -12,6 +13,10 @@ namespace Terrafirma.Common.Players
         Item lastHeldItem = null;
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
+
+        public float FeralCharge;
+        public float FeralChargeMax;
+        public float FeralChargeSpeed;
 
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
@@ -32,6 +37,8 @@ namespace Terrafirma.Common.Players
 
         public override void ResetEffects()
         {
+            FeralChargeMax = 0;
+            FeralChargeSpeed = 0.33f / 60f;
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
 
@@ -54,6 +61,16 @@ namespace Terrafirma.Common.Players
 
             if (hasSwappedItems || !Player.controlUseItem)
                 TimesHeldWeaponHasBeenSwung = 0;
+        }
+        public override void PostUpdateEquips()
+        {
+            FeralCharge += FeralChargeSpeed;
+
+            if(FeralCharge > FeralChargeMax)
+                FeralCharge = FeralChargeMax;
+            if (Player.itemAnimation == 1)
+                FeralCharge = 0;
+            Player.GetDamage(DamageClass.Melee) *= (FeralCharge + 1);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {

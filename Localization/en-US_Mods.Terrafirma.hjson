@@ -836,18 +836,12 @@ Items: {
 
 	GraniteGreaves: {
 		DisplayName: Granite Greaves
-		Tooltip:
-			'''
-			Movement speed increased by 5%
-			'''
+		Tooltip: Movement speed increased by 5%
 	}
 
 	GraniteHelmet: {
 		DisplayName: Granite Helmet
-		Tooltip:
-			'''
-			Mining speed increased by 10%
-			'''
+		Tooltip: Mining speed increased by 10%
 		SetBonus:
 			'''
 			Mining ores generates a shield
@@ -1288,7 +1282,6 @@ Tiles: {
 }
 
 Spells: {
-
 	ManaBloom: {
 		Name: Mana Bloom
 		Description: Regenerates 10 mana but slows the player down
@@ -1311,7 +1304,7 @@ Spells: {
 
 	SkeletonHand: {
 		Name: Skeleton Hand
-		Description: Summons a skeletal hand that roasts all enemies in its vicinity	
+		Description: Summons a skeletal hand that roasts all enemies in its vicinity
 	}
 
 	WaterBolt: {
@@ -1326,7 +1319,7 @@ Spells: {
 
 	WaterStream: {
 		Name: Water Stream
-		Description: Sprays out a shower of water	
+		Description: Sprays out a shower of water
 	}
 
 	WaterTreatment: {
@@ -1336,7 +1329,7 @@ Spells: {
 
 	DarkBolts: {
 		Name: Dark Bolts
-		Description: Charges up to 4 shadow scales	
+		Description: Charges up to 4 shadow scales
 	}
 
 	Vilethorn: {
@@ -1416,12 +1409,12 @@ Spells: {
 
 	CursedFlame: {
 		Name: Cursed Flame
-		Description: Summons unholy fire balls	
+		Description: Summons unholy fire balls
 	}
 
 	CursedFlamethrower: {
 		Name: Cursed Flamethrower
-		Description: Summons a wall of cursed fire	
+		Description: Summons a wall of cursed fire
 	}
 
 	DanceOfBlades: {
@@ -1436,7 +1429,7 @@ Spells: {
 
 	IceBlockSpell: {
 		Name: Ice Block
-		Description: Shoots a block of magical ice that gets placed at your mouse cursor	
+		Description: Shoots a block of magical ice that gets placed at your mouse cursor
 	}
 
 	IceBoulderSpell: {
@@ -1446,7 +1439,7 @@ Spells: {
 
 	IchorBubble: {
 		Name: Ichor Bubble
-		Description: Shoots a big explosive bubble of boiling Ichor	
+		Description: Shoots a big explosive bubble of boiling Ichor
 	}
 
 	InfernoFlamethrower: {
@@ -1456,7 +1449,7 @@ Spells: {
 
 	InfernoFork: {
 		Name: Inferno Fork
-		Description: Shoots an inferno fork that explodes into a lingering ball of fire	
+		Description: Shoots an inferno fork that explodes into a lingering ball of fire
 	}
 
 	InfernoWall: {
@@ -1466,12 +1459,12 @@ Spells: {
 
 	PrismRain: {
 		Name: Prism Rain
-		Description: Shoots a barrage of colored glass prisms	
+		Description: Shoots a barrage of colored glass prisms
 	}
 
 	RainbowGunRainbow: {
 		Name: Piercing Rainbow
-		Description: Shoots a rainbow that does continuous damage	
+		Description: Shoots a rainbow that does continuous damage
 	}
 
 	SkySpears: {
@@ -1491,17 +1484,17 @@ Spells: {
 
 	GlitterBomb: {
 		Name: Glitter Bomb
-		Description: Shoots a bomb of glitter that explodes on contact	
+		Description: Shoots a bomb of glitter that explodes on contact
 	}
 
 	Thunderbeam: {
 		Name: Thunderbeam
-		Description: Shoots multiple lightning bolts that home in on close enemies	
+		Description: Shoots multiple lightning bolts that home in on close enemies
 	}
 
 	ZapperBolt: {
 		Name: Zapper bolt
-		Description: Shoots a bolt of thunder	
+		Description: Shoots a bolt of thunder
 	}
 }
 
