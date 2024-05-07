@@ -31,9 +31,9 @@ namespace Terrafirma.Systems
             spriteBatch.Draw(display.Value, new Vector2(Main.screenWidth / 2 + 40, Main.screenHeight / 2 + 40), null, Color.White, 0f, display.Size() / 2, 1f, SpriteEffects.None, 0f);
 
             //Text
-            string StatNumber = Math.Round(stats.FeralCharge, 1) == (int)Math.Round(stats.FeralCharge, 1) ? Math.Round(stats.FeralCharge, 1).ToString() + ".0x" : Math.Round(stats.FeralCharge, 1).ToString() + "x";
+            string StatNumber = Math.Round(stats.FeralCharge+1, 1) == (int)Math.Round(stats.FeralCharge + 1, 1) ? Math.Round(stats.FeralCharge + 1, 1).ToString() + ".0x" : Math.Round(stats.FeralCharge + 1, 1).ToString() + "x";
             TextScale = MathHelper.Lerp(TextScale, 1f, 0.1f) ;
-            if (Math.Round(stats.FeralCharge, 1) == (int)Math.Round(stats.FeralCharge, 1) && (int)Math.Round(stats.FeralCharge, 1) != 0) TextScale = 1.2f;
+            if (Math.Round(stats.FeralCharge + 1, 1) == (int)Math.Round(stats.FeralCharge + 1, 1) && (int)Math.Round(stats.FeralCharge + 1, 1) != 0) TextScale = 1.2f;
             //Border
             int BorderWidth = 2;
             //Position
@@ -41,8 +41,15 @@ namespace Terrafirma.Systems
             Vector2 TextOrigin = new Vector2(-2, 10);
 
             Color[] MultiplierColors = new Color[] { Color.White, Color.Yellow, Color.Orange, Color.IndianRed, Color.Red, Color.Magenta, Color.Violet, Color.Indigo, Color.Cyan, Color.LimeGreen };
-            Color MultiplierColor = Color.White;
+            Color MultiplierColor;
             MultiplierColor = Color.Lerp(MultiplierColors[ Math.Clamp((int)stats.FeralCharge, 0, MultiplierColors.Length - 1)], MultiplierColors[ Math.Clamp((int)stats.FeralCharge + 1,0, MultiplierColors.Length - 1)], stats.FeralCharge - (int)stats.FeralCharge);
+
+            if (Main.LocalPlayer.ItemAnimationActive)
+            {
+                StatNumber = "1.0x";
+                MultiplierColor = MultiplierColors[0];
+                TextScale = 1f;
+            }
 
             spriteBatch.DrawString(FontAssets.MouseText.Value, StatNumber, new Vector2(TextPos.X - BorderWidth, TextPos.Y), Color.Black, 0f, TextOrigin, TextScale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(FontAssets.MouseText.Value, StatNumber, new Vector2(TextPos.X + BorderWidth, TextPos.Y), Color.Black, 0f, TextOrigin, TextScale, SpriteEffects.None, 0f);
