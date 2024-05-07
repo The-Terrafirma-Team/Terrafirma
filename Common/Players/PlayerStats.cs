@@ -34,11 +34,11 @@ namespace Terrafirma.Common.Players
         public int SummonFlatDamage = 0;
 
         public byte SteelBladeHits;
-
+        public static readonly float defaultFeralChargeSpeed = 0.66f / 60f;
         public override void ResetEffects()
         {
             FeralChargeMax = 0;
-            FeralChargeSpeed = 0.33f / 60f;
+            FeralChargeSpeed = defaultFeralChargeSpeed;
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
 
@@ -81,7 +81,8 @@ namespace Terrafirma.Common.Players
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            scale += MeleeWeaponScale;
+            if(item.DamageType == DamageClass.Melee)
+                scale += MeleeWeaponScale;
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
