@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Buffs.Debuffs
@@ -9,10 +10,18 @@ namespace Terrafirma.Buffs.Debuffs
         {
             Main.pvpBuff[Type] = true;
             Main.debuff[Type] = true;
+
+            for(int i = 0; i < NPCID.Count; i++)
+            {
+                if (ContentSamples.NpcsByNetId[i].knockBackResist == 0 || ContentSamples.NpcsByNetId[i].boss)
+                NPCID.Sets.SpecificDebuffImmunity[i][Type] = true;
+            }
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.5f);
+            npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.8f);
+            if (npc.noTileCollide)
+                return;
             if (npc.noGravity) npc.noGravity = false;
             if (npc.buffTime[buffIndex] == 0)
             {

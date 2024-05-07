@@ -7,6 +7,8 @@ namespace Terrafirma.Common.NPCs
 {
     internal class TerrafirmaGlobalNPCInstance : GlobalNPC
     {
+        public override bool InstancePerEntity => true;
+
         public bool PhantasmalBurn;
         public bool ElectricCharge;
         public bool Stunned;
@@ -31,7 +33,6 @@ namespace Terrafirma.Common.NPCs
                 npc.lifeRegen -= (int)(npc.velocity.Length() * 4f) - 1;
             }
         }
-        public override bool InstancePerEntity => true;
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
             if (Inked) drawColor = new Color(179, 130, 237);

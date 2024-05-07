@@ -41,7 +41,7 @@ namespace Terrafirma.Common.Items
             return base.CanUseItem(item, player);
         }
     }
-    public class SentryStats : GlobalProjectile
+    public class SentryStats : Terraria.ModLoader.GlobalProjectile
     {
         public float SentrySlots = 1f;
         public bool Priority = false;
@@ -184,7 +184,7 @@ namespace Terrafirma.Common.Items
         }
     }
 
-    public class SentryBulletBuff : GlobalProjectile
+    public class SentryBulletBuff : Terraria.ModLoader.GlobalProjectile
     {
         public override bool InstancePerEntity => true;
 

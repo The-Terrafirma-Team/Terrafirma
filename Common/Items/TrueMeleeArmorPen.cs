@@ -15,7 +15,7 @@ namespace Terrafirma.Common.Items
             }
         }
     }
-    public class TrueMeleeArmorPenetrationGlobalProjectile : GlobalProjectile
+    public class TrueMeleeArmorPenetrationGlobalProjectile : Terraria.ModLoader.GlobalProjectile
     {
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {

@@ -1208,6 +1208,7 @@ Projectiles: {
 	ThunderbeamProj.DisplayName: Thunderbeam Proj
 	Blunderball.DisplayName: Blunderball
 	IceBoulder.DisplayName: Ice Boulder
+	ChloroSprout.DisplayName: Chloro Sprout
 }
 
 Biomes: {

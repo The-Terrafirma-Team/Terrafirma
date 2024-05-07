@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Items
 {
-    public class SwarmGlobal : GlobalProjectile
+    public class SwarmGlobal : Terraria.ModLoader.GlobalProjectile
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {

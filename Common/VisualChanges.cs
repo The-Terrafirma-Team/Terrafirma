@@ -22,7 +22,7 @@ namespace Terrafirma.Common
             //TextureAssets.Item[ItemID.TungstenBroadsword] = ModContent.Request<Texture2D>(AssetFolder + "TungstenSword");
         }
     }
-    public class BulletVisuals : GlobalProjectile
+    public class BulletVisuals : Terraria.ModLoader.GlobalProjectile
     {
         private static Asset<Texture2D> tex;
 
@@ -75,9 +75,9 @@ namespace Terrafirma.Common
                 case 104: // Cursed
                     drawBullet(projectile, new Color(0.9f, 1f, 0f, 0f), new Color(0f, 0.5f, 0f, 0.5f));
                     break;
-                //case 207: // Chloro
-                //    drawBullet(projectile, new Color(0f, 1f, 0f, 0f), new Color(0f, 0.5f, 0.2f, 0.5f));
-                //    break;
+                case 207: // Chloro
+                    drawBullet(projectile, new Color(0f, 1f, 0f, 0f), new Color(0f, 0.5f, 0.2f, 0.5f));
+                    break;
                 case 302:
                 case 242: // High Velocity
                     drawBullet(projectile, new Color(1f, 1f, 0.7f, 0f), new Color(0.5f, 0.5f, 0f, 0.5f));
