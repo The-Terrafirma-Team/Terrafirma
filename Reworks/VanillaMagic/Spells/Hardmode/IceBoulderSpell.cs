@@ -110,6 +110,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
                     Dust dust = Dust.NewDustDirect(Projectile.Center, 20, 20, DustID.Ice, Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 0.5f), 0, new Color(0.9f, 1f, 0.9f, 0f), Main.rand.NextFloat(1f, 1.5f) * Math.Clamp(Projectile.scale, 0.6f, 2f));
                 }
             }
+
+            TFUtils.Explode(Projectile, (int)(Projectile.scale * 32));
             base.OnKill(timeLeft);
         }
 
