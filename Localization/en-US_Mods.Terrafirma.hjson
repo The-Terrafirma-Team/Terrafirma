@@ -1086,6 +1086,11 @@ Items: {
 		DisplayName: The Blunderbuss
 		Tooltip: ""
 	}
+
+	SplinterSword: {
+		DisplayName: Splinter Sword
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1209,6 +1214,7 @@ Projectiles: {
 	Blunderball.DisplayName: Blunderball
 	IceBoulder.DisplayName: Ice Boulder
 	ChloroSprout.DisplayName: Chloro Sprout
+	Splinter.DisplayName: Splinter
 }
 
 Biomes: {

@@ -53,7 +53,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
                 d.noGravity = true;
                 //if (Projectile.ai[0] % 15 == 0 || Projectile.ai[0] == 1)
                 //    SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
-                if (Projectile.ai[0] % 30 == 0)
+                if (Projectile.ai[0] % 15 == 0)
                 {
                     //SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
                     SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/VileCharge") { PitchVariance = 0.2f, MaxInstances = 10, Volume = 0.1f + Projectile.ai[1] * 0.1f, Pitch = Projectile.ai[1] * 0.1f }, Projectile.position);
