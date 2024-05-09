@@ -29,6 +29,7 @@ namespace Terrafirma
 
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
         }
+
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {
 

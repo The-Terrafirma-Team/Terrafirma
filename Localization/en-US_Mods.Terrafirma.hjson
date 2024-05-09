@@ -1436,13 +1436,17 @@ Spells: {
 	}
 
 	IceBlockSpell: {
-		Name: Ice Block
+		Name: Magical Ice Block
 		Description: Shoots a block of magical ice that gets placed at your mouse cursor
 	}
 
 	IceBoulderSpell: {
 		Name: Ice Boulder
-		Description: Summons a falling ice boulder that stuns hit enemies for a while
+		Description:
+			'''
+			Summons a falling ice boulder that stuns hit enemies for a while
+			Hold left mouse to increase the boulder's size and damage
+			'''
 	}
 
 	IchorBubble: {

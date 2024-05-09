@@ -93,12 +93,12 @@ namespace Terrafirma.Systems.MageClass
             Title = new UIText("", 1f, false);
             Title.SetText("");
             Title.HAlign = 0.5f;
-            Title.Top.Set(10, 0);
+            Title.Top.Set(30, 0);
 
             Description = new UIText("", 1.2f, false);
             Description.SetText("");
             Description.HAlign = 0.5f;
-            Title.Top.Set(30, 0);
+            Description.Top.Set(0, 0);
 
             ManaCost = new UIText("", 1f, false);
             ManaCost.SetText("");
@@ -119,6 +119,7 @@ namespace Terrafirma.Systems.MageClass
             //Description Stuff
             if (SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
+
                 if (ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
                 {
                     ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost) + " Mana");
@@ -129,6 +130,11 @@ namespace Terrafirma.Systems.MageClass
                 }
                 Title.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellDesc());
                 Description.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellName());
+
+                string DescriptionString = ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellDesc().ReplaceLineEndings("\n");
+                int LineEndingsInt = DescriptionString.Count(f => f == '\n');
+                Description.MinHeight.Pixels = 28 + 20 * LineEndingsInt;
+                ManaCost.Top.Set(55 + 25 * LineEndingsInt, 0);
 
                 TextPanel.Width.Set(Description.MinWidth.Pixels > Title.MinWidth.Pixels * 1.1f ? Description.MinWidth.Pixels : Title.MinWidth.Pixels * 1.1f + 20, 0);
                 TextPanel.Height.Set(Description.MinHeight.Pixels + Title.MinHeight.Pixels + ManaCost.MinHeight.Pixels + 40, 0);
@@ -145,6 +151,7 @@ namespace Terrafirma.Systems.MageClass
             //Description Stuff
             if ( SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell) )
             {
+
                 if ( ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
                 {
                     ManaCost.SetText("Costs " + ((int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost)).ToString() + " Mana");
@@ -155,7 +162,12 @@ namespace Terrafirma.Systems.MageClass
                 }
                 Title.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellDesc());
                 Description.SetText(ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellName());
-                
+
+                string DescriptionString = ModContent.GetInstance<SpellUISystem>().SelectedSpell.GetSpellDesc().ReplaceLineEndings("\n");
+                int LineEndingsInt = DescriptionString.Count(f => f == '\n');
+                Description.MinHeight.Pixels = 28 + 20 * LineEndingsInt;
+                ManaCost.Top.Set(55 + 25 * LineEndingsInt, 0);
+
                 TextPanel.Width.Set(Description.MinWidth.Pixels > Title.MinWidth.Pixels * 1.1f ? Description.MinWidth.Pixels : Title.MinWidth.Pixels * 1.1f + 20, 0);
                 TextPanel.Height.Set(Description.MinHeight.Pixels + Title.MinHeight.Pixels + ManaCost.MinHeight.Pixels + 40, 0);
             }

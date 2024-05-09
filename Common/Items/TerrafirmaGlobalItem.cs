@@ -23,6 +23,10 @@ namespace Terrafirma.Common.Items
                     entity.shootSpeed = 5.25f;
                     break;
             }
+
+            if (entity.type == ItemID.RainbowGun) entity.shoot = ProjectileID.WoodenArrowFriendly;
+
+            if (entity.type == ItemID.IceRod) Item.staff[entity.type] = true;
         }
         public override void UpdateEquip(Item item, Player player)
         {

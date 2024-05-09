@@ -5,6 +5,7 @@ using Mono.Cecil;
 using ReLogic.Content;
 using System;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Dusts;
 using Terrafirma.Particles;
 using Terrafirma.Projectiles.Summon.Sentry.Hardmode;
 using Terrafirma.Systems.MageClass;
@@ -43,6 +44,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         }
         public override void Update(Item item, Player player)
         {
+            item.useStyle = ItemUseStyleID.Shoot;
             if (player.HeldItem != item) return;
 
             if (player.statMana < ManaCost) HoldProj = null;
@@ -62,7 +64,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
                     HoldProj.scale *= 1.05f;
                     HoldProj.velocity = Vector2.Lerp(HoldProj.velocity, HoldProj.Center.DirectionTo(Main.MouseWorld) * 5f, 0.02f);
                     HoldProj.Size = new Vector2(HoldProj.scale * 30);
-                    HoldProj.damage = (int)(item.damage * 1.5f * HoldProj.scale);
+                    HoldProj.damage = (int)(item.damage * 2f * HoldProj.scale);
                     if (HoldProj.scale >= 2f) HoldProj = null;
                 }
             }
@@ -80,7 +82,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         int baseDamage = 0;
         public override void SetDefaults()
         {
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = true;
             Projectile.friendly = true;
             Projectile.timeLeft = 300;
@@ -91,19 +93,34 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item50 with { Pitch = 3f - Projectile.velocity.Y / 3f * (Projectile.scale / 2f) }, Projectile.Center);
-            for (int i = 0; i < 10; i++)
+            SoundStyle BoulderBreakSound = new SoundStyle("Terrafirma/Sounds/IceBoulderBreak");
+            SoundEngine.PlaySound(BoulderBreakSound with {  Volume = 1.3f, Pitch = 0.5f + (2f - Projectile.scale) * 0.33f }, Projectile.Center);
+            if (Projectile.scale > 0.4f)
             {
-                Dust dust = Dust.NewDustDirect(Projectile.Center, 20, 20, DustID.Ice, Main.rand.NextFloat(-4f,4f), Main.rand.NextFloat(-4f, 0.5f), 0, new Color(0.9f, 1f, 0.9f, 0f), Main.rand.NextFloat(1f, 1.5f));
-                dust.noGravity = true;
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust dust = Dust.NewDustDirect(Projectile.Center, 20, 20, ModContent.DustType<IceBoulderDust>(), Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 0.5f), 0, new Color(0.9f, 1f, 0.9f, 1f), Main.rand.NextFloat(1f, 1.5f) * Projectile.scale);
+                    dust = Dust.NewDustDirect(Projectile.Center, 20, 20, DustID.Ice, Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 0.5f), 0, new Color(0.9f, 1f, 0.9f, 0f), Main.rand.NextFloat(1f, 1.5f) * Math.Clamp(Projectile.scale, 0.6f, 1f));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust dust = Dust.NewDustDirect(Projectile.Center, 20, 20, DustID.Ice, Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 0.5f), 0, new Color(0.9f, 1f, 0.9f, 0f), Main.rand.NextFloat(1f, 1.5f) * Math.Clamp(Projectile.scale, 0.6f, 2f));
+                }
             }
             base.OnKill(timeLeft);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.ai[0] > 2 || Projectile.ai[1] % 8 == 0) SoundEngine.PlaySound(SoundID.Item50 with { Pitch = 3f - Projectile.velocity.Y / 3f * (Projectile.scale / 2f)}, Projectile.Center);
-            if (Projectile.velocity.Y > 2f) target.AddBuff(ModContent.BuffType<Stunned>(), 60 * 5);
+            if (Projectile.ai[0] > 2 || Projectile.ai[1] % 8 == 0)
+            {
+                SoundStyle BoulderBreakSound = new SoundStyle("Terrafirma/Sounds/IceBoulderBreak");
+                SoundEngine.PlaySound(BoulderBreakSound with { Volume = 1.3f, Pitch = 0.5f + (2f - Projectile.scale) * 0.33f }, Projectile.Center);
+            }
+            if (Projectile.velocity.Y > 2f) target.AddBuff(ModContent.BuffType<Stunned>(), target.boss? 60 : 60 * 4);
             base.OnHitNPC(target, hit, damageDone);
         }
         public override void AI()
@@ -112,10 +129,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             {
                 //Projectile.scale += 0.8f / 60f;
 
-                Vector2 DustSpawnPos = Projectile.Center + Main.rand.NextVector2Circular(40f, 40f);
+                Vector2 DustSpawnPos = Projectile.Center + Main.rand.NextVector2Circular(40f * Projectile.scale, 40f * Projectile.scale);
                 if (Main.rand.NextBool(4))
                 {
-                    Dust dust = Dust.NewDustPerfect(DustSpawnPos, DustID.Ice, DustSpawnPos.DirectionTo(Projectile.Center), 0, new Color(0.9f, 1f, 0.9f, 1f), Main.rand.NextFloat(1f, 1.2f));
+                    Dust dust = Dust.NewDustPerfect(DustSpawnPos, DustID.Ice, DustSpawnPos.DirectionTo(Projectile.Center) * 1.5f, 0, new Color(0.9f, 1f, 0.9f, 1f), Main.rand.NextFloat(1f, 1.2f));
                     dust.noGravity = true;
                 }
                 Projectile.rotation = Projectile.velocity.ToRotation() / 8f  + (float)Math.Sin(Projectile.ai[1] / 30f) / 2f;
@@ -129,7 +146,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             }
             else
             {
-                Projectile.damage = (int)(baseDamage * Math.Clamp(Projectile.velocity.Y * 0.2f,1f, 2f));
+                Projectile.damage = (int)(baseDamage * Math.Clamp(Projectile.velocity.Y * 0.15f,1f, 2.5f));
                 Projectile.rotation = MathHelper.Lerp(Projectile.rotation, 0f, 0.05f);
                 Projectile.velocity.X *= 0.98f;
                 Projectile.velocity.Y += 0.1f;
@@ -145,6 +162,32 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             }              
             Projectile.ai[0]++;
             Projectile.ai[1]++;
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            //Do later I don't feel like it
+
+            //Tile collidedtile = new Tile();
+            //collidedtile.TileType = TileID.Dirt;
+            //for (int i = -3; i <= 4; i++)
+            //{
+            //    Tile checktile = Main.tile[(int)(Projectile.Bottom.X / 16), (int)(Projectile.Bottom.Y / 16) + i];
+            //    if (checktile.HasTile && checktile.TileType == TileID.MagicalIceBlock)
+            //    {
+            //        collidedtile = checktile;
+            //        break;
+            //    }
+            //}
+            //Main.NewText(collidedtile.TileType);
+            //if (collidedtile.TileType == TileID.MagicalIceBlock)
+            //{
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Dust.NewDust(Projectile.Bottom, 2, 2, DustID.Torch, 0, 0, 0, Scale: 2f);
+            //    }
+            //    collidedtile.ClearTile();
+            //}
+            return base.OnTileCollide(oldVelocity);
         }
         public override bool PreDraw(ref Color lightColor)
         {

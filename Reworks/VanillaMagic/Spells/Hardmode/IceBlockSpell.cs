@@ -17,5 +17,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override int ManaCost => 6;
         public override int[] SpellItem => new int[] { ItemID.IceRod };
 
+        public override void Update(Item item, Player player)
+        {
+            item.useStyle = ItemUseStyleID.Swing;
+            base.Update(item, player);
+        }
+
     }
 }
