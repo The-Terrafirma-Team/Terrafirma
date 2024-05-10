@@ -31,7 +31,6 @@ namespace Terrafirma.Projectiles.Melee
         {
             if (Projectile.ai[0] > -1)
             {
-                Projectile.localNPCHitCooldown = 60;
                 Projectile.timeLeft = 60 * 3;
                 Projectile.tileCollide = false;
                 Projectile.ai[0] = -1;
@@ -44,7 +43,7 @@ namespace Terrafirma.Projectiles.Melee
         {
             if (Projectile.ai[0] == -2)
                 return null;
-            if ((Projectile.timeLeft > 60 * 16f && Projectile.ai[0] > -1))
+            if ((Projectile.timeLeft > 60 * 16.5f && Projectile.ai[0] > -1))
                 return false;
             return null;
         }
