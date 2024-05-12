@@ -54,8 +54,10 @@ namespace Terrafirma.Common.Players
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
 
-            if(Player.HeldItem != lastHeldItem)
+            if (Player.HeldItem != lastHeldItem)
+            {
                 hasSwappedItems = true;
+            }
 
             lastHeldItem = Player.HeldItem;
 

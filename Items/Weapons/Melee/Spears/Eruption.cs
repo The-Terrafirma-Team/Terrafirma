@@ -25,6 +25,7 @@ namespace Terrafirma.Items.Weapons.Melee.Spears
 
             Item.shoot = ModContent.ProjectileType<EruptionProjectile>();
             Item.shootSpeed = 10;
+            Item.channel = true;
         }
     }
 }

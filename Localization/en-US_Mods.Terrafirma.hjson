@@ -1091,6 +1091,16 @@ Items: {
 		DisplayName: Splinter Sword
 		Tooltip: ""
 	}
+
+	GraniteBullet: {
+		DisplayName: Granite Bullet
+		Tooltip: ""
+	}
+
+	CrimtaneScythe: {
+		DisplayName: Crimtane Scythe
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1215,6 +1225,9 @@ Projectiles: {
 	IceBoulder.DisplayName: Ice Boulder
 	ChloroSprout.DisplayName: Chloro Sprout
 	Splinter.DisplayName: Splinter
+	GraniteBullet.DisplayName: Granite Bullet
+	ScytheCast.DisplayName: Scythe Cast
+	ScytheSwing.DisplayName: Scythe Swing
 }
 
 Biomes: {
