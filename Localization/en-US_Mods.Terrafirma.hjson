@@ -1229,6 +1229,7 @@ Projectiles: {
 	ScytheCast.DisplayName: Scythe Cast
 	ScytheSwing.DisplayName: Scythe Swing
 	CrimsonRodWorm.DisplayName: Crimson Rod Worm
+	HealingEmeraldBeamProj.DisplayName: Healing Emerald Beam Proj
 }
 
 Biomes: {

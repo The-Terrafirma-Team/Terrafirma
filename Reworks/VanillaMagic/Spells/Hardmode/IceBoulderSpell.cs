@@ -20,7 +20,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
 {
     internal class IceBoulderSpell : Spell
     {
-        bool LeftMouseSwitch = false;
         Projectile HoldProj = null;
         public override int UseAnimation => 4;
         public override int UseTime => 4;
@@ -42,37 +41,73 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
             }
             else return true;
         }
+
+        public override void OnLeftMousePressed(Item item, Player player)
+        {
+            if (player.HeldItem != item) return;
+
+            if (player.statMana >= ManaCost)
+            {
+                HoldProj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), Main.MouseWorld + new Vector2(18, 18), Vector2.Zero, ModContent.ProjectileType<IceBoulder>(), item.damage * 3, item.knockBack, player.whoAmI, 0, 0, 0);
+                HoldProj.ai[1] = Main.rand.Next(0, 120);
+            }
+        }
+
+        public override void UpdateLeftMouse(Item item, Player player)
+        {
+            if (player.HeldItem != item) return;
+
+            if (HoldProj != null)
+            {
+                HoldProj.ai[0] = 0;
+                HoldProj.timeLeft = 300;
+                HoldProj.scale *= 1.05f;
+                HoldProj.velocity = Vector2.Lerp(HoldProj.velocity, HoldProj.Center.DirectionTo(Main.MouseWorld) * 5f, 0.02f);
+                HoldProj.Size = new Vector2(HoldProj.scale * 30);
+                HoldProj.damage = (int)(item.damage * 2f * HoldProj.scale);
+                if (HoldProj.scale >= 2f)
+                {
+                    HoldProj = null;
+                    LeftMouseSwitch = false;
+                }
+            }
+        }   
+
+        public override void OnLeftMouseReleased(Item item, Player player)
+        {
+            HoldProj = null;
+        }
         public override void Update(Item item, Player player)
         {
             item.useStyle = ItemUseStyleID.Shoot;
-            if (player.HeldItem != item) return;
+            //if (player.HeldItem != item) return;
 
-            if (player.statMana < ManaCost) HoldProj = null;
+            //if (player.statMana < ManaCost) HoldProj = null;
 
-            if (Main.mouseLeft && player.statMana >= ManaCost)
-            {
-                if (!LeftMouseSwitch)
-                {
-                    HoldProj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), Main.MouseWorld + new Vector2(18,18), Vector2.Zero, ModContent.ProjectileType<IceBoulder>(), item.damage * 3, item.knockBack, player.whoAmI, 0, 0, 0);
-                    HoldProj.ai[1] = Main.rand.Next(0, 120);
-                    LeftMouseSwitch = true;
-                }
-                if (HoldProj != null)
-                {
-                    HoldProj.ai[0] = 0;
-                    HoldProj.timeLeft = 300;
-                    HoldProj.scale *= 1.05f;
-                    HoldProj.velocity = Vector2.Lerp(HoldProj.velocity, HoldProj.Center.DirectionTo(Main.MouseWorld) * 5f, 0.02f);
-                    HoldProj.Size = new Vector2(HoldProj.scale * 30);
-                    HoldProj.damage = (int)(item.damage * 2f * HoldProj.scale);
-                    if (HoldProj.scale >= 2f) HoldProj = null;
-                }
-            }
-            else
-            {
-                HoldProj = null;
-                LeftMouseSwitch = false;
-            }
+            //if (Main.mouseLeft && player.statMana >= ManaCost)
+            //{
+            //    if (!LeftMouseSwitch)
+            //    {
+            //        HoldProj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), Main.MouseWorld + new Vector2(18,18), Vector2.Zero, ModContent.ProjectileType<IceBoulder>(), item.damage * 3, item.knockBack, player.whoAmI, 0, 0, 0);
+            //        HoldProj.ai[1] = Main.rand.Next(0, 120);
+            //        LeftMouseSwitch = true;
+            //    }
+            //    if (HoldProj != null)
+            //    {
+            //        HoldProj.ai[0] = 0;
+            //        HoldProj.timeLeft = 300;
+            //        HoldProj.scale *= 1.05f;
+            //        HoldProj.velocity = Vector2.Lerp(HoldProj.velocity, HoldProj.Center.DirectionTo(Main.MouseWorld) * 5f, 0.02f);
+            //        HoldProj.Size = new Vector2(HoldProj.scale * 30);
+            //        HoldProj.damage = (int)(item.damage * 2f * HoldProj.scale);
+            //        if (HoldProj.scale >= 2f) HoldProj = null;
+            //    }
+            //}
+            //else
+            //{
+            //    HoldProj = null;
+            //    LeftMouseSwitch = false;
+            //}
             base.Update(item, player);
         }
     }

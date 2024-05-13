@@ -15,6 +15,11 @@ namespace Terrafirma.Systems.MageClass
     
     public abstract class Spell : ModType
     {
+        /// <summary>
+        /// This gets set to true once OnLeftMousePressed() is run and set to false once OnLeftMouseReleased() is run, this is to prevent that method from running multiple times.
+        /// Set this to false to make OnLeftMousePressed() run again. This is useful for things like the Ice Boulder spell which can repeat even if the mouse is constantly held down.
+        /// </summary>
+        public bool LeftMouseSwitch = false;
         public virtual string TexurePath => (base.GetType().Namespace + "." + this.Name).Replace('.', '/');
         /// <summary>
         /// Sets the ReuseDelay of the spell's ManaCost. Set to -1 to use the item's default ManaCost
@@ -58,7 +63,7 @@ namespace Terrafirma.Systems.MageClass
 
         }
 
-        string CreateSpellName() => this.GetType().Name.Humanize();
+        string CreateSpellName() => this.GetType().Name.Titleize();
 
         static string CreateSpellDescription() => "";
 
@@ -72,13 +77,40 @@ namespace Terrafirma.Systems.MageClass
             return Language.GetTextValue("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Description");
         }
 
-
         public virtual void SetDefaults(Item entity)
         {
         }
+
+        /// <summary>
+        /// Update every tick while this weapon is in the Player's Inventory
+        /// </summary>
         public virtual void Update(Item item, Player player)
         {
         }
+
+        /// <summary>
+        /// Runs once when the left mouse is pressed
+        /// </summary>
+        public virtual void OnLeftMousePressed(Item item, Player player)
+        {
+        }
+
+        /// <summary>
+        /// Update every tick while the left mouse is down
+        /// </summary>
+        public virtual void UpdateLeftMouse(Item item, Player player)
+        {
+        }
+
+        //Runs once when the left mouse is released
+        public virtual void OnLeftMouseReleased(Item item, Player player)
+        {
+        }
+
+        public virtual void OnRightClick(Item item, Player player)
+        {
+        }
+
         public virtual bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             return true;

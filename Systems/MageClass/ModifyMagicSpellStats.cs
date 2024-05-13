@@ -8,7 +8,7 @@ using Terraria.ID;
 namespace Terrafirma.Systems.MageClass
 {
     internal class ModifyMagicSpellStats : GlobalItemInstanced
-    {
+    {  
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.DamageType == DamageClass.Magic;
@@ -33,7 +33,28 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)  item.GetGlobalItem<GlobalItemInstanced>().Spell.Update(item, player);
+
+            if (Main.mouseRight && item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.OnRightClick(item, player);
+
+            if (Main.mouseLeft && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && !item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            {
+                item.GetGlobalItem<GlobalItemInstanced>().Spell.OnLeftMousePressed(item, player);
+                item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch = true;
+            }
+            else if (Main.mouseLeft && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            {
+                item.GetGlobalItem<GlobalItemInstanced>().Spell.UpdateLeftMouse(item, player);
+            }
+            else
+            {
+                if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+                {
+                    item.GetGlobalItem<GlobalItemInstanced>().Spell.OnLeftMouseReleased(item, player);
+                    item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch = false;
+                }
+            }
+
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.Update(item, player);
 
             if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(item.type))
             {
@@ -95,5 +116,6 @@ namespace Terrafirma.Systems.MageClass
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
 
         }
+
     }
 }
