@@ -1524,13 +1524,13 @@ Spells: {
 	}
 
 	BloodRain: {
-		Name: Blood rain
-		Description: ""
+		Name: Bloody Shower
+		Description: Summons a cloud to rain blood on your foes
 	}
 
 	CrimsonWorm: {
-		Name: Crimson worm
-		Description: ""
+		Name: Crimson Rods
+		Description: Summons worms to seek out enemies
 	}
 }
 
