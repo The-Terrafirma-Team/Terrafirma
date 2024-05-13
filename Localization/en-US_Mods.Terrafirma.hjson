@@ -1228,6 +1228,7 @@ Projectiles: {
 	GraniteBullet.DisplayName: Granite Bullet
 	ScytheCast.DisplayName: Scythe Cast
 	ScytheSwing.DisplayName: Scythe Swing
+	CrimsonRodWorm.DisplayName: Crimson Rod Worm
 }
 
 Biomes: {
@@ -1520,6 +1521,16 @@ Spells: {
 	ZapperBolt: {
 		Name: Zapper bolt
 		Description: Shoots a bolt of thunder
+	}
+
+	BloodRain: {
+		Name: Blood rain
+		Description: ""
+	}
+
+	CrimsonWorm: {
+		Name: Crimson worm
+		Description: ""
 	}
 }
 

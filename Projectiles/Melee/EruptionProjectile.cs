@@ -32,6 +32,8 @@ namespace Terrafirma.Projectiles.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (Projectile.ai[2] >= 200 && !Main.getGoodWorld)
+                return;
             if (Projectile.ai[1] == 200)
             {
                 player.AddImmuneTime(ImmunityCooldownID.General, 60);
