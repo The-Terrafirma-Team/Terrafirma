@@ -12,6 +12,7 @@ namespace Terrafirma.Particles
         float sizeMultiplier;
         public float fadeInTime;
         public float smallestSize = 0.1f;
+        public int TimeLeft = -1;
         public Color secondaryColor = new Color(255,255,255,0);
         public override void OnSpawn()
         {
@@ -32,6 +33,12 @@ namespace Terrafirma.Particles
             if (sizeMultiplier < smallestSize)
             {
                 Active = false;
+            }
+
+            if (TimeLeft > 0) TimeLeft--;
+            else if (TimeLeft == 0) Active = false;
+            {
+                
             }
         }
 

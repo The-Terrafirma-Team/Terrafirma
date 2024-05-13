@@ -20,5 +20,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
             return false;
         }
+
+        public override void Update(Item item, Player player)
+        {
+            item.UseSound = SoundID.Item8;
+            base.Update(item, player);
+        }
     }
 }
