@@ -16,10 +16,11 @@ namespace Terrafirma.Common
         {
             TextureAssets.Item[ItemID.DemonScythe] = ModContent.Request<Texture2D>(AssetFolder + "ShadowCodex");
             TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "VileStaff");
-            //TextureAssets.Item[ItemID.GoldBroadsword] = ModContent.Request<Texture2D>(AssetFolder + "GoldSword");
-            //TextureAssets.Item[ItemID.PlatinumBroadsword] = ModContent.Request<Texture2D>(AssetFolder + "PlatinumSword");
-            //TextureAssets.Item[ItemID.SilverBroadsword] = ModContent.Request<Texture2D>(AssetFolder + "SilverSword");
-            //TextureAssets.Item[ItemID.TungstenBroadsword] = ModContent.Request<Texture2D>(AssetFolder + "TungstenSword");
+        }
+        public override void Unload()
+        {
+            TextureAssets.Item[ItemID.DemonScythe] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.DemonScythe}");
+            TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.Vilethorn}");
         }
     }
     public class BulletVisuals : Terraria.ModLoader.GlobalProjectile
