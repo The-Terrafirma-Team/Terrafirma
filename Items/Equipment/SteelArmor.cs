@@ -24,7 +24,7 @@ namespace Terrafirma.Items.Equipment
         }
         public override void PostUpdateEquips()
         {
-            if (Player.PlayerDoublePressedSetBonusActivateKey() && !ShutUp)
+            if (active && !ShutUp && Player.PlayerDoublePressedSetBonusActivateKey())
             {
                 Player.AddBuff(ModContent.BuffType<ShutUp>(),60 * 60);
                 float rot = 60;

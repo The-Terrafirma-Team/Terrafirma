@@ -969,11 +969,6 @@ Items: {
 			'''
 	}
 
-	ArmoredDummyItem: {
-		DisplayName: Armored Dummy Item
-		Tooltip: ""
-	}
-
 	GiantSunflower: {
 		DisplayName: Giant Sunflower
 		Tooltip: ""
@@ -1533,14 +1528,15 @@ Spells: {
 		Name: Crimson Rods
 		Description: Summons worms to seek out enemies
 	}
+
+	HealingEmeraldBeam: {
+		Name: Healing Emerald Beam
+		Description: ""
+	}
 }
 
 UIElements.CookingPot.InputAmount: Amount
-
-NPCs: {
-	FlameElemental.DisplayName: Flame Elemental
-	ArmoredDummyNPC.DisplayName: Armored Dummy N P C
-}
+NPCs.FlameElemental.DisplayName: Flame Elemental
 
 Configs: {
 	ClientConfig: {

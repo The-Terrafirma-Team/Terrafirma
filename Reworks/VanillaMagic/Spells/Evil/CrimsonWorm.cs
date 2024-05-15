@@ -48,7 +48,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
             NPC target = TFUtils.FindClosestNPC(500, Projectile.Center);
             if (!Collision.SolidTiles(Projectile.position, 16, 16))
             {
-                Projectile.velocity.Y += 0.2f;
+                Projectile.velocity.Y += 0.5f;
                 if(target != null)
                     Projectile.velocity.X += Projectile.Center.DirectionTo(target.Center).X * 1f;
             }
