@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Common.Templates;
 using Terrafirma.Data;
 using Terraria;
 using Terraria.DataStructures;
@@ -21,11 +22,11 @@ namespace Terrafirma.Common.Players
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
         public float WrenchBuffTimeMultiplier = 1f;
-        public float SwarmSpeedMultiplier = 1f;
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
         public float MeleeWeaponScale = 0;
-        public float ImmunityTimeMultiplier = 1f;
+        public float NecromancerWeaponScale = 0;
+        public float NecromancerChargeDiscount = 1f;
         public float AmmoSaveChance;
 
         public int MeleeFlatDamage = 0;
@@ -41,6 +42,8 @@ namespace Terrafirma.Common.Players
             FeralChargeSpeed = defaultFeralChargeSpeed;
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
+            NecromancerWeaponScale = 0;
+            NecromancerChargeDiscount = 1f;
 
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;
@@ -49,7 +52,6 @@ namespace Terrafirma.Common.Players
 
             SentrySpeedMultiplier = 0f;
             SentryRangeMultiplier = 0f;
-            SwarmSpeedMultiplier = 1f;
             KnockbackResist = 1f;
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
@@ -72,7 +74,7 @@ namespace Terrafirma.Common.Players
                 FeralCharge = FeralChargeMax;
             if (Player.itemAnimation == 1)
                 FeralCharge = 0;
-            Player.GetDamage(DamageClass.Melee) *= (FeralCharge + 1);
+            Player.GetDamage(DamageClass.Melee) += (FeralCharge + 1);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
@@ -85,6 +87,8 @@ namespace Terrafirma.Common.Players
         {
             if(item.DamageType == DamageClass.Melee)
                 scale += MeleeWeaponScale;
+            if (item.ModItem is NecromancerScythe)
+                scale += NecromancerWeaponScale;
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
@@ -115,14 +119,5 @@ namespace Terrafirma.Common.Players
             }
             modifiers.Knockback *= MathHelper.Clamp(KnockbackResist, 0, 10);
         }
-        public override float UseSpeedMultiplier(Item item)
-        {
-            if (ItemSets.isSwarmSummonItem[item.type])
-            {
-                return SwarmSpeedMultiplier;
-            }
-            return base.UseSpeedMultiplier(item);
-        }
-
     }
 }

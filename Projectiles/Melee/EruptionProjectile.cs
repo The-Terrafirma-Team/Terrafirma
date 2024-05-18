@@ -11,6 +11,7 @@ using Terraria.GameContent;
 using Terrafirma.Common;
 using Terraria.Graphics.CameraModifiers;
 using Terrafirma.Particles;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Melee
 {
@@ -20,6 +21,10 @@ namespace Terrafirma.Projectiles.Melee
         public override void Load()
         {
             glowTex = Mod.Assets.Request<Texture2D>("Projectiles/Melee/EruptionProjectile_Glow");
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
         }
         public override void SetDefaults()
         {

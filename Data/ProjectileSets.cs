@@ -12,6 +12,5 @@ namespace Terrafirma.Data
     public class ProjectileSets
     {
         public static bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet();
-        public static bool[] DontInheritElementFromSource = ProjectileID.Sets.Factory.CreateBoolSet();
     }
 }

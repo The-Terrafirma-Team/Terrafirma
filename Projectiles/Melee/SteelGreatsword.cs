@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terrafirma.Common.Templates.Melee;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
@@ -17,6 +18,10 @@ namespace Terrafirma.Projectiles.Melee
         public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/SteelGreatsword";
         private static Asset<Texture2D> afterImage;
 
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
+        }
         public override void Load()
         {
             afterImage = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SteelGreatswordAfter");
