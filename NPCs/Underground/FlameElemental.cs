@@ -49,7 +49,7 @@ namespace Terrafirma.NPCs.Underground
             {
                 for (int y = -size; y <= size; y++)
                 {
-                    if(spawnInfo.SpawnTileX + x < Main.tile.Width - size && spawnInfo.SpawnTileX + x >= Main.tile.Width + size && spawnInfo.SpawnTileY + y < Main.tile.Height - size && spawnInfo.SpawnTileY + y >= Main.tile.Height + size)
+                    if(spawnInfo.SpawnTileX + x < Main.tile.Width - size && spawnInfo.SpawnTileX + x > size && spawnInfo.SpawnTileY + y < Main.tile.Height - size && spawnInfo.SpawnTileY + y > size)
                     if (Main.tile[spawnInfo.SpawnTileX + x,spawnInfo.SpawnTileY + y].LiquidAmount > 0 && Main.tile[spawnInfo.SpawnTileX + x, spawnInfo.SpawnTileY + y].LiquidType == LiquidID.Lava)
                     {
                         chance += 0.0002f;
