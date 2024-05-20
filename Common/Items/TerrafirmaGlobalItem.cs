@@ -13,6 +13,10 @@ namespace Terrafirma.Common.Items
     {
         public override void SetDefaults(Item item)
         {
+            if(item.useStyle == ItemUseStyleID.Swing && item.ModItem == null)
+            {
+                item.useTurn = false;
+            }
             switch (item.type)
             {
                 case ItemID.Zenith:
@@ -64,7 +68,7 @@ namespace Terrafirma.Common.Items
         {
             if (player.ItemAnimationJustStarted && item.useStyle == ItemUseStyleID.Swing)
             {
-                player.direction = Math.Sign(player.Center.X - Main.MouseWorld.X);
+                player.direction = -Math.Sign(player.Center.X - Main.MouseWorld.X);
             }
             player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
             return base.UseItem(item, player);
