@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using Terrafirma.Common.Players;
 using Terrafirma.Particles;
 using Terrafirma.Rarities;
@@ -10,23 +11,25 @@ namespace Terrafirma.Common.Items
 {
     public class TerrafirmaGlobalItem : GlobalItem
     {
-        public override void SetDefaults(Item entity)
+        public override void SetDefaults(Item item)
         {
-            switch (entity.type)
+            switch (item.type)
             {
                 case ItemID.Zenith:
-                    entity.rare = ModContent.RarityType<FinalQuestRarity>();
+                    item.rare = ModContent.RarityType<FinalQuestRarity>();
                     break;
                 case ItemID.MusketBall:
                 case ItemID.SilverBullet:
                 case ItemID.TungstenBullet:
-                    entity.shootSpeed = 5.25f;
+                    item.shootSpeed = 5.25f;
+                    break;
+                case ItemID.RainbowGun:
+                    item.shoot = ProjectileID.WoodenArrowFriendly;
+                    break;
+                case ItemID.IceRod:
+                    Item.staff[item.type] = true;
                     break;
             }
-
-            if (entity.type == ItemID.RainbowGun) entity.shoot = ProjectileID.WoodenArrowFriendly;
-
-            if (entity.type == ItemID.IceRod) Item.staff[entity.type] = true;
         }
         public override void UpdateEquip(Item item, Player player)
         {
@@ -59,6 +62,10 @@ namespace Terrafirma.Common.Items
         }
         public override bool? UseItem(Item item, Player player)
         {
+            if (player.ItemAnimationJustStarted && item.useStyle == ItemUseStyleID.Swing)
+            {
+                player.direction = Math.Sign(player.Center.X - Main.MouseWorld.X);
+            }
             player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
             return base.UseItem(item, player);
         }

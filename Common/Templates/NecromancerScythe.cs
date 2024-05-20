@@ -66,7 +66,7 @@ namespace Terrafirma.Common.Templates
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             NecromancerScythe scythe = player.HeldItem.ModItem as NecromancerScythe;
-            scythe.DamageDealt = Math.Clamp(scythe.DamageDealt + damageDone, 0, scythe.DamagePerSoul * 6);
+            scythe.DamageDealt = (int)Math.Clamp(scythe.DamageDealt + (damageDone * player.PlayerStats().NecromancerChargeBonus), 0, scythe.DamagePerSoul * 6);
         }
         public override bool PreDraw(ref Color lightColor)
         {

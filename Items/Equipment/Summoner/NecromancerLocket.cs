@@ -20,7 +20,7 @@ namespace Terrafirma.Items.Equipment.Summoner
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<PlayerStats>().SwarmSpeedMultiplier += 0.15f;
+            player.GetModPlayer<PlayerStats>().NecromancerChargeBonus += 0.15f;
         }
         public override void AddRecipes()
         {

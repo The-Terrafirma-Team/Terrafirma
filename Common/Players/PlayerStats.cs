@@ -26,7 +26,8 @@ namespace Terrafirma.Common.Players
         public float ExtraWeaponPierceMultiplier = 1;
         public float MeleeWeaponScale = 0;
         public float NecromancerWeaponScale = 0;
-        public float NecromancerChargeDiscount = 1f;
+        public float NecromancerChargeBonus = 1f;
+        public float NecromancerSwingSpeed = 1f;
         public float AmmoSaveChance;
 
         public int MeleeFlatDamage = 0;
@@ -43,7 +44,8 @@ namespace Terrafirma.Common.Players
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
             NecromancerWeaponScale = 0;
-            NecromancerChargeDiscount = 1f;
+            NecromancerChargeBonus = 1f;
+            NecromancerSwingSpeed = 1f;
 
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;
@@ -87,8 +89,15 @@ namespace Terrafirma.Common.Players
         {
             if(item.DamageType == DamageClass.Melee)
                 scale += MeleeWeaponScale;
-            if (item.ModItem is NecromancerScythe)
+            else if (item.ModItem is NecromancerScythe)
                 scale += NecromancerWeaponScale;
+        }
+        public override float UseSpeedMultiplier(Item item)
+        {
+            if (item.ModItem is NecromancerScythe)
+                return NecromancerSwingSpeed;
+            else
+                return base.UseSpeedMultiplier(item);
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {

@@ -1,15 +1,6 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terrafirma.Items.Weapons.Melee.Shortswords;
-using Terrafirma.Items.Weapons.Magic;
-using Terrafirma.Items.Ammo;
-using Terrafirma.Projectiles.Hostile;
-using Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode;
-using Terrafirma.Items.Weapons.Magic.Tempire;
-using Terrafirma.Common.Items;
-using Terraria.Audio;
 
 namespace Terrafirma.Items.Consumable
 {
