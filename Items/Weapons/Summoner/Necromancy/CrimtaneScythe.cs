@@ -14,9 +14,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Necromancy
     public class CrimtaneScythe : NecromancerScythe
     {
         public override string SoulName => "Crimtane";
-
         public override void SetDefaults()
         {
+            summonColor = Color.Red;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.damage = 20;
@@ -29,6 +29,9 @@ namespace Terrafirma.Items.Weapons.Summoner.Necromancy
             Item.UseSound = SoundID.Item1;
             Item.Size = new Vector2(16, 16);
             Item.shootSpeed = 8;
+
+            Item.rare = ContentSamples.ItemsByType[ItemID.BloodButcherer].rare;
+            Item.value = ContentSamples.ItemsByType[ItemID.BloodButcherer].value;
         }
     }
 }

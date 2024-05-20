@@ -2,15 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Templates.Melee;
+using Terrafirma.Particles;
+using Terrafirma.Projectiles.Melee;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Templates
@@ -23,7 +22,11 @@ namespace Terrafirma.Common.Templates
         }
         public int DamageDealt = 0;
         public virtual string SoulName => "";
-        public virtual int DamagePerSoul => 100;
+        public virtual int DamagePerSoul => 50;
+
+        public Color summonColor = Color.White;
+        public virtual int FirstSummon => ModContent.ProjectileType<EruptionFloatProjectile>();
+        public virtual int SecondarySummon => ModContent.ProjectileType<HeroSwordShot>();
         //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         //{
         //    DamageDealt = Math.Clamp(DamageDealt + damageDone,0,DamagePerSoul * 6);
@@ -34,7 +37,7 @@ namespace Terrafirma.Common.Templates
             if (player.altFunctionUse == 2)
             {
                 Item.noUseGraphic = true;
-                Projectile.NewProjectile(source, player.Center, Vector2.Zero, ModContent.ProjectileType<ScytheCast>(), 0, 0, player.whoAmI);
+                Projectile.NewProjectile(source, player.Center, Vector2.Zero, ModContent.ProjectileType<ScytheCast>(), 0, 0, player.whoAmI, ai1: DamageDealt / (float)DamagePerSoul);
                 DamageDealt = 0;
             }
             else
@@ -81,7 +84,7 @@ namespace Terrafirma.Common.Templates
         {
             Projectile.aiStyle = -1;
             Projectile.hide = true;
-            Projectile.timeLeft = 40;
+            Projectile.timeLeft = (15 * 6) + 5;
         }
         public override void AI()
         {
@@ -90,20 +93,61 @@ namespace Terrafirma.Common.Templates
             player.bodyFrame.Y = 56;
             Projectile.Center = (player.getFrontArmPosition() + player.Center).ToPoint().ToVector2();
             player.heldProj = Projectile.whoAmI;
+            player.SetDummyItemTime(Projectile.timeLeft);
+            Projectile.ai[0]++;
+            Projectile.rotation = MathF.Sin(Projectile.ai[1] / 10f) * 0.1f;
+
+            if (Projectile.ai[0] % 15 == 0 && Projectile.ai[0] <= Projectile.ai[1] * 15)
+            {
+                SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(5, 5), ModContent.ProjectileType<NecromancySummon>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Item item = Main.player[Projectile.owner].HeldItem;
             Asset<Texture2D> tex = TextureAssets.Item[item.type];
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 8; i++)
             {
-                Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(2, 0).RotatedBy(i * MathHelper.PiOver2), null, new Color(1f, 1f, 1f, 0), (Projectile.spriteDirection == 1 ? 0 : -MathHelper.PiOver2) - MathHelper.PiOver4, new Vector2(0, Projectile.spriteDirection == -1 ? 0 : tex.Height()), item.scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
+                Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(Main.rand.NextFloat(2), 0).RotatedBy(i * MathHelper.PiOver4 + (Main.timeForVisualEffects * 0.1f)), null, new Color(1f, 1f, 1f, 0), (Projectile.spriteDirection == 1 ? Projectile.rotation : Projectile.rotation - MathHelper.PiOver2) - MathHelper.PiOver4, new Vector2(0, Projectile.spriteDirection == -1 ? 0 : tex.Height()), item.scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
             }
 
-            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, null, lightColor, (Projectile.spriteDirection == 1 ? 0 : -MathHelper.PiOver2) - MathHelper.PiOver4, new Vector2(0, Projectile.spriteDirection == -1 ? 0 : tex.Height()), item.scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, null, lightColor, (Projectile.spriteDirection == 1 ? Projectile.rotation : Projectile.rotation - MathHelper.PiOver2) - MathHelper.PiOver4, new Vector2(0, Projectile.spriteDirection == -1 ? 0 : tex.Height()), item.scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
 
             return false;
+        }
+    }
+    public class NecromancySummon : ModProjectile
+    {
+        public override string Texture => "Terrafirma/Assets/Bullet";
+        public override void SetDefaults()
+        {
+            Projectile.Size = new Vector2(8);
+            Projectile.aiStyle = -1;
+            Projectile.extraUpdates = 30;
+            Projectile.timeLeft = Projectile.extraUpdates;
+            Projectile.hide = true;
+        }
+        NecromancerScythe scythe;
+        public override void OnSpawn(IEntitySource source)
+        {
+            scythe = Main.player[Projectile.owner].HeldItem.ModItem as NecromancerScythe;
+        }
+        public override void AI()
+        {
+            ParticleSystem.AddParticle(new PixelCircle() {outlineColor = Color.Lerp(scythe.summonColor,Color.Black,0.6f),scale = Main.rand.NextFloat(1,2) }, Projectile.Center, Main.rand.NextVector2Circular(2, 2), scythe.summonColor);
+            Projectile.velocity.Y += 0.1f;
+        }
+        public override void OnKill(int timeLeft)
+        {
+            //SoundEngine.PlaySound(SoundID.DD2_DarkMageSummonSkeleton,Projectile.Center);
+            int iterations = 30;
+            for(int i = 0; i < iterations; i++)
+            {
+                ParticleSystem.AddParticle(new PixelCircle() {deceleration = 0.93f, scaleDecreaseOverTime = Main.rand.NextFloat(0.1f,0.3f), outlineColor = Color.Lerp(scythe.summonColor, Color.Black, 0.6f), scale = Main.rand.NextFloat(4, 8) }, Projectile.Center, new Vector2(Main.rand.NextFloat(3,4),0).RotatedBy(i * MathHelper.TwoPi/iterations), scythe.summonColor);
+            }
+            base.OnKill(timeLeft);
         }
     }
 }

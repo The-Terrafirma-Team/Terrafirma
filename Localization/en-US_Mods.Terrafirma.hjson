@@ -485,7 +485,7 @@ Items: {
 
 	NecromancerLocket: {
 		DisplayName: Necromancer's Locket
-		Tooltip: Boosts the attack speed of swarm summoning weapons by 15%
+		Tooltip: Boosts scythe soul gain by 15%
 	}
 
 	MetalWrench: {
@@ -1225,6 +1225,7 @@ Projectiles: {
 	ScytheSwing.DisplayName: Scythe Swing
 	CrimsonRodWorm.DisplayName: Crimson Rod Worm
 	HealingEmeraldBeamProj.DisplayName: Healing Emerald Beam Proj
+	NecromancySummon.DisplayName: Necromancy Summon
 }
 
 Biomes: {
