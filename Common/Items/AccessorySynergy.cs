@@ -9,6 +9,7 @@ using Terrafirma.Items.Ammo;
 using Terrafirma.Items.Equipment.Healing;
 using Terrafirma.Items.Equipment.Movement;
 using Terrafirma.Items.Equipment.Ranged;
+using Terrafirma.Systems.AccessorySynergy;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -23,101 +24,77 @@ namespace Terrafirma.Common.Items
         /// Array of ItemIDs of all Accessories that the player has equipped (Doesn't count vanity slots). Updates Automatically
         /// </summary>
         public int[] EquippedAccessories = new int[] { };
-        public SynergyData[] ActivatedSynergies = new SynergyData[] { };
+        public AccessorySynergy[] ActivatedSynergies = new AccessorySynergy[] { };
 
         public override void ResetEffects()
         {
             EquippedAccessories = new int[] { };
-            ActivatedSynergies = new SynergyData[] { };
-
+            ActivatedSynergies = new AccessorySynergy[] { };
+            base.ResetEffects();
         }
 
         public override void UpdateEquips()
         {
-            //Check For Synergies 
 
-            //Silly Ammo Belt
-            if (EquippedAccessories.Contains(ModContent.ItemType<DrumMag>()) && EquippedAccessories.Contains(ModContent.ItemType<AmmoCan>()))
+            for (int i = 0; i < SynergyID.SynergyIDs.Count; i++)
             {
-                ActivatedSynergies = ActivatedSynergies.Append(new SynergyData("Silly Ammo Belt", "33% chance for guns to shoot a random bullet", new int[] { ModContent.ItemType<DrumMag>(), ModContent.ItemType<AmmoCan>() })).ToArray();
-            }
-            //The Tank
-            if (EquippedAccessories.Contains(ModContent.ItemType<HeartContainer>()))
-            {
-                ActivatedSynergies = ActivatedSynergies.Append(new SynergyData("The Tank", "Double all synergising Accessories's health increase", new int[] { ModContent.ItemType<HeartContainer>() })).ToArray();
-                Player.statLifeMax2 += 150;
-            }
+                List<int> RequiredAccessories = SynergyID.SynergyIDs[i].SynergyAccessories;
+                for (int k = 0; k < SynergyID.SynergyIDs[i].SynergyAccessories.Count; k++)
+                {
+                    if (EquippedAccessories.Contains(SynergyID.SynergyIDs[i].SynergyAccessories[k])) RequiredAccessories.Remove(SynergyID.SynergyIDs[i].SynergyAccessories[k]);
+                }
 
-        }
-
-        public string[] ActivatedSynergyNames()
-        {
-            string[] synergies = new string[] { };
-
-            for (int i = 0; i < ActivatedSynergies.Length; i++)
-            {
-                synergies = synergies.Append(ActivatedSynergies[i].Name).ToArray();
+                if (RequiredAccessories.Count <= 0)
+                {
+                    ActivatedSynergies = ActivatedSynergies.Append(SynergyID.SynergyIDs[i]).ToArray();
+                }
             }
 
-            return synergies;
         }
     }
 
     public class GlobalAccessorySynergy : GlobalItem
     {
-        Player itemplayer;
-        string[] ActivatedSynergies = new string[] { };
+        AccessorySynergy[] ActivatedSynergies = new AccessorySynergy[] { };
         public override bool InstancePerEntity => true;
 
         public override void UpdateEquip(Item item, Player player)
         {
             player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Append(item.type).ToArray();
-            itemplayer = player;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            SynergyData pickedSynergy = new SynergyData("", "", new int[] { });
-            if (itemplayer != null)
+
+            for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies.Length; i++)
             {
-                for (int i = 0; i < itemplayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies.Length; i++)
+                if (Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i].SynergyAccessories.Contains(item.type))
                 {
-                    if (itemplayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i].Accessories.Contains(item.type))
+                    AccessorySynergy PickedSynergy = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i];
+                    string SynergyAccessoriesString = "Synergy with ";
+
+                    for (int k = 0;  k < PickedSynergy.SynergyAccessories.Count; k++)
                     {
-                        pickedSynergy = itemplayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i];
-                        break;
+                        if (k < PickedSynergy.SynergyAccessories.Count - 1) SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name + ", ";
+                        else SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name;
                     }
+
+                    TooltipLine synergyname = new TooltipLine(Terrafirma.Mod, "SynergyName" + i, "");
+                    synergyname.OverrideColor = new Color(43, 229, 255);
+                    synergyname.Text = PickedSynergy.GetSynergyName();
+                    tooltips.Add(synergyname);
+
+                    TooltipLine synergyitems = new TooltipLine(Terrafirma.Mod, "SynergyItems" + i, "");
+                    synergyitems.OverrideColor = new Color(43, 229, 255);
+                    synergyitems.Text = SynergyAccessoriesString;
+                    tooltips.Add(synergyitems);
+
+                    TooltipLine synergydescription = new TooltipLine(Terrafirma.Mod, "SynergyDescription" + i, "");
+                    synergydescription.OverrideColor = new Color(43, 229, 255);
+                    synergydescription.Text = PickedSynergy.GetSynergyDesc();
+                    tooltips.Add(synergydescription);
                 }
             }
 
-
-            if (pickedSynergy.Name != "")
-            {
-                string SynergyAccessories = "";
-                for (int i = 0; i < pickedSynergy.Accessories.Length; i++)
-                {
-                    Item accessory = new Item();
-                    accessory.SetDefaults(pickedSynergy.Accessories[i]);
-
-                    SynergyAccessories += accessory.Name;
-                    if (i < pickedSynergy.Accessories.Length - 2)
-                    {
-                        SynergyAccessories += ", ";
-                    }
-                    else if (i == pickedSynergy.Accessories.Length - 2)
-                    {
-                        SynergyAccessories += " and ";
-                    }
-                }
-
-
-                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyName", "[c/2BE5FF:" + pickedSynergy.Name + "]"));
-
-                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyItems", "[c/2BE5FF:" + "Synergy with " + SynergyAccessories + "]"));
-                tooltips.Add(new TooltipLine(Terrafirma.Mod, "SynergyDescription", "[c/2BE5FF:" + pickedSynergy.Description + "]"));
-
-
-
-            }
         }
     }
 }

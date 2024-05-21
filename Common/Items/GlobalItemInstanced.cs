@@ -98,22 +98,7 @@ namespace Terrafirma.Common.Items
             }
             #endregion
 
-            #region Silly Ammo Belt Synergy
-            //Silly Ammo Belt Synergy
-            if (player.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergyNames() != null)
-            {
-                if (player.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergyNames().Contains("Silly Ammo Belt") && item.useAmmo == AmmoID.Bullet)
-                {
-                    if (Main.rand.Next(100) < 33)
-                    {
-                        Item newitem = new Item(Terrafirma.Mod.BulletArray[Main.rand.Next(Terrafirma.Mod.BulletArray.Length)]);
-                        type = newitem.shoot;
-                    }
-                }
-            }
-
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
-            #endregion
         }
 
     }

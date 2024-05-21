@@ -1,22 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.ModLoader;
 using Terrafirma.Systems.MageClass;
-using Terrafirma.Common.Structs;
 using Terrafirma.Items.Weapons.Melee.Swords;
 using Terrafirma.Projectiles.Melee;
-using System;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terrafirma.Systems.NPCQuests;
-using Terrafirma.Reworks.VanillaMagic.Spells;
 using Terrafirma.Common.Items;
 using Terrafirma.Items.Consumable;
 using Terraria.GameContent.UI;
+
 
 namespace Terrafirma.Common.Players
 {
@@ -41,6 +37,7 @@ namespace Terrafirma.Common.Players
         public Quest[] playerquests = new Quest[] { };
 
         internal bool RightMouseSwitch = false;
+
 
         public override void ResetEffects()
         {
