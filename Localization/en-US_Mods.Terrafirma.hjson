@@ -1590,8 +1590,16 @@ Configs: {
 }
 
 AccessorySynergy: {
+	SynergyWith: Synergy with
+	And: and
+
 	TheTank: {
 		Name: The Tank
 		Description: Increases max health by 150
+	}
+
+	SillyAmmoBelt: {
+		Name: Silly Ammo Belt
+		Description: Guns may fire any type of bullet
 	}
 }

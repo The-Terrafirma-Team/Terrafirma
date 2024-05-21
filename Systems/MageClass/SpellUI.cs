@@ -6,8 +6,8 @@ using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 using System;
 using System.Linq;
-using Terrafirma.Common.Items;
 using Terrafirma.Common;
+using Terrafirma.Systems.AccessorySynergy;
 
 namespace Terrafirma.Systems.MageClass
 {

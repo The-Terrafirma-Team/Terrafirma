@@ -60,7 +60,7 @@ namespace Terrafirma
         }
 
         List<int> BulletList = new List<int>();
-        public int[] BulletArray = new int[] {};
+        public static int[] BulletArray = new int[] {};
         public override void PostSetupContent()
         {
             Item newitem = new Item();

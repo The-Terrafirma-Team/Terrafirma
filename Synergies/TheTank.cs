@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Common.Items;
 using Terrafirma.Items.Equipment.Healing;
 using Terrafirma.Systems.AccessorySynergy;
 using Terraria;

@@ -10,6 +10,7 @@ using Terrafirma.Data;
 using Terrafirma.Common.Items;
 using Terrafirma.Common.Players;
 using Terrafirma.Particles;
+using Terrafirma.Systems.AccessorySynergy;
 
 namespace Terrafirma
 {

@@ -9,14 +9,13 @@ using Terrafirma.Items.Ammo;
 using Terrafirma.Items.Equipment.Healing;
 using Terrafirma.Items.Equipment.Movement;
 using Terrafirma.Items.Equipment.Ranged;
-using Terrafirma.Systems.AccessorySynergy;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Common.Items
+namespace Terrafirma.Systems.AccessorySynergy
 {
     public class AccessorySynergyPlayer : ModPlayer
     {
@@ -70,11 +69,12 @@ namespace Terrafirma.Common.Items
                 if (Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i].SynergyAccessories.Contains(item.type))
                 {
                     AccessorySynergy PickedSynergy = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies[i];
-                    string SynergyAccessoriesString = "Synergy with ";
+                    string SynergyAccessoriesString = Language.GetText("Mods.Terrafirma.AccessorySynergy.SynergyWith") + " ";                    
 
-                    for (int k = 0;  k < PickedSynergy.SynergyAccessories.Count; k++)
+                    for (int k = 0; k < PickedSynergy.SynergyAccessories.Count; k++)
                     {
-                        if (k < PickedSynergy.SynergyAccessories.Count - 1) SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name + ", ";
+                        if (k < PickedSynergy.SynergyAccessories.Count - 2) SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name + ", ";
+                        else if (k == PickedSynergy.SynergyAccessories.Count - 2) SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name + " " + Language.GetText("Mods.Terrafirma.AccessorySynergy.And") + " ";
                         else SynergyAccessoriesString += new Item(PickedSynergy.SynergyAccessories[k]).Name;
                     }
 

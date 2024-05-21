@@ -4,27 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Common.Items;
 using Terrafirma.Items.Equipment.Healing;
+using Terrafirma.Items.Equipment.Ranged;
 using Terrafirma.Systems.AccessorySynergy;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Synergies
 {
     public class SillyAmmoBelt : AccessorySynergy
     {
-        public override List<int> SynergyAccessories => new List<int> { ModContent.ItemType<HeartContainer>() };
+        public override List<int> SynergyAccessories => new List<int> { ModContent.ItemType<AmmoCan>(), ModContent.ItemType<DrumMag>()};
     }
 
     internal class SillyAmmoBeltItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.useAmmo == AmmoID.Bullet;
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (player.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies.ContainsSynergy(new SillyAmmoBelt()))
             {
-
+                //Chaos Chaos - Jevil
+                double ChaosNumber = Main.timeForVisualEffects * Math.Sin(Main.timeForVisualEffects + 200) * Math.Cos(Main.timeForVisualEffects * 0.5f);
+                if (ChaosNumber > 300f)
+                {
+                    type = new Item(Terrafirma.BulletArray[Main.rand.Next(Terrafirma.BulletArray.Length)]).shoot;
+                    damage = Math.Max((int)(item.damage * 0.5f), damage);
+                }
             }
 
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
