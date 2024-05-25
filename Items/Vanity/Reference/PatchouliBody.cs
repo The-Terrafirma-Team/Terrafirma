@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Vanity
+namespace Terrafirma.Items.Vanity.Reference
 {
     [AutoloadEquip(EquipType.Body)]
     public class PatchouliBody : ModItem
@@ -31,7 +31,7 @@ namespace Terrafirma.Items.Vanity
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Loom).AddIngredient(ItemID.Silk, 8).AddRecipeGroup(RecipeGroupID.Wood,25).AddRecipeGroup(RecipeGroupID.IronBar,2).AddIngredient(ItemID.HellstoneBar, 2).Register();
+            CreateRecipe().AddTile(TileID.Loom).AddIngredient(ItemID.Silk, 8).AddRecipeGroup(RecipeGroupID.Wood, 25).AddRecipeGroup(RecipeGroupID.IronBar, 2).AddIngredient(ItemID.HellstoneBar, 2).Register();
         }
     }
 }

@@ -1096,6 +1096,11 @@ Items: {
 		DisplayName: Crimtane Scythe
 		Tooltip: ""
 	}
+
+	CyclopsEye: {
+		DisplayName: Cyclops Eye
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

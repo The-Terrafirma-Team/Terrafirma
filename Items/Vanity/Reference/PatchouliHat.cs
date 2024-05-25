@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Vanity
+namespace Terrafirma.Items.Vanity.Reference
 {
     [AutoloadEquip(EquipType.Head)]
     public class PatchouliHat : ModItem

@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Vanity
+namespace Terrafirma.Items.Vanity.Reference
 {
     [AutoloadEquip(EquipType.Head)]
     public class BlueDemonMask : ModItem
@@ -17,7 +17,7 @@ namespace Terrafirma.Items.Vanity
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.MushroomGrassSeeds, 10).AddIngredient(ItemID.FamiliarWig).AddIngredient(ItemID.DemoniteBar,2).Register();
+            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.MushroomGrassSeeds, 10).AddIngredient(ItemID.FamiliarWig).AddIngredient(ItemID.DemoniteBar, 2).Register();
         }
     }
 }
