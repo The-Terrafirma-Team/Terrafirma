@@ -12,6 +12,7 @@ using Terrafirma.Systems.NPCQuests;
 using Terrafirma.Common.Items;
 using Terrafirma.Items.Consumable;
 using Terraria.GameContent.UI;
+using Terrafirma.Common.Interfaces;
 
 
 namespace Terrafirma.Common.Players
@@ -189,26 +190,16 @@ namespace Terrafirma.Common.Players
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
             if (Main.mouseRight && !RightMouseSwitch)
-            {      
-                if (Main.mouseItem.type == ModContent.ItemType<RepairKit>() && inventory[slot].CanHavePrefixes() && inventory[slot].rare < new Item(inventory[slot].type).rare)
+            {
+                if(Main.mouseItem.ModItem is IUseOnItemInInventoryItem item)
                 {
-                    inventory[slot].SetDefaults(inventory[slot].type);
-                    inventory[slot].Prefix(-1);
-                    SoundEngine.PlaySound(SoundID.Item37);
-                    Main.mouseItem.stack--;
-                    PopupText.NewText(
-                        new AdvancedPopupRequest()
-                        {
-                            Text = inventory[slot].HoverName,
-                            DurationInFrames = 60,
-                            Color = ItemRarity.GetColor(inventory[slot].rare),
-                        }, Player.Center - new Vector2(0,40));
+                    if (item.canBeUsedOnThisItem(Player,Main.mouseItem, inventory[slot],context))
+                        item.useOnItem(Player,Main.mouseItem,inventory[slot],context);
                 }
                 RightMouseSwitch = true;
             }
             if (!Main.mouseRight) RightMouseSwitch = false;
             return base.HoverSlot(inventory, context, slot);
         }
-
     }
 }
