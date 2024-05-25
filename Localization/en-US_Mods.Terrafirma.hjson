@@ -1603,3 +1603,5 @@ AccessorySynergy: {
 		Description: Guns may fire any type of bullet
 	}
 }
+
+Keybinds.tertiaryAttack.DisplayName: Tertiary Attack

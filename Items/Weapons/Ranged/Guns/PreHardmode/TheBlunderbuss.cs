@@ -34,7 +34,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             PlayerAnimation.gunStyle(player, 0.1f, 4f, 2f);
-            if (player.ItemAnimationJustStarted)
+            if (player.itemAnimation == player.itemAnimationMax - 1)
             {
                 for(int i = 0; i < 5; i++)
                 {
@@ -46,7 +46,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
             }
             if (Main.rand.NextBool(6))
             {
-                Dust d2 = Dust.NewDustPerfect(player.itemLocation + new Vector2(50 * player.direction, 8).RotatedBy(player.itemRotation), DustID.Smoke, new Vector2(player.direction * 1,-2) + Main.rand.NextVector2CircularEdge(1,1));
+                Dust d2 = Dust.NewDustPerfect(player.itemLocation + new Vector2(40 * player.direction, 8).RotatedBy(player.itemRotation), DustID.Smoke, new Vector2(player.direction * 1,-2) + Main.rand.NextVector2CircularEdge(1,1));
                 d2.alpha = 200;
                 d2.velocity *= 0.4f;
             }
