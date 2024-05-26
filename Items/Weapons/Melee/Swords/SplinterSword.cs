@@ -19,11 +19,11 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
         }
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.NextBool(3))
+            if (Main.rand.NextBool(5))
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, player.Center.DirectionTo(target.Center + new Vector2(0, -40)).RotatedByRandom(0.1f) * Main.rand.NextFloat(3, 5), ModContent.ProjectileType<Splinter>(), Item.damage / 3, 0, player.whoAmI, target.whoAmI);
+                    Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, player.Center.DirectionTo(target.Center + new Vector2(0, -40)).RotatedByRandom(0.1f) * Main.rand.NextFloat(3, 5), ModContent.ProjectileType<Splinter>(), (int)(Item.damage * 0.45f), 0, player.whoAmI, target.whoAmI);
                 }
 
                 for (int i = 0; i < 15; i++)

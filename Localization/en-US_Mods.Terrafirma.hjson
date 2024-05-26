@@ -1101,6 +1101,11 @@ Items: {
 		DisplayName: Cyclops Eye
 		Tooltip: ""
 	}
+
+	ManaTalon: {
+		DisplayName: Mana Talon
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1231,6 +1236,7 @@ Projectiles: {
 	CrimsonRodWorm.DisplayName: Crimson Rod Worm
 	HealingEmeraldBeamProj.DisplayName: Healing Emerald Beam Proj
 	NecromancySummon.DisplayName: Necromancy Summon
+	ManaTalon.DisplayName: Mana Talon
 }
 
 Biomes: {
@@ -1538,6 +1544,11 @@ Spells: {
 	HealingEmeraldBeam: {
 		Name: Healing Emerald Beam
 		Description: ""
+	}
+
+	ManaTalon: {
+		Name: Mana Talon
+		Description: Shoots a bolt of mana stealing magic
 	}
 }
 
