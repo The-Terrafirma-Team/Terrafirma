@@ -160,25 +160,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	ShroomiteBullet: {
-		DisplayName: Shroomite Bullet
-		Tooltip: Ignores 30 points of enemy defence
-	}
-
-	LuckyBlock: {
-		DisplayName: Lucky Block
-		Tooltip:
-			'''
-			Test your Luck with this Lucky item! 
-			We're not responsible for any damages caused by opening this item.
-			'''
-	}
-
-	SlapJuice: {
-		DisplayName: Slap Juice
-		Tooltip: Greatly increases movement speed
-	}
-
 	HeartContainer: {
 		DisplayName: Heart Container
 		Tooltip: Increases max life by 50
@@ -275,12 +256,7 @@ Items: {
 
 	MajesticGel: {
 		DisplayName: Majestic Gel
-		Tooltip: ""
-	}
-
-	Uldrax: {
-		DisplayName: Uldrax
-		Tooltip: ""
+		Tooltip: "'Delicious, but smelly'"
 	}
 
 	KinMask: {
@@ -289,18 +265,13 @@ Items: {
 	}
 
 	KinMechanicalLegs: {
-		DisplayName: Kin Mechanical Legs
+		DisplayName: Kin's Mechanical Legs
 		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
 	}
 
 	KinStripedSweater: {
-		DisplayName: Kin Striped Sweater
+		DisplayName: Kin's Striped Sweater
 		Tooltip: "[c/A58CFF:Dedicated to Inkgum]"
-	}
-
-	WandOfPoisoning: {
-		DisplayName: Wand Of Poisoning
-		Tooltip: Shoots a waving poison
 	}
 
 	CrystalChainBlades: {
@@ -324,8 +295,8 @@ Items: {
 	}
 
 	HandCannon: {
-		DisplayName: Hand Cannon
-		Tooltip: ""
+		DisplayName: The Hand Cannon
+		Tooltip: Remember to wear a helmet!
 	}
 
 	IcicleMachineGun: {
@@ -360,45 +331,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	ShroomiteCrossbow: {
-		DisplayName: Shroomite Crossbow
-		Tooltip:
-			'''
-			Right click to zoom out
-			Arrows travel farther before falling
-			'''
-	}
-
-	ShroomiteSMG: {
-		DisplayName: Shroomite S.M.G.
-		Tooltip:
-			'''
-			Fires a 3 round burst
-			Converts musket balls to shroomite bullets
-			'''
-	}
-
-	ShroomiteSniper: {
-		DisplayName: Shroomite Sniper Rifle
-		Tooltip:
-			'''
-			Converts musket balls to high velocity shroomite bullets
-			Right click to zoom out
-			'''
-	}
-
-	StarRevolver: {
-		DisplayName: Star Revolver
-		Tooltip:
-			'''
-			Shoots fallen stars
-			has a 33% chance to save ammo
-			'''
-	}
-
 	TommyGun: {
 		DisplayName: Tommy Gun
-		Tooltip: Rattle 'em boys.
+		Tooltip: "'Rattle 'em, boys'"
 	}
 
 	CursedFlameSentryStaff: {
@@ -415,18 +350,8 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons an ichor sentry to fight for you
+			Summons an ichor-spitting turret
 			'''
-	}
-
-	VultureStaff: {
-		DisplayName: Vulture Staff
-		Tooltip: Summons vultures to fight for you
-	}
-
-	ZombiemancyStaff: {
-		DisplayName: Zombiemancy Staff
-		Tooltip: Summons zombies to fight for you
 	}
 
 	StaffofRa: {
@@ -480,7 +405,7 @@ Items: {
 
 	HeroSword: {
 		DisplayName: Hero Sword
-		Tooltip: It emanates an intense colorful aura
+		Tooltip: "'It emanates an intense, colorful aura'"
 	}
 
 	NecromancerLocket: {
@@ -500,7 +425,7 @@ Items: {
 
 	GunSword: {
 		DisplayName: Gun Sword
-		Tooltip: Just like a gun, just like a sword, just like a gun sword
+		Tooltip: "'Just like a gun, just like a sword, just like a gun sword'"
 	}
 
 	Microshark: {
@@ -742,12 +667,12 @@ Items: {
 	}
 
 	GREAT: {
-		DisplayName: G.R.E.A.T
+		DisplayName: G.R.E.A.T.
 		Tooltip:
 			'''
 			Uses 4 sentry slots
 			Summons a giant laser sentry that deals increasing damage the longer it's targetting a specific enemy
-			"Stands for Gargantuan Radiation Emitting Apex Turret"
+			'Stands for Gargantuan Radiation Emitting Apex Turret'
 			'''
 	}
 
@@ -805,19 +730,9 @@ Items: {
 		SetBonus: Swarm weapons have a chance to summon an empowered minion
 	}
 
-	DruidStaff: {
-		DisplayName: Druid Staff
-		Tooltip: ""
-	}
-
 	FireShield: {
 		Tooltip: Provides immunity to being lit aflame
 		DisplayName: Fire Shield
-	}
-
-	Fireaxe: {
-		DisplayName: Fireaxe
-		Tooltip: ""
 	}
 
 	LatiaoSticks: {
@@ -865,12 +780,12 @@ Items: {
 
 	BlueDemonMask: {
 		DisplayName: Blue Demon Mask
-		Tooltip: It's not even blue
+		Tooltip: "'It's not even blue'"
 	}
 
 	EnchantedStone: {
 		DisplayName: Enchanted Stone
-		Tooltip: ""
+		Tooltip: "'It causes a tingling in your hands'"
 	}
 
 	CorruptedEyeStaff: {
@@ -878,7 +793,7 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons a pillar with an eye that shoots psychic rings
+			Summons a pillar that shoots psychic rings
 			'''
 	}
 
@@ -892,26 +807,13 @@ Items: {
 		Tooltip: Doubles wrench buff duration
 	}
 
-	ScorchedCommandments: {
-		DisplayName: Scorched Commandments
-		Tooltip:
-			'''
-			Fire attacks inflict oiled on critical hits
-			Killed enemies create a fire explosion
-			'''
-	}
-
-	MoonlightCharm: {
-		DisplayName: Moonlight Charm
-		Tooltip: Dark attacks instantly kill if the target has less than double the damage taken
-	}
-
 	AmethystCane: {
 		DisplayName: Amethyst Cane
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons an amethyst sentry that increases the strength of elemental damage
+			Summons an amethyst sentry does something
+			'we don't know what but it's sure as hell doing something!'
 			'''
 	}
 
@@ -986,11 +888,11 @@ Items: {
 
 	ExcaliburStatue: {
 		DisplayName: Excalibur Statue
-		Tooltip: ""
+		Tooltip: "'It was deeper in the stone than expected'"
 	}
 
 	FourPointedStarStatue: {
-		DisplayName: Four Pointed Star Statue
+		DisplayName: Four-Pointed Star Statue
 		Tooltip: ""
 	}
 
@@ -1035,7 +937,7 @@ Items: {
 
 	TestSword: {
 		DisplayName: Test Sword
-		Tooltip: ""
+		Tooltip: "[c/ff0000:'Unspeakable Horrors']"
 	}
 
 	SteelBar: {
@@ -1045,7 +947,7 @@ Items: {
 
 	RepairKit: {
 		DisplayName: Repair Kit
-		Tooltip: Right click on an item with a bad prefix to reforge them
+		Tooltip: Drag over and right click on an item with a bad prefix in the inventory to reforge it
 	}
 
 	SteelPickaxe: {
@@ -1084,21 +986,20 @@ Items: {
 
 	SplinterSword: {
 		DisplayName: Splinter Sword
-		Tooltip: ""
+		Tooltip:
+			'''
+			Sometimes releases splinters on hit
+			'An animated attrocity'
+			'''
 	}
 
 	GraniteBullet: {
 		DisplayName: Granite Bullet
-		Tooltip: ""
+		Tooltip: Hitting enemies increases attack speed but decreases accuracy
 	}
 
 	CrimtaneScythe: {
 		DisplayName: Crimtane Scythe
-		Tooltip: ""
-	}
-
-	CyclopsEye: {
-		DisplayName: Cyclops Eye
 		Tooltip: ""
 	}
 
@@ -1237,73 +1138,7 @@ Projectiles: {
 	HealingEmeraldBeamProj.DisplayName: Healing Emerald Beam Proj
 	NecromancySummon.DisplayName: Necromancy Summon
 	ManaTalon.DisplayName: Mana Talon
-}
-
-Biomes: {
-	TempireBiome: {
-		DisplayName: Tempire Biome
-		TownNPCDialogueName: the Tempire Biome
-	}
-
-	Air: {
-		DisplayName: Air
-		TownNPCDialogueName: the Air
-	}
-
-	Dark: {
-		DisplayName: Dark
-		TownNPCDialogueName: the Dark
-	}
-
-	Earth: {
-		DisplayName: Earth
-		TownNPCDialogueName: the Earth
-	}
-
-	Electric: {
-		DisplayName: Electric
-		TownNPCDialogueName: the Electric
-	}
-
-	Fire: {
-		DisplayName: Fire
-		TownNPCDialogueName: the Fire
-	}
-
-	Ice: {
-		DisplayName: Ice
-		TownNPCDialogueName: the Ice
-	}
-
-	Light: {
-		DisplayName: Light
-		TownNPCDialogueName: the Light
-	}
-
-	Magic: {
-		DisplayName: Magic
-		TownNPCDialogueName: the Magic
-	}
-
-	Poison: {
-		DisplayName: Poison
-		TownNPCDialogueName: the Poison
-	}
-
-	Water: {
-		DisplayName: Water
-		TownNPCDialogueName: the Water
-	}
-
-	Arcane: {
-		DisplayName: Arcane
-		TownNPCDialogueName: the Arcane
-	}
-
-	Toxin: {
-		DisplayName: Toxin
-		TownNPCDialogueName: the Toxin
-	}
+	NecromancerSummonAnimation.DisplayName: Necromancer Summon Animation
 }
 
 Tiles: {
