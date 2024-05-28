@@ -14,12 +14,8 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Templates
 {
-    public abstract class NecromancerScythe : ModItem
+    public abstract class NecromancerWeapon : ModItem
     {
-        public override bool MeleePrefix()
-        {
-            return true;
-        }
         public int DamageDealt = 0;
         public virtual string SoulName => "";
         public virtual int DamagePerSoul => 50;
@@ -27,17 +23,24 @@ namespace Terrafirma.Common.Templates
         public Color summonColor = Color.White;
         public virtual int FirstSummon => ModContent.ProjectileType<EruptionFloatProjectile>();
         public virtual int SecondarySummon => ModContent.ProjectileType<HeroSwordShot>();
-        //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        //{
-        //    DamageDealt = Math.Clamp(DamageDealt + damageDone,0,DamagePerSoul * 6);
-        //    Main.NewText(DamageDealt);
-        //}
+
+        public static int getDamageValueToAdd(Player player, NecromancerWeapon item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            return (int)Math.Clamp(item.DamageDealt + (damageDone * player.PlayerStats().NecromancerChargeBonus), 0, item.DamagePerSoul * 6);
+        }
+    }
+    public abstract class NecromancerScythe : NecromancerWeapon
+    {
+        public override bool MeleePrefix()
+        {
+            return true;
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
             {
                 Item.noUseGraphic = true;
-                Projectile.NewProjectile(source, player.Center, Vector2.Zero, ModContent.ProjectileType<ScytheCast>(), 0, 0, player.whoAmI, ai1: DamageDealt / (float)DamagePerSoul);
+                Projectile.NewProjectile(source, player.Center, Vector2.Zero, ModContent.ProjectileType<NecromancerSummonAnimation>(), 0, 0, player.whoAmI, ai1: DamageDealt / (float)DamagePerSoul);
                 DamageDealt = 0;
             }
             else
@@ -68,8 +71,8 @@ namespace Terrafirma.Common.Templates
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            NecromancerScythe scythe = player.HeldItem.ModItem as NecromancerScythe;
-            scythe.DamageDealt = (int)Math.Clamp(scythe.DamageDealt + (damageDone * player.PlayerStats().NecromancerChargeBonus), 0, scythe.DamagePerSoul * 6);
+            NecromancerWeapon scythe = player.HeldItem.ModItem as NecromancerWeapon;
+            scythe.DamageDealt = NecromancerWeapon.getDamageValueToAdd(player,scythe,target,hit,damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -77,7 +80,7 @@ namespace Terrafirma.Common.Templates
             return false;
         }
     }
-    public class ScytheCast : ModProjectile
+    public class NecromancerSummonAnimation : ModProjectile
     {
         public override string Texture => "Terrafirma/Assets/Bullet";
         public override void SetDefaults()
