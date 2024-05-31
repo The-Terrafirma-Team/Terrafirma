@@ -30,22 +30,25 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<FireShield>(),100));
             }
-            if (npc.type == NPCID.PirateCrossbower)
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
-            }
-            if (npc.type == NPCID.GraniteGolem || npc.type == NPCID.GraniteFlyer)
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnchantedStone>(), 5, 1, 1));
-            }
-            if (npc.type == NPCID.KingSlime)
-            {
-                npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
-            }
-            if (npc.type == NPCID.BloodZombie || npc.type == NPCID.Drippler)
-            {
-                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<Overclock>(), 149, 75));
 
+            switch (npc.type)
+            {
+                case NPCID.PirateCrossbower:
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PirateCrossbow>(), 25, 1, 1));
+                    break;
+
+                case NPCID.BloodZombie:
+                case NPCID.Drippler:
+                    npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<Overclock>(), 149, 75));
+                    break;
+                case NPCID.GraniteGolem:
+                case NPCID.GraniteFlyer:
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnchantedStone>(), 5, 1, 1));
+                    break;
+
+                case NPCID.KingSlime:
+                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
+                    break;
             }
         }
 
