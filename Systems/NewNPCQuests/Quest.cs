@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,10 @@ using Terrafirma.Common;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Systems.NPCQuests
+namespace Terrafirma.Systems.NewNPCQuests
 {
     enum QuestStatus : byte
     {
@@ -39,27 +41,44 @@ namespace Terrafirma.Systems.NPCQuests
     }
     public abstract class Quest : ModType
     {
-        public virtual string Name => "";
-        public virtual string Dialogue => "";
-        public virtual string Description => "";
         public virtual byte Difficulty => 0;
         public virtual byte Type => (byte)QuestType.Explorer;
         public virtual int[] NPCs => new int[] { };
         public virtual Item[] Rewards => new Item[] { };
-        public virtual Condition[] Conditions => new Condition[] { };
 
         public byte Status = (byte)QuestStatus.NotStarted;
 
         public override void Load()
         {
-            QuestIndex.quests = QuestIndex.quests.Append(this).ToArray();
+            QuestID.quests = QuestID.quests.Append(this).ToArray();
+
+            Language.GetOrRegister("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Name", CreateQuestName);
+            Language.GetOrRegister("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Dialogue", CreateQuestDialogue);
+            Language.GetOrRegister("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Description", CreateQuestDescription);
+        }
+
+        string CreateQuestName() => this.GetType().Name.Titleize();
+        static string CreateQuestDialogue() => "";
+        static string CreateQuestDescription() => "";
+
+        public string GetQuestName()
+        {
+            return Language.GetTextValue("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Name");
+        }
+        public string GetQuestDialogue()
+        {
+            return Language.GetTextValue("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Dialogue");
+        }
+        public string GetQuestDescription()
+        {
+            return Language.GetTextValue("Mods.Terrafirma.Quests." + $"{this.GetType().Name}" + ".Description");
         }
 
         /// <summary>
         /// override to insert custom completion conditions. Returns false by default.
         /// </summary>
         /// <returns></returns>
-        public virtual bool QuestCompletion(Player player)
+        public virtual bool QuestCompletion()
         {
             return false;
         }
@@ -68,7 +87,7 @@ namespace Terrafirma.Systems.NPCQuests
         /// override to insert custom activation conditions. Returns false by default.
         /// </summary>
         /// <returns></returns>
-        public virtual bool QuestActivation(Player player)
+        public virtual bool QuestActivation()
         {
             return false;
         }
@@ -79,7 +98,7 @@ namespace Terrafirma.Systems.NPCQuests
         }
     }
 
-    public class QuestIndex : ModSystem
+    public class QuestID : ModSystem
     {
         public static Quest[] quests = new Quest[] { };
     }
@@ -123,6 +142,38 @@ namespace Terrafirma.Systems.NPCQuests
                 if (array[i].Name == quest.Name) return i;
             }
             return -1;
+        }
+
+        public static Quest[] SetupPlayerQuestList(this Quest[] questarray)
+        {
+            string[] questarraynames = new string[] { };
+            for (int i = 0; i < questarray.Length; i++)
+            {
+                questarraynames = questarraynames.Append(questarray[i].FullName).ToArray();
+            }
+            
+            for (int i = 0; i < QuestID.quests.Length; i++)
+            {
+                if (!questarraynames.Contains(QuestID.quests[i].FullName))
+                {
+                    questarray = questarray.Append(QuestID.quests[i]).ToArray();
+                }
+            }
+
+            return questarray;
+        }
+
+        public static Quest[] GetSpecificToNPCQuestArray(this Quest[] questarray, int npcid, bool checkcondition = false)
+        {
+            Quest[] returnquestarray = new Quest[] { };
+            for (int i = 0; i < questarray.Length; i++) {
+                if (checkcondition)
+                {
+                    if (questarray[i].QuestActivation() && questarray[i].NPCs.Contains(npcid)) returnquestarray = returnquestarray.Append(questarray[i]).ToArray();
+                }
+                else if(questarray[i].NPCs.Contains(npcid)) returnquestarray = returnquestarray.Append(questarray[i]).ToArray();
+            }
+            return returnquestarray;
         }
     }
 }

@@ -11,6 +11,8 @@ using Terrafirma.Common.Items;
 using Terrafirma.Common.Players;
 using Terrafirma.Particles;
 using Terrafirma.Systems.AccessorySynergy;
+using Terraria.GameContent;
+using ReLogic.Graphics;
 
 namespace Terrafirma
 {
@@ -302,6 +304,5 @@ namespace Terrafirma
             return false;
             
         }
-
     }
 }

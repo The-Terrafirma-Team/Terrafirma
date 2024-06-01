@@ -26,9 +26,8 @@ namespace Terrafirma.Synergies
         {
             if (player.GetModPlayer<AccessorySynergyPlayer>().ActivatedSynergies.ContainsSynergy(new SillyAmmoBelt()))
             {
-                //Chaos Chaos - Jevil
-                double ChaosNumber = Main.timeForVisualEffects * Math.Sin(Main.timeForVisualEffects + 200) * Math.Cos(Main.timeForVisualEffects * 0.5f);
-                if (ChaosNumber > 300f)
+                //No Chaos Chaos :( - Not Jevil         
+                if (Main.rand.NextBool(3))
                 {
                     type = new Item(Terrafirma.BulletArray[Main.rand.Next(Terrafirma.BulletArray.Length)]).shoot;
                     damage = Math.Max((int)(item.damage * 0.5f), damage);

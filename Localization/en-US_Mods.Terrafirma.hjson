@@ -177,11 +177,7 @@ Items: {
 
 	BoxOfHighPiercingRounds: {
 		DisplayName: Box Of High Piercing Rounds
-		Tooltip:
-			'''
-			66% chance to save bullets
-			5% increased ranged damage
-			'''
+		Tooltip: Increases gun pierce by 3
 	}
 
 	DrumMag: {
@@ -1452,6 +1448,31 @@ AccessorySynergy: {
 	SillyAmmoBelt: {
 		Name: Silly Ammo Belt
 		Description: Guns may fire any type of bullet
+	}
+}
+
+Quests: {
+	BusinessDeal: {
+		Name: Business Deal
+		Dialogue:
+			'''
+			Hey there pal, chum, friend. I've noticed that rusty gun ya have there, it's quite the specimen. If you have a keen eye for guns and firearms of all kind such as myself, then you're in the right place! 
+			I have way more than that rusty piece and of higher quality too. So how about you check out some of what I have in store right now? I promise you won't be disappointed, I'll even give you a deal. 
+			What do you think of that? I'm sure this will be the start of a great collaboration between us.
+			'''
+		Description: Purchase the Minishark and Flintlock pistol from the Arms dealer
+	}
+
+	TESTQUESTLMAO: {
+		Name: TESTQUESTLMAO
+		Dialogue: ""
+		Description: ""
+	}
+
+	TESTQUESTLMAO2: {
+		Name: TESTQUESTLMAO 2
+		Dialogue: ""
+		Description: ""
 	}
 }
 

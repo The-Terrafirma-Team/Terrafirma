@@ -8,87 +8,84 @@ using System.ComponentModel;
 using Terrafirma.Common.Structs;
 using System.Linq;
 using System.Collections.Generic;
+using Terrafirma.Systems.NewNPCQuests;
 
 namespace Terrafirma.Systems.NPCQuests
 {
     internal class QuestModNPC : ModPlayer
     {
-        ////Quest NPCs
-        //NPC armsdealer = new NPC();
-        //NPC guide = new NPC();
-        //NPC steampunker = new NPC();
 
+    //    bool uiopenswitch = false;
 
-        //bool JustOpenedUI = false;
+    //    public override void PostUpdate()
+    //    {
+    //        if (ModContent.GetInstance<NPCQuestButtonSystem>() == null) return;
 
-        //public override void PostUpdate()
-        //{
-        //    if (ModContent.GetInstance<NPCQuestButtonSystem>() == null) return;
-            
-        //    for (int i = 0; i < Main.npc.Length; i++)
-        //    {
-        //        if (Main.npc[i].type == NPCID.ArmsDealer) armsdealer = Main.npc[i];
-        //        if (Main.npc[i].type == NPCID.Steampunker) steampunker = Main.npc[i];
-        //        if (Main.npc[i].type == NPCID.Guide) guide = Main.npc[i];
-        //    }
+    //        int[] QuestNPCs = new int[] { };
+    //        for (int i = 0; i < QuestID.quests.Length; i++)
+    //        {
+    //            for (int k = 0; k < QuestID.quests[i].NPCs.Length; k++)
+    //            {
+    //                if (!QuestNPCs.Contains(QuestID.quests[i].NPCs[k])) QuestNPCs = QuestNPCs.Append(QuestID.quests[i].NPCs[k]).ToArray();
+    //            }
+    //        }
 
+    //        if (Player.TalkNPC != null && QuestNPCs.Contains(Player.TalkNPC.type))
+    //        {
+    //            if (!uiopenswitch)
+    //            {
+    //                ModContent.GetInstance<NPCQuestButtonSystem>().CreateButton(Player.TalkNPC);
+    //                uiopenswitch = true;
 
-        //    if (Player.TalkNPC == armsdealer || Player.TalkNPC == guide || Player.TalkNPC == steampunker)
-        //    {
-        //        if (!JustOpenedUI) 
-        //        { 
-        //            ModContent.GetInstance<NPCQuestButtonSystem>().CreateButton(Player.TalkNPC); 
-        //            JustOpenedUI = true; 
+    //                for (int i = 0; i < Main.npc.Length; i++)
+    //                {
+    //                    if (Main.npc[i] == Player.TalkNPC)
+    //                    {
+    //                        ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC = i;
+    //                        break;
+    //                    }
 
-        //            for (int i = 0; i < Main.npc.Length;i++)
-        //            {
-        //                if (Main.npc[i] == Player.TalkNPC)
-        //                {
-        //                    ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC = i;
-        //                    break;
-        //                }
+    //                }
+    //            }
+    //        }
+    //        else if (uiopenswitch)
+    //        {
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+    //            if (ModContent.GetInstance<NPCQuestButtonSystem>().Open() != "Selector")
+    //            {
+    //                ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
+    //            }
+    //            uiopenswitch = false;
+    //        }
 
-        //            }
-        //        }
-        //    }
-        //    else if (JustOpenedUI) 
-        //    { 
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton(); 
-        //        if( ModContent.GetInstance<NPCQuestButtonSystem>().Open() != "Selector" )
-        //        {
-        //            ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
-        //        }
-        //        JustOpenedUI = false; 
-        //    }
+    //        if (Main.npcShop == 1)
+    //        {
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
+    //            uiopenswitch = false;
+    //        }
 
-        //    if (Main.npcShop == 1)
-        //    {
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
-        //        JustOpenedUI = false;
-        //    }
+    //        if (Main.playerInventory)
+    //        {
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
+    //            uiopenswitch = false;
+    //        }
 
-        //    if (Main.playerInventory)
-        //    {
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().HideUI();
-        //        JustOpenedUI = false;
-        //    }
+    //        if (ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC != -1 &&
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().Open() == "Selector" &&
+    //            Player.Center.Distance(Main.npc[ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC].Center) > 300f)
+    //        {
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
+    //            ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
+    //            uiopenswitch = false;
+    //        }
 
-        //    if (ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC != -1 &&
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().Open() == "Selector" &&
-        //        Player.Center.Distance(Main.npc[ModContent.GetInstance<NPCQuestButtonSystem>().UIOpenForNPC].Center) > 300f)
-        //    {
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushButton();
-        //        ModContent.GetInstance<NPCQuestButtonSystem>().FlushSelectorUI();
-        //        JustOpenedUI = false;
-        //    }
+    //        base.PostUpdate();
 
-        //    base.PostUpdate();
-
-        //}
+    //    }
 
     }
 

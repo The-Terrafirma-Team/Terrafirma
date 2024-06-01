@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoMod.Utils;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,17 @@ namespace Terrafirma
         }
         public static Terrafirma Mod { get; private set; } = ModContent.GetInstance<Terrafirma>();
         public const string AssetPath = "Terrafirma/Assets/";
+        public static Asset<Texture2D> QuestButtonBG;
+        public static Asset<Texture2D> QuestButtonBGBorder;
+        public static Asset<Texture2D> QuestDifficultyStarEmpty;
+        public static Asset<Texture2D> QuestDifficultyStarFull;
         public override void Load()
         {
+            QuestButtonBG = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanel");
+            QuestButtonBGBorder = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanelBorder");
+            QuestDifficultyStarEmpty = ModContent.Request<Texture2D>("Terrafirma/Assets/QuestDifficultyStarEmpty");
+            QuestDifficultyStarFull = ModContent.Request<Texture2D>("Terrafirma/Assets/QuestDifficultyStarFull");
+
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
         }
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)

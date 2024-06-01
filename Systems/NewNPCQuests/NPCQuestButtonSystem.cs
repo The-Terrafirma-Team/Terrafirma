@@ -6,73 +6,80 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.Audio;
+using Terrafirma.Systems.NPCQuests;
 
-namespace Terrafirma.Systems.NPCQuests
+namespace Terrafirma.Systems.NewNPCQuests
 {
     [Autoload(Side = ModSide.Client)]
     public class NPCQuestButtonSystem : ModSystem
     {
         internal NPCQuestButtonUIState questbuttonui;
-        internal NPCQuestSelectorUIState questselectorui;
-        private UserInterface questbuttonuiinterface;
-        public int UIOpenForNPC = -1;
+        internal NewNPCQuestMenu questselectorui;
+        private UserInterface questuiinterface;
         public override void Load()
         {
             questbuttonui = new NPCQuestButtonUIState();
             questbuttonui.Activate();
-            questselectorui = new NPCQuestSelectorUIState();
+            questselectorui = new NewNPCQuestMenu();
             questselectorui.Activate();
-            questbuttonuiinterface = new UserInterface();
-            questbuttonuiinterface.SetState(null);
-        }
 
-        public void HideUI()
-        {
-            questbuttonuiinterface?.SetState(null);
+            questuiinterface = new UserInterface();
+            questuiinterface.SetState(null);
         }
 
         public string Open()
         {
-            if (questbuttonuiinterface.CurrentState == questbuttonui) return "Button";
-            if (questbuttonuiinterface.CurrentState == questselectorui) return "Selector";
+            if (questuiinterface.CurrentState == questbuttonui) return "Button";
+            if (questuiinterface.CurrentState == questselectorui) return "Selector";
             return "";
         }
 
         public override void UpdateUI(GameTime gameTime)
         {
-            if (questbuttonuiinterface?.CurrentState != null)
+            if (questuiinterface?.CurrentState != null)
             {
-                questbuttonuiinterface?.Update(gameTime);
+                questuiinterface?.Update(gameTime);
             }
-        }
-
-        public void CreateButton(NPC npc)
-        {
-            if (!questbuttonui.UIOpen) questbuttonui?.Create(npc);
-            questbuttonuiinterface?.SetState(questbuttonui);
         }
 
         public void FlushButton()
         {
             questbuttonui?.Flush();
+            questuiinterface?.SetState(null);
         }
 
-        public void OpenSelectorUI(NPC npc)
+        //Button
+        public void CreateButton()
         {
+            FlushSelectorUI();
+
+            if (!questbuttonui.UIOpen) questbuttonui?.Create();
+            questuiinterface?.SetState(questbuttonui);
+        }
+
+        //Selector
+        public void OpenSelectorUI(int talknpc)
+        {
+            FlushButton();
+
+            questselectorui.talknpc = talknpc;
+            questselectorui?.Create();         
+            questuiinterface?.SetState(questselectorui);
+
             Main.CloseNPCChatOrSign();
             Main.ClosePlayerChat();
-            Main.playerInventory = false;
-            questselectorui?.Create(npc);
-            questselectorui.UpdateQuests();
-            questbuttonuiinterface?.SetState(questselectorui);
-            
+            Main.playerInventory = false;          
+
         }
+
         public void FlushSelectorUI()
         {
-            questselectorui?.Flush();
+            questbuttonui?.Flush();
+            questuiinterface?.SetState(null);
         }
+
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
-        {
+        {            
             int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (mouseTextIndex != -1)
             {
@@ -80,9 +87,9 @@ namespace Terrafirma.Systems.NPCQuests
                     "Terrafirma: NPC Quest Interface",
                     delegate
                     {
-                        if (questbuttonuiinterface?.CurrentState != null)
+                        if (questuiinterface?.CurrentState != null)
                         {
-                            questbuttonuiinterface.Draw(Main.spriteBatch, new GameTime());
+                            questuiinterface.Draw(Main.spriteBatch, new GameTime());
                         }
                         return true;
                     },

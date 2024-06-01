@@ -8,10 +8,10 @@ using Terrafirma.Systems.MageClass;
 using Terrafirma.Items.Weapons.Melee.Swords;
 using Terrafirma.Projectiles.Melee;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
-using Terrafirma.Systems.NPCQuests;
 using Terrafirma.Common.Items;
 using Terrafirma.Items.Consumable;
 using Terraria.GameContent.UI;
+using Terrafirma.Systems.NewNPCQuests;
 using Terrafirma.Common.Interfaces;
 
 
@@ -120,7 +120,7 @@ namespace Terrafirma.Common.Players
 
         public override void PostUpdate()
         {
-            if (playerquests.Length == 0) playerquests = QuestIndex.quests;
+            if (playerquests.Length == 0) playerquests = QuestID.quests;
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {

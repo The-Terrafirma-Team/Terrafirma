@@ -13,7 +13,7 @@ using Terraria.GameContent;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Terrafirma.Systems.NPCQuests
+namespace Terrafirma.Systems.NewNPCQuests
 {
     [Autoload(Side = ModSide.Client)]
     internal class NPCQuestButtonUIState : UIState
@@ -27,9 +27,10 @@ namespace Terrafirma.Systems.NPCQuests
         UIText Title = null;
         Vector2 TitlePos = Vector2.Zero;
 
-        public void Create(NPC npc)
+        public void Create()
         {
-            selectednpc = npc;
+
+            ChatHeight = 30 * (Main.npcChatText.Length / 54);
 
             Title = new UIText("", 1f, false);
             Title.SetText("Quests");
@@ -49,18 +50,18 @@ namespace Terrafirma.Systems.NPCQuests
 
         public override void LeftClick(UIMouseEvent evt)
         {
-            if (Title.IsMouseHovering && selectednpc != null)
+            if (Title.IsMouseHovering)
             {
-                ModContent.GetInstance<NPCQuestButtonSystem>().OpenSelectorUI(selectednpc);
+                ModContent.GetInstance<NPCQuestButtonSystem>().OpenSelectorUI(Main.LocalPlayer.TalkNPC.type);
             }
 
-         }
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
 
-            TitlePos = Main.ScreenSize.ToVector2() * new Vector2(0.5f, 0f) + new Vector2(190f, 170f + ChatHeight );
-            float mousecolorfloat = (float)(int)Main.mouseTextColor / 255f;
+            TitlePos = Main.ScreenSize.ToVector2() * new Vector2(0.5f, 0f) + new Vector2(190f, 170f + ChatHeight);
+            float mousecolorfloat = Main.mouseTextColor / 255f;
             if (Title.IsMouseHovering)
             {
                 ChatManager.DrawColorCodedStringWithShadow(spriteBatch,
@@ -80,17 +81,17 @@ namespace Terrafirma.Systems.NPCQuests
             }
             else
             {
-                ChatManager.DrawColorCodedStringWithShadow(spriteBatch, 
-                    FontAssets.MouseText.Value, 
-                    "Quests", 
+                ChatManager.DrawColorCodedStringWithShadow(spriteBatch,
+                    FontAssets.MouseText.Value,
+                    "Quests",
                     TitlePos,
                     new Color((byte)(224f * mousecolorfloat), (byte)(201f * mousecolorfloat), (byte)(92f * mousecolorfloat), Main.mouseTextColor),
                     Color.Black,
-                    0, 
-                    new Vector2(25f, 10f), 
+                    0,
+                    new Vector2(25f, 10f),
                     Vector2.One);
-                if (justHovered) 
-                { 
+                if (justHovered)
+                {
                     justHovered = false;
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
@@ -99,7 +100,7 @@ namespace Terrafirma.Systems.NPCQuests
 
         public override void Update(GameTime gameTime)
         {
-            ChatHeight = (30 * (int)(Main.npcChatText.Length / 54));
+            ChatHeight = 30 * (Main.npcChatText.Length / 54);
             Title.MarginTop = 152f + ChatHeight;
             base.Update(gameTime);
         }
