@@ -12,6 +12,8 @@ namespace Terrafirma.Common
         public override void AddRecipes()
         {
             Recipe.Create(ItemID.SlimeStaff).AddTile(TileID.WorkBenches).AddIngredient(ItemID.Gel, 25).AddIngredient(ItemID.Wood, 25).AddIngredient(ItemID.Daybloom).Register();
+            Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(),7).Register();
+            
             AddCookingRecipes();
         }
         public override void PostAddRecipes()
@@ -37,6 +39,10 @@ namespace Terrafirma.Common
                 {
                     recipe.RemoveIngredient(ItemID.RottenChunk);
                     recipe.AddIngredient(ItemID.RottenChunk, 3);
+                }
+                else if (recipe.HasResult(ItemID.NightsEdge))
+                {
+                    recipe.AddIngredient(ItemID.Terragrim);
                 }
             }
         }

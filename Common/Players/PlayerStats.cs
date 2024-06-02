@@ -76,7 +76,7 @@ namespace Terrafirma.Common.Players
                 FeralCharge = FeralChargeMax;
             if (Player.itemAnimation == 1)
                 FeralCharge = 0;
-            Player.GetDamage(DamageClass.Melee) += (FeralCharge + 1);
+            Player.GetDamage(DamageClass.Melee) += (FeralCharge);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
