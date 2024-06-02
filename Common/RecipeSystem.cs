@@ -1,17 +1,30 @@
 ﻿using System.Collections.Generic;
+using Terrafirma.Items.Equipment.Movement;
 using Terrafirma.Items.Materials;
 using Terrafirma.Systems.Cooking;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common
 {
     public class RecipeSystem : ModSystem
     {
+        public override void AddRecipeGroups()
+        {
+            RecipeGroup CopperBar = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(ItemID.CopperBar), new int[]
+            {
+                ItemID.CopperBar,
+                ItemID.TinBar
+            });
+            RecipeGroup.RegisterGroup("Terrafirma:CopperBar", CopperBar);
+            base.AddRecipeGroups();
+        }
         public override void AddRecipes()
         {
             Recipe.Create(ItemID.SlimeStaff).AddTile(TileID.WorkBenches).AddIngredient(ItemID.Gel, 25).AddIngredient(ItemID.Wood, 25).AddIngredient(ItemID.Daybloom).Register();
+            Recipe.Create(ItemID.LightningBoots).AddTile(TileID.TinkerersWorkbench).AddIngredient(ModContent.ItemType<SpringBoots>()).AddIngredient(ItemID.Aglet).AddIngredient(ItemID.RocketBoots).AddIngredient(ItemID.AnkletoftheWind).Register();
             AddCookingRecipes();
         }
         public override void PostAddRecipes()
@@ -37,8 +50,9 @@ namespace Terrafirma.Common
                 {
                     recipe.RemoveIngredient(ItemID.RottenChunk);
                     recipe.AddIngredient(ItemID.RottenChunk, 3);
-                }
+                }               
             }
+
         }
         public void AddCookingRecipes()
         {

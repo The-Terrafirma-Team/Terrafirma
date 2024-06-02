@@ -224,7 +224,7 @@ namespace Terrafirma.Systems.NewNPCQuests
                 for (int i = 0; i < Checklist.Length; i++)
                 {
 
-                    if (Checklist[i].QuestActivation())
+                    if (Checklist[i].Condition())
                     {
                         UIButton_Terrafirma QuestButton = new UIButton_Terrafirma();
                         QuestButton.Text = Checklist[i].GetQuestName();
@@ -384,11 +384,11 @@ namespace Terrafirma.Systems.NewNPCQuests
             {
                 QuestButtonList[i].Top.Pixels = (QuestButtonList[i].Height.Pixels + 5) * i - (QuestButtonList[i].Height.Pixels + 5) * ScrollPanel_ScrollBar.GetValue();
                 Quest buttondata = QuestButtonList[i].ButtonData as Quest;
-                if (buttondata.Status == (byte)QuestStatus.InProgress && buttondata.QuestCompletion())
+                if (buttondata.Status == (byte)QuestStatus.InProgress && buttondata.CanBeCompleted())
                 {
                     QuestButtonList[i].BackgroundColor = new Color(1f, Main.masterColor, 0f);
                 }
-                else if (buttondata.Status == (byte)QuestStatus.InProgress && !buttondata.QuestCompletion())
+                else if (buttondata.Status == (byte)QuestStatus.InProgress && !buttondata.CanBeCompleted())
                 {
                     QuestButtonList[i].BackgroundColor = new Color(255, 140, 220);
                 }
@@ -433,8 +433,8 @@ namespace Terrafirma.Systems.NewNPCQuests
             if(SelectedQuest != null)
             {
                 if (SelectedQuest.Status == (byte)QuestStatus.NotStarted) QuestStartButton.Text = "Start Quest";
-                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && !SelectedQuest.QuestCompletion()) QuestStartButton.Text = "In Progress";
-                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && SelectedQuest.QuestCompletion()) QuestStartButton.Text = "Complete Quest";
+                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && !SelectedQuest.CanBeCompleted()) QuestStartButton.Text = "In Progress";
+                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && SelectedQuest.CanBeCompleted()) QuestStartButton.Text = "Complete Quest";
                 else if (SelectedQuest.Status == (byte)QuestStatus.Completed) QuestStartButton.Remove();
             }
 
@@ -477,10 +477,11 @@ namespace Terrafirma.Systems.NewNPCQuests
                 else if (ActiveQuests == 0 && SelectedQuest.Status == (byte)QuestStatus.NotStarted)
                 {
                     UpdateQuestStatus(SelectedQuest, QuestStatus.InProgress);
+                    SelectedQuest.OnQuestActivation();
                     UpdateQuests();
                     UpdateQuestButtons();
                 }
-                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && SelectedQuest.QuestCompletion())
+                else if (SelectedQuest.Status == (byte)QuestStatus.InProgress && SelectedQuest.CanBeCompleted())
                 {
                     UpdateQuestStatus(SelectedQuest, QuestStatus.Completed);
                     UpdateQuests();
@@ -500,7 +501,11 @@ namespace Terrafirma.Systems.NewNPCQuests
                 {
                     if (AvailableQuests[i].Status == (byte)QuestStatus.InProgress) UpdateQuestStatus(AvailableQuests[i], QuestStatus.NotStarted);
                 }
-                if (SelectedQuest.Status == (byte)QuestStatus.NotStarted) UpdateQuestStatus(SelectedQuest, QuestStatus.InProgress);
+                if (SelectedQuest.Status == (byte)QuestStatus.NotStarted) 
+                {
+                    SelectedQuest.OnQuestActivation();
+                    UpdateQuestStatus(SelectedQuest, QuestStatus.InProgress); 
+                }
                 UpdateQuests();
                 UpdateQuestButtons();
                 WarningPanel.HAlign = 10f;

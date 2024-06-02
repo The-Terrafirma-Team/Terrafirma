@@ -78,18 +78,26 @@ namespace Terrafirma.Systems.NewNPCQuests
         /// override to insert custom completion conditions. Returns false by default.
         /// </summary>
         /// <returns></returns>
-        public virtual bool QuestCompletion()
+        public virtual bool CanBeCompleted()
         {
             return false;
         }
 
         /// <summary>
-        /// override to insert custom activation conditions. Returns false by default.
+        /// override to insert custom appearance conditions. Returns false by default.
         /// </summary>
         /// <returns></returns>
-        public virtual bool QuestActivation()
+        public virtual bool Condition()
         {
             return false;
+        }
+
+        /// <summary>
+        /// Triggers whenever this quest is activated
+        /// </summary>
+        public virtual void OnQuestActivation()
+        {
+
         }
 
         protected override void Register()
@@ -169,7 +177,7 @@ namespace Terrafirma.Systems.NewNPCQuests
             for (int i = 0; i < questarray.Length; i++) {
                 if (checkcondition)
                 {
-                    if (questarray[i].QuestActivation() && questarray[i].NPCs.Contains(npcid)) returnquestarray = returnquestarray.Append(questarray[i]).ToArray();
+                    if (questarray[i].Condition() && questarray[i].NPCs.Contains(npcid)) returnquestarray = returnquestarray.Append(questarray[i]).ToArray();
                 }
                 else if(questarray[i].NPCs.Contains(npcid)) returnquestarray = returnquestarray.Append(questarray[i]).ToArray();
             }

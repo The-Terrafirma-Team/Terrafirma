@@ -8,7 +8,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Systems.NewNPCQuests.Quests
+namespace Terrafirma.Systems.NewNPCQuests.Quests.ArmsDealer
 {
     internal class BusinessDeal : Quest
     {
@@ -17,11 +17,11 @@ namespace Terrafirma.Systems.NewNPCQuests.Quests
         public override int[] NPCs => new int[] { NPCID.ArmsDealer };
         public override Item[] Rewards => new Item[] { new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), new Item(ModContent.ItemType<AmmoCan>()), };
 
-        public override bool QuestActivation()
+        public override bool Condition()
         {
             return true;
         }
-        public override bool QuestCompletion()
+        public override bool CanBeCompleted()
         {
             return false;
         }

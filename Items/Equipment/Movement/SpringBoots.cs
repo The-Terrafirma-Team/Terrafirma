@@ -32,12 +32,10 @@ namespace Terrafirma.Items.Equipment.Movement
         public override void AddRecipes()
         {
 
-            CreateRecipe()
-            .AddIngredient(ItemID.HermesBoots, 1)
-            .AddIngredient(ItemID.LuckyHorseshoe, 1)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
+            CreateRecipe().AddIngredient(ItemID.HermesBoots, 1).AddIngredient(ItemID.LuckyHorseshoe, 1).AddTile(TileID.TinkerersWorkbench).Register();
+            CreateRecipe().AddIngredient(ItemID.SailfishBoots, 1).AddIngredient(ItemID.LuckyHorseshoe, 1).AddTile(TileID.TinkerersWorkbench).Register();
+            CreateRecipe().AddIngredient(ItemID.FlurryBoots, 1).AddIngredient(ItemID.LuckyHorseshoe, 1).AddTile(TileID.TinkerersWorkbench).Register();
+            CreateRecipe().AddIngredient(ItemID.SandBoots, 1).AddIngredient(ItemID.LuckyHorseshoe, 1).AddTile(TileID.TinkerersWorkbench).Register();
         }
 
     }
