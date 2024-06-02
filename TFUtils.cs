@@ -204,6 +204,18 @@ namespace Terrafirma
             return AreaNPCs;
 
         }
+        public static Vector2 CommonBounceLogic(this Projectile p, Vector2 oldVelocity)
+        {
+            if (p.velocity.Y != oldVelocity.Y)
+            {
+                p.velocity.Y = -oldVelocity.Y;
+            }
+            if (p.velocity.X != oldVelocity.X)
+            {
+                p.velocity.X = -oldVelocity.X;
+            }
+            return p.velocity;
+        }
 
         public static bool NotPreBoss(bool includeKingSlime = true)
         {

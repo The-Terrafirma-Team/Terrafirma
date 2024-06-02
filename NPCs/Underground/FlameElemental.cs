@@ -113,7 +113,7 @@ namespace Terrafirma.NPCs.Underground
                 }
                 else if (NPC.ai[2] > 30)
                 {
-                    if ((NPC.ai[2] - 20) % 30 == 0 && target == Main.LocalPlayer)
+                    if ((NPC.ai[2] - 20) % 30 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.2f) * 8, ProjectileID.Fireball, 30, 3);
                     }
