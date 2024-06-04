@@ -258,7 +258,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
             }
             else if (NPC.ai[1] > 30)
             {
-                NPC.velocity += NPC.Center.DirectionTo(target.Center) * 2f;
+                NPC.velocity += NPC.Center.DirectionTo(target.Center) * (Main.expertMode ? 1.5f : 1);
                 NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver4;
                 NPC.velocity = NPC.velocity.LengthClamp(22);
             }
@@ -271,17 +271,17 @@ namespace Terrafirma.NPCs.Boss.Terragrim
             {
                 NPC.TargetClosest();
                 SoundEngine.PlaySound(SoundID.Item4, NPC.position);
+                NPC.rotation = NPC.Center.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4;
                 ParticleSystem.AddParticle(new BigSparkle() { Scale = 1.2f, fadeInTime = 10, }, NPC.Center, null, new Color(128, 255, 170, 0));
             }
             else if (NPC.ai[1] == 30)
             {
                 SoundEngine.PlaySound(SoundID.Item9, NPC.position);
                 NPC.velocity = NPC.Center.DirectionTo(target.Center) * (10 + (NPC.ai[2] * (!Main.expertMode ? 0.5f : 0.75f)));
-                NPC.rotation = NPC.Center.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4;
                 canHitPlayer = true;
                 NPC.ai[2]++;
             }
-            else if (NPC.ai[1] == 50)
+            else if (NPC.ai[1] == 45)
             {
                 canHitPlayer = false;
                 if (NPC.ai[2] == 6)
@@ -291,6 +291,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                     NPC.ai[2] = 0;
                     phase++;
                     NPC.netUpdate = true;
+                    NPC.TargetClosest();
                     return;
                 }
                 if (NPC.ai[2] == 3)
@@ -299,13 +300,49 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 }
                 else
                 {
-                    NPC.ai[1] = Main.expertMode ? -0 : 10;
+                    NPC.ai[1] = Main.expertMode ? 0 : 10;
+                    if (NPC.ai[2] > 3)
+                    {
+                        NPC.ai[1] += 5;
+                    }
                 }
             }
         }
         private void Phase5()
         {
+            NPC.ai[1]++;
+            if (NPC.ai[1] == -30)
+            {
+                NPC.TargetClosest();
+                SoundEngine.PlaySound(SoundID.Item4, NPC.position);
+                ParticleSystem.AddParticle(new BigSparkle() { Scale = 1f, fadeInTime = 10, }, NPC.Center, null, new Color(128, 255, 170, 0));
+            }
+            if (NPC.ai[1] < -30)
+            {
+                canHitPlayer = false;
+                Vector2 targetPos = target.Center + new Vector2(0, -200);
+                NPC.rotation = Utils.AngleLerp(NPC.rotation, NPC.Center.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4, 0.1f);
+                NPC.velocity += NPC.Center.DirectionTo(targetPos) * 0.8f;
+                NPC.velocity = NPC.velocity.LengthClamp(6);
+            }
+            else if (NPC.ai[1] < 0)
+            {
+                NPC.velocity = Vector2.Zero;
+            }
+            else
+            {
+                //NPC.Center = target.Center;
+                NPC.velocity = (NPC.rotation + MathHelper.PiOver4).ToRotationVector2() * -12;
+                NPC.rotation += 0.05f;
+                canHitPlayer = true;
+                if (NPC.ai[1] % 10 == 0)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(),NPC.Center, (NPC.rotation - MathHelper.PiOver4).ToRotationVector2() * 0.1f,ProjectileID.DemonSickle,12,0);
+                }
 
+                if (NPC.ai[1] > (MathHelper.TwoPi / 0.05f))
+                    NPC.ai[1] = -100;
+            }
         }
     }
 }

@@ -67,6 +67,9 @@ namespace Terrafirma.NPCs.Boss.Terragrim
         {
             target = Main.player[NPC.target];
 
+            if (target.dead)
+                NPC.TargetClosest();
+
             if(phase > 0 && phase != 3)
             {
                 if (Main.rand.NextBool(3))
@@ -122,6 +125,9 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 case 4:
                     Phase4();
                     break;
+                case 5:
+                    Phase5();
+                    break;
             }
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -138,11 +144,11 @@ namespace Terrafirma.NPCs.Boss.Terragrim
             {
                 for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
                 {
-                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2, new Rectangle(0, NPC.frame.Height * 2, NPC.frame.Width, NPC.frame.Height), new Color(128, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.1f, NPC.oldRot[i], NPC.frame.Size() / 2, 1.2f + (float)(Math.Sin((Main.timeForVisualEffects + i * 10) * 0.1f) * 0.1f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2 + Main.rand.NextVector2Circular(1,1), new Rectangle(0, 0, NPC.frame.Width, NPC.frame.Height), new Color(128, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i] + Main.rand.NextFloat(-0.05f,0.05f), NPC.frame.Size() / 2, 1.3f + (float)(Math.Sin((Main.timeForVisualEffects + i * 10) * 0.1f) * 0.2f), SpriteEffects.None, 0);
                 }
             }
                 
-            spriteBatch.Draw(tex.Value, NPC.Center - Main.screenPosition, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(tex.Value, NPC.Center - Main.screenPosition, NPC.frame, (canHitPlayer || phase == 0) ? Color.White : Color.Gray, NPC.rotation, NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
 
             if (spinnyMode)
             {

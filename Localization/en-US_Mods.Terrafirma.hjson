@@ -1018,6 +1018,11 @@ Items: {
 		DisplayName: Sunflower Pin
 		Tooltip: The sunflower makes you happy
 	}
+
+	AncientSpiritEssence: {
+		DisplayName: Ancient Spirit Essence
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1150,6 +1155,7 @@ Projectiles: {
 	NecromancySummon.DisplayName: Necromancy Summon
 	ManaTalon.DisplayName: Mana Talon
 	NecromancerSummonAnimation.DisplayName: Necromancer Summon Animation
+	TerragrimBouncyFlame.DisplayName: Terragrim Bouncy Flame
 }
 
 Tiles: {
@@ -1399,7 +1405,11 @@ Spells: {
 }
 
 UIElements.CookingPot.InputAmount: Amount
-NPCs.FlameElemental.DisplayName: Flame Elemental
+
+NPCs: {
+	FlameElemental.DisplayName: Flame Elemental
+	Terragrim.DisplayName: Terragrim
+}
 
 Configs: {
 	ClientConfig: {
