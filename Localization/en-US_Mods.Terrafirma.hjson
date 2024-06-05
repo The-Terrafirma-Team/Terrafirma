@@ -1156,6 +1156,9 @@ Projectiles: {
 	ManaTalon.DisplayName: Mana Talon
 	NecromancerSummonAnimation.DisplayName: Necromancer Summon Animation
 	TerragrimBouncyFlame.DisplayName: Terragrim Bouncy Flame
+	TESTPROJ.DisplayName: T E S T P R O J
+	CloudInABottleProj.DisplayName: Cloud In A Bottle Proj
+	TerragrimBouncyFlame.DisplayName: Terragrim Bouncy Flame
 }
 
 Tiles: {

@@ -46,7 +46,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.PreHardmode
                     int PushUpY;
                     Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
 
-                    Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY + 7), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
+                    Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY + 12), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
                     Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<CrimsonHeartSentryHeart>(), damage, 0, player.whoAmI, 0, 0, 0);
                     player.UpdateMaxTurrets();
                 }

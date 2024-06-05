@@ -27,8 +27,6 @@
     <None Remove="Systems\Cooking\CookingPotUI.cs~RF44f8c32a.TMP" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="SubworldLibrary">
       <HintPath>..\..\..\..\..\..\Downloads\SubworldLibrary.dll</HintPath>
     </Reference>

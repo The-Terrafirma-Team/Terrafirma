@@ -3,6 +3,7 @@ using System;
 using Terrafirma.Common.Players;
 using Terrafirma.Particles;
 using Terrafirma.Rarities;
+using Terrafirma.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -71,6 +72,7 @@ namespace Terrafirma.Common.Items
                 player.direction = -Math.Sign(player.Center.X - Main.MouseWorld.X);
             }
             player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
+
             return base.UseItem(item, player);
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
