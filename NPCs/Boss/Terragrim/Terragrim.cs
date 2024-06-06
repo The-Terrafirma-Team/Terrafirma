@@ -74,6 +74,30 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 return false;
             return base.CanHitPlayer(target, ref cooldownSlot);
         }
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+        {
+            if (Main.rand.NextBool(3))
+                target.AddBuff(BuffID.Darkness, 60 * 5);
+            if (Main.rand.NextBool(6))
+                target.AddBuff(BuffID.BrokenArmor, 60 * 5);
+        }
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            if(NPC.life <= 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Gore g = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, Main.rand.NextVector2Circular(2, 2), Main.rand.Next(61, 64));
+                    g.scale = Main.rand.NextFloat(0.5f, 0.7f);
+                    g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(NPC.Center, DustID.Terragrim, Main.rand.NextVector2Circular(6, 6));
+                    d.noGravity = true;
+                }
+            }
+        }
         public override void AI()
         {
             target = Main.player[NPC.target];
@@ -94,7 +118,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 Lighting.AddLight(NPC.Center, 0.1f, 0.4f + MathF.Sin((float)Main.timeForVisualEffects * 0.01f) * 0.1f, 0.3f + MathF.Sin((float)Main.timeForVisualEffects * 0.03f) * 0.1f);
             }
 
-            if(NPC.life < (int)(NPC.lifeMax * 0.8f) && phase <= 2)
+            if(NPC.life < (int)(NPC.lifeMax * 0.6f) && phase <= 2)
             {
                 NPC.ai[0] = -60;
                 NPC.ai[1] = 0;

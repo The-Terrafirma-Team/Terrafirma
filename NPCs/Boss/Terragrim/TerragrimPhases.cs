@@ -199,6 +199,12 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                             {
                                 Dust d2 = Dust.NewDustPerfect(NPC.Bottom, DustID.Stone, Main.rand.NextVector2Circular(6, 6) + new Vector2(0, -6));
                                 d2.scale *= 2;
+                                if (Main.rand.NextBool(2))
+                                {
+                                    Gore g = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, Main.rand.NextVector2Circular(3, 3) + new Vector2(0, -3), Main.rand.Next(61, 64));
+                                    g.scale = Main.rand.NextFloat(0.3f, 0.7f);
+                                    g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+                                }
                             }
                         }
 
