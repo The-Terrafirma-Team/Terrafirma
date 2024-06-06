@@ -48,7 +48,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 }
             }
         }
-        private void Phase1()
+        private void Phase1_Dash()
         {
             NPC.ai[0]++;
             NPC.ai[1]++;
@@ -109,7 +109,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 }
             }
         }
-        private void Phase2()
+        private void Phase2_SpinFireball()
         {
             NPC.ai[1]++;
             if (NPC.ai[1] < 0)
@@ -236,7 +236,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 }
             }
         }
-        private void Phase4()
+        private void Phase4_Dash()
         {
             NPC.ai[0]++;
             NPC.ai[1]++;
@@ -308,7 +308,7 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 }
             }
         }
-        private void Phase5()
+        private void Phase5_BladeRing()
         {
             NPC.ai[1]++;
             if (NPC.ai[1] == -30)
@@ -320,10 +320,10 @@ namespace Terrafirma.NPCs.Boss.Terragrim
             if (NPC.ai[1] < -30)
             {
                 canHitPlayer = false;
-                Vector2 targetPos = target.Center + new Vector2(0, -200);
+                Vector2 targetPos = target.Center + new Vector2(0, -100);
                 NPC.rotation = Utils.AngleLerp(NPC.rotation, NPC.Center.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4, 0.1f);
                 NPC.velocity += NPC.Center.DirectionTo(targetPos) * 0.8f;
-                NPC.velocity = NPC.velocity.LengthClamp(6);
+                NPC.velocity = NPC.velocity.LengthClamp(7);
             }
             else if (NPC.ai[1] < 0)
             {
@@ -335,13 +335,75 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                 NPC.velocity = (NPC.rotation + MathHelper.PiOver4).ToRotationVector2() * -12;
                 NPC.rotation += 0.05f;
                 canHitPlayer = true;
-                if (NPC.ai[1] % 10 == 0)
+                if (NPC.ai[1] % Math.Round(MathHelper.TwoPi / 0.05f / 16) == 0)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(),NPC.Center, (NPC.rotation - MathHelper.PiOver4).ToRotationVector2() * 0.1f,ProjectileID.DemonSickle,12,0);
+                    if(Main.netMode != NetmodeID.MultiplayerClient && !Main.rand.NextBool(5))
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(),NPC.Center, (NPC.rotation - MathHelper.PiOver4).ToRotationVector2() * 0.1f, ModContent.ProjectileType<TerragrimSpiritBlade>(), 12, 0, -1, NPC.ai[1],Main.rand.NextFloat(-1,1));
                 }
 
                 if (NPC.ai[1] > (MathHelper.TwoPi / 0.05f))
+                {
+                    NPC.ai[2]++;
                     NPC.ai[1] = -100;
+                }
+
+                if (NPC.ai[2] == 3)
+                {
+                    canHitPlayer = false;
+                    NPC.ai[0] = 0.3f;
+                    NPC.ai[1] = -200;
+                    NPC.ai[2] = 0;
+                    phase++;
+                    NPC.netUpdate = true;
+                }
+            }
+        }
+        private void Phase6_Spin()
+        {
+            NPC.ai[1]++;
+            if (NPC.ai[1] < 0)
+            {
+                Vector2 targetPos = target.Center + new Vector2(0, -200);
+                NPC.rotation = Utils.AngleLerp(NPC.rotation, NPC.Center.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4, 0.1f);
+                NPC.velocity += NPC.Center.DirectionTo(targetPos) * 0.5f;
+                NPC.velocity = NPC.velocity.LengthClamp(7);
+            }
+            else if (NPC.ai[1] is > 0 and < 30)
+            {
+                NPC.velocity *= 0.85f;
+            }
+            if (NPC.ai[1] is > 30)
+            {
+                spinnyMode = true;
+                NPC.knockBackResist = 0.2f;
+                canHitPlayer = true;
+                NPC.velocity += NPC.Center.DirectionTo(target.Center) * 0.6f;
+                NPC.velocity = NPC.velocity.LengthClamp(Main.expertMode ? 9 : 7);
+
+                NPC.ai[0] += 0.0005f;
+                NPC.rotation += NPC.ai[0];
+                if (NPC.ai[1] % 10 == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item7, NPC.position);
+                }
+                if (NPC.ai[1] % (60 * 2) == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item9, NPC.position);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(6, -6).RotatedBy(NPC.rotation), ModContent.ProjectileType<TerragrimBouncyFlame>(), 10, 0);
+                }
+            }
+            if (NPC.ai[1] > 60 * 10)
+            {
+                NPC.TargetClosest();
+                spinnyMode = false;
+                NPC.knockBackResist = 0;
+                canHitPlayer = false;
+                phase = 4;
+                NPC.ai[0] = 0;
+                NPC.ai[2] = 0;
+                NPC.ai[1] = -200;
+                NPC.netUpdate = true;
             }
         }
     }

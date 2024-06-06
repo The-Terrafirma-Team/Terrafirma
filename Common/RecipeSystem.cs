@@ -13,18 +13,25 @@ namespace Terrafirma.Common
     {
         public override void AddRecipeGroups()
         {
-            RecipeGroup CopperBar = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(ItemID.CopperBar), new int[]
-            {
+            RecipeGroup GoldBar = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(ItemID.GoldBar),
+            [
+                ItemID.GoldBar,
+                ItemID.PlatinumBar
+            ]);
+
+            RecipeGroup CopperBar = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(ItemID.CopperBar),
+            [
                 ItemID.CopperBar,
                 ItemID.TinBar
-            });
+            ]);
             RecipeGroup.RegisterGroup("Terrafirma:CopperBar", CopperBar);
             base.AddRecipeGroups();
         }
         public override void AddRecipes()
         {
             Recipe.Create(ItemID.SlimeStaff).AddTile(TileID.WorkBenches).AddIngredient(ItemID.Gel, 25).AddIngredient(ItemID.Wood, 25).AddIngredient(ItemID.Daybloom).Register();
-            Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(),7).Register();
+            
+            Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(),8).Register();
             
             Recipe.Create(ItemID.LightningBoots).AddTile(TileID.TinkerersWorkbench).AddIngredient(ModContent.ItemType<SpringBoots>()).AddIngredient(ItemID.Aglet).AddIngredient(ItemID.RocketBoots).AddIngredient(ItemID.AnkletoftheWind).Register();
             AddCookingRecipes();

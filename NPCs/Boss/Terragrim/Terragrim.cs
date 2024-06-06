@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Items.Materials;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -57,6 +59,15 @@ namespace Terrafirma.NPCs.Boss.Terragrim
         Player target;
         bool spinnyMode;
 
+        public override void BossLoot(ref string name, ref int potionType)
+        {
+            potionType = ItemID.LesserHealingPotion;
+        }
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            npcLoot.Add(ItemDropRule.Common(ItemID.Terragrim));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AncientSpiritEssence>(),1,10,20));
+        }
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
             if (!canHitPlayer)
@@ -114,19 +125,22 @@ namespace Terrafirma.NPCs.Boss.Terragrim
                     Phase0_Intro();
                     break;
                 case 1:
-                    Phase1();
+                    Phase1_Dash();
                     break;
                 case 2:
-                    Phase2();
+                    Phase2_SpinFireball();
                     break;
                 case 3:
                     Phase3_PhaseTwoIntro();
                     break;
                 case 4:
-                    Phase4();
+                    Phase4_Dash();
                     break;
                 case 5:
-                    Phase5();
+                    Phase5_BladeRing();
+                    break;
+                case 6:
+                    Phase6_Spin();
                     break;
             }
         }
