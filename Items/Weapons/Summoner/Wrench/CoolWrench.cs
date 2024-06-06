@@ -23,7 +23,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 
             CreateRecipe()
             .AddIngredient(ItemID.IceBlock, 10)
-            .AddRecipeGroup(nameof(ItemID.GoldBar), 6)
+            .AddRecipeGroup("Terrafirma:GoldBar", 6)
             .AddTile(TileID.Anvils)
             .Register();
         }

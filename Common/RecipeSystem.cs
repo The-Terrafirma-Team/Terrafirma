@@ -18,6 +18,7 @@ namespace Terrafirma.Common
                 ItemID.GoldBar,
                 ItemID.PlatinumBar
             ]);
+            RecipeGroup.RegisterGroup("Terrafirma:GoldBar", GoldBar);
 
             RecipeGroup CopperBar = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(ItemID.CopperBar),
             [
