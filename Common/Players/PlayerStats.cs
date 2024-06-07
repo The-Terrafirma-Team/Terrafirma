@@ -37,8 +37,11 @@ namespace Terrafirma.Common.Players
 
         public byte SteelBladeHits;
         public static readonly float defaultFeralChargeSpeed = 0.66f / 60f;
+
+        public bool newSwim;
         public override void ResetEffects()
         {
+            newSwim = false;
             FeralChargeMax = 0;
             FeralChargeSpeed = defaultFeralChargeSpeed;
             hasSwappedItems = false;
