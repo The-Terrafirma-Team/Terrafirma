@@ -80,34 +80,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         public override void Update(Item item, Player player)
         {
             item.useStyle = ItemUseStyleID.Shoot;
-            //if (player.HeldItem != item) return;
-
-            //if (player.statMana < ManaCost) HoldProj = null;
-
-            //if (Main.mouseLeft && player.statMana >= ManaCost)
-            //{
-            //    if (!LeftMouseSwitch)
-            //    {
-            //        HoldProj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), Main.MouseWorld + new Vector2(18,18), Vector2.Zero, ModContent.ProjectileType<IceBoulder>(), item.damage * 3, item.knockBack, player.whoAmI, 0, 0, 0);
-            //        HoldProj.ai[1] = Main.rand.Next(0, 120);
-            //        LeftMouseSwitch = true;
-            //    }
-            //    if (HoldProj != null)
-            //    {
-            //        HoldProj.ai[0] = 0;
-            //        HoldProj.timeLeft = 300;
-            //        HoldProj.scale *= 1.05f;
-            //        HoldProj.velocity = Vector2.Lerp(HoldProj.velocity, HoldProj.Center.DirectionTo(Main.MouseWorld) * 5f, 0.02f);
-            //        HoldProj.Size = new Vector2(HoldProj.scale * 30);
-            //        HoldProj.damage = (int)(item.damage * 2f * HoldProj.scale);
-            //        if (HoldProj.scale >= 2f) HoldProj = null;
-            //    }
-            //}
-            //else
-            //{
-            //    HoldProj = null;
-            //    LeftMouseSwitch = false;
-            //}
             base.Update(item, player);
         }
     }
@@ -202,28 +174,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            //Do later I don't feel like it
-
-            //Tile collidedtile = new Tile();
-            //collidedtile.TileType = TileID.Dirt;
-            //for (int i = -3; i <= 4; i++)
-            //{
-            //    Tile checktile = Main.tile[(int)(Projectile.Bottom.X / 16), (int)(Projectile.Bottom.Y / 16) + i];
-            //    if (checktile.HasTile && checktile.TileType == TileID.MagicalIceBlock)
-            //    {
-            //        collidedtile = checktile;
-            //        break;
-            //    }
-            //}
-            //Main.NewText(collidedtile.TileType);
-            //if (collidedtile.TileType == TileID.MagicalIceBlock)
-            //{
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        Dust.NewDust(Projectile.Bottom, 2, 2, DustID.Torch, 0, 0, 0, Scale: 2f);
-            //    }
-            //    collidedtile.ClearTile();
-            //}
             return base.OnTileCollide(oldVelocity);
         }
         public override bool PreDraw(ref Color lightColor)

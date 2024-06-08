@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terrafirma.Common.Templates;
 using Terrafirma.Data;
 using Terraria;
@@ -39,6 +40,9 @@ namespace Terrafirma.Common.Players
         public static readonly float defaultFeralChargeSpeed = 0.66f / 60f;
 
         public bool newSwim;
+
+        public Vector2 MouseWorld = Vector2.Zero;
+        public bool LeftMouse = false;
         public override void ResetEffects()
         {
             newSwim = false;
@@ -70,6 +74,8 @@ namespace Terrafirma.Common.Players
 
             if (hasSwappedItems || !Player.controlUseItem)
                 TimesHeldWeaponHasBeenSwung = 0;
+
+            if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
         }
         public override void PostUpdateEquips()
         {
@@ -130,6 +136,21 @@ namespace Terrafirma.Common.Players
                 Player.noKnockback = true;
             }
             modifiers.Knockback *= MathHelper.Clamp(KnockbackResist, 0, 10);
+        }
+
+    }
+
+    public static class PlayerMethods
+    {
+        public static void SendMouseWorld(this Player player)
+        {
+            if (Main.netMode == NetmodeID.SinglePlayer) return;
+
+            ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
+            packet.Write(NetSendIDs.syncCursor);
+            packet.Write(player.whoAmI);
+            packet.WriteVector2(Main.MouseWorld);
+            packet.Send(-1, -1);
         }
     }
 }

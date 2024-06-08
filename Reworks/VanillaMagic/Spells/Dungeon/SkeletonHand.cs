@@ -29,7 +29,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
             type = ModContent.ProjectileType<SkeletonHandProj>();
             velocity = Vector2.Zero;
 
-            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
+            Projectile.NewProjectile(source, Main.MouseWorld, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
             return false;
         }
     }
@@ -55,12 +55,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
         public override void AI()
         {
 
-
             if (Projectile.ai[0] == 0)
             {
                 Projectile.frame = 0;
                 Projectile.velocity = new Vector2(0, -5f);
-                Projectile.position = Main.MouseWorld;
                 OriginalPos = Projectile.Center + new Vector2(14, 0);
             }
             else if (Projectile.ai[0] < 60)

@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using System.IO;
 using Terrafirma.Common.Items;
+using Terrafirma.Common.Players;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -31,7 +32,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         {
             if (player.statMana >= ManaCost && player.HeldItem == item)
             {
-                beamproj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.Center, Main.rand.NextVector2Circular(2f,2f), ModContent.ProjectileType<HealingEmeraldBeamProj>(), 100, 0, player.whoAmI);
+                beamproj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<HealingEmeraldBeamProj>(), 100, 0, player.whoAmI);
             }
         }
 
@@ -39,6 +40,15 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         {
             if (beamproj != null) beamproj.Kill();
             beamproj = null;
+        }
+
+        public override void UpdateLeftMouse(Item item, Player player)
+        {
+            if (player.statMana >= ManaCost && player.HeldItem == item && beamproj == null)
+            {
+                beamproj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<HealingEmeraldBeamProj>(), 100, 0, player.whoAmI);
+            }
+            if (!beamproj.active) beamproj = null;
         }
 
         public override void Update(Item item, Player player)
@@ -68,149 +78,84 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
 
     public class HealingEmeraldBeamProj : ModProjectile
     {
-        Player targetplayer = null;
+        Vector2 MousePos = Vector2.Zero;
+        Player TargetPlayer = null;
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.EmeraldBolt}";
         public override void SetDefaults()
         {
             Projectile.penetrate = -1;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.Size = new Vector2(16);
+            Projectile.scale = 1f;
+            Projectile.Opacity = 0;
         }
 
         public override bool? CanHitNPC(NPC target) => false;
         public override bool CanHitPvp(Player target) => false;
         public override void AI()
         {
-            Vector2 weaponend = Main.player[Projectile.owner].Center + new Vector2(Main.player[Projectile.owner].HeldItem.Size.Length(), 0).RotatedBy(Main.player[Projectile.owner].Center.DirectionTo(Main.MouseWorld).ToRotation());
+            if (Main.player[Projectile.owner].HeldItem.type != ItemID.EmeraldStaff) Projectile.Kill();
+            
+            if (Main.LocalPlayer == Main.player[Projectile.owner]) Main.player[Projectile.owner].SendMouseWorld();
+            MousePos = Main.player[Projectile.owner].PlayerStats().MouseWorld;
 
-            if (targetplayer != null)
+            //Find Closest NPC to mouse
+            int PlayerNum = -1;
+            float minDist = -1;
+            for (int i = 0; i < Main.player.Length; i++)
             {
-                Projectile.Center = targetplayer.Center;
-
-                if ((Projectile.ai[0]-1) % 24 == 0)
+                float Distance = Main.player[i].Distance(MousePos);
+                if ((Distance < minDist || minDist == -1) && 
+                    Main.player[i].active && 
+                    Main.player[Projectile.owner].Center.Distance(Main.player[i].Center) <= 300)
                 {
-                    int healamount = (int)(2 * ((500f - Main.player[Projectile.owner].Center.Distance(targetplayer.Center)) / 500f));
-                    targetplayer.Heal(healamount);
+                    minDist = Distance;
+                    PlayerNum = i;
                 }
-
-                if ((Projectile.ai[0] - 1) % 4 == 0)
-                {
-                    for (int i = 0; i < weaponend.Distance(targetplayer.Center) / 7; i++)
-                    {
-                        BigSparkle bigsparkle = new BigSparkle();
-                        bigsparkle.fadeInTime = 4;
-                        bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-                        bigsparkle.Scale = 1.5f;
-                        bigsparkle.velocity = Main.player[Projectile.owner].velocity;
-                        bigsparkle.TimeLeft = 3;
-                        bigsparkle.color = new Color(30, 180, 120, 0) * 0.2f;
-                        
-                        bigsparkle.secondaryColor = new Color(30, 180, 120, 0) * 0.2f;
-
-                        Vector2 blendedpos = Vector2.Lerp(weaponend + weaponend.DirectionTo(Main.MouseWorld) * 7 * i, weaponend + weaponend.DirectionTo(targetplayer.Center) * 7 * i, i / (weaponend.Distance(targetplayer.Center) / 7));
-
-                        ParticleSystem.AddParticle(bigsparkle, blendedpos, Vector2.Zero, bigsparkle.color);
-                    }
-                }
-
-                if ((Projectile.ai[0]-1) % 8 == 0)
-                {
-                    for (int i = 0; i < weaponend.Distance(targetplayer.Center) / 10; i++)
-                    {
-                        BigSparkle bigsparkle = new BigSparkle();
-                        bigsparkle.fadeInTime = 4;
-                        bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-                        bigsparkle.Scale = 2f;
-                        bigsparkle.velocity = Main.player[Projectile.owner].velocity;
-                        bigsparkle.color = new Color(30, 180, 120, 0) * 0.5f;
-                        bigsparkle.secondaryColor = new Color(30, 180, 120, 0) * 0.5f;
-
-                        Vector2 blendedpos = Vector2.Lerp(weaponend + weaponend.DirectionTo(Main.MouseWorld) * 10 * i, weaponend + weaponend.DirectionTo(targetplayer.Center) * 10 * i, i / (weaponend.Distance(targetplayer.Center) / 10));
-
-                        ParticleSystem.AddParticle(bigsparkle, blendedpos + Main.rand.NextVector2Circular(10, 10), Vector2.Zero, bigsparkle.color);
-                    }    
-                }
-
-                if ((Projectile.ai[0] - 1) % 16 == 0)
-                {
-                    for (int i = 0; i < weaponend.Distance(targetplayer.Center) / 20; i++)
-                    {
-                        BigSparkle bigsparkle = new BigSparkle();
-                        bigsparkle.fadeInTime = 5;
-                        bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-                        bigsparkle.velocity = Main.player[Projectile.owner].velocity;
-                        bigsparkle.Scale = 2f;
-                        bigsparkle.color = new Color(30, 180, 120, 0);
-
-                        Vector2 blendedpos = Vector2.Lerp(weaponend + weaponend.DirectionTo(Main.MouseWorld) * 20 * i, weaponend + weaponend.DirectionTo(targetplayer.Center) * 20 * i, i / (weaponend.Distance(targetplayer.Center) / 20));
-
-                        ParticleSystem.AddParticle(bigsparkle, blendedpos + Main.rand.NextVector2Circular(4, 4), Vector2.Zero, bigsparkle.color);
-                    }
-                }
-
-                if (Main.LocalPlayer.whoAmI == Projectile.owner) targetplayer = GetMousePlayer();
-            }
-            else
-            {
-                if (Main.LocalPlayer.whoAmI == Projectile.owner) targetplayer = GetMousePlayer();
-
-                if ((Projectile.ai[0] - 1) % 4 == 0)
-                {
-                    Vector2 vel = weaponend.DirectionTo(Main.MouseWorld) * 3;
-                    Dust.NewDust(weaponend, 4, 4, DustID.GemEmerald, vel.X, vel.Y, 0, new Color(255,255,255,0));            
-                }
-
-
             }
 
+            if (PlayerNum > -1) TargetPlayer = Main.player[PlayerNum];
+
+            if (TargetPlayer != null && Main.player[Projectile.owner].Center.Distance(MousePos) <= 600)
+            {
+                Projectile.scale = 2f;
+                Projectile.position = TargetPlayer.Center;
+                if (Projectile.ai[0] % 4 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 7, 4, 1.5f, 3, new Color(30, 180, 120, 0) * 0.2f, new Color(30, 180, 120, 0) * 0.2f, Vector2.Zero, true);
+                if (Projectile.ai[0] % 8 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 10, 4, 2f, -1, new Color(30, 180, 120, 0) * 0.5f, new Color(30, 180, 120, 0) * 0.5f, new Vector2(10), false);
+                if (Projectile.ai[0] % 16 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 20, 5, 2f, -1, new Color(30, 180, 120, 0), new Color(30, 180, 120, 0), new Vector2(4), false);
+                if (Projectile.ai[0] % 30 == 0) TargetPlayer.Heal(2);
+            }
+
+            TargetPlayer = null;
             Projectile.ai[0]++;
         }
 
-        public override void SendExtraAI(BinaryWriter writer)
+        public void GenerateCoolBeam(Vector2 MousePos, Player targetplayer, int DistanceBetweenSparkles, int fadeintime, float scale, int timeleft, Color color, Color secondaryColor, Vector2 velocity, bool MakeLight)
         {
-            writer.Write((byte)targetplayer.whoAmI);
-            base.SendExtraAI(writer);
-        }
-
-        public override void ReceiveExtraAI(BinaryReader reader)
-        {
-            targetplayer = Main.player[reader.ReadByte()];
-            base.ReceiveExtraAI(reader);
-        }
-
-        public Player GetMousePlayer()
-        {
-            float MinDist = 300f;
-            Player target = null;   
-
-            for (int i = 0; i < Main.player.Length; i++)
+            Vector2 weaponend = Main.player[Projectile.owner].Center + new Vector2(Main.player[Projectile.owner].HeldItem.Size.Length(), 0).RotatedBy(Main.player[Projectile.owner].Center.DirectionTo(MousePos).ToRotation());
+            for (int i = 0; i < weaponend.Distance(targetplayer.Center) / DistanceBetweenSparkles; i++)
             {
-                float calculatedDist = Main.player[i].Center.Distance(Main.MouseWorld);
-                if (calculatedDist <= MinDist && Main.player[i].active && Main.player[i].team == Main.player[Projectile.owner].team)
-                {
-                    MinDist = calculatedDist;
-                    target = Main.player[i];
-                }
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = fadeintime;
+                bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+                bigsparkle.Scale = scale;
+                bigsparkle.velocity = Main.player[Projectile.owner].velocity;
+                bigsparkle.TimeLeft = timeleft;
+                bigsparkle.color = color;
+
+                bigsparkle.secondaryColor = secondaryColor;
+
+                Vector2 blendedpos = Vector2.Lerp(weaponend + weaponend.DirectionTo(MousePos) * DistanceBetweenSparkles * i, weaponend + weaponend.DirectionTo(targetplayer.Center) * DistanceBetweenSparkles * i, i / (weaponend.Distance(targetplayer.Center) / DistanceBetweenSparkles));
+
+                ParticleSystem.AddParticle(bigsparkle, blendedpos + Main.rand.NextVector2Circular(velocity.X, velocity.Y), Vector2.Zero, bigsparkle.color);
+                if (MakeLight) Lighting.AddLight(blendedpos, new Vector3(30, 180, 120) * (1 / 255f) * 0.5f);
             }
-
-            if (target != null && Main.player[Projectile.owner].Center.Distance(target.Center) > 500f) return null;
-
-            return target;
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> ProjTex = ModContent.Request<Texture2D>(Texture);
 
-            Main.EntitySpriteDraw(ProjTex.Value,
-                Projectile.Center,
-                ProjTex.Value.Bounds,
-                Color.White,
-                0f,
-                ProjTex.Size() / 2,
-                1f,
-                SpriteEffects.None);
-            return false;
+            return true;
         }
     }
 

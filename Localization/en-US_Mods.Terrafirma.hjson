@@ -1159,6 +1159,7 @@ Projectiles: {
 	TESTPROJ.DisplayName: T E S T P R O J
 	CloudInABottleProj.DisplayName: Cloud In A Bottle Proj
 	TerragrimSpiritBlade.DisplayName: Terragrim Spirit Blade
+	HealingEmeraldBeamProjOld.DisplayName: Healing Emerald Beam Proj Old
 }
 
 Tiles: {
@@ -1398,7 +1399,7 @@ Spells: {
 
 	HealingEmeraldBeam: {
 		Name: Healing Emerald Beam
-		Description: ""
+		Description: Hold to heal the closest player to your mouse
 	}
 
 	ManaTalon: {
