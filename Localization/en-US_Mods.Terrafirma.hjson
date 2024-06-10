@@ -1160,6 +1160,7 @@ Projectiles: {
 	CloudInABottleProj.DisplayName: Cloud In A Bottle Proj
 	TerragrimSpiritBlade.DisplayName: Terragrim Spirit Blade
 	HealingEmeraldBeamProjOld.DisplayName: Healing Emerald Beam Proj Old
+	TestSwordProj.DisplayName: Test Sword Proj
 }
 
 Tiles: {
