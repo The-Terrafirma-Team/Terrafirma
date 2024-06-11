@@ -41,18 +41,25 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             int highestHP = 0;
             NPC targetnpc = null;
-            for (int i = 0; i < Main.npc.Length; i++)
+            if (Main.player[Projectile.owner].HasMinionAttackTargetNPC) targetnpc = Main.npc[Main.player[Projectile.owner].MinionAttackTargetNPC];
+            else
             {
-                if (Projectile.Center.Distance(Main.npc[i].Center) < maxrange &&
-                    Main.npc[i].lifeMax > highestHP &&
-                    Main.npc[i].active &&
-                    Main.npc[i].type != NPCID.TargetDummy &&
-                    Collision.CanHitLine(Projectile.Center, 8, 8, Main.npc[i].position, Main.npc[i].width, Main.npc[i].height))
+                for (int i = 0; i < Main.npc.Length; i++)
                 {
-                    highestHP = Main.npc[i].lifeMax;
-                    targetnpc = Main.npc[i];
+                    if (Projectile.Center.Distance(Main.npc[i].Center) < maxrange &&
+                        Main.npc[i].lifeMax > highestHP &&
+                        Main.npc[i].active &&
+                        !Main.npc[i].friendly &&
+                        !Main.npc[i].CountsAsACritter &&
+                        Main.npc[i].type != NPCID.TargetDummy &&
+                        Collision.CanHitLine(Projectile.Center, 8, 8, Main.npc[i].position, Main.npc[i].width, Main.npc[i].height))
+                    {
+                        highestHP = Main.npc[i].lifeMax;
+                        targetnpc = Main.npc[i];
+                    }
                 }
             }
+
 
             if (Projectile.ai[0] / 8 % shoottime == 0 && targetnpc != null)
             {

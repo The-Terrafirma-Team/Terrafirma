@@ -33,7 +33,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         }
         public override void AI()
         {
-            targetnpc = Main.npc[(int)Projectile.ai[1]];
+            targetnpc = Projectile.FindSummonTarget(350f, Projectile.Center, false);
             if (Projectile.ai[0] % 30 == 0 && targetnpc != null)
             {
                 float minimalise = 50f * Math.Clamp(Projectile.ai[0] / 100f, 2f, 10f);

@@ -90,20 +90,7 @@ namespace Terrafirma
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI) => Network.HandlePacket(reader, whoAmI);
-        //{
-        //    byte msgType = reader.ReadByte();
-        //    switch (msgType)
-        //    {
-        //        case NetSendIDs.syncWrench:
-        //            break;
-        //        case NetSendIDs.syncCursor:
-        //            byte playernum = reader.ReadByte();
-        //            Vector2 mousepos = reader.ReadVector2();
-        //            Main.player[playernum].PlayerStats().MouseWorld = mousepos;
-        //            Main.NewText("Packet handled - sync Cursor: Player = " + playernum + ", MousePos = (" + mousepos.X + ", " + mousepos.Y + " )");
-        //            break;
-        //    }
-        //    base.HandlePacket(reader, whoAmI);
-        //}
+        
+        
     }
 }

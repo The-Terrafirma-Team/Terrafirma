@@ -35,6 +35,9 @@ namespace Terrafirma.Common.Players
         public int RangedFlatDamage = 0;
         public int MagicFlatDamage = 0;
         public int SummonFlatDamage = 0;
+        public int GenericFlatDamage = 0;
+
+        public float GenericCritDamage = 0f;
 
         public byte SteelBladeHits;
         public static readonly float defaultFeralChargeSpeed = 0.66f / 60f;
@@ -58,6 +61,9 @@ namespace Terrafirma.Common.Players
             RangedFlatDamage = 0;
             MagicFlatDamage = 0;
             SummonFlatDamage = 0;
+            GenericFlatDamage = 0;
+
+            GenericCritDamage = 0f;
 
             SentrySpeedMultiplier = 0f;
             SentryRangeMultiplier = 0f;
@@ -127,6 +133,8 @@ namespace Terrafirma.Common.Players
             {
                 damage.Flat += SummonFlatDamage;
             }
+
+            damage.Flat += GenericFlatDamage;
             #endregion Flat Damage
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
@@ -136,6 +144,12 @@ namespace Terrafirma.Common.Players
                 Player.noKnockback = true;
             }
             modifiers.Knockback *= MathHelper.Clamp(KnockbackResist, 0, 10);
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.CritDamage += GenericCritDamage;
+            base.ModifyHitNPC(target, ref modifiers);
         }
 
     }

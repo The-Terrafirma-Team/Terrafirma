@@ -170,6 +170,14 @@ namespace Terrafirma
 
         }
 
+        public static NPC FindSummonTarget(this Projectile proj, float maxDetectDistance, Vector2 position, bool TargetThroughWalls = true)
+        {
+            NPC TargetNPC = null;
+            if (Main.player[proj.owner].HasMinionAttackTargetNPC) TargetNPC = Main.npc[Main.player[proj.owner].MinionAttackTargetNPC];
+            else TargetNPC = FindClosestNPC(maxDetectDistance, position, TargetThroughWalls);
+            return TargetNPC;
+        }
+
         /// <summary>
         /// Gets all the NPCs in an Area
         /// </summary>

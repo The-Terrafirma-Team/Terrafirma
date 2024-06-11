@@ -66,10 +66,9 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                         Dust newdust = Dust.NewDustPerfect(Main.player[i].MountedCenter, DustID.Honey2, Main.rand.NextVector2Circular(1,1), 140);
                     }
 
-                    if (Projectile.ai[1] % 4 == 0)
+                    if (Projectile.ai[0] % (int)(10 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) == 0)
                     {
                         Main.player[i].Heal(2);
-                        //Main.player[i].HealEffect(2); 
                     }
 
                     Projectile.ai[0] = 0;
