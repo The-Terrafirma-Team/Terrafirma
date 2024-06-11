@@ -17,11 +17,6 @@ namespace Terrafirma.Projectiles.Melee
     {
         public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/SteelGreatsword";
         private static Asset<Texture2D> afterImage;
-
-        public override void SetStaticDefaults()
-        {
-            ProjectileSets.TrueMeleeProjectiles[Type] = true;
-        }
         public override void Load()
         {
             afterImage = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SteelGreatswordAfter");
@@ -126,6 +121,11 @@ namespace Terrafirma.Projectiles.Melee
         {
             if (Projectile.timeLeft == 600)
                 SoundEngine.PlaySound(SoundID.Item71, Projectile.position);
+            if (Main.rand.NextBool(3))
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(60, 60), DustID.GemSapphire, Projectile.velocity * 2f);
+                d.noGravity = true;
+            }
 
             Projectile.velocity *= 0.99f;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;

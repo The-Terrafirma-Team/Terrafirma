@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -19,6 +20,7 @@ namespace Terrafirma.Common.Templates.Melee
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
             ProjectileID.Sets.TrailingMode[Type] = 2;
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
         }
         public override void SetDefaults()
         {

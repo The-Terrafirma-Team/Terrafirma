@@ -10,8 +10,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
 {
     internal class DiamondTurret : Spell
     {
-        public override int UseAnimation => 80;
-        public override int UseTime => 80;
+        public override int UseAnimation => 26;
+        public override int UseTime => 26;
         public override int ManaCost => 40;
         public override int[] SpellItem => new int[] { ItemID.DiamondStaff };
 
@@ -37,7 +37,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
         {
             Projectile.penetrate = -1;
             Projectile.timeLeft = 600;
-            Projectile.Size = new Vector2(16);
+            Projectile.Size = new Vector2(24);
         }
 
         public override bool? CanHitNPC(NPC target)
@@ -51,7 +51,19 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.GemStaves
             Projectile.velocity *= 0.98f;
             if (Projectile.ai[0] % 90 == 0 && TFUtils.FindClosestNPC(600f, Projectile.position) != null)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(TFUtils.FindClosestNPC(600f, Projectile.position).Center) * 10f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                if(Main.myPlayer == Projectile.owner)
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(TFUtils.FindClosestNPC(600f, Projectile.position).Center) * 13f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                for(int i = 0; i < 8; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.GemDiamond, Main.rand.NextVector2Circular(5, 5));
+                    d.noGravity = true;
+                }
+            }
+            if (Main.rand.NextBool(3))
+            {
+                Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(Main.rand.NextFloat(-12, 12), 0), DustID.GemDiamond);
+                d2.velocity = new Vector2(0, 5);
+                d2.noGravity = true;
             }
         }
 
