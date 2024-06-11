@@ -32,5 +32,11 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
         {
             return true;
         }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.MinionAttackTargetNPC = target.whoAmI;
+            base.OnHitNPC(player, target, hit, damageDone);
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 {
                     switch (Projectile.ai[2])
                     {
-                        case 0: Main.player[i].AddBuff(ModContent.BuffType<AmethystElementalDamage>(), 1); break;
+                        case 0: Main.player[i].AddBuff(ModContent.BuffType<AmethystCriticalBuff>(), 1); break;
                         case 1: Main.player[i].AddBuff(ModContent.BuffType<TopazDefenseBuff>(), 1); break;
                         case 2: Main.player[i].AddBuff(ModContent.BuffType<EmeraldRegenBuff>(), 1); break;
                         case 3: Main.player[i].AddBuff(ModContent.BuffType<SapphireMovementBuff>(), 1); break;

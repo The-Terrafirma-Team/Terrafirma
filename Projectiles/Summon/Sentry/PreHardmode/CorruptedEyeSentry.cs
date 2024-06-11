@@ -47,7 +47,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.velocity.Y += 0.5f;
             AttackTimer = 60f * TFUtils.GetSentryAttackCooldownMultiplier(Projectile);
 
-            NPC ClosestNPC = TFUtils.FindClosestNPC(600f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center, TargetThroughWalls: true);
+            NPC ClosestNPC = Projectile.FindSummonTarget(600f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center, true);
             if (TargetNPC == null &&
                 ClosestNPC != null)               
             {

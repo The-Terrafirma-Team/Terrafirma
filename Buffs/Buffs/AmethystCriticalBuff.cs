@@ -3,11 +3,12 @@ using Terraria;
 
 namespace Terrafirma.Buffs.Buffs
 {
-    internal class AmethystElementalDamage: ModBuff
+    internal class AmethystCriticalBuff: ModBuff
     { 
         public override void Update(Player player, ref int buffIndex)
         {
-            Main.NewText("FIND A NEW PURPOSE", 255, 0, 0);
+            player.GetCritChance(DamageClass.Generic) += 100;
+            player.PlayerStats().GenericCritDamage += 1f;
         }
     }
 }

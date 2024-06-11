@@ -52,7 +52,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             if (Main.rand.NextBool(64)) Dust.NewDustDirect(Projectile.Left, Projectile.width, Projectile.height / 2, DustID.GlowingMushroom);
 
             Player owner = Main.player[Projectile.owner];
-            NPC potentialTarget = TFUtils.FindClosestNPC(600 * Projectile.GetSentryRangeMultiplier(), Projectile.Center);
+            NPC potentialTarget = Projectile.FindSummonTarget(600 * Projectile.GetSentryRangeMultiplier(), Projectile.Center, false);
             if (owner.HasMinionAttackTargetNPC)
                 Projectile.ai[2] = owner.MinionAttackTargetNPC;
             else if (potentialTarget != null)

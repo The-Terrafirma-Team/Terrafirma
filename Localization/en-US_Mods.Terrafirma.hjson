@@ -64,9 +64,9 @@ Buffs: {
 		Description: Increases armor penetration by 5.
 	}
 
-	AmethystElementalDamage: {
-		DisplayName: Amethyst Elemental Damage
-		Description: Increases the intensity of elemental damage.
+	AmethystCriticalBuff: {
+		DisplayName: Amethyst Critical Buff
+		Description: Increases critical strike chance and damage.
 	}
 
 	DiamondPierceBuff: {
@@ -808,8 +808,7 @@ Items: {
 		Tooltip:
 			'''
 			Summons a sentry
-			Summons an amethyst sentry does something
-			'we don't know what but it's sure as hell doing something!'
+			Summons an amethyst sentry that increases critical strike chance and damage
 			'''
 	}
 
