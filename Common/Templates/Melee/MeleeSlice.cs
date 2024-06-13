@@ -20,8 +20,8 @@ namespace Terrafirma.Common.Templates.Melee
         public static Asset<Texture2D> slashTex;
         public virtual int Length => 106;
         public virtual float slashSize => 106;
-        public virtual Color slashColor1 => Color.White;
-        public virtual Color slashColor2 => Color.Black;
+        public virtual Color DarkSlashColor => Color.White;
+        public virtual Color LightSlashColor => Color.Black;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
@@ -48,7 +48,7 @@ namespace Terrafirma.Common.Templates.Melee
             return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Length * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.1f);
         }
         // x = (Projectile.timeLeft / Projectile.ai[1])
-        float extend { get => (float)Math.Pow(Projectile.ai[2] / Projectile.ai[1],2);  }
+        public float extend { get => (float)Math.Pow(Projectile.ai[2] / Projectile.ai[1],2);  }
         public override void AI()
         {
             Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
@@ -87,7 +87,7 @@ namespace Terrafirma.Common.Templates.Melee
                     slashTex.Value, 
                     Projectile.Center - Main.screenPosition, 
                     new Rectangle(0, slashTex.Height() / 4 * i, slashTex.Width(),slashLength), 
-                    Color.Lerp(slashColor1, slashColor2, i / 4f) * extend2, 
+                    Color.Lerp(DarkSlashColor, LightSlashColor, i / 4f) * extend2, 
                     Projectile.rotation + (player.direction * extend * 0.1f) -MathHelper.PiOver4 - (player.direction == 1 ? 0 : MathHelper.TwoPi), 
                     new Vector2(slashTex.Width() / 2 + (slashLength * 0.1f), player.direction == 1 ? slashLength : 0), 
                     (Projectile.scale + (extend2 * 0.2f)) * slashSize, 

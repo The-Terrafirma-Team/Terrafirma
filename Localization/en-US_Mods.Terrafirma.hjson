@@ -1022,6 +1022,15 @@ Items: {
 		DisplayName: Ancient Spirit Essence
 		Tooltip: ""
 	}
+
+	ShadowflameSword: {
+		DisplayName: Shadowflame Sword
+		Tooltip:
+		'''
+		Striking enemies summons balls of shadowflame from the sky
+		Critical strikes deal extra damage
+		'''
+	}
 }
 
 Projectiles: {
@@ -1160,6 +1169,8 @@ Projectiles: {
 	TerragrimSpiritBlade.DisplayName: Terragrim Spirit Blade
 	HealingEmeraldBeamProjOld.DisplayName: Healing Emerald Beam Proj Old
 	TestSwordProj.DisplayName: Test Sword Proj
+	ShadowflameSword.DisplayName: Shadowflame Sword
+	ShadowflameBall.DisplayName: Shadowflame Ball
 }
 
 Tiles: {
