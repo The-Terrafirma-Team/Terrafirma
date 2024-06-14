@@ -33,7 +33,7 @@ namespace Terrafirma.Projectiles.Melee
             for (int i = 0; i < 3; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center + (new Vector2(Main.rand.NextFloat(Length * Projectile.scale * 0.8f)).RotatedBy(Projectile.rotation - MathHelper.PiOver2)), DustID.Shadowflame);
-                d.velocity = new Vector2(player.direction * Main.rand.NextFloat(-1,4) * extend).RotatedBy(Projectile.rotation);
+                d.velocity = new Vector2(player.direction * Main.rand.NextFloat(1,4) * extend).RotatedBy(Projectile.rotation);
                 d.velocity += new Vector2(player.direction * 2 * extend,-2);
                 d.alpha = 255;
                 d.scale = extend * 1.2f;

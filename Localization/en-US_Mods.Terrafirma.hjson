@@ -1026,10 +1026,10 @@ Items: {
 	ShadowflameSword: {
 		DisplayName: Shadowflame Sword
 		Tooltip:
-		'''
-		Striking enemies summons balls of shadowflame from the sky
-		Critical strikes deal extra damage
-		'''
+			'''
+			Striking enemies summons balls of shadowflame from the sky
+			Critical strikes deal extra damage
+			'''
 	}
 }
 

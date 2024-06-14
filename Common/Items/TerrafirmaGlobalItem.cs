@@ -14,9 +14,10 @@ namespace Terrafirma.Common.Items
     {
         public override void SetDefaults(Item item)
         {
-            if(item.useStyle == ItemUseStyleID.Swing && item.ModItem == null)
+            if(item.useStyle == ItemUseStyleID.Swing && item.DamageType == DamageClass.Melee)
             {
                 item.useTurn = false;
+                item.useTurnOnAnimationStart = false;
             }
             switch (item.type)
             {

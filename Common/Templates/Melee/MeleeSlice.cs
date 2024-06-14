@@ -35,6 +35,8 @@ namespace Terrafirma.Common.Templates.Melee
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.localNPCHitCooldown = -1;
+            Projectile.usesLocalNPCImmunity = true;
         }
         public override void OnSpawn(IEntitySource source)
         {
@@ -45,7 +47,7 @@ namespace Terrafirma.Common.Templates.Melee
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Length * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.1f);
+            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Length * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.2f);
         }
         // x = (Projectile.timeLeft / Projectile.ai[1])
         public float extend { get => (float)Math.Pow(Projectile.ai[2] / Projectile.ai[1],2);  }

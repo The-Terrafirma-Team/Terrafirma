@@ -14,7 +14,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
     {
         public override void SetDefaults()
         {
-            Item.DefaultToSword(90, 25, 4);
+            Item.DefaultToSword(90, 25, 8);
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.ShadowflameSword>();
