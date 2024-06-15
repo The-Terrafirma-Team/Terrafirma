@@ -64,8 +64,15 @@ namespace Terrafirma.Common
             }
             if(source is EntitySource_ItemUse_WithAmmo ammoSource)
             {
-                if (ammoSource.Item.prefix == PrefixID.Frenzying)
-                    projectile.velocity = projectile.velocity.RotatedByRandom(0.12f);
+                switch (ammoSource.Item.prefix)
+                {
+                    case PrefixID.Frenzying: 
+                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
+                        break;
+                    case PrefixID.Furious: 
+                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
+                        break;
+                }
             }
         }
         public override void AI(Projectile projectile)

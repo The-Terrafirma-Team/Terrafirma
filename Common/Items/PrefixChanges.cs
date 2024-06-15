@@ -40,7 +40,7 @@ namespace Terrafirma.Common.Items
                     break;
                 case PrefixID.Zealous:
                     crt = 25;
-                    dmg = 0.96f;
+                    dmg = 0.94f;
                     break;
 
                 // Melee
@@ -60,7 +60,28 @@ namespace Terrafirma.Common.Items
                     dmg = 1.25f;
                     spd = 1.1f;
                     size = 1.23f;
-                    crt = -4;
+                    crt = -8;
+                    break;
+                case PrefixID.Bulky:
+                    dmg = 1.4f;
+                    spd = 1.4f;
+                    size = 1.24f;
+                    kb = 1.1f;
+                    break;
+                case PrefixID.Dangerous:
+                    dmg = 1.1f;
+                    crt = 15;
+                    size = 0.9f;
+                    break;
+                case PrefixID.Light:
+                    spd = 0.8f;
+                    size = 0.85f;
+                    kb = 0.9f;
+                    break;
+                case PrefixID.Small:
+                    spd = 0.65f;
+                    size = 0.7f;
+                    kb = 0.5f;
                     break;
 
                 // ranged
@@ -68,6 +89,26 @@ namespace Terrafirma.Common.Items
                     spd = 0.63f;
                     dmg = 0.7f;
                     // this one decreases accuracy, see GlobalProjectile.cs
+                    break;
+                case PrefixID.Hasty:
+                    shtspd = 1.8f;
+                    spd = 0.8f;
+                    dmg = 0.9f;
+                    break;
+                case PrefixID.Intimidating:
+                    kb = 1.3f;
+                    crt = 6;
+                    shtspd = 0.8f;
+                    break;
+                case PrefixID.Powerful:
+                    dmg = 1.26f;
+                    crt = 8;
+                    spd = 1.24f;
+                    break;
+                case PrefixID.Rapid:
+                    shtspd = 1.6f;
+                    spd = 0.75f;
+                    dmg = 0.9f;
                     break;
 
                 // Magic
