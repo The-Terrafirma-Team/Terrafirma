@@ -23,7 +23,7 @@ namespace Terrafirma.Projectiles.Melee
             Projectile.friendly = true;
             Projectile.extraUpdates = 2;
             Projectile.tileCollide = false;
-            Projectile.scale = 1f;
+            Projectile.scale = 0.75f;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.localNPCHitCooldown = -1;
             Projectile.usesLocalNPCImmunity = true;

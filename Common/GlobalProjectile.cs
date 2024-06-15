@@ -62,6 +62,11 @@ namespace Terrafirma.Common
                 projectile.maxPenetrate = (int)(projectile.maxPenetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
                 projectile.penetrate = (int)(projectile.penetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
             }
+            if(source is EntitySource_ItemUse_WithAmmo ammoSource)
+            {
+                if (ammoSource.Item.prefix == PrefixID.Frenzying)
+                    projectile.velocity = projectile.velocity.RotatedByRandom(0.12f);
+            }
         }
         public override void AI(Projectile projectile)
         {

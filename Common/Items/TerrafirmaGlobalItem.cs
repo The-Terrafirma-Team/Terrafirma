@@ -5,6 +5,7 @@ using Terrafirma.Particles;
 using Terrafirma.Rarities;
 using Terrafirma.Tiles;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -37,6 +38,13 @@ namespace Terrafirma.Common.Items
                     break;
             }
         }
+
+        //public override bool? CanMeleeAttackCollideWithNPC(Item item, Rectangle meleeAttackHitbox, Player player, NPC target)
+        //{
+        //    Main.NewText(player.itemRotation);
+        //    //player.itemRotation = MathF.Round((int)(player.itemRotation * 4) / 4f,1);
+        //    return target.Hitbox.IntersectsConeFastInaccurate(player.RotatedRelativePoint(player.Center), new Vector2(Math.Max(TextureAssets.Item[item.type].Width(), TextureAssets.Item[item.type].Height())).Length() * item.scale, player.itemRotation,0.1f);
+        //}
         public override void UpdateEquip(Item item, Player player)
         {
             PlayerStats stats = player.PlayerStats();

@@ -23,22 +23,38 @@ namespace Terrafirma.Common.Items
 
             switch (rolledPrefix)
             {
+                // universal
                 case PrefixID.Hurtful:
                     dmg = 1.2f;
                     crt = -4;
                     break;
+                case PrefixID.Forceful:
+                    kb = 1.45f;
+                    break;
+                case PrefixID.Demonic:
+                    kb = 0.5f;
+                    dmg = 1.25f;
+                    break;
+                case PrefixID.Keen:
+                    crt = 6;
+                    break;
+                case PrefixID.Zealous:
+                    crt = 25;
+                    dmg = 0.96f;
+                    break;
 
+                // Melee
                 case PrefixID.Massive:
                     size = 1.5f;
+                    spd = 1.1f;
+                    kb = 1.1f;
                     break;
                 case PrefixID.Large:
                     size = 1.2f;
                     break;
                 case PrefixID.Heavy:
                     kb = 1.75f;
-                    break;
-                case PrefixID.Forceful:
-                    kb = 1.45f;
+                    dmg = 1.1f;
                     break;
                 case PrefixID.Savage:
                     dmg = 1.25f;
@@ -47,12 +63,23 @@ namespace Terrafirma.Common.Items
                     crt = -4;
                     break;
 
-                case PrefixID.Keen:
-                    crt = 10;
-                    break;
+                // ranged
                 case PrefixID.Frenzying:
                     spd = 0.63f;
-                    dmg = 0.66f;
+                    dmg = 0.7f;
+                    // this one decreases accuracy, see GlobalProjectile.cs
+                    break;
+
+                // Magic
+                case PrefixID.Furious:
+                    spd = 0.85f;
+                    dmg = 1.45f;
+                    kb = 1;
+                    mcst = 1.5f;
+                    break;
+                case PrefixID.Intense:
+                    mcst = 1.2f;
+                    dmg = 1.2f;
                     break;
             }
 
