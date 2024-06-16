@@ -11,27 +11,27 @@ using Microsoft.Xna.Framework;
 using Mono.Cecil;
 using Terrafirma.Projectiles.Ranged.Boomerangs;
 
-namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
+namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {
-    internal class TinChakram : ModItem
+    internal class MythrilChakram : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 10;
+            Item.damage = 35;
             Item.useTime = 26;
             Item.useAnimation = 26;
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Ranged;
+            Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
-            Item.rare = ItemRarityID.White;
-            Item.value = Item.sellPrice(silver: 11, copper: 25);
+            Item.rare = ItemRarityID.LightRed;
+            Item.value = Item.sellPrice(gold: 2, silver: 22);
 
-            Item.shoot = ModContent.ProjectileType<TinChakramProjetile>();
+            Item.shoot = ModContent.ProjectileType<MythrilChakramProjectile>();
             Item.shootSpeed = 10;
         }
 
@@ -42,13 +42,13 @@ namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
 
         public override bool CanUseItem(Player player)
         {
-            return player.ownedProjectileCounts[Item.shoot] < 1;
+            return player.ownedProjectileCounts[Item.shoot] < 3;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.TinBar, 10)
+                .AddIngredient(ItemID.MythrilBar, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

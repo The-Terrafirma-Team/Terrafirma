@@ -9,7 +9,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee.Knight
 {
     public class HeroSword : ModItem
     {
@@ -40,8 +40,8 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
-            if(player.ownedProjectileCounts[Item.shoot] > 0)
-            { 
+            if (player.ownedProjectileCounts[Item.shoot] > 0)
+            {
                 player.itemLocation = Vector2.Zero;
             }
         }

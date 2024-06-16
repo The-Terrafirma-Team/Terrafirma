@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee.Knight
 {
     public class SteelGreatsword : ModItem
     {
@@ -38,7 +38,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
                 Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
             }
             int mhm = player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0 ? 1 : 0;
-            Projectile.NewProjectile(source,position,velocity,type, damage, knockback,player.whoAmI, mhm);
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, mhm);
             return false;
         }
 

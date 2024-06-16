@@ -11,28 +11,28 @@ using Microsoft.Xna.Framework;
 using Mono.Cecil;
 using Terrafirma.Projectiles.Ranged.Boomerangs;
 
-namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
+namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {
-    internal class CobaltChakram : ModItem
+    internal class PalladiumChakram : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 45;
+            Item.damage = 51;
             Item.useTime = 26;
             Item.useAnimation = 26;
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Ranged;
+            Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
             Item.rare = ItemRarityID.LightRed;
-            Item.value = Item.sellPrice(gold: 1, silver: 05);
+            Item.value = Item.sellPrice(gold: 1, silver: 35);
 
-            Item.shoot = ModContent.ProjectileType<CobaltChakramProjectile>();
-            Item.shootSpeed = 12;
+            Item.shoot = ModContent.ProjectileType<PalladiumChakramProjectile>();
+            Item.shootSpeed = 24;
         }
 
         public override void SetStaticDefaults()
@@ -48,7 +48,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.CobaltBar, 10)
+                .AddIngredient(ItemID.PalladiumBar, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

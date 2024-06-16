@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee.Knight
 {
     public class ShadowflameSword : ModItem
     {

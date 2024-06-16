@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using Mono.Cecil;
 using Terrafirma.Projectiles.Ranged.Boomerangs;
 
-namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
+namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {
     internal class OrichalcumChakram : ModItem
     {
@@ -23,7 +23,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Boomerangs.Chakram
             Item.knockBack = 6;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.DamageType = DamageClass.Ranged;
+            Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;

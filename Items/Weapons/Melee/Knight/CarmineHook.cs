@@ -3,9 +3,9 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Weapons.Melee.Spears
+namespace Terrafirma.Items.Weapons.Melee.Knight
 {
-    internal class CarmineHook: ModItem
+    internal class CarmineHook : ModItem
     {
         public override void SetDefaults()
         {

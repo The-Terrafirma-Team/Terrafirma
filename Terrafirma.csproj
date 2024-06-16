@@ -32,6 +32,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Items\Weapons\Melee\Brawler\" />
     <Folder Include="Prefixes\Curses\" />
     <Folder Include="Walls\" />
   </ItemGroup>

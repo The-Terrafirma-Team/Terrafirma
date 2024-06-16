@@ -1,7 +1,5 @@
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.ID;
-using Terrafirma.Items.Weapons.Melee.Shortswords;
 
 namespace Terrafirma.Common.Items
 {

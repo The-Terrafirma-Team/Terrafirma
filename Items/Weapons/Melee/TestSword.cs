@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Weapons.Melee.Swords
+namespace Terrafirma.Items.Weapons.Melee
 {
     public class TestSword : ModItem
     {
@@ -33,7 +33,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source,position,velocity,type, damage, knockback,player.whoAmI);
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
 
@@ -46,7 +46,7 @@ namespace Terrafirma.Items.Weapons.Melee.Swords
     {
         public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/TestSword";
         public override Color DarkSlashColor => new Color(2, 0, 0, 0);
-        public override Color LightSlashColor => new Color(255,0,0,128);
+        public override Color LightSlashColor => new Color(255, 0, 0, 128);
         public override float slashSize => 1.2f;
     }
 }
