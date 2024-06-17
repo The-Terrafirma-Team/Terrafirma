@@ -13,7 +13,6 @@ namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {
     public class TinChakramProjetile : ChakramTemplate
     {
-        public override string Texture => "Terrafirma/Items/Weapons/Ranged/Boomerangs/Chakram/TinChakram";
         protected override int BounceAmount => 2;
         protected override int BounceMode => 1;
         protected override float ReturnSpeed => 14f;

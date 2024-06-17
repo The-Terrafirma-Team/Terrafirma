@@ -44,7 +44,7 @@ namespace Terrafirma.Items.Weapons.Melee
     }
     public class TestSwordProj : MeleeSlice
     {
-        public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/TestSword";
+        public override string Texture => "Terrafirma/Items/Weapons/Melee/TestSword";
         public override Color DarkSlashColor => new Color(2, 0, 0, 0);
         public override Color LightSlashColor => new Color(255, 0, 0, 128);
         public override float slashSize => 1.2f;

@@ -14,7 +14,6 @@ namespace Terrafirma.Projectiles.Ranged.Boomerangs
 {
     public class MythrilChakramProjectile : ChakramTemplate
     {
-        public override string Texture => "Terrafirma/Items/Weapons/Ranged/Boomerangs/Chakram/MythrilChakram";
         protected override int BounceAmount => 0;
         protected override int BounceMode => 0;
         protected override float ReturnSpeed => 14f;

@@ -1171,6 +1171,7 @@ Projectiles: {
 	TestSwordProj.DisplayName: Test Sword Proj
 	ShadowflameSword.DisplayName: Shadowflame Sword
 	ShadowflameBall.DisplayName: Shadowflame Ball
+	GraniteBeam.DisplayName: Granite Beam
 }
 
 Tiles: {

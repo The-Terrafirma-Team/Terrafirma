@@ -15,7 +15,7 @@ namespace Terrafirma.Projectiles.Melee
 {
     public class SteelGreatsword : UpDownSwing
     {
-        public override string Texture => "Terrafirma/Items/Weapons/Melee/Swords/SteelGreatsword";
+        public override string Texture => "Terrafirma/Items/Weapons/Melee/Knight/SteelGreatsword";
         private static Asset<Texture2D> afterImage;
         public override void Load()
         {
