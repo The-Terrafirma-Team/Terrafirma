@@ -21,7 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Effects\CookingPotVaporShader.fx" />
-    <None Remove="Projectiles\Ranged\Boomerangs\CopperChakramProjectile.png" />
     <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
     <None Remove="Projectiles\Tools\UldraxProjectile.png" />
     <None Remove="Systems\Cooking\CookingPotUI.cs~RF44f8c32a.TMP" />

@@ -1,7 +1,7 @@
-﻿using Terrafirma.Projectiles.Melee;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using Terrafirma.Projectiles.Melee.Knight;
 
 namespace Terrafirma.Items.Weapons.Melee.Knight
 {

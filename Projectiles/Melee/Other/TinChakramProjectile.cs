@@ -8,34 +8,28 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 using Terrafirma.Common.Templates;
-using Terraria.DataStructures;
 
-namespace Terrafirma.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Melee.Other
 {
-    public class MythrilChakramSplitProjectile : ChakramTemplate
+    public class TinChakramProjetile : ChakramTemplate
     {
-        protected override int BounceAmount => 10;
+        protected override int BounceAmount => 2;
         protected override int BounceMode => 1;
         protected override float ReturnSpeed => 14f;
+        protected override float ReturnAcc => 0.015f;
 
         public override void SetDefaults()
         {
-            AttackTime = 40;
+            AttackTime = 30;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
             Projectile.friendly = true;
             Projectile.damage = 16;
             Projectile.width = 20;
             Projectile.height = 20;
-            DrawOffsetX = -5;
-            DrawOriginOffsetY = -5;
+            DrawOffsetX = -4;
+            DrawOriginOffsetY = -10;
 
-        }
-
-        public override void OnSpawn(IEntitySource source)
-        {
-            base.OnSpawn(source);
-            targetNPC = TFUtils.FindClosestNPC(600f, Projectile.Center, excludedNPCs: new NPC[1] { Main.npc[(int)Projectile.ai[2]] });
         }
     }
 }

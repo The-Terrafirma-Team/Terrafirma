@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.Projectiles.Ranged.Tempire
+namespace Terrafirma.Projectiles.Ranged.Throwing
 {
     internal class BottleOfPoisonProjectile : ModProjectile
     {
@@ -37,8 +37,8 @@ namespace Terrafirma.Projectiles.Ranged.Tempire
         }
         public override void AI()
         {
-            Projectile.rotation += ((0.04f * Projectile.velocity.Length() ) + 0.1f) * startdirection;
-            
+            Projectile.rotation += (0.04f * Projectile.velocity.Length() + 0.1f) * startdirection;
+
 
             if (Projectile.ai[0] == 0) startdirection = Projectile.direction;
 
@@ -52,11 +52,11 @@ namespace Terrafirma.Projectiles.Ranged.Tempire
             for (int i = 0; i < 6; i++)
             {
                 Dust.NewDust(Projectile.Center, 16, 16, DustID.Glass, Main.rand.Next(-2, 2), Main.rand.Next(-2, 3), 0, default, Main.rand.NextFloat(0.9f, 1f));
-                
+
             }
             for (int i = 0; i < 24; i++)
             {
-                Dust.NewDust(Projectile.Center, 16, 16, DustID.Water_Corruption, Main.rand.Next(-4, 4) * 2, Main.rand.Next(-4, 4) * 2, 0, new Color(255,200,200), Main.rand.NextFloat(1.1f, 1.5f));
+                Dust.NewDust(Projectile.Center, 16, 16, DustID.Water_Corruption, Main.rand.Next(-4, 4) * 2, Main.rand.Next(-4, 4) * 2, 0, new Color(255, 200, 200), Main.rand.NextFloat(1.1f, 1.5f));
             }
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Shatter, Projectile.position);

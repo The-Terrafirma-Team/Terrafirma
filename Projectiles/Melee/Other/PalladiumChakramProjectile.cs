@@ -9,7 +9,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terrafirma.Common.Templates;
 
-namespace Terrafirma.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Melee.Other
 {
     public class PalladiumChakramProjectile : ChakramTemplate
     {

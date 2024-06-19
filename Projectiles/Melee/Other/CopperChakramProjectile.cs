@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.GameContent.Drawing;
-using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
+﻿using Terraria;
 using Terrafirma.Common.Templates;
 
-namespace Terrafirma.Projectiles.Ranged.Boomerangs
+namespace Terrafirma.Projectiles.Melee.Other
 {
-    public class OrichalcumChakramProjectile : ChakramTemplate
+    public class CopperChakramProjectile : ChakramTemplate
     {
         protected override int BounceAmount => 0;
         protected override int BounceMode => 0;
@@ -19,7 +11,6 @@ namespace Terrafirma.Projectiles.Ranged.Boomerangs
 
         public override void SetDefaults()
         {
-
             AttackTime = 40;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
@@ -27,9 +18,9 @@ namespace Terrafirma.Projectiles.Ranged.Boomerangs
             Projectile.damage = 16;
             Projectile.width = 20;
             Projectile.height = 20;
-            DrawOffsetX = -1;
-            DrawOriginOffsetY = -1;
-
+            DrawOffsetX = -5;
+            DrawOriginOffsetY = -5;
+            base.SetDefaults();
         }
     }
 }

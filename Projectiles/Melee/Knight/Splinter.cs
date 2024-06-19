@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Knight
 {
     public class Splinter : ModProjectile
     {
@@ -43,7 +43,7 @@ namespace Terrafirma.Projectiles.Melee
         {
             if (Projectile.ai[0] == -2)
                 return null;
-            if ((Projectile.timeLeft > 60 * 16.5f && Projectile.ai[0] > -1))
+            if (Projectile.timeLeft > 60 * 16.5f && Projectile.ai[0] > -1)
                 return false;
             return null;
         }

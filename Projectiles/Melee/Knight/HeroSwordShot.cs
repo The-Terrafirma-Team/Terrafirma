@@ -5,9 +5,9 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Particles;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class HeroSwordShot: ModProjectile
+    public class HeroSwordShot : ModProjectile
     {
         public override string Texture => "Terrafirma/Items/Weapons/Melee/Knight/HeroSword";
 

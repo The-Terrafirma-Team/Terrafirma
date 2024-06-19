@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using Terrafirma.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee.Other;
 
 namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {

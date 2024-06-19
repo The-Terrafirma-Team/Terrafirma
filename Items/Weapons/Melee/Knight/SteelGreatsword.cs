@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Items.Materials;
-using Terrafirma.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee.Knight;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
             Item.DefaultToSword(45, 30, 7);
             Item.noUseGraphic = true;
             Item.noMelee = true;
-            Item.shoot = ModContent.ProjectileType<Projectiles.Melee.SteelGreatsword>();
+            Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Knight.SteelGreatsword>();
             Item.UseSound = new SoundStyle("Terrafirma/Sounds/SwordSound2") { PitchVariance = 0.3f, Pitch = -0.45f, MaxInstances = 10 };
             Item.shootSpeed = 8;
             Item.rare = ItemRarityID.Orange;

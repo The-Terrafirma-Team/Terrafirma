@@ -1,5 +1,5 @@
 ﻿using Terrafirma.Items.Materials;
-using Terrafirma.Projectiles.Ranged.Tempire;
+using Terrafirma.Projectiles.Ranged.Throwing;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

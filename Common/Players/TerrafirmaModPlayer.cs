@@ -5,7 +5,6 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terrafirma.Systems.MageClass;
-using Terrafirma.Projectiles.Melee;
 using Terrafirma.Items.Weapons.Summoner.Wrench;
 using Terrafirma.Common.Items;
 using Terrafirma.Items.Consumable;
@@ -13,6 +12,7 @@ using Terraria.GameContent.UI;
 using Terrafirma.Systems.NewNPCQuests;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Items.Weapons.Melee.Knight;
+using Terrafirma.Projectiles.Melee.Knight;
 
 
 namespace Terrafirma.Common.Players

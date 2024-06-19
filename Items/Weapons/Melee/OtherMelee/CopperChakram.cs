@@ -1,7 +1,7 @@
 ﻿using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terrafirma.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Melee.Other;
 
 namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {

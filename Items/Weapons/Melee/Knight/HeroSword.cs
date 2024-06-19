@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Particles;
-using Terrafirma.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee.Knight;
 using Terrafirma.Rarities;
 using Terraria;
 using Terraria.DataStructures;

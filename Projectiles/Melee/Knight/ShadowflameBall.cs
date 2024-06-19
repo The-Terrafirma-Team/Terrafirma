@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Knight
 {
     public class ShadowflameBall : ModProjectile
     {
@@ -36,9 +36,9 @@ namespace Terrafirma.Projectiles.Melee
         {
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, Projectile.position);
 
-            for(int i = 0; i < 24; i++)
+            for (int i = 0; i < 24; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Shadowflame, Main.rand.NextVector2Circular(8,8), 255);
+                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Shadowflame, Main.rand.NextVector2Circular(8, 8), 255);
                 d.scale *= 1.5f;
                 d.noGravity = Main.rand.NextBool();
             }
@@ -67,7 +67,7 @@ namespace Terrafirma.Projectiles.Melee
                 d.noGravity = true;
             }
             Projectile.frameCounter++;
-            if(Projectile.frameCounter >= 10)
+            if (Projectile.frameCounter >= 10)
             {
                 Projectile.frameCounter = 0;
                 Projectile.frame++;

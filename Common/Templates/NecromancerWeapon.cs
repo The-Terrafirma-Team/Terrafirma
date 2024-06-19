@@ -4,7 +4,7 @@ using ReLogic.Content;
 using System;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Particles;
-using Terrafirma.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee.Knight;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;

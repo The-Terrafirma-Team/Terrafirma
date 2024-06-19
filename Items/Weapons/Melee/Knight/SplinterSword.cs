@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Projectiles.Melee;
+using Terrafirma.Projectiles.Melee.Knight;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

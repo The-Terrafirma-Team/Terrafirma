@@ -5,13 +5,18 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Other
 {
     internal class CrystalChainBladesProjectile : ModProjectile
     {
+        public override void Load()
+        {
+            ChainSprite = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/Other/CrystalChainBladesChain");
+        }
         public override void SetDefaults()
         {
             Projectile.damage = 16;
@@ -58,11 +63,10 @@ namespace Terrafirma.Projectiles.Melee
         {
             Projectile.rotation = (Projectile.position - Main.player[Projectile.owner].position).ToRotation();
         }
-
+        private static Asset<Texture2D> ChainSprite;
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> ChainSprite = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/CrystalChainBladesChain");
-            Asset<Texture2D> BladeSprite = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Melee/CrystalChainBladesProjectile");
+            Asset<Texture2D> BladeSprite = TextureAssets.Projectile[Type];
 
             for (int i = 0; i < (int)(Projectile.Center.Distance(Main.player[Projectile.owner].Center) / ChainSprite.Height()); i++)
             {

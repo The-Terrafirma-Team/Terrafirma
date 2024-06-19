@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using Terrafirma.Projectiles.Ranged.Boomerangs;
+using Terrafirma.Projectiles.Melee.Other;
 
 namespace Terrafirma.Items.Weapons.Melee.OtherMelee
 {

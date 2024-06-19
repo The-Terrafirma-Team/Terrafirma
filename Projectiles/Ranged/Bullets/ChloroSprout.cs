@@ -33,7 +33,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             return false;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             NPC target = Main.npc[(int)Projectile.ai[0]];
 

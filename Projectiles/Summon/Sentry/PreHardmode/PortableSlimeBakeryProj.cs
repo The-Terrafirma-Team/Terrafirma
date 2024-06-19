@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.Audio;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Terrafirma.Projectiles.Ranged.Boomerangs;
 using System.Collections.Generic;
 using Terraria.ID;
 

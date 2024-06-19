@@ -12,7 +12,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Knight
 {
     public class ShadowflameSword : MeleeSlice
     {
@@ -32,9 +32,9 @@ namespace Terrafirma.Projectiles.Melee
 
             for (int i = 0; i < 3; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + (new Vector2(Main.rand.NextFloat(Length * Projectile.scale * 0.8f)).RotatedBy(Projectile.rotation - MathHelper.PiOver2)), DustID.Shadowflame);
-                d.velocity = new Vector2(player.direction * Main.rand.NextFloat(1,4) * extend).RotatedBy(Projectile.rotation);
-                d.velocity += new Vector2(player.direction * 2 * extend,-2);
+                Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(Main.rand.NextFloat(Length * Projectile.scale * 0.8f)).RotatedBy(Projectile.rotation - MathHelper.PiOver2), DustID.Shadowflame);
+                d.velocity = new Vector2(player.direction * Main.rand.NextFloat(1, 4) * extend).RotatedBy(Projectile.rotation);
+                d.velocity += new Vector2(player.direction * 2 * extend, -2);
                 d.alpha = 255;
                 d.scale = extend * 1.2f;
                 d.noGravity = !Main.rand.NextBool(5);
@@ -44,14 +44,14 @@ namespace Terrafirma.Projectiles.Melee
         {
             target.AddBuff(BuffID.ShadowFlame, 60 * 3);
             modifiers.CritDamage += 1;
-            Vector2 spawnPos = player.Center + new Vector2(Main.rand.Next(-200,200), -700);
-            if(Projectile.localAI[0] != 1)
+            Vector2 spawnPos = player.Center + new Vector2(Main.rand.Next(-200, 200), -700);
+            if (Projectile.localAI[0] != 1)
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPos, spawnPos.DirectionTo(Main.MouseWorld) * 8, ModContent.ProjectileType<ShadowflameBall>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner, Main.MouseWorld.Y);
             Projectile.localAI[0] = 1;
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            float extend2 = MathF.Sin((Projectile.timeLeft / Projectile.ai[1]) * MathHelper.Pi);
+            float extend2 = MathF.Sin(Projectile.timeLeft / Projectile.ai[1] * MathHelper.Pi);
 
             Vector2 scaleVector = Vector2.SmoothStep(player.direction == 1 ? new Vector2(1.2f, 0.6f) : new Vector2(0.6f, 1.2f), new Vector2(1.1f), extend2);
 
@@ -66,13 +66,13 @@ namespace Terrafirma.Projectiles.Melee
                     Projectile.Center - Main.screenPosition,
                     new Rectangle(0, slashTex.Height() / 4 * i, slashTex.Width(), slashLength),
                     Color.Lerp(DarkSlashColor, LightSlashColor, i / 4f) * extend2 * 0.3f,
-                    Projectile.rotation + (player.direction * extend * 0.1f) - MathHelper.PiOver4 - (player.direction == 1 ? 0 : MathHelper.TwoPi),
-                    new Vector2(slashTex.Width() / 2 + (slashLength * 0.1f), player.direction == 1 ? slashLength : 0),
-                    (Projectile.scale + (extend2 * 0.2f)) * slashSize,
+                    Projectile.rotation + player.direction * extend * 0.1f - MathHelper.PiOver4 - (player.direction == 1 ? 0 : MathHelper.TwoPi),
+                    new Vector2(slashTex.Width() / 2 + slashLength * 0.1f, player.direction == 1 ? slashLength : 0),
+                    (Projectile.scale + extend2 * 0.2f) * slashSize,
                     player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically); ;
             }
             commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], scaleVector * Projectile.scale);
-            commonDiagonalItemDraw(new Color(255,255,255,128) * extend, glowTex, scaleVector * Projectile.scale);
+            commonDiagonalItemDraw(new Color(255, 255, 255, 128) * extend, glowTex, scaleVector * Projectile.scale);
             commonDiagonalItemDraw(new Color(255, 255, 255, 0) * extend * 0.5f, glowTex, scaleVector * Projectile.scale * 1.1f);
             return false;
         }

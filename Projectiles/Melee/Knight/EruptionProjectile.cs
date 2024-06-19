@@ -13,14 +13,14 @@ using Terraria.Graphics.CameraModifiers;
 using Terrafirma.Particles;
 using Terrafirma.Data;
 
-namespace Terrafirma.Projectiles.Melee
+namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class EruptionProjectile: HeldProjectile
+    public class EruptionProjectile : HeldProjectile
     {
         private static Asset<Texture2D> glowTex;
         public override void Load()
         {
-            glowTex = Mod.Assets.Request<Texture2D>("Projectiles/Melee/EruptionProjectile_Glow");
+            glowTex = ModContent.Request<Texture2D>(Texture + "_Glow");
         }
         public override void SetStaticDefaults()
         {
@@ -45,12 +45,12 @@ namespace Terrafirma.Projectiles.Melee
                 player.immune = true;
             }
 
-            for(int i = 0; i < 40; i++)
+            for (int i = 0; i < 40; i++)
             {
-                ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 3.8f,gravity = 1f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(8,8), new Color(1f, Main.rand.NextFloat(0.3f,0.6f), 0.2f, 0f));
+                ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 3.8f, gravity = 1f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(8, 8), new Color(1f, Main.rand.NextFloat(0.3f, 0.6f), 0.2f, 0f));
                 ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 1.8f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(8, 0), new Color(0.6f, 0.3f, 0.2f, 0f));
                 if (Main.rand.NextBool(5))
-                    ParticleSystem.AddParticle(new ColorDot() { Size = 0.3f}, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(8, 8), new Color(1f, Main.rand.NextFloat(0.3f, 0.6f), 0.2f, 0f));
+                    ParticleSystem.AddParticle(new ColorDot() { Size = 0.3f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(8, 8), new Color(1f, Main.rand.NextFloat(0.3f, 0.6f), 0.2f, 0f));
 
             }
 
@@ -73,7 +73,7 @@ namespace Terrafirma.Projectiles.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage += (Projectile.ai[1] / 100) - 1f;
+            modifiers.FinalDamage += Projectile.ai[1] / 100 - 1f;
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -85,7 +85,7 @@ namespace Terrafirma.Projectiles.Melee
         {
             if (Projectile.ai[1] == 200)
             {
-                ParticleSystem.AddParticle(new HiResFlame() {SizeMultiplier = 1.8f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(2, 0), new Color(0.3f, 0.15f, 0.1f, 0f));
+                ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 1.8f }, Projectile.Center + Main.rand.NextVector2Circular(10, 10), Main.rand.NextVector2Circular(2, 0), new Color(0.3f, 0.15f, 0.1f, 0f));
             }
 
             commonHeldLogic(2);
@@ -93,8 +93,8 @@ namespace Terrafirma.Projectiles.Melee
             if (player.channel && !stoppedChanneling)
             {
                 if (Projectile.ai[1] < 200)
-                Projectile.ai[1]++;
-                Projectile.ai[0] = MathHelper.Lerp(40, 10, MathHelper.Clamp(Projectile.ai[1] / 100,0,1));
+                    Projectile.ai[1]++;
+                Projectile.ai[0] = MathHelper.Lerp(40, 10, MathHelper.Clamp(Projectile.ai[1] / 100, 0, 1));
                 rotation = (player.MountedCenter - player.velocity + new Vector2(0, player.gfxOffY)).DirectionTo(Main.MouseWorld).ToRotation();
                 Projectile.rotation = rotation + MathHelper.PiOver4;
                 faceDirection = Main.MouseWorld.X - player.Center.X < 0 ? -1 : 1;
@@ -119,7 +119,7 @@ namespace Terrafirma.Projectiles.Melee
                 if (Projectile.ai[2] < 200)
                 {
                     Projectile.ai[2] += 0.08f;
-                    Projectile.ai[0] = (MathF.Sin((Projectile.ai[2] - MathHelper.Pi)) * -74) + 10;
+                    Projectile.ai[0] = MathF.Sin(Projectile.ai[2] - MathHelper.Pi) * -74 + 10;
                 }
                 else
                 {
@@ -139,18 +139,18 @@ namespace Terrafirma.Projectiles.Melee
         {
             Asset<Texture2D> tex = TextureAssets.Projectile[Type];
 
-            float rotation = player.direction == 1 ? Projectile.rotation : (Projectile.rotation - MathHelper.PiOver2);
+            float rotation = player.direction == 1 ? Projectile.rotation : Projectile.rotation - MathHelper.PiOver2;
             SpriteEffects effect = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically;
 
             for (int i = 0; i < 8; i++)
             {
-                Main.EntitySpriteDraw(glowTex.Value, Projectile.Center + Main.rand.NextVector2Circular(1,1) + new Vector2(MathHelper.Clamp(Projectile.ai[1] / 200, 0, 2)).RotatedBy((i * MathHelper.PiOver4) + (0.02f * Main.timeForVisualEffects)) - Main.screenPosition, null, new Color(1f, 0.3f, 0f, 0) * 0.3f * MathHelper.Clamp(Projectile.ai[1] / 200, 0, 1), rotation, new Vector2(85, player.direction == 1 ? 20 : 90), Projectile.scale, effect);
+                Main.EntitySpriteDraw(glowTex.Value, Projectile.Center + Main.rand.NextVector2Circular(1, 1) + new Vector2(MathHelper.Clamp(Projectile.ai[1] / 200, 0, 2)).RotatedBy(i * MathHelper.PiOver4 + 0.02f * Main.timeForVisualEffects) - Main.screenPosition, null, new Color(1f, 0.3f, 0f, 0) * 0.3f * MathHelper.Clamp(Projectile.ai[1] / 200, 0, 1), rotation, new Vector2(85, player.direction == 1 ? 20 : 90), Projectile.scale, effect);
             }
 
-            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, null, lightColor, rotation, new Vector2(85,player.direction == 1 ? 20 : 90),Projectile.scale, effect);
-            
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, null, lightColor, rotation, new Vector2(85, player.direction == 1 ? 20 : 90), Projectile.scale, effect);
+
             Main.EntitySpriteDraw(glowTex.Value, Projectile.Center + Main.rand.NextVector2Circular(1, 1) - Main.screenPosition, null, new Color(1f, 0.3f, 0f, 0) * 0.7f * MathHelper.Clamp(Projectile.ai[1] / 200, 0, 1), rotation, new Vector2(85, player.direction == 1 ? 20 : 90), Projectile.scale, effect);
-            
+
             return false;
         }
     }
@@ -176,13 +176,13 @@ namespace Terrafirma.Projectiles.Melee
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return Color.Lerp(new Color(255, 60, 0, 0), new Color(255, 128, 0, 0),(float)Math.Sin((Main.timeForVisualEffects + Projectile.whoAmI * 100) * 0.01f) * 0.5f + 0.5f) * Projectile.Opacity;
+            return Color.Lerp(new Color(255, 60, 0, 0), new Color(255, 128, 0, 0), (float)Math.Sin((Main.timeForVisualEffects + Projectile.whoAmI * 100) * 0.01f) * 0.5f + 0.5f) * Projectile.Opacity;
         }
 
         public override void AI()
         {
             double rot = Projectile.spriteDirection == 1 ? MathHelper.PiOver4 : MathHelper.PiOver2 + MathHelper.PiOver4;
-            
+
             Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
             Projectile.velocity *= 0.96f;
 
