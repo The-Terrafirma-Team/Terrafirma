@@ -19,16 +19,16 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) mult = (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / item.mana;
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) mult = (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / ContentSamples.ItemsByType[item.type].mana;
         }
         public override float UseTimeMultiplier(Item item, Player player)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)item.useTime;
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)ContentSamples.ItemsByType[item.type].useTime;
             return base.UseTimeMultiplier(item, player);
         }
         public override float UseAnimationMultiplier(Item item, Player player)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)item.useAnimation;
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)ContentSamples.ItemsByType[item.type].useAnimation;
             return base.UseAnimationMultiplier(item, player);
         }
         public override void UpdateInventory(Item item, Player player)
