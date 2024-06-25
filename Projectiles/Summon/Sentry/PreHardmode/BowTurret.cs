@@ -74,7 +74,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             {
                 if (!Main.player[Projectile.owner].IsAmmoFreeThisShot(ContentSamples.ItemsByType[ItemID.WoodenBow], selectedarrow, selectedarrow.shoot)) Main.player[Projectile.owner].inventory[arrowslot].stack--;
                 Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center - new Vector2(-11, 5), (Projectile.Center - new Vector2(-11, 5)).DirectionTo(targetNPC.Center) * 10f, selectedarrow.shoot, Projectile.damage + selectedarrow.damage, selectedarrow.knockBack, Projectile.owner);
-                pullback = 10f;
+                pullback = -10f;
                 SoundEngine.PlaySound(SoundID.Item5, Projectile.Center);
             }
 

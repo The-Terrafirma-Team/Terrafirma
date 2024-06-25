@@ -1034,7 +1034,7 @@ Items: {
 
 	BowTurretAssemblyKit: {
 		DisplayName: Bow Turret Assembly Kit
-		Tooltip: 			
+		Tooltip:
 			'''
 			Summons a sentry
 			Summons a bow turret that uses arrows in the player's ammo slots

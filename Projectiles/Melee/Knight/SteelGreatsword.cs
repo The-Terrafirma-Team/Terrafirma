@@ -5,6 +5,7 @@ using System;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terrafirma.Particles;
+using Terrafirma.Systems.Primitives;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -102,6 +103,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
         }
         public override bool PreDraw(ref Color lightColor)
         {
+
             for (int i = 0; i < 5; i++)
             {
                 Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Projectile.velocity * i * 3 - Main.screenPosition, null, new Color(128, 200, 255, 0) * Projectile.Opacity * (0.7f - i * 0.1f), Projectile.rotation, new Vector2(40, 24), 1.3f - i * 0.1f, SpriteEffects.None);

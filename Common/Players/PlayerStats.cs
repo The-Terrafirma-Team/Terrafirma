@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Terrafirma.Common.Templates;
 using Terrafirma.Data;
+using Terrafirma.Systems.Primitives;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -92,6 +93,11 @@ namespace Terrafirma.Common.Players
             if (Player.itemAnimation == 1)
                 FeralCharge = 0;
             Player.GetDamage(DamageClass.Melee) += (FeralCharge);
+
+        }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
