@@ -1031,6 +1031,15 @@ Items: {
 			Critical strikes deal extra damage
 			'''
 	}
+
+	BowTurretAssemblyKit: {
+		DisplayName: Bow Turret Assembly Kit
+		Tooltip: 			
+			'''
+			Summons a sentry
+			Summons a bow turret that uses arrows in the player's ammo slots
+			'''
+	}
 }
 
 Projectiles: {
@@ -1172,6 +1181,7 @@ Projectiles: {
 	ShadowflameSword.DisplayName: Shadowflame Sword
 	ShadowflameBall.DisplayName: Shadowflame Ball
 	GraniteBeam.DisplayName: Granite Beam
+	BowTurret.DisplayName: Bow Turret
 }
 
 Tiles: {
