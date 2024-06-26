@@ -9,19 +9,25 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Systems.Primitives;
 
 namespace Terrafirma.Projectiles.Ranged
 {
     internal class HotCoal : ModProjectile
     {
         Vector2 randpos = Vector2.Zero;
+        Trail trail;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
         }
         public override void SetDefaults()
         {
+            trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
+            trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            trail.color = f => new Color(1f, 0.4f, 0f, 0f) * 0.2f;
+
             Projectile.width = 12;
             Projectile.height = 12;
             Projectile.timeLeft = 100;
@@ -81,6 +87,8 @@ namespace Terrafirma.Projectiles.Ranged
         {
             Texture2D texture = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoal").Value;
             Texture2D textureglow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoalGlow").Value;
+
+            trail.Draw(Projectile.Right);
 
             Main.EntitySpriteDraw(texture,
                 Projectile.Center - Main.screenPosition,
