@@ -25,7 +25,6 @@ namespace Terrafirma.Projectiles.Ranged
         }
         public override void SetDefaults()
         {
-            trail = new Trail(Projectile.oldPos, TrailWidth.WobblyWidth, 30f);
 
             Projectile.width = 8;
             Projectile.height = 8;
@@ -43,36 +42,34 @@ namespace Terrafirma.Projectiles.Ranged
 
         public override void AI()
         {
-            //Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-            //Projectile.spriteDirection = Projectile.direction;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.spriteDirection = Projectile.direction;
 
-            //if (Projectile.ai[0] == 0)
-            //{
-            //    for (int i = 0; i < 8; i++)
-            //    {
-            //        Dust d = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Poop, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, Color.Black, Main.rand.NextFloat(0.8f, 1f));
-            //    }
-            //}
+            if (Projectile.ai[0] == 0)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Dust d = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Poop, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), Projectile.velocity.Y * Main.rand.NextFloat(0.2f, 0.3f), 0, Color.Black, Main.rand.NextFloat(0.8f, 1f));
+                }
+            }
 
-            //Projectile.ai[0]++;
+            Projectile.ai[0]++;
 
 
-            //if (Projectile.ai[0] % 2 == 0)
-            //{
-            //    Dust newdust = Dust.NewDustPerfect(Projectile.Center + Vector2.Normalize(Projectile.velocity) * 5f, DustID.Poop, Vector2.Zero, 0, Color.Black, Main.rand.NextFloat(1f, 1.2f));
-            //    newdust.noGravity = true;
-            //}
-            //if (Projectile.ai[0] % 4 == 0)
-            //{
-            //    Dust d = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Poop, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), 0, 0, Color.Black, Main.rand.NextFloat(0.8f, 1f));
-            //}
+            if (Projectile.ai[0] % 2 == 0)
+            {
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + Vector2.Normalize(Projectile.velocity) * 5f, DustID.Poop, Vector2.Zero, 0, Color.Black, Main.rand.NextFloat(1f, 1.2f));
+                newdust.noGravity = true;
+            }
+            if (Projectile.ai[0] % 4 == 0)
+            {
+                Dust d = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.Poop, Projectile.velocity.X * Main.rand.NextFloat(0.2f, 0.3f), 0, 0, Color.Black, Main.rand.NextFloat(0.8f, 1f));
+            }
 
-            //if (Projectile.ai[0] > 20)
-            //{
-            //    Projectile.velocity.Y += 0.3f;
-            //}
-
-            Projectile.position = Main.MouseWorld;
+            if (Projectile.ai[0] > 20)
+            {
+                Projectile.velocity.Y += 0.3f;
+            }
 
         }
 
@@ -87,7 +84,6 @@ namespace Terrafirma.Projectiles.Ranged
 
         public override void PostDraw(Color lightColor)
         {
-            trail.Draw(Projectile.position);
             base.PostDraw(lightColor);
         }
     }

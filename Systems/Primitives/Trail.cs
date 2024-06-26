@@ -14,18 +14,26 @@ namespace Terrafirma.Systems.Primitives
     {
         public BasicEffect effect;
         private GraphicsDevice GraphicsDevice = Main.graphics.GraphicsDevice;
-
         public TrailSegment[] trailsegments;
         public Vector2[] pointarray;
+
 
         public Texture2D trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/GlowTrail").Value;
 
         public delegate float WidthDelegate(float trailpart);
         /// <summary>
-        /// Set this to any float returning method to modify the trail's width.
+        /// Set this to any float returning method to modify the trail's width per segment.
         /// </summary>
         public WidthDelegate widthmodifier = null;
         public float basewidth = 30f;
+
+        public delegate Color ColorDelegate(float trailpart);
+        /// <summary>
+        /// Set this to any Color returning method to modify the trail's color per segment.
+        /// </summary>
+        public ColorDelegate color = null;
+
+
         public Trail(Vector2[] segmentpoints)
         {
             Main.RunOnMainThread(() =>
@@ -90,6 +98,7 @@ namespace Terrafirma.Systems.Primitives
         public void Draw(Vector2 position)
         {
             if (widthmodifier == null) widthmodifier = TrailWidth.FlatWidth;
+            if (color == null) color = f => new Color(1f,1f,1f,0f);
 
             //Create vertices and indices
             VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[]{};
@@ -104,8 +113,19 @@ namespace Terrafirma.Systems.Primitives
                 //If trailsegment has trailsegment in front of it, set it to follow that segment
                 //Update trailsegment then add the two vertices from the segment to the main vertex array
                 trailsegments[i].width = basewidth;
-                if (i < trailsegments.Length - 1) trailsegments[i].UpdatePoint(pointarray[i], pointarray[i+1], 1f - (i / (float)trailsegments.Length), widthmodifier(1f - (i / (float)trailsegments.Length)));
-                else trailsegments[i].UpdatePoint(pointarray[i], pointarray[i], 1f - (i / (float)trailsegments.Length), widthmodifier(1f - (i / (float)trailsegments.Length)));
+                if (i < trailsegments.Length - 1) 
+                    trailsegments[i].UpdatePoint(pointarray[i], 
+                    pointarray[i+1], 
+                    1f - (i / (float)trailsegments.Length), 
+                    widthmodifier(1f - (i  / (float)trailsegments.Length)),
+                    color(1f - (i / (float)trailsegments.Length))
+                    );
+                else trailsegments[i].UpdatePoint(pointarray[i], 
+                    pointarray[i], 
+                    1f - (i / (float)trailsegments.Length), 
+                    widthmodifier(1f - (i / (float)trailsegments.Length)),
+                    color(1f - (i / (float)trailsegments.Length))
+                    );
 
                 vertices = vertices.Concat(trailsegments[i].vertices).ToArray();
 
@@ -154,7 +174,7 @@ namespace Terrafirma.Systems.Primitives
         public VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[] { };
 
         //Update the vertex points for this trail segment
-        public void UpdatePoint(Vector2 position, Vector2 nextposition, float segmentpiece, float segmentwidthmultiplier)
+        public void UpdatePoint(Vector2 position, Vector2 nextposition, float segmentpiece, float segmentwidthmultiplier, Color color)
         {
             center = position;
             float rot = position.DirectionTo(nextposition).ToRotation();
@@ -167,11 +187,11 @@ namespace Terrafirma.Systems.Primitives
             {
               new VertexPositionColorTexture(
                     new Vector3(center + upperpoint, 0f),
-                    new Color(1f,1f,1f,0f),
+                    color,
                     new Vector2(segmentpiece, 0f)),
                 new VertexPositionColorTexture(
                     new Vector3(center + lowerpoint, 0f),
-                    new Color(1f,1f,1f,0f),
+                    color,
                     new Vector2(segmentpiece, 1f))
             };
         }
@@ -194,5 +214,10 @@ namespace Terrafirma.Systems.Primitives
         {
             return (float)((Math.Sin(trailpart * 60f) + 1f) / 4f) + 0.25f;
         }
+    }
+
+    public static class TrailColor
+    {
+
     }
 }
