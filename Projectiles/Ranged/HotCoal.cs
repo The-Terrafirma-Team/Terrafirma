@@ -10,6 +10,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.Primitives;
+using ReLogic.Content;
 
 namespace Terrafirma.Projectiles.Ranged
 {
@@ -17,6 +18,11 @@ namespace Terrafirma.Projectiles.Ranged
     {
         Vector2 randpos = Vector2.Zero;
         Trail trail;
+        private static Asset<Texture2D> trailTex;
+        public override void Load()
+        {
+            trailTex = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail");
+        }
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
@@ -25,7 +31,7 @@ namespace Terrafirma.Projectiles.Ranged
         public override void SetDefaults()
         {
             trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
-            trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            trail.trailtexture = trailTex.Value;
             trail.color = f => new Color(1f, 0.4f, 0f, 0f) * 0.2f;
 
             Projectile.width = 12;

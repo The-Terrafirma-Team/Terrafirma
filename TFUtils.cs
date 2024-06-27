@@ -18,6 +18,11 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static Color ToColor(this Vector3 vect, float alpha = 1f)
+        {
+            return new Color(vect.X,vect.Y,vect.Z,alpha);
+        }
+
         /// <summary>
         /// Clamps a Vector2 to be a specific length between max and min. Good for giving something a maximum speed.
         /// </summary>

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terrafirma.Systems.MageClass;
+using Terrafirma.Systems.Primitives;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -27,6 +28,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
     }
     public class CrimsonRodWorm : ModProjectile
     {
+        private static Asset<Texture2D> trailTex;
+        Trail trail;
+        public override void Load()
+        {
+            trailTex = ModContent.Request<Texture2D>(Texture);
+        }
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
@@ -34,6 +41,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
         }
         public override void SetDefaults()
         {
+            ProjectileID.Sets.TrailCacheLength[Type] = 13;
+            trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 14);
+            trail.trailtexture = trailTex.Value;
+            trail.color = f => Lighting.GetSubLight(Projectile.oldPos[(int)((1 - f) * (ProjectileID.Sets.TrailCacheLength[Type] - 1))]).ToColor();
+
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.Size = new Vector2(16);
@@ -97,17 +109,18 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Asset<Texture2D> tex = TextureAssets.Projectile[Type];
+            trail.Draw(Projectile.Center);
+            //Asset<Texture2D> tex = TextureAssets.Projectile[Type];
 
-            Vector2 pos = Projectile.position;
+            //Vector2 pos = Projectile.position;
 
-            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type] - 1; i++)
-            {
-                //pos += (Projectile.oldRot[i]).ToRotationVector2() * -18;
-                pos += Projectile.oldPos[i].DirectionFrom(Projectile.oldPos[i+1]) * -MathHelper.Clamp(Projectile.oldPos[i].Distance(Projectile.oldPos[i+1]) * 3,0,16);
-                float rotation = Projectile.oldRot[i];
-                Main.EntitySpriteDraw(tex.Value, pos - Main.screenPosition + Projectile.Size / 2, new Rectangle(20 * i, 0, 20, 14), lightColor, rotation, new Vector2(10, 7), 1, SpriteEffects.FlipHorizontally, 0);
-            }
+            //for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type] - 1; i++)
+            //{
+            //    //pos += (Projectile.oldRot[i]).ToRotationVector2() * -18;
+            //    pos += Projectile.oldPos[i].DirectionFrom(Projectile.oldPos[i+1]) * -MathHelper.Clamp(Projectile.oldPos[i].Distance(Projectile.oldPos[i+1]) * 3,0,16);
+            //    float rotation = Projectile.oldRot[i];
+            //    Main.EntitySpriteDraw(tex.Value, pos - Main.screenPosition + Projectile.Size / 2, new Rectangle(20 * i, 0, 20, 14), lightColor, rotation, new Vector2(10, 7), 1, SpriteEffects.FlipHorizontally, 0);
+            //}
 
             return false;
         }
