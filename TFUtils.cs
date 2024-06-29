@@ -44,6 +44,7 @@ namespace Terrafirma
         /// <param name="player"></param>
         public static void GetPointOnSwungItemPath(float spriteWidth, float spriteHeight, float normalizedPointOnPath, float itemScale, out Vector2 location, out Vector2 outwardDirection, Player player)
         {
+
             float num = (float)Math.Sqrt(spriteWidth * spriteWidth + spriteHeight * spriteHeight);
             float num2 = (float)(player.direction == 1).ToInt() * ((float)Math.PI / 2f);
             if (player.gravDir == -1f)
@@ -53,6 +54,7 @@ namespace Terrafirma
             outwardDirection = player.itemRotation.ToRotationVector2().RotatedBy(3.926991f + num2);
             location = player.RotatedRelativePoint(player.itemLocation + outwardDirection * num * normalizedPointOnPath * itemScale);
         }
+
         /// <summary>
         /// Sets defaults to regular sword stuff.
         /// item.useStyle = ItemUseStyleID.Swing;
@@ -217,6 +219,7 @@ namespace Terrafirma
             return AreaNPCs;
 
         }
+
         public static Vector2 CommonBounceLogic(this Projectile p, Vector2 oldVelocity)
         {
             if (p.velocity.Y != oldVelocity.Y)

@@ -15,7 +15,8 @@ using ReLogic.Content;
 namespace Terrafirma.Projectiles.Ranged
 {
     internal class HotCoal : ModProjectile
-    {
+    { 
+
         Vector2 randpos = Vector2.Zero;
         Trail trail;
         private static Asset<Texture2D> trailTex;
@@ -31,8 +32,8 @@ namespace Terrafirma.Projectiles.Ranged
         public override void SetDefaults()
         {
             trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
-            trail.trailtexture = trailTex.Value;
-            trail.color = f => new Color(1f, 0.4f, 0f, 0f) * 0.2f;
+            trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            trail.color = f => new Color(0.4f, 0.4f, 0.4f, 0f) * 0.2f;
 
             Projectile.width = 12;
             Projectile.height = 12;
@@ -51,6 +52,7 @@ namespace Terrafirma.Projectiles.Ranged
 
         public override void AI()
         {
+
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             Projectile.spriteDirection = Projectile.direction;
 
@@ -87,6 +89,7 @@ namespace Terrafirma.Projectiles.Ranged
             }
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item50, Projectile.position);
+
         }
 
         public override bool PreDraw(ref Color lightColor)

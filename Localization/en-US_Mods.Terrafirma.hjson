@@ -1182,6 +1182,8 @@ Projectiles: {
 	ShadowflameBall.DisplayName: Shadowflame Ball
 	GraniteBeam.DisplayName: Granite Beam
 	BowTurret.DisplayName: Bow Turret
+	NinjaKatanaProj.DisplayName: Ninja Katana Proj
+	NinjaShurikenHostile.DisplayName: Ninja Shuriken Hostile
 }
 
 Tiles: {
@@ -1435,6 +1437,7 @@ UIElements.CookingPot.InputAmount: Amount
 NPCs: {
 	FlameElemental.DisplayName: Flame Elemental
 	Terragrim.DisplayName: Terragrim
+	Ninja.DisplayName: Ninja
 }
 
 Configs: {
