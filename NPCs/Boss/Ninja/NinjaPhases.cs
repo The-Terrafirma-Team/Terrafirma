@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent;
+using static Terraria.GameContent.PlayerEyeHelper;
 
 namespace Terrafirma.NPCs.Boss.Ninja
 {
@@ -18,12 +19,24 @@ namespace Terrafirma.NPCs.Boss.Ninja
         //Select Phase based on condition
 
         int shurikentimer = 300;
+        int dashesexecuted = 0;
+        int distancetimer = 0;
         private void ChoosePhase()
         {
 
             NPC.TargetClosest();
 
             byte statenumber;
+
+            //Smoke bomb if too many dashes have been executed without the player being hit
+            if (NPC.Center.Distance(target.Center) > 150f && (dashesexecuted > 12 || distancetimer > 200))
+            {
+                state = NinjaPhase.smokebomb;
+                distancetimer = 30;
+                dashesexecuted = 3;
+                return;
+            }
+
             //Jump is player is very high up
             if (NPC.Center.Y - target.Center.Y > 100f && NPC.Center.Y - target.Center.Y > Math.Abs(NPC.Center.X - target.Center.X))
             {
@@ -39,11 +52,11 @@ namespace Terrafirma.NPCs.Boss.Ninja
             }
 
             //throw shurikens from time to time when the player gets too far away
-            if (NPC.Center.Distance(target.Center) <= 300f && NPC.Center.Distance(target.Center) >= 200f)
+            if (NPC.Center.Distance(target.Center) <= 300f && NPC.Center.Distance(target.Center) >= 200f && NPC.life < NPC.lifeMax * 0.7f)
             {
-                if (Main.rand.NextBool(16) || shurikentimer <= 0) { 
+                if (shurikentimer <= 0) { 
                     state = NinjaPhase.throwshuriken;
-                    shurikentimer = Main.rand.Next(10,16) * 50;
+                    shurikentimer = Main.rand.Next(700, 800);
                     return;
                 }
             }
@@ -71,7 +84,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
             else statenumber = (byte)Main.rand.Next(0, 2);
             switch (statenumber)
             {
-                case 0: state = NinjaPhase.idle; break;
+                case 0: state = Main.rand.NextBool(3) && NPC.life < NPC.lifeMax / 2? NinjaPhase.slashdash : NinjaPhase.idle; break;
                 case 1: state = NinjaPhase.chase; break;
             }
         }
@@ -97,8 +110,18 @@ namespace Terrafirma.NPCs.Boss.Ninja
             NPC.rotation = Utils.AngleLerp(NPC.rotation % (float)(Math.PI * 2), 0f, 0.2f);
             NPC.height = 47;
             NPC.velocity.Y += 0.5f;
-            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.5f, -5f, 5f);
+            float maxspeed = NPC.life < NPC.lifeMax / 2 ? 7.5f : 5f;
+            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.5f, -maxspeed, maxspeed);
             NPC.spriteDirection = -targetDirection;
+
+            if (NPC.ai[0] == 1) 
+            { 
+                dashesexecuted++; 
+                if (NPC.Center.Distance(target.Center) > 500f)
+                {
+                    dashesexecuted += 2;
+                }
+            }
 
             if (NPC.ai[0] % 10 == 0) SoundEngine.PlaySound(SoundID.Run, NPC.Center);
 
@@ -110,7 +133,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
             }
 
             //Speed up if player is far away
-            if (Math.Abs(NPC.Center.X - target.Center.X) > 300f)
+            if (Math.Abs(NPC.Center.X - target.Center.X) > 300f && NPC.life < NPC.lifeMax * 0.7f)
             {
                 NPC.ai[0] = 0;
                 if (Main.rand.NextBool(4)) state = NinjaPhase.throwshuriken;
@@ -135,13 +158,23 @@ namespace Terrafirma.NPCs.Boss.Ninja
             NPC.rotation = Utils.AngleLerp(NPC.rotation % (float)(Math.PI * 2), 0.2f * -NPC.spriteDirection, 0.2f);
             NPC.height = 47;
             NPC.velocity.Y += 0.5f;
-            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.5f, -10f, 10f);
+            float maxspeed = NPC.life < NPC.lifeMax / 2 ? 13f : 10f;
+            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.5f, -maxspeed, maxspeed);
             NPC.spriteDirection = -targetDirection;
+
+            if (NPC.ai[0] == 1) 
+            { 
+                dashesexecuted += 2;
+                if (NPC.Center.Distance(target.Center) > 500f)
+                {
+                    dashesexecuted += 2;
+                }
+            }
 
             if (NPC.ai[0] % 10 == 0) SoundEngine.PlaySound(SoundID.Run, NPC.Center);
 
             //Go into slash dash if the player is far
-            if (NPC.Center.Distance(target.Center) > 600f && NPC.ai[0] > 90 && NPC.life < NPC.lifeMax/2) state = NinjaPhase.slashdash;
+            if (NPC.Center.Distance(target.Center) > 600f && NPC.life < NPC.lifeMax/2) state = NinjaPhase.slashdash;
 
             //Go back to base state after 90 frames
             if (NPC.ai[0] > 90)
@@ -152,7 +185,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
             }
 
             //Slow down if player is close
-            if (Math.Abs(NPC.Center.X - target.Center.X) < 250f)
+            float slowdownrange = NPC.life < NPC.lifeMax / 2 ? 100f : 150f;
+            if (Math.Abs(NPC.Center.X - target.Center.X) < slowdownrange)
             {
                 NPC.ai[0] = 0;
                 state = NinjaPhase.chase;
@@ -174,6 +208,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
         bool coolspin = false;
         float afterimagefloat = 0f;
 
+        int maxjumps = 2;
+
         //Jump ________________________________________________________________________________________________________________
         private void Jump()
         {
@@ -192,7 +228,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 }
 
                 NPC.rotation = 0f;
-                NPC.velocity.Y = Math.Clamp((target.Bottom.Y - NPC.Bottom.Y) / 12f, -25f, -10f);
+                NPC.velocity.Y = Math.Clamp((target.Bottom.Y - NPC.Bottom.Y) / 8f, -25f, -10f);
+
                 NPC.velocity.X = targetDirection * 2f * Math.Clamp(Math.Abs(NPC.velocity.X), 0.2f, 3.5f);
                 NPC.spriteDirection = -targetDirection;
                 SoundEngine.PlaySound(SoundID.DoubleJump, NPC.Center);
@@ -202,7 +239,18 @@ namespace Terrafirma.NPCs.Boss.Ninja
 
             NPC.velocity.Y += 0.5f;
 
-            //Do cool spin and after image
+            //Jump again if player is just out of reach
+            if (Math.Abs(NPC.Center.X - target.Center.X) < 100f && NPC.Center.Y - target.Center.Y > 30f && NPC.ai[0] > 10 && maxjumps > 0)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(NPC.Bottom + Main.rand.NextVector2Circular(5f, 1f), DustID.Cloud, new Vector2(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(2f, 3.5f)), Scale: 1.2f);
+                }
+                NPC.ai[0] = 0;
+                maxjumps--;
+            }
+
+             //Do cool spin and after image
             if (coolspin)
             {
                 NPC.rotation += 0.2f * (NPC.velocity.X / Math.Abs(NPC.velocity.X));
@@ -210,7 +258,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
             }
 
             //Slow down if the x velocity is not towards the player
-            if (NPC.velocity.X / Math.Abs(NPC.velocity.X) != targetDirection) NPC.velocity.X *= 0.97f;
+            if (NPC.velocity.X / Math.Abs(NPC.velocity.X) != targetDirection) NPC.velocity.X *= 0.93f;
 
             //Increase air time for animation
             if (!NPC.collideY) airtime = Math.Clamp(airtime + 1, 0, 40);
@@ -224,6 +272,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 NPC.position.Y -= 24;
                 NPC.ai[0] = 0;
                 state = NinjaPhase.none;
+                maxjumps = 2;
             }
             NPC.ai[0]++;
         }
@@ -237,7 +286,11 @@ namespace Terrafirma.NPCs.Boss.Ninja
             NPC.velocity.X *= 0.9f;
             NPC.spriteDirection = -targetDirection;
 
-            if (NPC.ai[0] == 1) SoundEngine.PlaySound(SoundID.Item1, NPC.Center);
+            if (NPC.ai[0] == 1) 
+            { 
+                SoundEngine.PlaySound(SoundID.Item1, NPC.Center);
+                dashesexecuted--;
+            }
 
             if (katanaprojectile == null)
             {
@@ -259,20 +312,21 @@ namespace Terrafirma.NPCs.Boss.Ninja
             NPC.ai[0]++;
         }
 
-        int shurikenamount = 1;
+        int shurikenamount = 3;
 
         //Throw Shuriken ________________________________________________________________________________________________________________
         public void ThrowShuriken()
         {
             NPC.rotation = Utils.AngleLerp(NPC.rotation % (float)(Math.PI * 2), 0f, 0.2f);
             NPC.height = 47;
-            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.05f, -2f, 2f); ;
+            float maxspeed = NPC.life < NPC.lifeMax / 2 ? 4f : 2f;
+            NPC.velocity.X = Math.Clamp(NPC.velocity.X + targetDirection * 0.05f, -maxspeed, maxspeed); ;
             NPC.velocity.Y += 0.5f;
             NPC.spriteDirection = -targetDirection;
 
             float distancefloat = Math.Clamp((300f - NPC.Center.Distance(target.Center)) / 50f, 1f, 2f);
 
-            if (NPC.ai[0] == 0 && NPC.ai[1] == 0) shurikenamount = Main.rand.Next(3, 6);
+            if (NPC.ai[0] == 1 && NPC.ai[1] == 0) shurikenamount = Main.rand.Next(3, 6);
 
             if (NPC.ai[0] > 40 / distancefloat)
             {
@@ -285,7 +339,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 {
                     for (int i = -2; i <= 1; i++)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedBy(i * 0.4f) * 10f, ModContent.ProjectileType<NinjaShurikenHostile>(), NPC.damage / 4, NPC.knockBackResist, -1);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedBy(i * 0.4f + 0.2f) * 10f, ModContent.ProjectileType<NinjaShurikenHostile>(), NPC.damage / 4, NPC.knockBackResist, -1);
                     }
                 }
                 else
@@ -302,7 +356,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 NPC.ai[0] = 0;
                 NPC.ai[1] = 0;
 
-                if(NPC.Center.Distance(target.Center) > 300f && NPC.life < NPC.lifeMax /2) state = NinjaPhase.slashdash;
+                if (NPC.Center.Distance(target.Center) > 300f && NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool()) state = NinjaPhase.slashdash;
+                else if (NPC.life < (int)(NPC.lifeMax * 0.7f) && Main.rand.NextBool()) state = NinjaPhase.smokebomb;
                 else state = NinjaPhase.none;
             }
             NPC.ai[0]++;
@@ -360,6 +415,41 @@ namespace Terrafirma.NPCs.Boss.Ninja
 
             }
             NPC.ai[0]++;
+        }
+
+        //Smoke Bomb ________________________________________________________________________________________________________________
+
+        float smokebombanimation = 0f;
+        private void SmokeBomb()
+        {
+            NPC.rotation = Utils.AngleLerp(NPC.rotation % (float)(Math.PI * 2), 0f, 0.2f);
+            NPC.height = 47;
+            NPC.velocity.X *= 0.9f;
+            NPC.velocity.Y += 0.5f;
+            NPC.spriteDirection = -targetDirection;
+
+            if (NPC.ai[0] < 45)
+            {
+                smokebombanimation = MathHelper.Lerp(smokebombanimation, 5f, 0.15f);
+            }
+            if (NPC.ai[0] >= 45 && NPC.ai[0] < 55)
+            {
+                smokebombanimation = Utils.AngleLerp(smokebombanimation, 0f, 0.6f);
+            }
+            if (NPC.ai[0] == 55)
+            {
+                SoundEngine.PlaySound(SoundID.Item14, NPC.Center);
+                for (int i =  0; i < 30; i++) Dust.NewDustPerfect(NPC.Center, DustID.Smoke, Main.rand.NextVector2Circular(1.3f, 1.3f), newColor: Color.DarkGray, Scale: 3f);
+                NPC.position = target.Center + new Vector2(200f, -45f) * (target.velocity.X / Math.Abs(target.velocity.X));
+                for (int i = 0; i < 30; i++) Dust.NewDustPerfect(NPC.Center, DustID.Smoke, Main.rand.NextVector2Circular(1.3f, 1.3f), newColor: Color.DarkGray, Scale: 3f);
+
+                NPC.ai[0] = 0;
+                if(NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool()) state = NinjaPhase.slashdash;
+                else state = NinjaPhase.none;
+            }
+
+            NPC.ai[0]++;
+
         }
     }
 }

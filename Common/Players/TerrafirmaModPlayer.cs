@@ -13,12 +13,14 @@ using Terrafirma.Systems.NewNPCQuests;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Items.Weapons.Melee.Knight;
 using Terrafirma.Projectiles.Melee.Knight;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace Terrafirma.Common.Players
 {
     public class TerrafirmaModPlayer : ModPlayer
     {
+        //Accessories
 
         public bool Foregrip = false;
         public bool DrumMag = false;
@@ -28,17 +30,24 @@ namespace Terrafirma.Common.Players
 
         public bool SpringBoots = true;
 
+        //Movement Variables
+
         public Vector2 Momentum = Vector2.Zero;
         public int FloorTime = 0;
         public float JumpMultiplier = 1f;
 
+        //UI Variables
+
         public static bool SpellUI = false;
         internal Item HeldMagicItem = new Item(0);
+
+        public static bool SpellSideMenu = false;
+
+        //
 
         public Quest[] playerquests = new Quest[] { };
 
         internal bool RightMouseSwitch = false;
-
 
         public override void ResetEffects()
         {
@@ -176,6 +185,17 @@ namespace Terrafirma.Common.Players
                 }
             }
 
+            //Spell Side menu
+            if (!SpellSideMenu && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+            {
+                ModContent.GetInstance<SpellSideMenuUISystem>().Create(Player.HeldItem);
+                SpellSideMenu = true;
+            }
+            if (Main.keyState.IsKeyDown(Keys.P) || !SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) || ModContent.GetInstance<SpellSideMenuUISystem>().spellitem.type != Player.HeldItem.type || Player.HeldItem.type == 0)
+            {
+                ModContent.GetInstance<SpellSideMenuUISystem>().Flush();
+                SpellSideMenu = false;
+            }
 
         }
         public override bool CanUseItem(Item item)

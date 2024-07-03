@@ -1528,4 +1528,8 @@ Quests: {
 	}
 }
 
-Keybinds.tertiaryAttack.DisplayName: Tertiary Attack
+Keybinds: {
+	tertiaryAttack.DisplayName: Tertiary Attack
+	previousSpell.DisplayName: previous Spell
+	nextSpell.DisplayName: next Spell
+}

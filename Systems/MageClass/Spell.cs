@@ -6,6 +6,10 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using Humanizer;
+using Terrafirma.Systems.AccessorySynergy;
+using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Systems.UIElements;
+using System;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -163,5 +167,85 @@ namespace Terrafirma.Systems.MageClass
     {
         public static Spell[] SpellID = new Spell[] { };
         public static Dictionary<int, Spell[]> ItemCatalogue = new Dictionary<int, Spell[]>();
+
+        public static int GetWeaponSpellIndex(Spell spell, int itemid)
+        {
+            for (int i = 0; i < ItemCatalogue[itemid].Length; i++)
+            {
+                if (ItemCatalogue[itemid][i].IsEqualsTo(spell)) return i;
+            }
+            return 0;
+        }
+
+        public static int GetWeaponSpellIndexWithAccessory(Spell spell, int itemid)
+        {
+            for (int i = 0; i < ItemCatalogue[itemid].Length; i++)
+            {
+                if (ItemCatalogue[itemid][i].IsEqualsTo(spell)) return i;
+            }
+
+            int AccumulatedAccessorySpells = 0;
+
+            for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
+            {
+                if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                {
+                    int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
+                    for (int j = 0; j < ItemCatalogue[accessory].Length; j++)
+                    {
+                        if (ItemCatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j].IsEqualsTo(spell)) return ItemCatalogue[itemid].Length + AccumulatedAccessorySpells;
+                        else AccumulatedAccessorySpells++;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        public static Spell GetWeaponSpellFromIndex(int index, int itemid)
+        {
+            if (index < ItemCatalogue[itemid].Length)
+            {
+                return ItemCatalogue[itemid][index];
+            }
+            else
+            {
+                int AccumulatedAccessorySpells = 0;
+                for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
+                {
+                    if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                    {
+                        int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
+                        for (int j = 0; j < ItemCatalogue[accessory].Length; j++)
+                        {
+                            if (index == ItemCatalogue[itemid].Length + AccumulatedAccessorySpells) return ItemCatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j];
+                            else AccumulatedAccessorySpells++;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static int GetMaxSpellsforWeapon(int itemid)
+        {
+            return ItemCatalogue[itemid].Length;
+        }
+
+        public static int GetMaxSpellsforWeaponwithAccessory(int itemid)
+        {
+            if (!ItemCatalogue.ContainsKey(itemid)) return 0;
+
+            int AccumulatedAccessorySpells = 0;
+            for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
+            {
+                if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                {
+                    int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
+                    AccumulatedAccessorySpells += ItemCatalogue[accessory].Length;
+                }
+            }
+
+            return ItemCatalogue[itemid].Length + AccumulatedAccessorySpells;
+        }
     }
 }

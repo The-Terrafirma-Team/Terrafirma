@@ -27,6 +27,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
             swingsword = 5,
             throwshuriken = 6,
             slashdash = 7,
+            smokebomb = 8,
         }
 
         private NinjaPhase state = NinjaPhase.none;
@@ -51,6 +52,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
         private Trail slashtrail;
         public override void SetStaticDefaults()
         {
+            Main.npcFrameCount[Type] = 19;
+
             NPCID.Sets.TrailCacheLength[NPC.type] = 20;
             NPCID.Sets.TrailingMode[NPC.type] = 3;
 
@@ -67,8 +70,8 @@ namespace Terrafirma.NPCs.Boss.Ninja
         public override void SetDefaults()
         {
             NinjaPhase state = NinjaPhase.none;
-            NPC.lifeMax = 2000;
-            NPC.defense = 0;
+            NPC.lifeMax = 750;
+            NPC.defense = 5;
             NPC.HitSound = SoundID.NPCHit48;
             NPC.DeathSound = SoundID.NPCDeath50;
             NPC.boss = true;
@@ -183,6 +186,14 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 backarmrot = MathHelper.Lerp(backarmrot, 0f, 0.2f);
                 animframe = 5;
             }
+            else if (state == NinjaPhase.smokebomb)
+            {
+                if (NPC.ai[0] < 30) frontarmdirection = -1;
+                else frontarmdirection = 1;
+                frontarmrot = MathHelper.Lerp(frontarmrot, smokebombanimation, 0.2f);
+                backarmrot = MathHelper.Lerp(backarmrot, -smokebombanimation, 0.2f);
+                animframe = 0;
+            }
 
         }
 
@@ -200,13 +211,18 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 case NinjaPhase.swingsword: SwingSword(); break;
                 case NinjaPhase.throwshuriken: ThrowShuriken(); break;
                 case NinjaPhase.slashdash: SlashDash(); break;
+                case NinjaPhase.smokebomb: SmokeBomb(); break;
             }
 
             afterimagefloat *= 0.9f;
             dashtrailfloat *= 0.9f;
+            smokebombanimation *= 0.9f;
 
             if (state != NinjaPhase.slashdash) NPC.velocity.Y = Math.Clamp(NPC.velocity.Y, -999f, 16f);
             shurikentimer--;
+
+            if (NPC.Center.Distance(target.Center) > 400f) distancetimer += (int)(NPC.Center.Distance(target.Center) / 40f);
+            else distancetimer -= (int)(NPC.Center.Distance(target.Center) / 15f);
 
         }
 
@@ -302,6 +318,18 @@ namespace Terrafirma.NPCs.Boss.Ninja
             if (katanaprojectile != null) katanaprojectile.Kill();
             katanaprojectile = null;
             base.OnKill();
+        }
+
+        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+        {
+            if (state == NinjaPhase.slashdash && NPC.ai[0] > 50) return false;
+            return base.CanHitPlayer(target, ref cooldownSlot);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+        {
+            dashesexecuted = 0;
+            base.OnHitPlayer(target, hurtInfo);
         }
     }
 }

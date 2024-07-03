@@ -37,7 +37,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
 
             for (int i = 0; i < Main.player.Length; i++)
             {
-                if (Collision.CheckAABBvLineCollision(Main.player[i].position, Main.player[i].Size, Projectile.BottomLeft, Projectile.BottomLeft + bladetop) && !Main.player[i].immune)
+                if (Collision.CheckAABBvLineCollision(Main.player[i].position, Main.player[i].Size, Projectile.BottomLeft, Projectile.BottomLeft + bladetop) && !Main.player[i].immune && Main.player[i].shieldParryTimeLeft <= 0)
                 {
                     Player.HurtInfo info = new Player.HurtInfo();
                     info.Damage = Projectile.damage;
