@@ -158,10 +158,16 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                 Spellname.SetText(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell.GetSpellName());
                 Spellname.Left.Pixels = UIOffset.X - FontAssets.MouseText.Value.MeasureString(Spellname.Text).X / 2;
 
-                SpellKeyBind1.SetText(Keybinds.previousSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f,0f,1f), false);
-                SpellKeyBind1.Left.Pixels = UIOffset.X - 38 - (FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 2);
-                SpellKeyBind2.SetText(Keybinds.nextSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
-                SpellKeyBind2.Left.Pixels = UIOffset.X + 60 - FontAssets.MouseText.Value.MeasureString(SpellKeyBind2.Text).X / 2;
+                if (Keybinds.previousSpell.GetAssignedKeys().Count > 0)
+                {
+                    SpellKeyBind1.SetText(Keybinds.previousSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
+                    SpellKeyBind1.Left.Pixels = UIOffset.X - 38 - (FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 2);
+                }
+                if (Keybinds.nextSpell.GetAssignedKeys().Count > 0)
+                {
+                    SpellKeyBind2.SetText(Keybinds.nextSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
+                    SpellKeyBind2.Left.Pixels = UIOffset.X + 60 - FontAssets.MouseText.Value.MeasureString(SpellKeyBind2.Text).X / 2;
+                }
             }
 
             base.Update(gameTime);
