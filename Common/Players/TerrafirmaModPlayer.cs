@@ -191,7 +191,7 @@ namespace Terrafirma.Common.Players
                 ModContent.GetInstance<SpellSideMenuUISystem>().Create(Player.HeldItem);
                 SpellSideMenu = true;
             }
-            if (Main.keyState.IsKeyDown(Keys.P) || !SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) || ModContent.GetInstance<SpellSideMenuUISystem>().spellitem.type != Player.HeldItem.type || Player.HeldItem.type == 0)
+            if (!SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) || ModContent.GetInstance<SpellSideMenuUISystem>().spellitem.type != Player.HeldItem.type || Player.HeldItem.type == 0)
             {
                 ModContent.GetInstance<SpellSideMenuUISystem>().Flush();
                 SpellSideMenu = false;
@@ -207,6 +207,12 @@ namespace Terrafirma.Common.Players
                 else return false;
             }
             return base.CanUseItem(item);
+        }
+
+        public override void OnEnterWorld()
+        {
+            SpellSideMenu = false;
+            base.OnEnterWorld();
         }
 
         public override bool HoverSlot(Item[] inventory, int context, int slot)

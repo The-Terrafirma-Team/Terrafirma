@@ -49,6 +49,8 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public void Create(Item item)
         {
+            if (!SpellIndex.ItemCatalogue.ContainsKey(item.type)) return;
+
             selecteditem = item;
             selectedspellID = 0;
             iconshift = 0;
@@ -157,7 +159,7 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                 Spellname.Left.Pixels = UIOffset.X - FontAssets.MouseText.Value.MeasureString(Spellname.Text).X / 2;
 
                 SpellKeyBind1.SetText(Keybinds.previousSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f,0f,1f), false);
-                SpellKeyBind1.Left.Pixels = UIOffset.X - 36 - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 2;
+                SpellKeyBind1.Left.Pixels = UIOffset.X - 38 - (FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 2);
                 SpellKeyBind2.SetText(Keybinds.nextSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
                 SpellKeyBind2.Left.Pixels = UIOffset.X + 60 - FontAssets.MouseText.Value.MeasureString(SpellKeyBind2.Text).X / 2;
             }
@@ -182,51 +184,54 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                         position.X += (48 * spelliconlist.Length) * k;
                         float transparencyfloat = 1f - Math.Abs((spelliconlist[i].HAlign * Main.screenWidth + UIOffset.X) - position.X) / 90f;
 
-                        if ((iconshift + spelliconlist.Length * 10000) % spelliconlist.Length == i)
+                        if (transparencyfloat > 0.1f)
                         {
-                            //Icon
-                            spriteBatch.Draw(spelliconlist[i].texture,
-                                position,
-                                spelliconlist[i].texturebounds,
-                                spelliconlist[i].Color * transparencyfloat,
-                                spelliconlist[i].Rotation,
-                                spelliconlist[i].texture.Size() / 2,
-                                spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
-                                SpriteEffects.None,
-                                0f);
-                            //Border
-                            spriteBatch.Draw(iconBorder,
-                                position,
-                                new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
-                                spelliconlist[i].Color * transparencyfloat,
-                                spelliconlist[i].Rotation,
-                                new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
-                                spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
-                                SpriteEffects.None,
-                                0f);
-                        }
-                        else
-                        {
-                            //Icon
-                            spriteBatch.Draw(spelliconlist[i].texture,
-                                position,
-                                spelliconlist[i].texturebounds,
-                                spelliconlist[i].Color * 0.7f * transparencyfloat,
-                                spelliconlist[i].Rotation,
-                                spelliconlist[i].texture.Size() / 2,
-                                spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
-                                SpriteEffects.None,
-                                0f);
-                            //Border
-                            spriteBatch.Draw(iconBorder,
-                                position,
-                                new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
-                                spelliconlist[i].Color * 0.7f * transparencyfloat,
-                                spelliconlist[i].Rotation,
-                                new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
-                                spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
-                                SpriteEffects.None,
-                                0f);
+                            if ((iconshift + spelliconlist.Length * 10000) % spelliconlist.Length == i)
+                            {
+                                //Icon
+                                spriteBatch.Draw(spelliconlist[i].texture,
+                                    position,
+                                    spelliconlist[i].texturebounds,
+                                    spelliconlist[i].Color * transparencyfloat,
+                                    spelliconlist[i].Rotation,
+                                    spelliconlist[i].texture.Size() / 2,
+                                    spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
+                                    SpriteEffects.None,
+                                    0f);
+                                //Border
+                                spriteBatch.Draw(iconBorder,
+                                    position,
+                                    new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
+                                    spelliconlist[i].Color * transparencyfloat,
+                                    spelliconlist[i].Rotation,
+                                    new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
+                                    spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
+                                    SpriteEffects.None,
+                                    0f);
+                            }
+                            else
+                            {
+                                //Icon
+                                spriteBatch.Draw(spelliconlist[i].texture,
+                                    position,
+                                    spelliconlist[i].texturebounds,
+                                    spelliconlist[i].Color * 0.7f * transparencyfloat,
+                                    spelliconlist[i].Rotation,
+                                    spelliconlist[i].texture.Size() / 2,
+                                    spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
+                                    SpriteEffects.None,
+                                    0f);
+                                //Border
+                                spriteBatch.Draw(iconBorder,
+                                    position,
+                                    new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
+                                    spelliconlist[i].Color * 0.7f * transparencyfloat,
+                                    spelliconlist[i].Rotation,
+                                    new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
+                                    spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
+                                    SpriteEffects.None,
+                                    0f);
+                            }
                         }
                     }
                 }

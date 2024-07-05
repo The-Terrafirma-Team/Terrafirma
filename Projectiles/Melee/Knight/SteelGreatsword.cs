@@ -5,7 +5,6 @@ using System;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terrafirma.Particles;
-using Terrafirma.Systems.Primitives;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;

@@ -4,6 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using System;
+using Terraria.ID;
 
 namespace Terrafirma.Systems.Primitives
 {
@@ -13,7 +14,7 @@ namespace Terrafirma.Systems.Primitives
     public class Trail
     {
         public BasicEffect effect;
-        private GraphicsDevice GraphicsDevice = Main.graphics.GraphicsDevice;
+        private GraphicsDevice GraphicsDevice;
         public TrailSegment[] trailsegments;
         public Vector2[] pointarray;
 
@@ -43,6 +44,11 @@ namespace Terrafirma.Systems.Primitives
 
         public Trail(Vector2[] segmentpoints)
         {
+            //Graphics are not a thing on the server - Thanks a lot Tyfyter
+            if (Main.netMode == NetmodeID.Server) return;
+
+            GraphicsDevice = Main.graphics.GraphicsDevice;
+
             Main.RunOnMainThread(() =>
             {
                 effect = new BasicEffect(GraphicsDevice);
@@ -62,6 +68,11 @@ namespace Terrafirma.Systems.Primitives
 
         public Trail(Vector2[] segmentpoints, WidthDelegate _widthmodifier)
         {
+            //Graphics are not a thing on the server - Thanks a lot Tyfyter
+            if (Main.netMode == NetmodeID.Server) return;
+
+            GraphicsDevice = Main.graphics.GraphicsDevice;
+
             widthmodifier = _widthmodifier; 
 
             Main.RunOnMainThread(() =>
@@ -83,6 +94,11 @@ namespace Terrafirma.Systems.Primitives
 
         public Trail(Vector2[] segmentpoints, WidthDelegate _widthmodifier, float _basewidth = 30f)
         {
+            //Graphics are not a thing on the server - Thanks a lot Tyfyter
+            if (Main.netMode == NetmodeID.Server) return;
+
+            GraphicsDevice = Main.graphics.GraphicsDevice;
+
             widthmodifier = _widthmodifier;
             basewidth = _basewidth;
 
@@ -104,6 +120,9 @@ namespace Terrafirma.Systems.Primitives
         }
         public void Draw(Vector2 position)
         {
+            //Graphics are not a thing on the server - Thanks a lot Tyfyter
+            if (Main.netMode == NetmodeID.Server) return;
+
             if (widthmodifier == null) widthmodifier = TrailWidth.FlatWidth;
             if (color == null) color = f => new Color(1f,1f,1f,0f) * opacity;
             if (offset == null) offset = f => Vector2.Zero;

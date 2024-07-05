@@ -9,14 +9,12 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
-using Terrafirma.Systems.Primitives;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma.Projectiles.Ranged
 {
     internal class InkProjectile : ModProjectile
     {
-        Trail trail;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;

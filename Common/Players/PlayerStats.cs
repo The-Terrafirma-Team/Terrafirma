@@ -3,7 +3,6 @@ using System;
 using System.IO;
 using Terrafirma.Common.Templates;
 using Terrafirma.Data;
-using Terrafirma.Systems.Primitives;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
