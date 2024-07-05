@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Terrafirma.Common;
 using Terrafirma.Systems.AccessorySynergy;
+using Terraria.ID;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -20,6 +21,7 @@ namespace Terrafirma.Systems.MageClass
         UIText ManaCost;
         UIPanel TextPanel;
         public float manacost;
+        int itemid;
 
         int effecttimer;
         float sizefloat;
@@ -35,6 +37,7 @@ namespace Terrafirma.Systems.MageClass
         /// </summary>
         public void Create(int weapon, bool accessoriesincluded = true)
         {
+            itemid = weapon;
             Player player = Main.LocalPlayer;
             effecttimer = 0;
             sizefloat = 0f;
@@ -120,9 +123,11 @@ namespace Terrafirma.Systems.MageClass
             if (SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
 
-                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
+                int spellmanacost = ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost == -1 ? Main.LocalPlayer.HeldItem.mana : ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost;
+
+                if (ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost != 0)
                 {
-                    ManaCost.SetText("Costs " + (int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost) + " Mana");
+                    ManaCost.SetText("Costs " + (int)(spellmanacost * Main.LocalPlayer.manaCost) + " Mana");
                 }
                 else
                 {
@@ -152,9 +157,11 @@ namespace Terrafirma.Systems.MageClass
             if ( SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell) )
             {
 
-                if ( ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost > 0)
+                int spellmanacost = ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost == -1 ? Main.LocalPlayer.HeldItem.mana : ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost;
+
+                if ( ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost != 0)
                 {
-                    ManaCost.SetText("Costs " + ((int)(ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost * Main.LocalPlayer.manaCost)).ToString() + " Mana");
+                    ManaCost.SetText("Costs " + ((int)(spellmanacost * Main.LocalPlayer.manaCost)).ToString() + " Mana");
                 }
                 else
                 {

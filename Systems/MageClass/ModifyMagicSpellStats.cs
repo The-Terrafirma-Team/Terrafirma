@@ -17,20 +17,6 @@ namespace Terrafirma.Systems.MageClass
         {
             if (entity.GetGlobalItem<GlobalItemInstanced>().Spell != null) entity.GetGlobalItem<GlobalItemInstanced>().SetDefaults(entity);
         }
-        public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
-        {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) mult = (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / ContentSamples.ItemsByType[item.type].mana;
-        }
-        public override float UseTimeMultiplier(Item item, Player player)
-        {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)ContentSamples.ItemsByType[item.type].useTime;
-            return base.UseTimeMultiplier(item, player);
-        }
-        public override float UseAnimationMultiplier(Item item, Player player)
-        {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) return (float)item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)ContentSamples.ItemsByType[item.type].useAnimation;
-            return base.UseAnimationMultiplier(item, player);
-        }
         public override void UpdateInventory(Item item, Player player)
         {
 
@@ -61,30 +47,6 @@ namespace Terrafirma.Systems.MageClass
                 item.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[item.type][0];
             }
 
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
-            {
-                Item newitem = new Item(item.type);
-
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay != -1)
-                { item.reuseDelay = item.GetGlobalItem<GlobalItemInstanced>().Spell.ReuseDelay; }
-                else
-                { item.reuseDelay = newitem.reuseDelay; }
-
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation != -1)
-                { item.useAnimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation; }
-                else
-                { item.useAnimation = newitem.useAnimation; }
-
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime != -1)
-                { item.useTime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime; }
-                else
-                { item.useTime = newitem.useTime; }
-
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost != -1)
-                { item.mana = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost; }
-                else
-                { item.mana = newitem.mana; }
-            }
             base.UpdateInventory(item, player);
         }
         public override bool CanUseItem(Item item, Player player)
@@ -115,6 +77,39 @@ namespace Terrafirma.Systems.MageClass
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
 
+        }
+
+    }
+
+    internal class ModifyMagicSpellStatsPlayer : ModPlayer
+    {
+        public override float UseAnimationMultiplier(Item item)
+        {
+            float returnanimation = -1f;
+            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            {
+                returnanimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)item.useAnimation : -1f;
+            }
+            return returnanimation == -1f? base.UseAnimationMultiplier(item) : returnanimation;
+        }
+
+        public override float UseTimeMultiplier(Item item)
+        {
+            float returntime = -1f;
+            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            {
+                returntime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)item.useTime : -1f;
+            }
+            return returntime == -1f ? base.UseTimeMultiplier(item) : returntime;
+        }
+
+        public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
+        {
+            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            {
+                mult = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / (float)item.mana : 1f;
+            }
+            base.ModifyManaCost(item, ref reduce, ref mult);
         }
 
     }

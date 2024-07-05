@@ -1184,6 +1184,7 @@ Projectiles: {
 	BowTurret.DisplayName: Bow Turret
 	NinjaKatanaProj.DisplayName: Ninja Katana Proj
 	NinjaShurikenHostile.DisplayName: Ninja Shuriken Hostile
+	FlowerOfFireProj.DisplayName: Flower Of Fire Proj
 }
 
 Tiles: {
@@ -1429,6 +1430,16 @@ Spells: {
 	ManaTalon: {
 		Name: Mana Talon
 		Description: Shoots a bolt of mana stealing magic
+	}
+
+	FireSeed: {
+		Name: Fire Seed
+		Description: Throws a ball of fire
+	}
+
+	FlowerOfFire: {
+		Name: Flower of Fire
+		Description: Summons a flower of fire that attacks nearby enemies
 	}
 }
 

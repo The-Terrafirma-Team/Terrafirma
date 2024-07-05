@@ -36,18 +36,21 @@ namespace Terrafirma.Systems.MageClass
                 {
                     tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
                 }
-                
+
+
                 if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
                     for (int i = 0; i < SpellIndex.ItemCatalogue[item.type].Length; i++)
                     {
+                        int spellmanacost = SpellIndex.ItemCatalogue[item.type][i].ManaCost == -1 ? item.mana : SpellIndex.ItemCatalogue[item.type][i].ManaCost;
+
                         tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellDescription",
                         "[c/999999:" +
                         SpellIndex.ItemCatalogue[item.type][i].GetSpellName() +
                         ": " +
                         SpellIndex.ItemCatalogue[item.type][i].GetSpellDesc() +
                         ". Uses " +
-                        (int)(SpellIndex.ItemCatalogue[item.type][i].ManaCost * getplayer.manaCost) +
+                        (int)(spellmanacost * getplayer.manaCost) +
                         " Mana ]"
                         ));
                     }
