@@ -28,14 +28,27 @@ namespace Terrafirma
         public static Asset<Texture2D> QuestButtonBGBorder;
         public static Asset<Texture2D> QuestDifficultyStarEmpty;
         public static Asset<Texture2D> QuestDifficultyStarFull;
+
+        public static RenderTarget2D pixelRenderTarget;
         public override void Load()
         {
+            Main.RunOnMainThread(() =>
+            {
+                pixelRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, Main.screenWidth / 2, Main.screenHeight / 2);
+            }
+            );
+
             QuestButtonBG = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanel");
             QuestButtonBGBorder = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanelBorder");
             QuestDifficultyStarEmpty = ModContent.Request<Texture2D>("Terrafirma/Assets/QuestDifficultyStarEmpty");
             QuestDifficultyStarFull = ModContent.Request<Texture2D>("Terrafirma/Assets/QuestDifficultyStarFull");
 
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
+        }
+
+        public override void Unload()
+        {
+            pixelRenderTarget.Dispose();
         }
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {

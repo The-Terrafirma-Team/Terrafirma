@@ -21,9 +21,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.AccessorySpells
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             type = ModContent.ProjectileType<ManaBloomProj>();
+            velocity = Vector2.Normalize(velocity) * 10f;
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
             return false;
+            
         }
 
         public override bool? UseItem(Item item, Player player)

@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿//______________________________________________________________
+//Primitive Trail System
+//
+//Created by Fred ♥★
+//Please don't remove these credits (No watermark? This is the best code I've made so far!)
+//______________________________________________________________
+
+using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using Terraria;
 using Microsoft.Xna.Framework;
@@ -18,8 +25,7 @@ namespace Terrafirma.Systems.Primitives
         public TrailSegment[] trailsegments;
         public Vector2[] pointarray;
 
-
-        public Texture2D trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/GlowTrail").Value;
+        public Texture2D trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/GlowTrail").Value;  
 
         public delegate float WidthDelegate(float trailpart);
         /// <summary>
@@ -126,6 +132,12 @@ namespace Terrafirma.Systems.Primitives
             if (widthmodifier == null) widthmodifier = TrailWidth.FlatWidth;
             if (color == null) color = f => new Color(1f,1f,1f,0f) * opacity;
             if (offset == null) offset = f => Vector2.Zero;
+            if (effect == null)
+            {
+                effect = new BasicEffect(GraphicsDevice);
+                effect.VertexColorEnabled = true;
+                effect.TextureEnabled = true;
+            }
 
             //Create vertices and indices
             VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[]{};

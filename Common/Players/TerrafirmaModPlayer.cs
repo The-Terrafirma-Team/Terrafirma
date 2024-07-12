@@ -14,6 +14,7 @@ using Terrafirma.Common.Interfaces;
 using Terrafirma.Items.Weapons.Melee.Knight;
 using Terrafirma.Projectiles.Melee.Knight;
 using Microsoft.Xna.Framework.Input;
+using Terrafirma.Systems.Trees;
 
 
 namespace Terrafirma.Common.Players
@@ -195,6 +196,13 @@ namespace Terrafirma.Common.Players
             {
                 ModContent.GetInstance<SpellSideMenuUISystem>().Flush();
                 SpellSideMenu = false;
+            }
+
+            if (Main.keyState.IsKeyDown(Keys.P))
+            {
+                Tile tree = Main.tile[(short)(Main.MouseWorld.X / 16), (short)(Main.MouseWorld.Y / 16)];
+                tree.HasTile = true;
+                tree.TileType = (ushort)ModContent.TileType<ModTree_Terrafirma>();
             }
 
         }

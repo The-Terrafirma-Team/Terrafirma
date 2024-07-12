@@ -1185,6 +1185,8 @@ Projectiles: {
 	NinjaKatanaProj.DisplayName: Ninja Katana Proj
 	NinjaShurikenHostile.DisplayName: Ninja Shuriken Hostile
 	FlowerOfFireProj.DisplayName: Flower Of Fire Proj
+	WhiplashProj.DisplayName: Whiplash Proj
+	MarkOfTheDamnedProj.DisplayName: Mark Of The Damned Proj
 }
 
 Tiles: {
@@ -1440,6 +1442,21 @@ Spells: {
 	FlowerOfFire: {
 		Name: Flower of Fire
 		Description: Summons a flower of fire that attacks nearby enemies
+	}
+
+	MarkOfTheDamned: {
+		Name: Mark of the Damned
+		Description: ""
+	}
+
+	TracerFlare: {
+		Name: Tracer Flare
+		Description: ""
+	}
+
+	Whiplash: {
+		Name: Whiplash
+		Description: ""
 	}
 }
 
