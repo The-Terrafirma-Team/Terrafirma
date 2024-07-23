@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using Terrafirma.Items.Placeable.Statues;
 using Terraria;
 using Terraria.Enums;
 using Terraria.ID;
@@ -25,6 +27,35 @@ namespace Terrafirma.Tiles
             DustType = DustID.Stone;
             TileID.Sets.DisableSmartCursor[Type] = true;
             AddMapEntry(new Color(144, 148, 144), Language.GetText("MapObject.Statue"));
+        }
+        public override IEnumerable<Item> GetItemDrops(int i, int j)
+        {
+            int item = 0;
+            switch(Main.tile[i, j].TileFrameX / 36)
+            {
+                case 0:
+                    item = ModContent.ItemType<StrangeBulbStatue>();
+                    break;
+                case 1:
+                    item = ModContent.ItemType<ExcaliburStatue>();
+                    break;
+                case 2:
+                    item = ModContent.ItemType<CrossStatue>();
+                    break;
+                case 3:
+                    item = ModContent.ItemType<OverseeingStatue>();
+                    break;
+                case 4:
+                    item = ModContent.ItemType<FourPointedStarStatue>();
+                    break;
+                case 5:
+                    item = ModContent.ItemType<WrenchStatue>();
+                    break;
+                case 6:
+                    item = ModContent.ItemType<JewelStatue>();
+                    break;
+            }
+            yield return new Item(item);
         }
     }
 }

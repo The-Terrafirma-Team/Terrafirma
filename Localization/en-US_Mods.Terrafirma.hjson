@@ -1040,6 +1040,11 @@ Items: {
 			Summons a bow turret that uses arrows in the player's ammo slots
 			'''
 	}
+
+	BigChiseledStoneBlock: {
+		DisplayName: Big Chiseled Stone Block
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

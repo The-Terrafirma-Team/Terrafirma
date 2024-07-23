@@ -40,7 +40,7 @@ namespace Terrafirma.Dusts
             Main.EntitySpriteDraw(Tex.Value,
                 dust.position - Main.screenPosition,
                 actualframe,
-                dust.color,
+                Lighting.GetSubLight(dust.position).ToColor(),
                 dust.rotation,
                 actualframe.Size() / 2,
                 dust.scale * actualscale,

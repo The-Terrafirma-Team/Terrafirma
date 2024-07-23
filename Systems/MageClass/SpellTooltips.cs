@@ -28,13 +28,16 @@ namespace Terrafirma.Systems.MageClass
                 var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
                 tooltips.Remove(manaremove);
 
-                if (SpellIndex.ItemCatalogue[item.type].Length > 1)
+                if (getplayer != null && !getplayer.GetModPlayer<Keybinds>().Shifting)
                 {
-                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
-                }
-                else
-                {
-                    tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                    if (SpellIndex.ItemCatalogue[item.type].Length > 1)
+                    {
+                        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
+                    }
+                    else
+                    {
+                        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellIndex.ItemCatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                    }
                 }
 
 
@@ -45,9 +48,9 @@ namespace Terrafirma.Systems.MageClass
                         int spellmanacost = SpellIndex.ItemCatalogue[item.type][i].ManaCost == -1 ? item.mana : SpellIndex.ItemCatalogue[item.type][i].ManaCost;
 
                         tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellDescription",
-                        "[c/999999:" +
+                        "[c/00ffff:" +
                         SpellIndex.ItemCatalogue[item.type][i].GetSpellName() +
-                        ": " +
+                        ":] [c/999999:" +
                         SpellIndex.ItemCatalogue[item.type][i].GetSpellDesc() +
                         ". Uses " +
                         (int)(spellmanacost * getplayer.manaCost) +
