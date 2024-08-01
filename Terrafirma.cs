@@ -48,7 +48,10 @@ namespace Terrafirma
 
         public override void Unload()
         {
-            pixelRenderTarget.Dispose();
+            Main.RunOnMainThread(() =>
+            {
+                pixelRenderTarget.Dispose();
+            });
         }
         private void On_Player_UpdateMaxTurrets(On_Player.orig_UpdateMaxTurrets orig, Player player)
         {
