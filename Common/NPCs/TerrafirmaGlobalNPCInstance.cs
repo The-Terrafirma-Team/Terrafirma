@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.NPCs
@@ -13,12 +14,14 @@ namespace Terrafirma.Common.NPCs
         public bool ElectricCharge;
         public bool Stunned;
         public bool Inked;
+        public bool Chilled;
         public override void ResetEffects(NPC npc)
         {
             PhantasmalBurn = false;
             ElectricCharge = false;
             Stunned = false;
             Inked = false;
+            Chilled = false;
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
@@ -36,6 +39,17 @@ namespace Terrafirma.Common.NPCs
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
             if (Inked) drawColor = new Color(179, 130, 237);
+            if (Chilled)
+            {
+                drawColor = new Color(128, 200, 255);
+                if (Main.rand.NextBool(3))
+                {
+                    Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Snow);
+                    d.noGravity = true;
+                    d.velocity *= 0.2f;
+                    d.scale = 0.6f;
+                }
+            }
         }
     }
 }

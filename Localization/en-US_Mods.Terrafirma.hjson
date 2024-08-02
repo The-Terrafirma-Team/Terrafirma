@@ -108,6 +108,11 @@ Buffs: {
 		DisplayName: Shut Up!
 		Description: PLEASE.
 	}
+
+	ChilledForEnemies: {
+		DisplayName: Chilled For Enemies
+		Description: Mods.Terrafirma.Buffs.ChilledForEnemies.Description
+	}
 }
 
 Items: {
@@ -1192,6 +1197,7 @@ Projectiles: {
 	FlowerOfFireProj.DisplayName: Flower Of Fire Proj
 	WhiplashProj.DisplayName: Whiplash Proj
 	MarkOfTheDamnedProj.DisplayName: Mark Of The Damned Proj
+	TraitorsDaggerProj.DisplayName: Traitors Dagger Proj
 }
 
 Tiles: {
@@ -1461,6 +1467,16 @@ Spells: {
 
 	Whiplash: {
 		Name: Whiplash
+		Description: ""
+	}
+
+	DemonScythe: {
+		Name: Demon Scythe
+		Description: ""
+	}
+
+	TraitorsDagger: {
+		Name: Traitors Dagger
 		Description: ""
 	}
 }
