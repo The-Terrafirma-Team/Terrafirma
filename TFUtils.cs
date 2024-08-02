@@ -18,6 +18,14 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void QuickDefaults(this Projectile proj, bool hostile = false, int size = 8, int aiStyle = -1)
+        {
+            proj.aiStyle = aiStyle;
+            proj.hostile = hostile;
+            proj.friendly = !hostile;
+            proj.width = size;
+            proj.height = size;
+        }
         public static Color ToColor(this Vector3 vect, float alpha = 1f)
         {
             return new Color(vect.X,vect.Y,vect.Z,alpha);

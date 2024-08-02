@@ -7,6 +7,10 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
 {
     internal class CarmineHook : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override void SetDefaults()
         {
             Item.damage = 70;

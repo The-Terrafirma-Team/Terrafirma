@@ -26,7 +26,7 @@ namespace Terrafirma.Tiles
             TileObjectData.newTile.CoordinatePadding = 2;
             TileObjectData.addTile(Type);
             DustType = DustID.Stone;
-            AddMapEntry(new Color(144, 148, 144));
+            AddMapEntry(new Color(128, 128, 128));
         }
     }
 }
