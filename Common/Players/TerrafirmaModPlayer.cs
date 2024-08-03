@@ -150,7 +150,7 @@ namespace Terrafirma.Common.Players
                 else ModContent.GetInstance<SpellUISystem>().Flush();
             }
 
-            if (triggersSet.MouseRight)
+            if (triggersSet.MouseRight && !Player.ItemAnimationActive)
             {
                 HeldMagicItem = Player.HeldItem;
                 if (!SpellUI && SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1 && HeldMagicItem == Player.HeldItem && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)

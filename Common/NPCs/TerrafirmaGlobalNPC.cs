@@ -15,11 +15,11 @@ namespace Terrafirma.Common.NPCs
         {
             for (int i = 0; i < ContentSamples.NpcsByNetId.Count; i++)
             {
-                if (ContentSamples.NpcsByNetId[i].knockBackResist == 0)
-                {
-                    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<Inked>()] = true;
-                    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<ChilledForEnemies>()] = true;
-                }
+                //if (ContentSamples.NpcsByNetId[i].knockBackResist == 0)
+                //{
+                //    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<Inked>()] = true;
+                //    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<ChilledForEnemies>()] = true;
+                //}
             }
         }
     }

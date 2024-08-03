@@ -40,7 +40,7 @@ namespace Terrafirma.Common
             }
 
 
-            if (previousSpell != null && previousSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+            if (previousSpell != null && previousSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) && !Player.ItemAnimationActive)
             {
                 if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) > 0)
                 {
@@ -52,7 +52,7 @@ namespace Terrafirma.Common
                 }
             }
 
-            if (nextSpell != null && nextSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+            if (nextSpell != null && nextSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) && !Player.ItemAnimationActive)
             {
                 if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) < SpellIndex.GetMaxSpellsforWeaponwithAccessory(Player.HeldItem.type) - 1)
                 {

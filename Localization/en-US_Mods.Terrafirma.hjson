@@ -1050,6 +1050,16 @@ Items: {
 		DisplayName: Big Chiseled Stone Block
 		Tooltip: ""
 	}
+
+	SmoothStoneBlock: {
+		DisplayName: Smooth Stone Block
+		Tooltip: ""
+	}
+
+	SmoothStoneWallItem: {
+		DisplayName: Smooth Stone Wall Item
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1197,7 +1207,10 @@ Projectiles: {
 	FlowerOfFireProj.DisplayName: Flower Of Fire Proj
 	WhiplashProj.DisplayName: Whiplash Proj
 	MarkOfTheDamnedProj.DisplayName: Mark Of The Damned Proj
+	FireCrackerSpark.DisplayName: Fire Cracker Spark
+	SnowdinBomb.DisplayName: Snowdin Bomb
 	TraitorsDaggerProj.DisplayName: Traitors Dagger Proj
+	BipolarProjectile.DisplayName: Bipolar Projectile
 }
 
 Tiles: {
@@ -1468,6 +1481,31 @@ Spells: {
 	Whiplash: {
 		Name: Whiplash
 		Description: ""
+	}
+
+	FlareFire: {
+		Name: Flare Fire
+		Description: Shoots a small spark
+	}
+
+	Firecracker: {
+		Name: Firecracker
+		Description: Shoots a blast of sparks
+	}
+
+	Bipolar: {
+		Name: Bipolar
+		Description: Shoots a mix of frost and fire
+	}
+
+	Frostburn: {
+		Name: Frostburn
+		Description: Shoots a little frost
+	}
+
+	Snowdin: {
+		Name: Snowdin
+		Description: Throws a rolling ball of snow that explodes after a while
 	}
 
 	DemonScythe: {
