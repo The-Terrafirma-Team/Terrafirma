@@ -13,13 +13,13 @@ namespace Terrafirma.Common.NPCs
     {
         public override void SetStaticDefaults()
         {
-            for (int i = 0; i < ContentSamples.NpcsByNetId.Count; i++)
+            for (int i = -65; i < ContentSamples.NpcsByNetId.Count - 65; i++)
             {
-                //if (ContentSamples.NpcsByNetId[i].knockBackResist == 0)
-                //{
-                //    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<Inked>()] = true;
-                //    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<ChilledForEnemies>()] = true;
-                //}
+                if (ContentSamples.NpcsByNetId[i].knockBackResist == 0)
+                {
+                    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<Inked>()] = true;
+                    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<ChilledForEnemies>()] = true;
+                }
             }
         }
     }
