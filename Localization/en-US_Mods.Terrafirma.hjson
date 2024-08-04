@@ -1470,17 +1470,17 @@ Spells: {
 
 	MarkOfTheDamned: {
 		Name: Mark of the Damned
-		Description: ""
+		Description: Targets any enemy, they will attract projectiles
 	}
 
 	TracerFlare: {
 		Name: Tracer Flare
-		Description: ""
+		Description: Summons a controllable ball of fire
 	}
 
 	Whiplash: {
 		Name: Whiplash
-		Description: ""
+		Description: Summmons a whip of fire
 	}
 
 	FlareFire: {
@@ -1516,6 +1516,11 @@ Spells: {
 	TraitorsDagger: {
 		Name: Traitors Dagger
 		Description: ""
+	}
+
+	LaserBlast: {
+		Name: Laser Blast
+		Description: Fires fast moving lasers
 	}
 }
 
