@@ -100,7 +100,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
             Main.EntitySpriteDraw(Tex,
                 Projectile.Center - Main.screenPosition,
                 new Rectangle(0, 0, 54, 54),
-                new Color(1f, 1f, 1f, 0f) * 1f * ((float)((Math.Sin(Main.timeForVisualEffects / 20f) + 1f) / 4f) + 0.6f) * Projectile.Opacity,
+                new Color(1f, 1f, 1f, 0.5f) * 1f * ((float)((Math.Sin(Main.timeForVisualEffects / 20f) + 1f) / 4f) + 0.6f) * Projectile.Opacity,
                 Projectile.rotation,
                 new Vector2(27, 27),
                 Projectile.scale,
@@ -118,14 +118,27 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
 
             if (Projectile.timeLeft < 60) Projectile.Opacity -= 0.02f;
 
-            for (int i = 0; i < Main.projectile.Length; i++)
+            foreach(Projectile proj in Main.ActiveProjectiles)
             {
-                if (Main.projectile[i].Center.Distance(Projectile.Center) < 200f && Main.projectile[i] != Projectile && Main.projectile[i].active && !Main.projectile[i].IsTrueMeleeProjectile())
+                if (proj.Center.Distance(Projectile.Center) < 200f && proj != Projectile && proj.friendly)
                 {
-                    Main.projectile[i].velocity = Vector2.Lerp(Main.projectile[i].velocity, Main.projectile[i].DirectionTo(Projectile.Center) * 6f, 0.1f);
-                    if (Main.projectile[i].timeLeft == 0) Main.NewText("A");
+                    proj.velocity = Vector2.Lerp(proj.velocity, proj.DirectionTo(Projectile.Center) * 12f, 0.1f);
+                    if (Main.myPlayer == Projectile.owner && Projectile.timeLeft % 6 == 0)
+                    {
+
+                        Main.player[Projectile.owner].CheckMana(1, true);
+                        Main.player[Projectile.owner].manaRegenDelay = MathF.Max(Main.player[Projectile.owner].manaRegenDelay,6);
+                    }
                 }
             }
+            //for (int i = 0; i < Main.projectile.Length; i++)
+            //{
+            //    if (Main.projectile[i].Center.Distance(Projectile.Center) < 200f && Main.projectile[i] != Projectile && Main.projectile[i].active && !Main.projectile[i].IsTrueMeleeProjectile())
+            //    {
+            //        Main.projectile[i].velocity = Vector2.Lerp(Main.projectile[i].velocity, Main.projectile[i].DirectionTo(Projectile.Center) * 6f, 0.1f);
+            //        if (Main.projectile[i].timeLeft == 0) Main.NewText("A");
+            //    }
+            //}
         }
 
         public override bool? CanHitNPC(NPC target) => false;
