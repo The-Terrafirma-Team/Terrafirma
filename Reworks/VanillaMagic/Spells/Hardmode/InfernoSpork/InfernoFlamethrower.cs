@@ -8,7 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.InfernoFork.InfernoSpork
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.InfernoSpork
 {
     internal class InfernoFlamethrower : Spell
     {

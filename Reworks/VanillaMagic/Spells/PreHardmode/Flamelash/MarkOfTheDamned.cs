@@ -19,9 +19,9 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
     {
         public override int UseAnimation => 24;
         public override int UseTime => 24;
-        public override int ManaCost => 40;
+        public override int ManaCost => 0;
         public override int ReuseDelay => 40;
-        public override int[] SpellItem => new int[] { ItemID.Flamelash };
+        public override int[] SpellItem => [ItemID.Flamelash, ItemID.InfernoFork];
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -128,6 +128,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
 
                         Main.player[Projectile.owner].CheckMana(1, true);
                         Main.player[Projectile.owner].manaRegenDelay = MathF.Max(Main.player[Projectile.owner].manaRegenDelay,6);
+                        if(Main.player[Projectile.owner].statMana < 1)
+                        {
+                            Projectile.Kill();
+                        }
                     }
                 }
             }
