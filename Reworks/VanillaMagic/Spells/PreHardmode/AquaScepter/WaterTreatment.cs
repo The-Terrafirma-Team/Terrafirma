@@ -24,8 +24,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.AquaScepter
         }
     }
     public class HealingBubble : ModProjectile
-    {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/HealingBubble";
+    {       
         public override void SetDefaults()
         {
             Projectile.penetrate = 1;

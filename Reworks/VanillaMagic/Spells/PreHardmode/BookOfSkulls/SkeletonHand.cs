@@ -119,7 +119,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.BookOfSkulls
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/SkeletonHandBone").Value;
+            Texture2D SkeletonHandBone = ModContent.Request<Texture2D>("Terrafirma/Reworks/VanillaMagic/Spells/PreHardmode/BookOfSkulls/SkeletonHandBone").Value;
             for (int i = 0; i < Math.Abs((Projectile.Center.Y - OriginalPos.Y) / 32); i++)
             {
                 Main.EntitySpriteDraw(

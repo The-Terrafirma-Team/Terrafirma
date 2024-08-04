@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.InfernoFork
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.InfernoSpork
 {
     internal class InfernoWall : Spell
     {

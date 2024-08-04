@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.GoldenShower
 {
     internal class GoldenShower : Spell
     {

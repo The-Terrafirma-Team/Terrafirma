@@ -32,7 +32,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.AmberStaf
 
     public class AmberWallCrystal : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/GemStaves/AmberCrystal";
+        public override string Texture => "Terrafirma/Reworks/VanillaMagic/Spells/PreHardmode/GemStaves/AmberStaff/AmberWallProj";
         public override void SetDefaults()
         {
             Projectile.tileCollide = false;

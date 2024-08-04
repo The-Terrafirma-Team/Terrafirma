@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
+namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WaterBolt
 {
     internal class AuraWave : Spell
     {
@@ -59,7 +59,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Dungeon
             else
             {
                 Projectile.Opacity = Projectile.timeLeft / 60f;
-                Projectile.velocity = Projectile.velocity * 0.95f + ((Projectile.Center - playerpos) - (Projectile.Center - playerpos).RotatedBy(0.01f));
+                Projectile.velocity = Projectile.velocity * 0.95f + (Projectile.Center - playerpos - (Projectile.Center - playerpos).RotatedBy(0.01f));
                 Projectile.velocity *= 0.95f;
                 Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
 

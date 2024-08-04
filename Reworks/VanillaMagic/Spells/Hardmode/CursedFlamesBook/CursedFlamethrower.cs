@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.CursedFlamesBook
 {
     internal class CursedFlamethrower : Spell
     {
@@ -22,7 +22,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            type = ModContent.ProjectileType<CursedFlames>();
+            type = ModContent.ProjectileType<Projectiles.Summon.Sentry.Hardmode.CursedFlames>();
             velocity *= 0.8f;
             damage = (int)(damage * 0.5f);
 

@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves
+namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.DiamondStaff
 {
     internal class DiamondBolt : Spell
     {

@@ -12,7 +12,7 @@ using ReLogic.Content;
 using System;
 using Terraria.GameContent;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
+namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
 {
     public class Vilethorn : Spell
     {
@@ -39,7 +39,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
             {
                 Projectile.ai[0]++;
                 Vector2 vel = Main.rand.NextVector2CircularEdge(3, 3);
-                Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(30, -30).RotatedBy(Projectile.rotation) + (vel * 8), DustID.CorruptGibs, -vel + player.velocity, 128);
+                Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(30, -30).RotatedBy(Projectile.rotation) + vel * 8, DustID.CorruptGibs, -vel + player.velocity, 128);
                 d.noGravity = true;
                 if (Projectile.ai[0] % 30 == 0)
                 {
@@ -64,7 +64,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
                 if (Projectile.ai[1] > 0)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(30, -30).RotatedBy(Projectile.rotation), new Vector2(32, 0).RotatedBy(Projectile.rotation - MathHelper.PiOver4), ModContent.ProjectileType<VileThornProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[1] * 3);
-                    SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/VileThorn") { PitchVariance = 0.1f, MaxInstances = 10, Volume = 0.3f}, Projectile.position);
+                    SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/VileThorn") { PitchVariance = 0.1f, MaxInstances = 10, Volume = 0.3f }, Projectile.position);
                 }
                 Projectile.ai[1] = 0;
             }
@@ -88,15 +88,15 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            if (Main.rand.NextBool((Projectile.timeLeft > (maxTimeLeft - 10) || Projectile.timeLeft < 10) ? 3 : 100))
-            Dust.NewDustDirect(Projectile.position, 30, 30, DustID.Corruption,0,0,200);
+            if (Main.rand.NextBool(Projectile.timeLeft > maxTimeLeft - 10 || Projectile.timeLeft < 10 ? 3 : 100))
+                Dust.NewDustDirect(Projectile.position, 30, 30, DustID.Corruption, 0, 0, 200);
 
-            if (Projectile.timeLeft > (maxTimeLeft - 10))
+            if (Projectile.timeLeft > maxTimeLeft - 10)
                 Projectile.alpha -= 20;
             else if (Projectile.timeLeft < 10)
                 Projectile.alpha += 20;
 
-            if (Projectile.timeLeft == (maxTimeLeft - 12 + Projectile.ai[0]) && Projectile.ai[0] > 0)
+            if (Projectile.timeLeft == maxTimeLeft - 12 + Projectile.ai[0] && Projectile.ai[0] > 0)
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Projectile.velocity, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0] - 1);
             if (Projectile.ai[0] == 0)
                 Projectile.frame = 1;
@@ -111,7 +111,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Evil
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> tex = TextureAssets.Projectile[Type];
-            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0,Projectile.frame * (tex.Height() / 2),tex.Width(),tex.Height() / 2), lightColor * Projectile.Opacity,Projectile.rotation,new Vector2(tex.Width() / 2, tex.Height() / 2),1,SpriteEffects.None);
+            Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, Projectile.frame * (tex.Height() / 2), tex.Width(), tex.Height() / 2), lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(tex.Width() / 2, tex.Height() / 2), 1, SpriteEffects.None);
             return false;
         }
     }

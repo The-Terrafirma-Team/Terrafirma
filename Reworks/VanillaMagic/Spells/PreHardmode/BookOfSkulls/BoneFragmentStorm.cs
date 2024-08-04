@@ -31,7 +31,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.BookOfSkulls
     }
     public class BoneFragment : ModProjectile
     {
-        public override string Texture => $"Terrafirma/Reworks/VanillaMagic/Spells/Dungeon/BoneFragments";
 
         Vector2 playerpos = Vector2.Zero;
 

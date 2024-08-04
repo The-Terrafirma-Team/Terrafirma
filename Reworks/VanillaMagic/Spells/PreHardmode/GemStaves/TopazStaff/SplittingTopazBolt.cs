@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves
+namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.TopazStaff
 {
     internal class SplittingTopazBolt : Spell
     {
