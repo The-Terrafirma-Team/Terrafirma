@@ -1060,6 +1060,11 @@ Items: {
 		DisplayName: Smooth Stone Wall Item
 		Tooltip: ""
 	}
+
+	CleansingPotion: {
+		DisplayName: Cleansing Potion
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

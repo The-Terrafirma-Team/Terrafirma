@@ -23,6 +23,8 @@ namespace Terrafirma.Common.Players
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
         public float WrenchBuffTimeMultiplier = 1f;
+        public bool CanThrowWrenches = false;
+
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
         public float MeleeWeaponScale = 0;
@@ -48,6 +50,7 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            CanThrowWrenches = false;
             newSwim = false;
             FeralChargeMax = 0;
             FeralChargeSpeed = defaultFeralChargeSpeed;

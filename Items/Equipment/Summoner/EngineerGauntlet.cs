@@ -22,6 +22,7 @@ namespace Terrafirma.Items.Equipment.Summoner
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier += 1f;
+            player.GetModPlayer<PlayerStats>().CanThrowWrenches = true;
         }
 
         public override void AddRecipes()

@@ -13,7 +13,7 @@ using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.FlowerOfFire.FlowerOfFire
+namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.FlowerOfFire
 {
     internal class FireSeed : Spell
     {
