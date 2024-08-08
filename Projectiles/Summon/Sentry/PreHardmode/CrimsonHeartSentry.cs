@@ -6,8 +6,8 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.DataStructures;
-using Terrafirma.Common.Items;
 using System.IO;
+using Terrafirma.Common;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
@@ -71,26 +71,34 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 
             Projectile.ai[0]++;
 
-            if (Main.netMode == NetmodeID.SinglePlayer)
+            foreach(Projectile projectile in Main.ActiveProjectiles)
             {
-                for (int i = 0; i < Projectile.GetGlobalProjectile<SentryStats>().BuffTime.Length; i++)
+                if(projectile.owner == Projectile.owner && projectile.type == ModContent.ProjectileType<CrimsonHeartSentryHeart>())
                 {
-                    if (Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > 0)
-                    {
-                        for (int k = 0; k < Main.projectile.Length; k++)
-                        {
-                            if (Main.projectile[k].owner == Projectile.owner &&
-                                Main.projectile[k].type == ModContent.ProjectileType<CrimsonHeartSentryHeart>() &&
-                                Main.projectile[k].active &&
-                                Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i]
-                                )
-                            {
-                                Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i] = Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i];
-                            }
-                        }
-                    }
+                    projectile.GetGlobalProjectile<SentryStats>().BuffType = Projectile.GetGlobalProjectile<SentryStats>().BuffType;
+                    projectile.GetGlobalProjectile<SentryStats>().BuffTime = Projectile.GetGlobalProjectile<SentryStats>().BuffTime;
                 }
             }
+            //if (Main.netMode == NetmodeID.SinglePlayer)
+            //{
+            //    for (int i = 0; i < Projectile.GetGlobalProjectile<SentryStats>().BuffTime.Length; i++)
+            //    {
+            //        if (Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > 0)
+            //        {
+            //            for (int k = 0; k < Main.projectile.Length; k++)
+            //            {
+            //                if (Main.projectile[k].owner == Projectile.owner &&
+            //                    Main.projectile[k].type == ModContent.ProjectileType<CrimsonHeartSentryHeart>() &&
+            //                    Main.projectile[k].active &&
+            //                    Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i] > Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i]
+            //                    )
+            //                {
+            //                    Main.projectile[k].GetGlobalProjectile<SentryStats>().BuffTime[i] = Projectile.GetGlobalProjectile<SentryStats>().BuffTime[i];
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
         }
 

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ID;
-using Terrafirma.Common.Items;
+using Terrafirma.Common;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {
@@ -54,11 +54,13 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
             Projectile.velocity.Y += 0.5f;
             turretradius = 300f * Projectile.GetSentryRangeMultiplier();
             Projectile.ai[0]++;
+
+
             for (int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Projectile.Center.Distance(Main.projectile[i].Center) < turretradius + 5f && Main.projectile[i].sentry)
+                if (Main.projectile[i].sentry && Projectile.Center.Distance(Main.projectile[i].Center) < turretradius + 5f)
                 {
-                    Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[SentryBuffID.ClockworkTurret] = 10;
+                    Main.projectile[i].GetGlobalProjectile<SentryStats>().ClockworkSentryBonus = 2;
                 }
             }
 

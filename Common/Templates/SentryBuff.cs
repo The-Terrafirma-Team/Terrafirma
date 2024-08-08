@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Templates
 {
     public abstract class SentryBuff : ModBuff
     {
-        public virtual void Update(Projectile sentry)
+        public virtual void UpdateSentry(Projectile sentry, SentryStats sentryStats)
         {
 
         }
-        public virtual void ModifyBullet()
+        public virtual void modifyBullet(SentryBulletBuff globalProjectile, Projectile projectile)
         {
 
         }

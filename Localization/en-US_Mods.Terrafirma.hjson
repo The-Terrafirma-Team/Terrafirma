@@ -113,6 +113,11 @@ Buffs: {
 		DisplayName: Chilled For Enemies
 		Description: Mods.Terrafirma.Buffs.ChilledForEnemies.Description
 	}
+
+	MetalWrenchBuff: {
+		DisplayName: Metal Wrench Buff
+		Description: Mods.Terrafirma.Buffs.MetalWrenchBuff.Description
+	}
 }
 
 Items: {

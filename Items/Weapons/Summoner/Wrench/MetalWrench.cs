@@ -4,39 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Common.Items;
+using Terrafirma.Buffs.Sentry;
+using Terrafirma.Common;
+using Terrafirma.Common.Templates;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
-    public class MetalWrench : ModItem
+    public class MetalWrench : WrenchItem
     {
         public override void SetDefaults()
         {
             Item.DefaultToWrench(8, 25);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 10);
-        }
-        public override void MeleeEffects(Player player, Rectangle hitbox)
-        {
-            player.WrenchHitSentry(hitbox, SentryBuffID.MetalWrench, 60 * 3);
+            Buff = new MetalWrenchBuff();
+            BuffDuration = 60 * 4;
         }
         public override void AddRecipes()
         {
             CreateRecipe().AddRecipeGroup(RecipeGroupID.IronBar, 15).AddTile(TileID.Anvils).Register();
-        }
-
-        public override bool MeleePrefix()
-        {
-            return true;
-        }
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            player.MinionAttackTargetNPC = target.whoAmI;
-            base.OnHitNPC(player, target, hit, damageDone);
         }
     }
 }

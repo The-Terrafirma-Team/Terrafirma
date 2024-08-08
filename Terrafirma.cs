@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.IO;
 using Terrafirma.Common;
-using Terrafirma.Common.Items;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;

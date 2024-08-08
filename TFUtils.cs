@@ -7,12 +7,12 @@ using Terraria.Audio;
 using System.Linq;
 using Terraria.DataStructures;
 using Terrafirma.Data;
-using Terrafirma.Common.Items;
 using Terrafirma.Common.Players;
 using Terrafirma.Particles;
 using Terrafirma.Systems.AccessorySynergy;
 using Terraria.GameContent;
 using ReLogic.Graphics;
+using Terrafirma.Common;
 
 namespace Terrafirma
 {
@@ -260,31 +260,31 @@ namespace Terrafirma
         {
             return projectile.GetGlobalProjectile<SentryStats>().RangeMultiplier + Main.player[projectile.owner].GetModPlayer<PlayerStats>().SentryRangeMultiplier;
         }
-        public static void WrenchHitSentry(this Player player, Rectangle hitbox, int WrenchBuffID, int Duration)
-        {
-            for(int i = 0; i < Main.projectile.Length; i++)
-            {
-                if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] < (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
-                {
-                    Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] = (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier);
-                    SoundEngine.PlaySound(SoundID.Item37, player.position);
-                    Main.projectile[i].netUpdate = true;
+        //public static void WrenchHitSentry(this Player player, Rectangle hitbox, int WrenchBuffID, int Duration)
+        //{
+        //    for(int i = 0; i < Main.projectile.Length; i++)
+        //    {
+        //        if (Main.projectile[i].sentry && Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] < (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime && hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active)
+        //        {
+        //            Main.projectile[i].GetGlobalProjectile<SentryStats>().BuffTime[WrenchBuffID] = (int)(Duration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier);
+        //            SoundEngine.PlaySound(SoundID.Item37, player.position);
+        //            Main.projectile[i].netUpdate = true;
 
-                    BigSparkle bigsparkle = new BigSparkle();
-                    bigsparkle.fadeInTime = 6;
-                    bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
-                    bigsparkle.Scale = 3f;
-                    ParticleSystem.AddParticle(bigsparkle, hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f);
-                    //LegacyParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
-                    for(int j = 0; j < 3; j++)
-                    {
-                        Dust d = Dust.NewDustPerfect(hitbox.ClosestPointInRect(Main.projectile[i].Center), DustID.Torch, -Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(5));
-                        d.noGravity = true;
-                        d.scale *= 1.3f;
-                    }
-                }
-            }
-        }
+        //            BigSparkle bigsparkle = new BigSparkle();
+        //            bigsparkle.fadeInTime = 6;
+        //            bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
+        //            bigsparkle.Scale = 3f;
+        //            ParticleSystem.AddParticle(bigsparkle, hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f);
+        //            //LegacyParticleSystem.AddParticle(new BigSparkle(), hitbox.ClosestPointInRect(Main.projectile[i].Center), Vector2.Zero, new Color(1f, 1f, 0.6f, 0f) * 0.3f,0,6,20,3,Main.rand.NextFloat(-0.4f,0.4f));
+        //            for(int j = 0; j < 3; j++)
+        //            {
+        //                Dust d = Dust.NewDustPerfect(hitbox.ClosestPointInRect(Main.projectile[i].Center), DustID.Torch, -Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(5));
+        //                d.noGravity = true;
+        //                d.scale *= 1.3f;
+        //            }
+        //        }
+        //    }
+        //}
         public static Projectile NewProjectileButWithChangesFromSentryBuffs(this Projectile sentry, IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner,float ai0 = 0, float ai1 = 0, float ai2 = 0, bool RangeDoesNotAffectVelocity = false)
         {
             //Do Stuff in here for buffs it's like modify shoot stats
@@ -295,10 +295,9 @@ namespace Terrafirma
             damage = (int)(damage * sentryGlobal.DamageMultiplier);
             Projectile p = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
             SentryBulletBuff bulletGlobal = p.GetGlobalProjectile<SentryBulletBuff>();
-
-            if (sentryGlobal.BuffTime[SentryBuffID.InflictShadowflame] > 0)
+            if(sentryGlobal.BuffType != null)
             {
-                bulletGlobal.Demonite = true;
+                sentryGlobal.BuffType.modifyBullet(bulletGlobal, p);
             }
             return p;
         }

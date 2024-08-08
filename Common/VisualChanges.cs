@@ -19,6 +19,7 @@ namespace Terrafirma.Common
             TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "VileStaff");
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>(AssetFolder + "Slime");
+            TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "BalloonSlime");
         }
         public override void Unload()
         {
@@ -27,6 +28,7 @@ namespace Terrafirma.Common
             TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.Vilethorn}");
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
+            TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
         }
     }
 
@@ -57,102 +59,6 @@ namespace Terrafirma.Common
                     npc.frame.Y = frameHeight * 5;
             }
         }
-        //public int newFrame = 0;
-        //public int newFrameCounter = 0;
-        //public override void FindFrame(NPC npc, int frameHeight)
-        //{
-        //    if (npc.type == NPCID.BlueSlime)
-        //    {
-        //        int num2 = 0;
-        //        newFrameCounter++;
-        //        if (npc.aiAction == 0)
-        //        {
-        //            num2 = ((npc.velocity.Y < 0f) ? 2 : ((npc.velocity.Y > 0f) ? 3 : ((npc.velocity.X != 0f) ? 1 : 0)));
-        //        }
-        //        else if (npc.aiAction == 1)
-        //        {
-        //            num2 = 4;
-        //        }
-        //        if (num2 > 0)
-        //            newFrameCounter++;
-        //        if (num2 == 4)
-        //            newFrameCounter++;
-        //        if (newFrameCounter >= 8)
-        //        {
-        //            newFrameCounter = 0;
-        //            newFrame++;
-        //            if (newFrame > 3)
-        //                newFrame = 0;
-        //        }
-        //        npc.frame = new Rectangle(0, 28 * newFrame, 32, 26);
-        //        if (npc.velocity.Y < 0)
-        //            npc.frame.Y = 28 * 4;
-        //        else if (npc.velocity.Y > 0)
-        //            npc.frame.Y = 28 * 5;
-        //    }
-        //}
-        //public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        //{
-        //    if(npc.type == NPCID.BlueSlime)
-        //    {
-        //        if (npc.ai[1] > 0f)
-        //        {
-        //            DrawNPC_SlimeItem(npc, npc.type, drawColor, npc.rotation);
-        //        }
-        //        spriteBatch.Draw(Slime.Value, npc.Bottom - Main.screenPosition - new Vector2(0,-2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale, SpriteEffects.None, 0);
-        //        return false;
-        //    }
-        //    return true;
-        //}
-        //private static void DrawNPC_SlimeItem(NPC rCurrentNPC, int typeCache, Microsoft.Xna.Framework.Color npcColor, float addedRotation)
-        //{
-        //    int num = (int)rCurrentNPC.ai[1];
-        //    float num2 = 1f;
-        //    float num3 = 22f * rCurrentNPC.scale;
-        //    float num4 = 18f * rCurrentNPC.scale;
-        //    Main.GetItemDrawFrame(num, out var itemTexture, out var rectangle);
-        //    float num5 = rectangle.Width;
-        //    float num6 = rectangle.Height;
-        //    bool num7 = (int)rCurrentNPC.ai[0] == -999;
-        //    if (num7)
-        //    {
-        //        num3 = 14f * rCurrentNPC.scale;
-        //        num4 = 14f * rCurrentNPC.scale;
-        //    }
-        //    if (num5 > num3)
-        //    {
-        //        num2 *= num3 / num5;
-        //        num5 *= num2;
-        //        num6 *= num2;
-        //    }
-        //    if (num6 > num4)
-        //    {
-        //        num2 *= num4 / num6;
-        //        num5 *= num2;
-        //        num6 *= num2;
-        //    }
-        //    float num8 = -1f;
-        //    float num9 = 1f;
-        //    int num10 = rCurrentNPC.frame.Y / (TextureAssets.Npc[typeCache].Height() / Main.npcFrameCount[typeCache]);
-        //    num9 -= (float)num10;
-        //    num8 += (float)(num10 * 2);
-        //    float num11 = 0.2f;
-        //    num11 -= 0.3f * (float)num10;
-        //    if (num7)
-        //    {
-        //        num11 = 0f;
-        //        num9 -= 6f;
-        //        num8 -= num5 * addedRotation;
-        //    }
-        //    if (num == 75)
-        //    {
-        //        npcColor = new Microsoft.Xna.Framework.Color(255, 255, 255, 0);
-        //        num11 *= 0.3f;
-        //        num9 -= 2f;
-        //    }
-        //    npcColor = rCurrentNPC.GetShimmerColor(npcColor);
-        //    Main.spriteBatch.Draw(itemTexture, new Vector2(rCurrentNPC.Center.X - Main.screenPosition.X + num8, rCurrentNPC.Center.Y - Main.screenPosition.Y + rCurrentNPC.gfxOffY + num9), rectangle, npcColor, num11, rectangle.Size() / 2f, num2, SpriteEffects.None, 0f);
-        //}
     }
     public class BulletVisuals : GlobalProjectile
     {
