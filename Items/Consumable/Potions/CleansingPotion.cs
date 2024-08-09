@@ -30,11 +30,12 @@ namespace Terrafirma.Items.Consumable.Potions
 
         public override bool? UseItem(Player player)
         {
-            for(int i = 0; i < player.buffTime.Length; i--)
+            for(int i = 0; i < player.buffTime.Length; i++)
             {
-                if (Main.debuff[player.buffType[i]] && BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]])
+                if (Main.debuff[player.buffType[i]] && !BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]])
                 {
-                    player.buffTime[i] = 0;
+                    player.DelBuff(i);
+                    i--;
                 }
             }
             return true;

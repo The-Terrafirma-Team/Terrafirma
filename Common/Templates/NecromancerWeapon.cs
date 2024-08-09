@@ -103,7 +103,7 @@ namespace Terrafirma.Common.Templates
             if (Projectile.ai[0] % 15 == 0 && Projectile.ai[0] <= Projectile.ai[1] * 15)
             {
                 SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(5, 5), ModContent.ProjectileType<NecromancySummon>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(5, 5), ModContent.ProjectileType<NecromancySummon>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0] % 30 == 0? (player.HeldItem.ModItem as NecromancerScythe).SecondarySummon : (player.HeldItem.ModItem as NecromancerScythe).FirstSummon);
             }
         }
         public override bool PreDraw(ref Color lightColor)
@@ -149,6 +149,10 @@ namespace Terrafirma.Common.Templates
             for(int i = 0; i < iterations; i++)
             {
                 ParticleSystem.AddParticle(new PixelCircle() {deceleration = 0.93f, scaleDecreaseOverTime = Main.rand.NextFloat(0.1f,0.3f), outlineColor = Color.Lerp(scythe.summonColor, Color.Black, 0.6f), scale = Main.rand.NextFloat(4, 8) }, Projectile.Center, new Vector2(Main.rand.NextFloat(3,4),0).RotatedBy(i * MathHelper.TwoPi/iterations), scythe.summonColor);
+            }
+            if(Projectile.owner == Main.myPlayer)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity * 0.2f, (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
             base.OnKill(timeLeft);
         }

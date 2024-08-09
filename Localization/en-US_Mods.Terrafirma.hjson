@@ -118,6 +118,21 @@ Buffs: {
 		DisplayName: Metal Wrench Buff
 		Description: Mods.Terrafirma.Buffs.MetalWrenchBuff.Description
 	}
+
+	BonetwisterBuff: {
+		DisplayName: Bonetwister Buff
+		Description: Mods.Terrafirma.Buffs.BonetwisterBuff.Description
+	}
+
+	CoolWrenchBuff: {
+		DisplayName: Cool Wrench Buff
+		Description: Mods.Terrafirma.Buffs.CoolWrenchBuff.Description
+	}
+
+	ShadowflameWrenchBuff: {
+		DisplayName: Shadowflame Wrench Buff
+		Description: Mods.Terrafirma.Buffs.ShadowflameWrenchBuff.Description
+	}
 }
 
 Items: {

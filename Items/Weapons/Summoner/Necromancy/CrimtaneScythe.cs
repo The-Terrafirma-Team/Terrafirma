@@ -14,6 +14,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Necromancy
     public class CrimtaneScythe : NecromancerScythe
     {
         public override string SoulName => "Crimtane";
+        public override int SecondarySummon => ProjectileID.BouncyDynamite;
+        public override int FirstSummon => ProjectileID.BouncyBoulder;
         public override void SetDefaults()
         {
             summonColor = Color.Red;
