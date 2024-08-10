@@ -48,8 +48,8 @@ namespace Terrafirma.Items.Consumable.Potions
 
         public override void AddRecipes()
         {
-            CreateRecipe(20)
-            .AddIngredient(ItemID.BottledWater, 20)
+            CreateRecipe(10)
+            .AddIngredient(ItemID.BottledWater, 10)
             .AddIngredient(ItemID.Mushroom, 1)
             .AddIngredient(ItemID.GlowingMushroom, 1)
             .AddIngredient(ItemID.TealMushroom, 1)

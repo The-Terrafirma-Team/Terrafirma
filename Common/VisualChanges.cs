@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
@@ -59,6 +60,22 @@ namespace Terrafirma.Common
                     npc.frame.Y = frameHeight * 5;
             }
         }
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if(npc.type == NPCID.BlueSlime)
+            {
+                if (npc.ai[1] > 0)
+                {
+                    //Asset<Texture2D> itemTex = TextureAssets.Item[(int)npc.ai[1]];
+                    Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
+                    spriteBatch.Draw(itemTexture, npc.Center - Main.screenPosition + npc.velocity * -0.3f, rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, 1f, SpriteEffects.None, 0);
+                }
+                spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, npc.Bottom - Main.screenPosition + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale, SpriteEffects.None, 0);
+                
+                return false;
+            }
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
     }
     public class BulletVisuals : GlobalProjectile
     {
@@ -89,11 +106,11 @@ namespace Terrafirma.Common
                 //Main.NewText(p.oldPos[7]);
                 if (p.oldPos[i+1] != Vector2.Zero)
                 {
-                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i-1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
-                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), brightColor * (0.5f - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
+                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i-1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
+                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), brightColor * (0.5f - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
                 }
             }
-            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, null, brightColor, p.rotation, tex.Size() / 2, scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, null, brightColor, p.rotation, tex.Size() / 2, scale * p.scale, SpriteEffects.None);
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {

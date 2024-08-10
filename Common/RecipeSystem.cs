@@ -31,9 +31,9 @@ namespace Terrafirma.Common
         public override void AddRecipes()
         {
             Recipe.Create(ItemID.SlimeStaff).AddTile(TileID.WorkBenches).AddIngredient(ItemID.Gel, 25).AddIngredient(ItemID.Wood, 25).AddIngredient(ItemID.Daybloom).Register();
-            
-            Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(),8).Register();
-            
+
+            Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(), 8).Register();
+
             Recipe.Create(ItemID.LightningBoots).AddTile(TileID.TinkerersWorkbench).AddIngredient(ModContent.ItemType<SpringBoots>()).AddIngredient(ItemID.Aglet).AddIngredient(ItemID.RocketBoots).AddIngredient(ItemID.AnkletoftheWind).Register();
             AddCookingRecipes();
         }
@@ -42,15 +42,6 @@ namespace Terrafirma.Common
             for(int i = 0; i < Recipe.numRecipes; i++) 
             {
                 Recipe recipe = Main.recipe[i];
-                // add souls to hallowed armor
-                //if (recipe.HasResult(ItemID.HallowedGreaves) || recipe.HasResult(ItemID.HallowedPlateMail) || recipe.HasResult(ItemID.HallowedHelmet) || recipe.HasResult(ItemID.HallowedHeadgear) || recipe.HasResult(ItemID.HallowedHood) || recipe.HasResult(ItemID.HallowedMask) ||
-                //    recipe.HasResult(ItemID.AncientHallowedGreaves) || recipe.HasResult(ItemID.AncientHallowedPlateMail) || recipe.HasResult(ItemID.AncientHallowedHelmet) || recipe.HasResult(ItemID.AncientHallowedHeadgear) || recipe.HasResult(ItemID.AncientHallowedHood) || recipe.HasResult(ItemID.AncientHallowedMask))
-                //{
-                //    recipe.AddIngredient(ItemID.SoulofFright, 5);
-                //    recipe.AddIngredient(ItemID.SoulofSight, 5);
-                //    recipe.AddIngredient(ItemID.SoulofMight, 5);
-
-                //}
                 // Add majestic gel to adamantite forges
                 if (recipe.HasResult(ItemID.AdamantiteForge) || recipe.HasResult(ItemID.TitaniumForge))
                 {
@@ -61,10 +52,10 @@ namespace Terrafirma.Common
                     recipe.RemoveIngredient(ItemID.RottenChunk);
                     recipe.AddIngredient(ItemID.RottenChunk, 3);
                 }
-                else if (recipe.HasResult(ItemID.NightsEdge))
-                {
-                    recipe.AddIngredient(ItemID.Terragrim);
-                }
+                //else if (recipe.HasResult(ItemID.NightsEdge))
+                //{
+                //    recipe.AddIngredient(ItemID.Terragrim);
+                //}
             }
 
         }

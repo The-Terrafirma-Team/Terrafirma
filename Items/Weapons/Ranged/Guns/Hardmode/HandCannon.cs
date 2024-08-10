@@ -21,7 +21,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.useTime = 32;
             Item.width = 56;
             Item.height = 34;
-            Item.UseSound = new SoundStyle("Terrafirma/Sounds/Pistol") {PitchVariance = 0.2f };
+            Item.UseSound = new SoundStyle("Terrafirma/Sounds/Pistol") {PitchVariance = 0.3f, Pitch = -0.3f, MaxInstances = 3 };
             Item.DamageType = DamageClass.Ranged;
             Item.autoReuse = true;
             Item.noMelee = true;
@@ -45,8 +45,12 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile P = Projectile.NewProjectileDirect(source,position, velocity * 3, type, damage, knockback,player.whoAmI);
-            P.scale *= 2;
+            Projectile P = Projectile.NewProjectileDirect(source,position, velocity, type, damage, knockback,player.whoAmI);
+            P.scale *= 1.3f;
+            P.extraUpdates += 2;
+            P.Resize(P.width * 4, P.height * 4);
+
+            player.velocity += velocity * -0.2f;
             return false;
         }
         public override bool? UseItem(Player player)
