@@ -317,7 +317,7 @@ Items: {
 
 	HandCannon: {
 		DisplayName: The Hand Cannon
-		Tooltip: Remember to wear a helmet!
+		Tooltip: "'Remember to wear a helmet!'"
 	}
 
 	IcicleMachineGun: {
@@ -1085,6 +1085,11 @@ Items: {
 		DisplayName: Cleansing Potion
 		Tooltip: ""
 	}
+
+	ShadowflameWrench: {
+		DisplayName: Shadowflame Wrench
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1236,6 +1241,7 @@ Projectiles: {
 	SnowdinBomb.DisplayName: Snowdin Bomb
 	TraitorsDaggerProj.DisplayName: Traitors Dagger Proj
 	BipolarProjectile.DisplayName: Bipolar Projectile
+	ShadowflameWrench.DisplayName: Shadowflame Wrench
 }
 
 Tiles: {

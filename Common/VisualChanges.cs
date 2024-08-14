@@ -21,6 +21,8 @@ namespace Terrafirma.Common
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>(AssetFolder + "Slime");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "BalloonSlime");
+            // Misc
+            TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Ninja");
         }
         public override void Unload()
         {
@@ -30,6 +32,8 @@ namespace Terrafirma.Common
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
+            // Misc
+            TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
         }
     }
 
