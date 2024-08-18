@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -91,9 +92,21 @@ namespace Terrafirma.Common
             switch (projectile.type)
             {
                 case ProjectileID.ChlorophyteBullet:
-                    Projectile.NewProjectile(projectile.GetSource_FromThis(),projectile.Center,projectile.Center - target.Center,ModContent.ProjectileType<ChloroSprout>(),projectile.damage,projectile.knockBack,projectile.owner,target.whoAmI,target.rotation,Main.rand.NextFloat(-0.2f,0.2f));
+                    Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, projectile.Center - target.Center, ModContent.ProjectileType<ChloroSprout>(), projectile.damage, projectile.knockBack, projectile.owner, target.whoAmI, target.rotation, Main.rand.NextFloat(-0.2f, 0.2f));
                     break;
             }
+        }
+
+        public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
+        {
+            switch (projectile.type)
+            {
+                case ProjectileID.ChlorophyteBullet:
+                    Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center + oldVelocity, Vector2.Zero, ModContent.ProjectileType<ChloroSprout>(), projectile.damage, projectile.knockBack, projectile.owner, -1, 0, Main.rand.NextFloat(-0.2f, 0.2f));
+                    break;
+            }
+
+            return base.OnTileCollide(projectile,oldVelocity);
         }
     }
 }

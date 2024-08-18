@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Debuffs;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -33,9 +34,16 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             return false;
         }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            if (Projectile.ai[0] == -1)
+            {
+                Projectile.rotation = Main.rand.NextFloat(0f, MathHelper.PiOver2);
+            }
+        }
         public override void OnKill(int timeLeft)
         {
-            NPC target = Main.npc[(int)Projectile.ai[0]];
 
             for(int i = 0; i < 5; i++)
             {
@@ -46,23 +54,42 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
 
             if (Projectile.localAI[0] == 1)
                 return;
-            target.SimpleStrikeNPC(Projectile.damage / 4, 0, false, 0, DamageClass.Ranged, true, Main.player[Projectile.owner].luck);
-            if (Main.rand.NextBool(5))
-                Main.NewText("Figure out what these actually do plz");
+            if (Projectile.ai[0] > -1)
+            {
+                NPC target = Main.npc[(int)Projectile.ai[0]];
+                target.SimpleStrikeNPC(Projectile.damage / 4, 0, false, 0, DamageClass.Ranged, true, Main.player[Projectile.owner].luck);
+            }
+            else
+            {
+                for (int i = 0; i < Main.npc.Length; i++)
+                {
+                    NPC target = Main.npc[i];
+                    if (!target.friendly && target.Center.Distance(Projectile.Center) < 40f)
+                    {
+                        target.SimpleStrikeNPC(Projectile.damage / 4, 0, false, 0, DamageClass.Ranged, true, Main.player[Projectile.owner].luck);
+                    }
+                }
+            }
         }
         public override void AI()
         {
-            NPC target = Main.npc[(int)Projectile.ai[0]];
-            Projectile.rotation = Projectile.ai[2] + target.rotation;
+            NPC target;
+            if (Projectile.ai[0] > -1)
+            {
+                target = Main.npc[(int)Projectile.ai[0]];
+                Projectile.rotation = Projectile.ai[2] + target.rotation;
+
+                if (!target.active)
+                {
+                    Projectile.localAI[0] = 1;
+                    Projectile.Kill();
+                }
+
+                Projectile.Center = target.Center + Projectile.velocity.RotatedBy(target.rotation - Projectile.ai[1]);
+            }
             Projectile.frameCounter++;
 
-            if (!target.active)
-            {
-                Projectile.localAI[0] = 1;
-                Projectile.Kill();
-            }
-
-            Projectile.Center = target.Center + Projectile.velocity.RotatedBy(target.rotation - Projectile.ai[1]);
+            
 
             if (Projectile.frame < 2 && Projectile.frameCounter > 5)
             {

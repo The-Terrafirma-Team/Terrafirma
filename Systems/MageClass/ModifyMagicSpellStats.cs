@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Terrafirma.Common.Items;
 using Terraria.ID;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma.Systems.MageClass
 {

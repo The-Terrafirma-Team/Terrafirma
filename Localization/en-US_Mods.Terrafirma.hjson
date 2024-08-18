@@ -1086,6 +1086,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	LuckyDice: {
+		DisplayName: Lucky Dice
+		Tooltip: ""
+	}
+
 	ShadowflameWrench: {
 		DisplayName: Shadowflame Wrench
 		Tooltip: ""
@@ -1242,6 +1247,7 @@ Projectiles: {
 	TraitorsDaggerProj.DisplayName: Traitors Dagger Proj
 	BipolarProjectile.DisplayName: Bipolar Projectile
 	ShadowflameWrench.DisplayName: Shadowflame Wrench
+	LuckyDiceProjectile.DisplayName: Lucky Dice Projectile
 }
 
 Tiles: {
@@ -1552,6 +1558,26 @@ Spells: {
 	LaserBlast: {
 		Name: Laser Blast
 		Description: Fires fast moving lasers
+	}
+
+	PlasmaBall: {
+		Name: Plasma Ball
+		Description: ""
+	}
+
+	QuantumRay: {
+		Name: Quantum Ray
+		Description: ""
+	}
+
+	LuckySpellDice: {
+		Name: Lucky Spell Dice
+		Description: ""
+	}
+
+	LuckyDiceSpell: {
+		Name: Lucky Dice Spell
+		Description: ""
 	}
 }
 

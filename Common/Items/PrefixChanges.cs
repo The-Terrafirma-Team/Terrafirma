@@ -108,7 +108,7 @@ namespace Terrafirma.Common.Items
                 case PrefixID.Rapid:
                     shtspd = 1.6f;
                     spd = 0.75f;
-                    dmg = 0.9f;
+                    dmg = 0.8f;
                     break;
 
                 // Magic

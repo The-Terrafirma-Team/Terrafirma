@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Equipment.Magic
 {
-    public class ManaTalon : ModItem
+    public class LuckyDice : ModItem
     {
         public override void SetDefaults()
         {
