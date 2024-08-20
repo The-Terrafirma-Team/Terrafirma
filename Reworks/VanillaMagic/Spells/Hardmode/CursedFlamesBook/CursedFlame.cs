@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.CursedFlames
+namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.CursedFlamesBook
 {
     internal class CursedFlame : Spell
     {

@@ -44,9 +44,9 @@ namespace Terrafirma.Common
 
             if (previousSpell != null && previousSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) && !Player.ItemAnimationActive)
             {
-                if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) > 0)
+                if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.Spell(), Player.HeldItem.type) > 0)
                 {
-                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellFromIndex(SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) - 1, Player.HeldItem.type);
+                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellFromIndex(SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.Spell(), Player.HeldItem.type) - 1, Player.HeldItem.type);
                 }
                 else
                 {
@@ -56,9 +56,9 @@ namespace Terrafirma.Common
 
             if (nextSpell != null && nextSpell.JustPressed && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) && !Player.ItemAnimationActive)
             {
-                if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) < SpellIndex.GetMaxSpellsforWeaponwithAccessory(Player.HeldItem.type) - 1)
+                if (SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.Spell(), Player.HeldItem.type) < SpellIndex.GetMaxSpellsforWeaponwithAccessory(Player.HeldItem.type) - 1)
                 {
-                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellFromIndex(SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) + 1, Player.HeldItem.type);
+                    Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellFromIndex(SpellIndex.GetWeaponSpellIndexWithAccessory(Player.HeldItem.Spell(), Player.HeldItem.type) + 1, Player.HeldItem.type);
                 }
                 else
                 {
@@ -69,13 +69,13 @@ namespace Terrafirma.Common
 
             //If held item has spells and its selected spell is not of this item (ex: Accessory spell)
             if(SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
-                Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell != null &&
-               !SpellIndex.ItemCatalogue[Player.HeldItem.type].ContainsSpell(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell))
+                Player.HeldItem.Spell() != null &&
+               !SpellIndex.ItemCatalogue[Player.HeldItem.type].ContainsSpell(Player.HeldItem.Spell()))
             {
                 bool accessoriescontainspell = false;
-                for (int i = 0; i < Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.SpellItem.Length; i++)
+                for (int i = 0; i < Player.HeldItem.Spell().SpellItem.Length; i++)
                 {
-                    if (Player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Contains(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.SpellItem[i]))
+                    if (Player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Contains(Player.HeldItem.Spell().SpellItem[i]))
                     {
                         accessoriescontainspell = true;
                         break;

@@ -13,6 +13,8 @@ using Terrafirma.Systems.AccessorySynergy;
 using Terraria.GameContent;
 using ReLogic.Graphics;
 using Terrafirma.Common;
+using Terrafirma.Systems.MageClass;
+using Terrafirma.Common.Items;
 
 namespace Terrafirma
 {
@@ -28,7 +30,7 @@ namespace Terrafirma
         }
         public static Color ToColor(this Vector3 vect, float alpha = 1f)
         {
-            return new Color(vect.X,vect.Y,vect.Z,alpha);
+            return new Color(vect.X, vect.Y, vect.Z, alpha);
         }
 
         /// <summary>
@@ -99,6 +101,11 @@ namespace Terrafirma
         public static PlayerStats PlayerStats(this Player player)
         {
             return player.GetModPlayer<PlayerStats>();
+        }
+
+        public static Spell Spell(this Item item)
+        {
+            return item.GetGlobalItem<GlobalItemInstanced>().Spell;
         }
         public static bool PlayerDoublePressedSetBonusActivateKey(this Player player)
         {

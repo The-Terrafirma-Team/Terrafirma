@@ -21,8 +21,8 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
             Item.useTime = 20;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
 
-            Item.width = 38;
-            Item.height = 46;
+            Item.width = 44;
+            Item.height = 44;
 
             Item.autoReuse = true;
             Item.noMelee = true;
@@ -51,7 +51,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Sentry.Hardmode
                 int PushUpY;
                 Main.LocalPlayer.FindSentryRestingSpot(type, out WorldX, out WorldY, out PushUpY);
 
-                Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY - 6), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
+                Projectile.NewProjectile(source, new Vector2(WorldX, WorldY - PushUpY + 15), Vector2.Zero, type, damage, 0, player.whoAmI, 0, 0, 0);
                 player.UpdateMaxTurrets();
             }
             return false;

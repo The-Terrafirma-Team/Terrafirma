@@ -56,7 +56,8 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
             if (Projectile.ai[0] >= 30 * Projectile.GetSentryAttackCooldownMultiplier() && TFUtils.FindClosestNPC(600f * Projectile.GetSentryRangeMultiplier(), Projectile.Center) != null)
             {
                 Projectile.ai[0] = 0;
-                Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                Projectile proj = Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(0, -8) + new Vector2(-32, 0).RotatedBy(sentryrot), -new Vector2(4.2f, 0f).RotatedBy(sentryrot), ProjectileID.IchorSplash, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                proj.DamageType = DamageClass.Summon;
                 backtimer = 10;
                 SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
             }

@@ -164,9 +164,12 @@ namespace Terrafirma.Common.Players
 
     public static class PlayerMethods
     {
+        /// <summary>
+        /// Sends a packet containing the Player's MouseWorld position
+        /// </summary>
         public static void SendMouseWorld(this Player player)
         {
-            if (Main.netMode == NetmodeID.SinglePlayer) return;
+            if (Main.netMode == NetmodeID.SinglePlayer) return; //Why are you trying to sync your mouse position in singleplayer?
 
             ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
             packet.Write(NetSendIDs.syncCursor);

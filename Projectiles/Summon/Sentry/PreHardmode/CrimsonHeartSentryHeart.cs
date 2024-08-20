@@ -87,6 +87,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             }
             else if (Projectile.ai[0] % (int)(24 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) != 0) Projectile.ai[0]++;
 
+            Projectile.velocity.Y = (float)Math.Sin(Projectile.ai[1] / 40f) / 5f;
             Projectile.ai[1]++;
 
         }
