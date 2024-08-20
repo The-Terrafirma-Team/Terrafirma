@@ -22,6 +22,7 @@ namespace Terrafirma.Common.Items
                 case ItemID.IceBlock:
                     entity.ammo = ItemID.IceBlock;
                     entity.shoot = ModContent.ProjectileType<IcicleProjectile>();
+                    entity.notAmmo = true;
                     break;
             }
         }

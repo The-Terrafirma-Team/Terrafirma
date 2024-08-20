@@ -10,6 +10,7 @@ using Terrafirma.Systems.AccessorySynergy;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.UIElements;
 using System;
+using Terrafirma.Common.Items;
 
 namespace Terrafirma.Systems.MageClass
 {

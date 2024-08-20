@@ -101,5 +101,12 @@ namespace Terrafirma.Common.Items
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
         }
 
+        public override bool CanShoot(Item item, Player player)
+        {
+            if (item.type == ItemID.IceBlock) return false;
+
+            return base.CanShoot(item, player);
+        }
+
     }
 }

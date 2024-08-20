@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Terrafirma.Common.Items;
+using Terrafirma.Systems.AccessorySynergy;
 using Terrafirma.Systems.MageClass;
 using Terraria.GameInput;
 using Terraria.ModLoader;
@@ -63,6 +65,23 @@ namespace Terrafirma.Common
                     Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellFromIndex(0, Player.HeldItem.type);
                 }
                 //Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellIndex(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) < SpellIndex.ItemCatalogue[Player.HeldItem.type].Length - 1 ? SpellIndex.ItemCatalogue[Player.HeldItem.type][SpellIndex.GetWeaponSpellIndex(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) + 1] : SpellIndex.ItemCatalogue[Player.HeldItem.type][0];
+            }
+
+            //If held item has spells and its selected spell is not of this item (ex: Accessory spell)
+            if(SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) &&
+                Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell != null &&
+               !SpellIndex.ItemCatalogue[Player.HeldItem.type].ContainsSpell(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell))
+            {
+                bool accessoriescontainspell = false;
+                for (int i = 0; i < Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.SpellItem.Length; i++)
+                {
+                    if (Player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Contains(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.SpellItem[i]))
+                    {
+                        accessoriescontainspell = true;
+                        break;
+                    }
+                }
+                if (!accessoriescontainspell) Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[Player.HeldItem.type][0];
             }
 
         }

@@ -7,7 +7,7 @@ namespace Terrafirma.Buffs.Buffs
     { 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetCritChance(DamageClass.Generic) += 100;
+            player.GetCritChance(DamageClass.Generic) += 10;
             player.PlayerStats().GenericCritDamage += 1f;
         }
     }

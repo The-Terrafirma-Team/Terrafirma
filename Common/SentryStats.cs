@@ -54,7 +54,6 @@ namespace Terrafirma.Common
             if (entity.type == ModContent.ProjectileType<RoyalJellyDispenser>()) SentrySlots = 2f;
             if (entity.type == ModContent.ProjectileType<BarbedWireCanisterSentry>()) SentrySlots = 0.5f;
             if (entity.type == ModContent.ProjectileType<GREATSentry>()) SentrySlots = 4f;
-            if (entity.type == ModContent.ProjectileType<CrimsonHeartSentry>()) SentrySlots = 0f;
             Priority = false;
         }
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)

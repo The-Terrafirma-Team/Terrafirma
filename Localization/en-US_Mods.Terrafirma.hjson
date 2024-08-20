@@ -1095,6 +1095,11 @@ Items: {
 		DisplayName: Shadowflame Wrench
 		Tooltip: ""
 	}
+
+	GlowingMushroomCap: {
+		DisplayName: Glowing Mushroom Cap
+		Tooltip: Increases maximum mana by 40
+	}
 }
 
 Projectiles: {

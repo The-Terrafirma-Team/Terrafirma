@@ -20,7 +20,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
         {
             foreach(Projectile proj in Main.ActiveProjectiles)
             {
-                if(proj.type != ModContent.ProjectileType<CrimsonHeartSentry>() && hitbox.Intersects(proj.Hitbox) && proj.sentry)
+                if(hitbox.Intersects(proj.Hitbox) && proj.sentry)
                 {
                     proj.GetGlobalProjectile<SentryStats>().Priority = true;
                     TFUtils.UpdateSentryPriority(proj);

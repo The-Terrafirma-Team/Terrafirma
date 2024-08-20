@@ -48,29 +48,33 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.velocity.Y += 0.5f;
             turretradius = 200f * Projectile.GetSentryRangeMultiplier();
 
-            for(int i = 0; i < Main.player.Length; i++)
+            if (Projectile.ai[0] >= 20 * Projectile.GetSentryAttackCooldownMultiplier())
             {
-                if (Projectile.Center.Distance(Main.player[i].MountedCenter) < turretradius && Projectile.ai[0] >= 20 * Projectile.GetSentryAttackCooldownMultiplier() && Main.player[i].team == Main.player[Projectile.owner].team)
+                for (int i = 0; i < Main.player.Length; i++)
                 {
-                    for(int j = 0; j < Projectile.Center.Distance(Main.player[i].MountedCenter); j += 6)
+                    if (Main.player[i].active && Main.player[i].team == Main.player[Projectile.owner].team && Main.player[i].MountedCenter.Distance(Projectile.Center) <= turretradius)
                     {
-                        Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(0,-12) + new Vector2(j, (float)Math.Sin( (j / 20f) - ((float)Main.timeForVisualEffects / 30) ) * 15f).RotatedBy((Projectile.Center + new Vector2(0, -12)).DirectionTo(Main.player[i].MountedCenter).ToRotation()), DustID.Honey2, Vector2.Zero, 140, Scale : 1f + (((float)Math.Sin(j / 20f) + 1f) / 5f) );
-                        newdust.noGravity = true;
-                    }
+                        for (int j = 0; j < Projectile.Center.Distance(Main.player[i].MountedCenter); j += 6)
+                        {
+                            Dust newdust = Dust.NewDustPerfect(Projectile.Center + new Vector2(0, -12) + new Vector2(j, (float)Math.Sin((j / 20f) - ((float)Main.timeForVisualEffects / 30)) * 15f).RotatedBy((Projectile.Center + new Vector2(0, -12)).DirectionTo(Main.player[i].MountedCenter).ToRotation()), DustID.Honey2, Vector2.Zero, 140, Scale: 1f + (((float)Math.Sin(j / 20f) + 1f) / 5f));
+                            newdust.noGravity = true;
+                        }
 
-                    for (int j = 0; j < 4; j ++)
-                    {
-                        Dust newdust = Dust.NewDustPerfect(Main.player[i].MountedCenter, DustID.Honey2, Main.rand.NextVector2Circular(1,1), 140);
-                    }
+                        for (int j = 0; j < 4; j++)
+                        {
+                            Dust newdust = Dust.NewDustPerfect(Main.player[i].MountedCenter, DustID.Honey2, Main.rand.NextVector2Circular(1, 1), 140);
+                        }
 
-                    if (Projectile.ai[0] % (int)(10 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) == 0)
-                    {
-                        Main.player[i].Heal(2);
+                        if (Projectile.ai[0] % (int)(10 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) == 0 && 
+                            Main.LocalPlayer == Main.player[i])
+                        {
+                            Main.player[i].Heal(2);
+                        }
                     }
-
-                    Projectile.ai[0] = 0;
-                    Projectile.ai[1]++;
                 }
+
+                Projectile.ai[0] = 0;
+                Projectile.ai[1]++;
             }
 
             Projectile.ai[0]++;

@@ -17,7 +17,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public Projectile BaseProj = null;
         public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CrimsonHeartSentryHeart";
         private static Asset<Texture2D> HeartTex;
-        private static Asset<Texture2D> BaseTex;
         private float a;
         private float b;
         private Vector2 c;
@@ -25,7 +24,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override void SetStaticDefaults()
         {
             HeartTex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CrimsonHeartSentryHeart");
-            BaseTex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CrimsonHeartSentryBase");
         }
         public override void SetDefaults()
         {
@@ -60,30 +58,8 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             return false;
         }
-        public override void OnSpawn(IEntitySource source)
-        {
-            for (int i = 0; i < Main.projectile.Length; i++)
-            {
-                if (Main.projectile[i].owner == Projectile.owner && Main.projectile[i].type == ModContent.ProjectileType<CrimsonHeartSentry>())
-                {
-                    BaseProj = Main.projectile[i];
-                }
-            }
-
-            //if (BaseProj != null)
-            //{
-            //    c = new Vector2(BaseProj.Center.X + (Projectile.Center.X - BaseProj.Center.X) * 0.5f, Math.Max(Projectile.Center.Y, BaseProj.Center.Y) + 40);
-            //    Vector2 PosA = Projectile.Center - c;
-            //    Vector2 PosB = BaseProj.Center - c;
-            //    a = (PosA.Y * PosB.X - PosB.Y * PosA.X) / (PosA.X * PosB.X * (PosA.X * PosB.X));
-            //    b = (PosB.Y - a * (float)Math.Pow(PosB.X, 2)) / PosB.X;
-            //} 
-            base.OnSpawn(source);
-        }
         public override void AI()
         {
-
-            if (BaseProj == null || BaseProj.active == false) Projectile.Kill();
 
             NPC ClosestNPC = TFUtils.FindClosestNPC(120f * TFUtils.GetSentryRangeMultiplier(Projectile), Projectile.Center);
 
@@ -110,16 +86,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 Projectile.ai[0]++;
             }
             else if (Projectile.ai[0] % (int)(24 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) != 0) Projectile.ai[0]++;
-
-
-            if (Projectile.ai[1] % 12 == 0)
-            {
-                for (int i = 0; i < Projectile.Center.Distance(BaseProj.Center) / 10; i++)
-                {
-                    Dust dust = Dust.NewDustPerfect(Projectile.Center + Projectile.DirectionTo(BaseProj.Center) * 10 * i, DustID.Blood, Vector2.Zero, newColor: Color.White * 0.5f);
-                    dust.noGravity = true;
-                }
-            }
 
             Projectile.ai[1]++;
 
