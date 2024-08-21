@@ -124,7 +124,7 @@ namespace Terrafirma.Common.Items
             {
                 AmmoDropParticle particle = new AmmoDropParticle();
                 particle.itemID = source.AmmoItemIdUsed;
-                ParticleSystem.AddParticle(particle, player.Center + Vector2.Normalize(velocity) * (item.width/2), -velocity * Main.rand.NextFloat(0.15f,0.4f));
+                ParticleSystem.AddParticle(particle, player.Center + Vector2.Normalize(velocity) * (item.width/6), (-velocity + new Vector2(0,Main.rand.NextFloat(-5,-3))) * Main.rand.NextFloat(0.15f,0.4f));
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
         }

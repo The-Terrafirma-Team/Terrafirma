@@ -46,14 +46,23 @@ namespace Terrafirma.Particles
         public override void Update()
         {
 
-             velocity.X *= 0.98f;
-            velocity.Y = Math.Clamp(velocity.Y + 0.2f, -1000f, 5f);
+             velocity.X *= 0.97f;
+            velocity.Y = Math.Clamp(velocity.Y + 0.2f, -1000f, 15f);
             rotation += velocity.Length() / 10f;
 
             position += velocity;
 
             if (TimeInWorld > timeleft) Active = false;
             if (timeleft - TimeInWorld < 10) opacity -= 0.1f;
+
+            if (Collision.SolidCollision(position - new Vector2(1) + velocity, 2, 2))
+            {
+                Vector2 mhm = Collision.AnyCollision(position - new Vector2(1), velocity, 2, 2);
+                if (mhm.X != velocity.X)
+                    velocity.X *= -1;
+                if (mhm.X != velocity.Y)
+                    velocity.Y *= -0.7f;
+            }
 
             base.Update();
         }
@@ -64,7 +73,7 @@ namespace Terrafirma.Particles
             spriteBatch.Draw(AmmoTex.Value, 
                 position - Main.screenPosition,
                 AmmoTex.Value.Bounds, 
-                Color.White * opacity,
+                Lighting.GetColor(position.ToTileCoordinates()) * opacity,
                 rotation,
                 AmmoTex.Size() / 2,
                 scale * 0.7f, 
