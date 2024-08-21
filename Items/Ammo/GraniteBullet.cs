@@ -2,13 +2,19 @@
 using Terraria.ModLoader;
 using Terraria;
 using Terrafirma.Items.Materials;
+using Terrafirma.Common.Interfaces;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace Terrafirma.Items.Ammo
 {
-    internal class GraniteBullet : ModItem
+    internal class GraniteBullet : ModItem, ITFBullet
     {
+        Asset<Texture2D> ITFBullet.casingTexture { get => ModContent.Request<Texture2D>("Terrafirma/Assets/BulletCasings/GraniteBulletCasing"); }
+
         public override void SetDefaults()
         {
+            
             Item.damage = 6;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 18;

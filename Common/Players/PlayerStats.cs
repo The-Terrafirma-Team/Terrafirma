@@ -22,6 +22,7 @@ namespace Terrafirma.Common.Players
 
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
+        public float SentryDamageMultiplier = 0f;
         public float WrenchBuffTimeMultiplier = 1f;
         public bool CanThrowWrenches = false;
 
@@ -70,6 +71,7 @@ namespace Terrafirma.Common.Players
 
             SentrySpeedMultiplier = 0f;
             SentryRangeMultiplier = 0f;
+            SentryDamageMultiplier = 0f;
             KnockbackResist = 1f;
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
@@ -144,6 +146,11 @@ namespace Terrafirma.Common.Players
 
             damage.Flat += GenericFlatDamage;
             #endregion Flat Damage
+
+            if (item.DamageType == DamageClass.Summon && item.sentry)
+            {
+                damage.Flat += (item.damage * (SentryDamageMultiplier + 1f)) - item.OriginalDamage;
+            }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {

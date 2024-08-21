@@ -1100,6 +1100,11 @@ Items: {
 		DisplayName: Glowing Mushroom Cap
 		Tooltip: Increases maximum mana by 40
 	}
+
+	EngineerCap: {
+		DisplayName: Engineer Cap
+		Tooltip: Increases sentry damage by 10%
+	}
 }
 
 Projectiles: {

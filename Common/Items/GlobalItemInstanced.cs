@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terrafirma.Common.Players;
+using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
@@ -15,6 +16,9 @@ namespace Terrafirma.Common.Items
     public class GlobalItemInstanced : GlobalItem
     {
         public Spell Spell = null;
+
+        public bool spawnAmmoParticle = false;
+        public bool defaultShootingAnimation = false;
         public override bool InstancePerEntity => true;
 
         //Net Send & Recieve
@@ -48,6 +52,12 @@ namespace Terrafirma.Common.Items
             {
                 entity.useTime = entity.useAnimation = 16;
                 entity.mana = 0;
+            }
+
+            if (entity.useAmmo == AmmoID.Bullet)
+            {
+                spawnAmmoParticle = true;
+                defaultShootingAnimation = true;
             }
         }
 
@@ -106,6 +116,34 @@ namespace Terrafirma.Common.Items
             if (item.type == ItemID.IceBlock) return false;
 
             return base.CanShoot(item, player);
+        }
+
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (spawnAmmoParticle)
+            {
+                AmmoDropParticle particle = new AmmoDropParticle();
+                particle.itemID = source.AmmoItemIdUsed;
+                ParticleSystem.AddParticle(particle, player.Center + Vector2.Normalize(velocity) * (item.width/2), -velocity * Main.rand.NextFloat(0.15f,0.4f));
+            }
+            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+        }
+
+        public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
+        {
+            //Gun shooting animation
+            if (defaultShootingAnimation) PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.01f, 0.03f), 3, 0);
+            switch (item.type)
+            {
+                case ItemID.Boomstick: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.03f, 0.08f), 6, 1); break;
+                case ItemID.Shotgun: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.05f, 0.1f), 8, 3); break;
+                case ItemID.TacticalShotgun: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.03f, 0.08f), 6, 2); break;
+                case ItemID.QuadBarrelShotgun: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.04f, 0.09f), 7, 2); break;
+
+                case ItemID.SniperRifle: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.015f, 0.03f), 15, 0); break;
+            }
+
+            base.UseStyle(item, player, heldItemFrame);
         }
 
     }
