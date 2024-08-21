@@ -43,9 +43,9 @@ namespace Terrafirma.Systems.MageClass
 
             if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.Update(item, player);
 
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellIndex.ItemCatalogue.ContainsKey(item.type))
+            if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellID.itemcatalogue.ContainsKey(item.type))
             {
-                item.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.ItemCatalogue[item.type][0];
+                item.GetGlobalItem<GlobalItemInstanced>().Spell = SpellID.itemcatalogue[item.type][0];
             }
 
             base.UpdateInventory(item, player);
@@ -87,7 +87,7 @@ namespace Terrafirma.Systems.MageClass
         public override float UseAnimationMultiplier(Item item)
         {
             float returnanimation = -1f;
-            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 returnanimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)item.useAnimation : -1f;
             }
@@ -97,7 +97,7 @@ namespace Terrafirma.Systems.MageClass
         public override float UseTimeMultiplier(Item item)
         {
             float returntime = -1f;
-            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 returntime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)item.useTime : -1f;
             }
@@ -106,7 +106,7 @@ namespace Terrafirma.Systems.MageClass
 
         public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
         {
-            if (SpellIndex.ItemCatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 mult = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / (float)item.mana : 1f;
             }

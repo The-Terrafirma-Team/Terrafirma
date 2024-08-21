@@ -49,17 +49,17 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public void Create(Item item)
         {
-            if (!SpellIndex.ItemCatalogue.ContainsKey(item.type)) return;
+            if (!SpellID.itemcatalogue.ContainsKey(item.type)) return;
 
             selecteditem = item;
             selectedspellID = 0;
             iconshift = 0;
             UIOffset = new Vector2(1400, 0);
 
-            for (int i = 0; i < SpellIndex.ItemCatalogue[item.type].Length; i++)
+            for (int i = 0; i < SpellID.itemcatalogue[item.type].Length; i++)
             {
 
-                spellicon = new UIImage_Terrafirma(ModContent.Request<Texture2D>(SpellIndex.ItemCatalogue[item.type][i].TexurePath, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+                spellicon = new UIImage_Terrafirma(ModContent.Request<Texture2D>(SpellID.itemcatalogue[item.type][i].TexurePath, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
                 spellicon.HAlign = 0f;
                 spellicon.VAlign = 0.03f;
                 spellicon.Top.Pixels = UIOffset.Y;
@@ -72,12 +72,12 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
 
             for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
             {
-                if (SpellIndex.ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                if (SpellID.itemcatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                 {
                     int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                    for (int j = 0; j < SpellIndex.ItemCatalogue[accessory].Length; j++)
+                    for (int j = 0; j < SpellID.itemcatalogue[accessory].Length; j++)
                     {
-                        spellicon = new UIImage_Terrafirma(ModContent.Request<Texture2D>(SpellIndex.ItemCatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j].TexurePath, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+                        spellicon = new UIImage_Terrafirma(ModContent.Request<Texture2D>(SpellID.itemcatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j].TexurePath, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
                         spellicon.HAlign = 0f;
                         spellicon.VAlign = 0.03f;
                         spellicon.Top.Pixels = UIOffset.Y;
@@ -114,36 +114,36 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
 
         public override void Update(GameTime gameTime)
         {
-            if (SpellIndex.GetMaxSpellsforWeaponwithAccessory(selecteditem.type) != spelliconlist.Length) 
+            if (SpellID.GetMaxSpellsforWeaponwithAccessory(selecteditem.type) != spelliconlist.Length) 
             { 
                 Flush();
                 Create(selecteditem);
             }
 
-            if (SpellIndex.ItemCatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null  && selectedspellID != SpellIndex.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type))
+            if (SpellID.itemcatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null  && selectedspellID != SpellID.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type))
             {
                 spellchangeswitch = false;
             }
 
             if (!spellchangeswitch)
             {
-                if (selectedspellID == 0 && SpellIndex.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) == spelliconlist.Length - 1)
+                if (selectedspellID == 0 && SpellID.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) == spelliconlist.Length - 1)
                 {
                     iconshift--;
                 }
-                else if (selectedspellID == spelliconlist.Length - 1 && SpellIndex.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) == 0)
+                else if (selectedspellID == spelliconlist.Length - 1 && SpellID.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) == 0)
                 {
                     iconshift++;
                 }
                 else
                 {
-                    iconshift += SpellIndex.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) - selectedspellID;
+                    iconshift += SpellID.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type) - selectedspellID;
                 }
             }
 
-            if (SpellIndex.ItemCatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null) 
+            if (SpellID.itemcatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null) 
             { 
-                selectedspellID = SpellIndex.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type);
+                selectedspellID = SpellID.GetWeaponSpellIndexWithAccessory(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell, selecteditem.type);
                 spellchangeswitch = true;
             }
 
@@ -153,7 +153,7 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
             }
 
             //Spell Title Name
-            if (SpellIndex.ItemCatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 Spellname.SetText(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell.GetSpellName());
                 Spellname.Left.Pixels = UIOffset.X - FontAssets.MouseText.Value.MeasureString(Spellname.Text).X / 2;
@@ -174,12 +174,12 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (!SpellIndex.ItemCatalogue.ContainsKey(selecteditem.type) || selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell == null || spelliconlist.Length == 0) return;
+            if (!SpellID.itemcatalogue.ContainsKey(selecteditem.type) || selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell == null || spelliconlist.Length == 0) return;
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
-            if (SpellIndex.ItemCatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(selecteditem.type) && selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell != null)
             {
                 for (int k = -1 + (iconshift / spelliconlist.Length); k <= 1 + (iconshift / spelliconlist.Length); k++)
                 {

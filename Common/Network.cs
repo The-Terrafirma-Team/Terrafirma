@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Common
 {
@@ -52,6 +53,14 @@ namespace Terrafirma.Common
                 switch (packetID)
                 {
                     case NetSendIDs.syncSentryBuff:
+                        int projidentity = reader.ReadInt32();
+                        int buffid = reader.ReadInt32();
+                        int buffduration = reader.ReadInt32();
+                        packet.Write((byte)packetID);
+                        packet.Write(projidentity);
+                        packet.Write(buffid);
+                        packet.Write(buffduration);
+                        packet.Send(-1, -1);
                         break;
                     case NetSendIDs.syncCursor:
                         int packetPlayer = reader.ReadInt32();
@@ -70,6 +79,10 @@ namespace Terrafirma.Common
                 switch (packetID)
                 {
                     case NetSendIDs.syncSentryBuff:
+                        int projidentity = reader.ReadInt32();
+                        int buffid = reader.ReadInt32();
+                        int buffduration = reader.ReadInt32();
+                        WrenchItem.ApplySentryBuff(Main.projectile[projidentity], SentryBuffID.sentrybuffs[buffid], buffduration);
                         break;
                     case NetSendIDs.syncCursor:
                         int PlayerInt = reader.ReadInt32();

@@ -142,7 +142,7 @@ namespace Terrafirma.Common.Players
 
             if (HeldMagicItem != Player.HeldItem && triggersSet.MouseRight && Player.inventory[Player.selectedItem].damage != -1 && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)
             {
-                if (SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type))
+                if (SpellID.itemcatalogue.ContainsKey(Player.inventory[Player.selectedItem].type))
                 {
                     ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
                     HeldMagicItem = Player.HeldItem;
@@ -153,7 +153,7 @@ namespace Terrafirma.Common.Players
             if (triggersSet.MouseRight && !Player.ItemAnimationActive)
             {
                 HeldMagicItem = Player.HeldItem;
-                if (!SpellUI && SpellIndex.ItemCatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1 && HeldMagicItem == Player.HeldItem && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)
+                if (!SpellUI && SpellID.itemcatalogue.ContainsKey(Player.inventory[Player.selectedItem].type) && Player.inventory[Player.selectedItem].damage != -1 && HeldMagicItem == Player.HeldItem && !Main.HoveringOverAnNPC && Main.SmartInteractTileCoordsSelected.Count == 0 && !TileInteract)
                 {
                     ModContent.GetInstance<SpellUISystem>().Create(Player.HeldItem.type);
                     SpellUI = true;
@@ -167,7 +167,7 @@ namespace Terrafirma.Common.Players
                     if (ModContent.GetInstance<SpellUISystem>().SelectedSpell != null && 
                         SpellUI == true &&
                         Player.HeldItem.type > 0 &&
-                        SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+                        SpellID.itemcatalogue.ContainsKey(Player.HeldItem.type))
                     {
                         SpellUI = false;
                         Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
@@ -187,12 +187,12 @@ namespace Terrafirma.Common.Players
             }
 
             //Spell Side menu
-            if (!SpellSideMenu && SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type))
+            if (!SpellSideMenu && SpellID.itemcatalogue.ContainsKey(Player.HeldItem.type))
             {
                 ModContent.GetInstance<SpellSideMenuUISystem>().Create(Player.HeldItem);
                 SpellSideMenu = true;
             }
-            if (!SpellIndex.ItemCatalogue.ContainsKey(Player.HeldItem.type) || ModContent.GetInstance<SpellSideMenuUISystem>().spellitem.type != Player.HeldItem.type || Player.HeldItem.type == 0)
+            if (!SpellID.itemcatalogue.ContainsKey(Player.HeldItem.type) || ModContent.GetInstance<SpellSideMenuUISystem>().spellitem.type != Player.HeldItem.type || Player.HeldItem.type == 0)
             {
                 ModContent.GetInstance<SpellSideMenuUISystem>().Flush();
                 SpellSideMenu = false;

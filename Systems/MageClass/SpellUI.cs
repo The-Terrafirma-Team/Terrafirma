@@ -42,7 +42,7 @@ namespace Terrafirma.Systems.MageClass
             effecttimer = 0;
             sizefloat = 0f;
             Flush();
-            if (SpellIndex.ItemCatalogue.ContainsKey(weapon))
+            if (SpellID.itemcatalogue.ContainsKey(weapon))
             {
                 UIOpen = true;
                 SpellList = new Spell[]{};
@@ -52,14 +52,14 @@ namespace Terrafirma.Systems.MageClass
                         //Add all Accessory Spells to Spell List
                         for (int i = 0; i < player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
                         {
-                            if (SpellIndex.ItemCatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                            if (SpellID.itemcatalogue.ContainsKey(player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                             {
                                 int accessory = player.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                                for (int j = 0; j < SpellIndex.ItemCatalogue[accessory].Length; j++)
+                                for (int j = 0; j < SpellID.itemcatalogue[accessory].Length; j++)
                                 {
-                                    if (!SpellList.Contains(SpellIndex.ItemCatalogue[accessory][j]))
+                                    if (!SpellList.Contains(SpellID.itemcatalogue[accessory][j]))
                                     {
-                                        SpellList = SpellList.Append(SpellIndex.ItemCatalogue[accessory][j]).ToArray();
+                                        SpellList = SpellList.Append(SpellID.itemcatalogue[accessory][j]).ToArray();
                                     }
                                 }
 
@@ -68,11 +68,11 @@ namespace Terrafirma.Systems.MageClass
                 }
 
                 //Add all Weapon Spells to Spell list
-                for (int i = 0; i < SpellIndex.ItemCatalogue[weapon].Length; i++)
+                for (int i = 0; i < SpellID.itemcatalogue[weapon].Length; i++)
                 {
-                    if (!SpellList.Contains(SpellIndex.ItemCatalogue[weapon][i]))
+                    if (!SpellList.Contains(SpellID.itemcatalogue[weapon][i]))
                     {
-                        SpellList = SpellList.Append(SpellIndex.ItemCatalogue[weapon][i]).ToArray();
+                        SpellList = SpellList.Append(SpellID.itemcatalogue[weapon][i]).ToArray();
                     }
 
                 }
@@ -120,7 +120,7 @@ namespace Terrafirma.Systems.MageClass
             TextPanel.Append(Description);
 
             //Description Stuff
-            if (SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
+            if (SpellID.spells.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell))
             {
 
                 int spellmanacost = ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost == -1 ? Main.LocalPlayer.HeldItem.mana : ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost;
@@ -154,7 +154,7 @@ namespace Terrafirma.Systems.MageClass
         public override void Update(GameTime gameTime)
         {
             //Description Stuff
-            if ( SpellIndex.SpellID.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell) )
+            if ( SpellID.spells.ContainsSpell(ModContent.GetInstance<SpellUISystem>().SelectedSpell) )
             {
 
                 int spellmanacost = ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost == -1 ? Main.LocalPlayer.HeldItem.mana : ModContent.GetInstance<SpellUISystem>().SelectedSpell.ManaCost;

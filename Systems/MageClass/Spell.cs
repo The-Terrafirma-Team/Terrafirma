@@ -46,16 +46,16 @@ namespace Terrafirma.Systems.MageClass
 
         public override void Load()
         {
-            SpellIndex.SpellID = SpellIndex.SpellID.Append(this).ToArray();
+            SpellID.spells = SpellID.spells.Append(this).ToArray();
             for (int i = 0;  i < SpellItem.Length; i++)
             {
-                if (SpellIndex.ItemCatalogue.ContainsKey(SpellItem[i]))
+                if (SpellID.itemcatalogue.ContainsKey(SpellItem[i]))
                 {
-                    SpellIndex.ItemCatalogue[SpellItem[i]] = SpellIndex.ItemCatalogue[SpellItem[i]].Append(this).ToArray();
+                    SpellID.itemcatalogue[SpellItem[i]] = SpellID.itemcatalogue[SpellItem[i]].Append(this).ToArray();
                 }
                 else
                 {
-                    SpellIndex.ItemCatalogue.Add(SpellItem[i], new Spell[] { this });
+                    SpellID.itemcatalogue.Add(SpellItem[i], new Spell[] { this });
                 }
 
             }
@@ -164,37 +164,37 @@ namespace Terrafirma.Systems.MageClass
         }
     }
 
-    public class SpellIndex : ModSystem
+    public class SpellID : ModSystem
     {
-        public static Spell[] SpellID = new Spell[] { };
-        public static Dictionary<int, Spell[]> ItemCatalogue = new Dictionary<int, Spell[]>();
+        public static Spell[] spells = new Spell[] { };
+        public static Dictionary<int, Spell[]> itemcatalogue = new Dictionary<int, Spell[]>();
 
         public static int GetWeaponSpellIndex(Spell spell, int itemid)
         {
-            for (int i = 0; i < ItemCatalogue[itemid].Length; i++)
+            for (int i = 0; i < itemcatalogue[itemid].Length; i++)
             {
-                if (ItemCatalogue[itemid][i].IsEqualsTo(spell)) return i;
+                if (itemcatalogue[itemid][i].IsEqualsTo(spell)) return i;
             }
             return 0;
         }
 
         public static int GetWeaponSpellIndexWithAccessory(Spell spell, int itemid)
         {
-            for (int i = 0; i < ItemCatalogue[itemid].Length; i++)
+            for (int i = 0; i < itemcatalogue[itemid].Length; i++)
             {
-                if (ItemCatalogue[itemid][i].IsEqualsTo(spell)) return i;
+                if (itemcatalogue[itemid][i].IsEqualsTo(spell)) return i;
             }
 
             int AccumulatedAccessorySpells = 0;
 
             for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
             {
-                if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                if (itemcatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                 {
                     int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                    for (int j = 0; j < ItemCatalogue[accessory].Length; j++)
+                    for (int j = 0; j < itemcatalogue[accessory].Length; j++)
                     {
-                        if (ItemCatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j].IsEqualsTo(spell)) return ItemCatalogue[itemid].Length + AccumulatedAccessorySpells;
+                        if (itemcatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j].IsEqualsTo(spell)) return itemcatalogue[itemid].Length + AccumulatedAccessorySpells;
                         else AccumulatedAccessorySpells++;
                     }
                 }
@@ -204,21 +204,21 @@ namespace Terrafirma.Systems.MageClass
 
         public static Spell GetWeaponSpellFromIndex(int index, int itemid)
         {
-            if (index < ItemCatalogue[itemid].Length)
+            if (index < itemcatalogue[itemid].Length)
             {
-                return ItemCatalogue[itemid][index];
+                return itemcatalogue[itemid][index];
             }
             else
             {
                 int AccumulatedAccessorySpells = 0;
                 for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
                 {
-                    if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                    if (itemcatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                     {
                         int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                        for (int j = 0; j < ItemCatalogue[accessory].Length; j++)
+                        for (int j = 0; j < itemcatalogue[accessory].Length; j++)
                         {
-                            if (index == ItemCatalogue[itemid].Length + AccumulatedAccessorySpells) return ItemCatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j];
+                            if (index == itemcatalogue[itemid].Length + AccumulatedAccessorySpells) return itemcatalogue[Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]][j];
                             else AccumulatedAccessorySpells++;
                         }
                     }
@@ -229,24 +229,24 @@ namespace Terrafirma.Systems.MageClass
 
         public static int GetMaxSpellsforWeapon(int itemid)
         {
-            return ItemCatalogue[itemid].Length;
+            return itemcatalogue[itemid].Length;
         }
 
         public static int GetMaxSpellsforWeaponwithAccessory(int itemid)
         {
-            if (!ItemCatalogue.ContainsKey(itemid)) return 0;
+            if (!itemcatalogue.ContainsKey(itemid)) return 0;
 
             int AccumulatedAccessorySpells = 0;
             for (int i = 0; i < Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories.Length; i++)
             {
-                if (ItemCatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
+                if (itemcatalogue.ContainsKey(Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i]))
                 {
                     int accessory = Main.LocalPlayer.GetModPlayer<AccessorySynergyPlayer>().EquippedAccessories[i];
-                    AccumulatedAccessorySpells += ItemCatalogue[accessory].Length;
+                    AccumulatedAccessorySpells += itemcatalogue[accessory].Length;
                 }
             }
 
-            return ItemCatalogue[itemid].Length + AccumulatedAccessorySpells;
+            return itemcatalogue[itemid].Length + AccumulatedAccessorySpells;
         }
     }
 }

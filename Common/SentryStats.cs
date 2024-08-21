@@ -190,4 +190,9 @@ namespace Terrafirma.Common
             }
         }
     }
+
+    public static class SentryBuffID
+    {
+        public static SentryBuff[] sentrybuffs = new SentryBuff[]{};
+    }
 }
