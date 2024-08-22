@@ -30,7 +30,7 @@ namespace Terrafirma.Particles
         /// </summary>
         public List<int> alloweditemIDs = new List<int>{
             ModContent.ItemType<Buckshot>(), ModContent.ItemType<Birdshot>(), ModContent.ItemType<ExplosiveBuckshot>(), ModContent.ItemType<BouncyBuckshot>(),
-            ModContent.ItemType<GraniteBullet>()
+            ModContent.ItemType<GraniteBullet>(), ItemID.HighVelocityBullet, ModContent.ItemType<HallowPointBullet>()
         };
 
 
@@ -38,8 +38,14 @@ namespace Terrafirma.Particles
         {
             if (itemID != null && alloweditemIDs.Contains((int)itemID))
             {
+
                 if (new Item((int)itemID).ModItem is ITFBullet item) AmmoTex = item.casingTexture;
                 else AmmoTex = TextureAssets.Item[(int)itemID];
+
+                switch (itemID)
+                {
+                    case ItemID.HighVelocityBullet: AmmoTex = ModContent.Request<Texture2D>("Terrafirma/Assets/BulletCasings/HighVelocityBulletCasing"); break;
+                }
             }
             base.OnSpawn();
         }

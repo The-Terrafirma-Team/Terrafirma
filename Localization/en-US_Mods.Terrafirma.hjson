@@ -1105,6 +1105,16 @@ Items: {
 		DisplayName: Engineer Cap
 		Tooltip: Increases sentry damage by 10%
 	}
+
+	TheBestGunEver: {
+		DisplayName: The Best Gun Ever
+		Tooltip: Would easily destroy a Gokuverse
+	}
+
+	HallowPointBullet: {
+		DisplayName: Hallow Point Bullet
+		Tooltip: Lodges itself into the taget, striking it multiple times
+	}
 }
 
 Projectiles: {
@@ -1258,6 +1268,7 @@ Projectiles: {
 	BipolarProjectile.DisplayName: Bipolar Projectile
 	ShadowflameWrench.DisplayName: Shadowflame Wrench
 	LuckyDiceProjectile.DisplayName: Lucky Dice Projectile
+	HallowPointBulletProjectile.DisplayName: Hallow Point Bullet Projectile
 }
 
 Tiles: {

@@ -39,7 +39,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
-            PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.01f,0.03f), 3, 0);
+            PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.01f,0.02f), 2, 0);
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

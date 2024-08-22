@@ -54,7 +54,7 @@ namespace Terrafirma.Common.Items
                 entity.mana = 0;
             }
 
-            if (entity.useAmmo == AmmoID.Bullet)
+            if (entity.DamageType == DamageClass.Ranged)
             {
                 spawnAmmoParticle = true;
                 defaultShootingAnimation = true;
