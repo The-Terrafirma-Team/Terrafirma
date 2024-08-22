@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Projectiles.Ranged.Bullets
 {
-    internal class BoneBulletProjectile : ModProjectile
+    internal class PosionBulletProjectile : ModProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -20,7 +20,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            BulletVisuals.drawBullet(Projectile, new Color(0.7f, 0.7f, 0.6f, 0.6f), new Color(0f, 0f, 0f, 1f));
+            BulletVisuals.drawBullet(Projectile, new Color(0.6f, 0.8f, 0.35f, 1f), new Color(0.4f, 0.3f, 0.5f, 1f), 1.2f);
             return false;
         }
         public override void SetDefaults()
@@ -31,10 +31,10 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 1;
 
             Projectile.timeLeft = 600;
-            Projectile.light = 0.2f;
+            Projectile.light = 0.4f;
 
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
@@ -51,6 +51,12 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             Projectile.Kill();
             return false;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Poisoned, 600);
+            base.OnHitNPC(target, hit, damageDone);
         }
         public override void OnKill(int timeLeft)
         {

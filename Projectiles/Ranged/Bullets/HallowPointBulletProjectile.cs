@@ -60,6 +60,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
             Projectile.tileCollide = true;
             Projectile.extraUpdates = 1;
             Projectile.penetrate = 10;
+            Projectile.light = 0.4f;
 
             Projectile.aiStyle = -1;
             AIType = ProjectileID.Bullet;

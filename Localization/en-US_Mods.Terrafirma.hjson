@@ -1115,6 +1115,26 @@ Items: {
 		DisplayName: Hallow Point Bullet
 		Tooltip: Lodges itself into the taget, striking it multiple times
 	}
+
+	CactusArrow: {
+		DisplayName: Cactus Arrow
+		Tooltip: It may sting
+	}
+
+	MushroomBullet: {
+		DisplayName: Mushroom Bullet
+		Tooltip: Grows inside the target, providing a little bit of light
+	}
+
+	PoisonBullet: {
+		DisplayName: Poison Bullet
+		Tooltip: ""
+	}
+
+	PoisonedBullet: {
+		DisplayName: Poisoned Bullet
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1269,6 +1289,10 @@ Projectiles: {
 	ShadowflameWrench.DisplayName: Shadowflame Wrench
 	LuckyDiceProjectile.DisplayName: Lucky Dice Projectile
 	HallowPointBulletProjectile.DisplayName: Hallow Point Bullet Projectile
+	CactusArrowProjectile.DisplayName: Cactus Arrow Projectile
+	MushroomBullet.DisplayName: Mushroom Bullet
+	MushroomBulletProjectile.DisplayName: Mushroom Bullet Projectile
+	PosionBulletProjectile.DisplayName: Posion Bullet Projectile
 }
 
 Tiles: {

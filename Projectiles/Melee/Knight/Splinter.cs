@@ -27,6 +27,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
         {
             return base.PreDraw(ref lightColor);
         }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.ai[0] > -1)
