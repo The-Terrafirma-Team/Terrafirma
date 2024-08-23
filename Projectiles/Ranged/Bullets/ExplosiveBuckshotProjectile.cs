@@ -20,7 +20,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            BulletVisuals.drawBullet(Projectile, new Color(1f, Main.masterColor, 0f, 0f), new Color(1f, 0f, 0f, 0f), 0.7f);
+            BulletVisuals.drawBullet(Projectile, new Color(1f, Main.masterColor, 0f, 0f), new Color(1f, 0f, 0f, 0f), Projectile.scale * 0.7f);
             return false;
         }
         public override void SetDefaults()
@@ -61,7 +61,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity.RotatedBy(Main.rand.NextFloat(-10, 10) * (Math.PI / 180)) * Main.rand.NextFloat(0.9f, 1.1f), Projectile.type, Projectile.damage / 2, Projectile.knockBack, Projectile.owner, 0, 0, 1);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity.RotatedBy(Main.rand.NextFloat(-10, 10) * (Math.PI / 180)) * Main.rand.NextFloat(0.7f, 1.1f), Projectile.type, Projectile.damage / 2, Projectile.knockBack, Projectile.owner, 0, 0, 1);
 
                 }
                 Projectile.Kill();
@@ -93,7 +93,11 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
                     SmokeDust.noGravity = true;
                 }
                 Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
-                SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+                SoundStyle style = SoundID.Item14;
+                style.MaxInstances = 20;
+                style.PitchVariance = 0.7f;
+                style.Volume = 0.5f;
+                SoundEngine.PlaySound(style, Projectile.position);
                 Projectile.Explode(100);
             }
 

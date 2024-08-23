@@ -20,7 +20,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            BulletVisuals.drawBullet(Projectile, new Color(1f, 1f, 0.5f, 0f), new Color(1f, 0.1f, 0f, 0.5f), 0.7f);
+            BulletVisuals.drawBullet(Projectile, new Color(1f, 1f, 0.5f, 0f), new Color(1f, 0.1f, 0f, 0.5f), Projectile.scale * 0.7f);
             return false;
         }
         public override void SetDefaults()

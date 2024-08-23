@@ -17,7 +17,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         bool lodged = false;
         public override bool PreDraw(ref Color lightColor)
         {
-            if (!lodged) BulletVisuals.drawBullet(Projectile, new Color(255, 255, 255, 0), new Color(150, 130, 10, 255), 1f);
+            if (!lodged) BulletVisuals.drawBullet(Projectile, new Color(255, 255, 255, 0), new Color(150, 130, 10, 255), Projectile.scale);
             return false;
         }
 
@@ -35,15 +35,24 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
                 if (Projectile.ai[2] % 120 == 0)
                 {
                     Main.npc[(int)Projectile.ai[1]].SimpleStrikeNPC(Projectile.damage, 0, false, 0, DamageClass.Ranged, true);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1, Scale: 1.2f);
-                    }
+                    //for (int i = 0; i < 4; i++)
+                    //{
+                    //    Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1, Scale: 1.2f);
+                    //}
+                    ParticleSystem.AddParticle(new BigSparkle() { Rotation = Main.rand.NextFloat(-0.3f, 0.3f), fadeInTime = 6, Scale = 1f },Main.rand.NextVector2FromRectangle(Main.npc[(int)Projectile.ai[1]].Hitbox),null, new Color(1f,1f,0f,0f));
                 }
 
                 if (!Main.npc[(int)Projectile.ai[1]].active) Projectile.Kill();
             }
-
+            else
+            {
+                if (Main.rand.NextBool())
+                {
+                    Dust d2 = Dust.NewDustPerfect(Projectile.Center, DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1);
+                    d2.noGravity = true;
+                    d2.velocity *= 0.1f;
+                }
+            }
         }
         public override void SetDefaults()
         {

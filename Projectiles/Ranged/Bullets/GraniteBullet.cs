@@ -42,7 +42,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            BulletVisuals.drawBullet(Projectile, new Color(183, 247, 255, 0), Color.Lerp(new Color(64, 64, 246, 128),new Color(0f,Main.masterColor,1f,0f), Main.player[Projectile.owner].GetModPlayer<GranitBulletPlayer>().speedBonus));
+            BulletVisuals.drawBullet(Projectile, new Color(183, 247, 255, 0), Color.Lerp(new Color(64, 64, 246, 128),new Color(0f,Main.masterColor,1f,0f), Main.player[Projectile.owner].GetModPlayer<GranitBulletPlayer>().speedBonus), Projectile.scale);
             return false;
         }
         public override void AI()
