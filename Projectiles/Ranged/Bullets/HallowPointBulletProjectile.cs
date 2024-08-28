@@ -34,21 +34,25 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
                 Projectile.ai[2]++;
                 if (Projectile.ai[2] % 120 == 0)
                 {
-                    Main.npc[(int)Projectile.ai[1]].SimpleStrikeNPC(Projectile.damage, 0, false, 0, DamageClass.Ranged, true);
+                    if(Main.myPlayer == Projectile.owner)
+                        Main.npc[(int)Projectile.ai[1]].SimpleStrikeNPC(Projectile.damage, 0, false, 0, DamageClass.Ranged, true);
                     //for (int i = 0; i < 4; i++)
                     //{
                     //    Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1, Scale: 1.2f);
                     //}
-                    ParticleSystem.AddParticle(new BigSparkle() { Rotation = Main.rand.NextFloat(-0.3f, 0.3f), fadeInTime = 6, Scale = 1f },Main.rand.NextVector2FromRectangle(Main.npc[(int)Projectile.ai[1]].Hitbox),null, new Color(1f,1f,0f,0f));
+                    ParticleSystem.AddParticle(new BigSparkle() { Rotation = Main.rand.NextFloat(-0.3f, 0.3f), fadeInTime = 9, Scale = 1f },Main.rand.NextVector2FromRectangle(Main.npc[(int)Projectile.ai[1]].Hitbox),null, new Color(1f,1f,0.2f,0f));
                 }
-
+                if (Main.rand.NextBool(20))
+                {
+                    ParticleSystem.AddParticle(new BigSparkle() { Rotation = Main.rand.NextFloat(-0.3f, 0.3f), fadeInTime = 6, Scale = 0.6f }, Main.rand.NextVector2FromRectangle(Main.npc[(int)Projectile.ai[1]].Hitbox), null, new Color(1f, 1f, 0f, 0f) * 0.2f);
+                }
                 if (!Main.npc[(int)Projectile.ai[1]].active) Projectile.Kill();
             }
             else
             {
                 if (Main.rand.NextBool())
                 {
-                    Dust d2 = Dust.NewDustPerfect(Projectile.Center, DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1);
+                    Dust d2 = Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * Main.rand.NextFloat(), DustID.HallowedWeapons, Main.rand.NextVector2Circular(2f, 2f), 1);
                     d2.noGravity = true;
                     d2.velocity *= 0.1f;
                 }

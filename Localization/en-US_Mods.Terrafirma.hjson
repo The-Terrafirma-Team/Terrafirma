@@ -1293,6 +1293,7 @@ Projectiles: {
 	MushroomBullet.DisplayName: Mushroom Bullet
 	MushroomBulletProjectile.DisplayName: Mushroom Bullet Projectile
 	PosionBulletProjectile.DisplayName: Posion Bullet Projectile
+	LeechingSapphireBolt.DisplayName: Leeching Sapphire Bolt
 }
 
 Tiles: {
@@ -1623,6 +1624,11 @@ Spells: {
 	LuckyDiceSpell: {
 		Name: Lucky Dice Spell
 		Description: ""
+	}
+
+	LeechingSapphire: {
+		Name: Leeching Sapphire
+		Description: Stabs enemies with mana-stealing magic
 	}
 }
 
