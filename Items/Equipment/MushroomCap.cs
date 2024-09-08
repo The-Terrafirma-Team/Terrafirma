@@ -25,6 +25,10 @@ namespace Terrafirma.Items.Equipment
             Item.value = Item.sellPrice(silver: 20);
             Item.defense = 1;
         }
+        public override void SetStaticDefaults()
+        {
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
+        }
         public override void UpdateEquip(Player player)
         {
             player.statLifeMax2 += 25;

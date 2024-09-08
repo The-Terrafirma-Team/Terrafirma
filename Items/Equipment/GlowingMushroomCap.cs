@@ -20,6 +20,7 @@ namespace Terrafirma.Items.Equipment
         public override void SetStaticDefaults()
         {
             ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
         public override void SetDefaults()
         {

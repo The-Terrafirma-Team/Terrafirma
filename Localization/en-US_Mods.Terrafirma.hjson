@@ -1630,6 +1630,11 @@ Spells: {
 		Name: Leeching Sapphire
 		Description: Stabs enemies with mana-stealing magic
 	}
+
+	ElectrostaticOrb: {
+		Name: Electrostatic Orb
+		Description: ""
+	}
 }
 
 UIElements.CookingPot.InputAmount: Amount
