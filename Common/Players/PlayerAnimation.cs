@@ -3,7 +3,7 @@ using Terraria.Graphics.CameraModifiers;
 using Terraria;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Players
 {
     public static class PlayerAnimation
     {
@@ -20,10 +20,10 @@ namespace Terrafirma.Common
         public static Vector2 getFrontArmPosition(this Player player)
         {
             Vector2 vector = new Vector2();
-            switch(player.bodyFrame.Y / 56)
+            switch (player.bodyFrame.Y / 56)
             {
                 case PointDown:
-                    vector = new Vector2(-6,8);
+                    vector = new Vector2(-6, 8);
                     break;
                 case PointDownRight:
                     vector = new Vector2(4, 8);
@@ -39,12 +39,12 @@ namespace Terrafirma.Common
                     vector = new Vector2(-10, -10);
                     break;
             }
-            vector.X += player.direction == -1 ? 2: 0;
-            return new Vector2(vector.X * player.direction,vector.Y * player.gravDir);
+            vector.X += player.direction == -1 ? 2 : 0;
+            return new Vector2(vector.X * player.direction, vector.Y * player.gravDir);
         }
         public static bool LegFrameIsOneThatRaisesTheBody(this Player player)
         {
-            return (player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560) || (player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952);
+            return player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560 || player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952;
         }
         public static void gunStyle(Player player, float rotation = 0.1f, float backwardsMovement = 3f, float screenshakeIntensity = 0f)
         {
@@ -65,11 +65,11 @@ namespace Terrafirma.Common
         {
             int bodyHeight = 56;
             int frame = 0;
-            float trueRotation = rotation - (MathHelper.PiOver2 * Math.Sign(rotation));
+            float trueRotation = rotation - MathHelper.PiOver2 * Math.Sign(rotation);
             if (Math.Abs(trueRotation) <= 0.4)
-                frame = (rotation) < 0 ? PointUp : PointDown;
+                frame = rotation < 0 ? PointUp : PointDown;
             else if (Math.Abs(trueRotation) <= 1.2)
-                frame = (rotation) < 0 ? PointUpRight : PointDownRight;
+                frame = rotation < 0 ? PointUpRight : PointDownRight;
             else if (Math.Abs(trueRotation) <= 2.2)
                 frame = PointRight;
             if (trueRotation == 0)
@@ -82,9 +82,9 @@ namespace Terrafirma.Common
         {
             int bodyHeight = 56;
             int frame = 0;
-            float trueRotation = rotation - (MathHelper.PiOver2 * Math.Sign(rotation));
+            float trueRotation = rotation - MathHelper.PiOver2 * Math.Sign(rotation);
             if (Math.Abs(trueRotation) <= 1.2)
-                frame = (rotation) < 0 ? PointUpRight : PointDownRight;
+                frame = rotation < 0 ? PointUpRight : PointDownRight;
             else
                 frame = PointRight;
             player.bodyFrame.Y = frame * bodyHeight;

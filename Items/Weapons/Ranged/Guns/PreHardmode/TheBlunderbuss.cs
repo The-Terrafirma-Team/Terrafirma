@@ -8,10 +8,10 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using Terrafirma.Common;
 using Terraria.Audio;
 using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Items.Materials;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {

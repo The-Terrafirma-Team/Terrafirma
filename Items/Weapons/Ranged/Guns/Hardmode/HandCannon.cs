@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;

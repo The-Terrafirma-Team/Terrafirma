@@ -4,7 +4,7 @@ using ReLogic.Content;
 using System;
 using Terrafirma.Buffs.Buffs;
 using Terrafirma.Buffs.Debuffs;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

@@ -8,10 +8,10 @@ using Terraria.Audio;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
-using Terrafirma.Common;
 using Terraria.Graphics.CameraModifiers;
 using Terrafirma.Particles;
 using Terrafirma.Data;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {

@@ -4,13 +4,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Terrafirma.Common;
 using Terrafirma.Particles;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terraria.GameContent;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
 {
