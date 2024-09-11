@@ -7,6 +7,7 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.GameContent;
 using Terrafirma.Buffs.Buffs;
+using Microsoft.Xna.Framework.Graphics.PackedVector;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
@@ -49,7 +50,6 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.velocity.Y += 0.5f;
             turretradius = 200f * Projectile.GetSentryRangeMultiplier();
             Projectile.ai[0]++;
-
             Color GemGlowColor = Color.White;
             switch (Projectile.ai[2])
             {
@@ -101,8 +101,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 case 4: GemGlowColor = new Color(238, 51, 53, 0); break;
                 case 5: GemGlowColor = new Color(255, 255, 255, 0); break;
                 case 6: GemGlowColor = new Color(207, 101, 0, 0); break;
-            }        
-
+            }
             //Base
             Main.EntitySpriteDraw(SentrySprite.Value,
                 Projectile.Center - Main.screenPosition + new Vector2(0,21),
@@ -141,6 +140,15 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             float BorderSpriteInt = (int)(((turretradius) * 2f * MathHelper.Pi) / 50) / 2 * 2;
             for (int i = 0; i < BorderSpriteInt; i++)
             {
+                Main.EntitySpriteDraw(SentrySprite.Value,
+                Projectile.Center - Main.screenPosition + new Vector2(turretradius, 0).RotatedBy((MathHelper.TwoPi / BorderSpriteInt) * i + (Main.timeForVisualEffects * 0.01f / TFUtils.GetSentryRangeMultiplier(Projectile))),
+                i % 2 == 0 ? GemBorderRect : SparkleBorderRect,
+                new Color(GemGlowColor.R / 2,GemGlowColor.G / 2,GemGlowColor.B / 2,128) * 0.7f,
+                ((MathHelper.TwoPi / BorderSpriteInt) * i + (float)(Main.timeForVisualEffects * 0.01f / TFUtils.GetSentryRangeMultiplier(Projectile))) + MathHelper.PiOver2,
+                i % 2 == 0 ? new Vector2(24, 20) : new Vector2(8, 8),
+                1f,
+                SpriteEffects.None);
+
                 Main.EntitySpriteDraw(SentrySprite.Value,
                     Projectile.Center - Main.screenPosition + new Vector2(turretradius , 0).RotatedBy((MathHelper.TwoPi / BorderSpriteInt) * i + (Main.timeForVisualEffects * 0.01f / TFUtils.GetSentryRangeMultiplier(Projectile))),
                     i % 2 == 0? GemBorderRect : SparkleBorderRect,
