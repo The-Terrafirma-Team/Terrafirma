@@ -12,6 +12,24 @@ namespace Terrafirma.Common.Players
 {
     public class PlayerStats : ModPlayer
     {
+        public override void Load()
+        {
+            On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
+        }
+
+        private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
+        {
+            if (Main.debuff[type] && !BuffID.Sets.NurseCannotRemoveDebuff[type])
+            {
+                time1 = (int)(time1 * self.PlayerStats().DebuffTimeMultiplier);
+            }
+            else
+            {
+                time1 = (int)(time1 * self.PlayerStats().buffTimeMultiplier);
+            }
+            return orig(self, type, time1);
+        }
+
         Item lastHeldItem = null;
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
@@ -29,6 +47,8 @@ namespace Terrafirma.Common.Players
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
         public float MeleeWeaponScale = 0;
+        public float DebuffTimeMultiplier = 1f;
+        public float buffTimeMultiplier = 1f;
         public float NecromancerWeaponScale = 0;
         public float NecromancerChargeBonus = 1f;
         public float NecromancerSwingSpeed = 1f;
@@ -57,6 +77,10 @@ namespace Terrafirma.Common.Players
             FeralChargeSpeed = defaultFeralChargeSpeed;
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
+
+            DebuffTimeMultiplier = 1f;
+            buffTimeMultiplier = 1f;
+
             NecromancerWeaponScale = 0;
             NecromancerChargeBonus = 1f;
             NecromancerSwingSpeed = 1f;

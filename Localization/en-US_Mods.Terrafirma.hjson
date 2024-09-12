@@ -1740,3 +1740,22 @@ Keybinds: {
 	previousSpell.DisplayName: previous Spell
 	nextSpell.DisplayName: next Spell
 }
+
+VanillaSetBonus: {
+	Silver:
+		'''
+		+3 defense
+		Debuffs last half as long
+		'''
+	Tungsten:
+		'''
+		+ 3 defense
+		+10% knockback
+		Melee weapons are 20% larger
+		'''
+	Gold:
+		'''
+		+3 defense
+		Enemies killed will drop more money
+		'''
+}
