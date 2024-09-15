@@ -1151,6 +1151,14 @@ Items: {
 		DisplayName: Paladin Greaves
 		Tooltip: ""
 	}
+
+	MonsterHeart: {
+		DisplayName: Monster Heart
+		Tooltip: 
+		'''
+		Increases max life and decreases damage based on your enemy aggro
+		'''
+	}
 }
 
 Projectiles: {
