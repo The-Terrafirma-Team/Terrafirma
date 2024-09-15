@@ -11,7 +11,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Items.Equipment
+namespace Terrafirma.Items.Equipment.Mixed
 {
     public class SteelSetBonus : ModPlayer
     {
@@ -26,9 +26,9 @@ namespace Terrafirma.Items.Equipment
         {
             if (active && !ShutUp && Player.PlayerDoublePressedSetBonusActivateKey())
             {
-                Player.AddBuff(ModContent.BuffType<ShutUp>(),60 * 60);
+                Player.AddBuff(ModContent.BuffType<ShutUp>(), 60 * 60);
                 float rot = 60;
-                for(int i = 0; i < rot; i++)
+                for (int i = 0; i < rot; i++)
                 {
                     Dust d = Dust.NewDustPerfect(Player.MountedCenter, DustID.GemTopaz, new Vector2(50, 0).RotatedBy(i / rot * MathHelper.TwoPi));
                     d.noGravity = true;
@@ -40,10 +40,10 @@ namespace Terrafirma.Items.Equipment
                     d2.alpha = 64;
                 }
 
-                for(int i = 0; i < Main.player.Length; i++)
+                for (int i = 0; i < Main.player.Length; i++)
                 {
                     Player p = Main.player[i];
-                    if(p.Center.Distance(Player.Center) < 550)
+                    if (p.Center.Distance(Player.Center) < 550)
                     {
                         p.AddBuff(ModContent.BuffType<Confidence>(), 60 * 5);
                     }
@@ -57,7 +57,7 @@ namespace Terrafirma.Items.Equipment
         public override bool IsHeadLayer => true;
         public override void SetStaticDefaults()
         {
-            tex = Mod.Assets.Request<Texture2D>("Items/Equipment/SteelHelmet_Plume");
+            tex = Mod.Assets.Request<Texture2D>("Items/Equipment/Mixed/SteelHelmet_Plume");
         }
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
@@ -70,7 +70,7 @@ namespace Terrafirma.Items.Equipment
             Vector2 position = drawInfo.Center - Main.screenPosition;
             position = new Vector2((int)position.X, (int)position.Y);
 
-            position -= new Vector2(7 * drawInfo.drawPlayer.direction, 21 + (drawInfo.drawPlayer.LegFrameIsOneThatRaisesTheBody()? 2 : 0));
+            position -= new Vector2(7 * drawInfo.drawPlayer.direction, 21 + (drawInfo.drawPlayer.LegFrameIsOneThatRaisesTheBody() ? 2 : 0));
 
             int frame = 0;
 
@@ -94,7 +94,7 @@ namespace Terrafirma.Items.Equipment
 
             SpriteEffects effect = drawInfo.drawPlayer.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-            drawInfo.DrawDataCache.Add(new DrawData(tex.Value,position,new Rectangle(0, frame * tex.Height() / 3, tex.Width(),tex.Height() / 3),drawInfo.colorArmorHead,0,new Vector2(tex.Width() / 2, tex.Height() / 6),1, effect) {shader = drawInfo.cHead });
+            drawInfo.DrawDataCache.Add(new DrawData(tex.Value, position, new Rectangle(0, frame * tex.Height() / 3, tex.Width(), tex.Height() / 3), drawInfo.colorArmorHead, 0, new Vector2(tex.Width() / 2, tex.Height() / 6), 1, effect) { shader = drawInfo.cHead });
         }
     }
 
@@ -134,7 +134,7 @@ namespace Terrafirma.Items.Equipment
         }
     }
 
-    [AutoloadEquip(EquipType.Body,EquipType.Back)]
+    [AutoloadEquip(EquipType.Body, EquipType.Back)]
     public class SteelChestplate : ModItem
     {
         public override void SetStaticDefaults()

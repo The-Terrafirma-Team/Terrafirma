@@ -52,7 +52,7 @@ namespace Terrafirma.Common.Players
         public float NecromancerWeaponScale = 0;
         public float NecromancerChargeBonus = 1f;
         public float NecromancerSwingSpeed = 1f;
-        public float AmmoSaveChance;
+        public float AmmoSaveChance = 0;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -71,6 +71,7 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            AmmoSaveChance = 0;
             CanThrowWrenches = false;
             newSwim = false;
             FeralChargeMax = 0;

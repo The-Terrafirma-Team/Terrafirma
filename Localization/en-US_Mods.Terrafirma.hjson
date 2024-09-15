@@ -1135,6 +1135,22 @@ Items: {
 		DisplayName: Poisoned Bullet
 		Tooltip: ""
 	}
+
+	PaladinHelmet: {
+		SetBonus: Mods.Terrafirma.Items.PaladinHelmet.SetBonus
+		DisplayName: Paladin Helmet
+		Tooltip: ""
+	}
+
+	PaladinCuirass: {
+		DisplayName: Paladin Cuirass
+		Tooltip: ""
+	}
+
+	PaladinGreaves: {
+		DisplayName: Paladin Greaves
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1294,6 +1310,7 @@ Projectiles: {
 	MushroomBulletProjectile.DisplayName: Mushroom Bullet Projectile
 	PosionBulletProjectile.DisplayName: Posion Bullet Projectile
 	LeechingSapphireBolt.DisplayName: Leeching Sapphire Bolt
+	ElectricDischargeBomb.DisplayName: Electric Discharge Bomb
 }
 
 Tiles: {
@@ -1635,6 +1652,11 @@ Spells: {
 		Name: Electrostatic Orb
 		Description: ""
 	}
+
+	ElectricDischarge: {
+		Name: Electric Discharge
+		Description: ""
+	}
 }
 
 UIElements.CookingPot.InputAmount: Amount
@@ -1742,6 +1764,12 @@ Keybinds: {
 }
 
 VanillaSetBonus: {
+	Lead:
+		'''
+		+3 defense
+		33% chance to save ammo
+		Your attacks have a chance to poison enemies
+		'''
 	Silver:
 		'''
 		+3 defense

@@ -1,4 +1,4 @@
-﻿using Terrafirma.Items.Equipment;
+﻿using Terrafirma.Items.Equipment.Mixed;
 using Terraria;
 using Terraria.ModLoader;
 
