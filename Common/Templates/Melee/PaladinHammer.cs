@@ -14,6 +14,7 @@ using Terraria;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Particles;
 
 namespace Terrafirma.Common.Templates.Melee
 {
@@ -42,28 +43,25 @@ namespace Terrafirma.Common.Templates.Melee
         {
             return false;
         }
-        public override void OnSpawn(IEntitySource source)
-        {
-            base.OnSpawn(source);
-        }
-
         public virtual void Hold()
         {
 
         }
-
         public virtual void Throw(bool fullCharge)
         {
             SoundEngine.PlaySound(SoundID.Item1, player.position);
             if (Main.myPlayer == player.whoAmI)
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.getFrontArmPosition() + player.Center, player.Center.DirectionTo(Main.MouseWorld) * player.HeldItem.shootSpeed * player.GetWeaponAttackSpeed(player.HeldItem), ThrownProjectile, Projectile.damage, Projectile.knockBack, player.whoAmI, Projectile.ai[0]);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.getFrontArmPosition() + player.Center, player.Center.DirectionTo(Main.MouseWorld) * player.HeldItem.shootSpeed * player.GetWeaponAttackSpeed(player.HeldItem), ThrownProjectile, (Projectile.damage / 2) + (int)(Projectile.damage * Easing.SineOut(Projectile.ai[0]) * 2.5f), Projectile.knockBack + (int)(Projectile.knockBack * Projectile.ai[0]), player.whoAmI, MathHelper.Clamp(Projectile.ai[0],0.1f,1f));
         }
         public override void AI()
         {
             commonHeldLogic(12);
 
             player.direction = MathF.Sign(player.PlayerStats().MouseWorld.X - player.Center.X);
-
+            if (Projectile.ai[0] == 0)
+            {
+                Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
+            }
             Projectile.ai[0] += ChargeIncrement * player.GetAttackSpeed(DamageClass.Melee);
 
             if (Projectile.ai[0] > 1f)
@@ -73,6 +71,12 @@ namespace Terrafirma.Common.Templates.Melee
             }
             if (Projectile.ai[1] == 1 && player.whoAmI == Main.myPlayer)
             {
+                BigSparkle bigsparkle = new BigSparkle();
+                bigsparkle.fadeInTime = 4;
+                bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
+                bigsparkle.Scale = 3f * Projectile.scale;
+                bigsparkle.secondaryColor = Color.Transparent;
+                ParticleSystem.AddParticle(bigsparkle, Projectile.Center + (TextureAssets.Projectile[Type].Size() * new Vector2(0.65f,-0.65f) * Projectile.scale).RotatedBy(Projectile.rotation), Vector2.Zero, new Color(0.3f, 0.3f, 0.6f, 0f));
                 SoundEngine.PlaySound(SoundID.MaxMana, player.position);
             }
             // Animate the player
@@ -99,6 +103,7 @@ namespace Terrafirma.Common.Templates.Melee
             if (!player.channel && Projectile.timeLeft == 11)
             {
                 Throw(Projectile.ai[1] > 0);
+                Projectile.Kill();
             }
             else
             {
@@ -107,14 +112,14 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if (player.channel)
-                commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], Projectile.scale);
+            commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], Projectile.scale);
             return false;
         }
     }
 
     public abstract class PaladinHammerThrown : ModProjectile
     {
+        public bool Returning = false;
         public virtual int FlightDuration => 60;
         public virtual float ReturnSpeed => 14f;
         public override void SetDefaults()
@@ -138,12 +143,10 @@ namespace Terrafirma.Common.Templates.Melee
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
+            Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             Projectile.CommonBounceLogic(oldVelocity);
+            SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
             return false;
-        }
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            base.OnHitPlayer(target, info);
         }
         public override void SetStaticDefaults()
         {
@@ -170,22 +173,39 @@ namespace Terrafirma.Common.Templates.Melee
             drawHammer(lightColor, tex, Projectile.Center, Projectile.scale, Projectile.rotation);
             return false;
         }
+        public virtual void Return()
+        {
+
+        }
+
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
 
-            Projectile.rotation += Projectile.velocity.Length() * Projectile.direction * 0.1f;
             if (Projectile.ai[1] == 0)
             {
+                Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
+                Projectile.Resize((int)(Projectile.width * Projectile.scale), (int)(Projectile.width * Projectile.scale));
                 Projectile.spriteDirection = player.direction;
             }
+            Projectile.rotation += Projectile.spriteDirection * 0.6f;
             Projectile.ai[1]++;
+
+            if (Projectile.ai[1] % 10 == 0)
+                SoundEngine.PlaySound(SoundID.Item7, Projectile.position);
+
             if (Projectile.ai[1] > FlightDuration * Projectile.ai[0])
             {
+                if (Projectile.localAI[0] == 0)
+                {
+
+                    Returning = true;
+                    Return();
+                    Projectile.localAI[0] = 1;
+                }
                 Projectile.tileCollide = false;
                 //Projectile.velocity += Projectile.Center.DirectionTo(player.Center) * 0.7f;
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(player.Center) * ReturnSpeed, 0.1f);
-                Projectile.velocity = Projectile.velocity.LengthClamp(ReturnSpeed);
 
                 if (Projectile.Hitbox.Intersects(player.Hitbox))
                 {

@@ -1159,7 +1159,17 @@ Items: {
 
 	EaterOfSkulls: {
 		DisplayName: Eater Of Skulls
-		Tooltip: ""
+		Tooltip: Stuns enemies at full charge
+	}
+
+	IronThrowingHammer: {
+		DisplayName: Iron Throwing Hammer
+		Tooltip: Stuns enemies at full charge
+	}
+
+	LeadThrowingHammer: {
+		DisplayName: Lead Throwing Hammer
+		Tooltip: Stuns enemies at full charge
 	}
 }
 
@@ -1323,6 +1333,10 @@ Projectiles: {
 	ElectricDischargeBomb.DisplayName: Electric Discharge Bomb
 	EaterOfSkulls.DisplayName: Eater Of Skulls
 	EaterOfSkullsThrown.DisplayName: Eater Of Skulls Thrown
+	IronThrowingHammer.DisplayName: Iron Throwing Hammer
+	IronThrowingHammerThrown.DisplayName: Iron Throwing Hammer Thrown
+	LeadThrowingHammer.DisplayName: Lead Throwing Hammer
+	LeadThrowingHammerThrown.DisplayName: Lead Throwing Hammer Thrown
 }
 
 Tiles: {

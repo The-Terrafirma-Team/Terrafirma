@@ -1,12 +1,10 @@
 ﻿using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Terrafirma.Projectiles.Melee.Knight;
-using Terrafirma.Projectiles.Melee.Paladin;
 
 namespace Terrafirma.Items.Weapons.Melee.Paladin
 {
-    internal class EaterOfSkulls : ModItem
+    internal class LeadThrowingHammer : ModItem
     {
         public override bool MeleePrefix()
         {
@@ -14,10 +12,10 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
         }
         public override void SetDefaults()
         {
-            Item.damage = 15;
+            Item.damage = 22;
             Item.useTime = 20;
             Item.useAnimation = 20;
-            Item.knockBack = 6;
+            Item.knockBack = 4;
 
             Item.useStyle = ItemUseStyleID.Swing;
             Item.DamageType = DamageClass.Melee;
@@ -25,16 +23,16 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
             Item.noMelee = true;
             Item.noUseGraphic = true;
 
-            Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(silver: 36);
+            Item.rare = ContentSamples.ItemsByType[ItemID.LeadHammer].rare;
+            Item.value = ContentSamples.ItemsByType[ItemID.LeadHammer].value;
 
-            Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Paladin.EaterOfSkulls>();
-            Item.shootSpeed = 10;
+            Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Paladin.LeadThrowingHammer>();
+            Item.shootSpeed = 7;
             Item.channel = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.DemoniteBar, 8).AddIngredient(ItemID.ShadowScale, 3).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.LeadBar, 8).Register();
         }
     }
 }

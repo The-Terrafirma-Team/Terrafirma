@@ -15,7 +15,7 @@ namespace Terrafirma
         }
         public static float SineOut(float x)
         {
-            return 1 - MathF.Sin((x * MathHelper.Pi) / 2);
+            return MathF.Sin((x * MathHelper.Pi) / 2);
         }
         public static float SineInOut(float x)
         {

@@ -46,11 +46,11 @@ namespace Terrafirma.Common
         }
         public override void SetStaticDefaults()
         {
-            //for(int i = -10; i <= -3; i++) // Increase slime frame count
-            //{
-            //    Main.npcFrameCount[i] = 6;
-            //}
             Main.npcFrameCount[1] = 6;
+        }
+        public override void Unload()
+        {
+            Main.npcFrameCount[1] = 2;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {

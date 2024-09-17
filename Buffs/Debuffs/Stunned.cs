@@ -21,8 +21,6 @@ namespace Terrafirma.Buffs.Debuffs
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            //npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.9f);
-
             if (npc.direction == 1)
             {
                 npc.velocity.X = MathF.Min(npc.velocity.X,npc.velocity.X * MathHelper.Clamp(1f - npc.knockBackResist,0f,1f));
