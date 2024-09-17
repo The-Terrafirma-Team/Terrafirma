@@ -122,6 +122,7 @@ namespace Terrafirma.Common.Templates.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
+            Projectile.damage = (int)(Projectile.damage * 0.8f);
             if (Projectile.ai[1] < FlightDuration * Projectile.ai[0])
             {
                 if (Projectile.ai[0] == 1f)
