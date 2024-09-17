@@ -1,4 +1,6 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using System;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,7 +21,16 @@ namespace Terrafirma.Buffs.Debuffs
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.8f);
+            //npc.position.X -= npc.velocity.X * (npc.knockBackResist * 0.9f);
+
+            if (npc.direction == 1)
+            {
+                npc.velocity.X = MathF.Min(npc.velocity.X,npc.velocity.X * MathHelper.Clamp(1f - npc.knockBackResist,0f,1f));
+            }
+            else
+            {
+                npc.velocity.X = MathF.Max(npc.velocity.X, npc.velocity.X * MathHelper.Clamp(1f - npc.knockBackResist, -1f, 0f));
+            }
             if (npc.noTileCollide)
                 return;
             if (npc.noGravity) npc.noGravity = false;

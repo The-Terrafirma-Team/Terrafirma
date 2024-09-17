@@ -24,6 +24,7 @@ namespace Terrafirma.Items.Equipment.Healing
         public override void AddRecipes()
         {
             CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.SoulofNight,15).AddIngredient(ItemID.RottenChunk,15).AddIngredient(ItemID.LifeCrystal).Register();
+            CreateRecipe().AddTile(TileID.DemonAltar).AddIngredient(ItemID.SoulofNight, 15).AddIngredient(ItemID.Vertebrae, 15).AddIngredient(ItemID.LifeCrystal).Register();
         }
     }
 	public class MonsterHeartPlayer : ModPlayer

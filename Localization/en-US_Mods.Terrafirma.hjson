@@ -1154,10 +1154,12 @@ Items: {
 
 	MonsterHeart: {
 		DisplayName: Monster Heart
-		Tooltip: 
-		'''
-		Increases max life and decreases damage based on your enemy aggro
-		'''
+		Tooltip: Increases max life and decreases damage based on your enemy aggro
+	}
+
+	EaterOfSkulls: {
+		DisplayName: Eater Of Skulls
+		Tooltip: ""
 	}
 }
 
@@ -1319,6 +1321,8 @@ Projectiles: {
 	PosionBulletProjectile.DisplayName: Posion Bullet Projectile
 	LeechingSapphireBolt.DisplayName: Leeching Sapphire Bolt
 	ElectricDischargeBomb.DisplayName: Electric Discharge Bomb
+	EaterOfSkulls.DisplayName: Eater Of Skulls
+	EaterOfSkullsThrown.DisplayName: Eater Of Skulls Thrown
 }
 
 Tiles: {
