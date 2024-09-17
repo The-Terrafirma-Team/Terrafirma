@@ -132,7 +132,7 @@ namespace Terrafirma.Common.Items
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
             //Gun shooting animation
-            if (defaultShootingAnimation) PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.01f, 0.03f), 3, 0);
+            if (defaultShootingAnimation && item.ModItem == null && item.useAmmo == AmmoID.Bullet) PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.01f, 0.03f), 3, 0);
             switch (item.type)
             {
                 case ItemID.Boomstick: PlayerAnimation.gunStyle(player, Main.rand.NextFloat(0.03f, 0.08f), 6, 1); break;
