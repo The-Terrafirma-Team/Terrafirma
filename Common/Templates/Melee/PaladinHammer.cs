@@ -43,10 +43,6 @@ namespace Terrafirma.Common.Templates.Melee
         {
             return false;
         }
-        public virtual void Hold()
-        {
-
-        }
         public virtual void Throw(bool fullCharge)
         {
             SoundEngine.PlaySound(SoundID.Item1, player.position);
@@ -100,14 +96,10 @@ namespace Terrafirma.Common.Templates.Melee
             if (player.direction == -1)
                 Projectile.rotation -= MathHelper.PiOver2;
 
-            if (!player.channel && Projectile.timeLeft == 11)
+            if (!player.channel)
             {
                 Throw(Projectile.ai[1] > 0);
                 Projectile.Kill();
-            }
-            else
-            {
-                Hold();
             }
         }
         public override bool PreDraw(ref Color lightColor)
