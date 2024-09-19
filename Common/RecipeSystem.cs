@@ -42,12 +42,7 @@ namespace Terrafirma.Common
             for(int i = 0; i < Recipe.numRecipes; i++) 
             {
                 Recipe recipe = Main.recipe[i];
-                // Add majestic gel to adamantite forges
-                if (recipe.HasResult(ItemID.AdamantiteForge) || recipe.HasResult(ItemID.TitaniumForge))
-                {
-                    recipe.AddIngredient(ModContent.ItemType<MajesticGel>(), 10);
-                }
-                else if (recipe.HasResult(ItemID.Leather) && recipe.Mod == null)
+                if (recipe.HasResult(ItemID.Leather) && recipe.Mod == null)
                 {
                     recipe.RemoveIngredient(ItemID.RottenChunk);
                     recipe.AddIngredient(ItemID.RottenChunk, 3);
@@ -57,7 +52,6 @@ namespace Terrafirma.Common
                 //    recipe.AddIngredient(ItemID.Terragrim);
                 //}
             }
-
         }
         public void AddCookingRecipes()
         {
