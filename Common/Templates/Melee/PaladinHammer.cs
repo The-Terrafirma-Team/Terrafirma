@@ -90,6 +90,7 @@ namespace Terrafirma.Common.Templates.Melee
             if (player.channel)
                 player.bodyFrame.Y = player.bodyFrame.Height * handMovement;
             Projectile.position = player.getFrontArmPosition() + player.Center;
+            Projectile.position = Projectile.position.ToPoint().ToVector2();
             Projectile.spriteDirection = player.direction;
 
             Projectile.rotation = MathHelper.Lerp(1.5f * player.direction, -1.5f * player.direction, Easing.SineOut(Projectile.ai[0]));

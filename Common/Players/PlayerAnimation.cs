@@ -40,6 +40,7 @@ namespace Terrafirma.Common.Players
                     break;
             }
             vector.X += player.direction == -1 ? 2 : 0;
+            vector.Y += player.gfxOffY;
             return new Vector2(vector.X * player.direction, vector.Y * player.gravDir);
         }
         public static bool LegFrameIsOneThatRaisesTheBody(this Player player)

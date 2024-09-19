@@ -1171,6 +1171,26 @@ Items: {
 		DisplayName: Lead Throwing Hammer
 		Tooltip: Stuns enemies at full charge
 	}
+
+	RedTowerShield: {
+		DisplayName: Red Tower Shield
+		Tooltip: ""
+	}
+
+	BlueTowerShield: {
+		DisplayName: Blue Tower Shield
+		Tooltip: ""
+	}
+
+	GreenTowerShield: {
+		DisplayName: Green Tower Shield
+		Tooltip: ""
+	}
+
+	YellowTowerShield: {
+		DisplayName: Yellow Tower Shield
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1337,6 +1357,7 @@ Projectiles: {
 	IronThrowingHammerThrown.DisplayName: Iron Throwing Hammer Thrown
 	LeadThrowingHammer.DisplayName: Lead Throwing Hammer
 	LeadThrowingHammerThrown.DisplayName: Lead Throwing Hammer Thrown
+	BannerTowerShield.DisplayName: Banner Tower Shield
 }
 
 Tiles: {
@@ -1813,3 +1834,5 @@ VanillaSetBonus: {
 		Enemies killed will drop more money
 		'''
 }
+
+Misc.TowerShield: Can block up to {0} damage
