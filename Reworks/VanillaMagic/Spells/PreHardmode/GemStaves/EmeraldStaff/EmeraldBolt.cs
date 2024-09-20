@@ -24,6 +24,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
         public override void Update(Item item, Player player)
         {
             item.UseSound = SoundID.Item8;
+            item.channel = false;
             base.Update(item, player);
         }
     }

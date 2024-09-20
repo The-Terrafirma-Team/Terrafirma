@@ -62,7 +62,7 @@ namespace Terrafirma.Pets
             "I'm losing my mind",
             "me when i me",
             "i overthink too much",
-            "face reveal",
+            "face reveal!!",
             "U dont even care or understand",
             "i love you",
             "give me a hug, please",
@@ -77,7 +77,8 @@ namespace Terrafirma.Pets
             "things",
             "my uncle works for relogic you're getting banned",
             "I am Ayumu Kasuga",
-            "Death is coming :3"
+            "Death is coming :3",
+            "AMERICAYA!!"
         };
         public override string Texture => "Terrafirma/Pets/Bnuy";
         public override void SetStaticDefaults()
@@ -125,7 +126,7 @@ namespace Terrafirma.Pets
 
             if (Math.Abs(Projectile.velocity.Y) > 0.5f) Projectile.frame = 4;
 
-            if (Projectile.ai[0] % (60 * 30) == 0) CombatText.NewText(Projectile.Hitbox, Color.White, quotes[Main.rand.Next(quotes.Length)], false);
+            if (Projectile.ai[0] % (60 * 10) == 0) CombatText.NewText(Projectile.Hitbox, Color.White, quotes[Main.rand.Next(quotes.Length)], false);
 
 
             Projectile.spriteDirection = Projectile.direction;

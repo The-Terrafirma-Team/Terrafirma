@@ -20,6 +20,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.IceRod
         public override void Update(Item item, Player player)
         {
             item.useStyle = ItemUseStyleID.Swing;
+            item.channel = true;
             base.Update(item, player);
         }
 

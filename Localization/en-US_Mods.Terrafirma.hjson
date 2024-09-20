@@ -1358,6 +1358,7 @@ Projectiles: {
 	LeadThrowingHammer.DisplayName: Lead Throwing Hammer
 	LeadThrowingHammerThrown.DisplayName: Lead Throwing Hammer Thrown
 	BannerTowerShield.DisplayName: Banner Tower Shield
+	QuantumRayProj.DisplayName: Quantum Ray Proj
 }
 
 Tiles: {
@@ -1797,7 +1798,7 @@ Quests: {
 		Name: Pistolero
 		Dialogue:
 			'''
-			You like guns, right? I do too! As fellow gun enthusiasts and gun expert such as myself, I have to assess your sharpshootin' skills. Do you have what it takes to wield a real man's gun?
+			You like guns, right? I do too! As kindred gun enthusiasts, I have to assess your sharpshootin' skills. Do you have what it takes to wield a real man's gun? 
 			Prove it to me and I may bestow you with a small treasure of mine.
 			'''
 		Description: Kill the Eye of Cthulhu using only Pistols

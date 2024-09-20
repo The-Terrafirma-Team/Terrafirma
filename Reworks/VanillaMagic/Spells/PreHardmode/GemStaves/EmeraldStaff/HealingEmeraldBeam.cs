@@ -66,6 +66,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
             }
 
             item.UseSound = null;
+            item.channel = true;
         }
 
         public override void OnRightClick(Item item, Player player)

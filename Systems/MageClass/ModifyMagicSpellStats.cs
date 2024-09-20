@@ -18,17 +18,18 @@ namespace Terrafirma.Systems.MageClass
         {
             if (entity.GetGlobalItem<GlobalItemInstanced>().Spell != null) entity.GetGlobalItem<GlobalItemInstanced>().SetDefaults(entity);
         }
+
         public override void UpdateInventory(Item item, Player player)
         {
 
             if (Main.mouseRight && item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.OnRightClick(item, player);
 
-            if (Main.mouseLeft && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && !item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            if (player.channel && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && !item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
             {
                 item.GetGlobalItem<GlobalItemInstanced>().Spell.OnLeftMousePressed(item, player);
                 item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch = true;
             }
-            else if (Main.mouseLeft && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            else if (player.channel && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
             {
                 item.GetGlobalItem<GlobalItemInstanced>().Spell.UpdateLeftMouse(item, player);
             }
