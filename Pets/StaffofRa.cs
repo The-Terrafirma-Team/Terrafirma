@@ -75,7 +75,10 @@ namespace Terrafirma.Pets
             if (Projectile.position.Distance(player.position) > 5000)
                 Projectile.position = player.MountedCenter;
             
-            Lighting.AddLight(Projectile.Center, new Vector3(5,4.6f,1));
+            if(player.name is "Terrafirminator2" or "Jeo")
+                Lighting.AddLight(Projectile.Center, new Vector3(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B) / 255 * 4);
+            else
+                Lighting.AddLight(Projectile.Center, new Vector3(5,3.6f,1));
         }
         public override bool PreDraw(ref Color lightColor)
         {

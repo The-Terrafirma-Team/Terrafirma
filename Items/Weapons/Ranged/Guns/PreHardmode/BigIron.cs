@@ -80,15 +80,23 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
         public override void UpdateInventory(Player player)
         {
             if (ShootTimer >= 1) ShootTimer++;
+            int bulletType = 0;
+            float speed = 0f;
+            int damage = 0;
+            float knockback;
+            int ammo = 0;
+
             if ((ShootTimer + 1) % 3 == 0)
             {
-                Vector2 velocity = player.DirectionTo(Main.MouseWorld).RotatedByRandom(0.45) * Item.shootSpeed;
-                ShootRot = velocity.ToRotation();
-                SoundEngine.PlaySound(SoundID.Item11, player.Center);
-                Projectile.NewProjectile(Item.GetSource_FromThis(), player.Center + new Vector2(16,10 * -player.direction).RotatedBy(player.Center.DirectionTo(Main.MouseWorld).ToRotation()), velocity, Item.shoot, Item.damage, Item.knockBack, player.whoAmI);
+                if (player.PickAmmo(player.HeldItem, out bulletType, out speed, out damage, out knockback, out ammo))
+                {
+                    Vector2 velocity = player.DirectionTo(Main.MouseWorld).RotatedByRandom(0.45) * speed;
+                    ShootRot = velocity.ToRotation();
+                    SoundEngine.PlaySound(SoundID.Item11, player.Center);
+                    Projectile.NewProjectile(Item.GetSource_FromThis(), player.Center + new Vector2(16, 10 * -player.direction).RotatedBy(player.Center.DirectionTo(Main.MouseWorld).ToRotation()), velocity, bulletType, damage, knockback, player.whoAmI);
+                }
+                if (ShootTimer > 14) ShootTimer = 0;
             }
-            if (ShootTimer > 14) ShootTimer = 0;
-            base.UpdateInventory(player);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
