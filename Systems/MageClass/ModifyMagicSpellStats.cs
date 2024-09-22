@@ -16,7 +16,7 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void SetDefaults(Item entity)
         {
-            if (entity.GetGlobalItem<GlobalItemInstanced>().Spell != null) entity.GetGlobalItem<GlobalItemInstanced>().SetDefaults(entity);
+            if (entity.GetGlobalItem<GlobalItemInstanced>().Spell != null) entity.Spell().SetDefaults(entity);
         }
 
         public override void UpdateInventory(Item item, Player player)

@@ -31,12 +31,17 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
             Projectile.NewProjectile(source, position + new Vector2(20,0).RotatedBy(velocity.ToRotation()), velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
+        public override void Update(Item item, Player player)
+        {
+            item.channel = false;
+        }
     }
 
     public class QuantumRayProj : ModProjectile
     {
         NPC targetnpc = null;
         NPC[] hittargets = new NPC[]{};
+        int gainedmana = 0;
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.DeathLaser}";
         public override void SetDefaults()
         {
@@ -60,15 +65,32 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
             }
 
             Projectile.ai[0] += 0.3f;
+            Projectile.ai[1]++;
+            if (Projectile.ai[1] > 20 && gainedmana > 0)
+            {
+                Main.player[Projectile.owner].statMana += gainedmana;
+                Main.player[Projectile.owner].ManaEffect(gainedmana);
+                gainedmana -= gainedmana;
+            }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             hittargets = hittargets.Append(target).ToArray();
             targetnpc = null;
-            Main.player[Projectile.owner].statMana += 2;
-            Main.player[Projectile.owner].ManaEffect(2);
+            gainedmana += 2;
+            Projectile.ai[1] = 0;
             base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            if (gainedmana > 0)
+            {
+                Main.player[Projectile.owner].statMana += gainedmana;
+                Main.player[Projectile.owner].ManaEffect(gainedmana);
+            }
+            base.OnKill(timeLeft);
         }
     }
 }

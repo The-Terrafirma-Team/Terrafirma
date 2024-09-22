@@ -1359,6 +1359,7 @@ Projectiles: {
 	LeadThrowingHammerThrown.DisplayName: Lead Throwing Hammer Thrown
 	BannerTowerShield.DisplayName: Banner Tower Shield
 	QuantumRayProj.DisplayName: Quantum Ray Proj
+	PlasmaBallProj.DisplayName: Plasma Ball Proj
 }
 
 Tiles: {
@@ -1673,12 +1674,12 @@ Spells: {
 
 	PlasmaBall: {
 		Name: Plasma Ball
-		Description: ""
+		Description: Charge up a ball of deadly plasma
 	}
 
 	QuantumRay: {
 		Name: Quantum Ray
-		Description: ""
+		Description: Fires a mana restoring ray
 	}
 
 	LuckySpellDice: {

@@ -27,5 +27,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
         {
             return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
+
+        public override void Update(Item item, Player player)
+        {
+            item.channel = false;
+        }
     }
 }
