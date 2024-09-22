@@ -16,6 +16,7 @@ namespace Terrafirma.Common.Items
     public class GlobalItemInstanced : GlobalItem
     {
         public Spell Spell = null;
+        public bool droppedForRecovery = false;
 
         public bool spawnAmmoParticle = false;
         public bool defaultShootingAnimation = false;
@@ -38,11 +39,31 @@ namespace Terrafirma.Common.Items
 
             base.ModifyTooltips(item, tooltips);
         }
-
+        public override bool GrabStyle(Item item, Player player)
+        {
+            if (droppedForRecovery)
+            {
+                item.velocity = Vector2.Lerp(item.Center.DirectionTo(player.Bottom) * 15,item.velocity,0.9f);
+                return false;
+            }
+                return base.GrabStyle(item, player);
+        }
+        public override void GrabRange(Item item, Player player, ref int grabRange)
+        {
+            if (droppedForRecovery)
+            {
+                grabRange += 50;
+                grabRange = (int)(grabRange * player.PlayerStats().ThrowerGrabRange);
+            }
+        }
+        public override bool OnPickup(Item item, Player player)
+        {
+            droppedForRecovery = false;
+            return base.OnPickup(item, player);
+        }
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
-
             if (entity.type == ItemID.ManaFlower)
             {
 

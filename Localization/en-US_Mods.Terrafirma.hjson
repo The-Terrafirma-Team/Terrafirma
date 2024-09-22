@@ -133,6 +133,16 @@ Buffs: {
 		DisplayName: Shadowflame Wrench Buff
 		Description: Mods.Terrafirma.Buffs.ShadowflameWrenchBuff.Description
 	}
+
+	Corrupting: {
+		DisplayName: Corrupting
+		Description: Mods.Terrafirma.Buffs.Corrupting.Description
+	}
+
+	ThrowerBleeding: {
+		DisplayName: Thrower Bleeding
+		Description: Mods.Terrafirma.Buffs.ThrowerBleeding.Description
+	}
 }
 
 Items: {
@@ -1191,6 +1201,30 @@ Items: {
 		DisplayName: Yellow Tower Shield
 		Tooltip: ""
 	}
+
+	DarkenedDiamond: {
+		DisplayName: Darkened Diamond
+		Tooltip: ""
+	}
+
+	SporeVial: {
+		DisplayName: Spore Vial
+		Tooltip: Increases throwing debuff power by 15%
+	}
+
+	AcuteCanine: {
+		DisplayName: Acute Canine
+		Tooltip:
+			'''
+			Makes enemies bleed
+			'It's not really cute, though'
+			'''
+	}
+
+	LeatherGlove: {
+		DisplayName: Leather Glove
+		Tooltip: Increases throwing velocity by 15%
+	}
 }
 
 Projectiles: {
@@ -1360,6 +1394,8 @@ Projectiles: {
 	BannerTowerShield.DisplayName: Banner Tower Shield
 	QuantumRayProj.DisplayName: Quantum Ray Proj
 	PlasmaBallProj.DisplayName: Plasma Ball Proj
+	AcuteCanine.DisplayName: Acute Canine
+	DarkenedDiamond.DisplayName: Darkened Diamond
 }
 
 Tiles: {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Common.Players;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Rarities;
 using Terrafirma.Tiles;
@@ -13,6 +14,30 @@ namespace Terrafirma.Common.Items
 {
     public class TerrafirmaGlobalItem : GlobalItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemSets.ThrowerWeapon[ItemID.PaperAirplaneA] = true;
+            ItemSets.ThrowerWeapon[ItemID.PaperAirplaneB] = true;
+            ItemSets.ThrowerWeapon[ItemID.Shuriken] = true;
+            ItemSets.ThrowerWeapon[ItemID.ThrowingKnife] = true;
+            ItemSets.ThrowerWeapon[ItemID.PoisonedKnife] = true;
+            ItemSets.ThrowerWeapon[ItemID.Snowball] = true;
+            ItemSets.ThrowerWeapon[ItemID.SpikyBall] = true;
+            ItemSets.ThrowerWeapon[ItemID.Bone] = true;
+            ItemSets.ThrowerWeapon[ItemID.RottenEgg] = true;
+            ItemSets.ThrowerWeapon[ItemID.StarAnise] = true;
+            ItemSets.ThrowerWeapon[ItemID.MolotovCocktail] = true;
+            ItemSets.ThrowerWeapon[ItemID.FrostDaggerfish] = true;
+            ItemSets.ThrowerWeapon[ItemID.Javelin] = true;
+            ItemSets.ThrowerWeapon[ItemID.BoneJavelin] = true;
+            ItemSets.ThrowerWeapon[3379] = true; // bone throwing knife
+            ItemSets.ThrowerWeapon[ItemID.Grenade] = true;
+            ItemSets.ThrowerWeapon[ItemID.StickyGrenade] = true;
+            ItemSets.ThrowerWeapon[ItemID.BouncyGrenade] = true;
+            ItemSets.ThrowerWeapon[ItemID.Beenade] = true;
+            ItemSets.ThrowerWeapon[ItemID.PartyGirlGrenade] = true;
+            ItemSets.ThrowerWeapon[ItemID.AleThrowingGlove] = true;
+        }
         public override void SetDefaults(Item item)
         {
             if(item.useStyle == ItemUseStyleID.Swing && item.DamageType == DamageClass.Melee)

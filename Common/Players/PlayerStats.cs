@@ -53,6 +53,10 @@ namespace Terrafirma.Common.Players
         public float NecromancerChargeBonus = 1f;
         public float NecromancerSwingSpeed = 1f;
         public float AmmoSaveChance = 0;
+        public float ThrowerDebuffPower = 1f;
+        public float ThrowerGrabRange = 1f;
+        public float ThrowerRecoveryChance = 0f;
+        public float ThrowerVelocity = 1f;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -71,6 +75,10 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            ThrowerVelocity = 1f;
+            ThrowerRecoveryChance = 0.2f;
+            ThrowerGrabRange = 1f;
+            ThrowerDebuffPower = 1f;
             AmmoSaveChance = 0;
             CanThrowWrenches = false;
             newSwim = false;
@@ -108,7 +116,7 @@ namespace Terrafirma.Common.Players
 
             lastHeldItem = Player.HeldItem;
 
-            if (hasSwappedItems || !Player.controlUseItem)
+            if ((hasSwappedItems || !Player.controlUseItem) && Player.ItemAnimationEndingOrEnded)
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
@@ -191,7 +199,13 @@ namespace Terrafirma.Common.Players
             modifiers.CritDamage += GenericCritDamage;
             base.ModifyHitNPC(target, ref modifiers);
         }
-
+        public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            if (ItemSets.ThrowerWeapon[item.type])
+            {
+                velocity *= ThrowerVelocity;
+            }
+        }
     }
 
     public static class PlayerMethods

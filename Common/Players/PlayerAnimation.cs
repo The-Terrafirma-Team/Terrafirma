@@ -47,6 +47,36 @@ namespace Terrafirma.Common.Players
         {
             return player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560 || player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952;
         }
+        public static void AlternatingSwingStyle(Player player)
+        {
+            float time = 1f - ((float)player.itemAnimation / player.itemAnimationMax);
+            int handMovement = 0;
+
+            if (player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0)
+            {
+                if (time < 0.2f)
+                    handMovement = PlayerAnimation.PointDownRight;
+                else if (time < 0.4f)
+                    handMovement = PlayerAnimation.PointRight;
+                else if (time < 0.6f)
+                    handMovement = PlayerAnimation.PointUpRight;
+                else
+                    handMovement = PlayerAnimation.PointUp;
+            }
+            else
+            {
+                if (time < 0.2f)
+                    handMovement = PlayerAnimation.PointUpRight;
+                else if (time < 0.4f)
+                    handMovement = PlayerAnimation.PointRight;
+                else if (time < 0.6f)
+                    handMovement = PlayerAnimation.PointDownRight;
+                else
+                    handMovement = PlayerAnimation.PointDown;
+            }
+
+            player.bodyFrame.Y = player.bodyFrame.Height * handMovement;
+        }
         public static void gunStyle(Player player, float rotation = 0.1f, float backwardsMovement = 3f, float screenshakeIntensity = 0f)
         {
             if (player.ItemAnimationJustStarted && screenshakeIntensity != 0 && player.whoAmI == Main.myPlayer)

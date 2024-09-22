@@ -15,11 +15,37 @@ using ReLogic.Graphics;
 using Terrafirma.Common;
 using Terrafirma.Systems.MageClass;
 using Terrafirma.Common.Items;
+using ReLogic.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void ThrowerSpawnDroppedItem(this Projectile projectile, int player, int type)
+        {
+            projectile.ThrowerSpawnDroppedItem(Main.player[player], type);
+        }
+        public static void ThrowerSpawnDroppedItem(this Projectile projectile, Player player, int type)
+        {
+            if(Main.LocalPlayer == player && Main.rand.NextFloat() < player.PlayerStats().ThrowerRecoveryChance)
+            {
+                int i = Item.NewItem(projectile.GetSource_DropAsItem(),projectile.Hitbox,type,1,true);
+                Main.item[i].GetGlobalItem<GlobalItemInstanced>().droppedForRecovery = true;
+            }
+        }
+        public static void AddBuffThrower(this NPC target, int type, int duration, Player player, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(type, (int)(duration * player.PlayerStats().ThrowerDebuffPower));
+        }
+        public static void EasyCenteredProjectileDraw(Asset<Texture2D> tex, Projectile p, Color color)
+        {
+            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, tex.Frame(1, Main.projFrames[p.type],0,p.frame),color * p.Opacity,p.rotation,new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.projFrames[p.type]),p.scale,p.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+        }
+        public static void EasyCenteredProjectileDraw(Asset<Texture2D> tex, Projectile p, Color color, Vector2 position, float rotation, float scale)
+        {
+            Main.EntitySpriteDraw(tex.Value, position, tex.Frame(1, Main.projFrames[p.type], 0, p.frame), color, rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.projFrames[p.type]), scale, p.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+        }
         public static void QuickDefaults(this Projectile proj, bool hostile = false, int size = 8, int aiStyle = -1)
         {
             proj.aiStyle = aiStyle;

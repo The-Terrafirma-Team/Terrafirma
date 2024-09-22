@@ -15,8 +15,10 @@ namespace Terrafirma.Common.NPCs
         public bool Stunned;
         public bool Inked;
         public bool Chilled;
+        public float ThrowerDOT;
         public override void ResetEffects(NPC npc)
         {
+            ThrowerDOT = 0;
             PhantasmalBurn = false;
             ElectricCharge = false;
             Stunned = false;
@@ -32,9 +34,11 @@ namespace Terrafirma.Common.NPCs
             }
             if (ElectricCharge)
             {
-                damage = 5;
+                damage += 5;
                 npc.lifeRegen -= (int)(npc.velocity.Length() * 4f) - 1;
             }
+            npc.lifeRegen -= (int)ThrowerDOT;
+            damage += (int)(ThrowerDOT / 5f);
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
