@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.Localization;
 
-namespace Terrafirma.Items.Weapons.Melee.Paladin
+namespace Terrafirma.Items.Weapons.Melee.Paladin.Shields
 {
     public class RedTowerShield : TowerShield
     {
@@ -42,7 +42,7 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source,position, velocity, type, damage, knockback,player.whoAmI,ai2: 0);
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai2: 0);
             return false;
         }
         public override void AddRecipes()
