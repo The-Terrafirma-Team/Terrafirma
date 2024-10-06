@@ -24,6 +24,7 @@ namespace Terrafirma.Projectiles.Ranged.Throwing
             Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Crimson, Projectile.velocity + Main.rand.NextVector2Circular(2,2));
             d.noGravity = true;
             d.scale *= 1.2f;
+            d.alpha = Projectile.alpha;
 
             if (Projectile.ai[0] == 0)
             {

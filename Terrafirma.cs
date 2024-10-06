@@ -17,6 +17,7 @@ namespace Terrafirma
 {
     public class Terrafirma : Mod
 	{
+        public static Asset<Texture2D> Pixel;
         public static string SetBonusKey
         {
             get { return Main.setKey == 1 ? "UP" : "DOWN"; }
@@ -35,7 +36,7 @@ namespace Terrafirma
             //{
             //    pixelRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, Main.screenWidth / 2, Main.screenHeight / 2);
             //});
-
+            Pixel = ModContent.Request<Texture2D>("Terrafirma/Assets/Pixel");
             QuestButtonBG = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanel");
             QuestButtonBGBorder = ModContent.Request<Texture2D>("Terrafirma/Systems/NewNPCQuests/QuestButtonPanelBorder");
             QuestDifficultyStarEmpty = ModContent.Request<Texture2D>("Terrafirma/Assets/QuestDifficultyStarEmpty");

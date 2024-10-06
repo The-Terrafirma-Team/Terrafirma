@@ -22,17 +22,56 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
-        public static void ThrowerSpawnDroppedItem(this Projectile projectile, int player, int type)
+        public static Color TryApplyingPlayerStringColor(int playerStringColor, Color stringColor)
         {
-            projectile.ThrowerSpawnDroppedItem(Main.player[player], type);
+            if (playerStringColor > 0)
+            {
+                stringColor = WorldGen.paintColor(playerStringColor);
+                if (stringColor.R < 75)
+                {
+                    stringColor.R = 75;
+                }
+                if (stringColor.G < 75)
+                {
+                    stringColor.G = 75;
+                }
+                if (stringColor.B < 75)
+                {
+                    stringColor.B = 75;
+                }
+                switch (playerStringColor)
+                {
+                    case 13:
+                        stringColor = new Color(20, 20, 20);
+                        break;
+                    case 0:
+                    case 14:
+                        stringColor = new Color(200, 200, 200);
+                        break;
+                    case 28:
+                        stringColor = new Color(163, 116, 91);
+                        break;
+                    case 27:
+                        stringColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+                        break;
+                }
+                stringColor.A = (byte)((float)(int)stringColor.A * 0.4f);
+            }
+            return stringColor;
         }
-        public static void ThrowerSpawnDroppedItem(this Projectile projectile, Player player, int type)
+        public static bool ThrowerSpawnDroppedItem(this Projectile projectile, int player, int type)
+        {
+            return projectile.ThrowerSpawnDroppedItem(Main.player[player], type);
+        }
+        public static bool ThrowerSpawnDroppedItem(this Projectile projectile, Player player, int type)
         {
             if(Main.LocalPlayer == player && Main.rand.NextFloat() < player.PlayerStats().ThrowerRecoveryChance)
             {
                 int i = Item.NewItem(projectile.GetSource_DropAsItem(),projectile.Hitbox,type,1,true);
                 Main.item[i].GetGlobalItem<GlobalItemInstanced>().droppedForRecovery = true;
+                return true;
             }
+            return false;
         }
         public static void AddBuffThrower(this NPC target, int type, int duration, Player player, NPC.HitInfo hit, int damageDone)
         {
@@ -45,6 +84,14 @@ namespace Terrafirma
         public static void EasyCenteredProjectileDraw(Asset<Texture2D> tex, Projectile p, Color color, Vector2 position, float rotation, float scale)
         {
             Main.EntitySpriteDraw(tex.Value, position, tex.Frame(1, Main.projFrames[p.type], 0, p.frame), color, rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.projFrames[p.type]), scale, p.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+        }
+        public static void EasyCenteredProjectileDrawVerticalFlip(Asset<Texture2D> tex, Projectile p, Color color)
+        {
+            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, tex.Frame(1, Main.projFrames[p.type], 0, p.frame), color * p.Opacity, p.rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.projFrames[p.type]), p.scale, p.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
+        }
+        public static void EasyCenteredProjectileDrawVerticalFlip(Asset<Texture2D> tex, Projectile p, Color color, Vector2 position, float rotation, float scale)
+        {
+            Main.EntitySpriteDraw(tex.Value, position, tex.Frame(1, Main.projFrames[p.type], 0, p.frame), color, rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.projFrames[p.type]), scale, p.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically);
         }
         public static void QuickDefaults(this Projectile proj, bool hostile = false, int size = 8, int aiStyle = -1)
         {
@@ -112,6 +159,22 @@ namespace Terrafirma
             item.knockBack = Knockback;
             item.UseSound = SoundID.Item1;
             item.Size = new Vector2(16, 16);
+        }
+        public static void DefaultToDrawnBow(this Item item,int Projectile, int Damage, int UseTime, float Knockback = 5, float shootSpeed = 6f)
+        {
+            item.useStyle = ItemUseStyleID.Shoot;
+            item.DamageType = DamageClass.Ranged;
+            item.useTime = UseTime;
+            item.useAnimation = UseTime;
+            item.damage = Damage;
+            item.knockBack = Knockback;
+            item.useAmmo = AmmoID.Arrow;
+            item.Size = new Vector2(16, 16);
+            item.shoot = Projectile;
+            item.shootSpeed = 6f;
+            item.channel = true;
+            item.noUseGraphic = true;
+            item.noMelee = true;
         }
         public static void DefaultToWrench(this Item item, int Damage, int UseTime, float Knockback = 7)
         {
