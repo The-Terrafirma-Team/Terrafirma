@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Utilities;
 using System;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -30,8 +31,14 @@ namespace Terrafirma.Common.Templates
 
         public virtual void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float power)
         {
-            Projectile.NewProjectile(source, position, velocity * power * 2, type, damage / 2 + (int)(damage * power * 1.5f), knockback / 2f + (knockback * power * 1.5f), player.whoAmI);
+            Projectile p = Projectile.NewProjectileDirect(source, position, velocity * power * 2, type, damage / 2 + (int)(damage * power * 1.5f), knockback / 2f + (knockback * power * 1.5f), player.whoAmI);
+            if (power == 1)
+            {
+                p.ai[0] = -20;
+                p.extraUpdates++;
+            }
         }
+        SlotId BowPullSound = SlotId.Invalid;
         public override void AI()
         {
             commonHeldLogic(30);
@@ -39,6 +46,17 @@ namespace Terrafirma.Common.Templates
             Player.CompositeArmStretchAmount stretch = Player.CompositeArmStretchAmount.None;
             if (player.channel && !stoppedChanneling)
             {
+                if (Projectile.ai[0] == 0)
+                {
+                    SoundStyle PullSound = new SoundStyle("Terrafirma/Sounds/LongbowPull")
+                    {
+                        Volume = 0.3f,
+                        Pitch = -(float)(player.itemAnimationMax * 0.014f),
+                        MaxInstances = 2,
+                    };
+                    BowPullSound = SoundEngine.PlaySound(PullSound, Projectile.position);
+                }
+
                 Projectile.ai[0] += 1 / (float)player.itemAnimationMax;
                 Vector2 direction = player.Center.DirectionTo(player.PlayerStats().MouseWorld);
                 Projectile.rotation = direction.ToRotation();
@@ -50,7 +68,23 @@ namespace Terrafirma.Common.Templates
                 else if (Projectile.ai[0] < 0.9f)
                     stretch = Player.CompositeArmStretchAmount.Quarter;
                 if (Projectile.ai[0] > 1f)
+                {
+                    if (Projectile.localAI[1] == 0 && player == Main.LocalPlayer)
+                    {
+                        SoundEngine.PlaySound(SoundID.MaxMana, player.Center);
+                        BigSparkle bigsparkle = new BigSparkle();
+                        bigsparkle.fadeInTime = 6;
+                        bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
+                        bigsparkle.Scale = 2f;
+                        ParticleSystem.AddParticle(bigsparkle, Projectile.Center + player.Center.DirectionTo(player.PlayerStats().MouseWorld) * 5, null, new Color(128, 255, 255, 128), ParticleLayer.normal);
+                    }
+                    if(SoundEngine.TryGetActiveSound(BowPullSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
+                    {
+                        sound.Volume = 0;
+                    }
+                    Projectile.localAI[1]++;
                     Projectile.ai[0] = 1f;
+                }
             }
             else
             {
@@ -61,6 +95,11 @@ namespace Terrafirma.Common.Templates
                 }
                 Projectile.localAI[0]++;
                 stretch = Player.CompositeArmStretchAmount.None;
+
+                if ((Projectile.ai[0] > 1 || Projectile.localAI[0] > 0) && SoundEngine.TryGetActiveSound(BowPullSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
+                {
+                    sound.Volume = 0;
+                }
             }
             //player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation - MathHelper.PiOver2);
             player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, (player.Center + new Vector2(4 * player.direction, player.gfxOffY)).DirectionTo(Projectile.Center + player.velocity).ToRotation() - MathHelper.PiOver2);
