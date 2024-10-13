@@ -36,11 +36,6 @@ namespace Terrafirma.Items.Weapons.Melee
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ModContent.ItemType<SteelBar>(), 8).AddRecipeGroup(RecipeGroupID.Wood, 4).Register();
-        }
     }
     public class TestSwordProj : MeleeSlice
     {
