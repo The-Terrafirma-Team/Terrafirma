@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,39 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Items
 {
-    internal class PrefixChanges : ModSystem
+    internal class PrefixChanges : GlobalItem
     {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            int accuracy = 0;
+            switch(item.prefix)
+            {
+                case PrefixID.Frenzying:
+                case PrefixID.Furious:
+                    accuracy -= 4;
+                    break;
+            }
+
+            if (accuracy != 0)
+            {
+                string tip = "";
+                if(accuracy > 0)
+                {
+                    tip = "+";
+                }
+                tip = tip + accuracy + Language.GetText("Mods.Terrafirma.Misc.AccuracyPrefix").ToString();
+                tooltips.Add(new TooltipLine(Mod, "accuracyModifier", tip) { IsModifier = true, IsModifierBad = accuracy < 0});
+            }
+        }
         public override void Load()
         {
             On_Item.TryGetPrefixStatMultipliersForItem += On_Item_TryGetPrefixStatMultipliersForItem;
         }
-
         private bool On_Item_TryGetPrefixStatMultipliersForItem(On_Item.orig_TryGetPrefixStatMultipliersForItem orig, Item self, int rolledPrefix, out float dmg, out float kb, out float spd, out float size, out float shtspd, out float mcst, out int crt)
         {
             orig(self,rolledPrefix, out dmg, out kb, out spd, out size, out shtspd, out mcst, out crt);

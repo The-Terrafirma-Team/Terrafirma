@@ -1879,4 +1879,16 @@ VanillaSetBonus: {
 		'''
 }
 
-Misc.TowerShield: Can block up to {0} damage
+Misc: {
+	TowerShield: Can block up to {0} damage
+	AccuracyPrefix: % accuracy
+	MaxLifePrefix: "{0} max"
+	LifeRegenPrefix: "{0} life regeneration"
+}
+
+Prefixes: {
+	Healthy.DisplayName: Healthy
+	Hearty.DisplayName: Hearty
+	OK.DisplayName: "O.K."
+	Stoic.DisplayName: Stoic
+}
