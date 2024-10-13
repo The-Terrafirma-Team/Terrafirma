@@ -72,9 +72,9 @@ namespace Terrafirma.Common
                 {
                     //Asset<Texture2D> itemTex = TextureAssets.Item[(int)npc.ai[1]];
                     Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
-                    spriteBatch.Draw(itemTexture, npc.Center - Main.screenPosition + npc.velocity * -0.3f, rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, 0.7f * npc.scale, SpriteEffects.None, 0);
+                    spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f, rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, 0.7f * npc.scale, SpriteEffects.None, 0);
                 }
-                spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, npc.Bottom - Main.screenPosition + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, npc.Bottom - screenPos + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale, SpriteEffects.None, 0);
                 
                 return false;
             }

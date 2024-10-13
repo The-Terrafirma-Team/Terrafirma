@@ -22,6 +22,7 @@ namespace Terrafirma.Items.Equipment.Ranged
         public override void UpdateEquip(Player player)
         {
             player.PlayerStats().ThrowerVelocity += 0.15f;
+            player.PlayerStats().BowChargeTimeMultipler -= 0.1f;
         }
     }
 }

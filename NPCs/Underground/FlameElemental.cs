@@ -140,10 +140,10 @@ namespace Terrafirma.NPCs.Underground
             Asset<Texture2D> tex = TextureAssets.Npc[Type];
             for(int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
             {
-                spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2, NPC.frame, drawColor * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i], new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]), NPC.scale + (i * NPC.velocity.Length() * 0.01f) + (i * 0.05f), NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+                spriteBatch.Draw(tex.Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, drawColor * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i], new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]), NPC.scale + (i * NPC.velocity.Length() * 0.01f) + (i * 0.05f), NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
             }
             drawColor.A = 128;
-            spriteBatch.Draw(tex.Value, NPC.Center - Main.screenPosition, NPC.frame, drawColor, NPC.rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]),NPC.scale,NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+            spriteBatch.Draw(tex.Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, new Vector2(tex.Width() / 2, tex.Height() / 2 / Main.npcFrameCount[Type]),NPC.scale,NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
             return false;
         }
         public override void FindFrame(int frameHeight)

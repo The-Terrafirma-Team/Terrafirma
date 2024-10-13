@@ -175,24 +175,24 @@ namespace Terrafirma.NPCs.Boss.Terragrim
             {
                 for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
                 {
-                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2, new Rectangle(0, NPC.frame.Height * 2, NPC.frame.Width, NPC.frame.Height), new Color(0, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i], NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, new Rectangle(0, NPC.frame.Height * 2, NPC.frame.Width, NPC.frame.Height), new Color(0, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i], NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
                 }
             }
             else if(phase > 0)
             {
                 for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
                 {
-                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2 + Main.rand.NextVector2Circular(1,1), new Rectangle(0, 0, NPC.frame.Width, NPC.frame.Height), new Color(128, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i] + Main.rand.NextFloat(-0.05f,0.05f), NPC.frame.Size() / 2, 1.3f + (float)(Math.Sin((Main.timeForVisualEffects + i * 10) * 0.1f) * 0.2f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - screenPos + NPC.Size / 2 + Main.rand.NextVector2Circular(1,1), new Rectangle(0, 0, NPC.frame.Width, NPC.frame.Height), new Color(128, 255, 200, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.2f, NPC.oldRot[i] + Main.rand.NextFloat(-0.05f,0.05f), NPC.frame.Size() / 2, 1.3f + (float)(Math.Sin((Main.timeForVisualEffects + i * 10) * 0.1f) * 0.2f), SpriteEffects.None, 0);
                 }
             }
                 
-            spriteBatch.Draw(tex.Value, NPC.Center - Main.screenPosition, NPC.frame, (canHitPlayer || phase == 0) ? Color.White : Color.Gray, NPC.rotation, NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(tex.Value, NPC.Center - screenPos, NPC.frame, (canHitPlayer || phase == 0) ? Color.White : Color.Gray, NPC.rotation, NPC.frame.Size() / 2, 1f, SpriteEffects.None, 0);
 
             if (spinnyMode)
             {
                 for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
                 {
-                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - Main.screenPosition + NPC.Size / 2, new Rectangle(0, NPC.frame.Height * 3, NPC.frame.Width, NPC.frame.Height), new Color(0, 255, 100, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.1f, NPC.oldRot[i], NPC.frame.Size() / 2, 1.3f - ((NPCID.Sets.TrailCacheLength[Type] - i) * 0.1f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(tex.Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, new Rectangle(0, NPC.frame.Height * 3, NPC.frame.Width, NPC.frame.Height), new Color(0, 255, 100, 0) * (NPCID.Sets.TrailCacheLength[Type] - i) * 0.1f, NPC.oldRot[i], NPC.frame.Size() / 2, 1.3f - ((NPCID.Sets.TrailCacheLength[Type] - i) * 0.1f), SpriteEffects.None, 0);
                 }
             }
 

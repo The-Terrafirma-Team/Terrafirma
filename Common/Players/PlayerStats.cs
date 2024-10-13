@@ -57,6 +57,7 @@ namespace Terrafirma.Common.Players
         public float ThrowerGrabRange = 1f;
         public float ThrowerRecoveryChance = 0f;
         public float ThrowerVelocity = 1f;
+        public float BowChargeTimeMultipler = 1f;
 
         public int MeleeFlatDamage = 0;
         public int RangedFlatDamage = 0;
@@ -75,6 +76,7 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            BowChargeTimeMultipler = 1f;
             ThrowerVelocity = 1f;
             ThrowerRecoveryChance = 0.2f;
             ThrowerGrabRange = 1f;
@@ -154,6 +156,8 @@ namespace Terrafirma.Common.Players
         {
             if (item.ModItem is NecromancerScythe)
                 return NecromancerSwingSpeed;
+            else if (item.useAmmo == AmmoID.Arrow && ContentSamples.ProjectilesByType[item.shoot].ModProjectile is DrawnBowTemplate)
+                return BowChargeTimeMultipler;
             else
                 return base.UseSpeedMultiplier(item);
         }
@@ -182,7 +186,7 @@ namespace Terrafirma.Common.Players
 
             if (item.DamageType == DamageClass.Summon && item.sentry)
             {
-                damage.Flat += (item.damage * (SentryDamageMultiplier + 1f)) - item.OriginalDamage;
+                damage += SentryDamageMultiplier;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)

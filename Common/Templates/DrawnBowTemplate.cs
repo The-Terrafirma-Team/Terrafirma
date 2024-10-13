@@ -31,7 +31,7 @@ namespace Terrafirma.Common.Templates
 
         public virtual void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float power)
         {
-            Projectile p = Projectile.NewProjectileDirect(source, position, velocity * power * 2, type, damage / 2 + (int)(damage * power * 1.5f), knockback / 2f + (knockback * power * 1.5f), player.whoAmI);
+            Projectile p = Projectile.NewProjectileDirect(source, position, velocity * power * 3, type, (int)MathHelper.Lerp(damage * 0.1f, damage * 2,power*power*power), knockback / 2f + (knockback * power * 1.5f), player.whoAmI);
             if (power == 1)
             {
                 p.ai[0] = -20;

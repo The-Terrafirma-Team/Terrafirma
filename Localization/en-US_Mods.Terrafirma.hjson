@@ -1223,7 +1223,11 @@ Items: {
 
 	LeatherGlove: {
 		DisplayName: Leather Glove
-		Tooltip: Increases throwing velocity by 15%
+		Tooltip:
+			'''
+			Increases throwing velocity by 15%
+			Increases bow drawing speed by 10%
+			'''
 	}
 
 	TestBow: {
@@ -1882,13 +1886,13 @@ VanillaSetBonus: {
 Misc: {
 	TowerShield: Can block up to {0} damage
 	AccuracyPrefix: % accuracy
-	MaxLifePrefix: "{0} max"
+	MaxLifePrefix: "{0} max life"
 	LifeRegenPrefix: "{0} life regeneration"
 }
 
 Prefixes: {
 	Healthy.DisplayName: Healthy
 	Hearty.DisplayName: Hearty
-	OK.DisplayName: "O.K."
+	OK.DisplayName: O.K.
 	Stoic.DisplayName: Stoic
 }

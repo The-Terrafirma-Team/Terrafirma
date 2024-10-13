@@ -237,7 +237,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 {
                     //Back Arm
                     Main.EntitySpriteDraw(tex,
-                        NPC.oldPos[i] + new Vector2(14, 20) - Main.screenPosition + (new Vector2(NPC.spriteDirection == 1 ? 4 : 6, 0) * -NPC.spriteDirection + backarmoffset).RotatedBy(NPC.oldRot[i]),
+                        NPC.oldPos[i] + new Vector2(14, 20) - screenPos + (new Vector2(NPC.spriteDirection == 1 ? 4 : 6, 0) * -NPC.spriteDirection + backarmoffset).RotatedBy(NPC.oldRot[i]),
                         new Rectangle(58, 2, 10, 18),
                         drawColor * ((20 - i) / 20f) * 0.6f * afterimagefloat,
                         NPC.oldRot[i] + backarmrot,
@@ -246,7 +246,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                         (NPC.spriteDirection * backarmdirection) == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
                     //Body
                     Main.EntitySpriteDraw(tex,
-                        NPC.oldPos[i] + new Vector2(14, 20) - Main.screenPosition,
+                        NPC.oldPos[i] + new Vector2(14, 20) - screenPos,
                         new Rectangle(0, 56 * animframe, 40, 56),
                         drawColor * ((20 - i) / 20f) * 0.6f * afterimagefloat,
                         NPC.oldRot[i],
@@ -255,7 +255,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                         NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
                     //Front Arm
                     Main.EntitySpriteDraw(tex,
-                        NPC.oldPos[i] + new Vector2(14, 20) - Main.screenPosition - (new Vector2(NPC.spriteDirection == 1 ? 6 : 8, 0) * -NPC.spriteDirection + frontarmoffset).RotatedBy(NPC.oldRot[i]),
+                        NPC.oldPos[i] + new Vector2(14, 20) - screenPos - (new Vector2(NPC.spriteDirection == 1 ? 6 : 8, 0) * -NPC.spriteDirection + frontarmoffset).RotatedBy(NPC.oldRot[i]),
                         new Rectangle(44, 2, 10, 18),
                         drawColor * ((20 - i) / 20f) * 0.6f * afterimagefloat,
                         NPC.oldRot[i] + frontarmrot,
@@ -267,7 +267,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
 
             //Back Arm
             Main.EntitySpriteDraw(tex,
-                NPC.Center - Main.screenPosition + (new Vector2(NPC.spriteDirection == 1 ? 4 : 6, 0) * -NPC.spriteDirection + backarmoffset).RotatedBy(NPC.rotation),
+                NPC.Center - screenPos + (new Vector2(NPC.spriteDirection == 1 ? 4 : 6, 0) * -NPC.spriteDirection + backarmoffset).RotatedBy(NPC.rotation),
                 new Rectangle(58, 2, 10, 18),
                 drawColor,
                 NPC.rotation + backarmrot,
@@ -276,7 +276,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 (NPC.spriteDirection * backarmdirection) == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
             //Body
             Main.EntitySpriteDraw(tex,
-                NPC.Center - Main.screenPosition,
+                NPC.Center - screenPos,
                 new Rectangle(0, 56 * animframe, 40, 56),
                 drawColor,
                 NPC.rotation,
@@ -285,7 +285,7 @@ namespace Terrafirma.NPCs.Boss.Ninja
                 NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
             //Front Arm
             Main.EntitySpriteDraw(tex,
-                NPC.Center - Main.screenPosition - (new Vector2(NPC.spriteDirection == 1 ? 6 : 8, 0) * -NPC.spriteDirection + frontarmoffset).RotatedBy(NPC.rotation),
+                NPC.Center - screenPos - (new Vector2(NPC.spriteDirection == 1 ? 6 : 8, 0) * -NPC.spriteDirection + frontarmoffset).RotatedBy(NPC.rotation),
                 new Rectangle(44, 2, 10, 18),
                 drawColor,
                 NPC.rotation + frontarmrot,

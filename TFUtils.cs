@@ -17,6 +17,7 @@ using Terrafirma.Systems.MageClass;
 using Terrafirma.Common.Items;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Reflection;
 
 namespace Terrafirma
 {
@@ -24,40 +25,41 @@ namespace Terrafirma
     {
         public static Color TryApplyingPlayerStringColor(int playerStringColor, Color stringColor)
         {
-            if (playerStringColor > 0)
-            {
-                stringColor = WorldGen.paintColor(playerStringColor);
-                if (stringColor.R < 75)
-                {
-                    stringColor.R = 75;
-                }
-                if (stringColor.G < 75)
-                {
-                    stringColor.G = 75;
-                }
-                if (stringColor.B < 75)
-                {
-                    stringColor.B = 75;
-                }
-                switch (playerStringColor)
-                {
-                    case 13:
-                        stringColor = new Color(20, 20, 20);
-                        break;
-                    case 0:
-                    case 14:
-                        stringColor = new Color(200, 200, 200);
-                        break;
-                    case 28:
-                        stringColor = new Color(163, 116, 91);
-                        break;
-                    case 27:
-                        stringColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
-                        break;
-                }
-                stringColor.A = (byte)((float)(int)stringColor.A * 0.4f);
-            }
-            return stringColor;
+            return (Color)typeof(Main).GetMethod("TryApplyingPlayerStringColor", BindingFlags.Static | BindingFlags.NonPublic).Invoke(null, [playerStringColor, stringColor]);
+            //if (playerStringColor > 0)
+            //{
+            //    stringColor = WorldGen.paintColor(playerStringColor);
+            //    if (stringColor.R < 75)
+            //    {
+            //        stringColor.R = 75;
+            //    }
+            //    if (stringColor.G < 75)
+            //    {
+            //        stringColor.G = 75;
+            //    }
+            //    if (stringColor.B < 75)
+            //    {
+            //        stringColor.B = 75;
+            //    }
+            //    switch (playerStringColor)
+            //    {
+            //        case 13:
+            //            stringColor = new Color(20, 20, 20);
+            //            break;
+            //        case 0:
+            //        case 14:
+            //            stringColor = new Color(200, 200, 200);
+            //            break;
+            //        case 28:
+            //            stringColor = new Color(163, 116, 91);
+            //            break;
+            //        case 27:
+            //            stringColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+            //            break;
+            //    }
+            //    stringColor.A = (byte)((float)(int)stringColor.A * 0.4f);
+            //}
+            //return stringColor;
         }
         public static bool ThrowerSpawnDroppedItem(this Projectile projectile, int player, int type)
         {

@@ -15,7 +15,7 @@ namespace Terrafirma.Items.Weapons.Ranged.Bows
     {
         public override void SetDefaults()
         {
-            Item.DefaultToDrawnBow(ModContent.ProjectileType<Projectiles.Ranged.Bows.TestBow>(), 30, 50,5,10);
+            Item.DefaultToDrawnBow(ModContent.ProjectileType<Projectiles.Ranged.Bows.TestBow>(), 30, 80,5,10);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

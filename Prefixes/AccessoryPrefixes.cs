@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Prefixes
 {  
+    // Life
     public class OK : Healthy
     {
         public override int RegenIncrease => 3;
@@ -44,8 +45,13 @@ namespace Terrafirma.Prefixes
     }
     public class Stoic : ModPrefix
     {
+        public override PrefixCategory Category => PrefixCategory.Accessory;
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
+            yield return new TooltipLine(Mod, "PrefixAccDefense", "+2" + Lang.tip[25].Value)
+            {
+                IsModifier = true
+            };
             yield return new TooltipLine(Mod, "MaxLifePrefix", Language.GetText("Mods.Terrafirma.Misc.MaxLifePrefix").WithFormatArgs("+20").ToString())
             {
                 IsModifier = true
@@ -54,6 +60,9 @@ namespace Terrafirma.Prefixes
         public override void ApplyAccessoryEffects(Player player)
         {
             player.statLifeMax2 += 20;
+            player.statDefense += 2;
         }
     }
+
+    // Debuff Duration
 }
