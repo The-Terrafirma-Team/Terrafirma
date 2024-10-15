@@ -24,7 +24,7 @@ namespace Terrafirma.Buffs.Debuffs.Throwing
                 d.velocity.X *= 0.2f;
             }
 
-            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().ThrowerDOT += (npc.buffTime[buffIndex] / 3f);
+            npc.GetGlobalNPC<NPCStats>().ThrowerDOT += (npc.buffTime[buffIndex] / 3f);
         }
     }
 }

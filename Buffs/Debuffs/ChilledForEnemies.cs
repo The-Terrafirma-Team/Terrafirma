@@ -17,7 +17,7 @@ namespace Terrafirma.Buffs.Debuffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().Chilled = true;
+            npc.GetGlobalNPC<NPCStats>().Chilled = true;
             npc.position -= npc.velocity * (npc.knockBackResist * 0.5f);
         } 
     }

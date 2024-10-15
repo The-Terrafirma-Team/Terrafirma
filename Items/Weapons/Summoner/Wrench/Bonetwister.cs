@@ -16,7 +16,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1);
             Buff = new BonetwisterBuff();
-            BuffDuration = 60 * 6;
+            BuffDuration = 3600 * 2;
         }
         public override void AddRecipes()
         {

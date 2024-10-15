@@ -36,7 +36,6 @@ namespace Terrafirma.Common
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
         }
     }
-
     public class VanillaNPCSpriteChanges : GlobalNPC
     {
         public override bool InstancePerEntity => true;
@@ -79,6 +78,38 @@ namespace Terrafirma.Common
                 return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
+    }
+    public class ProjectileChanges : GlobalProjectile
+    {
+        const string AssetFolder = "Terrafirma/Assets/Resprites/";
+        private static Asset<Texture2D> DemonScythe;
+        public override void Load()
+        {
+            DemonScythe = ModContent.Request<Texture2D>(AssetFolder + "DemonScythe");
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailingMode[ProjectileID.DemonSickle] = 2;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.DemonSickle] = 5;
+            ProjectileID.Sets.TrailingMode[ProjectileID.DemonScythe] = 2;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.DemonScythe] = 5;
+        }
+        public override bool PreDraw(Projectile projectile, ref Color lightColor)
+        {
+            switch (projectile.type)
+            {
+                case ProjectileID.DemonScythe:
+                case ProjectileID.DemonSickle:
+                    Color color = Color.Lerp(new Color(1f,1f,1f,0f),new Color(0.3f,0f,1f,0f),(float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f);
+                    for(int i = 0; i < 5; i++)
+                    {
+                        TFUtils.EasyCenteredProjectileDraw(DemonScythe, projectile, color * (1f - (i/5f)) * 0.3f, projectile.oldPos[i] + (projectile.Size / 2) - Main.screenPosition, projectile.oldRot[i],1f);
+                    }
+                    TFUtils.EasyCenteredProjectileDraw(DemonScythe, projectile, color);
+                    return false;
+            }
+            return base.PreDraw(projectile, ref lightColor);
         }
     }
     public class BulletVisuals : GlobalProjectile

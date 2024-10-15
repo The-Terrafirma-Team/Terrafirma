@@ -18,11 +18,47 @@ using Terrafirma.Common.Items;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Reflection;
+using Terrafirma.Common.NPCs;
 
 namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void ApplyManaStats(this NPC npc, int MaxMana)
+        {
+            NPCStats gNPC = npc.GetGlobalNPC<NPCStats>();
+            gNPC.MaxMana = MaxMana;
+            gNPC.Mana = MaxMana;
+        }
+        public static bool CheckMana(this NPC npc, int Mana, bool Consume = true)
+        {
+            NPCStats gNPC = npc.GetGlobalNPC<NPCStats>();
+            if(gNPC.Mana > Mana)
+            {
+                if (Consume)
+                {
+                    gNPC.Mana -= Mana;
+                    gNPC.ManaRegenTimer = 0;
+                }
+                return true;
+            }
+            return false;
+        }
+        public static void DealManaDamage(this NPC npc, Player player, int Mana)
+        {
+            NPCStats gNPC = npc.GetGlobalNPC<NPCStats>();
+            if (gNPC.MaxMana == 0)
+                return;
+
+            gNPC.Mana -= Mana;
+            gNPC.ManaRegenTimer = 0;
+            CombatText.NewText(npc.Hitbox,Common.NPCs.NPCStats.EnemyManaDamageColor,Mana);
+        }
+        public static void DealManaDamage(this Player player, NPC npc, int Mana)
+        {
+            player.statMana -= Mana;
+            CombatText.NewText(npc.Hitbox, Common.NPCs.NPCStats.FriendlyManaDamageColor, Mana);
+        }
         public static Color TryApplyingPlayerStringColor(int playerStringColor, Color stringColor)
         {
             return (Color)typeof(Main).GetMethod("TryApplyingPlayerStringColor", BindingFlags.Static | BindingFlags.NonPublic).Invoke(null, [playerStringColor, stringColor]);
@@ -193,7 +229,10 @@ namespace Terrafirma
         {
             return player.GetModPlayer<PlayerStats>();
         }
-
+        public static NPCStats NPCStats(this NPC npc)
+        {
+            return npc.GetGlobalNPC<NPCStats>();
+        }
         public static Spell Spell(this Item item)
         {
             return item.GetGlobalItem<GlobalItemInstanced>().Spell;

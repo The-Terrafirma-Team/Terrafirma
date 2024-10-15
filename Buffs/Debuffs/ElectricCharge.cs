@@ -17,7 +17,7 @@ namespace Terrafirma.Buffs.Debuffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().ElectricCharge = true;
+            npc.GetGlobalNPC<NPCStats>().ElectricCharge = true;
             Dust d = Dust.NewDustPerfect(Main.rand.NextVector2FromRectangle(npc.Hitbox), DustID.Electric, Main.rand.NextVector2CircularEdge(6,6));
             d.noGravity = true;
         }

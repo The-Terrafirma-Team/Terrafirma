@@ -23,7 +23,7 @@ namespace Terrafirma.Buffs.Debuffs.Throwing
                 d.noGravity = !Main.rand.NextBool(3);
             }
 
-            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().ThrowerDOT += (npc.buffTime[buffIndex] / 2f);
+            npc.GetGlobalNPC<NPCStats>().ThrowerDOT += (npc.buffTime[buffIndex] / 2f);
         }
     }
 }

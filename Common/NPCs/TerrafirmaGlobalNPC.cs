@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Debuffs;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,6 +22,6 @@ namespace Terrafirma.Common.NPCs
                     NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<ChilledForEnemies>()] = true;
                 }
             }
-        }
+       }
     }
 }

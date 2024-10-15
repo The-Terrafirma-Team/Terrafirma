@@ -34,7 +34,7 @@ namespace Terrafirma.Projectiles.Magic
         }
         public override void OnKill(int timeLeft)
         {
-            ParticleSystem.AddParticle(new SliceSparkle() {Rotation = Projectile.oldVelocity.ToRotation(), Scale = 0.4f, fadeInTime = 10 }, Projectile.Center - Projectile.oldVelocity, Projectile.oldVelocity, new Color(0f, 0.75f, 1f, 0f));
+            ParticleSystem.AddParticle(new SliceSparkle() {Rotation = Projectile.oldVelocity.ToRotation(), Scale = 0.4f, fadeInTime = 3 }, Projectile.Center - Projectile.oldVelocity, Projectile.oldVelocity * 0.5f, new Color(0f, 0.75f, 1f, 0f));
         }
         public override void AI()
         {
@@ -43,8 +43,14 @@ namespace Terrafirma.Projectiles.Magic
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
-            CombatText.NewText(player.Hitbox, CombatText.HealMana, 5, false);
-            player.statMana += 5;
+
+            int manaGain = target.NPCStats().Mana > 2 ? 4 : 2;
+            if (target.NPCStats().Mana == 1)
+                manaGain = 3;
+
+            CombatText.NewText(player.Hitbox, CombatText.HealMana, manaGain, false);
+            player.statMana += manaGain;
+            target.DealManaDamage(player, 6);
         }
     }
 }

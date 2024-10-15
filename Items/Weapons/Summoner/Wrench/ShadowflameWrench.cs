@@ -17,7 +17,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
             Item.rare = ContentSamples.ItemsByType[ItemID.ShadowFlameKnife].rare;
             Item.value = ContentSamples.ItemsByType[ItemID.ShadowFlameKnife].value;
             Buff = new ShadowflameWrenchBuff();
-            BuffDuration = 60 * 4;
+            BuffDuration = 60 * 30;
             Item.shoot = ModContent.ProjectileType<Projectiles.Summon.ShadowflameWrench>();
             Item.shootSpeed = 6;
         }

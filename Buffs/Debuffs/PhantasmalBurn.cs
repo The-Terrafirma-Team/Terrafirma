@@ -17,7 +17,7 @@ namespace Terrafirma.Buffs.Debuffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.GetGlobalNPC<TerrafirmaGlobalNPCInstance>().PhantasmalBurn = true;
+            npc.GetGlobalNPC<NPCStats>().PhantasmalBurn = true;
             if (npc.buffTime[buffIndex] % 2 == 0)
             {
                 Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.BlueFlare, Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-6f, -5f), 0, default, Main.rand.NextFloat(1.5f, 1.7f));

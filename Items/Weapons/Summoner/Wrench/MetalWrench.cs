@@ -21,7 +21,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 10);
             Buff = new MetalWrenchBuff();
-            BuffDuration = 60 * 4;
+            BuffDuration = 60 * 30;
         }
         public override void AddRecipes()
         {

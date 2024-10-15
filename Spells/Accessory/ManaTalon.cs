@@ -16,7 +16,7 @@ namespace Terrafirma.Spells.Accessory
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<Projectiles.Magic.ManaTalon>(), damage, knockback, player.whoAmI, 0, 0, 0);
+            Projectile.NewProjectile(source, position, Vector2.Normalize(velocity) * 8, ModContent.ProjectileType<Projectiles.Magic.ManaTalon>(), damage, knockback, player.whoAmI, 0, 0, 0);
             return false;
         }
     }
