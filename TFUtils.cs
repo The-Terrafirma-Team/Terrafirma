@@ -33,6 +33,8 @@ namespace Terrafirma
         public static bool CheckMana(this NPC npc, int Mana, bool Consume = true)
         {
             NPCStats gNPC = npc.GetGlobalNPC<NPCStats>();
+            if (gNPC.Silenced)
+                return false;
             if(gNPC.Mana > Mana)
             {
                 if (Consume)

@@ -11,7 +11,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.PlayerLayers
 {
     public class NecromancerLayer : PlayerDrawLayer
     {
@@ -28,12 +28,12 @@ namespace Terrafirma.Common
 
             Asset<Texture2D> tex = Mod.Assets.Request<Texture2D>("Assets/Souls/" + scythe.SoulName);
 
-            for (int i = 0; i < (scythe.DamageDealt / scythe.DamagePerSoul); i++)
+            for (int i = 0; i < scythe.DamageDealt / scythe.DamagePerSoul; i++)
             {
                 double timer = Main.timeForVisualEffects + i * (MathHelper.TwoPi * 5.5f);
                 float circle = (float)Math.Sin(timer * 0.03f);
-                float halfCircle = (float)Math.Sin((timer * 0.03f) + 1.521229);
-                if ((halfCircle < 0 && front) || (halfCircle > 0 && !front))
+                float halfCircle = (float)Math.Sin(timer * 0.03f + 1.521229);
+                if (halfCircle < 0 && front || halfCircle > 0 && !front)
                     drawInfo.DrawDataCache.Add(new DrawData(tex.Value, position + new Vector2(circle * 28f, Math.Abs(halfCircle) * 8f), new Rectangle(tex.Height() * (i % 2 == 0 ? 0 : 1), 0, tex.Height(), tex.Height()), Color.Lerp(Color.White, Color.Gray, halfCircle) * 0.8f, 0, new Vector2(tex.Width() / 4, tex.Height() / 2), 0.65f - halfCircle * 0.15f, SpriteEffects.None));
             }
         }

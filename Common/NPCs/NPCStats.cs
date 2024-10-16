@@ -7,11 +7,19 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
+using ReLogic.Content;
 
 namespace Terrafirma.Common.NPCs
 {
     public class NPCStats : GlobalNPC
     {
+        private static Asset<Texture2D> SilenceTex;
+        public override void Load()
+        {
+            SilenceTex = Mod.Assets.Request<Texture2D>("Assets/Silenced");
+        }
+
+        public static Color EnemyManaGainColor = new Color(200, 64, 255);
         public static Color EnemyManaDamageColor = new Color(128,0,255);
         public static Color FriendlyManaDamageColor = new Color(255, 0, 255);
         public override bool InstancePerEntity => true;
@@ -19,6 +27,7 @@ namespace Terrafirma.Common.NPCs
         public int Mana;
         public int MaxMana;
         public int ManaRegenTimer;
+        public bool Silenced;
 
         public bool PhantasmalBurn;
         public bool ElectricCharge;
@@ -35,6 +44,7 @@ namespace Terrafirma.Common.NPCs
             ManaRegenTimer++;
 
             ThrowerDOT = 0;
+            Silenced = false;
             PhantasmalBurn = false;
             ElectricCharge = false;
             Stunned = false;
@@ -69,6 +79,11 @@ namespace Terrafirma.Common.NPCs
         {
             if (Mana != 0)
                 DrawManaBar(npc,spriteBatch);
+            if (Silenced)
+            {
+                float alpha = Lighting.Brightness((int)(npc.Center.X / 16), (int)((npc.Center.Y + npc.gfxOffY) / 16));
+                spriteBatch.Draw(SilenceTex.Value, npc.Top - screenPos + new Vector2(0,-10), null, Color.White * alpha, 0f, SilenceTex.Size() / 2, 1f + Main.masterColor * 0.1f, SpriteEffects.None, 0);
+            }
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {

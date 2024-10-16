@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Core.Utils;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,15 @@ namespace Terrafirma.Reworks.EnemyMana
 {
     public class Demon : GlobalNPC
     {
+        const string AssetFolder = "Terrafirma/Assets/Resprites/";
+        private static Asset<Texture2D> DemonTex;
+        private static Asset<Texture2D> VoodooTex;
 
+        public override void Load()
+        {
+            DemonTex = ModContent.Request<Texture2D>(AssetFolder + "Demon");
+            VoodooTex = ModContent.Request<Texture2D>(AssetFolder + "VoodooDemon");
+        }
         public override bool AppliesToEntity(NPC npc, bool lateInstantiation)
         {
             return npc.type == NPCID.Demon || npc.type == NPCID.VoodooDemon;
@@ -22,11 +32,16 @@ namespace Terrafirma.Reworks.EnemyMana
         public override bool InstancePerEntity => true;
         public override void SetDefaults(NPC npc)
         {
-            npc.ApplyManaStats(200);
+            npc.ApplyManaStats(npc.type == NPCID.Demon? 250 : 350);
             npc.aiStyle = -1;
             npc.noGravity = true;
         }
-
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Asset<Texture2D> tex = npc.type == NPCID.Demon ? DemonTex : VoodooTex;
+            spriteBatch.Draw(tex.Value,npc.Center - screenPos,npc.frame,drawColor,npc.rotation,new Vector2(tex.Width() / 4,36),npc.scale,npc.direction == 1? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            return false;
+        }
         public override bool? CanFallThroughPlatforms(NPC npc)
         {
             return true;
@@ -53,27 +68,39 @@ namespace Terrafirma.Reworks.EnemyMana
             npc.ai[0]++;
             if (npc.ai[1] == 0)
             {
-                npc.velocity += new Vector2(npc.direction, npc.directionY * 0.2f) * 0.1f;
-                npc.velocity = npc.velocity.LengthClamp(6);
-
-                if(npc.HasValidTarget && stats.Mana > 45 && npc.ai[0] > 60 && Collision.CanHitLine(npc.Center,1,1,target.Center,1,1) && Main.rand.NextBool(20))
+                if (npc.CheckMana(45,false))
                 {
-                    npc.ai[0] = 0;
-                    npc.ai[1] = 1;
-                    npc.netUpdate = true;
+                    npc.velocity += new Vector2(npc.direction, npc.directionY * 0.2f) * 0.1f;
+                    npc.velocity = npc.velocity.LengthClamp(6);
+                    npc.frame.X = 0;
+
+                    if (npc.HasValidTarget && stats.Mana > 70 && npc.ai[0] > 60 && Collision.CanHitLine(npc.Center, 1, 1, target.Center, 1, 1) && Main.rand.NextBool(20))
+                    {
+                        npc.ai[0] = 0;
+                        npc.ai[1] = 1;
+                        npc.netUpdate = true;
+                    }
+                }
+                else
+                {
+                    npc.frameCounter+= 0.5f;
+                    npc.velocity += new Vector2(npc.direction, npc.directionY * 0.4f) * 0.4f;
+                    npc.velocity = npc.velocity.LengthClamp(8);
+                    npc.frame.X = 0;
                 }
             }
             else if (npc.ai[1] == 1)
             {
+                npc.frame.X = 86;
                 Lighting.AddLight(npc.Center, new Vector3(0.6f, 0f, 1f) * Math.Clamp(npc.ai[0], 0, 15) / 15f);
                 npc.velocity *= 0.95f;
-                if (npc.ai[0] is 30 or 50 or 70 && npc.CheckMana(15))
+                if ((npc.ai[0] is 30 or 50 or 70 || (npc.ai[0] == 90 && npc.type == NPCID.VoodooDemon)) && npc.CheckMana(15))
                 {
                     if(Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, npc.Center.DirectionTo(target.Center),ProjectileID.DemonSickle,21,1);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, npc.Center.DirectionTo(target.Center).RotatedByRandom(0.3f),ProjectileID.DemonSickle,21,1);
                 }
 
-                if (npc.ai[0] > 90)
+                if (npc.ai[0] > (npc.type == NPCID.VoodooDemon ? 110 : 90))
                 {
                     npc.ai[0] = -128;
                     npc.ai[1] = 0;
@@ -109,7 +136,7 @@ namespace Terrafirma.Reworks.EnemyMana
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.DealManaDamage(npc, 50);
-            CombatText.NewText(npc.Hitbox, CombatText.HealMana, 50);
+            CombatText.NewText(npc.Hitbox, NPCStats.EnemyManaGainColor, 25);
             npc.NPCStats().Mana += 25;
         }
     }
