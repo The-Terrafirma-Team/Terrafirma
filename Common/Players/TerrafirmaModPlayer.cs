@@ -53,7 +53,6 @@ namespace Terrafirma.Common.Players
         public override void ResetEffects()
         {
             Player.pickSpeed *= 0.8f;
-            Player.accFlipper = true;
             //Player.runAcceleration *= 2;
 
             Foregrip = false;

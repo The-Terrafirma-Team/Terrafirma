@@ -68,8 +68,8 @@ namespace Terrafirma.NPCs.Underground
             NPC.damage = 20;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
+            NPC.ApplyManaStats(300);
         }
-
         public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
@@ -94,10 +94,15 @@ namespace Terrafirma.NPCs.Underground
                 NPC.velocity.Y = NPC.oldVelocity.Y * -1f;
 
             if (NPC.ai[1] == 0)
-                NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(160).RotatedBy(NPC.ai[0] * 0.01f)) * 0.1f;
+            {
+                if(!NPC.CheckMana(15 * 6, false))
+                    NPC.velocity += NPC.Center.DirectionTo(target.Center) * 0.5f;
+                else
+                    NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(160).RotatedBy(NPC.ai[0] * 0.01f)) * 0.1f;
+            }
             NPC.velocity = NPC.velocity.LengthClamp(8);
 
-            if (NPC.ai[0] % 300 == 0)
+            if (NPC.ai[0] % 300 == 0 && NPC.CheckMana(15 * 6,false))
             {
                 NPC.ai[1] = 1;
             }
@@ -113,8 +118,9 @@ namespace Terrafirma.NPCs.Underground
                 }
                 else if (NPC.ai[2] > 30)
                 {
-                    if ((NPC.ai[2] - 20) % 30 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+                    if ((NPC.ai[2] - 20) % 30 == 0 && NPC.CheckMana(15))
                     {
+                        if(Main.netMode != NetmodeID.MultiplayerClient)
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.2f) * 8, ProjectileID.Fireball, 30, 3);
                     }
                     if (NPC.ai[2] > 110)

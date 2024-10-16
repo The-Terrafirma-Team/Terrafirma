@@ -51,34 +51,10 @@ namespace Terrafirma.Common.NPCs
             Inked = false;
             Chilled = false;
         }
-        private void DrawManaBar(NPC npc, SpriteBatch spriteBatch)
-        {
-            if (Mana >= MaxMana || MaxMana == 0)
-                return;
-
-            float alpha = Lighting.Brightness((int)(npc.Center.X / 16), (int)((npc.Center.Y + npc.gfxOffY) / 16));
-            //alpha = (alpha + 1f) / 2f;
-            int yOff = npc.life >= npc.lifeMax? 22 : 44;
-
-            float percent = Mana / (float)MaxMana;
-            Color barColor = Color.Cyan;
-
-            if(percent > 0.5f)
-            {
-                barColor = Color.Lerp(Color.Cyan,new Color(128,0,255), (percent*2) - 1);
-            }
-            else
-            {
-                barColor = Color.Lerp(Color.Blue, Color.Cyan, percent * 2);
-            }
-
-            spriteBatch.Draw(TextureAssets.Hb2.Value, npc.Bottom - Main.screenPosition + new Vector2(0, yOff), null, barColor * alpha, 0, TextureAssets.Hb2.Size() / 2, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(TextureAssets.Hb1.Value, npc.Bottom - Main.screenPosition + new Vector2(0, yOff), new Rectangle(0,0, (int)(TextureAssets.Hb1.Width() * percent), TextureAssets.Hb1.Height()), barColor * alpha, 0, TextureAssets.Hb1.Size() / 2, 1, SpriteEffects.None, 0);
-        }
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (Mana != 0)
-                DrawManaBar(npc,spriteBatch);
+            //if (Mana != 0)
+            //    DrawManaBar(npc,spriteBatch);
             if (Silenced)
             {
                 float alpha = Lighting.Brightness((int)(npc.Center.X / 16), (int)((npc.Center.Y + npc.gfxOffY) / 16));
