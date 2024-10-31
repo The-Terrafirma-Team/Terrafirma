@@ -1234,6 +1234,20 @@ Items: {
 		DisplayName: Test Bow
 		Tooltip: "[c/ff0000:'Touching the string makes your hand feel weirdly dry']"
 	}
+
+	PristineEmblem: {
+		DisplayName: Pristine Emblem
+		Tooltip: Deal extra damage to healthy targets
+	}
+
+	CuringStone: {
+		DisplayName: Curing Stone
+		Tooltip:
+			'''
+			Increases healing recieved by 10%
+			Decreases debuff duration by 20%
+			'''
+	}
 }
 
 Projectiles: {
@@ -1884,6 +1898,8 @@ VanillaSetBonus: {
 }
 
 Misc: {
+	EbonstoneWeak: The ebonstone begins to crumble!
+	CrimstoneWeak: The crimstone begins to crumble!
 	TowerShield: Can block up to {0} damage
 	AccuracyPrefix: % accuracy
 	MaxLifePrefix: "{0} max life"

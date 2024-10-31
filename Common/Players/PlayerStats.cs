@@ -34,6 +34,9 @@ namespace Terrafirma.Common.Players
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
 
+        public float HealingMultiplier = 1f;
+        public float PotionHealingMultiplier = 1f;
+
         public float FeralCharge;
         public float FeralChargeMax;
         public float FeralChargeSpeed;
@@ -51,7 +54,7 @@ namespace Terrafirma.Common.Players
         public float buffTimeMultiplier = 1f;
         public float NecromancerWeaponScale = 0;
         public float NecromancerChargeBonus = 1f;
-        public float NecromancerSwingSpeed = 1f;
+        public float NecromancerAttackSpeed = 1f;
         public float AmmoSaveChance = 0;
         public float ThrowerDebuffPower = 1f;
         public float ThrowerGrabRange = 1f;
@@ -76,6 +79,7 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            HealingMultiplier = 1f;
             BowChargeTimeMultipler = 1f;
             ThrowerVelocity = 1f;
             ThrowerRecoveryChance = 0.2f;
@@ -94,7 +98,7 @@ namespace Terrafirma.Common.Players
 
             NecromancerWeaponScale = 0;
             NecromancerChargeBonus = 1f;
-            NecromancerSwingSpeed = 1f;
+            NecromancerAttackSpeed = 1f;
 
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;
@@ -134,9 +138,17 @@ namespace Terrafirma.Common.Players
             Player.GetDamage(DamageClass.Melee) += (FeralCharge);
 
         }
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+
+        public override void UpdateLifeRegen()
         {
-            base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
+            if(Player.lifeRegenCount >= (int)(120f / HealingMultiplier))
+            {
+                Player.lifeRegenCount = 120;
+            }
+        }
+        public override void PostUpdateMiscEffects()
+        {
+            Player.lifeRegen = (int)(Player.lifeRegen * HealingMultiplier);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
@@ -155,7 +167,7 @@ namespace Terrafirma.Common.Players
         public override float UseSpeedMultiplier(Item item)
         {
             if (item.ModItem is NecromancerScythe)
-                return NecromancerSwingSpeed;
+                return NecromancerAttackSpeed;
             else if (item.useAmmo == AmmoID.Arrow && ContentSamples.ProjectilesByType[item.shoot].ModProjectile is DrawnBowTemplate)
                 return BowChargeTimeMultipler;
             else
@@ -164,19 +176,19 @@ namespace Terrafirma.Common.Players
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             #region Flat Damage
-            if (item.DamageType == DamageClass.Melee || item.DamageType == DamageClass.MeleeNoSpeed)
+            if (item.DamageType.CountsAsClass(DamageClass.Melee))
             {
                 damage.Flat += MeleeFlatDamage;
             }
-            else if (item.DamageType == DamageClass.Ranged)
+            else if (item.DamageType.CountsAsClass(DamageClass.Ranged))
             {
                 damage.Flat += RangedFlatDamage;
             }
-            else if (item.DamageType == DamageClass.Magic)
+            else if (item.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 damage.Flat += MagicFlatDamage;
             }
-            else if (item.DamageType == DamageClass.Summon)
+            else if (item.DamageType.CountsAsClass(DamageClass.Summon))
             {
                 damage.Flat += SummonFlatDamage;
             }

@@ -19,11 +19,24 @@ using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Reflection;
 using Terrafirma.Common.NPCs;
+using Terraria.Chat;
+using Terraria.Localization;
 
 namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void SendImportantStatusMessage(string Key, Color color)
+        {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                Main.NewText(Language.GetText(Key), color);
+            }
+            else if (Main.netMode == NetmodeID.Server)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromKey(Key), color);
+            }
+        }
         public static void ApplyManaStats(this NPC npc, int MaxMana)
         {
             NPCStats gNPC = npc.GetGlobalNPC<NPCStats>();

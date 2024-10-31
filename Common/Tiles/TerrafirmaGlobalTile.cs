@@ -15,5 +15,13 @@ namespace Terrafirma.Common.Tiles
             }
             base.Drop(i, j, type);
         }
+        public override bool CanExplode(int i, int j, int type)
+        {
+            if(type is TileID.Ebonstone or TileID.Crimstone && !NPC.downedBoss2)
+            {
+                return false;
+            }
+            return base.CanExplode(i, j, type);
+        }
     }
 }

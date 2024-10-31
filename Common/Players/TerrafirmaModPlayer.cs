@@ -15,6 +15,7 @@ using Terrafirma.Items.Weapons.Melee.Knight;
 using Terrafirma.Projectiles.Melee.Knight;
 using Microsoft.Xna.Framework.Input;
 using Terrafirma.Systems.Trees;
+using Terrafirma.Items.Equipment;
 
 
 namespace Terrafirma.Common.Players
@@ -23,6 +24,7 @@ namespace Terrafirma.Common.Players
     {
         //Accessories
 
+        public bool PristineEmblem = false;
         public bool Foregrip = false;
         public bool DrumMag = false;
         public bool AmmoCan = false;
@@ -55,6 +57,7 @@ namespace Terrafirma.Common.Players
             Player.pickSpeed *= 0.8f;
             //Player.runAcceleration *= 2;
 
+            PristineEmblem = false;
             Foregrip = false;
             DrumMag = false;
             AmmoCan = false;
@@ -128,7 +131,6 @@ namespace Terrafirma.Common.Players
         {
             Player.manaFlower = false;
         }
-
         public override void PostUpdate()
         {
             if (playerquests.Length == 0) playerquests = QuestID.quests;
@@ -235,6 +237,14 @@ namespace Terrafirma.Common.Players
             }
             if (!Main.mouseRight) RightMouseSwitch = false;
             return base.HoverSlot(inventory, context, slot);
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if(PristineEmblem && target.life >= target.lifeMax * 0.66f)
+            {
+                modifiers.SourceDamage *= 1.1f;
+            }
         }
     }
 }

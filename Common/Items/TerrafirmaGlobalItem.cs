@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Terrafirma.Common.Players;
 using Terrafirma.Data;
 using Terrafirma.Particles;
@@ -8,6 +9,7 @@ using Terrafirma.Tiles;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Items
@@ -108,6 +110,20 @@ namespace Terrafirma.Common.Items
             player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
 
             return base.UseItem(item, player);
+        }
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            for(int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("HealLife"))
+                {
+                    tooltips[i].Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Main.LocalPlayer.PlayerStats().HealingMultiplier * Main.LocalPlayer.PlayerStats().PotionHealingMultiplier));
+                }
+            }
+        }
+        public override void GetHealLife(Item item, Player player, bool quickHeal, ref int healValue)
+        {
+            healValue = (int)(healValue * player.PlayerStats().HealingMultiplier * player.PlayerStats().PotionHealingMultiplier);
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {

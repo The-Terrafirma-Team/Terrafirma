@@ -53,8 +53,6 @@ namespace Terrafirma.Common.NPCs
         }
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            //if (Mana != 0)
-            //    DrawManaBar(npc,spriteBatch);
             if (Silenced)
             {
                 float alpha = Lighting.Brightness((int)(npc.Center.X / 16), (int)((npc.Center.Y + npc.gfxOffY) / 16));
