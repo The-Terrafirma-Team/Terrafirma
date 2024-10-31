@@ -77,6 +77,10 @@ namespace Terrafirma.Common.Players
 
         public Vector2 MouseWorld = Vector2.Zero;
         public bool LeftMouse = false;
+
+        //Movement
+        public float maxRunSpeedMultiplier = 1f;
+        public float maxRunSpeedFlat = 0f;
         public override void ResetEffects()
         {
             HealingMultiplier = 1f;
@@ -115,6 +119,9 @@ namespace Terrafirma.Common.Players
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
 
+            maxRunSpeedMultiplier = 1f;
+            maxRunSpeedFlat = 0f;
+
             if (Player.HeldItem != lastHeldItem)
             {
                 hasSwappedItems = true;
@@ -126,6 +133,13 @@ namespace Terrafirma.Common.Players
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
+        }
+
+        public override void PostUpdateRunSpeeds()
+        {
+            Player.maxRunSpeed += maxRunSpeedFlat;
+            Player.maxRunSpeed *= maxRunSpeedMultiplier;
+            base.PostUpdateRunSpeeds();
         }
         public override void PostUpdateEquips()
         {
