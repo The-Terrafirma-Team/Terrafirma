@@ -51,6 +51,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
             Projectile.timeLeft = 36000;
             Projectile.scale = 0.5f;
             Projectile.Opacity = 0f;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
         }
 
         public override void AI()
@@ -66,8 +68,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
                 Projectile.timeLeft = 150;
                 Projectile.velocity = new Vector2(4f * player.direction, 0f).RotatedBy(Projectile.rotation);
                 Projectile.damage = (int)(Projectile.originalDamage * Math.Pow(Projectile.scale, 3));
-                Projectile.penetrate = (int)(4 * Projectile.scale);
-
+                Projectile.penetrate = (int)(4 * Projectile.scale) + 1;
             }
             else if (!released)
             {
@@ -84,6 +85,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.SpaceGun
                     Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(8, 0).RotatedBy(vel.ToRotation()), DustID.CursedTorch, vel, 0, Scale: 1.5f);
                     d.noGravity = true;
                 }
+                if (Projectile.ai[0] <= 1)
+                {
+                    Dust d2 = Dust.NewDustPerfect(player.MountedCenter + new Vector2(20 * player.direction, 0f).RotatedBy(Projectile.rotation), DustID.CursedTorch, new Vector2(2f * player.direction, 0f).RotatedBy(Projectile.rotation), Scale:1.2f);
+                    d2.noGravity = true;
+                }
+
             }
             else if (released)
             {
