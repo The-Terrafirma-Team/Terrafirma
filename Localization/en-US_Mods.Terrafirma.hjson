@@ -146,7 +146,7 @@ Buffs: {
 
 	ManaPotionSickness: {
 		DisplayName: Mana Potion Sickness
-		Description: Mods.Terrafirma.Buffs.ManaPotionSickness.Description
+		Description: Cannot consume anymore mana restoring items
 	}
 }
 

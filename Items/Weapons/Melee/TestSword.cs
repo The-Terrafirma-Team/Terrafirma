@@ -34,11 +34,14 @@ namespace Terrafirma.Items.Weapons.Melee
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            Projectile.NewProjectile(source, position, velocity, player.altFunctionUse == 2 ? ProjectileID.SapphireBolt : ProjectileID.AmethystBolt , damage, knockback, player.whoAmI);
+
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
         public void TertriaryShoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            Projectile.NewProjectile(source, position, velocity, ProjectileID.EmeraldBolt, damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
         }
     }

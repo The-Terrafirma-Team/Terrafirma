@@ -160,9 +160,12 @@ namespace Terrafirma.Common.Templates.Melee
         {
             Asset<Texture2D> tex = TextureAssets.Projectile[Type];
             int trailLength = ProjectileID.Sets.TrailCacheLength[Type];
-            for (int i = 0; i < trailLength; i++)
+            if (Projectile.ai[0] == 1)
             {
-                drawHammer(lightColor * ((trailLength - i) / (float)trailLength) * 0.4f, tex, Projectile.oldPos[i] + Projectile.Size / 2, Projectile.scale, Projectile.oldRot[i]);
+                for (int i = 0; i < trailLength; i++)
+                {
+                    drawHammer(lightColor * ((trailLength - i) / (float)trailLength) * 0.4f, tex, Projectile.oldPos[i] + Projectile.Size / 2, Projectile.scale, Projectile.oldRot[i]);
+                }
             }
             drawHammer(lightColor, tex, Projectile.Center, Projectile.scale, Projectile.rotation);
             return false;

@@ -17,7 +17,7 @@ namespace Terrafirma.Common
         public static ModKeybind nextSpell { get; set; }
         public override void Load()
         {
-            tertiaryAttack = KeybindLoader.RegisterKeybind(Mod, "tertiaryAttack", Keys.C);
+            tertiaryAttack = KeybindLoader.RegisterKeybind(Mod, "tertiaryAttack", "Mouse3");
             previousSpell = KeybindLoader.RegisterKeybind(Mod, "previousSpell", Keys.Z);
             nextSpell = KeybindLoader.RegisterKeybind(Mod, "nextSpell", Keys.X);
         }
