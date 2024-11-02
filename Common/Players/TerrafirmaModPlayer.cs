@@ -16,6 +16,7 @@ using Terrafirma.Projectiles.Melee.Knight;
 using Microsoft.Xna.Framework.Input;
 using Terrafirma.Systems.Trees;
 using Terrafirma.Items.Equipment;
+using Terraria.DataStructures;
 
 
 namespace Terrafirma.Common.Players
@@ -199,13 +200,23 @@ namespace Terrafirma.Common.Players
                 SpellSideMenu = false;
             }
 
-            if (Main.keyState.IsKeyDown(Keys.P))
+            //if (Main.keyState.IsKeyDown(Keys.P))
+            //{
+            //    Tile tree = Main.tile[(short)(Main.MouseWorld.X / 16), (short)(Main.MouseWorld.Y / 16)];
+            //    tree.HasTile = true;
+            //    tree.TileType = (ushort)ModContent.TileType<ModTree_Terrafirma>();
+            //}
+            if (Keybinds.tertiaryAttack.JustPressed)
             {
-                Tile tree = Main.tile[(short)(Main.MouseWorld.X / 16), (short)(Main.MouseWorld.Y / 16)];
-                tree.HasTile = true;
-                tree.TileType = (ushort)ModContent.TileType<ModTree_Terrafirma>();
+                if (Player.HeldItem.ModItem is IHasTertriaryFunction t && !Player.ItemAnimationActive)
+                {
+                    Item i = Player.HeldItem;
+                    Player.ApplyItemAnimation(Player.HeldItem);
+                    Player.ApplyItemTime(Player.HeldItem);
+                    SoundEngine.PlaySound(i.UseSound, Player.Center);
+                    t.TertriaryShoot(Player,Player.GetSource_ItemUse_WithPotentialAmmo(i,Player.ChooseAmmo(i).type) as EntitySource_ItemUse_WithAmmo,Player.Center,Player.Center.DirectionTo(Main.MouseWorld) * i.shootSpeed, i.shoot,Player.GetWeaponDamage(i), Player.GetWeaponKnockback(i));
+                }
             }
-
         }
         public override bool CanUseItem(Item item)
         {

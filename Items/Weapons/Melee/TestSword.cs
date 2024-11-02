@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Terrafirma.Common.Interfaces;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Items.Materials;
 using Terrafirma.Projectiles.Melee;
@@ -10,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Weapons.Melee
 {
-    public class TestSword : ModItem
+    public class TestSword : ModItem, IHasTertriaryFunction
     {
         public override void SetDefaults()
         {
@@ -35,6 +36,10 @@ namespace Terrafirma.Items.Weapons.Melee
         {
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
+        }
+        public void TertriaryShoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
         }
     }
     public class TestSwordProj : MeleeSlice
