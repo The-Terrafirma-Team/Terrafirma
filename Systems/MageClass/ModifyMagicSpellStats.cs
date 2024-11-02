@@ -16,35 +16,40 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void SetDefaults(Item entity)
         {
-            if (entity.GetGlobalItem<GlobalItemInstanced>().Spell != null) entity.Spell().SetDefaults(entity);
+            if (entity.Spell() != null) entity.Spell().SetDefaults(entity);
         }
 
+        public override bool? CanAutoReuseItem(Item item, Player player)
+        {
+            if (item.Spell() != null) return item.Spell().CanAutoReuse();
+            return base.CanAutoReuseItem(item, player);
+        }
         public override void UpdateInventory(Item item, Player player)
         {
 
-            if (Main.mouseRight && item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.OnRightClick(item, player);
+            if (Main.mouseRight && item.Spell() != null) item.Spell().OnRightClick(item, player);
 
-            if (player.channel && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && !item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            if (player.channel && item.Spell() != null && !item.Spell().LeftMouseSwitch)
             {
-                item.GetGlobalItem<GlobalItemInstanced>().Spell.OnLeftMousePressed(item, player);
-                item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch = true;
+                item.Spell().OnLeftMousePressed(item, player);
+                item.Spell().LeftMouseSwitch = true;
             }
-            else if (player.channel && item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+            else if (player.channel && item.Spell() != null && item.Spell().LeftMouseSwitch)
             {
-                item.GetGlobalItem<GlobalItemInstanced>().Spell.UpdateLeftMouse(item, player);
+                item.Spell().UpdateLeftMouse(item, player);
             }
             else
             {
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null && item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch)
+                if (item.Spell() != null && item.Spell().LeftMouseSwitch)
                 {
-                    item.GetGlobalItem<GlobalItemInstanced>().Spell.OnLeftMouseReleased(item, player);
-                    item.GetGlobalItem<GlobalItemInstanced>().Spell.LeftMouseSwitch = false;
+                    item.Spell().OnLeftMouseReleased(item, player);
+                    item.Spell().LeftMouseSwitch = false;
                 }
             }
 
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null) item.GetGlobalItem<GlobalItemInstanced>().Spell.Update(item, player);
+            if (item.Spell() != null) item.Spell().Update(item, player);
 
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell == null && SpellID.itemcatalogue.ContainsKey(item.type))
+            if (item.Spell() == null && SpellID.itemcatalogue.ContainsKey(item.type))
             {
                 item.GetGlobalItem<GlobalItemInstanced>().Spell = SpellID.itemcatalogue[item.type][0];
             }
@@ -54,27 +59,27 @@ namespace Terrafirma.Systems.MageClass
         public override bool CanUseItem(Item item, Player player)
         {
 
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (item.Spell() != null)
             {
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.CanUseItem(item, player) == true) return true;
-                else if (item.GetGlobalItem<GlobalItemInstanced>().Spell.CanUseItem(item, player) == false) return false;
+                if (item.Spell().CanUseItem(item, player) == true) return true;
+                else if (item.Spell().CanUseItem(item, player) == false) return false;
             }
             return base.CanUseItem(item, player);
         }
         public override bool? UseItem(Item item, Player player)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (item.Spell() != null)
             {
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseItem(item, player) == true) return true;
-                else if (item.GetGlobalItem<GlobalItemInstanced>().Spell.UseItem(item, player) == false) return false;
+                if (item.Spell().UseItem(item, player) == true) return true;
+                else if (item.Spell().UseItem(item, player) == false) return false;
             }
             return base.UseItem(item, player);
         }
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (item.Spell() != null)
             {
-                if (item.GetGlobalItem<GlobalItemInstanced>().Spell.Shoot(player, source, position, velocity, type, damage, knockback) == true) item.GetGlobalItem<GlobalItemInstanced>().Spell.Shoot(player, source, position, velocity, type, damage, knockback);
+                if (item.Spell().Shoot(player, source, position, velocity, type, damage, knockback) == true) item.Spell().Shoot(player, source, position, velocity, type, damage, knockback);
                 else return false;
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
@@ -88,9 +93,9 @@ namespace Terrafirma.Systems.MageClass
         public override float UseAnimationMultiplier(Item item)
         {
             float returnanimation = -1f;
-            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.Spell() != null)
             {
-                returnanimation = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseAnimation / (float)item.useAnimation : -1f;
+                returnanimation = item.Spell().UseAnimation > 0 ? item.Spell().UseAnimation / (float)item.useAnimation : -1f;
             }
             return returnanimation == -1f? base.UseAnimationMultiplier(item) : returnanimation;
         }
@@ -98,18 +103,18 @@ namespace Terrafirma.Systems.MageClass
         public override float UseTimeMultiplier(Item item)
         {
             float returntime = -1f;
-            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.Spell() != null)
             {
-                returntime = item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.UseTime / (float)item.useTime : -1f;
+                returntime = item.Spell().UseTime > 0 ? item.Spell().UseTime / (float)item.useTime : -1f;
             }
             return returntime == -1f ? base.UseTimeMultiplier(item) : returntime;
         }
 
         public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
         {
-            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.GetGlobalItem<GlobalItemInstanced>().Spell != null)
+            if (SpellID.itemcatalogue.ContainsKey(item.type) && item.Spell() != null)
             {
-                mult = item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost > 0 ? item.GetGlobalItem<GlobalItemInstanced>().Spell.ManaCost / (float)item.mana : 1f;
+                mult = item.Spell().ManaCost > 0 ? item.Spell().ManaCost / (float)item.mana : 1f;
             }
             base.ModifyManaCost(item, ref reduce, ref mult);
         }

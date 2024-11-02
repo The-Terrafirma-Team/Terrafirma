@@ -98,7 +98,7 @@ namespace Terrafirma.Systems.MageClass
             Title.HAlign = 0.5f;
             Title.Top.Set(30, 0);
 
-            Description = new UIText("", 1.2f, false);
+            Description = new UIText("", 0.55f, true);
             Description.SetText("");
             Description.HAlign = 0.5f;
             Description.Top.Set(0, 0);

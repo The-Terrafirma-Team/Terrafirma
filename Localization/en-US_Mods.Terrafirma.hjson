@@ -1425,6 +1425,8 @@ Projectiles: {
 	AcuteCanine.DisplayName: Acute Canine
 	DarkenedDiamond.DisplayName: Darkened Diamond
 	TestBow.DisplayName: Test Bow
+	LeecherOrbProj.DisplayName: Leecher Orb Proj
+	PenetratingSigilProj.DisplayName: Penetrating Sigil Proj
 }
 
 Tiles: {
@@ -1585,11 +1587,7 @@ Spells: {
 
 	IceBoulderSpell: {
 		Name: Ice Boulder
-		Description:
-			'''
-			Summons a falling ice boulder that stuns hit enemies for a while
-			Hold left mouse to increase the boulder's size and damage
-			'''
+		Description: Channels a falling ice boulder that stuns hit enemies for a while
 	}
 
 	IchorBubble: {
@@ -1724,12 +1722,12 @@ Spells: {
 
 	DemonScythe: {
 		Name: Demon Scythe
-		Description: ""
+		Description: Casts an accelerating demon scythe
 	}
 
 	TraitorsDagger: {
 		Name: Traitors Dagger
-		Description: ""
+		Description: Shoots freezing daggers
 	}
 
 	LaserBlast: {
@@ -1774,12 +1772,22 @@ Spells: {
 
 	NimbleFeet: {
 		Name: Nimble Feet
-		Description: ""
+		Description: Speeds you up
 	}
 
 	WeatherPain: {
 		Name: Weather Pain
-		Description: ""
+		Description: Summons a magic tornado
+	}
+
+	LeecherOrb: {
+		Name: Leecher Orb
+		Description: Summons a magical orb that leeches mana and deals damage to nearby enemies
+	}
+
+	PenetratingSigil: {
+		Name: Penetrating Sigil
+		Description: Projectiles inside pierce infinitely
 	}
 }
 

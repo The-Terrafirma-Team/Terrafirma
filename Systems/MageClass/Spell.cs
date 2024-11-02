@@ -125,6 +125,11 @@ namespace Terrafirma.Systems.MageClass
         {
             return true;
         }
+
+        public virtual bool CanAutoReuse()
+        {
+            return true;
+        }
         protected override void Register()
         {
             ModTypeLookup<Spell>.Register(this);
