@@ -143,6 +143,11 @@ Buffs: {
 		DisplayName: Thrower Bleeding
 		Description: Mods.Terrafirma.Buffs.ThrowerBleeding.Description
 	}
+
+	ManaPotionSickness: {
+		DisplayName: Mana Potion Sickness
+		Description: Mods.Terrafirma.Buffs.ManaPotionSickness.Description
+	}
 }
 
 Items: {

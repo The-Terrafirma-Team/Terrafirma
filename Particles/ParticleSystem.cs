@@ -63,9 +63,8 @@ namespace Terrafirma.Particles
         {
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-
+            List<Particle> postParticles = new List<Particle>();
             SpriteBatch spriteBatch = Main.spriteBatch;
-            bool postDraw = false;
             for (int i = 0; i < PreTileParticles.Count; i++)
             {
                 Particle particle = PreTileParticles[i];
@@ -73,19 +72,18 @@ namespace Terrafirma.Particles
                 {
                     if (particle.HasPartsDrawnAfterOtherParticles)
                     {
-                        postDraw = true;
+                        postParticles.Add(particle);
                     }
                     particle.Draw(spriteBatch);
                 }
             }
-            if (postDraw)
+            for (int i = 0; i < postParticles.Count; i++)
             {
-                for (int i = 0; i < PreTileParticles.Count; i++)
-                {
-                    Particle particle = PreTileParticles[i];
-                    particle.DrawAfter(spriteBatch);
-                }
+                Particle particle = postParticles[i];
+                particle.DrawAfter(spriteBatch);
             }
+            postParticles.Clear();
+
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
         }
@@ -93,8 +91,8 @@ namespace Terrafirma.Particles
         {
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
+            List<Particle> postParticles = new List<Particle>();
             SpriteBatch spriteBatch = Main.spriteBatch;
-            bool postDraw = false;
             for (int i = 0; i < Particles.Count; i++)
             {
                 Particle particle = Particles[i];
@@ -102,19 +100,17 @@ namespace Terrafirma.Particles
                 {
                     if (particle.HasPartsDrawnAfterOtherParticles)
                     {
-                        postDraw = true;
+                        postParticles.Add(particle);
                     }
                     particle.Draw(spriteBatch);
                 }
             }
-            if (postDraw)
+            for (int i = 0; i < postParticles.Count; i++)
             {
-                for (int i = 0; i < Particles.Count; i++)
-                {
-                    Particle particle = Particles[i];
-                    particle.DrawAfter(spriteBatch);
-                }
+                Particle particle = postParticles[i];
+                particle.DrawAfter(spriteBatch);
             }
+            postParticles.Clear();
             Main.spriteBatch.End();
         }
         public override void PostUpdateDusts()

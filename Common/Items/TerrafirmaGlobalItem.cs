@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Players;
 using Terrafirma.Data;
 using Terrafirma.Particles;
@@ -108,6 +109,11 @@ namespace Terrafirma.Common.Items
                 player.direction = -Math.Sign(player.Center.X - Main.MouseWorld.X);
             }
             player.PlayerStats().TimesHeldWeaponHasBeenSwung++;
+
+            if(item.healMana > 0)
+            {
+                player.AddBuff(ModContent.BuffType<ManaPotionSickness>(), 3600);
+            }
 
             return base.UseItem(item, player);
         }

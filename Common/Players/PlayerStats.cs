@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.IO;
+using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Templates;
 using Terrafirma.Data;
 using Terraria;
@@ -16,7 +17,6 @@ namespace Terrafirma.Common.Players
         {
             On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
         }
-
         private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
         {
             if (Main.debuff[type] && !BuffID.Sets.NurseCannotRemoveDebuff[type])
@@ -36,6 +36,7 @@ namespace Terrafirma.Common.Players
 
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
+        public bool ManaPotionSickness = false;
 
         public float FeralCharge;
         public float FeralChargeMax;
@@ -79,6 +80,7 @@ namespace Terrafirma.Common.Players
         public bool LeftMouse = false;
         public override void ResetEffects()
         {
+            ManaPotionSickness = false;
             HealingMultiplier = 1f;
             BowChargeTimeMultipler = 1f;
             ThrowerVelocity = 1f;
@@ -221,6 +223,12 @@ namespace Terrafirma.Common.Players
             {
                 velocity *= ThrowerVelocity;
             }
+        }
+        public override bool CanUseItem(Item item)
+        {
+            if (ManaPotionSickness && item.healMana > 0)
+                return false;
+            return base.CanUseItem(item);
         }
     }
 
