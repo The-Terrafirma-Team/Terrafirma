@@ -43,7 +43,7 @@ namespace Terrafirma.Common.Players
             vector.Y += player.gfxOffY;
             return new Vector2(vector.X * player.direction, vector.Y * player.gravDir);
         }
-        public static bool LegFrameIsOneThatRaisesTheBody(this Player player)
+        public static bool CurrentLegFrameIsOneThatRaisesTheBody(this Player player)
         {
             return player.bodyFrame.Y >= 392 && player.bodyFrame.Y < 560 || player.bodyFrame.Y >= 784 && player.bodyFrame.Y < 952;
         }

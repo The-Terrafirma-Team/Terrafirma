@@ -1,6 +1,7 @@
 ﻿//using Microsoft.Xna.Framework;
 //using System;
 //using Terrafirma.Common;
+//using Terrafirma.Common.Players;
 //using Terrafirma.Items.Materials;
 //using Terraria;
 //using Terraria.DataStructures;
@@ -26,12 +27,14 @@
 //        public override void UpdateEquip(Player player)
 //        {
 //            player.statManaMax2 += 40;
-//            player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
+//            player.PlayerStats().MagicFlatDamage += 1;
 //        }
 //        public override void UpdateArmorSet(Player player)
 //        {
 //            Lighting.AddLight(player.Center, new Vector3(0, 0.2f, 0));
 //            player.GetModPlayer<MahoganyShamanPlayer>().active = true;
+//            player.maxMinions += 1;
+//            player.statManaMax2 += 80;
 //            player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.MahoganyShamanMask.SetBonus");
 //        }
 //        public override void UpdateVanitySet(Player player)
@@ -39,7 +42,7 @@
 //            player.GetModPlayer<PlayerDrawEffects>().SineDarken = true;
 //            for (int i = 0; i < 2; i++)
 //            {
-//                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 + i*6) * player.direction, -10 + player.gfxOffY + (player.LegFrameIsOneThatRaisesTheBody() ? -2 : 0) * player.gravDir).RotatedBy(player.fullRotation), DustID.GemEmerald);
+//                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 + i * 6) * player.direction, -10 + player.gfxOffY + (player.CurrentLegFrameIsOneThatRaisesTheBody() ? -2 : 0) * player.gravDir).RotatedBy(player.fullRotation), DustID.GemEmerald);
 //                d.scale = 0.6f;
 //                d.velocity = Vector2.Zero;
 //                d.alpha = 128;
@@ -51,7 +54,6 @@
 //        {
 //            return body.type == ModContent.ItemType<MahoganyShamanBody>() && legs.type == ModContent.ItemType<MahoganyShamanLegs>();
 //        }
-
 //        public override void AddRecipes()
 //        {
 //            Recipe recipe = Recipe.Create(Type)
@@ -73,9 +75,8 @@
 //        public override void UpdateEquip(Player player)
 //        {
 //            player.GetDamage(DamageClass.Summon) += 0.1f;
-//            player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
+//            player.GetDamage(DamageClass.Magic) += 0.1f;
 //        }
-
 //        public override void AddRecipes()
 //        {
 //            Recipe recipe = Recipe.Create(Type)
@@ -97,9 +98,7 @@
 //        public override void UpdateEquip(Player player)
 //        {
 //            player.moveSpeed += 0.10f;
-//            player.PlayerStats().SwarmSpeedMultiplier += 0.05f;
 //        }
-
 //        public override void AddRecipes()
 //        {
 //            Recipe recipe = Recipe.Create(Type)

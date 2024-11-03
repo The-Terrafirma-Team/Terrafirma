@@ -64,6 +64,10 @@ namespace Terrafirma.Common.Items
                 case ItemID.IceRod:
                     Item.staff[item.type] = true;
                     break;
+                case ItemID.EngineeringHelmet:
+                    item.vanity = false;
+                    item.defense = 4;
+                    break;
             }
         }
 
@@ -79,7 +83,7 @@ namespace Terrafirma.Common.Items
             switch (item.type)
             {
                 case ItemID.FeralClaws:
-                    if(stats.FeralChargeMax < 3)
+                    if (stats.FeralChargeMax < 3)
                         stats.FeralChargeMax = 3;
                     break;
                 case ItemID.PowerGlove:
@@ -99,6 +103,11 @@ namespace Terrafirma.Common.Items
                         stats.FeralChargeSpeed = PlayerStats.defaultFeralChargeSpeed * 1.3f;
                     if (stats.FeralChargeMax < 7)
                         stats.FeralChargeMax = 7;
+                    break;
+                case ItemID.EngineeringHelmet:
+                    player.PlayerStats().SentrySpeedMultiplier += 0.1f;
+                    player.PlayerStats().SentryDamageMultiplier += 0.05f;
+                    player.maxTurrets += 1;
                     break;
             }
         }
@@ -125,6 +134,20 @@ namespace Terrafirma.Common.Items
                 {
                     tooltips[i].Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Main.LocalPlayer.PlayerStats().HealingMultiplier * Main.LocalPlayer.PlayerStats().PotionHealingMultiplier));
                 }
+            }
+            switch (item.type)
+            {
+                case ItemID.LivingCursedFireBlock:
+                case ItemID.LivingDemonFireBlock:
+                case ItemID.LivingFireBlock:
+                case ItemID.LivingFrostFireBlock:
+                case ItemID.LivingIchorBlock:
+                case ItemID.LivingUltrabrightFireBlock:
+                    tooltips.Add(new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.LivingFireBlock")));
+                    break;
+                case ItemID.EngineeringHelmet:
+                    tooltips.Add(new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.EngineeringHelmet")));
+                    break;
             }
         }
         public override void GetHealLife(Item item, Player player, bool quickHeal, ref int healValue)

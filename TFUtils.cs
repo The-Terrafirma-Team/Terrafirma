@@ -26,6 +26,10 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static bool CanUseDash(this Player player)
+        {
+            return player.dashType == DashID.None && !player.setSolar && !player.mount.Active;
+        }
         public static void SendImportantStatusMessage(string Key, Color color)
         {
             if (Main.netMode == NetmodeID.SinglePlayer)

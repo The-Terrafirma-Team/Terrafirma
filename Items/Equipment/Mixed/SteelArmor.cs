@@ -70,7 +70,7 @@ namespace Terrafirma.Items.Equipment.Mixed
             Vector2 position = drawInfo.Center - Main.screenPosition;
             position = new Vector2((int)position.X, (int)position.Y);
 
-            position -= new Vector2(7 * drawInfo.drawPlayer.direction, 21 + (drawInfo.drawPlayer.LegFrameIsOneThatRaisesTheBody() ? 2 : 0));
+            position -= new Vector2(7 * drawInfo.drawPlayer.direction, 21 + (drawInfo.drawPlayer.CurrentLegFrameIsOneThatRaisesTheBody() ? 2 : 0));
 
             int frame = 0;
 

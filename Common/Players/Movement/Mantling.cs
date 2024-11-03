@@ -53,6 +53,9 @@ namespace Terrafirma.Common.Players.Movement
         }
         public override void PostUpdateEquips()
         {
+            if (!(PlayerInput.Triggers.Current.Right && MantleDirection == 1) && !(PlayerInput.Triggers.Current.Left && MantleDirection == -1))
+                return;
+
             Point worldPos = Player.Center.ToTileCoordinates();
             if (Player.grapCount == 0 && (WorldGen.SolidTile(worldPos.X + Player.direction, worldPos.Y - (int)(Player.gravDir * 1)) || WorldGen.SolidTile(worldPos.X + Player.direction, worldPos.Y)) && !WorldGen.SolidTile(worldPos.X + Player.direction, worldPos.Y - (int)(Player.gravDir * 2f)))
             {

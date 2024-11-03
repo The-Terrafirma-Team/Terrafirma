@@ -953,7 +953,7 @@ Items: {
 
 	EngineeringForDummies: {
 		DisplayName: Engineering For Dummies
-		Tooltip: Increase your max number of sentries by 1
+		Tooltip: Increases your max number of sentries by 1
 	}
 
 	HellfireGargoyleStaff: {
@@ -1918,6 +1918,11 @@ VanillaSetBonus: {
 		+3 defense
 		Enemies killed will drop more money
 		'''
+	Ninja:
+		'''
+		Allows the ability to dash
+		Double tap a direction
+		'''
 }
 
 Misc: {
@@ -1927,6 +1932,15 @@ Misc: {
 	AccuracyPrefix: % accuracy
 	MaxLifePrefix: "{0} max life"
 	LifeRegenPrefix: "{0} life regeneration"
+}
+
+VanillaItemTooltips: {
+	LivingFireBlock: Arrows that pass through are lit ablaze
+	EngineeringHelmet:
+		'''
+		Increases sentry attack speed by 10% and damage by 5%
+		Increases your max number of sentries by 1
+		'''
 }
 
 Prefixes: {
