@@ -57,8 +57,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
             int projectileVomit = (int)(Projectile.ai[1] / 66);
             if (Main.player[Projectile.owner] == Main.LocalPlayer)
             {
-                PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 8 * Projectile.ai[1] / 100, 10, 20, -1);
-                Main.instance.CameraModifiers.Add(modifier);
+                if (Terrafirma.ScreenshakeEnabled)
+                {
+                    PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 8 * Projectile.ai[1] / 100, 10, 20, -1);
+                    Main.instance.CameraModifiers.Add(modifier);
+                }
                 for (int i = -projectileVomit; i <= projectileVomit; i++)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(Projectile.ai[1] / 20 * Main.rand.NextFloat(0.4f, 1f)).RotatedBy(Projectile.rotation - MathHelper.PiOver2 + Main.rand.NextFloat(0.2f)).RotatedBy(MathHelper.Pi / 8 * i), ModContent.ProjectileType<EruptionFloatProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);

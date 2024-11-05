@@ -21,11 +21,38 @@ using System.Reflection;
 using Terrafirma.Common.NPCs;
 using Terraria.Chat;
 using Terraria.Localization;
+using System.Collections.Generic;
+using Terraria.GameInput;
 
 namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void ApplyRightAndMiddleClickFormattingToTooltip(List<TooltipLine> tooltips, LocalizedText Tooltip)
+        {
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
+                {
+                    tooltips[i].Text = Tooltip.WithFormatArgs([TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight")), TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault())]).Value;
+                    tooltips.RemoveAt(i + 1);
+                    break;
+                }
+            }
+        }
+        public static string NicenUpKeybindNameIfApplicable(string name)
+        {
+            switch (name)
+            {
+                case "Mouse1":
+                    return Language.GetText("Mods.Terrafirma.KeybindReplacements.Mouse1").Value;
+                case "Mouse2":
+                    return Language.GetText("Mods.Terrafirma.KeybindReplacements.Mouse2").Value;
+                case "Mouse3":
+                    return Language.GetText("Mods.Terrafirma.KeybindReplacements.Mouse3").Value;
+            }
+            return name;
+        }
         public static bool CanUseDash(this Player player)
         {
             return player.dashType == DashID.None && !player.setSolar && !player.mount.Active;

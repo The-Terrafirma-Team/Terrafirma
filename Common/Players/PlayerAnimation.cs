@@ -79,7 +79,7 @@ namespace Terrafirma.Common.Players
         }
         public static void gunStyle(Player player, float rotation = 0.1f, float backwardsMovement = 3f, float screenshakeIntensity = 0f)
         {
-            if (player.ItemAnimationJustStarted && screenshakeIntensity != 0 && player.whoAmI == Main.myPlayer)
+            if (Terrafirma.ScreenshakeEnabled && player.ItemAnimationJustStarted && screenshakeIntensity != 0 && player.whoAmI == Main.myPlayer)
             {
                 PunchCameraModifier modifier = new PunchCameraModifier(player.MountedCenter, new Vector2(Main.rand.NextFloat(-1.5f, -0.7f), 0).RotatedBy(player.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f)), screenshakeIntensity, 6f, 8, 200f, player.name);
                 Main.instance.CameraModifiers.Add(modifier);

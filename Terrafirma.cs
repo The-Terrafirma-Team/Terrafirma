@@ -22,6 +22,7 @@ namespace Terrafirma
         {
             get { return Main.setKey == 1 ? "UP" : "DOWN"; }
         }
+        public static bool ScreenshakeEnabled { get => ModContent.GetInstance<ClientConfig>().EnableScreenshake; }
         public static Terrafirma Mod { get; private set; } = ModContent.GetInstance<Terrafirma>();
         public const string AssetPath = "Terrafirma/Assets/";
         public static Asset<Texture2D> QuestButtonBG;

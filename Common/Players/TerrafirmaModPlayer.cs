@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Input;
 using Terrafirma.Systems.Trees;
 using Terrafirma.Items.Equipment;
 using Terraria.DataStructures;
+using Terrafirma.Common.Templates.Melee;
 
 
 namespace Terrafirma.Common.Players

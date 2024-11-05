@@ -30,5 +30,11 @@ namespace Terrafirma.Common
         [Range(0, 1)]
         [DefaultValue(0)]
         public int MeleeDamageMultiplier;
+
+        [Header("$Mods.Terrafirma.Configs.ClientConfig.Accessibility")]
+
+        [Range(0, MaxSpellBorders - 1)]
+        [DefaultValue(true)]
+        public bool EnableScreenshake;
     }
 }

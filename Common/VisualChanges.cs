@@ -23,6 +23,13 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "BalloonSlime");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Ninja");
+            // Armor
+            TextureAssets.Item[ItemID.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "NecroHelmet");
+            TextureAssets.Item[ItemID.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "NecroChest");
+            TextureAssets.Item[ItemID.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "NecroLegs");
+            TextureAssets.ArmorHead[ArmorIDs.Head.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "NecroHelmet_Head");
+            TextureAssets.ArmorBodyComposite[ArmorIDs.Body.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "NecroChest_Body");
+            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "NecroLegs_Legs");
         }
         public override void Unload()
         {
@@ -34,6 +41,13 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
+            // Armor
+            TextureAssets.Item[ItemID.NecroHelmet] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.NecroHelmet}");
+            TextureAssets.Item[ItemID.NecroBreastplate] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.NecroBreastplate}");
+            TextureAssets.Item[ItemID.NecroGreaves] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.NecroGreaves}");
+            TextureAssets.ArmorHead[ArmorIDs.Head.NecroHelmet] = ModContent.Request<Texture2D>($"Terraria/Images/Armor_Head_{ArmorIDs.Head.NecroHelmet}");
+            TextureAssets.ArmorBodyComposite[ArmorIDs.Body.NecroBreastplate] = ModContent.Request<Texture2D>($"Terraria/Images/Armor/Armor_{ArmorIDs.Body.NecroBreastplate}");
+            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>($"Terraria/Images/Armor_Legs{ArmorIDs.Legs.NecroGreaves}");
         }
     }
     public class VanillaNPCSpriteChanges : GlobalNPC

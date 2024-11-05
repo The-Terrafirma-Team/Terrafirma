@@ -3,8 +3,10 @@ using System;
 using System.IO;
 using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Templates;
+using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,6 +35,8 @@ namespace Terrafirma.Common.Players
         Item lastHeldItem = null;
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
+        public int ParryProjectile = -1;
+        public bool TurnOffDownwardsMovementRestrictions = false;
 
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
@@ -41,6 +45,9 @@ namespace Terrafirma.Common.Players
         public float FeralCharge;
         public float FeralChargeMax;
         public float FeralChargeSpeed;
+        public float MeleeWeaponScale = 0;
+        public float ParryBuffDurationMultiplier = 1f;
+        public float ParryImmunityDurationMultiplier = 1f;
 
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
@@ -50,7 +57,6 @@ namespace Terrafirma.Common.Players
 
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
-        public float MeleeWeaponScale = 0;
         public float DebuffTimeMultiplier = 1f;
         public float buffTimeMultiplier = 1f;
         public float NecromancerWeaponScale = 0;
@@ -84,6 +90,15 @@ namespace Terrafirma.Common.Players
         public float maxRunSpeedFlat = 0f;
         public override void ResetEffects()
         {
+            if (TurnOffDownwardsMovementRestrictions)
+            {
+                Player.maxFallSpeed = 1000;
+            }
+            TurnOffDownwardsMovementRestrictions = false;
+
+            if (ParryProjectile >= 0 && !Main.projectile[ParryProjectile].active)
+                ParryProjectile = -1;
+
             ManaPotionSickness = false;
             HealingMultiplier = 1f;
             BowChargeTimeMultipler = 1f;
@@ -244,6 +259,41 @@ namespace Terrafirma.Common.Players
                 return false;
             return base.CanUseItem(item);
         }
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            if (ParryProjectile == -1)
+                return false;
+            Entity e;
+            info.DamageSource.TryGetCausingEntity(out e);
+
+            if (Main.projectile[ParryProjectile].ModProjectile is MeleeParry p && e.Hitbox.Intersects(Main.projectile[ParryProjectile].Hitbox))
+            {
+                if (e is NPC npc)
+                    p.OnParryNPC(npc, Player);
+                else if (e is Projectile proj)
+                    p.OnParryProjectile(proj, Player);
+                return true;
+            }
+            return base.FreeDodge(info);
+        }
+        //public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
+        //{
+        //    if (ParryProjectile == -1)
+        //        return;
+        //    if (Main.projectile[ParryProjectile].ModProjectile is MeleeParry p && npc.Hitbox.Intersects(Main.projectile[ParryProjectile].Hitbox))
+        //    {
+        //        p.OnParryNPC(npc);
+        //    }
+        //}
+        //public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+        //{
+        //    if (ParryProjectile == -1)
+        //        return;
+        //    if (Main.projectile[ParryProjectile].ModProjectile is MeleeParry p && proj.Hitbox.Intersects(Main.projectile[ParryProjectile].Hitbox))
+        //    {
+        //        p.OnParryProjectile(proj);
+        //    }
+        //}
     }
 
     public static class PlayerMethods

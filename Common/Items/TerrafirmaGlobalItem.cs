@@ -133,6 +133,7 @@ namespace Terrafirma.Common.Items
                 if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("HealLife"))
                 {
                     tooltips[i].Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Main.LocalPlayer.PlayerStats().HealingMultiplier * Main.LocalPlayer.PlayerStats().PotionHealingMultiplier));
+                    break;
                 }
             }
             switch (item.type)

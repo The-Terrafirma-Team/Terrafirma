@@ -148,6 +148,11 @@ Buffs: {
 		DisplayName: Mana Potion Sickness
 		Description: Cannot consume anymore mana restoring items
 	}
+
+	GoldKnucklesParry: {
+		DisplayName: Gold Knuckles Parry
+		Description: Mods.Terrafirma.Buffs.GoldKnucklesParry.Description
+	}
 }
 
 Items: {
@@ -1253,6 +1258,24 @@ Items: {
 			Decreases debuff duration by 20%
 			'''
 	}
+
+	GoldKnuckles: {
+		DisplayName: Gold Knuckles
+		Tooltip:
+			'''
+			{0} to parry
+			{1} to do a charged punch
+			'''
+	}
+
+	PlatinumKnuckles: {
+		DisplayName: Platinum Knuckles
+		Tooltip:
+			'''
+			{0} to parry
+			{1} to do a charged punch
+			'''
+	}
 }
 
 Projectiles: {
@@ -1427,6 +1450,10 @@ Projectiles: {
 	TestBow.DisplayName: Test Bow
 	LeecherOrbProj.DisplayName: Leecher Orb Proj
 	PenetratingSigilProj.DisplayName: Penetrating Sigil Proj
+	GoldKnuckles.DisplayName: Gold Knuckles
+	GoldKnucklesPunch.DisplayName: Gold Knuckles Punch
+	GoldKnucklesParry.DisplayName: Gold Knuckles Parry
+	GoldKnucklesDash.DisplayName: Gold Knuckles Dash
 }
 
 Tiles: {
@@ -1802,7 +1829,11 @@ NPCs: {
 Configs: {
 	ClientConfig: {
 		DisplayName: Client Config
-		Headers.SpellVisuals: Spell Visuals
+
+		Headers: {
+			SpellVisuals: UI
+			Accessibility: Accessibility
+		}
 
 		SpellR: {
 			Label: Spell Selection Wheel R
@@ -1848,6 +1879,12 @@ Configs: {
 		}
 
 		SpellVisuals: Spell Border Header
+		Accessibility: Enable Screenshake Header
+
+		EnableScreenshake: {
+			Label: Enable Screenshake
+			Tooltip: ""
+		}
 	}
 }
 
@@ -1893,6 +1930,12 @@ Keybinds: {
 	tertiaryAttack.DisplayName: Tertiary Attack
 	previousSpell.DisplayName: previous Spell
 	nextSpell.DisplayName: next Spell
+}
+
+KeybindReplacements: {
+	Mouse1: Left Click
+	Mouse2: Right Click
+	Mouse3: Middle Click
 }
 
 VanillaSetBonus: {
