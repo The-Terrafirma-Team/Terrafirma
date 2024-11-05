@@ -58,6 +58,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         private Color selectionColor = Color.White;
         private float selectionScale = 1f;
         private bool open = false;
+        private bool snapSwitch = false;
+        private bool holdSwitch = false;
+        private bool insideSwitch = false;
 
         public abstract ref Vector2 SetPos { get; }
 
@@ -164,12 +167,13 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
 
         public override void Update(GameTime gameTime)
         {
-            MinHeight.Set(Main.screenHeight * (screenScale / maxScreenScale) + 20 + (maxScreenOffset.Y * (screenScale / maxScreenScale)), 0);
+            MinHeight.Set(Main.screenHeight * screenScale + 20 + (maxScreenOffset.Y * (screenScale / maxScreenScale)), 0);
 
-            //if Mouse is inside element and also holding
-            if (Main.mouseLeft && uiBounds.Contains(Main.MouseScreen.ToPoint()))
+            //if Mouse is inside screen and also holding
+            if (Main.mouseLeft && uiBounds.Contains(Main.MouseScreen.ToPoint()) && !holdSwitch)
             {
                 bool snapPointClicked = false;
+                insideSwitch = true;
 
                 for (int i = 0; i < snapPoints.Length; i++)
                 {
@@ -181,11 +185,17 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                         SetPos = (point.percentPoint * uiBounds.Size() + point.setOffset) / screenScale;
                         SetObject((point.percentPoint * uiBounds.Size() + point.setOffset) / screenScale);
                         snapPointClicked = true;
+                        if (!snapSwitch)
+                        {
+                            SoundEngine.PlaySound(SoundID.MenuTick);
+                            snapSwitch = true;
+                        }
                     }
                 }
 
                 if (!snapPointClicked)
                 {
+                    snapSwitch = false;
                     SetPos = (Main.MouseScreen - uiBounds.TopLeft()) / screenScale;
                     SetObject((Main.MouseScreen - uiBounds.TopLeft()) / screenScale);
                 }
@@ -197,7 +207,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             }
 
             //Set SnapPoint Color
-            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()))
+            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) || open)
             {
                 for (int i = 0; i < snapPoints.Length; i++)
                 {
@@ -229,13 +239,24 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             //If mouse is inside element
             if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
             {
+                if (!open) SoundEngine.PlaySound(SoundID.MenuTick);
                 open = true;
-                SoundEngine.PlaySound(SoundID.MenuTick);
             }
             else if (!GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
             {
-                open = false;
-                SoundEngine.PlaySound(SoundID.MenuClose);
+                if (open && !insideSwitch) SoundEngine.PlaySound(SoundID.MenuClose);
+                if(!insideSwitch) open = false;
+                holdSwitch = true;
+            }
+
+            //Hold switch
+            else if (!uiBounds.Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
+            {
+                holdSwitch = true;
+            }
+            if (uiBounds.Contains(Main.MouseScreen.ToPoint()) && !Main.mouseLeft)
+            {
+                holdSwitch = false;
             }
 
             if (open) screenScale = float.Lerp(screenScale, maxScreenScale, 0.2f);
