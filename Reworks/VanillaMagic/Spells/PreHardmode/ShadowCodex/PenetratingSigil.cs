@@ -122,8 +122,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
             Main.EntitySpriteDraw(tex.Value,
                 Projectile.Center - Main.screenPosition,
                 tex.Frame(),
-                new Color(1f, 1f, 1f, 0.5f) * Projectile.Opacity * 0.2f,
-                Projectile.rotation + (float)Math.Sin(Main.timeForVisualEffects / 25f) / 12f,
+                new Color(1f, 1f, 1f, 0.5f) * Projectile.Opacity * 0.4f,
+                Projectile.rotation + (float)Math.Sin(Main.timeForVisualEffects / 15f) / 12f,
                 tex.Size() / 2,
                 Projectile.scale,
                 SpriteEffects.None);

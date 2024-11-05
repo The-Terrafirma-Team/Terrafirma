@@ -1,7 +1,10 @@
-﻿using System;
+﻿using SteelSeries.GameSense;
+using System;
 using System.ComponentModel;
+using Microsoft.Xna.Framework;
 using Terrafirma.Systems;
 using Terraria.ModLoader.Config;
+using Terrafirma.Systems.UIElements.ConfigElements;
 
 namespace Terrafirma.Common
 {
@@ -9,32 +12,36 @@ namespace Terrafirma.Common
     {
         public const int MaxSpellBorders = 9;
         public override ConfigScope Mode => ConfigScope.ClientSide;
-        [Header("$Mods.Terrafirma.Configs.ClientConfig.SpellVisuals")]
 
-        [Range(0, MaxSpellBorders - 1)]
-        [DefaultValue(0)]
-        public int SpellBorder;
+        [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.Gameplay")]
 
-        [Range(12, 255)]
-        [DefaultValue(47)]
-        public byte SpellR;
-
-        [Range(12, 255)]
-        [DefaultValue(215)]
-        public byte SpellG;
-
-        [Range(12, 255)]
-        [DefaultValue(237)]
-        public byte SpellB;
-
+        [DrawTicks]
         [Range(0, 1)]
         [DefaultValue(0)]
         public int MeleeDamageMultiplier;
 
-        [Header("$Mods.Terrafirma.Configs.ClientConfig.Accessibility")]
+        [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.Accessibility")]
 
+        [DrawTicks]
         [Range(0, MaxSpellBorders - 1)]
         [DefaultValue(true)]
         public bool EnableScreenshake;
+
+        [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.UIPosition")]
+
+        [DrawTicks]
+        [Range(0, MaxSpellBorders - 1)]
+        [DefaultValue(0)]
+        public int SpellBorder;
+
+        [DrawTicks]
+        [CustomModConfigItem(typeof(ConfigExtraSpellUIPosition))]
+        [DefaultValue(typeof(Vector2), "1400, 0")]
+        public Vector2 ExtraSpellUiPosition;
+
+        [DrawTicks]
+        [DefaultValue(typeof(Color), "160, 255, 255, 200")]
+        public Color SpellRingUiColor;
+
     }
 }

@@ -150,6 +150,7 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
             for (int i = 0; i < spelliconlist.Length; i++)
             {
                 spelliconlist[i].Left.Pixels = MathHelper.Lerp(spelliconlist[i].Left.Pixels , UIOffset.X + (i - iconshift) * 48, 0.2f);
+                spelliconlist[i].Top.Pixels = UIOffset.Y;
             }
 
             //Spell Title Name
@@ -157,16 +158,19 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
             {
                 Spellname.SetText(selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell.GetSpellName());
                 Spellname.Left.Pixels = UIOffset.X - FontAssets.MouseText.Value.MeasureString(Spellname.Text).X / 2;
+                Spellname.Top.Pixels = UIOffset.Y + 30;
 
                 if (Keybinds.previousSpell.GetAssignedKeys().Count > 0)
                 {
-                    SpellKeyBind1.SetText(Keybinds.previousSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
+                    SpellKeyBind1.SetText(TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.previousSpell.GetAssignedKeys()[0]), Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
                     SpellKeyBind1.Left.Pixels = UIOffset.X - 38 - (FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 2);
+                    SpellKeyBind1.Top.Pixels = UIOffset.Y + 5;
                 }
                 if (Keybinds.nextSpell.GetAssignedKeys().Count > 0)
                 {
-                    SpellKeyBind2.SetText(Keybinds.nextSpell.GetAssignedKeys()[0], Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
+                    SpellKeyBind2.SetText(TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.nextSpell.GetAssignedKeys()[0]), Math.Clamp(1f - FontAssets.MouseText.Value.MeasureString(SpellKeyBind1.Text).X / 200f, 0f, 1f), false);
                     SpellKeyBind2.Left.Pixels = UIOffset.X + 60 - FontAssets.MouseText.Value.MeasureString(SpellKeyBind2.Text).X / 2;
+                    SpellKeyBind2.Top.Pixels = UIOffset.Y + 5;
                 }
             }
 
@@ -174,6 +178,9 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * (Main.ViewSize / new Vector2(1920, 1080)).X * Main.GameZoomTarget,
+                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * (Main.ViewSize / new Vector2(1920, 1080)).Y * Main.GameZoomTarget);
+
             if (!SpellID.itemcatalogue.ContainsKey(selecteditem.type) || selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell == null || spelliconlist.Length == 0) return;
 
             spriteBatch.End();
@@ -186,9 +193,9 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                     for (int i = 0; i < spelliconlist.Length; i++)
                     {
                         Texture2D iconBorder = (Texture2D)ModContent.Request<Texture2D>(Terrafirma.AssetPath + "SpellIconBorders");
-                        Vector2 position = new Vector2(spelliconlist[i].HAlign * Main.screenWidth, spelliconlist[i].VAlign * Main.screenHeight) + new Vector2(spelliconlist[i].Left.Pixels, spelliconlist[i].Top.Pixels);
+                        Vector2 position = new Vector2(spelliconlist[i].HAlign * Main.ViewSize.X, spelliconlist[i].VAlign * Main.ViewSize.Y) + new Vector2(spelliconlist[i].Left.Pixels, spelliconlist[i].Top.Pixels);
                         position.X += (48 * spelliconlist.Length) * k;
-                        float transparencyfloat = 1f - Math.Abs((spelliconlist[i].HAlign * Main.screenWidth + UIOffset.X) - position.X) / 90f;
+                        float transparencyfloat = 1f - Math.Abs((spelliconlist[i].HAlign * Main.ViewSize.X + UIOffset.X) - position.X) / 90f;
 
                         if (transparencyfloat > 0.1f)
                         {

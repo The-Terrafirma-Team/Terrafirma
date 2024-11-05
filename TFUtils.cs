@@ -50,6 +50,28 @@ namespace Terrafirma
                     return Language.GetText("Mods.Terrafirma.KeybindReplacements.Mouse2").Value;
                 case "Mouse3":
                     return Language.GetText("Mods.Terrafirma.KeybindReplacements.Mouse3").Value;
+                case "OemOpenBrackets":
+                    return "[";
+                case "OemCloseBrackets":
+                    return "]";
+                case "OemSemiColon":
+                    return ";";
+                case "OemColon":
+                    return ":";
+                case "OemQuotes":
+                    return "'";
+                case "OemComma":
+                    return ",";
+                case "OemPeriod":
+                    return ".";
+                case "OemQuestion":
+                    return "?";
+                case "OemPipe":
+                    return "/";
+                case "OemPlus":
+                    return "+";
+                case "OemMinus":
+                    return "-";
             }
             return name;
         }

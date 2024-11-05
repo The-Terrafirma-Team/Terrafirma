@@ -1831,7 +1831,9 @@ Configs: {
 		DisplayName: Client Config
 
 		Headers: {
-			SpellVisuals: UI
+			SpellVisuals: Spell UI
+			UIPosition: UI Position
+			Gameplay: Gameplay
 			Accessibility: Accessibility
 		}
 
@@ -1879,6 +1881,73 @@ Configs: {
 		}
 
 		SpellVisuals: Spell Border Header
+
+		test: {
+			Label: test
+			Tooltip: ""
+		}
+
+		ExtraUIPosition: {
+			Label: Extra U I Position
+			Tooltip: ""
+		}
+
+		Accessibility: Enable Screenshake Header
+
+		EnableScreenshake: {
+			Label: Enable Screenshake
+			Tooltip: ""
+		}
+
+		ExtraSpellUIPosition: {
+			Label: Extra Spell U I Position
+			Tooltip: ""
+		}
+
+		ExtraSpellUiPosition: {
+			Label: Extra Spell Ui Position
+			Tooltip: ""
+		}
+
+		ExtraSpellUiPosition2: {
+			Label: Extra Spell Ui Position2
+			Tooltip: ""
+		}
+
+		ExtraSpellUiPosition3: {
+			Label: Extra Spell Ui Position3
+			Tooltip: ""
+		}
+
+		spec: {
+			Label: spec
+			Tooltip: ""
+		}
+
+		SpellUIColor: {
+			Label: Spell U I Color
+			Tooltip: ""
+		}
+
+		SpellRingUiColor: {
+			Label: Spell Ring Ui Color
+			Tooltip: ""
+		}
+	}
+
+	Gradient: {
+		Tooltip: ""
+
+		start: {
+			Label: start
+			Tooltip: ""
+		}
+
+		end: {
+			Label: end
+			Tooltip: ""
+		}
+
 		Accessibility: Enable Screenshake Header
 
 		EnableScreenshake: {
