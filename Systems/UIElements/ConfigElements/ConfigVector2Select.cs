@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using Terrafirma.Common;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.States;
 using Terraria.ID;
@@ -56,21 +57,22 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         private Rectangle uiBounds;
         private Color selectionColor = Color.White;
         private float selectionScale = 1f;
+        private bool open = false;
 
         public abstract ref Vector2 SetPos { get; }
 
         private float screenScale = 0.05f;
         public virtual float minScreenScale => 0.05f;
-        public virtual float maxScreenScale => 0.25f;
+        public virtual float maxScreenScale => 0.276f;
 
-        public virtual Vector2 maxScreenOffset => new Vector2(0, 15);
+        public virtual Vector2 maxScreenOffset => new Vector2(0, 20);
 
         //Add ConfigSnapPoints to this array if you want snapPoints to appear in the config Element
         public ConfigSnapPoint[] snapPoints = new ConfigSnapPoint[] { };        
         public virtual Texture2D selectionTexture => Terrafirma.ExtraSpellUIConfigPosition.Value;
         public ConfigVector2Select()
         {
-            MinHeight.Set(Main.screenHeight * maxScreenScale + 20, 0);
+            MinHeight.Set(Main.screenHeight * maxScreenScale + 20 + maxScreenOffset.Y, 0);
             snapPoints = new ConfigSnapPoint[]
             {
                 new ConfigSnapPoint(new Vector2(0.8f,0f), new Vector2(0,0)),
@@ -162,8 +164,8 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
 
         public override void Update(GameTime gameTime)
         {
-            MinHeight.Set(Main.screenHeight * screenScale + 20, 0);
-            
+            MinHeight.Set(Main.screenHeight * (screenScale / maxScreenScale) + 20 + (maxScreenOffset.Y * (screenScale / maxScreenScale)), 0);
+
             //if Mouse is inside element and also holding
             if (Main.mouseLeft && uiBounds.Contains(Main.MouseScreen.ToPoint()))
             {
@@ -225,11 +227,19 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             }
 
             //If mouse is inside element
-            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()))
+            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
             {
-                screenScale = float.Lerp(screenScale, maxScreenScale, 0.1f);
+                open = true;
+                SoundEngine.PlaySound(SoundID.MenuTick);
             }
-            else screenScale = float.Lerp(screenScale, minScreenScale, 0.1f);
+            else if (!GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
+            {
+                open = false;
+                SoundEngine.PlaySound(SoundID.MenuClose);
+            }
+
+            if (open) screenScale = float.Lerp(screenScale, maxScreenScale, 0.2f);
+            else screenScale = float.Lerp(screenScale, minScreenScale, 0.2f);
 
             base.Update(gameTime);
         }
