@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Common;
 using Terrafirma.Common.Players;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -47,7 +48,7 @@ namespace Terrafirma.Systems
                     drawRect = rightSegment;
                 }
                 spriteBatch.Draw(bar.Value, pos + new Vector2(xOffset + (midSegment.Width * (i - (segments/2f)) * 0.97f),0), drawRect, Color.White, 0, new Vector2(drawRect.Width / 2, 0), 1, SpriteEffects.None, 0);
-                if(i > -1 && i < segments && !Main.LocalPlayer.ItemAnimationActive)
+                if(i > -1 && i < segments && (!Main.LocalPlayer.ItemAnimationActive || (ItemSets.AltFireDoesNotConsumeFeralCharge[Main.LocalPlayer.HeldItem.type] && Main.LocalPlayer.altFunctionUse == 2)))
                 {
                     spriteBatch.Draw(bar.Value, pos + new Vector2(xOffset + (midSegment.Width * (i - (segments / 2f)) * 0.97f), 0), new Rectangle(fill.X,fill.Y,(int)MathHelper.Clamp((stats.FeralCharge - i) * fill.Width,0,fill.Width),fill.Height), Color.White, 0, new Vector2(drawRect.Width / 2, 0), 1, SpriteEffects.None, 0);
                 }

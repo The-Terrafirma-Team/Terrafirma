@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Common;
 using Terrafirma.Common.Players;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -44,7 +45,7 @@ namespace Terrafirma.Systems
             Color MultiplierColor;
             MultiplierColor = Color.Lerp(MultiplierColors[ Math.Clamp((int)stats.FeralCharge, 0, MultiplierColors.Length - 1)], MultiplierColors[ Math.Clamp((int)stats.FeralCharge + 1,0, MultiplierColors.Length - 1)], stats.FeralCharge - (int)stats.FeralCharge);
 
-            if (Main.LocalPlayer.ItemAnimationActive)
+            if (Main.LocalPlayer.ItemAnimationActive && (ItemSets.AltFireDoesNotConsumeFeralCharge[Main.LocalPlayer.HeldItem.type] && Main.LocalPlayer.altFunctionUse != 2))
             {
                 StatNumber = "1.0x";
                 MultiplierColor = MultiplierColors[0];

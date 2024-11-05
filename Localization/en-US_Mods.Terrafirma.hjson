@@ -150,8 +150,8 @@ Buffs: {
 	}
 
 	GoldKnucklesParry: {
-		DisplayName: Gold Knuckles Parry
-		Description: Mods.Terrafirma.Buffs.GoldKnucklesParry.Description
+		DisplayName: Gold Knuckles
+		Description: Attack speed increased
 	}
 }
 

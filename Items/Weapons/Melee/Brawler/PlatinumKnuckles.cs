@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Common.Players;
+using Terrafirma.Data;
 using Terrafirma.Projectiles.Melee.Brawler;
 using Terraria;
 using Terraria.DataStructures;
@@ -24,6 +25,10 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
     public class PlatinumKnuckles : ModItem, IItemThatDrawsOnHandsWhenHeld, IHasTertriaryFunction
     {
         private static Asset<Texture2D> ArmTex;
+        public override void SetStaticDefaults()
+        {
+            ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
+        }
         public override void SetDefaults()
         {
             Item.shoot = ModContent.ProjectileType<GoldKnucklesPunch>();

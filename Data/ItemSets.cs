@@ -9,6 +9,7 @@ namespace Terrafirma.Data
 {
     public class ItemSets
     {
-        public static bool[] ThrowerWeapon = ItemID.Sets.Factory.CreateBoolSet(); 
+        public static bool[] ThrowerWeapon = ItemID.Sets.Factory.CreateBoolSet();
+        public static bool[] AltFireDoesNotConsumeFeralCharge = ItemID.Sets.Factory.CreateBoolSet();
     }
 }

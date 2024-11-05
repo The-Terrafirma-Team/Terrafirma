@@ -164,7 +164,7 @@ namespace Terrafirma.Common.Players
 
             if(FeralCharge > FeralChargeMax)
                 FeralCharge = FeralChargeMax;
-            if (Player.itemAnimation == 1)
+            if (Player.itemAnimation == 1 && Player.altFunctionUse != 2)
                 FeralCharge = 0;
             Player.GetDamage(DamageClass.Melee) += (FeralCharge);
 
