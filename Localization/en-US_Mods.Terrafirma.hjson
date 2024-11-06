@@ -1870,9 +1870,16 @@ Configs: {
 
 		SpellVisuals: Spell Border Header
 
-		test: {
-			Label: test
-			Tooltip: ""
+		SpellBorderNames: {
+			0: Default
+			1: Retro
+			2: Valkyrie
+			3: Gilded
+			4: StoneGold
+			5: Corroboros
+			6: Thin
+			7: Split
+			8: Terrafirma
 		}
 
 		ExtraUIPosition: {

@@ -158,7 +158,7 @@ namespace Terrafirma.Common.Players
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
-            Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
+            //Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
         }
 
         public override void PostUpdateRunSpeeds()

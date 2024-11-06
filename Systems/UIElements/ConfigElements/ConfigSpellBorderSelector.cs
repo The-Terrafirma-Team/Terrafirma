@@ -1,15 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+using ReLogic.Content;
+using ReLogic.Graphics;
 using System.Linq;
 using Terrafirma.Common;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Terrafirma.Systems.UIElements.ConfigElements
 {
@@ -134,6 +137,23 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                         SpriteEffects.None,
                         1f);
             }
+
+            string BorderName = Language.GetOrRegister("Mods.Terrafirma.Configs.ClientConfig.SpellBorderNames." + $"{ModContent.GetInstance<ClientConfig>().SpellBorder}", () => "").Value;
+
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 offset = Vector2.Zero;
+                switch (i)
+                {
+                    case 0: offset = new Vector2(-2, 0); break;
+                    case 1: offset = new Vector2(2, 0); break;
+                    case 2: offset = new Vector2(0, -2); break;
+                    case 3: offset = new Vector2(0, 2); break;
+                }
+                spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(7, 30) + offset, Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            }
+            spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(7, 30), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+
         }
 
         public override void Update(GameTime gameTime)
@@ -143,12 +163,14 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             MinHeight.Set(Terrafirma.SpellBorderSelectionBG.Height() + 15 + ((rowHeight * rows) * pullBack), 0);
 
             //Open UI Mechanic
-            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
+            if (GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && PlayerInput.Triggers.JustPressed.MouseLeft && !open)
             {
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 open = true;
             }
-            else if (!GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)
+            else if (!GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && PlayerInput.Triggers.JustPressed.MouseLeft && open)
             {
+                SoundEngine.PlaySound(SoundID.MenuClose);
                 open = false;
             }
 
@@ -167,9 +189,10 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             {
                 if (borderButtons[i].ContainsPoint(Main.MouseScreen))
                 {
-                    borderButtons[i].color = Main.OurFavoriteColor;
+                    borderButtons[i].color = new Color(120, 160, 220, 255);
                     if (PlayerInput.Triggers.JustPressed.MouseLeft && pullBack >= 0.9f)
                     {
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                         borderID = borderButtons[i].index;
                         ModContent.GetInstance<ClientConfig>().SpellBorder = borderID;
                         SetObject(borderID);
