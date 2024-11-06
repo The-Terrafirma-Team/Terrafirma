@@ -1,20 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
 using ReLogic.Content;
-using SteelSeries.GameSense;
 using System;
-using System.Linq;
 using Terrafirma.Common;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
-using Terraria.GameContent.UI.States;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 using Terraria.ModLoader.Config.UI;
-using Terraria.UI;
 
 public struct ConfigSnapPoint
 {
@@ -79,8 +72,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             snapPoints = new ConfigSnapPoint[]
             {
                 new ConfigSnapPoint(new Vector2(0.8f,0f), new Vector2(0,0)),
+                new ConfigSnapPoint(new Vector2(0.35f,0f), new Vector2(0,0)),
                 new ConfigSnapPoint(new Vector2(0.5f,0.5f), new Vector2(0,15)),
-                new ConfigSnapPoint(new Vector2(0f,1f), new Vector2(20,-8))
+                new ConfigSnapPoint(new Vector2(0.0f,1f), new Vector2(25,-10))
             };
 
         }
@@ -98,15 +92,6 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                 0f,
                 Vector2.Zero,
                 screenScale,
-                SpriteEffects.None,
-                1f);
-            spriteBatch.Draw(selectionTexture,
-                pos + ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition * screenScale,
-                Terrafirma.ExtraSpellUIConfigPosition.Frame(),
-                selectionColor,
-                0f,
-                Terrafirma.ExtraSpellUIConfigPosition.Size() / 2,
-                selectionScale,
                 SpriteEffects.None,
                 1f);
 
@@ -127,15 +112,25 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                 Terrafirma.BasicBorder,
                 8,
                 Color.White);
-            
+
+            spriteBatch.Draw(selectionTexture,
+                pos + ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition * screenScale,
+                Terrafirma.ExtraSpellUIConfigPosition.Frame(),
+                selectionColor,
+                0f,
+                Terrafirma.ExtraSpellUIConfigPosition.Size() / 2,
+                selectionScale,
+                SpriteEffects.None,
+                1f);
+
         }
 
         public Rectangle GetSnapPointRect(Vector2 topleft, Vector2 position)
         {
             int scale = (int)Math.Clamp((screenScale / maxScreenScale) * 20, 10, 1000);
             return new Rectangle(
-                (int)Math.Clamp(topleft.X + position.X * uiBounds.Width - scale/2, topleft.X, topleft.X + uiBounds.Width - scale),
-                (int)Math.Clamp(topleft.Y + position.Y * uiBounds.Height - scale / 2, topleft.Y, topleft.Y + uiBounds.Height - scale),
+                (int)Math.Clamp(topleft.X + position.X * uiBounds.Width - scale/2, topleft.X, Math.Clamp(topleft.X + uiBounds.Width - scale,0,100000)),
+                (int)Math.Clamp(topleft.Y + position.Y * uiBounds.Height - scale / 2, topleft.Y, Math.Clamp(topleft.Y + uiBounds.Height - scale,0,100000)),
                 scale,
                 scale);
         }
@@ -248,6 +243,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                 if(!insideSwitch) open = false;
                 holdSwitch = true;
             }
+
+            //Inside Switch
+            if (!GetInnerDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint()) && !Main.mouseLeft) insideSwitch = false;
 
             //Hold switch
             else if (!uiBounds.Contains(Main.MouseScreen.ToPoint()) && Main.mouseLeft)

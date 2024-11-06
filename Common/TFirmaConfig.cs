@@ -13,12 +13,6 @@ namespace Terrafirma.Common
         public const int MaxSpellBorders = 9;
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
-        [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.Gameplay")]
-
-        [DrawTicks]
-        [Range(0, 1)]
-        [DefaultValue(0)]
-        public int MeleeDamageMultiplier;
 
         [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.Accessibility")]
 
@@ -30,9 +24,9 @@ namespace Terrafirma.Common
         [Header("$Mods.Terrafirma.Configs.ClientConfig.Headers.UIPosition")]
 
         [DrawTicks]
-        [Range(0, MaxSpellBorders - 1)]
+        [Range(0, 1)]
         [DefaultValue(0)]
-        public int SpellBorder;
+        public int MeleeDamageMultiplier;
 
         [DrawTicks]
         [CustomModConfigItem(typeof(ConfigExtraSpellUIPosition))]
@@ -42,6 +36,11 @@ namespace Terrafirma.Common
         [DrawTicks]
         [DefaultValue(typeof(Color), "160, 255, 255, 200")]
         public Color SpellRingUiColor;
+
+        [DrawTicks]
+        [CustomModConfigItem(typeof(ConfigSpellBorderSelector))]
+        [DefaultValue(0)]
+        public int SpellBorder;
 
     }
 }

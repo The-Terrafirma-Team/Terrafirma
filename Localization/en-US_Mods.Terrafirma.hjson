@@ -1832,7 +1832,7 @@ Configs: {
 
 		Headers: {
 			SpellVisuals: Spell UI
-			UIPosition: UI Position
+			UIPosition: UI
 			Gameplay: Gameplay
 			Accessibility: Accessibility
 		}
@@ -1854,23 +1854,11 @@ Configs: {
 
 		SpellBorder: {
 			Label: Spell Border
-			Tooltip:
-				'''
-				Changes the border on the spell icons.
-				0 = Default
-				1 = Retro
-				2 = Valkyrie
-				3 = Gilded
-				4 = StoneGold
-				5 = Corroboros
-				6 = Thin
-				7 = Split
-				8 = Terrafirma
-				'''
+			Tooltip: ""
 		}
 
 		MeleeDamageMultiplier: {
-			Label: Meele Damage Multiplier Display
+			Label: Feral Charge UI
 			Tooltip:
 				'''
 				Changes the melee damage multiplier display that appears 
@@ -1931,6 +1919,11 @@ Configs: {
 
 		SpellRingUiColor: {
 			Label: Spell Ring Ui Color
+			Tooltip: ""
+		}
+
+		SpellBorderNew: {
+			Label: Spell Border New
 			Tooltip: ""
 		}
 	}

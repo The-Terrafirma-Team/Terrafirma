@@ -34,6 +34,10 @@ namespace Terrafirma
         public static Asset<Texture2D> BasicBorder;
         public static Asset<Texture2D> BasicSelectionBox;
 
+        public static Asset<Texture2D> SpellBorderSelectionBG;
+        public static Asset<Texture2D> SpellBorders;
+        public static Asset<Texture2D> SpellBordersGlow;
+
         //public static RenderTarget2D pixelRenderTarget;
         public override void Load()
         {
@@ -50,6 +54,10 @@ namespace Terrafirma
             ExtraSpellUIConfigPosition = ModContent.Request<Texture2D>("Terrafirma/Assets/ExtraSpellUIConfigPosition");
             BasicBorder = ModContent.Request<Texture2D>("Terrafirma/Assets/BasicBorder");
             BasicSelectionBox = ModContent.Request<Texture2D>("Terrafirma/Assets/BasicSelectionBox");
+
+            SpellBorderSelectionBG = ModContent.Request<Texture2D>("Terrafirma/Assets/SpellBorderSelectionBG");
+            SpellBorders = ModContent.Request<Texture2D>("Terrafirma/Assets/SpellIconBorders");
+            SpellBordersGlow = ModContent.Request<Texture2D>("Terrafirma/Assets/SpellIconBordersGlow");
 
             On_Player.UpdateMaxTurrets += On_Player_UpdateMaxTurrets;
         }
