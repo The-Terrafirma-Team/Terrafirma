@@ -1880,6 +1880,7 @@ Configs: {
 			6: Thin
 			7: Split
 			8: Terrafirma
+			9: Copper
 		}
 
 		ExtraUIPosition: {

@@ -10,7 +10,7 @@ namespace Terrafirma.Common
 {
     public class ClientConfig : ModConfig
     {
-        public const int MaxSpellBorders = 9;
+        public const int MaxSpellBorders = 10;
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
 

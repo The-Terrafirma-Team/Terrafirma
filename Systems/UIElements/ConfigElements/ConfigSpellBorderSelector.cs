@@ -16,6 +16,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Terrafirma.Systems.UIElements.ConfigElements
 {
+    //Spell Border Button Struct so it's easier to work with
     public struct ConfigSpellBorderButton
     {
         public Vector2 position;
@@ -48,9 +49,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         private float pullBack = 0f;
         private bool open = false;
 
+        //
         private Color flash = Color.White;
         private float flashTimer = 0f;
-        private bool clickSwitch = false;
 
         public ConfigSpellBorderButton[] borderButtons = new ConfigSpellBorderButton[] { };
         public ConfigSpellBorderSelector()
@@ -150,9 +151,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                     case 2: offset = new Vector2(0, -2); break;
                     case 3: offset = new Vector2(0, 2); break;
                 }
-                spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(7, 30) + offset, Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(10, 30) + offset, Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             }
-            spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(7, 30), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(FontAssets.MouseText.Value, BorderName, GetInnerDimensions().ToRectangle().TopLeft() + new Vector2(10, 30), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
         }
 
