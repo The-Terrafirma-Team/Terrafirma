@@ -49,7 +49,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         private float pullBack = 0f;
         private bool open = false;
 
-        //
+        //Visual effects
         private Color flash = Color.White;
         private float flashTimer = 0f;
 
@@ -63,6 +63,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //Create the buttons or edit them if they already exist
             for (int i = 0; i < Terrafirma.SpellBorders.Width() / (int)Terrafirma.SpellBorders.Height(); i++)
             {
                 float width = (Terrafirma.SpellBorderSelectionBG.Width() + 5) * i + (Terrafirma.SpellBorderSelectionBG.Width() / 2f + 7);
@@ -79,6 +80,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
 
             base.Draw(spriteBatch);
 
+            //In order: BG > Back Glow > Border
             spriteBatch.Draw(Terrafirma.SpellBorderSelectionBG.Value,
                     GetInnerDimensions().ToRectangle().TopRight() - new Vector2(Terrafirma.SpellBorderSelectionBG.Width() / 2, -Terrafirma.SpellBorderSelectionBG.Height() / 2) - new Vector2(10, -10),
                     Terrafirma.SpellBorderSelectionBG.Frame(),
@@ -107,6 +109,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                     SpriteEffects.None,
                     1f);
 
+            //Same order but for all the buttons
             for (int i = 0; i < borderButtons.Length; i++)
             {
                 if (pullBack == 0f) break;
@@ -139,6 +142,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                         1f);
             }
 
+            //Render Name
             string BorderName = Language.GetOrRegister("Mods.Terrafirma.Configs.ClientConfig.SpellBorderNames." + $"{ModContent.GetInstance<ClientConfig>().SpellBorder}", () => "").Value;
 
             for (int i = 0; i < 4; i++)
@@ -159,6 +163,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
 
         public override void Update(GameTime gameTime)
         {
+            //Set Size
             float rowHeight = (Terrafirma.SpellBorderSelectionBG.Height() + 7);
             int rows = (borderButtons.Length / 7) + 1;
             MinHeight.Set(Terrafirma.SpellBorderSelectionBG.Height() + 15 + ((rowHeight * rows) * pullBack), 0);

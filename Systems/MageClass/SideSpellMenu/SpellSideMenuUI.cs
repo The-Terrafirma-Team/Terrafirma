@@ -201,6 +201,7 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                         {
                             if ((iconshift + spelliconlist.Length * 10000) % spelliconlist.Length == i)
                             {
+                                int borderCount = iconBorder.Width / iconBorder.Height;
                                 //Icon
                                 spriteBatch.Draw(spelliconlist[i].texture,
                                     position,
@@ -214,16 +215,17 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                                 //Border
                                 spriteBatch.Draw(iconBorder,
                                     position,
-                                    new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
+                                    new Rectangle((iconBorder.Width / borderCount) * clientConfig.SpellBorder, 0, iconBorder.Width / borderCount, iconBorder.Height),
                                     spelliconlist[i].Color * transparencyfloat,
                                     spelliconlist[i].Rotation,
-                                    new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
+                                    new Vector2(iconBorder.Width / borderCount, iconBorder.Height) / 2,
                                     spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
                                     SpriteEffects.None,
                                     0f);
                             }
                             else
                             {
+                                int borderCount = iconBorder.Width / iconBorder.Height;
                                 //Icon
                                 spriteBatch.Draw(spelliconlist[i].texture,
                                     position,
@@ -237,10 +239,10 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                                 //Border
                                 spriteBatch.Draw(iconBorder,
                                     position,
-                                    new Rectangle((iconBorder.Width / ClientConfig.MaxSpellBorders) * clientConfig.SpellBorder, 0, iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height),
+                                    new Rectangle((iconBorder.Width / borderCount) * clientConfig.SpellBorder, 0, iconBorder.Width / borderCount, iconBorder.Height),
                                     spelliconlist[i].Color * 0.7f * transparencyfloat,
                                     spelliconlist[i].Rotation,
-                                    new Vector2(iconBorder.Width / ClientConfig.MaxSpellBorders, iconBorder.Height) / 2,
+                                    new Vector2(iconBorder.Width / borderCount, iconBorder.Height) / 2,
                                     spelliconlist[i].ImageScale * Math.Clamp(transparencyfloat * 1.5f, 0f, 1f),
                                     SpriteEffects.None,
                                     0f);

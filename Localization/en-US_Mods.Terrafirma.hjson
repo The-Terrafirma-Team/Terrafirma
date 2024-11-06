@@ -1881,6 +1881,10 @@ Configs: {
 			7: Split
 			8: Terrafirma
 			9: Copper
+			10: Gothic
+			11: Dipped
+			12: Devourer
+
 		}
 
 		ExtraUIPosition: {
