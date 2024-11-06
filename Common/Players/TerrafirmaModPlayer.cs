@@ -209,7 +209,7 @@ namespace Terrafirma.Common.Players
             //}
             if (Keybinds.tertiaryAttack.JustPressed)
             {
-                if (Player.HeldItem.ModItem is IHasTertriaryFunction t && !Player.ItemAnimationActive)
+                if (Player.HeldItem.ModItem is IHasTertriaryFunction t && !Player.ItemAnimationActive && t.canUseTertriary(Player))
                 {
                     Item i = Player.HeldItem;
                     Player.ApplyItemAnimation(Player.HeldItem);

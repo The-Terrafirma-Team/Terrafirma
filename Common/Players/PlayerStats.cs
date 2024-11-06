@@ -48,6 +48,11 @@ namespace Terrafirma.Common.Players
         public float MeleeWeaponScale = 0;
         public float ParryBuffDurationMultiplier = 1f;
         public float ParryImmunityDurationMultiplier = 1f;
+        public int Tension = 0;
+        public int TensionMax = 60;
+        public int TensionMax2 = 60;
+        public float TensionGainMultiplier = 1f;
+        public float TensionCostMultiplier = 1f;
 
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
@@ -114,6 +119,9 @@ namespace Terrafirma.Common.Players
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
 
+            Tension = Math.Clamp(Tension,0,TensionMax + TensionMax2);
+            TensionMax2 = 0;
+
             DebuffTimeMultiplier = 1f;
             buffTimeMultiplier = 1f;
 
@@ -150,6 +158,7 @@ namespace Terrafirma.Common.Players
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
+            Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
         }
 
         public override void PostUpdateRunSpeeds()

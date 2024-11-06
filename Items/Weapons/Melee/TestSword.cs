@@ -44,6 +44,11 @@ namespace Terrafirma.Items.Weapons.Melee
             Projectile.NewProjectile(source, position, velocity, ProjectileID.EmeraldBolt, damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
         }
+
+        public bool canUseTertriary(Player player)
+        {
+            return true;
+        }
     }
     public class TestSwordProj : MeleeSlice
     {

@@ -47,6 +47,7 @@ namespace Terrafirma.Common.Templates.Melee
             {
                 Dust.NewDustPerfect(n.Hitbox.ClosestPointInRect(player.Center),DustID.Smoke);
             }
+            player.GiveTension(20);
         }
         public virtual void OnParryProjectile(Projectile p, Player player)
         {
@@ -58,6 +59,7 @@ namespace Terrafirma.Common.Templates.Melee
             {
                 Dust.NewDustPerfect(p.Hitbox.ClosestPointInRect(player.Center), DustID.Smoke);
             }
+            player.GiveTension(20);
         }
     }
 }

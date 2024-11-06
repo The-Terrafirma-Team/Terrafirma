@@ -101,5 +101,9 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<GoldKnucklesDash>(), damage * 2, knockback * 2, player.whoAmI, -30);
         }
+        public bool canUseTertriary(Player player)
+        {
+            return player.CheckTension(30);
+        }
     }
 }

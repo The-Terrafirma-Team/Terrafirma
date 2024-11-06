@@ -11,6 +11,7 @@ namespace Terrafirma.Common.Interfaces
 {
     public interface IHasTertriaryFunction
     {
+        bool canUseTertriary(Player player);
         void TertriaryShoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback);
     }
 }
