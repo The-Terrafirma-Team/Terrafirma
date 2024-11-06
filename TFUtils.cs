@@ -28,6 +28,24 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static bool CheckTension(this Player player, int Tension, bool Consume = true)
+        {
+            PlayerStats pStats = player.PlayerStats();
+            if (pStats.Tension >= Tension)
+            {
+                if (Consume)
+                {
+                    pStats.Tension -= (int)(Tension * pStats.TensionCostMultiplier);
+                }
+                return true;
+            }
+            return false;
+        }
+        public static void GiveTension(this Player player, int Tension, bool Numbers = true)
+        {
+            PlayerStats pStats = player.PlayerStats();
+            pStats.Tension += (int)(Tension * pStats.TensionGainMultiplier);
+        }
         public static void ApplyRightAndMiddleClickFormattingToTooltip(List<TooltipLine> tooltips, LocalizedText Tooltip)
         {
             for (int i = 0; i < tooltips.Count; i++)

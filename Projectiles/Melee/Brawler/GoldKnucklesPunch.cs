@@ -30,11 +30,13 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         {
             Projectile.ai[2] = 1;
             Main.player[Projectile.owner].velocity -= Projectile.velocity * (1f - target.knockBackResist) * 1.2f;
+            Main.player[Projectile.owner].GiveTension(5);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.ai[2] = 1;
             Main.player[Projectile.owner].velocity -= Projectile.velocity * 1.2f;
+            Main.player[Projectile.owner].GiveTension(5);
         }
         public override void AI()
         {
