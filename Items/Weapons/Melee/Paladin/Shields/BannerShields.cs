@@ -11,10 +11,6 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin.Shields
 {
     public class RedTowerShield : TowerShield
     {
-        public override bool MeleePrefix()
-        {
-            return true;
-        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             tooltips[tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Damage"))].Hide();

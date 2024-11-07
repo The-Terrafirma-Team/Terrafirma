@@ -41,8 +41,8 @@ namespace Terrafirma.Common
             if (Main.rand.NextBool(3))
                 duration *= 3;
 
-            if(Fire)
-                target.AddBuff(BuffID.OnFire3,duration);
+            if (Fire)
+                target.AddBuff(BuffID.OnFire3, duration);
             if (Cursed)
                 target.AddBuff(BuffID.CursedInferno, duration);
             if (Demon)
@@ -78,7 +78,7 @@ namespace Terrafirma.Common
             {
                 spawnDust(projectile, DustID.CursedTorch);
             }
-            if(Main.tile[projectile.Center.ToTileCoordinates()].TileType == TileID.LivingDemonFire && !Demon)
+            if (Main.tile[projectile.Center.ToTileCoordinates()].TileType == TileID.LivingDemonFire && !Demon)
             {
                 SoundEngine.PlaySound(style, projectile.position);
                 Demon = true;

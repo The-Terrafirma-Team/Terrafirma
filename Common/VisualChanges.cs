@@ -47,7 +47,7 @@ namespace Terrafirma.Common
             TextureAssets.Item[ItemID.NecroGreaves] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.NecroGreaves}");
             TextureAssets.ArmorHead[ArmorIDs.Head.NecroHelmet] = ModContent.Request<Texture2D>($"Terraria/Images/Armor_Head_{ArmorIDs.Head.NecroHelmet}");
             TextureAssets.ArmorBodyComposite[ArmorIDs.Body.NecroBreastplate] = ModContent.Request<Texture2D>($"Terraria/Images/Armor/Armor_{ArmorIDs.Body.NecroBreastplate}");
-            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>($"Terraria/Images/Armor_Legs{ArmorIDs.Legs.NecroGreaves}");
+            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>($"Terraria/Images/Armor_Legs_{ArmorIDs.Legs.NecroGreaves}");
         }
     }
     public class VanillaNPCSpriteChanges : GlobalNPC

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -39,12 +40,15 @@ namespace Terrafirma.Common.Templates.Melee
     public abstract class TowerShield : ModItem
     {
         public virtual int MaxDamageAbsorbed => 15;
-
         public int getMaxDamageAbsorption(Player player)
         {
             int dmg = MaxDamageAbsorbed;
 
             return dmg;
+        }
+        public override bool MeleePrefix()
+        {
+            return true;
         }
         public override void SetDefaults()
         {
@@ -53,6 +57,7 @@ namespace Terrafirma.Common.Templates.Melee
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.channel = true;
+            Item.useTime = Item.useAnimation = 10;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
@@ -71,6 +76,10 @@ namespace Terrafirma.Common.Templates.Melee
     }
     public abstract class TowerShieldProjectile : HeldProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(22,44);
@@ -101,23 +110,28 @@ namespace Terrafirma.Common.Templates.Melee
         public override void AI()
         {
             player = Main.player[Projectile.owner];
+            player.PlayerStats().FeralCharge = 0;
             if (player.channel && !stoppedChanneling)
             {
                 Projectile.timeLeft = 2;
                 player.SetDummyItemTime(2);
             }
-
-            player.direction = MathF.Sign(player.PlayerStats().MouseWorld.X - player.Center.X);
             if (Projectile.ai[0] == 0)
             {
-                Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
-                Projectile.Resize((int)(Projectile.width * Projectile.scale), (int)(Projectile.height * Projectile.scale));
-                Projectile.ai[0]++;
+                float scale = player.GetAdjustedItemScale(player.HeldItem);
+                Projectile.Resize((int)(player.width * scale), (int)(player.height * scale));
+                Projectile.scale = scale;
+
+                Projectile.rotation = player.Center.DirectionTo(player.PlayerStats().MouseWorld).ToRotation();
             }
+            Projectile.ai[0]++;
+
+            player.direction = MathF.Sign(player.PlayerStats().MouseWorld.X - player.Center.X);
 
             Projectile.spriteDirection = player.direction;
-            Projectile.Center = player.Center + player.Center.DirectionTo(player.PlayerStats().MouseWorld) * (15 - (5 * Easing.SineOut(Projectile.localAI[0] / 20)));
-            Projectile.rotation = player.Center.DirectionTo(player.PlayerStats().MouseWorld).ToRotation();
+            float lerp = 0.1f * player.GetAdjustedWeaponSpeedPercent(player.HeldItem);
+            Projectile.rotation = Utils.AngleLerp(Projectile.rotation, player.Center.DirectionTo(player.PlayerStats().MouseWorld).ToRotation(), lerp);
+            Projectile.Center = player.Center + Projectile.rotation.ToRotationVector2() * (15 - (5 * Easing.SineOut(Projectile.localAI[0] / 20)));
             Projectile.position.X = (int)Projectile.position.X;
             Projectile.position.Y = (int)Projectile.position.Y + player.gfxOffY;
 
@@ -148,6 +162,7 @@ namespace Terrafirma.Common.Templates.Melee
         {
             SoundEngine.PlaySound(SoundID.Dig);
             proj.Kill();
+            player.PlayerStats().StoredMeleeCharge += 0.1f;
             Projectile.localAI[0] = 20;
             if (!player.noKnockback)
                 player.velocity += proj.velocity * 0.3f * player.PlayerStats().KnockbackResist;

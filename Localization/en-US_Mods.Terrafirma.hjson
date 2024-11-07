@@ -150,7 +150,7 @@ Buffs: {
 	}
 
 	GoldKnucklesParry: {
-		DisplayName: Gold Knuckles
+		DisplayName: Shining Moment
 		Description: Attack speed increased
 	}
 }
@@ -724,10 +724,9 @@ Items: {
 
 	LeatherChestplate: {
 		DisplayName: Leather Chestplate
-		Tooltip: Melee weapons have an additional 2 flat damage
+		Tooltip: Melee weapons have an additional 1 flat damage
 		SetBonus:
 			'''
-			Melee weapons have an additional 2 flat damage
 			Double tap a direction to roll
 			Rolling reduces incoming damage by 75%
 			'''
@@ -1263,8 +1262,8 @@ Items: {
 		DisplayName: Gold Knuckles
 		Tooltip:
 			'''
-			{0} to parry
-			{1} to do a charged punch
+			{0} to parry, grants {1} tension
+			{2} to do a charged punch, costs {3} tension
 			'''
 	}
 
@@ -1272,8 +1271,8 @@ Items: {
 		DisplayName: Platinum Knuckles
 		Tooltip:
 			'''
-			{0} to parry
-			{1} to do a charged punch
+			{0} to parry, grants {1} tension
+			{2} to do a charged punch, costs {3} tension
 			'''
 	}
 }

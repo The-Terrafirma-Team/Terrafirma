@@ -56,9 +56,6 @@ namespace Terrafirma.Items.Equipment.Melee
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.LeatherChestplate.SetBonus");
-
-            player.PlayerStats().MeleeFlatDamage += 1;
-
             if (player.dashType == DashID.None && !player.mount.Active)
                 player.GetModPlayer<LeatherArmorRoll>().CanRoll = true;
         }

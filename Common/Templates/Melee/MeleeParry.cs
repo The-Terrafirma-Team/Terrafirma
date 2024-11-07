@@ -37,29 +37,28 @@ namespace Terrafirma.Common.Templates.Melee
             player.PlayerStats().ParryProjectile = Projectile.whoAmI;
             Projectile.Center = player.Center + new Vector2(player.direction * Projectile.width / 2, 2);
         }
+        public void CommonParryEffects(Player player, Entity e, int immuneTime = 60, int tensionGain = 20)
+        {
+            player.immune = true;
+            player.AddImmuneTime(ImmunityCooldownID.General, (int)(immuneTime * player.PlayerStats().ParryImmunityDurationMultiplier));
+            SoundEngine.PlaySound(SoundID.Item37, player.position);
+            for (int i = 0; i < 10; i++)
+            {
+                Dust.NewDustPerfect(e.Hitbox.ClosestPointInRect(player.Center), DustID.Smoke);
+                Dust g = Dust.NewDustPerfect(e.Hitbox.ClosestPointInRect(player.Center), DustID.GoldCoin);
+                g.noGravity = true;
+            }
+            player.GiveTension(player.ApplyTensionBonusScaling(tensionGain,true));
+        }
         public virtual void OnParryNPC(NPC n, Player player)
         {
             Projectile.Kill();
-            player.immune = true;
-            player.AddImmuneTime(ImmunityCooldownID.General, (int)(60 * player.PlayerStats().ParryImmunityDurationMultiplier));
-            SoundEngine.PlaySound(SoundID.Item37,player.position);
-            for(int i = 0; i < 10; i++)
-            {
-                Dust.NewDustPerfect(n.Hitbox.ClosestPointInRect(player.Center),DustID.Smoke);
-            }
-            player.GiveTension(20);
+            CommonParryEffects(player, n);
         }
         public virtual void OnParryProjectile(Projectile p, Player player)
         {
             Projectile.Kill();
-            player.immune = true;
-            player.AddImmuneTime(ImmunityCooldownID.General, (int)(60 * player.PlayerStats().ParryImmunityDurationMultiplier));
-            SoundEngine.PlaySound(SoundID.Item37, player.position);
-            for (int i = 0; i < 10; i++)
-            {
-                Dust.NewDustPerfect(p.Hitbox.ClosestPointInRect(player.Center), DustID.Smoke);
-            }
-            player.GiveTension(20);
+            CommonParryEffects(player, p);
         }
     }
 }

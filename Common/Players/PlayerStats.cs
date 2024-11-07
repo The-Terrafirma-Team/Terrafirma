@@ -41,7 +41,7 @@ namespace Terrafirma.Common.Players
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
         public bool ManaPotionSickness = false;
-
+        public float StoredMeleeCharge = 0f;
         public float FeralCharge;
         public float FeralChargeMax;
         public float FeralChargeSpeed;
@@ -95,6 +95,10 @@ namespace Terrafirma.Common.Players
         public float maxRunSpeedFlat = 0f;
         public override void ResetEffects()
         {
+            if(StoredMeleeCharge > 1)
+            {
+                StoredMeleeCharge = 1;
+            }
             if (TurnOffDownwardsMovementRestrictions)
             {
                 Player.maxFallSpeed = 1000;

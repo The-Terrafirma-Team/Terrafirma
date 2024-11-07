@@ -30,6 +30,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
         }
+        const int SuperCost = 30;
         public override void SetDefaults()
         {
             Item.shoot = ModContent.ProjectileType<GoldKnucklesPunch>();
@@ -49,7 +50,17 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            TFUtils.ApplyRightAndMiddleClickFormattingToTooltip(tooltips, Tooltip);
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
+                {
+                    string Right = TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight"));
+                    string Middle = TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault());
+                    tooltips[i].Text = Tooltip.WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20,true), Middle, Main.LocalPlayer.ApplyTensionBonusScaling(SuperCost,false,true)]).Value;
+                    tooltips.RemoveAt(i + 1);
+                    break;
+                }
+            }
         }
         public override void Load()
         {
@@ -103,7 +114,8 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         }
         public bool canUseTertriary(Player player)
         {
-            return player.CheckTension(30);
+            return player.CheckTension(player.ApplyTensionBonusScaling(SuperCost, false, true));
         }
+        public override bool MeleePrefix() => true;
     }
 }

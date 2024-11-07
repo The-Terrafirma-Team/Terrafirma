@@ -1,16 +1,14 @@
-﻿using Terraria.ModLoader;
-using Terraria;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.IO;
-using Microsoft.Xna.Framework;
-using Terraria.GameContent;
-using Terraria.ModLoader.IO;
-using Terraria.DataStructures;
-using System.Collections.Generic;
-using System.Linq;
 using System;
-using Terraria.GameContent.UI;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Terrafirma.Common.Templates
 {
@@ -22,6 +20,10 @@ namespace Terrafirma.Common.Templates
     {
         public override bool InstancePerEntity => true;
 
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.maxStack > 1 && entity.consumable;
+        }
         public int grade = -1;
 
         public override void OnCreated(Item item, ItemCreationContext context)
