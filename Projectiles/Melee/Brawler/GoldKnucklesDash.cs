@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -16,6 +17,11 @@ namespace Terrafirma.Projectiles.Melee.Brawler
 {
     public class GoldKnucklesDash : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.QuickDefaults(false, 32);
@@ -23,6 +29,11 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             Projectile.tileCollide = false;
             Projectile.Opacity = 0;
             Projectile.hide = true;
+        }
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = height = 32;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {

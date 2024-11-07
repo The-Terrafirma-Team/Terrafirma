@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Buffs;
 using Terrafirma.Common.Players;
+using Terrafirma.Data;
 using Terrafirma.Projectiles.Ranged.Bullets;
 using Terraria;
 using Terraria.DataStructures;
@@ -73,6 +74,12 @@ namespace Terrafirma.Common
                     case PrefixID.Furious: 
                         projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
                         break;
+                }
+                if (ProjectileSets.AutomaticallyGivenMeleeScaling[projectile.type])
+                {
+                    float scale = ammoSource.Player.GetAdjustedItemScale(ammoSource.Item);
+                    projectile.Resize((int)(projectile.width * scale), (int)(projectile.height * scale));
+                    projectile.scale = scale;
                 }
             }
         }

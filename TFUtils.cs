@@ -35,7 +35,7 @@ namespace Terrafirma
             {
                 if (Consume)
                 {
-                    pStats.Tension -= (int)(Tension * pStats.TensionCostMultiplier);
+                    pStats.Tension -= player.ApplyTensionBonusScaling(Tension,false,true);
                 }
                 return true;
             }
@@ -46,16 +46,15 @@ namespace Terrafirma
             PlayerStats pStats = player.PlayerStats();
             pStats.Tension += (int)(Tension * pStats.TensionGainMultiplier);
         }
-        public static void ApplyRightAndMiddleClickFormattingToTooltip(List<TooltipLine> tooltips, LocalizedText Tooltip)
+        public static int ApplyTensionBonusScaling(this Player player, int number, bool parry = false, bool drain = false)
         {
-            for (int i = 0; i < tooltips.Count; i++)
+            if (!drain)
             {
-                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
-                {
-                    tooltips[i].Text = Tooltip.WithFormatArgs([TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight")), TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault())]).Value;
-                    tooltips.RemoveAt(i + 1);
-                    break;
-                }
+                return (int)(number * player.PlayerStats().TensionGainMultiplier);
+            }
+            else
+            {
+                return (int)(number * player.PlayerStats().TensionCostMultiplier);
             }
         }
         public static string NicenUpKeybindNameIfApplicable(string name)
