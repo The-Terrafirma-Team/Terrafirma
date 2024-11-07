@@ -35,14 +35,14 @@ namespace Terrafirma.Systems.MageClass
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
             Texture2D iconglow = (Texture2D)ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/SpellIconGlow");
-            Texture2D iconBorder = Terrafirma.SpellBorders.Value;
+            Texture2D iconBorder = (Texture2D)ModContent.Request<Texture2D>(Terrafirma.AssetPath + "SpellIconBorders");
             if (icon == ""){ spellicon = (Texture2D)ModContent.Request<Texture2D>("Terrafirma/Systems/MageClass/SpellIcons/PlaceholderSpellIcon"); }
             else { spellicon = (Texture2D)ModContent.Request<Texture2D>(icon); }
            
-            //int bordercount = (int)Math.Floor((decimal)iconBorder.Width / (decimal)iconBorder.Height) + 1;
+            int bordercount = (int)Math.Floor((decimal)iconBorder.Width / (decimal)iconBorder.Height) ;
             spriteBatch.Draw(iconglow, position, new Rectangle(0, 0, iconglow.Width, iconglow.Height), new Color(SpellUI.ringColor.R, SpellUI.ringColor.G, SpellUI.ringColor.B, 0) * MathHelper.Lerp(0f, dist, timer) * 0.5f, 0, iconglow.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 0.9f, SpriteEffects.None, 0);
             spriteBatch.Draw(spellicon, position, new Rectangle(0, 0, spellicon.Width, spellicon.Height), new Color(1, 1, 1, postimer), 0, spellicon.Size() / 2, MathHelper.Lerp(0.5f, dist, timer) * 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(iconBorder, position, new Rectangle((int)(iconBorder.Width / iconBorder.Height) * clientConfig.SpellBorder, 0, iconBorder.Height, iconBorder.Height), new Color(1, 1, 1, postimer), 0, new Vector2(iconBorder.Height / 2), MathHelper.Lerp(0.5f, dist, timer) * 0.999f, SpriteEffects.None, 0);
+            spriteBatch.Draw(iconBorder, position, new Rectangle((iconBorder.Width / bordercount) * clientConfig.SpellBorder, 0, iconBorder.Height, iconBorder.Height), new Color(1, 1, 1, postimer), 0, new Vector2(iconBorder.Height / 2), MathHelper.Lerp(0.5f, dist, timer) * 0.999f, SpriteEffects.None, 0);
             
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);

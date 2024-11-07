@@ -58,8 +58,8 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         public abstract ref Vector2 SetPos { get; }
 
         private float screenScale = 0.05f;
-        public virtual float minScreenScale => 0.05f;
-        public virtual float maxScreenScale => 0.276f;
+        public virtual float minScreenScale { get; set; }
+        public virtual float maxScreenScale { get; set; }
 
         public virtual Vector2 maxScreenOffset => new Vector2(0, 20);
 
@@ -68,15 +68,9 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         public virtual Texture2D selectionTexture => Terrafirma.ExtraSpellUIConfigPosition.Value;
         public ConfigVector2Select()
         {
+            minScreenScale = (530 * 0.2f) / Main.ScreenSize.ToVector2().X;
+            maxScreenScale = 530 / Main.ScreenSize.ToVector2().X;
             MinHeight.Set(Main.screenHeight * maxScreenScale + 20 + maxScreenOffset.Y, 0);
-            snapPoints = new ConfigSnapPoint[]
-            {
-                new ConfigSnapPoint(new Vector2(0.8f,0f), new Vector2(0,0)),
-                new ConfigSnapPoint(new Vector2(0.35f,0f), new Vector2(0,0)),
-                new ConfigSnapPoint(new Vector2(0.5f,0.5f), new Vector2(0,5)),
-                new ConfigSnapPoint(new Vector2(0.0f,1f), new Vector2(25,-10))
-            };
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -129,8 +123,8 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
         {
             int scale = (int)Math.Clamp((screenScale / maxScreenScale) * 20, 10, 1000);
             return new Rectangle(
-                (int)Math.Clamp(topleft.X + position.X * uiBounds.Width - scale/2, topleft.X, Math.Clamp(topleft.X + uiBounds.Width - scale,0,100000)),
-                (int)Math.Clamp(topleft.Y + position.Y * uiBounds.Height - scale / 2, topleft.Y, Math.Clamp(topleft.Y + uiBounds.Height - scale,0,100000)),
+                (int)Math.Clamp(topleft.X + position.X * uiBounds.Width - scale/2, topleft.X, Math.Clamp(topleft.X + uiBounds.Width - scale, topleft.X, 100000)),
+                (int)Math.Clamp(topleft.Y + position.Y * uiBounds.Height - scale / 2, topleft.Y, Math.Clamp(topleft.Y + uiBounds.Height - scale, topleft.Y, 100000)),
                 scale,
                 scale);
         }
@@ -194,11 +188,11 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                     SetPos = (Main.MouseScreen - uiBounds.TopLeft()) / screenScale;
                     SetObject((Main.MouseScreen - uiBounds.TopLeft()) / screenScale);
                 }
-                selectionScale = float.Lerp(selectionScale, 0.7f, 0.05f);
+                selectionScale = float.Lerp(selectionScale, 1f, 0.2f);
             }
-            else
+            else if (open)
             {
-                selectionScale = float.Lerp(selectionScale, 0.5f, 0.05f);
+                selectionScale = float.Lerp(selectionScale, 0.75f, 0.2f);
             }
 
             //Set SnapPoint Color
@@ -216,7 +210,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             {
                 for (int i = 0; i < snapPoints.Length; i++)
                 {
-                    snapPoints[i].color = Color.Lerp(snapPoints[i].color, Color.White * 0.02f, 0.05f);
+                    snapPoints[i].color = Color.Lerp(snapPoints[i].color, Color.White * 0.02f, 0.2f);
                 }
             }
 
@@ -257,8 +251,16 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
                 holdSwitch = false;
             }
 
-            if (open) screenScale = float.Lerp(screenScale, maxScreenScale, 0.2f);
-            else screenScale = float.Lerp(screenScale, minScreenScale, 0.2f);
+            //Check if UI is Open
+            if (open)
+            {
+                screenScale = float.Lerp(screenScale, maxScreenScale, 0.2f);
+            }
+            else
+            {
+                screenScale = float.Lerp(screenScale, minScreenScale, 0.2f);
+                selectionScale = float.Lerp(selectionScale, 0.5f, 0.2f);
+            }
 
             base.Update(gameTime);
         }

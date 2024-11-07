@@ -181,8 +181,8 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * Main.GameZoomTarget,
-                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * Main.GameZoomTarget);
+            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X,
+                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y);
 
             if (!SpellID.itemcatalogue.ContainsKey(selecteditem.type) || selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell == null || spelliconlist.Length == 0) return;
 
