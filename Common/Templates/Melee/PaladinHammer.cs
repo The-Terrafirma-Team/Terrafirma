@@ -15,13 +15,19 @@ using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Particles;
+using Terrafirma.Common.Interfaces;
+using Terrafirma.Data;
 
 namespace Terrafirma.Common.Templates.Melee
 {
-    public abstract class PaladinHammer : HeldProjectile
+    public abstract class PaladinHammer : HeldProjectile, IUsesStoredMeleeCharge
     {
         public virtual float ChargeIncrement => 0.01f;
         public virtual int ThrownProjectile => 1;
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(2);
@@ -54,11 +60,7 @@ namespace Terrafirma.Common.Templates.Melee
             commonHeldLogic(12);
 
             player.direction = MathF.Sign(player.PlayerStats().MouseWorld.X - player.Center.X);
-            if (Projectile.ai[0] == 0)
-            {
-                Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
-            }
-            Projectile.ai[0] += ChargeIncrement * player.GetAttackSpeed(DamageClass.Melee);
+            Projectile.ai[0] += ChargeIncrement * player.GetAdjustedWeaponSpeedPercent(player.HeldItem);
 
             if (Projectile.ai[0] > 1f)
             {
@@ -107,6 +109,11 @@ namespace Terrafirma.Common.Templates.Melee
         {
             commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], Projectile.scale);
             return false;
+        }
+
+        public void ApplyStoredCharge(Player player, Projectile projectile)
+        {
+            projectile.ai[0] = player.PlayerStats().StoredMeleeCharge;
         }
     }
 
@@ -174,7 +181,6 @@ namespace Terrafirma.Common.Templates.Melee
         {
 
         }
-
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];

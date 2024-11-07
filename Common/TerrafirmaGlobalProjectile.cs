@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Buffs;
+using Terrafirma.Common.Interfaces;
 using Terrafirma.Common.Players;
 using Terrafirma.Data;
 using Terrafirma.Projectiles.Ranged.Bullets;
@@ -15,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common
 {
-    public class GlobalProjectile : Terraria.ModLoader.GlobalProjectile
+    public class TerrafirmaGlobalProjectile : GlobalProjectile
     {
         public override void SetDefaults(Projectile projectile)
         {
@@ -35,27 +36,6 @@ namespace Terrafirma.Common
                     projectile.aiStyle = -1;
                     break;
             }
-
-            //if (
-            //    entity.type == ProjectileID.EnchantedBoomerang ||
-            //    entity.type == ProjectileID.FruitcakeChakram ||
-            //    entity.type == ProjectileID.IceBoomerang ||
-            //    entity.type == ProjectileID.Shroomerang ||
-            //    entity.type == ProjectileID.WoodenBoomerang ||
-            //    entity.type == ProjectileID.BloodyMachete ||
-            //    entity.type == ProjectileID.CombatWrench ||
-            //    entity.type == ProjectileID.Flamarang ||
-            //    entity.type == ProjectileID.ThornChakram ||
-            //    entity.type == ProjectileID.Trimarang ||
-            //    entity.type == ProjectileID.Bananarang ||
-            //    entity.type == ProjectileID.LightDisc ||
-            //    entity.type == ProjectileID.FlyingKnife ||
-            //    entity.type == ProjectileID.PossessedHatchet ||
-            //    entity.type == ProjectileID.PaladinsHammerFriendly 
-            //)
-            //{
-            //    entity.DamageType = DamageClass.Ranged;
-            //}
         }
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
@@ -75,11 +55,17 @@ namespace Terrafirma.Common
                         projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
                         break;
                 }
+
                 if (ProjectileSets.AutomaticallyGivenMeleeScaling[projectile.type])
                 {
                     float scale = ammoSource.Player.GetAdjustedItemScale(ammoSource.Item);
                     projectile.Resize((int)(projectile.width * scale), (int)(projectile.height * scale));
                     projectile.scale = scale;
+                }
+                if (projectile.ModProjectile is IUsesStoredMeleeCharge i && ammoSource.Player.PlayerStats().StoredMeleeCharge != 0)
+                {
+                    i.ApplyStoredCharge(ammoSource.Player,projectile);
+                    ammoSource.Player.PlayerStats().StoredMeleeCharge = 0;
                 }
             }
         }

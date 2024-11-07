@@ -28,6 +28,10 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static float GetAdjustedWeaponSpeedPercent(this Player player, Item item)
+        {
+            return player.GetWeaponAttackSpeed(item) * ((float)ContentSamples.ItemsByType[item.type].useTime / item.useTime);
+        }
         public static bool CheckTension(this Player player, int Tension, bool Consume = true)
         {
             PlayerStats pStats = player.PlayerStats();
