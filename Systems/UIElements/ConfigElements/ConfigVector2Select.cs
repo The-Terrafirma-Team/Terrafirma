@@ -73,7 +73,7 @@ namespace Terrafirma.Systems.UIElements.ConfigElements
             {
                 new ConfigSnapPoint(new Vector2(0.8f,0f), new Vector2(0,0)),
                 new ConfigSnapPoint(new Vector2(0.35f,0f), new Vector2(0,0)),
-                new ConfigSnapPoint(new Vector2(0.5f,0.5f), new Vector2(0,15)),
+                new ConfigSnapPoint(new Vector2(0.5f,0.5f), new Vector2(0,5)),
                 new ConfigSnapPoint(new Vector2(0.0f,1f), new Vector2(25,-10))
             };
 

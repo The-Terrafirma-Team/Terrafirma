@@ -181,7 +181,6 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Main.NewText(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X);
             UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * Main.GameZoomTarget,
                                    ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * Main.GameZoomTarget);
 
