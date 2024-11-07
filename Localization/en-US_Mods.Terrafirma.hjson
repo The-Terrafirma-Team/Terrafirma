@@ -1884,7 +1884,8 @@ Configs: {
 			10: Gothic
 			11: Dipped
 			12: Devourer
-
+			13: Ouroboros
+			14: Bejeweled
 		}
 
 		ExtraUIPosition: {

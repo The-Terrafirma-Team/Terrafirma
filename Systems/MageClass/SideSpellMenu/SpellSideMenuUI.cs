@@ -54,7 +54,7 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
             selecteditem = item;
             selectedspellID = 0;
             iconshift = 0;
-            UIOffset = new Vector2(1400, 0);
+            UIOffset = new Vector2(0, 0);
 
             for (int i = 0; i < SpellID.itemcatalogue[item.type].Length; i++)
             {
@@ -88,6 +88,9 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
                     }
                 }
             }
+
+            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * (Main.ScreenSize.ToVector2() / new Vector2(100, 100)).X * Main.GameZoomTarget,
+                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * (Main.ScreenSize.ToVector2() / new Vector2(100, 100)).Y * Main.GameZoomTarget);
 
             Spellname = new UIText("");
             Spellname.HAlign = 0f;
@@ -178,8 +181,9 @@ namespace Terrafirma.Systems.MageClass.SideSpellMenu
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * (Main.ViewSize / new Vector2(1920, 1080)).X * Main.GameZoomTarget,
-                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * (Main.ViewSize / new Vector2(1920, 1080)).Y * Main.GameZoomTarget);
+            Main.NewText(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X);
+            UIOffset = new Vector2(ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.X * Main.GameZoomTarget,
+                                   ModContent.GetInstance<ClientConfig>().ExtraSpellUiPosition.Y * Main.GameZoomTarget);
 
             if (!SpellID.itemcatalogue.ContainsKey(selecteditem.type) || selecteditem.GetGlobalItem<GlobalItemInstanced>().Spell == null || spelliconlist.Length == 0) return;
 
