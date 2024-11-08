@@ -33,7 +33,6 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override void OnSpawn(IEntitySource source)
         {
-            player = Main.player[Projectile.owner];
             Projectile.timeLeft = player.itemAnimationMax;
             Projectile.ai[1] = player.itemAnimationMax;
         }

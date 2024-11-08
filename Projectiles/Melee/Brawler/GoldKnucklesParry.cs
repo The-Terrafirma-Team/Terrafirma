@@ -19,6 +19,12 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Quarter, MathHelper.PiOver4 * -3 * player.direction);
             player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Quarter, MathHelper.PiOver4 * -3 * player.direction);
         }
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Projectile.hide = true;
+            Projectile.Opacity = 0;
+        }
         public override void OnParryProjectile(Projectile p, Player player)
         {
             base.OnParryProjectile(p, player);

@@ -3,14 +3,38 @@ using Terraria;
 using Terraria.ModLoader;
 using Terrafirma.Projectiles.Melee.Knight;
 using Terrafirma.Projectiles.Melee.Paladin;
+using Terrafirma.Data;
+using Terraria.DataStructures;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using Terrafirma.Common;
+using Terraria.GameInput;
+using Terraria.Localization;
+using System.Linq;
 
 namespace Terrafirma.Items.Weapons.Melee.Paladin
 {
     internal class EaterOfSkulls : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
+        }
         public override bool MeleePrefix()
         {
             return true;
+        }
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
+                {
+                    string Right = TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight"));
+                    tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip", Language.GetText("Mods.Terrafirma.Misc.RightClickToParry").WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20, true)]).Value));
+                    break;
+                }
+            }
         }
         public override void SetDefaults()
         {
@@ -31,6 +55,19 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Paladin.EaterOfSkulls>();
             Item.shootSpeed = 10;
             Item.channel = true;
+        }
+        public override bool AltFunctionUse(Player player)
+        {
+            return true;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if(player.altFunctionUse == 2)
+            {
+                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<EaterOfSkullsParry>(), damage, knockback, player.whoAmI);
+                return false;
+            }
+            return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
         public override void AddRecipes()
         {

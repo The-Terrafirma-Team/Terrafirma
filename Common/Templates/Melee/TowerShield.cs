@@ -70,7 +70,8 @@ namespace Terrafirma.Common.Templates.Melee
             int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Knockback"));
             if (index != -1)
             {
-                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip1", Language.GetText("Mods.Terrafirma.Misc.TowerShield").WithFormatArgs(dmg).ToString()));
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip1", Language.GetText("Mods.Terrafirma.Misc.TowerShield").WithFormatArgs(dmg).Value));
+                tooltips.Insert(index + 2, new TooltipLine(Mod, "Tooltip2", Language.GetText("Mods.Terrafirma.Misc.TowerShieldExtras").Value));
             }
         }
     }
@@ -109,7 +110,6 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override void AI()
         {
-            player = Main.player[Projectile.owner];
             player.PlayerStats().FeralCharge = 0;
             if (player.channel && !stoppedChanneling)
             {

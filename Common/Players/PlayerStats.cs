@@ -203,6 +203,10 @@ namespace Terrafirma.Common.Players
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
+            if(item.ModItem is TowerShield)
+            {
+                scale -= scale * 0.25f;
+            }
             if(item.DamageType == DamageClass.Melee)
                 scale += MeleeWeaponScale;
             else if (item.ModItem is NecromancerScythe)

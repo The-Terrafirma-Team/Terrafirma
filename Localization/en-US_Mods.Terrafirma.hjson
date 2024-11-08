@@ -1260,20 +1260,12 @@ Items: {
 
 	GoldKnuckles: {
 		DisplayName: Gold Knuckles
-		Tooltip:
-			'''
-			{0} to parry, grants {1} tension
-			{2} to do a charged punch, costs {3} tension
-			'''
+		Tooltip: "{0} to do a charged punch, costs {1} tension"
 	}
 
 	PlatinumKnuckles: {
 		DisplayName: Platinum Knuckles
-		Tooltip:
-			'''
-			{0} to parry, grants {1} tension
-			{2} to do a charged punch, costs {3} tension
-			'''
+		Tooltip: "{0} to do a charged punch, costs {1} tension"
 	}
 }
 
@@ -1453,6 +1445,9 @@ Projectiles: {
 	GoldKnucklesPunch.DisplayName: Gold Knuckles Punch
 	GoldKnucklesParry.DisplayName: Gold Knuckles Parry
 	GoldKnucklesDash.DisplayName: Gold Knuckles Dash
+	EaterOfSkullsParry.DisplayName: Eater Of Skulls Parry
+	IronThrowingHammerParry.DisplayName: Iron Throwing Hammer Parry
+	LeadThrowingHammerParry.DisplayName: Lead Throwing Hammer Parry
 }
 
 Tiles: {
@@ -2045,7 +2040,14 @@ VanillaSetBonus: {
 Misc: {
 	EbonstoneWeak: The ebonstone begins to crumble!
 	CrimstoneWeak: The crimstone begins to crumble!
+	PaladinHammerStun: Stuns enemies at full charge
+	RightClickToParry: "{0} To parry, grants {1} tension"
 	TowerShield: Can block up to {0} damage
+	TowerShieldExtras:
+		'''
+		75% benefit from melee scale bonuses
+		Deflecting projectiles charges channeled melee weapons
+		'''
 	AccuracyPrefix: % accuracy
 	MaxLifePrefix: "{0} max life"
 	LifeRegenPrefix: "{0} life regeneration"

@@ -56,8 +56,8 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
                 {
                     string Right = TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight"));
                     string Middle = TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault());
-                    tooltips[i].Text = Tooltip.WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20,true), Middle, Main.LocalPlayer.ApplyTensionBonusScaling(SuperCost,false,true)]).Value;
-                    tooltips.RemoveAt(i + 1);
+                    tooltips[i].Text = Language.GetText("Mods.Terrafirma.Misc.RightClickToParry").WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20, true)]).Value;
+                    tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip", Tooltip.WithFormatArgs([Middle, Main.LocalPlayer.ApplyTensionBonusScaling(SuperCost, false, true)]).Value));
                     break;
                 }
             }

@@ -3,6 +3,10 @@ using Terrafirma.Common.Templates.Melee;
 using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Projectiles.Melee.Paladin
 {
@@ -31,5 +35,20 @@ namespace Terrafirma.Projectiles.Melee.Paladin
             }
         }
         public override string Texture => "Terrafirma/Projectiles/Melee/Paladin/EaterOfSkulls";
+    }
+    public class EaterOfSkullsParry : MeleeParry
+    {
+        public override string Texture => "Terrafirma/Projectiles/Melee/Paladin/EaterOfSkulls";
+        public override void AI()
+        {
+            base.AI();
+            player.heldProj = Projectile.whoAmI;
+            UpwardsSwingParryAnimation();
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            PaladinHammerParry(lightColor);
+            return false;
+        }
     }
 }

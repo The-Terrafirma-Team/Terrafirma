@@ -8,7 +8,7 @@ namespace Terrafirma.Common.Templates
 {
     public abstract class HeldProjectile : ModProjectile
     {
-        public Player player;
+        public Player player { get => Main.player[Projectile.owner]; }
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(16);
@@ -24,7 +24,6 @@ namespace Terrafirma.Common.Templates
         }
         public void commonHeldLogic(int dummyTime = 2)
         {
-            player = Main.player[Projectile.owner];
             player.heldProj = Projectile.whoAmI;
             if (player.channel && !stoppedChanneling)
             {

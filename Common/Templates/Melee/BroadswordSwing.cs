@@ -18,7 +18,6 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override void OnSpawn(IEntitySource source)
         {
-            player = Main.player[Projectile.owner];
             Projectile.timeLeft = player.HeldItem.useTime;
             Projectile.ai[1] = player.PlayerStats().TimesHeldWeaponHasBeenSwung;
         }
