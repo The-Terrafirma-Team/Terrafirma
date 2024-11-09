@@ -73,25 +73,25 @@ namespace Terrafirma.Systems
             multiplierinterface = new();
             multiplierinterface.SetState(multiplierdisplay);
         }
-        public override void UpdateUI(GameTime gameTime)
-        {
-            multiplierinterface?.Update(gameTime);
-        }
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
-        {
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
-            if (mouseTextIndex != -1)
-            {
-                layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-                    "Terrafirma: Damage Multiplier Display",
-                    delegate
-                    {
-                        multiplierinterface?.Draw(Main.spriteBatch, new GameTime());
-                        return true;
-                    },
-                    InterfaceScaleType.UI)
-                );
-            }
-        }
+        //public override void UpdateUI(GameTime gameTime)
+        //{
+        //    multiplierinterface?.Update(gameTime);
+        //}
+        //public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        //{
+        //    int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
+        //    if (mouseTextIndex != -1)
+        //    {
+        //        layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
+        //            "Terrafirma: Damage Multiplier Display",
+        //            delegate
+        //            {
+        //                multiplierinterface?.Draw(Main.spriteBatch, new GameTime());
+        //                return true;
+        //            },
+        //            InterfaceScaleType.UI)
+        //        );
+        //    }
+        //}
     }
 }

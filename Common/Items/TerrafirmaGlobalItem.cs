@@ -82,28 +82,28 @@ namespace Terrafirma.Common.Items
             PlayerStats stats = player.PlayerStats();
             switch (item.type)
             {
-                case ItemID.FeralClaws:
-                    if (stats.FeralChargeMax < 3)
-                        stats.FeralChargeMax = 3;
-                    break;
-                case ItemID.PowerGlove:
-                    if (stats.FeralChargeMax < 4)
-                        stats.FeralChargeMax = 4;
-                    break;
-                case ItemID.BerserkerGlove:
-                    if (stats.FeralChargeMax < 5)
-                        stats.FeralChargeMax = 5;
+                //case ItemID.FeralClaws:
+                //    if (stats.FeralChargeMax < 3)
+                //        stats.FeralChargeMax = 3;
+                //    break;
+                //case ItemID.PowerGlove:
+                //    if (stats.FeralChargeMax < 4)
+                //        stats.FeralChargeMax = 4;
+                //    break;
+                //case ItemID.BerserkerGlove:
+                //    if (stats.FeralChargeMax < 5)
+                //        stats.FeralChargeMax = 5;
 
-                    if (stats.FeralChargeSpeed < PlayerStats.defaultFeralChargeSpeed * 2f)
-                        stats.FeralChargeSpeed = PlayerStats.defaultFeralChargeSpeed * 2f;
-                    break;
-                case ItemID.FireGauntlet:
-                case ItemID.MechanicalGlove:
-                    if (stats.FeralChargeSpeed < PlayerStats.defaultFeralChargeSpeed * 1.3f)
-                        stats.FeralChargeSpeed = PlayerStats.defaultFeralChargeSpeed * 1.3f;
-                    if (stats.FeralChargeMax < 7)
-                        stats.FeralChargeMax = 7;
-                    break;
+                //    if (stats.FeralChargeSpeed < PlayerStats.defaultFeralChargeSpeed * 2f)
+                //        stats.FeralChargeSpeed = PlayerStats.defaultFeralChargeSpeed * 2f;
+                //    break;
+                //case ItemID.FireGauntlet:
+                //case ItemID.MechanicalGlove:
+                //    if (stats.FeralChargeSpeed < PlayerStats.defaultFeralChargeSpeed * 1.3f)
+                //        stats.FeralChargeSpeed = PlayerStats.defaultFeralChargeSpeed * 1.3f;
+                //    if (stats.FeralChargeMax < 7)
+                //        stats.FeralChargeMax = 7;
+                //    break;
                 case ItemID.EngineeringHelmet:
                     player.PlayerStats().SentrySpeedMultiplier += 0.1f;
                     player.PlayerStats().SentryDamageMultiplier += 0.05f;
