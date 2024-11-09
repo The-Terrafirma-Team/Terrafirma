@@ -18,7 +18,7 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
         }
         public override void SetDefaults()
         {
-            Item.damage = 20;
+            Item.damage = 9;
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.knockBack = 4;

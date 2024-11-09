@@ -16,20 +16,20 @@ namespace Terrafirma.Common
         public override void Load()
         {
             // Items
-            TextureAssets.Item[ItemID.DemonScythe] = ModContent.Request<Texture2D>(AssetFolder + "ShadowCodex");
-            TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "VileStaff");
+            TextureAssets.Item[ItemID.DemonScythe] = ModContent.Request<Texture2D>(AssetFolder + "Items/ShadowCodex");
+            TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "Items/VileStaff");
             // NPCs
-            TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>(AssetFolder + "Slime");
-            TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "BalloonSlime");
+            TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_0");
+            TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/BalloonSlime");
             // Misc
-            TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Ninja");
+            TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Misc/Ninja");
             // Armor
-            TextureAssets.Item[ItemID.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "NecroHelmet");
-            TextureAssets.Item[ItemID.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "NecroChest");
-            TextureAssets.Item[ItemID.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "NecroLegs");
-            TextureAssets.ArmorHead[ArmorIDs.Head.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "NecroHelmet_Head");
-            TextureAssets.ArmorBodyComposite[ArmorIDs.Body.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "NecroChest_Body");
-            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "NecroLegs_Legs");
+            TextureAssets.Item[ItemID.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroHelmet");
+            TextureAssets.Item[ItemID.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroChest");
+            TextureAssets.Item[ItemID.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroLegs");
+            TextureAssets.ArmorHead[ArmorIDs.Head.NecroHelmet] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroHelmet_Head");
+            TextureAssets.ArmorBodyComposite[ArmorIDs.Body.NecroBreastplate] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroChest_Body");
+            TextureAssets.ArmorLeg[ArmorIDs.Legs.NecroGreaves] = ModContent.Request<Texture2D>(AssetFolder + "Items/NecroLegs_Legs");
         }
         public override void Unload()
         {
@@ -52,14 +52,28 @@ namespace Terrafirma.Common
     }
     public class VanillaNPCSpriteChanges : GlobalNPC
     {
+        const string AssetFolder = "Terrafirma/Assets/Resprites/";
         public override bool InstancePerEntity => true;
+
+        private static Asset<Texture2D>[] SlimeVariants = new Asset<Texture2D>[3];
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.ModNPC == null;
         }
+        public byte variant = 0;
         public override void SetStaticDefaults()
         {
+            //Slime
             Main.npcFrameCount[1] = 6;
+            SlimeVariants[0] = TextureAssets.Npc[1];
+            for(int i = 1; i <  SlimeVariants.Length; i++)
+            {
+                SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
+            }
+        }
+        public override void SetDefaults(NPC entity)
+        {
+            variant = (byte)Main.rand.Next(255);
         }
         public override void Unload()
         {
@@ -69,6 +83,7 @@ namespace Terrafirma.Common
         {
             if(npc.type == NPCID.BlueSlime)
             {
+                npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 if (npc.frame.Y > frameHeight * 3)
                     npc.frame.Y = 0;
                 if (npc.velocity.Y < 0)
@@ -83,11 +98,12 @@ namespace Terrafirma.Common
             {
                 if (npc.ai[1] > 0)
                 {
-                    //Asset<Texture2D> itemTex = TextureAssets.Item[(int)npc.ai[1]];
                     Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
-                    spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f, rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, 0.7f * npc.scale, SpriteEffects.None, 0);
+                    //Main.GetItemDrawFrame(ItemID.FieryGreatsword, out var itemTexture, out var rectangle);
+                    float itemScale = (float)npc.frame.Height / Math.Max(rectangle.Width,rectangle.Height) * 0.5f;
+                    spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0,(float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
                 }
-                spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, npc.Bottom - screenPos + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
                 
                 return false;
             }
@@ -100,7 +116,7 @@ namespace Terrafirma.Common
         private static Asset<Texture2D> DemonScythe;
         public override void Load()
         {
-            DemonScythe = ModContent.Request<Texture2D>(AssetFolder + "DemonScythe");
+            DemonScythe = ModContent.Request<Texture2D>(AssetFolder + "Projectiles/DemonScythe");
         }
         public override void SetStaticDefaults()
         {

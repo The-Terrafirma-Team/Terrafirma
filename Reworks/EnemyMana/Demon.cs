@@ -22,8 +22,8 @@ namespace Terrafirma.Reworks.EnemyMana
 
         public override void Load()
         {
-            DemonTex = ModContent.Request<Texture2D>(AssetFolder + "Demon");
-            VoodooTex = ModContent.Request<Texture2D>(AssetFolder + "VoodooDemon");
+            DemonTex = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Demon");
+            VoodooTex = ModContent.Request<Texture2D>(AssetFolder + "NPCs/VoodooDemon");
         }
         public override bool AppliesToEntity(NPC npc, bool lateInstantiation)
         {
