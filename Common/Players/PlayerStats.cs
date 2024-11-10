@@ -1,13 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.IO;
-using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Templates;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -41,6 +37,7 @@ namespace Terrafirma.Common.Players
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
         public bool ManaPotionSickness = false;
+
         public float StoredMeleeCharge = 0f;
         public float FeralCharge;
         public float FeralChargeMax;
@@ -48,11 +45,13 @@ namespace Terrafirma.Common.Players
         public float MeleeWeaponScale = 0;
         public float ParryBuffDurationMultiplier = 1f;
         public float ParryImmunityDurationMultiplier = 1f;
+        public float ParryDurationMultiplier = 1f;
         public int Tension = 0;
         public int TensionMax = 60;
         public int TensionMax2 = 60;
         public float TensionGainMultiplier = 1f;
         public float TensionCostMultiplier = 1f;
+        public bool Whiffed = false;
 
         public float SentrySpeedMultiplier = 0f;
         public float SentryRangeMultiplier = 0f;
@@ -95,7 +94,11 @@ namespace Terrafirma.Common.Players
         public float maxRunSpeedFlat = 0f;
         public override void ResetEffects()
         {
-            if(StoredMeleeCharge > 1)
+            ParryBuffDurationMultiplier = 1f;
+            ParryImmunityDurationMultiplier = 1f;
+            ParryDurationMultiplier = 1f;
+            Whiffed = false;
+            if (StoredMeleeCharge > 1)
             {
                 StoredMeleeCharge = 1;
             }
@@ -123,7 +126,7 @@ namespace Terrafirma.Common.Players
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
 
-            Tension = Math.Clamp(Tension,0,TensionMax + TensionMax2);
+            Tension = Math.Clamp(Tension, 0, TensionMax + TensionMax2);
             TensionMax2 = 0;
 
             DebuffTimeMultiplier = 1f;
@@ -175,7 +178,7 @@ namespace Terrafirma.Common.Players
         {
             FeralCharge += FeralChargeSpeed;
 
-            if(FeralCharge > FeralChargeMax)
+            if (FeralCharge > FeralChargeMax)
                 FeralCharge = FeralChargeMax;
             if (Player.itemAnimation == 1 && Player.altFunctionUse != 2)
                 FeralCharge = 0;
@@ -185,7 +188,7 @@ namespace Terrafirma.Common.Players
 
         public override void UpdateLifeRegen()
         {
-            if(Player.lifeRegenCount >= (int)(120f / HealingMultiplier))
+            if (Player.lifeRegenCount >= (int)(120f / HealingMultiplier))
             {
                 Player.lifeRegenCount = 120;
             }
@@ -196,18 +199,18 @@ namespace Terrafirma.Common.Players
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if(Main.rand.NextFloat() < AmmoSaveChance)
+            if (Main.rand.NextFloat() < AmmoSaveChance)
                 return false;
 
             return base.CanConsumeAmmo(weapon, ammo);
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            if(item.ModItem is TowerShield)
+            if (item.ModItem is TowerShield)
             {
                 scale -= scale * 0.25f;
             }
-            if(item.DamageType == DamageClass.Melee)
+            if (item.DamageType == DamageClass.Melee)
                 scale += MeleeWeaponScale;
             else if (item.ModItem is NecromancerScythe)
                 scale += NecromancerWeaponScale;

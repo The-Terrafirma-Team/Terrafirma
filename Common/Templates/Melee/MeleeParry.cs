@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.Audio;
@@ -40,7 +41,7 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public virtual void FailParry()
         {
-
+            player.AddBuff(ModContent.BuffType<Whiffed>(),(int)(60 * 5 * player.PlayerStats().ParryDurationMultiplier));
         }
         public override void AI()
         {

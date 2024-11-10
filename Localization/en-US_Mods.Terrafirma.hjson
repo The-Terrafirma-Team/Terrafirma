@@ -153,6 +153,11 @@ Buffs: {
 		DisplayName: Shining Moment
 		Description: Attack speed increased
 	}
+
+	Whiffed: {
+		DisplayName: Whiffed Parry
+		Description: You cannot parry
+	}
 }
 
 Items: {

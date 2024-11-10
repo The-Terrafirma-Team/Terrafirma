@@ -20,7 +20,11 @@ namespace Terrafirma.Common
             TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>(AssetFolder + "Items/VileStaff");
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_0");
+            TextureAssets.Npc[NPCID.LavaSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/LavaSlime");
+            TextureAssets.Npc[NPCID.IlluminantSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/IlluminantSlime");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/BalloonSlime");
+            TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/MotherSlime");
+            TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Misc/Ninja");
             // Armor
@@ -38,6 +42,10 @@ namespace Terrafirma.Common
             TextureAssets.Item[ItemID.Vilethorn] = ModContent.Request<Texture2D>($"Terraria/Images/Item_{ItemID.Vilethorn}");
             // NPCs
             TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
+            TextureAssets.Npc[NPCID.LavaSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.LavaSlime}");
+            TextureAssets.Npc[NPCID.IlluminantSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.IlluminantSlime}");
+            TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.MotherSlime}");
+            TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
@@ -70,18 +78,34 @@ namespace Terrafirma.Common
             {
                 SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
             }
+            Main.npcFrameCount[NPCID.LavaSlime] = 6;
+            Main.npcFrameCount[NPCID.MotherSlime] = 6;
+            Main.npcFrameCount[NPCID.DungeonSlime] = 6;
+            Main.npcFrameCount[NPCID.IlluminantSlime] = 6;
         }
-        public override void SetDefaults(NPC entity)
+        public override void SetDefaultsFromNetId(NPC npc)
         {
-            variant = (byte)Main.rand.Next(255);
+            if (npc.netID == NPCID.BabySlime)
+            {
+                npc.color = new Color(80, 80, 80, 128);
+            }
+        }
+        public override void SetDefaults(NPC npc)
+        {
+            if (!npc.IsABestiaryIconDummy)
+                variant = (byte)Main.rand.Next(255);
         }
         public override void Unload()
         {
             Main.npcFrameCount[1] = 2;
+            Main.npcFrameCount[NPCID.LavaSlime] = 2;
+            Main.npcFrameCount[NPCID.MotherSlime] = 2;
+            Main.npcFrameCount[NPCID.DungeonSlime] = 2;
+            Main.npcFrameCount[NPCID.IlluminantSlime] = 2;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if(npc.type == NPCID.BlueSlime)
+            if(npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 if (npc.frame.Y > frameHeight * 3)
@@ -100,11 +124,12 @@ namespace Terrafirma.Common
                 {
                     Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
                     //Main.GetItemDrawFrame(ItemID.FieryGreatsword, out var itemTexture, out var rectangle);
-                    float itemScale = (float)npc.frame.Height / Math.Max(rectangle.Width,rectangle.Height) * 0.5f;
+                    //float itemScale = (float)npc.frame.Height / Math.Max(rectangle.Width,rectangle.Height) * 0.5f;
+                    float itemScale = 0.7f;
                     spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0,(float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
                 }
                 spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
-                
+
                 return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);

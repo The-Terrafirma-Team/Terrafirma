@@ -58,7 +58,7 @@ namespace Terrafirma.Items.Weapons.Melee.Paladin
         }
         public override bool AltFunctionUse(Player player)
         {
-            return true;
+            return !player.PlayerStats().Whiffed;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
