@@ -18,6 +18,7 @@ using Terrafirma.Systems.Trees;
 using Terrafirma.Items.Equipment;
 using Terraria.DataStructures;
 using Terrafirma.Common.Templates.Melee;
+using System.Collections.Generic;
 
 
 namespace Terrafirma.Common.Players
@@ -67,6 +68,15 @@ namespace Terrafirma.Common.Players
             BoxOfHighPiercingRounds = false;
 
             SpringBoots = false;
+        }
+
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+            if(!mediumCoreDeath)
+            {
+                Player.ConsumedManaCrystals = 2;
+            }
+            return base.AddStartingItems(mediumCoreDeath);
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
@@ -128,7 +138,6 @@ namespace Terrafirma.Common.Players
                 }
             }
         }
-
         public override void OnMissingMana(Item item, int neededMana)
         {
             Player.manaFlower = false;

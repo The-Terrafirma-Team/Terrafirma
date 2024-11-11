@@ -158,6 +158,11 @@ Buffs: {
 		DisplayName: Whiffed Parry
 		Description: You cannot parry
 	}
+
+	ShadowBoxersParry: {
+		DisplayName: Shady Moment
+		Description: Melee weapon size increased
+	}
 }
 
 Items: {
@@ -1272,6 +1277,11 @@ Items: {
 		DisplayName: Platinum Knuckles
 		Tooltip: "{0} to do a charged punch, costs {1} tension"
 	}
+
+	ShadowBoxers: {
+		DisplayName: Shadow Boxers
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1453,6 +1463,9 @@ Projectiles: {
 	EaterOfSkullsParry.DisplayName: Eater Of Skulls Parry
 	IronThrowingHammerParry.DisplayName: Iron Throwing Hammer Parry
 	LeadThrowingHammerParry.DisplayName: Lead Throwing Hammer Parry
+	ShadowBoxersPunch.DisplayName: Shadow Boxers Punch
+	ShadowBoxerBomb.DisplayName: Shadow Boxer Bomb
+	ShadowBoxersParry.DisplayName: Shadow Boxers Parry
 }
 
 Tiles: {
@@ -2026,7 +2039,7 @@ VanillaSetBonus: {
 		'''
 	Tungsten:
 		'''
-		+ 3 defense
+		+3 defense
 		+10% knockback
 		Melee weapons are 20% larger
 		'''

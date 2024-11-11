@@ -45,6 +45,10 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override void AI()
         {
+            if (Projectile.ai[0] == 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item1, player.Center);
+            }
             Projectile.ai[0] += (1 / 15f);
 
             if (Projectile.ai[0] > 1f)

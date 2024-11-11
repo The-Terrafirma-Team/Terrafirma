@@ -108,6 +108,7 @@ namespace Terrafirma.Common
             if(npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
+                npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
                 if (npc.frame.Y > frameHeight * 3)
                     npc.frame.Y = 0;
                 if (npc.velocity.Y < 0)
