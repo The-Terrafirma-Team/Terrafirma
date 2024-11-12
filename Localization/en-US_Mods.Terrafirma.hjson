@@ -1282,6 +1282,11 @@ Items: {
 		DisplayName: Shadow Boxers
 		Tooltip: ""
 	}
+
+	SlimyUmbrella: {
+		DisplayName: Slimy Umbrella
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

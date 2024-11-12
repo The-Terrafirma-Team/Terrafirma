@@ -25,6 +25,8 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/BalloonSlime");
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/MotherSlime");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
+
+            TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Misc/Ninja");
             // Armor
@@ -47,6 +49,8 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.MotherSlime}");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
+
+            TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.EaterofSouls}");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
             // Armor
@@ -64,6 +68,7 @@ namespace Terrafirma.Common
         public override bool InstancePerEntity => true;
 
         private static Asset<Texture2D>[] SlimeVariants = new Asset<Texture2D>[3];
+        private static Asset<Texture2D>[] SoulEaterVariants = new Asset<Texture2D>[2];
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.ModNPC == null;
@@ -74,7 +79,7 @@ namespace Terrafirma.Common
             //Slime
             Main.npcFrameCount[1] = 6;
             SlimeVariants[0] = TextureAssets.Npc[1];
-            for(int i = 1; i <  SlimeVariants.Length; i++)
+            for(int i = 1; i < SlimeVariants.Length; i++)
             {
                 SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
             }
@@ -82,6 +87,13 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.MotherSlime] = 6;
             Main.npcFrameCount[NPCID.DungeonSlime] = 6;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 6;
+            // Corruption
+            Main.npcFrameCount[NPCID.EaterofSouls] = 4;
+            SoulEaterVariants[0] = TextureAssets.Npc[NPCID.EaterofSouls];
+            for (int i = 1; i < SoulEaterVariants.Length; i++)
+            {
+                SoulEaterVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_" + $"{i}");
+            }
         }
         public override void SetDefaultsFromNetId(NPC npc)
         {
@@ -116,22 +128,31 @@ namespace Terrafirma.Common
                 else if (npc.velocity.Y > 0)
                     npc.frame.Y = frameHeight * 5;
             }
+            else if(npc.type == NPCID.EaterofSouls)
+            {
+                npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
+                npc.frameCounter += (1f - (MathHelper.Clamp(npc.Center.Distance(Main.player[npc.target].Center),0,200) / 200f)) * 2;
+            }
         }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if(npc.type == NPCID.BlueSlime)
+            switch (npc.type)
             {
-                if (npc.ai[1] > 0)
-                {
-                    Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
-                    //Main.GetItemDrawFrame(ItemID.FieryGreatsword, out var itemTexture, out var rectangle);
-                    //float itemScale = (float)npc.frame.Height / Math.Max(rectangle.Width,rectangle.Height) * 0.5f;
-                    float itemScale = 0.7f;
-                    spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0,(float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
-                }
-                spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0,2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                case NPCID.BlueSlime:
+                    if (npc.ai[1] > 0)
+                    {
+                        Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
+                        //Main.GetItemDrawFrame(ItemID.FieryGreatsword, out var itemTexture, out var rectangle);
+                        //float itemScale = (float)npc.frame.Height / Math.Max(rectangle.Width,rectangle.Height) * 0.5f;
+                        float itemScale = 0.7f;
+                        spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
+                    }
+                    spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                    return false;
 
-                return false;
+                case NPCID.EaterofSouls:
+                    spriteBatch.Draw(SoulEaterVariants[variant % 2].Value, npc.Center - screenPos, npc.frame, drawColor.MultiplyRGB(Color.Lerp(Color.White,new Color(0.85f,0.8f,0.9f),MathF.Sin(variant * 0.1f))), npc.rotation, new Vector2(25,56), npc.scale, SpriteEffects.None, 0);
+                    return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }

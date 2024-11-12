@@ -27,6 +27,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         public override void SetDefaults()
         {
             Projectile.QuickDefaults(false, 16);
+            Projectile.timeLeft = 60;
         }
         public override void OnKill(int timeLeft)
         {
