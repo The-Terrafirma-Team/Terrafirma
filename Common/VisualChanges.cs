@@ -27,6 +27,9 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
 
             TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
+            // Gore
+            TextureAssets.Gore[14] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0_Gore_0");
+            TextureAssets.Gore[15] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0_Gore_1");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Misc/Ninja");
             // Armor
@@ -50,7 +53,11 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
 
-            TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.EaterofSouls}");
+            TextureAssets.Gore[14] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_14"); // Eater of
+            TextureAssets.Gore[15] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_15"); //   Souls
+
+            // Gore
+            TextureAssets.Npc[14] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.EaterofSouls}");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
             // Armor
@@ -79,7 +86,7 @@ namespace Terrafirma.Common
             //Slime
             Main.npcFrameCount[1] = 6;
             SlimeVariants[0] = TextureAssets.Npc[1];
-            for(int i = 1; i < SlimeVariants.Length; i++)
+            for (int i = 1; i < SlimeVariants.Length; i++)
             {
                 SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
             }
@@ -117,7 +124,7 @@ namespace Terrafirma.Common
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if(npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime)
+            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
@@ -128,10 +135,10 @@ namespace Terrafirma.Common
                 else if (npc.velocity.Y > 0)
                     npc.frame.Y = frameHeight * 5;
             }
-            else if(npc.type == NPCID.EaterofSouls)
+            else if (npc.type == NPCID.EaterofSouls)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
-                npc.frameCounter += (1f - (MathHelper.Clamp(npc.Center.Distance(Main.player[npc.target].Center),0,200) / 200f)) * 2;
+                npc.frameCounter += (1f - (MathHelper.Clamp(npc.Center.Distance(Main.player[npc.target].Center), 0, 200) / 200f)) * 2;
             }
         }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -151,10 +158,36 @@ namespace Terrafirma.Common
                     return false;
 
                 case NPCID.EaterofSouls:
-                    spriteBatch.Draw(SoulEaterVariants[variant % 2].Value, npc.Center - screenPos, npc.frame, drawColor.MultiplyRGB(Color.Lerp(Color.White,new Color(0.85f,0.8f,0.9f),MathF.Sin(variant * 0.1f))), npc.rotation, new Vector2(25,56), npc.scale, SpriteEffects.None, 0);
+                    spriteBatch.Draw(SoulEaterVariants[variant % 2].Value, npc.Center - screenPos, npc.frame, drawColor/*.MultiplyRGB(Color.Lerp(Color.White, new Color(0.85f, 0.8f, 0.9f), Math.Abs(MathF.Sin(variant * 0.1f))))*/, npc.rotation, new Vector2(25, 56), npc.scale, SpriteEffects.None, 0);
                     return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {
+            if (npc.life > 0)
+                return;
+            switch (npc.type)
+            {
+                case NPCID.EaterofSouls:
+                    int latest = FindLatestGore();
+
+                    if (variant % 2 == 1)
+                    {
+                        Main.gore[latest].type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_0").Type;
+                        Main.gore[latest - 1].type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_1").Type;
+                    }
+                    break;
+            }
+        }
+        private int FindLatestGore()
+        {
+            for(int i = 0; i < Main.maxGore; i++)
+            {
+                if (Main.gore[i].active == false)
+                    return i - 1;
+            }
+            return Main.maxGore;
         }
     }
     public class ProjectileChanges : GlobalProjectile
@@ -178,10 +211,10 @@ namespace Terrafirma.Common
             {
                 case ProjectileID.DemonScythe:
                 case ProjectileID.DemonSickle:
-                    Color color = Color.Lerp(new Color(1f,1f,1f,0f),new Color(0.3f,0f,1f,0f),(float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f);
-                    for(int i = 0; i < 5; i++)
+                    Color color = Color.Lerp(new Color(1f, 1f, 1f, 0f), new Color(0.3f, 0f, 1f, 0f), (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f);
+                    for (int i = 0; i < 5; i++)
                     {
-                        TFUtils.EasyCenteredProjectileDraw(DemonScythe, projectile, color * (1f - (i/5f)) * 0.3f, projectile.oldPos[i] + (projectile.Size / 2) - Main.screenPosition, projectile.oldRot[i],1f);
+                        TFUtils.EasyCenteredProjectileDraw(DemonScythe, projectile, color * (1f - (i / 5f)) * 0.3f, projectile.oldPos[i] + (projectile.Size / 2) - Main.screenPosition, projectile.oldRot[i], 1f);
                     }
                     TFUtils.EasyCenteredProjectileDraw(DemonScythe, projectile, color);
                     return false;
@@ -193,7 +226,7 @@ namespace Terrafirma.Common
     {
         private static Asset<Texture2D> tex;
 
-        private static readonly int[] Bullets = {14,36,89,104,110,180,207,242,279,283,284,285,286,287,302,638,981};
+        private static readonly int[] Bullets = { 14, 36, 89, 104, 110, 180, 207, 242, 279, 283, 284, 285, 286, 287, 302, 638, 981 };
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
         {
             return Bullets.Contains(entity.type);
@@ -216,9 +249,9 @@ namespace Terrafirma.Common
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[p.type] - 1; i++)
             {
                 //Main.NewText(p.oldPos[7]);
-                if (p.oldPos[i+1] != Vector2.Zero)
+                if (p.oldPos[i + 1] != Vector2.Zero)
                 {
-                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i-1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
+                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
                     Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), brightColor * (0.5f - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
                 }
             }
@@ -256,13 +289,13 @@ namespace Terrafirma.Common
                     drawBullet(projectile, new Color(185, 128, 193, 128), new Color(95, 67, 139, 255));
                     break;
                 case 284: // Party
-                    drawBullet(projectile, new Color(255,128,255,128), new Color(200, 0, 255, 128));
+                    drawBullet(projectile, new Color(255, 128, 255, 128), new Color(200, 0, 255, 128));
                     break;
                 case 285: // Nano
                     drawBullet(projectile, new Color(0, 255, 255, 0), new Color(0, 0, 0, 255));
                     break;
                 case 286: // Explosive
-                    drawBullet(projectile, new Color(1f,Main.masterColor,0f, 0f), new Color(1f, 0f, 0f, 0f));
+                    drawBullet(projectile, new Color(1f, Main.masterColor, 0f, 0f), new Color(1f, 0f, 0f, 0f));
                     break;
                 case 287: // Ichor
                     drawBullet(projectile, new Color(1f, 1f, 0.6f, 0f), new Color(0.5f, 0.2f, 0f, 0.5f));
