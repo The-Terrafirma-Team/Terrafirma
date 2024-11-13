@@ -25,7 +25,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
 {
     public class ShadowBoxers : ModItem, IItemThatDrawsOnHandsWhenHeld, IHasTertriaryFunction
     {
-        //private static Asset<Texture2D> ArmTex;
+        private static Asset<Texture2D> ArmTex;
         public override void SetStaticDefaults()
         {
             ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
@@ -48,48 +48,48 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.DemoniteBar,6).Register();
         }
-        //public override void ModifyTooltips(List<TooltipLine> tooltips)
-        //{
-        //    for (int i = 0; i < tooltips.Count; i++)
-        //    {
-        //        if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
-        //        {
-        //            string Right = TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight"));
-        //            string Middle = TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault());
-        //            tooltips[i].Text = Language.GetText("Mods.Terrafirma.Misc.RightClickToParry").WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20, true)]).Value;
-        //            tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip", Tooltip.WithFormatArgs([Middle, Main.LocalPlayer.ApplyTensionBonusScaling(SuperCost, false, true)]).Value));
-        //            break;
-        //        }
-        //    }
-        //}
-        //public override void Load()
-        //{
-        //    ArmTex = ModContent.Request<Texture2D>(Texture + "_Hand");
-        //}
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
+                {
+                    string Right = TFUtils.NicenUpKeybindNameIfApplicable(PlayerInput.GenerateInputTag_ForCurrentGamemode(tagForGameplay: true, "MouseRight"));
+                    string Middle = TFUtils.NicenUpKeybindNameIfApplicable(Keybinds.tertiaryAttack.GetAssignedKeys().FirstOrDefault());
+                    tooltips[i].Text = Language.GetText("Mods.Terrafirma.Misc.RightClickToParry").WithFormatArgs([Right, Main.LocalPlayer.ApplyTensionBonusScaling(20, true)]).Value;
+                    tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip", Tooltip.WithFormatArgs([Middle, Main.LocalPlayer.ApplyTensionBonusScaling(SuperCost, false, true)]).Value));
+                    break;
+                }
+            }
+        }
+        public override void Load()
+        {
+            ArmTex = ModContent.Request<Texture2D>(Texture + "_Hand");
+        }
         public void DrawFrontHand(ref PlayerDrawSet drawInfo)
         {
-            //if (!drawInfo.drawPlayer.compositeFrontArm.enabled)
-            //{
-            //    DrawData item = new DrawData(ArmTex.Value, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2), drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
-            //    if (drawInfo.drawPlayer.CurrentLegFrameIsOneThatRaisesTheBody())
-            //    {
-            //        item.position.Y -= 2 * drawInfo.drawPlayer.gravDir;
-            //    }
-            //    drawInfo.DrawDataCache.Add(item);
-            //}
-            //else
-            //{
-            //    Vector2 vector = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2);
-            //    Vector2 value = Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
-            //    vector += value * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
-            //    float rotation = drawInfo.drawPlayer.bodyRotation + drawInfo.compositeFrontArmRotation;
-            //    Vector2 bodyVect = drawInfo.bodyVect;
-            //    Vector2 compositeOffset_FrontArm = new Vector2(-5 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 0f);
-            //    bodyVect += compositeOffset_FrontArm;
-            //    vector += compositeOffset_FrontArm;
-            //    DrawData drawData2 = new DrawData(ArmTex.Value, vector, drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, rotation, bodyVect, 1f, drawInfo.playerEffect, 0);
-            //    PlayerDrawLayers.DrawCompositeArmorPiece(ref drawInfo, CompositePlayerDrawContext.FrontArmAccessory, drawData2);
-            //}
+            if (!drawInfo.drawPlayer.compositeFrontArm.enabled)
+            {
+                DrawData item = new DrawData(ArmTex.Value, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2), drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
+                if (drawInfo.drawPlayer.CurrentLegFrameIsOneThatRaisesTheBody())
+                {
+                    item.position.Y -= 2 * drawInfo.drawPlayer.gravDir;
+                }
+                drawInfo.DrawDataCache.Add(item);
+            }
+            else
+            {
+                Vector2 vector = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2);
+                Vector2 value = Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
+                vector += value * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
+                float rotation = drawInfo.drawPlayer.bodyRotation + drawInfo.compositeFrontArmRotation;
+                Vector2 bodyVect = drawInfo.bodyVect;
+                Vector2 compositeOffset_FrontArm = new Vector2(-5 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 0f);
+                bodyVect += compositeOffset_FrontArm;
+                vector += compositeOffset_FrontArm;
+                DrawData drawData2 = new DrawData(ArmTex.Value, vector, drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, rotation, bodyVect, 1f, drawInfo.playerEffect, 0);
+                PlayerDrawLayers.DrawCompositeArmorPiece(ref drawInfo, CompositePlayerDrawContext.FrontArmAccessory, drawData2);
+            }
         }
         public void DrawOffHand(ref PlayerDrawSet drawInfo)
         {
