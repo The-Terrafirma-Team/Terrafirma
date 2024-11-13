@@ -55,7 +55,7 @@ namespace Terrafirma.Systems.MageClass
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
             if (mouseTextIndex != -1)
             {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
