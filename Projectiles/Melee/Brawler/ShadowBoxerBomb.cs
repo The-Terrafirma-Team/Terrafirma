@@ -21,13 +21,11 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         public override void SetStaticDefaults()
         {
             ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
-            Main.projFrames[Type] = 4;
-            back = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/GlowCircleGradient");
         }
         public override void SetDefaults()
         {
             Projectile.QuickDefaults(false, 16);
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = 40;
         }
         public override void OnKill(int timeLeft)
         {
@@ -40,8 +38,23 @@ namespace Terrafirma.Projectiles.Melee.Brawler
                 d.color = new Color(60, 0, 150);
                 d.noGravity = true;
                 d.scale *= 1.3f;
-                d.fadeIn = 2f;
+                d.fadeIn = Main.rand.NextFloat(2);
                 d.noLight = d.noLightEmittence = true;
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Corruption);
+                d.velocity = Main.rand.NextVector2Circular(5, 5);
+                d.alpha = 128;
+                d.scale *= 1.5f;
+                d.noGravity = Main.rand.NextBool();
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.CorruptTorch);
+                d.velocity = Main.rand.NextVector2Circular(5, 5);
+                d.scale *= 1.5f;
+                d.noGravity = Main.rand.NextBool();
             }
             Player player = Main.player[Projectile.owner];
             player.Teleport(Projectile.Center - new Vector2(player.width / 2, player.height),TeleportationStyleID.DebugTeleport);
@@ -58,44 +71,24 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         {
             if (Main.rand.NextBool(4))
             {
-                Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.FireworksRGB);
+                Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Corruption);
                 d.velocity = Projectile.velocity;
-                d.color = new Color(60, 0, 150);
+                d.alpha = 128;
                 d.noGravity = true;
-                d.scale *= 0.7f;
                 d.noLight = d.noLightEmittence = true;
             }
+            Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(11,-14).RotatedBy(Projectile.rotation), DustID.CorruptTorch);
+            d2.velocity *= 0.1f;
+            d2.noGravity = true;
+            d2.scale = 1.2f;
 
-            Projectile.frame = (int)(Projectile.timeLeft / 3) % 4;
+            Projectile.rotation += Projectile.direction * 0.3f;
 
             Projectile.velocity.Y += 0.3f;
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Main.spriteBatch.End();
-            BlendState BlendS = new BlendState
-            {
-                ColorBlendFunction = BlendFunction.ReverseSubtract,
-                ColorDestinationBlend = Blend.One,
-                ColorSourceBlend = Blend.SourceAlpha,
-                AlphaBlendFunction = BlendFunction.ReverseSubtract,
-                AlphaDestinationBlend = Blend.One,
-                AlphaSourceBlend = Blend.SourceAlpha
-            };
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendS, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-
-            Main.EntitySpriteDraw(back.Value, Projectile.Center - Main.screenPosition + Vector2.Normalize(Projectile.velocity) * 13, null, Color.LightGreen * 0.3f * Projectile.Opacity, 0, back.Size() / 2, 0.2f, SpriteEffects.None);
-
-            TFUtils.EasyCenteredProjectileDraw(TextureAssets.Projectile[Type], Projectile, Color.White * Projectile.Opacity);
-            TFUtils.EasyCenteredProjectileDraw(TextureAssets.Projectile[Type], Projectile, Color.Lime * Projectile.Opacity);
-
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-
-            TFUtils.EasyCenteredProjectileDraw(TextureAssets.Projectile[Type], Projectile, Color.Magenta * Projectile.Opacity);
-            TFUtils.EasyCenteredProjectileDraw(TextureAssets.Projectile[Type], Projectile, Color.Magenta * Projectile.Opacity);
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+            TFUtils.EasyCenteredProjectileDraw(TextureAssets.Projectile[Type], Projectile, lightColor);
             return false;
         }
     }
