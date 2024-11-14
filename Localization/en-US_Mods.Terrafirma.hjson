@@ -1280,7 +1280,7 @@ Items: {
 
 	ShadowBoxers: {
 		DisplayName: Shadow Boxers
-		Tooltip: ""
+		Tooltip: "{0} to throw a teleporter grenade, costs {1} tension"
 	}
 
 	SlimyUmbrella: {

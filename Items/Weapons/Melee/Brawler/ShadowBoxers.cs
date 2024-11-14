@@ -30,7 +30,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
         }
-        const int SuperCost = 30;
+        const int SuperCost = 60;
         public override void SetDefaults()
         {
             Item.shoot = ModContent.ProjectileType<ShadowBoxersPunch>();
@@ -68,28 +68,15 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         }
         public void DrawFrontHand(ref PlayerDrawSet drawInfo)
         {
-            if (!drawInfo.drawPlayer.compositeFrontArm.enabled)
+            IItemThatDrawsOnHandsWhenHeld.commonFrontHandDrawData(ArmTex, ref drawInfo);
+            if (drawInfo.drawPlayer.CheckTension(SuperCost, false))
             {
-                DrawData item = new DrawData(ArmTex.Value, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2), drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
-                if (drawInfo.drawPlayer.CurrentLegFrameIsOneThatRaisesTheBody())
+                for (int i = 0; i < 4; i++)
                 {
-                    item.position.Y -= 2 * drawInfo.drawPlayer.gravDir;
+                    IItemThatDrawsOnHandsWhenHeld.commonFrontHandDrawData(ArmTex, ref drawInfo, new Vector2(0, 2).RotatedBy(MathHelper.PiOver2 * i), new Color(0.7f, 0.2f, 1f, 0f) * (((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f) + 0.5f));
                 }
-                drawInfo.DrawDataCache.Add(item);
             }
-            else
-            {
-                Vector2 vector = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2);
-                Vector2 value = Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
-                vector += value * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
-                float rotation = drawInfo.drawPlayer.bodyRotation + drawInfo.compositeFrontArmRotation;
-                Vector2 bodyVect = drawInfo.bodyVect;
-                Vector2 compositeOffset_FrontArm = new Vector2(-5 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 0f);
-                bodyVect += compositeOffset_FrontArm;
-                vector += compositeOffset_FrontArm;
-                DrawData drawData2 = new DrawData(ArmTex.Value, vector, drawInfo.compFrontArmFrame, drawInfo.colorArmorBody, rotation, bodyVect, 1f, drawInfo.playerEffect, 0);
-                PlayerDrawLayers.DrawCompositeArmorPiece(ref drawInfo, CompositePlayerDrawContext.FrontArmAccessory, drawData2);
-            }
+
         }
         public void DrawOffHand(ref PlayerDrawSet drawInfo)
         {
@@ -114,7 +101,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         }
         public bool canUseTertriary(Player player)
         {
-            return player.CheckTension(player.ApplyTensionBonusScaling(SuperCost * 2, false, true));
+            return player.CheckTension(player.ApplyTensionBonusScaling(SuperCost, false, true));
         }
         public override bool MeleePrefix() => true;
     }
