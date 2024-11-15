@@ -50,7 +50,11 @@ namespace Terrafirma.NPCs.Dungeon
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return spawnInfo.Player.ZoneDungeon? 0.07f : 0f;
+            if (spawnInfo.Player.ZoneDungeon)
+            {
+                return Main.hardMode ? 0.12f : 0.07f;
+            }
+            return 0f;
         }
 
         public override void OnSpawn(IEntitySource source)
