@@ -12,10 +12,11 @@ using Terraria.Graphics.CameraModifiers;
 using Terrafirma.Particles;
 using Terrafirma.Data;
 using Terrafirma.Common.Players;
+using Terrafirma.Common.Interfaces;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class EruptionProjectile : HeldProjectile
+    public class EruptionProjectile : HeldProjectile, IUsesStoredMeleeCharge
     {
         private static Asset<Texture2D> glowTex;
         public override void Load()
@@ -155,6 +156,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
             Main.EntitySpriteDraw(glowTex.Value, Projectile.Center + Main.rand.NextVector2Circular(1, 1) - Main.screenPosition, null, new Color(1f, 0.3f, 0f, 0) * 0.7f * MathHelper.Clamp(Projectile.ai[1] / 200, 0, 1), rotation, new Vector2(85, player.direction == 1 ? 20 : 90), Projectile.scale, effect);
 
             return false;
+        }
+
+        public void ApplyStoredCharge(Player player, Projectile projectile)
+        {
+            projectile.ai[1] = player.PlayerStats().StoredMeleeCharge * 200;
         }
     }
 
