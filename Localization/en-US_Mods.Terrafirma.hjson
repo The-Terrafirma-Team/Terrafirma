@@ -1841,6 +1841,7 @@ NPCs: {
 	FlameElemental.DisplayName: Flame Elemental
 	Terragrim.DisplayName: Terragrim
 	Ninja.DisplayName: Ninja
+	NefariousSkull.DisplayName: Nefarious Skull
 }
 
 Configs: {

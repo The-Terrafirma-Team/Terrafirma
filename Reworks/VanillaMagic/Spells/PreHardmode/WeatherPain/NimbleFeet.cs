@@ -22,7 +22,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WeatherPain
         {
             if (player.ItemAnimationActive && player.HeldItem == item)
             {
-                player.moveSpeed *= 2f;
+                player.moveSpeed += 1f;
             }
 
             item.UseSound = null;
