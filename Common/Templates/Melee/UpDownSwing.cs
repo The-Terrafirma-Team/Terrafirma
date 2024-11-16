@@ -53,7 +53,7 @@ namespace Terrafirma.Common.Templates.Melee
 
             player.heldProj = Projectile.whoAmI;
 
-            PlayerAnimation.ArmPointToDirection(Projectile.rotation - MathHelper.PiOver4, player);
+            PlayerAnimation.ArmPointToDirectionLegacy(Projectile.rotation - MathHelper.PiOver4, player);
             if (Projectile.ai[0] == 0)
             {
                 if (Projectile.timeLeft / Projectile.ai[1] > 0.6f)

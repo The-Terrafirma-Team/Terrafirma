@@ -1471,6 +1471,7 @@ Projectiles: {
 	ShadowBoxersPunch.DisplayName: Shadow Boxers Punch
 	ShadowBoxerBomb.DisplayName: Shadow Boxer Bomb
 	ShadowBoxersParry.DisplayName: Shadow Boxers Parry
+	SplinterSword.DisplayName: Splinter Sword
 }
 
 Tiles: {

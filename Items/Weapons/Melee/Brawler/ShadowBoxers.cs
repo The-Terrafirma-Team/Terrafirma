@@ -35,7 +35,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             Item.shoot = ModContent.ProjectileType<ShadowBoxersPunch>();
             Item.shootSpeed = 1;
-            Item.damage = 13;
+            Item.damage = 20;
             Item.useAnimation = Item.useTime = 20;
             Item.noMelee = true;
             Item.noUseGraphic = true;

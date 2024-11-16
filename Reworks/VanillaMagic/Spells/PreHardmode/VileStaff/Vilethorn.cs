@@ -32,7 +32,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
         {
             commonHeldLogic(25);
             positionSelf(new Vector2(0, 0));
-            PlayerAnimation.ArmPointToDirection(Projectile.rotation - MathHelper.PiOver4, player);
+            PlayerAnimation.ArmPointToDirectionLegacy(Projectile.rotation - MathHelper.PiOver4, player);
             Projectile.position += player.getFrontArmPosition();
 
             if (player.channel && !stoppedChanneling)

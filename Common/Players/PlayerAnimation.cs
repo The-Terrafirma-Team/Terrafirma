@@ -98,6 +98,23 @@ namespace Terrafirma.Common.Players
         {
             int bodyHeight = 56;
             int frame = 0;
+            if (rotation < 0.5f)
+                frame = PointUp;
+            else if (rotation < 1f)
+                frame = PointUpRight;
+            else if (rotation < 1.5f)
+                frame = PointRight;
+            else if (rotation < 2.7f)
+                frame = PointDownRight;
+            else
+                frame = PointDown;
+
+            player.bodyFrame.Y = frame * bodyHeight;
+        }
+        public static void ArmPointToDirectionLegacy(float rotation, Player player)
+        {
+            int bodyHeight = 56;
+            int frame = 0;
             float trueRotation = rotation - MathHelper.PiOver2 * Math.Sign(rotation);
             if (Math.Abs(trueRotation) <= 0.4)
                 frame = rotation < 0 ? PointUp : PointDown;
@@ -111,7 +128,7 @@ namespace Terrafirma.Common.Players
 
             //Main.NewText("body: " + $"{player.bodyFrame.Height} " + "rotation: " + $"{rotation} " + "trueRotation: " + $"{trueRotation}", Main.DiscoColor);
         }
-        public static void ArmPointToDirectionWithoutUpOrDown(float rotation, Player player)
+        public static void ArmPointToDirectionWithoutUpOrDownLegacy(float rotation, Player player)
         {
             int bodyHeight = 56;
             int frame = 0;

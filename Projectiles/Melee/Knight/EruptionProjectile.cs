@@ -134,7 +134,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
                 player.SetDummyItemTime(Projectile.timeLeft);
             }
 
-            PlayerAnimation.ArmPointToDirectionWithoutUpOrDown(Projectile.rotation - MathHelper.PiOver4, player);
+            PlayerAnimation.ArmPointToDirectionWithoutUpOrDownLegacy(Projectile.rotation - MathHelper.PiOver4, player);
             Projectile.Center = player.MountedCenter.ToPoint().ToVector2() + new Vector2(Projectile.ai[0], -Projectile.ai[0]).RotatedBy(Projectile.rotation) + new Vector2(0, player.gfxOffY);
             Projectile.Center += player.getFrontArmPosition();
             player.direction = faceDirection;

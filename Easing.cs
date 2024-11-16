@@ -32,7 +32,7 @@ namespace Terrafirma
         public static float InOutPow(float x, float pow)
         {
             if (x > 0.5f)
-                return 1 - MathF.Pow(1 - x, pow);
+                return 1f - MathF.Pow(1 - x, pow);
             else
                 return MathF.Pow(x,pow);
         }

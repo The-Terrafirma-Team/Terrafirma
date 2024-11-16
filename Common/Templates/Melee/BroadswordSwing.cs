@@ -40,7 +40,7 @@ namespace Terrafirma.Common.Templates.Melee
 
             player.heldProj = Projectile.whoAmI;
 
-            PlayerAnimation.ArmPointToDirection(Projectile.rotation - MathHelper.PiOver4, player);
+            PlayerAnimation.ArmPointToDirectionLegacy(Projectile.rotation - MathHelper.PiOver4, player);
             Projectile.Center = player.MountedCenter.ToPoint().ToVector2() + new Vector2(0, player.gfxOffY) + player.getFrontArmPosition();
 
             if (Projectile.ai[1] != 3)

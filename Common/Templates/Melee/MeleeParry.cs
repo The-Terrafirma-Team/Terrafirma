@@ -35,7 +35,7 @@ namespace Terrafirma.Common.Templates.Melee
         public void UpwardsSwingParryAnimation()
         {
             Projectile.rotation = MathHelper.Lerp(1f, -0.5f, Easing.OutPow(Projectile.ai[0],2));
-            PlayerAnimation.ArmPointToDirection(Projectile.rotation + MathHelper.PiOver4, player);
+            PlayerAnimation.ArmPointToDirection(Projectile.rotation + 0.4f, player);
             if (player.direction == -1)
                 Projectile.rotation = MathHelper.Pi - Projectile.rotation + MathHelper.PiOver2;
         }
@@ -49,7 +49,7 @@ namespace Terrafirma.Common.Templates.Melee
             {
                 SoundEngine.PlaySound(SoundID.Item1, player.Center);
             }
-            Projectile.ai[0] += (1 / 15f);
+            Projectile.ai[0] += (1 / 65f);
 
             if (Projectile.ai[0] > 1f)
             {

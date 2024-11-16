@@ -27,17 +27,19 @@ namespace Terrafirma.Projectiles.Melee.Knight
         {
             return base.PreDraw(ref lightColor);
         }
-
+        private readonly Point[] sticking = new Point[6];
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.ai[0] > -1)
             {
+                Projectile.KillOldestJavelin(Projectile.whoAmI, Type, (int)Projectile.ai[1], sticking);
                 Projectile.timeLeft = 60 * 3;
                 Projectile.tileCollide = false;
                 Projectile.ai[0] = -1;
                 Projectile.ai[1] = target.whoAmI;
                 Projectile.ai[2] = Projectile.rotation - target.rotation;
                 Projectile.velocity = Projectile.Center - target.Center;
+                Projectile.netUpdate = true;
             }
         }
         public override bool? CanHitNPC(NPC target)
@@ -59,7 +61,6 @@ namespace Terrafirma.Projectiles.Melee.Knight
                 Projectile.rotation = Projectile.ai[2] + target.rotation;
                 Projectile.velocity.RotatedBy(target.rotation - Projectile.ai[2]);
                 Projectile.Center = target.Center + Projectile.velocity.RotatedBy(target.rotation);
-
                 if (!target.active)
                     Projectile.Kill();
             }
