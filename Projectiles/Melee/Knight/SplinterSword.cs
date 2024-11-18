@@ -23,7 +23,6 @@ namespace Terrafirma.Projectiles.Melee.Knight
         }
         public override void SetDefaults()
         {
-            ProjectileID.Sets.TrailingMode[Type] = 2;
             Projectile.QuickDefaults();
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
@@ -71,11 +70,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
             else
             {
                 SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/SplinterHit_" + Main.rand.Next(4)) { PitchVariance = 0.2f }, player.position);
-                if (Terrafirma.ScreenshakeEnabled)
-                {
-                    PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 2, 3, 10, -1);
-                    Main.instance.CameraModifiers.Add(modifier);
-                }
+                //if (Terrafirma.ScreenshakeEnabled)
+                //{
+                //    PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 2, 3, 10, -1);
+                //    Main.instance.CameraModifiers.Add(modifier);
+                //}
                 for (int i = 0; i < 7; i++)
                 {
                     Dust d = Dust.NewDustPerfect(target.Hitbox.ClosestPointInRect(player.MountedCenter), DustID.RichMahogany, player.Center.DirectionTo(target.Center).RotatedByRandom(0.5f) * Main.rand.NextFloat(2, 5));

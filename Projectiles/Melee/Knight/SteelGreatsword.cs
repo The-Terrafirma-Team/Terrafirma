@@ -1,142 +1,100 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
-using Terrafirma.Common.Templates.Melee;
+using Terrafirma.Common.Players;
+using Terrafirma.Common.Templates;
 using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class SteelGreatsword : UpDownSwing
+    public class SteelGreatsword : HeldProjectile
     {
         public override string Texture => "Terrafirma/Items/Weapons/Melee/Knight/SteelGreatsword";
-        private static Asset<Texture2D> afterImage;
-        public override void Load()
+        public override void SetStaticDefaults()
         {
-            afterImage = Mod.Assets.Request<Texture2D>("Projectiles/Melee/Knight/SteelGreatswordAfter");
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
+            ProjectileID.Sets.TrailingMode[Type] = 2;
+
         }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (player.PlayerStats().SteelBladeHits == 12)
-                modifiers.FinalDamage *= 1.2f;
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (player.PlayerStats().SteelBladeHits < 12)
-                player.PlayerStats().SteelBladeHits++;
-            bool fullCharge = player.PlayerStats().SteelBladeHits == 12;
-
-            if (fullCharge) SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
-
-            BigSparkle p = new BigSparkle();
-            p.Scale = fullCharge ? 4 : 2;
-            p.fadeInTime = 6;
-            p.smallestSize = 0.01f;
-            p.secondaryColor = Color.Transparent;
-
-            Color trailColor = !fullCharge ? new Color(180, 180, 250, 0) : new Color(128, 255, 255, 0);
-
-            ParticleSystem.AddParticle(p, target.Hitbox.ClosestPointInRect(Projectile.Center), null, trailColor);
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            float extend = MathF.Sin(Projectile.timeLeft / Projectile.ai[1] * MathHelper.Pi);
-
-            if (player.PlayerStats().SteelBladeHits != 12)
-            {
-                for (int i = 0; i < 6; i++)
-                {
-                    if (Projectile.oldRot[i] != 0)
-                        commonDiagonalItemDrawManualRotation(new Color(lightColor.R, lightColor.G, lightColor.B, 0) * (0.3f - i * 0.05f), afterImage, Projectile.scale + extend * 0.2f, Projectile.oldRot[i]);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 6; i++)
-                {
-                    if (Projectile.oldRot[i] != 0)
-                        commonDiagonalItemDrawManualRotation(new Color(128, 255, 255, 0) * (1f - i * 0.2f), afterImage, Projectile.scale + extend * 0.3f, Projectile.oldRot[i]);
-                }
-            }
-
-            commonDiagonalItemDraw(lightColor, TextureAssets.Projectile[Type], Projectile.scale + extend * 0.2f);
-            return false;
-        }
-    }
-    public class SteelGreatswordSlash : ModProjectile
-    {
         public override void SetDefaults()
         {
-            Projectile.friendly = true;
-            Projectile.Size = new Vector2(80);
-            Projectile.aiStyle = -1;
-            Projectile.alpha = 254;
-            Projectile.timeLeft = 600;
+            Projectile.QuickDefaults();
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.extraUpdates = 2;
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, 90 * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.2f) && Projectile.ai[1] < 20;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Player player = Main.player[Projectile.owner];
-            if (player.PlayerStats().SteelBladeHits < 12)
-                player.PlayerStats().SteelBladeHits++;
-            for (int i = 0; i < 4; i++)
+            player.GiveTension(5);
+            //if (Terrafirma.ScreenshakeEnabled)
+            //{
+            //    PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 1, 3, 10, -1);
+            //    Main.instance.CameraModifiers.Add(modifier);
+            //}
+            for(int i = 0; i < 10; i++)
             {
-                BigSparkle p = new BigSparkle();
-                p.Scale = Main.rand.NextFloat(3, 5);
-                p.fadeInTime = Main.rand.NextFloat(4, 7);
-                p.smallestSize = 0.01f;
-                p.secondaryColor = Color.Transparent;
-                p.Rotation = Main.rand.NextFloat(-1f, 1f);
-                ParticleSystem.AddParticle(p, Main.rand.NextVector2FromRectangle(target.Hitbox), null, new Color(128, 255, 255, 0));
+                ParticleSystem.AddParticle(new ImpactSparkle() {Scale = Main.rand.NextFloat(0.2f,0.7f), LifeTime = Main.rand.Next(15,30) }, target.Hitbox.ClosestPointInRect(Projectile.Center),new Vector2(0,Main.rand.NextFloat(2f,5f) * Projectile.spriteDirection * player.direction).RotatedByRandom(0.3f) + new Vector2(player.direction * Main.rand.NextFloat(3),0),new Color(1f,1f,1f,0f) * Main.rand.NextFloat(0.5f,1f));
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-
-            for (int i = 0; i < 5; i++)
-            {
-                Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Projectile.velocity * i * 3 - Main.screenPosition, null, new Color(128, 200, 255, 0) * Projectile.Opacity * (0.7f - i * 0.1f), Projectile.rotation, new Vector2(40, 24), 1.3f - i * 0.1f, SpriteEffects.None);
-            }
-
-            //Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, new Color(255,255,255,0) * Projectile.Opacity, Projectile.rotation, new Vector2(40, 24), Projectile.scale, SpriteEffects.None);
-
-            return false;
-        }
-        public override bool? CanHitNPC(NPC target)
-        {
-            if (!Collision.CanHitLine(Main.player[Projectile.owner].Center, 1, 1, Projectile.Center, 1, 1))
-                return false;
-            return base.CanHitNPC(target);
+            modifiers.HitDirectionOverride = player.direction;
         }
         public override void AI()
         {
-            if (Projectile.timeLeft == 600)
-                SoundEngine.PlaySound(SoundID.Item71, Projectile.position);
-            if (Main.rand.NextBool(3))
+            Projectile.localAI[0]++;
+            Projectile.ai[1] += player.GetAdjustedWeaponSpeedPercent(player.HeldItem);
+            player.SetDummyItemTime(2);
+            int swingTime = 35 * (Projectile.extraUpdates + 1);
+            switch (Projectile.ai[0])
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(60, 60), DustID.GemSapphire, Projectile.velocity * 2f);
-                d.noGravity = true;
+                case 0:
+                    Projectile.rotation = MathHelper.Lerp(-1 * player.direction, 3f * player.direction, Easing.OutPow(Projectile.ai[1] / swingTime, 5));
+                    Projectile.spriteDirection = player.direction;
+                    break;
+                case 1:
+                    Projectile.ai[1] += player.GetAdjustedWeaponSpeedPercent(player.HeldItem) * 0.2f;
+                    Projectile.rotation = MathHelper.Lerp(3.4f * player.direction, -2f * player.direction, Easing.OutPow(Projectile.ai[1] / swingTime, 3));
+                    Projectile.spriteDirection = -player.direction;
+                    break;
             }
 
-            Projectile.velocity *= 0.99f;
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            if (Projectile.timeLeft > 540)
-                Projectile.alpha -= 20;
-            else
-                Projectile.alpha += 12;
-            if (Projectile.alpha > 255)
+            Projectile.Opacity = Easing.OutPow(Projectile.ai[1] / swingTime, 6);
+            if (Projectile.ai[1] > swingTime)
+            {
                 Projectile.Kill();
+            }
+
+            player.heldProj = Projectile.whoAmI;
+
+            PlayerAnimation.ArmPointToDirection(Projectile.rotation * player.direction + 0.8f, player);
+
+            Projectile.Center = player.RotatedRelativePoint(player.MountedCenter + player.getFrontArmPosition());
+            Projectile.Center = new Vector2((int)Projectile.Center.X, (int)Projectile.Center.Y);
+            if (player.direction == -1)
+                Projectile.rotation -= MathHelper.PiOver2;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            for (int i = 0; i < Math.Min(ProjectileID.Sets.TrailCacheLength[Type], Projectile.localAI[0]); i++)
+            {
+                commonDiagonalItemDrawManualRotation(((Color.White * (1f - (i * 0.1f))) with { A = 0 } * (0.5f - (i * 0.1f))) * (1f - (Projectile.ai[1] / 30f)) * Projectile.Opacity, TextureAssets.Projectile[Type], Projectile.scale * (1f - (i * 0.03f)), Projectile.oldRot[i] - (Projectile.spriteDirection == 1 ? 0 : MathHelper.PiOver2));
+            }
+            commonDiagonalItemDraw(lightColor * Projectile.Opacity, TextureAssets.Projectile[Type], Projectile.scale);
+            return false;
         }
     }
 }

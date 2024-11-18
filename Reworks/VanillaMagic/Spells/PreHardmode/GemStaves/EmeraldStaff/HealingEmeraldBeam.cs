@@ -124,7 +124,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
                 if (Projectile.ai[0] % 4 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 7, 4, 1.5f, 3, new Color(30, 180, 120, 0) * 0.2f, new Color(30, 180, 120, 0) * 0.2f, Vector2.Zero, true);
                 if (Projectile.ai[0] % 8 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 10, 4, 2f, -1, new Color(30, 180, 120, 0) * 0.5f, new Color(30, 180, 120, 0) * 0.5f, new Vector2(10), false);
                 if (Projectile.ai[0] % 16 == 0) GenerateCoolBeam(MousePos, TargetPlayer, 20, 5, 2f, -1, new Color(30, 180, 120, 0), new Color(30, 180, 120, 0), new Vector2(4), false);
-                if (Projectile.ai[0] % 30 == 0 && Projectile.ai[0] != 0) TargetPlayer.Heal(5);
+                if (Projectile.ai[0] % 30 == 0 && Projectile.ai[0] != 0) TargetPlayer.HealWithAdjustments(Main.player[Projectile.owner], 5);
             }
 
             TargetPlayer = null;

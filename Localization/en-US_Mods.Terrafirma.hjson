@@ -1287,6 +1287,11 @@ Items: {
 		DisplayName: Slimy Umbrella
 		Tooltip: ""
 	}
+
+	SteelGreatbow: {
+		DisplayName: Steel Greatbow
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1472,6 +1477,7 @@ Projectiles: {
 	ShadowBoxerBomb.DisplayName: Shadow Boxer Bomb
 	ShadowBoxersParry.DisplayName: Shadow Boxers Parry
 	SplinterSword.DisplayName: Splinter Sword
+	SteelGreatbow.DisplayName: Steel Greatbow
 }
 
 Tiles: {

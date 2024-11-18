@@ -36,6 +36,7 @@ namespace Terrafirma.Common.Players
 
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
+        public float OutgoingHealingMultiplier = 1f;
         public bool ManaPotionSickness = false;
 
         public float StoredMeleeCharge = 0f;
@@ -81,7 +82,6 @@ namespace Terrafirma.Common.Players
 
         public float GenericCritDamage = 0f;
 
-        public byte SteelBladeHits;
         public static readonly float defaultFeralChargeSpeed = 0.66f / 60f;
 
         public bool newSwim;
@@ -113,6 +113,8 @@ namespace Terrafirma.Common.Players
 
             ManaPotionSickness = false;
             HealingMultiplier = 1f;
+            OutgoingHealingMultiplier = 1f;
+            PotionHealingMultiplier = 1f;
             BowChargeTimeMultipler = 1f;
             ThrowerVelocity = 1f;
             ThrowerRecoveryChance = 0.2f;

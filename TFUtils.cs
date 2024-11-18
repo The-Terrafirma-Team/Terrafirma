@@ -28,6 +28,14 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void HealWithAdjustments(this Player reciever, int life)
+        {
+            reciever.Heal((int)(life * reciever.PlayerStats().HealingMultiplier));
+        }
+        public static void HealWithAdjustments(this Player reciever, Player giver, int life)
+        {
+            reciever.Heal((int)(life * reciever.PlayerStats().HealingMultiplier * giver.PlayerStats().OutgoingHealingMultiplier));
+        }
         public static float GetAdjustedWeaponSpeedPercent(this Player player, Item item)
         {
             return player.GetWeaponAttackSpeed(item) * ((float)ContentSamples.ItemsByType[item.type].useTime / item.useTime);

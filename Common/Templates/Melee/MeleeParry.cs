@@ -49,7 +49,7 @@ namespace Terrafirma.Common.Templates.Melee
             {
                 SoundEngine.PlaySound(SoundID.Item1, player.Center);
             }
-            Projectile.ai[0] += (1 / 65f);
+            Projectile.ai[0] += (1 / 15f);
 
             if (Projectile.ai[0] > 1f)
             {

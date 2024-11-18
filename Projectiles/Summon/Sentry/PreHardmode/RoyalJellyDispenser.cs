@@ -68,7 +68,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                         if (Projectile.ai[0] % (int)(10 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile)) == 0 && 
                             Main.LocalPlayer == Main.player[i])
                         {
-                            Main.player[i].Heal(2);
+                            Main.player[i].HealWithAdjustments(Main.player[Projectile.owner],2);
                         }
                     }
                 }

@@ -32,11 +32,11 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.altFunctionUse == 2 && player.PlayerStats().SteelBladeHits == 12)
-            {
-                player.PlayerStats().SteelBladeHits = 0;
-                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
-            }
+            //if (player.altFunctionUse == 2 && player.PlayerStats().SteelBladeHits == 12)
+            //{
+            //    player.PlayerStats().SteelBladeHits = 0;
+            //    Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
+            //}
             int mhm = player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0 ? 1 : 0;
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, mhm);
             return false;
