@@ -6,6 +6,7 @@ using Terrafirma.Data;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Terrafirma.Common.Players
 {
@@ -28,6 +29,8 @@ namespace Terrafirma.Common.Players
             return orig(self, type, time1);
         }
 
+        public int SpiritCrystals = 0;
+
         Item lastHeldItem = null;
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
@@ -48,8 +51,8 @@ namespace Terrafirma.Common.Players
         public float ParryImmunityDurationMultiplier = 1f;
         public float ParryDurationMultiplier = 1f;
         public int Tension = 0;
-        public int TensionMax = 60;
-        public int TensionMax2 = 60;
+        public int TensionMax = 50;
+        public int TensionMax2 = 0;
         public float TensionGainMultiplier = 1f;
         public float TensionCostMultiplier = 1f;
         public bool Whiffed = false;
@@ -128,8 +131,8 @@ namespace Terrafirma.Common.Players
             hasSwappedItems = false;
             MeleeWeaponScale = 0;
 
-            Tension = Math.Clamp(Tension, 0, TensionMax + TensionMax2);
-            TensionMax2 = 0;
+            TensionMax2 = TensionMax;
+            Tension = Math.Clamp(Tension, 0, TensionMax2);
 
             DebuffTimeMultiplier = 1f;
             buffTimeMultiplier = 1f;
@@ -316,6 +319,22 @@ namespace Terrafirma.Common.Players
         //        p.OnParryProjectile(proj);
         //    }
         //}
+        public override void SaveData(TagCompound tag)
+        {
+            tag["Terrafirma:TensionMax"] = TensionMax;
+            tag["Terrafirma:SpiritCrystals"] = SpiritCrystals;
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            if (tag.ContainsKey("Terrafirma:TensionMax"))
+            {
+                TensionMax = tag.Get<int>("Terrafirma:TensionMax");
+            }
+            if (tag.ContainsKey("Terrafirma:SpiritCrystals"))
+            {
+                SpiritCrystals = tag.Get<int>("Terrafirma:SpiritCrystals");
+            }
+        }
     }
 
     public static class PlayerMethods

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Biomes.CaveHouse;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Weapons.Ranged.Bows
@@ -16,6 +17,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Bows
         public override void SetDefaults()
         {
             Item.DefaultToDrawnBow(ModContent.ProjectileType<Projectiles.Ranged.Bows.SteelGreatbow>(), 30, 80,5,10);
+            Item.rare = ItemRarityID.Orange;
+            Item.value = Item.sellPrice(0, 0, 45, 0);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

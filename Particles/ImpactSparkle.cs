@@ -15,7 +15,7 @@ namespace Terrafirma.Particles
         public override void Update()
         {
             size.Y = velocity.Length() * 0.4f;
-            size.X = MathHelper.Lerp(1,0,Easing.OutPow((float)TimeInWorld / LifeTime,2));
+            size.X = MathHelper.Lerp(2f * Scale,0,Easing.OutPow((float)TimeInWorld / LifeTime,2));
 
             Rotation = velocity.ToRotation();
             position += velocity;
@@ -31,7 +31,7 @@ namespace Terrafirma.Particles
         {
             Texture2D Sparkle = TextureAssets.Extra[89].Value;
             spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color * size.X, Rotation + MathHelper.PiOver2, new Vector2(36,56), size * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor * size.X, Rotation + MathHelper.PiOver2, new Vector2(36, 56), size * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor * size.X, Rotation + MathHelper.PiOver2, new Vector2(36, 56), size * new Vector2(0.5f,0.8f) * Scale , SpriteEffects.None, 0);
         }
     }
 }

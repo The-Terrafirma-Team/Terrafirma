@@ -21,7 +21,7 @@ namespace Terrafirma.Systems
         public override void Draw(SpriteBatch spriteBatch)
         {
             PlayerStats stats = Main.LocalPlayer.PlayerStats();
-            float multiply = stats.Tension / (stats.TensionMax + (float)stats.TensionMax2);
+            float multiply = stats.Tension / (float)stats.TensionMax2;
             Vector2 vector = new Vector2(Main.screenWidth - 350, 68);
             spriteBatch.Draw(bar.Value, vector, bar.Frame(2, 1, 0), Color.White, 0, new Vector2(0, bar.Height()), 1, SpriteEffects.None, 0);
 

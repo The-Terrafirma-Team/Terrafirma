@@ -22,23 +22,32 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 45, 0);
         }
+        int SlashCost = 30;
         public override bool AltFunctionUse(Player player)
         {
-            return true;
+            return player.CheckTension(SlashCost,false);
         }
         public override bool MeleePrefix()
         {
             return true;
         }
+        public override float UseSpeedMultiplier(Player player)
+        {
+            return 1f;
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            //if (player.altFunctionUse == 2 && player.PlayerStats().SteelBladeHits == 12)
-            //{
-            //    player.PlayerStats().SteelBladeHits = 0;
-            //    Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
-            //}
-            int mhm = player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0 ? 1 : 0;
-            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, mhm);
+            if (player.altFunctionUse == 2)
+            {
+                player.CheckTension(SlashCost, true);
+                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<SteelGreatswordSlash>(), damage * 3, knockback * 3, player.whoAmI);
+                Projectile.NewProjectile(source, position, velocity, type, (int)(damage * 2f), knockback, player.whoAmI, 2);
+            }
+            else
+            {
+                int mhm = player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0 ? 1 : 0;
+                Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, mhm);
+            }
             return false;
         }
 

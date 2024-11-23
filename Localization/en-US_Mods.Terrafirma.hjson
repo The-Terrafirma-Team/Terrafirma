@@ -1292,6 +1292,11 @@ Items: {
 		DisplayName: Steel Greatbow
 		Tooltip: ""
 	}
+
+	CrystalizedSpirit: {
+		DisplayName: Crystalized Spirit
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
