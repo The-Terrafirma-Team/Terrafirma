@@ -30,7 +30,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
         }
-        const int SuperCost = 30;
+        const int SuperCost = 20;
         public override void SetDefaults()
         {
             Item.shoot = ModContent.ProjectileType<GoldKnucklesPunch>();

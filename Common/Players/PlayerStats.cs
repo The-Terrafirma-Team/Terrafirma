@@ -55,6 +55,8 @@ namespace Terrafirma.Common.Players
         public int TensionMax2 = 0;
         public float TensionGainMultiplier = 1f;
         public float TensionCostMultiplier = 1f;
+        public int FlatTensionGain = 0;
+        public int FlatTensionCost = 0;
         public bool Whiffed = false;
 
         public float SentrySpeedMultiplier = 0f;
@@ -133,6 +135,10 @@ namespace Terrafirma.Common.Players
 
             TensionMax2 = TensionMax;
             Tension = Math.Clamp(Tension, 0, TensionMax2);
+            TensionGainMultiplier = 1f;
+            TensionCostMultiplier = 1f;
+            FlatTensionGain = 0;
+            FlatTensionCost = 0;
 
             DebuffTimeMultiplier = 1f;
             buffTimeMultiplier = 1f;

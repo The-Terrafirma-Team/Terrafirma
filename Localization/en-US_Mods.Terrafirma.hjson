@@ -2071,6 +2071,13 @@ VanillaSetBonus: {
 		Allows the ability to dash
 		Double tap a direction
 		'''
+	Molten:
+		'''
+		Tension gain increased by 2
+		Attacks have a chance to deal fire damage
+		15% increased movement speed
+		10% increased melee damage
+		'''
 }
 
 Misc: {
@@ -2095,6 +2102,23 @@ VanillaItemTooltips: {
 		'''
 		Increases sentry attack speed by 10% and damage by 5%
 		Increases your max number of sentries by 1
+		'''
+	MoltenHelmet:
+		'''
+		7% increased melee critical strike chance
+		10% increased weapon size and decreased tension cost
+		'''
+	MoltenBreastplate:
+		'''
+		7% increased melee damage
+		10% increased weapon size
+		Reduces damage from touching lava
+		Cannot be set on fire
+		'''
+	MoltenGreaves:
+		'''
+		7% increased melee speed
+		Allows the holder to do a fiery double jump
 		'''
 }
 

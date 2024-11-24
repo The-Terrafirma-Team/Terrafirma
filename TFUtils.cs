@@ -60,13 +60,14 @@ namespace Terrafirma
         }
         public static int ApplyTensionBonusScaling(this Player player, int number, bool parry = false, bool drain = false)
         {
+            PlayerStats stats = player.PlayerStats();
             if (!drain)
             {
-                return (int)(number * player.PlayerStats().TensionGainMultiplier);
+                return (int)(number * stats.TensionGainMultiplier) + stats.FlatTensionGain;
             }
             else
             {
-                return (int)(number * player.PlayerStats().TensionCostMultiplier);
+                return (int)(number * stats.TensionCostMultiplier) + stats.FlatTensionCost;
             }
         }
         public static string NicenUpKeybindNameIfApplicable(string name)

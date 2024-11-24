@@ -30,7 +30,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
         {
             ItemSets.AltFireDoesNotConsumeFeralCharge[Type] = true;
         }
-        const int SuperCost = 60;
+        const int SuperCost = 25;
         public override void SetDefaults()
         {
             Item.shoot = ModContent.ProjectileType<ShadowBoxersPunch>();
@@ -73,7 +73,7 @@ namespace Terrafirma.Items.Weapons.Melee.Brawler
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    IItemThatDrawsOnHandsWhenHeld.commonFrontHandDrawData(ArmTex, ref drawInfo, new Vector2(0, 2).RotatedBy(MathHelper.PiOver2 * i), new Color(0.7f, 0.2f, 1f, 0f) * (((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f) + 0.5f));
+                    IItemThatDrawsOnHandsWhenHeld.commonFrontHandDrawData(ArmTex, ref drawInfo, new Vector2(0, 2).RotatedBy(MathHelper.PiOver2 * i), new Color(0.7f, 0.2f, 1f, 0f) * (drawInfo.colorArmorBody.A / 255f) * (((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f) + 0.5f));
                 }
             }
 
