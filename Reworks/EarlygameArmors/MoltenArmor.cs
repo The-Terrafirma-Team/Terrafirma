@@ -31,7 +31,7 @@ namespace Terrafirma.Reworks.EarlygameArmors
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(Main.rand.NextBool(5))
+            if(Active && Main.rand.NextBool(5))
                 target.AddBuff(BuffID.OnFire3, 60 * 3);
         }
     }

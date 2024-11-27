@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Buffs.Buffs;
 using Terrafirma.Common.Templates;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
+using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -303,6 +305,12 @@ namespace Terrafirma.Common.Players
                     p.OnParryNPC(npc, Player);
                 else if (e is Projectile proj)
                     p.OnParryProjectile(proj, Player);
+
+                if (Player.GetModPlayer<ShockingPlayer>().active)
+                {
+                    Projectile.NewProjectile(Player.GetSource_Buff(Player.GetModPlayer<ShockingPlayer>().index), Player.Center, Vector2.Zero, ModContent.ProjectileType<ShockPotionLightning>(), info.SourceDamage / 3, 0, Player.whoAmI, 0, -1);
+                }
+
                 return true;
             }
             return base.FreeDodge(info);

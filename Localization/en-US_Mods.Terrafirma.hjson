@@ -178,6 +178,16 @@ Buffs: {
 		DisplayName: Tasty
 		Description: You are now very tasty!
 	}
+
+	Shocking: {
+		DisplayName: Shocking
+		Description: Critical strikes and parries shock nearby enemies
+	}
+
+	Healer: {
+		DisplayName: Healer
+		Description: Mods.Terrafirma.Buffs.Healer.Description
+	}
 }
 
 Items: {
@@ -1316,27 +1326,34 @@ Items: {
 	BitterPotion: {
 		DisplayName: Bitter Potion
 		Tooltip:
-		'''
-		Enemies are less likely to target you
-		'Surprisingly tasty'
-		'''
+			'''
+			Enemies are less likely to target you
+			'Surprisingly tasty'
+			'''
 	}
 
 	MalicePotion: {
 		DisplayName: Malice Potion
-		Tooltip:
-		'''
-		'You are a terrible person'
-		'''
+		Tooltip: "'You are a terrible person'"
 	}
 
 	TastyPotion: {
 		DisplayName: Tasty Potion
 		Tooltip:
-		'''
-		Enemies are more likely to target you
-		'It's not very tasty'
-		'''
+			'''
+			Enemies are more likely to target you
+			'It's not very tasty'
+			'''
+	}
+
+	ShockPotion: {
+		DisplayName: Shock Potion
+		Tooltip: Critical strikes and parries shock nearby enemies
+	}
+
+	HealerPotion: {
+		DisplayName: Healer Potion
+		Tooltip: ""
 	}
 }
 
@@ -1524,6 +1541,7 @@ Projectiles: {
 	ShadowBoxersParry.DisplayName: Shadow Boxers Parry
 	SplinterSword.DisplayName: Splinter Sword
 	SteelGreatbow.DisplayName: Steel Greatbow
+	ShockPotionLightning.DisplayName: Shock Potion Lightning
 }
 
 Tiles: {

@@ -31,7 +31,7 @@ namespace Terrafirma.Buffs.Buffs
         }
         public override bool? CanHitNPCWithProj(Projectile proj, NPC target)
         {
-            if (target.friendly && active)
+            if (target.friendly && active && proj.localNPCImmunity[target.whoAmI] == 0)
             {
                 return true;
             }
