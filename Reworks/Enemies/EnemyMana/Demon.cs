@@ -12,7 +12,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Reworks.EnemyMana
+namespace Terrafirma.Reworks.Enemies.EnemyMana
 {
     public class Demon : GlobalNPC
     {
@@ -32,14 +32,14 @@ namespace Terrafirma.Reworks.EnemyMana
         public override bool InstancePerEntity => true;
         public override void SetDefaults(NPC npc)
         {
-            npc.ApplyManaStats(npc.type == NPCID.Demon? 250 : 350);
+            npc.ApplyManaStats(npc.type == NPCID.Demon ? 250 : 350);
             npc.aiStyle = -1;
             npc.noGravity = true;
         }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Asset<Texture2D> tex = npc.type == NPCID.Demon ? DemonTex : VoodooTex;
-            spriteBatch.Draw(tex.Value,npc.Center - screenPos,npc.frame,drawColor,npc.rotation,new Vector2(tex.Width() / 4,36),npc.scale,npc.direction == 1? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            spriteBatch.Draw(tex.Value, npc.Center - screenPos, npc.frame, drawColor, npc.rotation, new Vector2(tex.Width() / 4, 36), npc.scale, npc.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             return false;
         }
         public override bool? CanFallThroughPlatforms(NPC npc)
@@ -68,7 +68,7 @@ namespace Terrafirma.Reworks.EnemyMana
             npc.ai[0]++;
             if (npc.ai[1] == 0)
             {
-                if (npc.CheckMana(45,false))
+                if (npc.CheckMana(45, false))
                 {
                     npc.velocity += new Vector2(npc.direction, npc.directionY * 0.2f) * 0.1f;
                     npc.velocity = npc.velocity.LengthClamp(6);
@@ -83,7 +83,7 @@ namespace Terrafirma.Reworks.EnemyMana
                 }
                 else
                 {
-                    npc.frameCounter+= 0.5f;
+                    npc.frameCounter += 0.5f;
                     npc.velocity += new Vector2(npc.direction, npc.directionY * 0.4f) * 0.4f;
                     npc.velocity = npc.velocity.LengthClamp(8);
                     npc.frame.X = 0;
@@ -94,10 +94,10 @@ namespace Terrafirma.Reworks.EnemyMana
                 npc.frame.X = 86;
                 Lighting.AddLight(npc.Center, new Vector3(0.6f, 0f, 1f) * Math.Clamp(npc.ai[0], 0, 15) / 15f);
                 npc.velocity *= 0.95f;
-                if ((npc.ai[0] is 30 or 50 or 70 || (npc.ai[0] == 90 && npc.type == NPCID.VoodooDemon)) && npc.CheckMana(15))
+                if ((npc.ai[0] is 30 or 50 or 70 || npc.ai[0] == 90 && npc.type == NPCID.VoodooDemon) && npc.CheckMana(15))
                 {
-                    if(Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, npc.Center.DirectionTo(target.Center).RotatedByRandom(0.3f),ProjectileID.DemonSickle,21,1);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, npc.Center.DirectionTo(target.Center).RotatedByRandom(0.3f), ProjectileID.DemonSickle, 21, 1);
                 }
 
                 if (npc.ai[0] > (npc.type == NPCID.VoodooDemon ? 110 : 90))
@@ -109,7 +109,7 @@ namespace Terrafirma.Reworks.EnemyMana
             if (npc.collideY)
             {
                 npc.velocity.Y = npc.oldVelocity.Y * -0.5f;
-                if(npc.velocity.Y < -2)
+                if (npc.velocity.Y < -2)
                 {
                     npc.velocity.Y = -2;
                 }

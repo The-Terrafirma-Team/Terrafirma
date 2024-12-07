@@ -186,7 +186,7 @@ Buffs: {
 
 	Healer: {
 		DisplayName: Healer
-		Description: Mods.Terrafirma.Buffs.Healer.Description
+		Description: Outgoing healing increased, damage decreased
 	}
 }
 
@@ -1353,7 +1353,11 @@ Items: {
 
 	HealerPotion: {
 		DisplayName: Healer Potion
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases outgoing healing by 20%
+			Decreases attack damage by 10%
+			'''
 	}
 }
 

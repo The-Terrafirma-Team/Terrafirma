@@ -12,7 +12,7 @@ using Terraria.WorldBuilding;
 
 namespace Terrafirma.Reworks.VanillaSentry
 {
-    public class SentryRework : GlobalProjectile
+    public class AllowWrenchesToWorkWithVanillaSentries : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)

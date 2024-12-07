@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Linq;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -207,6 +208,7 @@ namespace Terrafirma.Common
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
+
             switch (projectile.type)
             {
                 case ProjectileID.DemonScythe:

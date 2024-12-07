@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.DataStructures;
@@ -43,10 +44,16 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.AquaScepter
             Projectile.velocity.Y -= 0.05f;
             Projectile.velocity.X *= 0.98f;
 
-            if (Projectile.ai[0] % 2 == 0)
+            if (Main.rand.NextBool())
             {
-                Dust newdust = Dust.NewDustPerfect(Projectile.position + new Vector2(Main.rand.Next(23), Main.rand.Next(23)), DustID.DungeonWater, Vector2.Zero, 0, Color.White, 1f);
+                Dust newdust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(12,12), Main.rand.NextBool(3) ? DustID.GreenTorch : DustID.DungeonWater, Vector2.Zero, 0, Color.White, 1f);
+                newdust.noGravity = true;
+                newdust.noLightEmittence = true;
             }
+            Lighting.AddLight(Projectile.Center, new Vector3(0.4f, 0.5f, 0.6f));
+
+            Projectile.rotation = Projectile.velocity.X * 0.1f;
+            Projectile.scale = 0.9f + MathF.Sin(Projectile.timeLeft * 0.1f) * 0.1f;
 
             for (int i = 0; i < Main.player.Length; i++)
             {

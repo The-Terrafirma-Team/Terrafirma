@@ -13,6 +13,7 @@ using Terrafirma.Buffs.Debuffs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.GameContent;
+using Terrafirma.Particles;
 
 namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
 {
@@ -58,7 +59,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
 
         NPC.HitInfo hitinfo = new NPC.HitInfo();
         public override void AI()
-        {
+        {  
             if (Projectile.timeLeft < 40)
             {
                 Projectile.Opacity -= 0.03f;
@@ -94,8 +95,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
 
                             for (int k = 0; k < 3; k++)
                             {
-                                Vector2 vel = Main.rand.NextVector2Circular(3f, 3f);
-                                Dust d = Dust.NewDustDirect(Main.npc[i].Center, 4, 4, DustID.CorruptTorch, vel.X, vel.Y, Scale: 2f);
+                                Dust d = Dust.NewDustPerfect(Main.npc[i].Center, DustID.CorruptTorch, Main.rand.NextVector2Circular(4f, 4f), Scale: 2f);
+                                d.noGravity = true;
                             }
                         }
                     }

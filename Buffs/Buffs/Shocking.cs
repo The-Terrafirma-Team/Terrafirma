@@ -27,7 +27,7 @@ namespace Terrafirma.Buffs.Buffs
         public int index = 0;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(hit.Crit)
+            if(hit.Crit && active)
                 Projectile.NewProjectile(Player.GetSource_Buff(index), target.Center, Vector2.Zero,ModContent.ProjectileType<ShockPotionLightning>(),damageDone / 3,0,Player.whoAmI,0,target.whoAmI);
         }
     }
