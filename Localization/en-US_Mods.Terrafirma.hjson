@@ -1546,6 +1546,8 @@ Projectiles: {
 	SplinterSword.DisplayName: Splinter Sword
 	SteelGreatbow.DisplayName: Steel Greatbow
 	ShockPotionLightning.DisplayName: Shock Potion Lightning
+	DuckHunterDuck.DisplayName: Duck Hunter Duck
+	DuckHunterShot.DisplayName: Duck Hunter Shot
 }
 
 Tiles: {
@@ -1907,6 +1909,16 @@ Spells: {
 	PenetratingSigil: {
 		Name: Penetrating Sigil
 		Description: Projectiles inside pierce infinitely
+	}
+
+	DuckHunter: {
+		Name: Duck Hunter
+		Description: Automatically summons ducks on screen that will chase enemies on hit
+	}
+
+	ButtonMasher: {
+		Name: Button Masher
+		Description: Shoots laser beams that may be broken
 	}
 }
 
