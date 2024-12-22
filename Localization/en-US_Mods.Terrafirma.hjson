@@ -827,7 +827,7 @@ Items: {
 
 	GraniteGreaves: {
 		DisplayName: Granite Greaves
-		Tooltip: 
+		Tooltip:
 			'''
 			Movement speed increased by 5%
 			Increases block placement & tool range by 1
@@ -1987,7 +1987,7 @@ Configs: {
 			3: Gilded
 			4: StoneGold
 			5: Corroboros
-			6: Thin
+			6: Minimalist
 			7: Split
 			8: Terrafirma
 			9: Copper
@@ -1999,7 +1999,7 @@ Configs: {
 		}
 
 		ExtraUIPosition: {
-			Label: Extra U I Position
+			Label: Extra UI Position
 			Tooltip: ""
 		}
 
@@ -2011,7 +2011,7 @@ Configs: {
 		}
 
 		ExtraSpellUIPosition: {
-			Label: Extra Spell U I Position
+			Label: Extra Spell UI Position
 			Tooltip: ""
 		}
 
@@ -2036,7 +2036,7 @@ Configs: {
 		}
 
 		SpellUIColor: {
-			Label: Spell U I Color
+			Label: Spell UI Color
 			Tooltip: ""
 		}
 

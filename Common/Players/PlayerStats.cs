@@ -276,6 +276,7 @@ namespace Terrafirma.Common.Players
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.DamageVariationScale *= 0;
             modifiers.CritDamage += GenericCritDamage;
             base.ModifyHitNPC(target, ref modifiers);
         }
