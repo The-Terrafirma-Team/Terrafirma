@@ -53,7 +53,8 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             Projectile.Center = player.Center + Vector2.Normalize(Projectile.velocity) * 4;
             if (Projectile.ai[0] == 0)
             {
-                SoundEngine.PlaySound(SoundID.Item1 with { Volume = 2, Pitch = -0.5f}, Projectile.position);
+                //SoundEngine.PlaySound(SoundID.Item1 with { Volume = 2, Pitch = -0.5f}, Projectile.position);]
+                SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/GoldKnucklesSwoosh"),Projectile.position);
             }
 
             if (Projectile.ai[0] < 0)
@@ -113,7 +114,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
                 PunchCameraModifier modifier = new PunchCameraModifier(Main.LocalPlayer.MountedCenter, new Vector2(Main.rand.NextFloat(-1.5f, -0.7f), 0).RotatedBy(Main.LocalPlayer.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f)), 4, 12f, 20, 200f, Main.LocalPlayer.name);
                 Main.instance.CameraModifiers.Add(modifier);
             }
-
+            SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/GoldKnucklesBigPunch"), Projectile.position);
             for (int i = 0; i < 10; i++)
             {
                 Dust d = Dust.NewDustPerfect(target.Hitbox.ClosestPointInRect(Main.player[Projectile.owner].Center),DustID.Cloud,Main.rand.NextVector2Circular(8,8));

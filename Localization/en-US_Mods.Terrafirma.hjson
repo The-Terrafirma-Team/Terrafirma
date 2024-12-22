@@ -821,12 +821,17 @@ Items: {
 			'''
 			Movement speed increased by 5%
 			Mining speed increased by 10%
+			Increases block placement & tool range by 1
 			'''
 	}
 
 	GraniteGreaves: {
 		DisplayName: Granite Greaves
-		Tooltip: Movement speed increased by 5%
+		Tooltip: 
+			'''
+			Movement speed increased by 5%
+			Increases block placement & tool range by 1
+			'''
 	}
 
 	GraniteHelmet: {

@@ -12,7 +12,7 @@ using Terrafirma.Particles;
 using Terraria.Audio;
 using Terrafirma.Items.Materials;
 
-namespace Terrafirma.Items.Equipment.Elemental
+namespace Terrafirma.Items.Equipment.MiningBuilding
 {
     public class GraniteSetBonus : ModPlayer
     {
@@ -92,7 +92,7 @@ namespace Terrafirma.Items.Equipment.Elemental
             Vector2 position = drawInfo.Center - Main.screenPosition;
             position = new Vector2((int)position.X, (int)position.Y);
             float glow = (float)Math.Sin(Main.timeForVisualEffects * 0.01f) * 0.1f;
-            drawInfo.DrawDataCache.Add(new DrawData(tex.Value,position,null, new Color(1f,1f,1f,0f) * ((setPlayer.power * 0.8f) + glow * 2f),0,tex.Value.Size() / 2f, (setPlayer.power * 1.1f) + glow, SpriteEffects.None));
+            drawInfo.DrawDataCache.Add(new DrawData(tex.Value,position,null, new Color(1f,1f,1f,0f) * ((setPlayer.power * 0.8f) + glow * 2f),0,tex.Value.Size() / 2f, (setPlayer.power * 1.1f) + glow * setPlayer.power, SpriteEffects.None));
         }
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
     }
@@ -150,6 +150,7 @@ namespace Terrafirma.Items.Equipment.Elemental
         {
             player.moveSpeed += 0.05f;
             player.pickSpeed -= 0.1f;
+            player.blockRange += 1;
         }
     }
 
@@ -170,6 +171,7 @@ namespace Terrafirma.Items.Equipment.Elemental
         }
         public override void UpdateEquip(Player player)
         {
+            player.blockRange += 1;
             player.moveSpeed += 0.05f;
         }
     }

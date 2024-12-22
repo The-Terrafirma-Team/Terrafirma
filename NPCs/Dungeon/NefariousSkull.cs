@@ -27,7 +27,7 @@ namespace Terrafirma.NPCs.Dungeon
         float colorgradient = 0f;
         int[] allowedBuffs = new int[] 
         { 
-            BuffID.Slow, BuffID.OnFire, BuffID.Darkness, BuffID.Confused
+            BuffID.Slow, BuffID.OnFire, BuffID.Blackout, BuffID.Confused
         };
         public override void SetStaticDefaults()
         {
@@ -91,7 +91,7 @@ namespace Terrafirma.NPCs.Dungeon
                 case BuffID.Slow:
                     NPC.color = Color.RosyBrown;
                     break;
-                case BuffID.Darkness:
+                case BuffID.Blackout:
                     NPC.color = Color.Purple;
                     break;
                 case BuffID.Confused:
@@ -180,7 +180,7 @@ namespace Terrafirma.NPCs.Dungeon
             glowtex = ModContent.Request<Texture2D>("Terrafirma/NPCs/Dungeon/NefariousSkullGlow");
             Asset<Texture2D> tex = TextureAssets.Npc[Type];
             spriteBatch.Draw(tex.Value,
-                NPC.Center - Main.screenPosition,
+                NPC.Center - screenPos,
                 NPC.frame,
                 drawColor,
                 NPC.rotation,
@@ -189,7 +189,7 @@ namespace Terrafirma.NPCs.Dungeon
                 SpriteEffects.None,
                 1f);
             spriteBatch.Draw(glowtex.Value,
-                NPC.Center - Main.screenPosition,
+                NPC.Center - screenPos,
                 NPC.frame,
                 new Color(NPC.color.R, NPC.color.G, NPC.color.B ,0) * (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1f) * 0.5f),
                 NPC.rotation,

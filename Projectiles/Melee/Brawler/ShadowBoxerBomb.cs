@@ -59,7 +59,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             Player player = Main.player[Projectile.owner];
             player.Teleport(Projectile.Center - new Vector2(player.width / 2, player.height),TeleportationStyleID.DebugTeleport);
             player.immune = true;
-            player.AddImmuneTime(ImmunityCooldownID.General,60 * 3);
+            player.immuneTime = Math.Max(player.immuneTime, 60 * 3);
             player.velocity = -Projectile.velocity * 0.3f;
         }
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
