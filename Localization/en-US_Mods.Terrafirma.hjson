@@ -1553,6 +1553,7 @@ Projectiles: {
 	ShockPotionLightning.DisplayName: Shock Potion Lightning
 	DuckHunterDuck.DisplayName: Duck Hunter Duck
 	DuckHunterShot.DisplayName: Duck Hunter Shot
+	MagicDaggerSpread.DisplayName: Magic Dagger Spread
 }
 
 Tiles: {
@@ -1924,6 +1925,16 @@ Spells: {
 	ButtonMasher: {
 		Name: Button Masher
 		Description: Shoots laser beams that may be broken
+	}
+
+	DaggerSpread: {
+		Name: Dagger Spread
+		Description: Throws a spread of daggers
+	}
+
+	MagicDagger: {
+		Name: Magic Dagger
+		Description: Throws a magical dagger
 	}
 }
 

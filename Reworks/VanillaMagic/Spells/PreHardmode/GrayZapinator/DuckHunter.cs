@@ -38,7 +38,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GrayZapinator
                 int randomYPos = Main.rand.Next((int)player.Center.Y - Main.ScreenSize.Y / 2, (int)player.Center.Y + Main.ScreenSize.Y / 2);
                 bool flipped = Main.rand.NextBool(1,2);
                 
-                Projectile.NewProjectileDirect(player.GetSource_ItemUse(item), new Vector2((int)player.Center.X - (flipped? Main.ScreenSize.X / 2 : -Main.ScreenSize.X / 2), randomYPos), new Vector2((flipped ? 0.6f : -0.6f), 0), ModContent.ProjectileType<DuckHunterDuck>(), (int)(item.damage * 1.5f), 0f, player.whoAmI);
+                Projectile.NewProjectileDirect(player.GetSource_ItemUse(item), new Vector2((int)player.Center.X - (flipped? Main.ScreenSize.X / 2 : -Main.ScreenSize.X / 2), randomYPos), new Vector2((flipped ? 0.6f : -0.6f), 0), ModContent.ProjectileType<DuckHunterDuck>(), (int)(item.damage * 2f), 0f, player.whoAmI);
                 duckSpawnTimer = 0;
             }
         }
