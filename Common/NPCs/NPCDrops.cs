@@ -16,16 +16,21 @@ namespace Terrafirma.Common
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            int[] DropsLeather = new int[] {NPCID.FireImp,NPCID.Demon,NPCID.FaceMonster,NPCID.DesertGhoul,NPCID.DesertGhoulCorruption,NPCID.DesertGhoulCrimson,NPCID.DesertGhoulHallow};
+            int[] DropsLeather = [NPCID.FireImp,NPCID.Demon,NPCID.FaceMonster,NPCID.DesertGhoul,NPCID.DesertGhoulCorruption,NPCID.DesertGhoulCrimson,NPCID.DesertGhoulHallow];
             if (DropsLeather.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5));
+            }
+            int[] DropsLivingIce = [NPCID.SpikedIceSlime,NPCID.IceBat,NPCID.IceElemental,NPCID.IcyMerman];
+            if (DropsLivingIce.Contains(npc.type))
+            {
+                npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5,1,2));
             }
             if (NPCID.Sets.Zombies[npc.type])
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 12));
             }
-            int[] DropsFireShield = new int[] { NPCID.FireImp,NPCID.LavaSlime, NPCID.MeteorHead,NPCID.SkeletonArcher};
+            int[] DropsFireShield = [NPCID.FireImp,NPCID.LavaSlime, NPCID.MeteorHead,NPCID.SkeletonArcher];
             if (DropsFireShield.Contains(npc.type))
             {
                 npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<FireShield>(),100));

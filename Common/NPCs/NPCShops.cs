@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common
 {
-    public class GlobalNPCShop : GlobalNPC
+    public class NPCShops : GlobalNPC
     {
         public override void ModifyShop(NPCShop shop)
         {

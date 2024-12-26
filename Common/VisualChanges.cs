@@ -26,6 +26,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/BalloonSlime");
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/MotherSlime");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
+            TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/CorruptSlime");
 
             TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
             // Gore
@@ -52,6 +53,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.IlluminantSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.IlluminantSlime}");
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.MotherSlime}");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
+            TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.CorruptSlime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
 
             TextureAssets.Gore[14] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_14"); // Eater of
@@ -77,6 +79,7 @@ namespace Terrafirma.Common
 
         private static Asset<Texture2D>[] SlimeVariants = new Asset<Texture2D>[3];
         private static Asset<Texture2D>[] SoulEaterVariants = new Asset<Texture2D>[2];
+        private static Asset<Texture2D> Pinky;
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.ModNPC == null;
@@ -91,10 +94,12 @@ namespace Terrafirma.Common
             {
                 SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
             }
+            Pinky = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Pinky");
             Main.npcFrameCount[NPCID.LavaSlime] = 6;
             Main.npcFrameCount[NPCID.MotherSlime] = 6;
             Main.npcFrameCount[NPCID.DungeonSlime] = 6;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 6;
+            Main.npcFrameCount[NPCID.CorruptSlime] = 6;
             // Corruption
             Main.npcFrameCount[NPCID.EaterofSouls] = 4;
             SoulEaterVariants[0] = TextureAssets.Npc[NPCID.EaterofSouls];
@@ -121,11 +126,12 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.LavaSlime] = 2;
             Main.npcFrameCount[NPCID.MotherSlime] = 2;
             Main.npcFrameCount[NPCID.DungeonSlime] = 2;
+            Main.npcFrameCount[NPCID.CorruptSlime] = 2;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 2;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime)
+            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
@@ -155,7 +161,10 @@ namespace Terrafirma.Common
                         float itemScale = 0.7f;
                         spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
                     }
-                    spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                    if(npc.netID == NPCID.Pinky)
+                        spriteBatch.Draw(Pinky.Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, drawColor * 0.8f, npc.rotation, new Vector2(16, 26), npc.scale * 2, SpriteEffects.None, 0);
+                    else
+                        spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
                     return false;
 
                 case NPCID.EaterofSouls:

@@ -175,8 +175,32 @@ namespace Terrafirma.NPCs.Dungeon
             return base.CanHitPlayer(target, ref cooldownSlot);
         }
 
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            if (NPC.life <= 0)
+            {
+                Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("NefariousSkull_0").Type);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("NefariousSkull_1").Type);
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Bone, hit.HitDirection, -1f, NPC.alpha, NPC.color, NPC.scale);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < hit.Damage; i++)
+                {
+                    Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Bone, hit.HitDirection, -1f, NPC.alpha, NPC.color, NPC.scale);
+                }
+                return;
+            }
+        }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            if (NPC.IsABestiaryIconDummy)
+            {
+                NPC.color = Color.Orange;
+            }
             glowtex = ModContent.Request<Texture2D>("Terrafirma/NPCs/Dungeon/NefariousSkullGlow");
             Asset<Texture2D> tex = TextureAssets.Npc[Type];
             spriteBatch.Draw(tex.Value,
@@ -214,7 +238,10 @@ namespace Terrafirma.NPCs.Dungeon
                     NPC.frameCounter = Math.Clamp(NPC.frameCounter - 1, 0, 3);
                 }
             }
-
+            if (NPC.IsABestiaryIconDummy)
+            {
+                NPC.frameCounter = ((int)(Main.timeForVisualEffects / 8) % 2 == 0)? 2 : 3;
+            }
             NPC.frame.Y = (int)(NPC.frameCounter * frameHeight);
         }
     }

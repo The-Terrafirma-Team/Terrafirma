@@ -1364,6 +1364,11 @@ Items: {
 			Decreases attack damage by 10%
 			'''
 	}
+
+	LivingIce: {
+		DisplayName: Living Ice
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1554,6 +1559,7 @@ Projectiles: {
 	DuckHunterDuck.DisplayName: Duck Hunter Duck
 	DuckHunterShot.DisplayName: Duck Hunter Shot
 	MagicDaggerSpread.DisplayName: Magic Dagger Spread
+	CorrupillarInk.DisplayName: Corrupillar Ink
 }
 
 Tiles: {
@@ -1945,6 +1951,7 @@ NPCs: {
 	Terragrim.DisplayName: Terragrim
 	Ninja.DisplayName: Ninja
 	NefariousSkull.DisplayName: Nefarious Skull
+	Corrupillar.DisplayName: Corrupillar
 }
 
 Configs: {
@@ -2218,4 +2225,10 @@ Prefixes: {
 	Hearty.DisplayName: Hearty
 	OK.DisplayName: O.K.
 	Stoic.DisplayName: Stoic
+}
+
+Bestiary: {
+	Corrupillar: yea
+	NefariousSkull: yea2
+	FlameElemental: yea3
 }
