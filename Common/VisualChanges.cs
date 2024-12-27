@@ -138,9 +138,9 @@ namespace Terrafirma.Common
                 if (npc.frame.Y > frameHeight * 3)
                     npc.frame.Y = 0;
                 if (npc.velocity.Y < 0)
-                    npc.frame.Y = frameHeight * 4;
-                else if (npc.velocity.Y > 0)
                     npc.frame.Y = frameHeight * 5;
+                else if (npc.velocity.Y > 0)
+                    npc.frame.Y = frameHeight * 4;
             }
             else if (npc.type == NPCID.EaterofSouls)
             {
