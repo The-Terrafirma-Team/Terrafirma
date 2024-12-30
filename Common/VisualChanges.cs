@@ -27,6 +27,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/MotherSlime");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/CorruptSlime");
+            TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Crimslime");
 
             TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
             // Gore
@@ -54,6 +55,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.MotherSlime}");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.CorruptSlime}");
+            TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.Crimslime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
 
             TextureAssets.Gore[14] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_14"); // Eater of
@@ -100,6 +102,7 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.DungeonSlime] = 6;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 6;
             Main.npcFrameCount[NPCID.CorruptSlime] = 6;
+            Main.npcFrameCount[NPCID.Crimslime] = 6;
             // Corruption
             Main.npcFrameCount[NPCID.EaterofSouls] = 4;
             SoulEaterVariants[0] = TextureAssets.Npc[NPCID.EaterofSouls];
@@ -131,7 +134,7 @@ namespace Terrafirma.Common
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime)
+            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime or NPCID.Crimslime)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;

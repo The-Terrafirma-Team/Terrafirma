@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Projectiles.Hostile;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -13,7 +14,6 @@ namespace Terrafirma.Common.NPCs
         {
             On_NPC.SlimeRainSpawns += On_NPC_SlimeRainSpawns;
         }
-
         private void On_NPC_SlimeRainSpawns(On_NPC.orig_SlimeRainSpawns orig, int plr)
         {
             int logicCheckScreenHeight = Main.LogicCheckScreenHeight;
@@ -107,6 +107,11 @@ namespace Terrafirma.Common.NPCs
             }
         }
 
+        public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+            spawnRate = (int)(spawnRate * player.PlayerStats().EnemySpawnRateMultiplier);
+            maxSpawns = (int)(maxSpawns * player.PlayerStats().MaxEnemySpawnMultiplier);
+        }
         public override void SetStaticDefaults()
         {
             for (int i = -65; i < ContentSamples.NpcsByNetId.Count - 65; i++)
@@ -120,6 +125,11 @@ namespace Terrafirma.Common.NPCs
         }
         public override void OnKill(NPC npc)
         {
+            if(npc.type == NPCID.Crimslime)
+            {
+                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, -1)), ModContent.ProjectileType<CrimslimeBomb>(), 0, 0, -1);
+                return;
+            }
             if (NPC.downedBoss2)
                 return;
             if (npc.type is >= NPCID.EaterofWorldsHead and <= NPCID.EaterofWorldsTail && npc.boss)

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using Terrafirma.Common.Players;
+using Terrafirma.Common;
 using Terrafirma.Common.Templates;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;

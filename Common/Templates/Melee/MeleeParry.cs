@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Debuffs;
-using Terrafirma.Common.Players;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;

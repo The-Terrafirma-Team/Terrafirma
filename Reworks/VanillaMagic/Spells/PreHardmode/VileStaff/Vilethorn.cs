@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terraria.GameContent;
-using Terrafirma.Common.Players;
+using Terrafirma.Common;
 
 namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
 {

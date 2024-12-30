@@ -11,8 +11,8 @@ using Terraria.GameContent;
 using Terraria.Graphics.CameraModifiers;
 using Terrafirma.Particles;
 using Terrafirma.Data;
-using Terrafirma.Common.Players;
 using Terrafirma.Common.Interfaces;
+using Terrafirma.Common;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {

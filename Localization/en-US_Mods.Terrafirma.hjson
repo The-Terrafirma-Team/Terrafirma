@@ -188,6 +188,11 @@ Buffs: {
 		DisplayName: Healer
 		Description: Outgoing healing increased, damage decreased
 	}
+
+	Bloodsoaked: {
+		DisplayName: Bloodsoaked
+		Description: Mods.Terrafirma.Buffs.Bloodsoaked.Description
+	}
 }
 
 Items: {
@@ -1369,6 +1374,11 @@ Items: {
 		DisplayName: Living Ice
 		Tooltip: ""
 	}
+
+	DebugEdible: {
+		DisplayName: Debug Edible
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1560,6 +1570,7 @@ Projectiles: {
 	DuckHunterShot.DisplayName: Duck Hunter Shot
 	MagicDaggerSpread.DisplayName: Magic Dagger Spread
 	CorrupillarInk.DisplayName: Corrupillar Ink
+	CrimslimeBomb.DisplayName: Crimslime Bomb
 }
 
 Tiles: {

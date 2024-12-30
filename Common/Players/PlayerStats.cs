@@ -38,6 +38,8 @@ namespace Terrafirma.Common.Players
         public uint TimesHeldWeaponHasBeenSwung = 0;
         public int ParryProjectile = -1;
         public bool TurnOffDownwardsMovementRestrictions = false;
+        public float EnemySpawnRateMultiplier = 1f;
+        public float MaxEnemySpawnMultiplier = 1f;
 
         public float HealingMultiplier = 1f;
         public float PotionHealingMultiplier = 1f;
@@ -101,6 +103,9 @@ namespace Terrafirma.Common.Players
         public float maxRunSpeedFlat = 0f;
         public override void ResetEffects()
         {
+            EnemySpawnRateMultiplier = 1f;
+            MaxEnemySpawnMultiplier = 1f;
+
             ParryBuffDurationMultiplier = 1f;
             ParryImmunityDurationMultiplier = 1f;
             ParryDurationMultiplier = 1f;
@@ -178,9 +183,7 @@ namespace Terrafirma.Common.Players
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
-            //Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
         }
-
         public override void PostUpdateRunSpeeds()
         {
             Player.maxRunSpeed += maxRunSpeedFlat;

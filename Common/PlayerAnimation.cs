@@ -4,7 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terrafirma.Systems;
 
-namespace Terrafirma.Common.Players
+namespace Terrafirma.Common
 {
     public static class PlayerAnimation
     {
@@ -50,30 +50,30 @@ namespace Terrafirma.Common.Players
         }
         public static void AlternatingSwingStyle(Player player)
         {
-            float time = 1f - ((float)player.itemAnimation / player.itemAnimationMax);
+            float time = 1f - (float)player.itemAnimation / player.itemAnimationMax;
             int handMovement = 0;
 
             if (player.PlayerStats().TimesHeldWeaponHasBeenSwung % 2 == 0)
             {
                 if (time < 0.2f)
-                    handMovement = PlayerAnimation.PointDownRight;
+                    handMovement = PointDownRight;
                 else if (time < 0.4f)
-                    handMovement = PlayerAnimation.PointRight;
+                    handMovement = PointRight;
                 else if (time < 0.6f)
-                    handMovement = PlayerAnimation.PointUpRight;
+                    handMovement = PointUpRight;
                 else
-                    handMovement = PlayerAnimation.PointUp;
+                    handMovement = PointUp;
             }
             else
             {
                 if (time < 0.2f)
-                    handMovement = PlayerAnimation.PointUpRight;
+                    handMovement = PointUpRight;
                 else if (time < 0.4f)
-                    handMovement = PlayerAnimation.PointRight;
+                    handMovement = PointRight;
                 else if (time < 0.6f)
-                    handMovement = PlayerAnimation.PointDownRight;
+                    handMovement = PointDownRight;
                 else
-                    handMovement = PlayerAnimation.PointDown;
+                    handMovement = PointDown;
             }
 
             player.bodyFrame.Y = player.bodyFrame.Height * handMovement;

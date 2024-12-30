@@ -4,7 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria.Audio;
-using Terrafirma.Common.Players;
+using Terrafirma.Common;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
 {

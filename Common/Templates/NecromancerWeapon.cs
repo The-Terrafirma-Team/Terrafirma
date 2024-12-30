@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using Terrafirma.Common.Players;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Particles;
 using Terrafirma.Projectiles.Melee.Knight;

@@ -21,7 +21,7 @@ namespace Terrafirma.Common.Templates
             {
                 if (sentry.sentry && sentry.Hitbox.Intersects(hitbox))
                 {
-                    if(sentry.GetGlobalProjectile<SentryStats>().BuffTime < (int)(wrench.BuffDuration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime) 
+                    if((sentry.GetGlobalProjectile<SentryStats>().BuffTime < (int)(wrench.BuffDuration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime) || sentry.GetGlobalProjectile<SentryStats>().BuffType != wrench.Buff) 
                     {
                         if (Main.netMode == NetmodeID.SinglePlayer) ApplySentryBuff(sentry, wrench.Buff, (int)(wrench.BuffDuration * player.PlayerStats().WrenchBuffTimeMultiplier));
                         SyncSentryBuff(sentry, wrench.Buff, (int)(wrench.BuffDuration * player.PlayerStats().WrenchBuffTimeMultiplier));
