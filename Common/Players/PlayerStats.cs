@@ -420,16 +420,18 @@ namespace Terrafirma.Common.Players
             packet.Send(-1, -1);
         }
 
-        public static void AddManaType(this Player player, ManaType type, int startInt, int endInt)
+        public static void AddManaType(this Player player, ManaType type, float startPercent, float endPercent)
         {
             Dictionary<ManaType, NumberRange> manaTypes = player.PlayerStats().playerManaTypes;
 
+            int convertedStart = (int)(startPercent * player.statManaMax);
+            int convertedEnd = (int)(endPercent * player.statManaMax);
 
-            if (startInt >= player.statMana && endInt >= player.statMana) return;
+            if (convertedStart >= player.statMana && convertedEnd >= player.statMana) return;
 
             for (int i = manaTypes.Count - 1; i >= 0; i--)
             {
-                if (new NumberRange(startInt, endInt).ContainsRange(manaTypes.Values.ToArray()[i]))
+                if (new NumberRange(convertedStart, convertedEnd).ContainsRange(manaTypes.Values.ToArray()[i]))
                 {
                     manaTypes.Remove(manaTypes.Keys.ToArray()[i]);
                 }
@@ -439,23 +441,23 @@ namespace Terrafirma.Common.Players
             for (int i = manaTypes.Count - 1; i >= 0; i--)
             {
 
-                if (manaTypes.Values.ToArray()[i].ContainsInt(startInt))
+                if (manaTypes.Values.ToArray()[i].ContainsInt(convertedStart))
                 {
-                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(manaTypes.Values.ToArray()[i].start, startInt);
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(manaTypes.Values.ToArray()[i].start, convertedStart);
                 }
-                else if (manaTypes.Values.ToArray()[i].ContainsInt(endInt))
+                else if (manaTypes.Values.ToArray()[i].ContainsInt(convertedEnd))
                 {
-                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(endInt, manaTypes.Values.ToArray()[i].end);
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(convertedEnd, manaTypes.Values.ToArray()[i].end);
                 }
 
                 if (manaTypes.Keys.ToArray()[i].GetType() == type.GetType() &&
-                    (manaTypes.Values.ToArray()[i].ContainsInt(startInt) || manaTypes.Values.ToArray()[i].ContainsInt(endInt)))
+                    (manaTypes.Values.ToArray()[i].ContainsInt(convertedStart) || manaTypes.Values.ToArray()[i].ContainsInt(convertedEnd)))
                 {
                     overlap = true;
-                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(Math.Min(startInt, manaTypes.Values.ToArray()[i].start), Math.Max(endInt, manaTypes.Values.ToArray()[i].end));
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(Math.Min(convertedStart, manaTypes.Values.ToArray()[i].start), Math.Max(convertedEnd, manaTypes.Values.ToArray()[i].end));
                 }
             }
-            if (!overlap) manaTypes.Add(type, new NumberRange(startInt, Math.Min(endInt,player.statMana)));
+            if (!overlap) manaTypes.Add(type, new NumberRange(convertedStart, Math.Min(convertedEnd, player.statMana)));
 
         }
 

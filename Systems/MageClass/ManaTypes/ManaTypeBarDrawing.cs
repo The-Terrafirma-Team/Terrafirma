@@ -39,36 +39,34 @@ namespace Terrafirma.Systems.MageClass.ManaTypes
 
             //Main.NewText(Main.LocalPlayer.PlayerStats().playerManaTypes.Count);
 
+
             for (int i = 0; i < Main.LocalPlayer.PlayerStats().playerManaTypes.Count; i++)
-            { 
+            {
                 //Main.NewText("Start: " + segmentRange.start + ", End: " + segmentRange.end);
                 //Main.NewText("Name: " + playerManaTypes.Keys.ToArray()[i].Name + ", Start: " + playerManaTypes.Values.ToArray()[i].start + ", End: " + playerManaTypes.Values.ToArray()[i].end);
 
                 Player player = Main.LocalPlayer;
+                int manaTypeEnd = (int)playerManaTypes.Values.ToArray()[i].end;
+                int manaTypeStart = (int)playerManaTypes.Values.ToArray()[i].start;
+
                 if (CompareAssets(asset, barsFolder + "MP_Fill"))
-                {
-                    if (playerManaTypes.Values.ToArray()[i].ContainsRange(segmentRange))
+                {                    
+                    if (playerManaTypes.Values.ToArray()[i].OverlapsRange(segmentRange))
                     {
-                        context.texture = ModContent.Request<Texture2D>(playerManaTypes.Keys.ToArray()[i].TexurePath);
-                        context.position = originalPosition;
-                        context.source = new Rectangle(10, 44, 12, 12);
-                        context.Draw();
-                    }
-                    else if (segmentRange.ContainsInt(playerManaTypes.Values.ToArray()[i].end) || segmentRange.ContainsInt(playerManaTypes.Values.ToArray()[i].start))
-                    {
+
                         float leftMana = 0f;
                         float leftPixelMana = 0f;
-                        if (segmentRange.ContainsInt(playerManaTypes.Values.ToArray()[i].end))
+                        if (segmentRange.ContainsInt(manaTypeEnd))
                         {
-                            leftMana = segmentRange.end - playerManaTypes.Values.ToArray()[i].end;
+                            leftMana = segmentRange.end - manaTypeEnd;
                             leftPixelMana = leftMana / (20f / 12f);
                         }
 
                         float rightMana = 0f;
                         float rightPixelMana = 0f;
-                        if (segmentRange.ContainsInt(playerManaTypes.Values.ToArray()[i].start))
+                        if (segmentRange.ContainsInt(manaTypeStart))
                         {
-                            rightMana = -(segmentRange.start - playerManaTypes.Values.ToArray()[i].start);
+                            rightMana = -(segmentRange.start - manaTypeStart);
                             rightPixelMana = rightMana / (20f / 12f);
                         }
 
@@ -86,8 +84,8 @@ namespace Terrafirma.Systems.MageClass.ManaTypes
 
                 }
                 else if (asset == TextureAssets.Mana
-                    && playerManaTypes.Values.ToArray()[i].start <= (manaPerSegment * segmentNumber)
-                    && playerManaTypes.Values.ToArray()[i].end >= (manaPerSegment * segmentNumber))
+                    && manaTypeStart <= (manaPerSegment * segmentNumber)
+                    && manaTypeEnd >= (manaPerSegment * segmentNumber))
                 {
                     // Draw over the Classic stars
                     context.texture = ModContent.Request<Texture2D>(playerManaTypes.Keys.ToArray()[i].TexurePath);
@@ -95,14 +93,14 @@ namespace Terrafirma.Systems.MageClass.ManaTypes
                     context.Draw();
                 }
                 else if (CompareAssets(asset, fancyFolder + "Star_Fill")
-                    && playerManaTypes.Values.ToArray()[i].start <= (manaPerSegment * segmentNumber) 
-                    && playerManaTypes.Values.ToArray()[i].end >= (manaPerSegment * segmentNumber))
+                    && manaTypeStart <= (manaPerSegment * segmentNumber) 
+                    && manaTypeEnd >= (manaPerSegment * segmentNumber))
                 {
                     // Draw over the Fancy stars
                     context.texture = ModContent.Request<Texture2D>(playerManaTypes.Keys.ToArray()[i].TexurePath);
                     context.source = new Rectangle(6, 4, 22, 24);
                     context.Draw();
-                }
+                } 
 
             }
 

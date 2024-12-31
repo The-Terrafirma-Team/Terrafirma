@@ -8,8 +8,8 @@ namespace Terrafirma.Common.Structs
 {
     public struct NumberRange
     {
-        public int start;
-        public int end;
+        public float start;
+        public float end;
 
         public NumberRange()
         {
@@ -23,11 +23,17 @@ namespace Terrafirma.Common.Structs
             end = endInt;
         }
 
+        public NumberRange(float startInt, float endInt)
+        {
+            start = startInt;
+            end = endInt;
+        }
+
     }
 
     internal static class NumberRangeMethods
     {
-        public static bool ContainsInt(this NumberRange range, int number, bool greaterequals = true)
+        public static bool ContainsInt(this NumberRange range, float number, bool greaterequals = true)
         {
             if (greaterequals) return (number >= range.start && number <= range.end);
             return (number > range.start && number < range.end);
@@ -41,15 +47,18 @@ namespace Terrafirma.Common.Structs
 
         public static bool OverlapsRange(this NumberRange range, NumberRange otherRange)
         {
-            return (range.end >= otherRange.start || range.start <= otherRange.end);
+            return ((range.end >= otherRange.start && range.end <= otherRange.end) || 
+                (range.start <= otherRange.end && range.start >= otherRange.start) ||
+                (otherRange.end >= range.start && otherRange.end <= range.end) ||
+                (otherRange.start <= range.end && otherRange.start >= range.start));
         }
-        public static void Shift(this NumberRange range, int offset)
+        public static void Shift(this NumberRange range, float offset)
         {
             range.start -= offset;
             range.end -= offset;
         }
 
-        public static int Size(this NumberRange range)
+        public static float Size(this NumberRange range)
         {
             return range.end - range.start;
         }

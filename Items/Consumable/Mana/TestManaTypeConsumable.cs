@@ -35,11 +35,7 @@ namespace Terrafirma.Items.Consumable.Mana
         {
             if (player.ItemAnimationJustStarted)
             {
-                player.AddManaType(new StarlightMana(), 0, 40);
-                player.AddManaType(new TestManaType2(), 40, 80);
-                player.AddManaType(new StarlightMana(), 80, 120);
-                player.AddManaType(new TestManaType2(), 120, 160);
-                player.AddManaType(new StarlightMana(), 160, 200);
+                player.AddManaType(new StarlightMana(), 0.35f, 1f);
                 //player.ResetManaTypes();
             }
             return base.UseItem(player);
