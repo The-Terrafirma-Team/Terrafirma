@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,6 +111,7 @@ namespace Terrafirma.Common.Players
         //Mana Types
         public Dictionary<ManaType, NumberRange> playerManaTypes = new Dictionary<ManaType, NumberRange>();
         public bool manaUsed = false;
+        public bool consumeManaType = true;
 
         public override void OnConsumeMana(Item item, int manaConsumed)
         {
@@ -123,23 +125,23 @@ namespace Terrafirma.Common.Players
 
             for (int i = playerManaTypes.Count - 1; i >= 0; i--)
             {
-                playerManaTypes.Keys.ToArray()[i].TickEffect(Player);
+                playerManaTypes.Keys.ToArray()[i].TickEffect(Player, playerManaTypes[playerManaTypes.Keys.ToArray()[i]]);
 
                 //Use Effect
                 if (playerManaTypes.Values.ToArray()[i].ContainsInt(Player.statMana) && manaUsed)
                 {
-                    playerManaTypes.Keys.ToArray()[i].UseEffect(Player);
+                    playerManaTypes.Keys.ToArray()[i].UseEffect(Player, playerManaTypes[playerManaTypes.Keys.ToArray()[i]]);
                 }
                 //Not in Use Effect
-                else if (!manaUsed && !Player.ItemAnimationActive) playerManaTypes.Keys.ToArray()[i].NotInUseEffect(Player);
+                else if (!manaUsed && !Player.ItemAnimationActive) playerManaTypes.Keys.ToArray()[i].NotInUseEffect(Player, playerManaTypes[playerManaTypes.Keys.ToArray()[i]]);
 
                 //Consume when mana is used
-                if (playerManaTypes.Values.ToArray()[i].end > Player.statMana)
+                if (playerManaTypes.Values.ToArray()[i].end > Player.statMana && consumeManaType && playerManaTypes.Keys.ToArray()[i].consumable)
                 {
                     playerManaTypes[playerManaTypes.Keys.ToArray()[i]] = new NumberRange(playerManaTypes.Values.ToArray()[i].start, Player.statMana);
                 }
                 //Remove when end and start are the same of if it has been completely consumed
-                if (playerManaTypes.Values.ToArray()[i].start > Player.statMana ||
+                if ((playerManaTypes.Values.ToArray()[i].start > Player.statMana && consumeManaType && playerManaTypes.Keys.ToArray()[i].consumable) ||
                     playerManaTypes.Values.ToArray()[i].start == playerManaTypes.Values.ToArray()[i].end)
                 {
                     playerManaTypes.Remove(playerManaTypes.Keys.ToArray()[i]);
@@ -230,7 +232,11 @@ namespace Terrafirma.Common.Players
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
             //Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
-            if (manaUsed && Player.ItemAnimationEndingOrEnded) manaUsed = false;
+            if (manaUsed && Player.ItemAnimationEndingOrEnded)
+            {
+                manaUsed = false;
+            }
+            consumeManaType = false;
         }
 
         public override void PostUpdateRunSpeeds()
@@ -431,6 +437,7 @@ namespace Terrafirma.Common.Players
 
             for (int i = manaTypes.Count - 1; i >= 0; i--)
             {
+                //Remove mana type is the new one consumes the old one
                 if (new NumberRange(convertedStart, convertedEnd).ContainsRange(manaTypes.Values.ToArray()[i]))
                 {
                     manaTypes.Remove(manaTypes.Keys.ToArray()[i]);
@@ -441,15 +448,17 @@ namespace Terrafirma.Common.Players
             for (int i = manaTypes.Count - 1; i >= 0; i--)
             {
 
+                //Shrink the end if it overlaps with the start of the new type
                 if (manaTypes.Values.ToArray()[i].ContainsInt(convertedStart))
                 {
                     manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(manaTypes.Values.ToArray()[i].start, convertedStart);
                 }
+                //Shrink the start if it overlaps with the end of the new type
                 else if (manaTypes.Values.ToArray()[i].ContainsInt(convertedEnd))
                 {
                     manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(convertedEnd, manaTypes.Values.ToArray()[i].end);
                 }
-
+                //Merge the same types as one if they overlap
                 if (manaTypes.Keys.ToArray()[i].GetType() == type.GetType() &&
                     (manaTypes.Values.ToArray()[i].ContainsInt(convertedStart) || manaTypes.Values.ToArray()[i].ContainsInt(convertedEnd)))
                 {

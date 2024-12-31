@@ -73,9 +73,11 @@ namespace Terrafirma.Systems.MageClass.ManaTypes
                         float manaLeftInSegment = Math.Clamp(segmentRange.end - context.snapshot.Mana, 0, 20);
                         float manaLeftInSegmentPixel = manaLeftInSegment / (20f / 12f);
 
+                        int segmentLoopOffset = playerManaTypes.Keys.ToArray()[i].loopingBarTextureSegments > 0 ? (12 * context.resourceNumber) % (12 * (playerManaTypes.Keys.ToArray()[i].loopingBarTextureSegments + 1)) : 0;
+
                         context.texture = ModContent.Request<Texture2D>(playerManaTypes.Keys.ToArray()[i].TexurePath);
                         context.position.X = originalPosition.X + (int)leftPixelMana - (int)manaLeftInSegmentPixel;
-                        context.source = new Rectangle(10 + (int)leftPixelMana,
+                        context.source = new Rectangle(10 + segmentLoopOffset + (int)leftPixelMana,
                             44,
                             12 - (int)leftPixelMana - (int)rightPixelMana,
                             12);

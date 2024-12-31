@@ -13,8 +13,9 @@ using Terrafirma.Common.Structs;
 
 namespace Terrafirma.ManaTypes
 {
-    public class StarlightMana : ManaType
+    public class NatureMana : ManaType
     {
+        public override int loopingBarTextureSegments => 1;
         public override void TickEffect(Player player, NumberRange range)
         {
             player.AddBuff(ModContent.BuffType<StarlightManaBuff>(), 2);         

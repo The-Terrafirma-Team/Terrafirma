@@ -31,6 +31,7 @@ namespace Terrafirma.Items.Consumable
             player.PlayerStats().SpiritCrystals = 0;
             player.PlayerStats().TensionMax = 50;
             player.PlayerStats().Tension = 0;
+            player.ConsumedManaCrystals = 4;
             return true;
         }
         public override Color? GetAlpha(Color lightColor)
