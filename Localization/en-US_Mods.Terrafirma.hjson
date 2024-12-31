@@ -1370,6 +1370,16 @@ Items: {
 			'''
 	}
 
+	TestManaTypeConsumable: {
+		DisplayName: Test Mana Type Consumable
+		Tooltip: ""
+	}
+
+	TestManaTypeConsumable2: {
+		DisplayName: Test Mana Type Consumable2
+		Tooltip: ""
+	}
+
 	LivingIce: {
 		DisplayName: Living Ice
 		Tooltip: ""

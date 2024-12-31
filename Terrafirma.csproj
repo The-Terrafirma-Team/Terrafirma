@@ -20,7 +20,8 @@
     <None Remove="Systems\MageClass\SpellIcons\Tempire\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Effects\CookingPotVaporShader.fx" />
+    <None Remove="Items\Consumable\Mana\TestManaTypeConsumable.png" />
+    <None Remove="Items\Consumable\Mana\TestManaTypeConsumable2.png" />
     <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
     <None Remove="Projectiles\Tools\UldraxProjectile.png" />
     <None Remove="Systems\Cooking\CookingPotUI.cs~RF44f8c32a.TMP" />

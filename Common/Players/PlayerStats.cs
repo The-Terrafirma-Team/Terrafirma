@@ -1,10 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terrafirma.Buffs.Buffs;
+using Terrafirma.Common.Structs;
 using Terrafirma.Common.Templates;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
+using Terrafirma.Systems.MageClass.ManaTypes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,6 +22,7 @@ namespace Terrafirma.Common.Players
         {
             On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
         }
+
         private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
         {
             if (Main.debuff[type] && !BuffID.Sets.NurseCannotRemoveDebuff[type])
@@ -101,6 +106,47 @@ namespace Terrafirma.Common.Players
         //Movement
         public float maxRunSpeedMultiplier = 1f;
         public float maxRunSpeedFlat = 0f;
+
+        //Mana Types
+        public Dictionary<ManaType, NumberRange> playerManaTypes = new Dictionary<ManaType, NumberRange>();
+        public bool manaUsed = false;
+
+        public override void OnConsumeMana(Item item, int manaConsumed)
+        {
+            manaUsed = true;
+        }
+
+        public override void PreUpdateBuffs()
+        {
+            //Mana Types
+            if (Player.statMana == 0 || (!Player.CheckMana(Player.HeldItem.mana))) playerManaTypes.Clear();
+
+            for (int i = playerManaTypes.Count - 1; i >= 0; i--)
+            {
+                playerManaTypes.Keys.ToArray()[i].TickEffect(Player);
+
+                //Use Effect
+                if (playerManaTypes.Values.ToArray()[i].ContainsInt(Player.statMana) && manaUsed)
+                {
+                    playerManaTypes.Keys.ToArray()[i].UseEffect(Player);
+                }
+                //Not in Use Effect
+                else if (!manaUsed && !Player.ItemAnimationActive) playerManaTypes.Keys.ToArray()[i].NotInUseEffect(Player);
+
+                //Consume when mana is used
+                if (playerManaTypes.Values.ToArray()[i].end > Player.statMana)
+                {
+                    playerManaTypes[playerManaTypes.Keys.ToArray()[i]] = new NumberRange(playerManaTypes.Values.ToArray()[i].start, Player.statMana);
+                }
+                //Remove when end and start are the same of if it has been completely consumed
+                if (playerManaTypes.Values.ToArray()[i].start > Player.statMana ||
+                    playerManaTypes.Values.ToArray()[i].start == playerManaTypes.Values.ToArray()[i].end)
+                {
+                    playerManaTypes.Remove(playerManaTypes.Keys.ToArray()[i]);
+                }
+            }
+        }
+
         public override void ResetEffects()
         {
             EnemySpawnRateMultiplier = 1f;
@@ -183,6 +229,10 @@ namespace Terrafirma.Common.Players
                 TimesHeldWeaponHasBeenSwung = 0;
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
+            //Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
+        }
+
+            if (manaUsed && Player.ItemAnimationEndingOrEnded) manaUsed = false;
         }
         public override void PostUpdateRunSpeeds()
         {
@@ -369,6 +419,69 @@ namespace Terrafirma.Common.Players
             packet.Write(player.whoAmI);
             packet.WriteVector2(Main.MouseWorld);
             packet.Send(-1, -1);
+        }
+
+        public static void AddManaType(this Player player, ManaType type, int startInt, int endInt)
+        {
+            Dictionary<ManaType, NumberRange> manaTypes = player.PlayerStats().playerManaTypes;
+
+
+            if (startInt >= player.statMana && endInt >= player.statMana) return;
+
+            for (int i = manaTypes.Count - 1; i >= 0; i--)
+            {
+                if (new NumberRange(startInt, endInt).ContainsRange(manaTypes.Values.ToArray()[i]))
+                {
+                    manaTypes.Remove(manaTypes.Keys.ToArray()[i]);
+                }
+            }
+
+            bool overlap = false;
+            for (int i = manaTypes.Count - 1; i >= 0; i--)
+            {
+
+                if (manaTypes.Values.ToArray()[i].ContainsInt(startInt))
+                {
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(manaTypes.Values.ToArray()[i].start, startInt);
+                }
+                else if (manaTypes.Values.ToArray()[i].ContainsInt(endInt))
+                {
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(endInt, manaTypes.Values.ToArray()[i].end);
+                }
+
+                if (manaTypes.Keys.ToArray()[i].GetType() == type.GetType() &&
+                    (manaTypes.Values.ToArray()[i].ContainsInt(startInt) || manaTypes.Values.ToArray()[i].ContainsInt(endInt)))
+                {
+                    overlap = true;
+                    manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(Math.Min(startInt, manaTypes.Values.ToArray()[i].start), Math.Max(endInt, manaTypes.Values.ToArray()[i].end));
+                }
+            }
+            if (!overlap) manaTypes.Add(type, new NumberRange(startInt, Math.Min(endInt,player.statMana)));
+
+        }
+
+        public static void AddManaType(this Player player, ManaType type)
+        {
+            player.PlayerStats().playerManaTypes.Clear();
+            player.PlayerStats().playerManaTypes.Add(type, new NumberRange(0, player.statManaMax));
+        }
+
+        public static void ResetManaTypes(this Player player)
+        {
+            player.PlayerStats().playerManaTypes.Clear();
+        }
+
+        /// <summary>
+        /// Return the current mana type that player can use, returns null if there's none
+        /// </summary>
+        public static ManaType GetCurrentManaType(this Player player)
+        {
+            Dictionary<ManaType, NumberRange> playerManaTypes = player.PlayerStats().playerManaTypes;
+            for (int i = 0; i < playerManaTypes.Count; i++)
+            {
+                if (playerManaTypes.Values.ToArray()[i].ContainsInt(player.statMana)) return playerManaTypes.Keys.ToArray()[i];
+            }
+            return null;
         }
     }
 }
