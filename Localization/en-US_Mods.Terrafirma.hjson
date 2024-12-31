@@ -193,6 +193,11 @@ Buffs: {
 		DisplayName: Bloodsoaked
 		Description: Mods.Terrafirma.Buffs.Bloodsoaked.Description
 	}
+
+	StarlightManaBuff: {
+		DisplayName: Starlight Mana
+		Description: Magic damage increased
+	}
 }
 
 Items: {
