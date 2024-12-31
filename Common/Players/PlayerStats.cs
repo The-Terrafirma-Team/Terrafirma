@@ -230,10 +230,9 @@ namespace Terrafirma.Common.Players
 
             if (Main.LocalPlayer == Player) MouseWorld = Main.MouseWorld;
             //Main.NewText($"{Tension}" + "/" + $"{TensionMax + TensionMax2}");
-        }
-
             if (manaUsed && Player.ItemAnimationEndingOrEnded) manaUsed = false;
         }
+
         public override void PostUpdateRunSpeeds()
         {
             Player.maxRunSpeed += maxRunSpeedFlat;
