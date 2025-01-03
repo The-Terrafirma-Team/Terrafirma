@@ -12,7 +12,7 @@ namespace Terrafirma.Items.Materials
             Item.Size = new Vector2(24);
             Item.rare = ItemRarityID.Blue;
             Item.maxStack = Item.CommonMaxStack;
-            Item.value = Item.sellPrice(0, 0, 1, 0);
+            Item.value = Item.sellPrice(0, 0, 10, 0);
         }
         public override void SetStaticDefaults()
         {

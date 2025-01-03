@@ -1394,6 +1394,16 @@ Items: {
 		DisplayName: Debug Edible
 		Tooltip: ""
 	}
+
+	GranitePickaxe: {
+		DisplayName: Granite Pickaxe
+		Tooltip: ""
+	}
+
+	GraniteTurretStaff: {
+		DisplayName: Granite Turret Staff
+		Tooltip: Summons a sentry
+	}
 }
 
 Projectiles: {
@@ -1586,6 +1596,8 @@ Projectiles: {
 	MagicDaggerSpread.DisplayName: Magic Dagger Spread
 	CorrupillarInk.DisplayName: Corrupillar Ink
 	CrimslimeBomb.DisplayName: Crimslime Bomb
+	GraniteTurret.DisplayName: Granite Turret
+	GraniteTurretShot.DisplayName: Granite Turret Shot
 }
 
 Tiles: {

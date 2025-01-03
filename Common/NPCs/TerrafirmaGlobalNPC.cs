@@ -123,6 +123,22 @@ namespace Terrafirma.Common.NPCs
                 }
             }
         }
+        public override void AI(NPC npc)
+        {
+            switch (npc.type)
+            {
+                case NPCID.UmbrellaSlime:
+                    if(npc.velocity.Y > 0)
+                    {
+                        npc.GravityMultiplier /= 6;
+                        if (npc.velocity.Y > 1)
+                        {
+                            npc.velocity.Y = 1;
+                        }
+                    }
+                    break;
+            }
+        }
         public override void OnKill(NPC npc)
         {
             if(npc.type == NPCID.Crimslime)

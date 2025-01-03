@@ -88,7 +88,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         {
             Color GlowColor = new Color(180, 20, 255,0);
 
-            Asset<Texture2D> tex = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CorruptedEyeSentry", AssetRequestMode.ImmediateLoad);
+            Asset<Texture2D> tex = TextureAssets.Projectile[Type];
             // Body
             Main.EntitySpriteDraw(tex.Value,
                 Projectile.Center - Main.screenPosition,

@@ -25,14 +25,17 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.IlluminantSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/IlluminantSlime");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/BalloonSlime");
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/MotherSlime");
+            TextureAssets.Npc[NPCID.UmbrellaSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/UmbrellaSlime");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/DungeonSlime");
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/CorruptSlime");
+            TextureAssets.Npc[NPCID.SlimeSpiked] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/SpikedSlime");
             TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Crimslime");
 
             TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
             // Gore
             TextureAssets.Gore[14] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0_Gore_0");
             TextureAssets.Gore[15] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0_Gore_1");
+            TextureAssets.Gore[314] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Umbrella");
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>(AssetFolder + "Misc/Ninja");
             // Armor
@@ -53,16 +56,16 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.LavaSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.LavaSlime}");
             TextureAssets.Npc[NPCID.IlluminantSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.IlluminantSlime}");
             TextureAssets.Npc[NPCID.MotherSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.MotherSlime}");
+            TextureAssets.Npc[NPCID.UmbrellaSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.UmbrellaSlime}");
             TextureAssets.Npc[NPCID.DungeonSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.DungeonSlime}");
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.CorruptSlime}");
             TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.Crimslime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
 
+            // Gore
             TextureAssets.Gore[14] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_14"); // Eater of
             TextureAssets.Gore[15] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_15"); //   Souls
-
-            // Gore
-            TextureAssets.Npc[14] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.EaterofSouls}");
+            TextureAssets.Gore[314] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_314"); //   umbrella slime
             // Misc
             TextureAssets.Ninja = ModContent.Request<Texture2D>($"Terraria/Images/Ninja");
             // Armor
@@ -82,27 +85,33 @@ namespace Terrafirma.Common
         private static Asset<Texture2D>[] SlimeVariants = new Asset<Texture2D>[3];
         private static Asset<Texture2D>[] SoulEaterVariants = new Asset<Texture2D>[2];
         private static Asset<Texture2D> Pinky;
+        private static Asset<Texture2D> Umbrella;
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.ModNPC == null;
         }
         public byte variant = 0;
+        public float UmbrellaRotation = 0f;
         public override void SetStaticDefaults()
         {
             //Slime
-            Main.npcFrameCount[1] = 6;
             SlimeVariants[0] = TextureAssets.Npc[1];
             for (int i = 1; i < SlimeVariants.Length; i++)
             {
                 SlimeVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Slime_" + $"{i}");
             }
             Pinky = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Pinky");
+            Umbrella = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Umbrella");
+
+            Main.npcFrameCount[1] = 6;
             Main.npcFrameCount[NPCID.LavaSlime] = 6;
             Main.npcFrameCount[NPCID.MotherSlime] = 6;
             Main.npcFrameCount[NPCID.DungeonSlime] = 6;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 6;
             Main.npcFrameCount[NPCID.CorruptSlime] = 6;
             Main.npcFrameCount[NPCID.Crimslime] = 6;
+            Main.npcFrameCount[NPCID.SlimeSpiked] = 6;
+            Main.npcFrameCount[NPCID.UmbrellaSlime] = 6;
             // Corruption
             Main.npcFrameCount[NPCID.EaterofSouls] = 4;
             SoulEaterVariants[0] = TextureAssets.Npc[NPCID.EaterofSouls];
@@ -131,10 +140,12 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.DungeonSlime] = 2;
             Main.npcFrameCount[NPCID.CorruptSlime] = 2;
             Main.npcFrameCount[NPCID.IlluminantSlime] = 2;
+            Main.npcFrameCount[NPCID.SlimeSpiked] = 2;
+            Main.npcFrameCount[NPCID.UmbrellaSlime] = 2;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime or NPCID.Crimslime)
+            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime or NPCID.Crimslime or NPCID.UmbrellaSlime or NPCID.SlimeSpiked)
             {
                 npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
                 npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
@@ -169,7 +180,10 @@ namespace Terrafirma.Common
                     else
                         spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
                     return false;
-
+                case NPCID.UmbrellaSlime:
+                    UmbrellaRotation = MathHelper.Lerp(UmbrellaRotation, npc.velocity.X * -0.1f, 0.1f);
+                    spriteBatch.Draw(Umbrella.Value, npc.Center - screenPos, null, drawColor, npc.rotation + UmbrellaRotation + (float)Math.Sin(Main.timeForVisualEffects * 0.01f + variant) * 0.1f, new Vector2(23, 44),npc.scale,SpriteEffects.None,0);
+                    break;
                 case NPCID.EaterofSouls:
                     spriteBatch.Draw(SoulEaterVariants[variant % 2].Value, npc.Center - screenPos, npc.frame, drawColor/*.MultiplyRGB(Color.Lerp(Color.White, new Color(0.85f, 0.8f, 0.9f), Math.Abs(MathF.Sin(variant * 0.1f))))*/, npc.rotation, new Vector2(25, 56), npc.scale, SpriteEffects.None, 0);
                     return false;
