@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Particles;
 using Terrafirma.Projectiles.Hostile;
 using Terraria;
 using Terraria.GameContent.Creative;
@@ -65,6 +66,10 @@ namespace Terrafirma.Common.NPCs
             // Regular slime spawns
             if (!Main.rand.NextBool(40))
             {
+                if (Main.player[plr].ZoneHallow && Main.rand.NextBool(40))
+                {
+                    NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.RainbowSlime);
+                }
                 int num8 = NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, 1);
                 if (Main.rand.NextBool(200))
                 {
@@ -92,18 +97,16 @@ namespace Terrafirma.Common.NPCs
             }
             else // Special Slimes
             {
-                NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.MotherSlime);
-                // Uncomment when more are to be added
-                //int rand = Main.rand.Next(2);
-                //switch(rand) 
-                //{
-                //    case 0:
-                //        NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.Slimer);
-                //        break;
-                //    case 1:
-                //        NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.MotherSlime);
-                //        break;
-                //}
+                int rand = Main.rand.Next(2);
+                switch (rand)
+                {
+                    case 0:
+                        NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.MotherSlime);
+                        break;
+                    case 1:
+                        NPC.NewNPC(NPC.GetSource_NaturalSpawn(), num6 * 16 + 8, num7 * 16, NPCID.MotherSlime);
+                        break;
+                }
             }
         }
 
@@ -135,6 +138,13 @@ namespace Terrafirma.Common.NPCs
                         {
                             npc.velocity.Y = 1;
                         }
+                    }
+                    break;
+                case NPCID.RainbowSlime:
+                    npc.ai[0]-= 2;
+                    if (Main.rand.NextBool(10))
+                    {
+                        ParticleSystem.AddParticle(new BigSparkle() {Rotation = Main.rand.NextFloat(-0.2f,0.2f), Scale = 0.3f, fadeInTime = 10 }, Main.rand.NextVector2FromRectangle(npc.Hitbox),npc.velocity * 0.1f,Main.DiscoColor with { A = 0});
                     }
                     break;
             }

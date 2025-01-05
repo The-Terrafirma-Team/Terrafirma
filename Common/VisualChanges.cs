@@ -30,6 +30,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/CorruptSlime");
             TextureAssets.Npc[NPCID.SlimeSpiked] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/SpikedSlime");
             TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/Crimslime");
+            TextureAssets.Npc[NPCID.RainbowSlime] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/RainbowSlime");
 
             TextureAssets.Npc[NPCID.EaterofSouls] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_0");
             // Gore
@@ -61,6 +62,7 @@ namespace Terrafirma.Common
             TextureAssets.Npc[NPCID.CorruptSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.CorruptSlime}");
             TextureAssets.Npc[NPCID.Crimslime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.Crimslime}");
             TextureAssets.Npc[NPCID.WindyBalloon] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.WindyBalloon}");
+            TextureAssets.Npc[NPCID.RainbowSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.RainbowSlime}");
 
             // Gore
             TextureAssets.Gore[14] = ModContent.Request<Texture2D>($"Terraria/Images/Gore_14"); // Eater of
@@ -112,6 +114,7 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.Crimslime] = 6;
             Main.npcFrameCount[NPCID.SlimeSpiked] = 6;
             Main.npcFrameCount[NPCID.UmbrellaSlime] = 6;
+            Main.npcFrameCount[NPCID.RainbowSlime] = 11;
             // Corruption
             Main.npcFrameCount[NPCID.EaterofSouls] = 4;
             SoulEaterVariants[0] = TextureAssets.Npc[NPCID.EaterofSouls];
@@ -122,7 +125,7 @@ namespace Terrafirma.Common
         }
         public override void SetDefaultsFromNetId(NPC npc)
         {
-            if (npc.netID == NPCID.BabySlime)
+            if (npc.netID is NPCID.BabySlime)
             {
                 npc.color = new Color(80, 80, 80, 128);
             }
@@ -142,24 +145,51 @@ namespace Terrafirma.Common
             Main.npcFrameCount[NPCID.IlluminantSlime] = 2;
             Main.npcFrameCount[NPCID.SlimeSpiked] = 2;
             Main.npcFrameCount[NPCID.UmbrellaSlime] = 2;
+            Main.npcFrameCount[NPCID.RainbowSlime] = 2;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            if (npc.type is NPCID.BlueSlime or NPCID.LavaSlime or NPCID.MotherSlime or NPCID.IlluminantSlime or NPCID.DungeonSlime or NPCID.CorruptSlime or NPCID.Crimslime or NPCID.UmbrellaSlime or NPCID.SlimeSpiked)
+            switch (npc.type)
             {
-                npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
-                npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
-                if (npc.frame.Y > frameHeight * 3)
-                    npc.frame.Y = 0;
-                if (npc.velocity.Y < 0)
-                    npc.frame.Y = frameHeight * 5;
-                else if (npc.velocity.Y > 0)
-                    npc.frame.Y = frameHeight * 4;
-            }
-            else if (npc.type == NPCID.EaterofSouls)
-            {
-                npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
-                npc.frameCounter += (1f - (MathHelper.Clamp(npc.Center.Distance(Main.player[npc.target].Center), 0, 200) / 200f)) * 2;
+                case NPCID.BlueSlime:
+                case NPCID.LavaSlime:
+                case NPCID.MotherSlime:
+                case NPCID.IlluminantSlime:
+                case NPCID.DungeonSlime:
+                case NPCID.CorruptSlime:
+                case NPCID.Crimslime:
+                case NPCID.UmbrellaSlime:
+                case NPCID.SlimeSpiked:
+                    npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
+                    npc.frameCounter += (1f - (npc.life / (float)npc.lifeMax)) * 2;
+                    if (npc.frame.Y > frameHeight * 3)
+                        npc.frame.Y = 0;
+                    if (npc.velocity.Y < 0)
+                        npc.frame.Y = frameHeight * 5;
+                    else if (npc.velocity.Y > 0)
+                        npc.frame.Y = frameHeight * 4;
+                    return;
+                case NPCID.RainbowSlime:
+                    if (npc.frame.Y > frameHeight * 3)
+                        npc.frame.Y = 0;
+                    if ((npc.ai[0] is > -40 and <= -20) || (npc.ai[0] is >= -1040 and <= -1020) || (npc.ai[0] is >= -2040 and <= -2020))
+                    {
+                        npc.frame.Y = frameHeight * 4;
+                    }
+                    else if ((npc.ai[0] is >= -20 and <= 0) || (npc.ai[0] is >= -1020 and <= -1000) || (npc.ai[0] is >= -2020 and <= -2000))
+                    {
+                        npc.frame.Y = frameHeight * 5;
+                    }
+                    if (npc.velocity.Y != 0)
+                    {
+                        npc.frame.Y = frameHeight * (8 + (int)MathHelper.Clamp(npc.velocity.Y,-2,2));
+                    }
+                    return;
+
+                case NPCID.EaterofSouls:
+                    npc.frameCounter += Math.Sin(variant * 0.1f) * 0.2f;
+                    npc.frameCounter += (1f - (MathHelper.Clamp(npc.Center.Distance(Main.player[npc.target].Center), 0, 200) / 200f)) * 2;
+                    return;
             }
         }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

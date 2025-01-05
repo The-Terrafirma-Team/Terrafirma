@@ -1598,6 +1598,7 @@ Projectiles: {
 	CrimslimeBomb.DisplayName: Crimslime Bomb
 	GraniteTurret.DisplayName: Granite Turret
 	GraniteTurretShot.DisplayName: Granite Turret Shot
+	ToxicSludgeBall.DisplayName: Toxic Sludge Ball
 }
 
 Tiles: {
@@ -1990,6 +1991,7 @@ NPCs: {
 	Ninja.DisplayName: Ninja
 	NefariousSkull.DisplayName: Nefarious Skull
 	Corrupillar.DisplayName: Corrupillar
+	MatriarchSlime.DisplayName: Matriarch Slime
 }
 
 Configs: {

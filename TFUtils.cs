@@ -28,6 +28,10 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static bool IfTheSlimesAI0WasThisNumberItWouldJump(int i)
+        {
+            return i is 0 or -1000 or -2000;
+        }
         public static void HealWithAdjustments(this Player reciever, int life)
         {
             reciever.Heal((int)(life * reciever.PlayerStats().HealingMultiplier));
