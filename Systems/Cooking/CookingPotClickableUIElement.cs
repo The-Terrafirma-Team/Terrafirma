@@ -54,7 +54,7 @@ namespace Terrafirma.Systems.Cooking
                     ParticleSystem.AddParticle(p, new Vector2(Main.ScreenSize.X * HAlign + Left.Pixels, Main.ScreenSize.Y * VAlign + Top.Pixels), new Vector2(3f, 0).RotatedBy(MathHelper.Pi * 0.33f * i), new Color(213, 123, 11, 0) * 0.2f, ParticleLayer.UI);
                 }    
             }
-            ParticleSystem.DrawUIParticle(Vector2.Zero);
+            ParticleSystem.DrawUIParticles(Vector2.Zero);
             base.Draw(spriteBatch);
         }
 

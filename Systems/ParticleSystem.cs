@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -55,7 +54,7 @@ namespace Terrafirma.Particles
                 }
                 else
                 {
-                    list.Remove(Particles[i]);
+                    list.Remove(particle);
                 }
             }
         }
@@ -78,7 +77,7 @@ namespace Terrafirma.Particles
             orig.Invoke(self);
             DrawParticles();
         }
-        public static void DrawUIParticle(Vector2 Linepos)
+        public static void DrawUIParticles(Vector2 Linepos)
         {
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.SamplerStateForCursor, null, null, null, Main.UIScaleMatrix);
@@ -135,7 +134,7 @@ namespace Terrafirma.Particles
                         TooltipParticles.Add(particle);
                         break;
                     }
-                    case ParticleLayer.BehindTiles:
+                case ParticleLayer.BehindTiles:
                     {
                         if (PreTileParticles.Count == MaxParticles)
                         {

@@ -169,10 +169,11 @@ namespace Terrafirma.Common.Items
                         p.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
                         p.fadeInTime = 20;
                         p.Scale = Main.rand.NextFloat(0.3f, 1.2f);
-                        ParticleSystem.AddParticle(new BigSparkle(), new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(20f)),null,line.Color,ParticleLayer.UI);
+                        p.smallestSize = 0f;
+                        ParticleSystem.AddParticle(new BigSparkle(), new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(20f)), null, line.Color, ParticleLayer.UI);
                     }
+                    ParticleSystem.DrawUIParticles(new Vector2(line.X, line.Y));
                 }
-                ParticleSystem.DrawUIParticle(new Vector2(line.X, line.Y));
             }
         }
     }
