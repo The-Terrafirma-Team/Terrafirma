@@ -1992,6 +1992,7 @@ NPCs: {
 	NefariousSkull.DisplayName: Nefarious Skull
 	Corrupillar.DisplayName: Corrupillar
 	MatriarchSlime.DisplayName: Matriarch Slime
+	TragicUmbrellaSlime.DisplayName: Tragic Umbrella Slime
 }
 
 Configs: {
