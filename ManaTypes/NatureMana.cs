@@ -16,14 +16,5 @@ namespace Terrafirma.ManaTypes
     public class NatureMana : ManaType
     {
         public override int loopingBarTextureSegments => 1;
-        public override void TickEffect(Player player, NumberRange range)
-        {
-            player.AddBuff(ModContent.BuffType<StarlightManaBuff>(), 2);         
-            if (Main.timeForVisualEffects % 4 == 0)
-            {
-                Dust d = Dust.NewDustDirect(player.position - new Vector2(10), player.width + 20, player.height + 20, DustID.PurpleTorch, -player.velocity.X * 0.5f, -player.velocity.Y * 0.5f, Scale: 2f);
-                d.noGravity = true;
-            }
-        }
     }
 }

@@ -236,7 +236,7 @@ namespace Terrafirma.Common.Players
             {
                 manaUsed = false;
             }
-            consumeManaType = false;
+            consumeManaType = true;
         }
 
         public override void PostUpdateRunSpeeds()
@@ -466,7 +466,11 @@ namespace Terrafirma.Common.Players
                     manaTypes[manaTypes.Keys.ToArray()[i]] = new NumberRange(Math.Min(convertedStart, manaTypes.Values.ToArray()[i].start), Math.Max(convertedEnd, manaTypes.Values.ToArray()[i].end));
                 }
             }
-            if (!overlap) manaTypes.Add(type, new NumberRange(convertedStart, Math.Min(convertedEnd, player.statMana)));
+            if (!overlap)
+            {
+                type.OnApply(player, new NumberRange(convertedStart, convertedEnd));
+                manaTypes.Add(type, new NumberRange(convertedStart, Math.Min(convertedEnd, player.statMana)));
+            }
 
         }
 

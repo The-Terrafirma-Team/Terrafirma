@@ -44,6 +44,14 @@ namespace Terrafirma.Systems.MageClass.ManaTypes
 
         }
 
+        /// <summary>
+        /// Runs when the type is first applied
+        /// </summary>
+        public virtual void OnApply(Player player, NumberRange range)
+        {
+
+        }
+
         protected override void Register()
         {
             ModTypeLookup<ManaType>.Register(this);
