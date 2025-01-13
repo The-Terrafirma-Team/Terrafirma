@@ -1404,6 +1404,11 @@ Items: {
 		DisplayName: Granite Turret Staff
 		Tooltip: Summons a sentry
 	}
+
+	Antihero: {
+		DisplayName: Antihero
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1599,6 +1604,7 @@ Projectiles: {
 	GraniteTurret.DisplayName: Granite Turret
 	GraniteTurretShot.DisplayName: Granite Turret Shot
 	ToxicSludgeBall.DisplayName: Toxic Sludge Ball
+	AntiheroProjectile.DisplayName: Antihero Projectile
 }
 
 Tiles: {
@@ -2044,17 +2050,19 @@ Configs: {
 			1: Retro
 			2: Valkyrie
 			3: Gilded
-			4: StoneGold
-			5: Corroboros
-			6: Minimalist
-			7: Split
-			8: Terrafirma
-			9: Copper
-			10: Gothic
-			11: Dipped
-			12: Devourer
-			13: Ouroboros
-			14: Bejeweled
+			4: Silver
+			5: StoneGold
+			6: Corroboros
+			7: Minimalist
+			8: Split
+			9: Terrafirma
+			10: Copper
+			11: Gothic
+			12: Dipped
+			13: Devourer
+			14: Ouroboros
+			15: Bejeweled
+			16: Honeyed
 		}
 
 		ExtraUIPosition: {

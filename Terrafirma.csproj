@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Items\Consumable\Mana\TestManaTypeConsumable.png" />
+    <None Remove="Projectiles\Melee\Knight\AntiheroProjectile.png" />
     <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
     <None Remove="Projectiles\Tools\UldraxProjectile.png" />
     <None Remove="Systems\Cooking\CookingPotUI.cs~RF44f8c32a.TMP" />
