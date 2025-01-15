@@ -17,9 +17,10 @@ namespace Terrafirma.Projectiles.Melee.Knight
     {
         NPC targetNPC = null;
         Vector2 targetOffset = Vector2.Zero;
-        public override string Texture => "Terrafirma/Projectiles/Melee/Knight/AntiheroProjectile";
+        private static Asset<Texture2D> glow;
         public override void SetStaticDefaults()
         {
+            glow = ModContent.Request<Texture2D>(Texture + "_White");
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
         }
@@ -39,6 +40,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
         }
         public override void AI()
         {
+            ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 2f}, Projectile.Center + new Vector2(0,Main.rand.NextFloat(-30,30)).RotatedBy(Projectile.rotation + MathHelper.PiOver2), Projectile.velocity.RotatedByRandom(0.3f) * 0.3f + Main.rand.NextVector2Circular(1,1), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.2f);
             if (Projectile.velocity != Vector2.Zero) Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Projectile.velocity.ToRotation(), 0.2f);
             if (Projectile.ai[1] == 1)
             {
@@ -59,12 +61,17 @@ namespace Terrafirma.Projectiles.Melee.Knight
 
                 if (targetNPC.immune[Projectile.owner] == 0)
                 {
-                    Main.player[Projectile.owner].ApplyDamageToNPC(targetNPC, Projectile.damage, 0f, 1, damageType: DamageClass.Melee);
+                    Main.player[Projectile.owner].ApplyDamageToNPC(targetNPC, Projectile.damage / 3, 0f, 1, damageType: DamageClass.Melee);
                     targetNPC.immune[Projectile.owner] = 20;
+                    if (!Main.player[Projectile.owner].CheckTension(5, true))
+                    {
+                        Projectile.ai[1] = 1;
+                        return;
+                    }
 
                     int healAmount = (int)(4 * (((600 - (int)Main.player[Projectile.owner].Center.Distance(Projectile.Center)) / 300f) + 1));
 
-                    if (healAmount > 0 && targetNPC.type != NPCID.TargetDummy) Main.player[Projectile.owner].Heal(healAmount);
+                    if (healAmount > 0 && targetNPC.type != NPCID.TargetDummy) Main.player[Projectile.owner].HealWithAdjustments(healAmount);
 
                     for (int i = 0; i < Projectile.Center.Distance(Main.player[Projectile.owner].Center); i += 5)
                     {
@@ -79,8 +86,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
 
                     for (int i = 0; i < 10; i++)
                     {
-                        Vector2 vel = Main.rand.NextVector2Circular(4f, 4f);
-                        Dust.NewDust(Projectile.Center + Projectile.Center.DirectionTo(targetNPC.Center) * 40, 4, 4, DustID.Blood, vel.X, vel.Y, Scale: 1.5f);
+                        Dust.NewDustPerfect(Projectile.Center + Projectile.Center.DirectionTo(targetNPC.Center) * 40, DustID.Blood, Main.rand.NextVector2Circular(4f, 4f), Scale: 1.5f);
+
+                        //ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 1.5f }, Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2Circular(3, 3), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.6f);
+                        ParticleSystem.AddParticle(new ImpactSparkle() { Scale = Main.rand.NextFloat(0.4f, 0.7f), LifeTime = Main.rand.Next(15, 30) }, targetNPC.Hitbox.ClosestPointInRect(Projectile.Center), Main.rand.NextVector2Circular(3,3), Color.Black);
+                        ParticleSystem.AddParticle(new ImpactSparkle() { Scale = Main.rand.NextFloat(0.4f, 0.7f), LifeTime = Main.rand.Next(15, 30) }, targetNPC.Hitbox.ClosestPointInRect(Projectile.Center), Main.rand.NextVector2Circular(5,5), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.5f);
                     }
 
                 }
@@ -135,17 +145,43 @@ namespace Terrafirma.Projectiles.Melee.Knight
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D SwordTexture = TextureAssets.Projectile[Type].Value;
-            for (int i = 0; i < Projectile.oldPos.Length; i+=2)
+            //for (int i = 0; i < Projectile.oldPos.Length; i+=2)
+            //{
+            //    Main.EntitySpriteDraw(SwordTexture,
+            //        (Projectile.oldPos[i] + Projectile.Size/2f) - Main.screenPosition,
+            //        SwordTexture.Frame(),
+            //        new Color(1f,0f,0f,0f) * (1f - (i / (float)Projectile.oldPos.Length)) * 0.5f,
+            //        Projectile.rotation + MathHelper.PiOver4 * Projectile.spriteDirection,
+            //        SwordTexture.Size() / 2,
+            //        Projectile.scale + (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1f) / 10f),
+            //        Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            //}
+
+            for (int i = 0; i < 4; i++)
             {
-                Main.EntitySpriteDraw(SwordTexture,
-                    (Projectile.oldPos[i] + Projectile.Size/2f) - Main.screenPosition,
-                    SwordTexture.Frame(),
-                    new Color(1f,0f,0f,0f) * (1f - (i / (float)Projectile.oldPos.Length)) * 0.5f,
+                
+                Main.EntitySpriteDraw(glow.Value,
+                    Projectile.Center - Main.screenPosition + Main.rand.NextVector2Circular(4,4),
+                    glow.Frame(),
+                    Color.Black * 0.5f,
                     Projectile.rotation + MathHelper.PiOver4 * Projectile.spriteDirection,
                     SwordTexture.Size() / 2,
-                    Projectile.scale + (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1f) / 10f),
+                    Projectile.scale * Main.rand.NextFloat(0.8f, 1.2f),
+                    Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+
+                Main.EntitySpriteDraw(glow.Value,
+                    Projectile.Center - Main.screenPosition + Main.rand.NextVector2Circular(4, 4),
+                    glow.Frame(),
+                    Color.Lerp(new Color(0.5f, 0.2f, 0.8f, 0.5f) * 0.25f, new Color(1f, 0f, 0f, 0f), i / 4f) * 0.5f,
+                    Projectile.rotation + MathHelper.PiOver4 * Projectile.spriteDirection,
+                    SwordTexture.Size() / 2,
+                    Projectile.scale * Main.rand.NextFloat(0.8f, 1.2f),
                     Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
             }
+
             Main.EntitySpriteDraw(SwordTexture,
                 Projectile.Center - Main.screenPosition,
                 SwordTexture.Frame(),
@@ -154,14 +190,15 @@ namespace Terrafirma.Projectiles.Melee.Knight
                 SwordTexture.Size() / 2,
                 Projectile.scale,
                 Projectile.spriteDirection == 1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
-            Main.EntitySpriteDraw(SwordTexture,
-                Projectile.Center - Main.screenPosition,
-                SwordTexture.Frame(),
-                new Color(1f, 1f, 1f, 0f) * 0.5f,
-                Projectile.rotation + MathHelper.PiOver4 * Projectile.spriteDirection,
-                SwordTexture.Size() / 2,
-                Projectile.scale + (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1f) / 10f),
-                Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+
+            //Main.EntitySpriteDraw(SwordTexture,
+            //    Projectile.Center - Main.screenPosition,
+            //    SwordTexture.Frame(),
+            //    new Color(1f, 1f, 1f, 0f) * 0.5f,
+            //    Projectile.rotation + MathHelper.PiOver4 * Projectile.spriteDirection,
+            //    SwordTexture.Size() / 2,
+            //    Projectile.scale + (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1f) / 10f),
+            //    Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally);
 
             return false;
         }

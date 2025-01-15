@@ -1605,6 +1605,7 @@ Projectiles: {
 	GraniteTurretShot.DisplayName: Granite Turret Shot
 	ToxicSludgeBall.DisplayName: Toxic Sludge Ball
 	AntiheroProjectile.DisplayName: Antihero Projectile
+	AntiheroSwing.DisplayName: Antihero Swing
 }
 
 Tiles: {

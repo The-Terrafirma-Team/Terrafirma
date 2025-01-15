@@ -42,9 +42,9 @@ namespace Terrafirma.Common.PlayerLayers
                     float rotation = (((MathHelper.TwoPi / 40f) * i) + ((float)Main.timeForVisualEffects / 100f));
                     drawInfo.DrawDataCache.Add(new DrawData(
                         auraTex.Value,
-                        (drawInfo.drawPlayer.Center + new Vector2(auraRadius, 0).RotatedBy(rotation) - Main.screenPosition).Floor(),
+                        (drawInfo.drawPlayer.Center + new Vector2(auraRadius, 0).RotatedBy(rotation) - Main.screenPosition),
                         frame,
-                        new Color(1f,0f,0f,0f) * auraFloat,
+                        new Color(1f,0f,0f,1f) * auraFloat,
                         rotation - MathHelper.PiOver2,
                         frame.Size() / 2,
                         new Vector2(1f,1f),
