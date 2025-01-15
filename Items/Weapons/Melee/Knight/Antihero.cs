@@ -40,7 +40,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
             Asset<Texture2D> glowtex = ModContent.Request<Texture2D>("Terrafirma/Items/Weapons/Melee/Knight/AntiheroGlow");
 
             spriteBatch.Draw(glowtex.Value,
-                Item.position + Item.Size / 2 - Main.screenPosition,
+                Item.position + Item.Size / 2 - new Vector2(4,6) - Main.screenPosition,
                 glowtex.Frame(),
                 new Color(1f,0f,0f,0f) * (float)((Math.Sin(Main.timeForVisualEffects / 10f) + 1.5f) / 5f),
                 rotation,
