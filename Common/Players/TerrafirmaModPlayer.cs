@@ -58,6 +58,7 @@ namespace Terrafirma.Common.Players
         public override void ResetEffects()
         {
             Player.pickSpeed *= 0.8f;
+            Player.autoJump = true;
             //Player.runAcceleration *= 2;
 
             PristineEmblem = false;

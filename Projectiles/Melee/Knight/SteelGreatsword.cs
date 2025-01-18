@@ -4,6 +4,7 @@ using ReLogic.Content;
 using System;
 using Terrafirma.Common;
 using Terrafirma.Common.Templates;
+using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
@@ -15,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class SteelGreatsword : HeldProjectile
+    public class SteelGreatsword : MeleeSwing
     {
         private static Asset<Texture2D> Flame;
         private static Asset<Texture2D> FlameAfter;
@@ -29,36 +30,15 @@ namespace Terrafirma.Projectiles.Melee.Knight
             Flame = ModContent.Request<Texture2D>(Texture + "_Flame");
             FlameAfter = ModContent.Request<Texture2D>(Texture + "_FlameAfter");
         }
-        public override void SetDefaults()
-        {
-            Projectile.QuickDefaults();
-            Projectile.tileCollide = false;
-            Projectile.penetrate = -1;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = -1;
-        }
-        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
-        {
-            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, 90 * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.2f) && Projectile.ai[1] < 20;
-        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             player.GiveTension(5);
-            //if (Terrafirma.ScreenshakeEnabled)
-            //{
-            //    PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 1, 3, 10, -1);
-            //    Main.instance.CameraModifiers.Add(modifier);
-            //}
             for(int i = 0; i < 10 + (Charge * 0.5f); i++)
             {
                 ParticleSystem.AddParticle(new ImpactSparkle() {Scale = Main.rand.NextFloat(0.2f,0.7f) + (Charge * 0.2f), LifeTime = Main.rand.Next(15,30), secondaryColor = new Color(1f,1f,0.3f,0f) * Charge }, target.Hitbox.ClosestPointInRect(Projectile.Center),new Vector2(0,Main.rand.NextFloat(2f,5f) * Projectile.spriteDirection * player.direction).RotatedByRandom(0.3f) + new Vector2(player.direction * Main.rand.NextFloat(3),0),Color.Lerp(new Color(1f, 1f, 1f, 0f) * Main.rand.NextFloat(0.5f, 1f),new Color(1f,Main.rand.NextFloat(0.7f),0f,0f),Charge));
             }
             if (Main.rand.NextFloat() < Charge * 0.5f)
             target.AddBuff(BuffID.OnFire3, 60 * 3);
-        }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            modifiers.HitDirectionOverride = player.direction;
         }
         public override void AI()
         {

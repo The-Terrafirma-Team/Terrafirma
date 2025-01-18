@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoMod.Cil;
 using ReLogic.Content;
 using System;
 using System.Linq;
 using Terrafirma.Particles;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -131,13 +133,6 @@ namespace Terrafirma.Common
                 SoulEaterVariants[i] = ModContent.Request<Texture2D>(AssetFolder + "NPCs/EaterOfSouls_" + $"{i}");
             }
         }
-        public override void SetDefaultsFromNetId(NPC npc)
-        {
-            if (npc.netID is NPCID.BabySlime)
-            {
-                npc.color = new Color(80, 80, 80, 128);
-            }
-        }
         public override void SetDefaults(NPC npc)
         {
             if (!npc.IsABestiaryIconDummy)
@@ -213,49 +208,53 @@ namespace Terrafirma.Common
                         float itemScale = 0.7f;
                         spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
                     }
-                    if(npc.netID == NPCID.Pinky)
+                    if (npc.netID == NPCID.Pinky)
                         spriteBatch.Draw(Pinky.Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, drawColor, npc.rotation, new Vector2(16, 26), npc.scale * 2, SpriteEffects.None, 0);
                     else
-                        spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(drawColor), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                    {
+                        spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, drawColor * npc.Opacity, npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                        spriteBatch.Draw(SlimeVariants[variant % 3].Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, npc.GetColor(npc.GetNPCColorTintedByBuffs(drawColor)), npc.rotation, new Vector2(16, 26), npc.scale + (variant - 128f) / 128f * 0.1f, SpriteEffects.None, 0);
+                    }
                     return false;
+
                 case NPCID.UmbrellaSlime:
                     UmbrellaRotation = MathHelper.Lerp(UmbrellaRotation, npc.velocity.X * -0.1f, 0.1f);
                     spriteBatch.Draw(Umbrella[variant % Umbrella.Length].Value, npc.Center - screenPos, null, drawColor, npc.rotation + UmbrellaRotation + (float)Math.Sin(Main.timeForVisualEffects * 0.01f + variant) * 0.1f, new Vector2(23, 44),npc.scale,SpriteEffects.None,0);
                     spriteBatch.Draw(variant % 3 == 0? TextureAssets.Npc[npc.type].Value : UmbrellaSlimeLight.Value, npc.Bottom - screenPos + new Vector2(0, 2), npc.frame, drawColor, npc.rotation, new Vector2(23, 32), npc.scale, SpriteEffects.None, 0);
                     return false;
+
                 case NPCID.EaterofSouls:
                     spriteBatch.Draw(SoulEaterVariants[variant % 2].Value, npc.Center - screenPos, npc.frame, drawColor/*.MultiplyRGB(Color.Lerp(Color.White, new Color(0.85f, 0.8f, 0.9f), Math.Abs(MathF.Sin(variant * 0.1f))))*/, npc.rotation, new Vector2(25, 56), npc.scale, SpriteEffects.None, 0);
                     return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
-        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        public override void Load()
         {
-            if (npc.life > 0)
-                return;
-            int latest = FindLatestGore();
-            switch (npc.type)
-            {
-                case NPCID.EaterofSouls:
-                    if (variant % 2 == 1)
-                    {
-                        Main.gore[latest].type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_0").Type;
-                        Main.gore[latest - 1].type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_1").Type;
-                    }
-                    break;
-                case NPCID.UmbrellaSlime:
-                    Main.gore[latest].type = Mod.Find<ModGore>("Umbrella_" + $"{variant % Umbrella.Length}").Type;
-                    break;
-            }
+            On_Gore.NewGore_IEntitySource_Vector2_Vector2_int_float += ReplaceGore;
         }
-        private int FindLatestGore()
+        private int ReplaceGore(On_Gore.orig_NewGore_IEntitySource_Vector2_Vector2_int_float orig, Terraria.DataStructures.IEntitySource source, Vector2 Position, Vector2 Velocity, int Type, float Scale)
         {
-            for(int i = 0; i < Main.maxGore; i++)
+            if (source is EntitySource_Parent s && s.Entity is NPC npc && npc.ModNPC == null)
             {
-                if (Main.gore[i].active == false)
-                    return i - 1;
+                byte v = npc.GetGlobalNPC<VanillaNPCSpriteChanges>().variant;
+                switch (npc.type)
+                {
+                    case NPCID.EaterofSouls:
+                        if(v % 2 == 1)
+                        {
+                            if (Type == 14)
+                                Type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_0").Type;
+                            else
+                                Type = Mod.Find<ModGore>("EaterOfSouls_1_Gore_1").Type;
+                        }
+                        break;
+                    case NPCID.UmbrellaSlime:
+                        Type = Mod.Find<ModGore>("Umbrella_" + $"{v % Umbrella.Length}").Type;
+                        break;
+                }
             }
-            return Main.maxGore;
+            return orig(source,Position,Velocity,Type,Scale);
         }
     }
     public class ProjectileChanges : GlobalProjectile

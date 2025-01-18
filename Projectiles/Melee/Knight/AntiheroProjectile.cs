@@ -10,6 +10,7 @@ using Terrafirma.Items.Weapons.Melee.Knight;
 using Terraria.GameContent;
 using ReLogic.Content;
 using System.Collections.Generic;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {
@@ -20,12 +21,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
         private static Asset<Texture2D> glow;
         public override void SetStaticDefaults()
         {
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
             glow = ModContent.Request<Texture2D>(Texture + "_White");
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
         }
-
-        bool returnbool = false;
         public override void SetDefaults()
         {          
             Projectile.width = 40;
@@ -33,15 +33,14 @@ namespace Terrafirma.Projectiles.Melee.Knight
             Projectile.penetrate = -1;
             Projectile.timeLeft = 10000;
             Projectile.friendly = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.extraUpdates = 2;
             Projectile.hide = true;
         }
         public override void AI()
         {
-            ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 2f}, Projectile.Center + new Vector2(0,Main.rand.NextFloat(-30,30)).RotatedBy(Projectile.rotation + MathHelper.PiOver2), Projectile.velocity.RotatedByRandom(0.3f) * 0.3f + Main.rand.NextVector2Circular(1,1), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.2f);
-            if (Projectile.velocity != Vector2.Zero) Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Projectile.velocity.ToRotation(), 0.2f);
+            ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 2f}, Projectile.Center + new Vector2(0,Main.rand.NextFloat(-30,30) * Projectile.scale).RotatedBy(Projectile.rotation + MathHelper.PiOver2), Projectile.velocity.RotatedByRandom(0.3f) * 0.3f + Main.rand.NextVector2Circular(1,1), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.2f);
             if (Projectile.ai[1] == 1)
             {
                 Projectile.tileCollide = false;
@@ -49,6 +48,11 @@ namespace Terrafirma.Projectiles.Melee.Knight
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(Main.player[Projectile.owner].Center) * 16f, 0.04f);                
                 targetNPC = null;
                 if (Main.player[Projectile.owner].Center.Distance(Projectile.Center) <= 50) Projectile.Kill();
+                Projectile.rotation += Projectile.direction * 0.2f;
+            }
+            else
+            {
+                Projectile.rotation = Projectile.velocity.ToRotation();
             }
 
             if (Main.player[Projectile.owner].Center.Distance(Projectile.Center) > 600f) Projectile.ai[1] = 1;
@@ -86,7 +90,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
 
                     for (int i = 0; i < 10; i++)
                     {
-                        Dust.NewDustPerfect(Projectile.Center + Projectile.Center.DirectionTo(targetNPC.Center) * 40, DustID.Blood, Main.rand.NextVector2Circular(4f, 4f), Scale: 1.5f);
+                        Dust.NewDustPerfect(Projectile.Center + Projectile.Center.DirectionTo(targetNPC.Center) * (40 * Projectile.scale), DustID.Blood, Main.rand.NextVector2Circular(4f, 4f), Scale: 1.5f);
 
                         //ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 1.5f }, Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2Circular(3, 3), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.6f);
                         ParticleSystem.AddParticle(new ImpactSparkle() { Scale = Main.rand.NextFloat(0.4f, 0.7f), LifeTime = Main.rand.Next(15, 30) }, targetNPC.Hitbox.ClosestPointInRect(Projectile.Center), Main.rand.NextVector2Circular(3,3), Color.Black);

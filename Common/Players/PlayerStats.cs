@@ -283,14 +283,14 @@ namespace Terrafirma.Common.Players
             }
             if (item.DamageType == DamageClass.Melee)
                 scale += MeleeWeaponScale;
-            else if (item.ModItem is NecromancerScythe)
-                scale += NecromancerWeaponScale;
+            //else if (item.ModItem is NecromancerScythe)
+            //    scale += NecromancerWeaponScale;
         }
         public override float UseSpeedMultiplier(Item item)
         {
-            if (item.ModItem is NecromancerScythe)
-                return NecromancerAttackSpeed;
-            else if (item.useAmmo == AmmoID.Arrow && ContentSamples.ProjectilesByType[item.shoot].ModProjectile is DrawnBowTemplate)
+            //if (item.ModItem is NecromancerScythe)
+            //    return NecromancerAttackSpeed;
+            if (item.useAmmo == AmmoID.Arrow && ContentSamples.ProjectilesByType[item.shoot].ModProjectile is DrawnBowTemplate)
                 return BowChargeTimeMultipler;
             else
                 return base.UseSpeedMultiplier(item);

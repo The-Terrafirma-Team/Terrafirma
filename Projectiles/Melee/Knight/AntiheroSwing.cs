@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Terrafirma.Common;
 using Terrafirma.Common.Templates;
+using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
@@ -16,11 +17,13 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Projectiles.Melee.Knight
 {
-    public class AntiheroSwing : HeldProjectile
+    public class AntiheroSwing : MeleeSwing
     {
         private static Asset<Texture2D> slash;
         public override void SetStaticDefaults()
         {
+            ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+            ProjectileSets.TrueMeleeProjectiles[Type] = true;
             slash = ModContent.Request<Texture2D>(Texture + "_Slash");
         }
         int swingTime = 36;
@@ -33,10 +36,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
             Projectile.localNPCHitCooldown = -1;
             Projectile.extraUpdates = 1;
         }
-        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
-        {
-            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, 130 * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.2f) && Projectile.ai[1] < 20;
-        }
+        public override int Length => 130;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for(int i = 0; i < 7; i++)
@@ -47,10 +47,6 @@ namespace Terrafirma.Projectiles.Melee.Knight
 
             }
             player.GiveTension(5);
-        }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            modifiers.HitDirectionOverride = player.direction;
         }
         public override void AI()
         {
