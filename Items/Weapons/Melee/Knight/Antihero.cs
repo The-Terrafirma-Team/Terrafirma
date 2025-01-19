@@ -141,7 +141,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         public override void HoldItem(Player player)
         {
             if (player.ownedProjectileCounts[ModContent.ProjectileType<AntiheroProjectile>()] > 0) auraRadius = -1;
-            else auraRadius = MathHelper.Lerp(auraRadius, 210 * player.GetAdjustedItemScale(Item), 0.15f);
+            else auraRadius = MathHelper.Lerp(auraRadius, 350 * player.GetAdjustedItemScale(Item), 0.15f);
 
             if (auraFadeTimer == 0) auraPresence = MathHelper.Clamp(auraPresence - 0.05f, 0f, 1f);
             auraFadeTimer = (int)MathHelper.Clamp(auraFadeTimer - 1, 0, 10000);
@@ -182,7 +182,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
                         Dust.NewDust(npcArray[i].Center, 4, 4, DustID.Blood, vel.X, vel.Y, Scale: 1.5f);
                     }
 
-                    player.GiveTension(3);
+                    player.GiveTension(6);
                 }
             }
             if (damageTick <= 0) damageTick = 4;

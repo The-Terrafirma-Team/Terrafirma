@@ -21,14 +21,19 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
             Item.useAnimation = 12;
             Item.knockBack = 6;
 
-            Item.useStyle = ItemUseStyleID.Swing;
+            Item.useStyle = 15;
             Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<HeroSwordProjectile>();
-
+            Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Knight.HeroSword>();
             Item.rare = ModContent.RarityType<FinalQuestRarity>();
             Item.value = Item.sellPrice(gold: 20, silver: 00);
             Item.shootSpeed = 20;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+        }
+        public override bool MeleePrefix()
+        {
+            return true;
         }
         public override bool CanUseItem(Player player)
         {
@@ -48,120 +53,20 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.altFunctionUse == 2)
-            {
-                player.itemLocation = Vector2.Zero;
-                return base.Shoot(player, source, position, velocity, type, damage, knockback);
-            }
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, (player.PlayerStats().TimesHeldWeaponHasBeenSwung + 2) % 3);
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
-        {
-            Texture2D SwordTexture = TextureAssets.Item[Type].Value;
-            spriteBatch.Draw(SwordTexture,
-                Item.position - Main.screenPosition - new Vector2(13, 13),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.1f,
-                rotation,
-                new Vector2(16, 42),
-                scale: scale + 1f + (float)Math.Sin(Main.timeForVisualEffects / 15f) / 10f,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                Item.position - Main.screenPosition - new Vector2(13, 13),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0),
-                rotation,
-                new Vector2(16, 42),
-                scale: scale + 0.25f + (float)Math.Sin(Main.timeForVisualEffects / 20f) / 10f,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                Item.position - Main.screenPosition,
-                new Rectangle(0, 0, 56, 56),
-                Color.White,
-                rotation,
-                new Vector2(28, 56),
-                scale: scale,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                Item.position - Main.screenPosition - new Vector2(13, 13),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f,
-                rotation,
-                new Vector2(16, 42),
-                scale: scale + (float)Math.Sin(Main.timeForVisualEffects / 20f) / 10f,
-                SpriteEffects.None,
-                0);
-
-            if (Main.timeForVisualEffects % 40 == 0)
-            {
-                BigSparkle bigsparkle = new BigSparkle();
-                bigsparkle.fadeInTime = 10;
-                bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-                bigsparkle.Scale = 1f;
-                ParticleSystem.AddParticle(bigsparkle, Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20, 40).RotatedBy(MathHelper.PiOver4) - new Vector2(0, 20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f);
-                //LegacyParticleSystem.AddParticle(new BigSparkle(), Item.position - new Vector2(13, 13) + Main.rand.NextVector2Circular(20,40).RotatedBy(MathHelper.PiOver4) - new Vector2(0,20).RotatedBy(MathHelper.PiOver4), Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f, 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
-            }
-
-            return false;
-        }
-
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
-        {
-            Texture2D SwordTexture = TextureAssets.Item[Type].Value;
-
-            spriteBatch.Draw(SwordTexture,
-                position + new Vector2(-6, 6),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.1f,
-                0,
-                new Vector2(16, 42),
-                scale: scale + 0.3f + (float)Math.Sin(Main.timeForVisualEffects / 15f) / 20f,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                position + new Vector2(-6, 6),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0),
-                0,
-                new Vector2(16, 42),
-                scale: scale + 0.1f + (float)Math.Sin(Main.timeForVisualEffects / 20f) / 20f,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                position + new Vector2(-6, 6),
-                new Rectangle(0, 0, 56, 56),
-                Color.White,
-                0,
-                new Vector2(16, 42),
-                scale: scale,
-                SpriteEffects.None,
-                0);
-            spriteBatch.Draw(SwordTexture,
-                position + new Vector2(-6, 6),
-                new Rectangle(0, 0, 56, 56),
-                new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0) * 0.5f,
-                0,
-                new Vector2(16, 42),
-                scale: scale + (float)Math.Sin(Main.timeForVisualEffects / 20f) / 10f,
-                SpriteEffects.None,
-                0);
-            return false;
-        }
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            BigSparkle bigsparkle = new BigSparkle();
-            bigsparkle.fadeInTime = 10;
-            bigsparkle.smallestSize = 0.1f;
-            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-            bigsparkle.Scale = 1f;
-            ParticleSystem.AddParticle(bigsparkle, target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0));
-            //LegacyParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
-            base.OnHitNPC(player, target, hit, damageDone);
-        }
+        //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        //{
+        //    BigSparkle bigsparkle = new BigSparkle();
+        //    bigsparkle.fadeInTime = 10;
+        //    bigsparkle.smallestSize = 0.1f;
+        //    bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+        //    bigsparkle.Scale = 1f;
+        //    ParticleSystem.AddParticle(bigsparkle, target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0));
+        //    //LegacyParticleSystem.AddParticle(new BigSparkle(), target.Center, Vector2.Zero, new Color(Main.DiscoColor.R, Main.DiscoColor.G, Main.DiscoColor.B, 0), 0, 10, 1, 1f, Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2));
+        //    base.OnHitNPC(player, target, hit, damageDone);
+        //}
     }
 }

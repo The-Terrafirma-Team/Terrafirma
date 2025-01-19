@@ -229,17 +229,6 @@ namespace Terrafirma.Common.Players
                 }
             }
         }
-        public override bool CanUseItem(Item item)
-        {
-            
-            if (Player.HeldItem.type == ModContent.ItemType<HeroSword>())
-            {
-                if (Player.ownedProjectileCounts[ModContent.ProjectileType<HeroSwordProjectile>()] < 1) return true;
-                else return false;
-            }
-            return base.CanUseItem(item);
-        }
-
         public override void OnEnterWorld()
         {
             SpellSideMenu = false;

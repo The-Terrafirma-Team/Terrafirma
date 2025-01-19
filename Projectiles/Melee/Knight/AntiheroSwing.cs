@@ -44,8 +44,26 @@ namespace Terrafirma.Projectiles.Melee.Knight
                 //ParticleSystem.AddParticle(new HiResFlame() { SizeMultiplier = 1.5f }, Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2Circular(3, 3), new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.6f);
                 ParticleSystem.AddParticle(new ImpactSparkle() { Scale = Main.rand.NextFloat(0.2f, 0.7f), LifeTime = Main.rand.Next(15, 30)}, target.Hitbox.ClosestPointInRect(Projectile.Center), new Vector2(0, Main.rand.NextFloat(5f) * Projectile.spriteDirection * player.direction).RotatedByRandom(0.3f) + new Vector2(player.direction * Main.rand.NextFloat(3), 0), Color.Black);
                 ParticleSystem.AddParticle(new ImpactSparkle() { Scale = Main.rand.NextFloat(0.2f, 0.7f), LifeTime = Main.rand.Next(15, 30) }, target.Hitbox.ClosestPointInRect(Projectile.Center), new Vector2(0, Main.rand.NextFloat(1f, 7f) * Projectile.spriteDirection * player.direction).RotatedByRandom(0.3f) + new Vector2(player.direction * Main.rand.NextFloat(3), 0), new Color(1f,0f,Main.rand.NextFloat(),0f) * 0.5f);
-
             }
+            for(int i = 0; i < 2; i++)
+            {
+                BigSparkle s = new BigSparkle();
+                s.fadeInTime = Main.rand.NextFloat(8f,10f);
+                s.smallestSize = 0.1f;
+                s.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+                s.Scale = Main.rand.NextFloat(0.5f, 1.5f);
+                s.lengthMultiplier = 0.5f;
+                s.secondaryColor = Color.Black;
+                ParticleSystem.AddParticle(s, target.Hitbox.ClosestPointInRect(Projectile.Center) + Main.rand.NextVector2Circular(12,12), Vector2.Zero, new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.5f);
+            }
+            BigSparkle bigsparkle = new BigSparkle();
+            bigsparkle.fadeInTime = Main.rand.NextFloat(8f, 10f);
+            bigsparkle.smallestSize = 0.1f;
+            bigsparkle.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+            bigsparkle.Scale = Main.rand.NextFloat(1.5f,2.5f);
+            bigsparkle.lengthMultiplier = 0.7f;
+            bigsparkle.secondaryColor = Color.Black;
+            ParticleSystem.AddParticle(bigsparkle, target.Hitbox.ClosestPointInRect(Projectile.Center), Vector2.Zero, new Color(1f, 0f, Main.rand.NextFloat(), 0f) * 0.5f);
             player.GiveTension(5);
         }
         public override void AI()

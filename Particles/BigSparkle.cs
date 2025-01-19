@@ -10,6 +10,7 @@ namespace Terrafirma.Particles
         public float Rotation;
         public float Scale;
         float sizeMultiplier;
+        public float lengthMultiplier = 1f;
         public float fadeInTime;
         public float smallestSize = 0.1f;
         public int TimeLeft = -1;
@@ -20,14 +21,19 @@ namespace Terrafirma.Particles
         }
         public override void Update()
         {
+            velocity = velocity.RotatedBy(0.01f);
             position += velocity;
             if (TimeInWorld < fadeInTime)
             {
                 sizeMultiplier *= 1.3f;
+                lengthMultiplier *= 1.05f;
             }
             else
             {
                 sizeMultiplier *= 0.9f;
+                lengthMultiplier *= 0.9f;
+                color *= 0.9f;
+                secondaryColor *= 0.85f;
             }
 
             if (sizeMultiplier < smallestSize)
@@ -45,10 +51,10 @@ namespace Terrafirma.Particles
         public override void Draw(SpriteBatch spriteBatch)
         {
             Texture2D Sparkle = TextureAssets.Extra[89].Value;
-            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, Rotation, Sparkle.Size() / 2, sizeMultiplier * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, sizeMultiplier * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, Rotation, Sparkle.Size() / 2, sizeMultiplier * 0.5f * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, sizeMultiplier * 0.5f * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * 0.5f * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position - Main.screenPosition, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * 0.5f * Scale, SpriteEffects.None, 0);
         }
         public override void DrawInUI(SpriteBatch spriteBatch, Vector2 linePos)
         {

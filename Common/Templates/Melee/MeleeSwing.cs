@@ -30,7 +30,7 @@ namespace Terrafirma.Common.Templates.Melee
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Length * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.2f) && Projectile.ai[1] < 20;
+            return targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Length * Projectile.scale, Projectile.rotation - MathHelper.PiOver4, 0.4f);
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
