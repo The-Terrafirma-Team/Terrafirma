@@ -17,6 +17,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         public override void SetDefaults()
         {
             Item.DefaultToSword(16, 25, 4);
+            Item.useStyle = 666;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Knight.SplinterSword>();

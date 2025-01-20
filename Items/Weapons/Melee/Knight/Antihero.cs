@@ -30,6 +30,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         public override void SetDefaults()
         {
             Item.DefaultToSword(125, 10, 3);
+            Item.useStyle = 666;
             Item.DamageType = DamageClass.Melee;
             Item.width = 52;
             Item.height = 56;

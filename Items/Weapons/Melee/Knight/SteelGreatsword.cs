@@ -14,6 +14,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
         public override void SetDefaults()
         {
             Item.DefaultToSword(45, 30, 7);
+            Item.useStyle = 666;
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Knight.SteelGreatsword>();

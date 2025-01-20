@@ -36,19 +36,4 @@ namespace Terrafirma.Projectiles.Melee.Paladin
         }
         public override string Texture => "Terrafirma/Projectiles/Melee/Paladin/EaterOfSkulls";
     }
-    public class EaterOfSkullsParry : MeleeParry
-    {
-        public override string Texture => "Terrafirma/Projectiles/Melee/Paladin/EaterOfSkulls";
-        public override void AI()
-        {
-            base.AI();
-            player.heldProj = Projectile.whoAmI;
-            UpwardsSwingParryAnimation();
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            PaladinHammerParry(lightColor);
-            return false;
-        }
-    }
 }

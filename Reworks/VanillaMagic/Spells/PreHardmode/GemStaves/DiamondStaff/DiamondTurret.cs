@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.AmberStaff;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -18,14 +20,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.DiamondSt
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             type = ModContent.ProjectileType<DiamondTurretProj>();
-
+            foreach (Projectile p in Main.ActiveProjectiles)
+            {
+                if (p.owner == player.whoAmI && p.type == type || p.type == type)
+                    p.Kill();
+            }
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
-            return false;
-        }
-
-        public override bool CanUseItem(Item item, Player player)
-        {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<DiamondTurretProj>()] < 1) return player.ownedProjectileCounts[ModContent.ProjectileType<DiamondTurretProj>()] < 1;
             return false;
         }
     }
@@ -48,11 +48,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.DiamondSt
         public override void AI()
         {
             Projectile.ai[0]++;
-            Projectile.velocity *= 0.98f;
+            Projectile.velocity *= 0.95f;
             if (Projectile.ai[0] % 90 == 0 && TFUtils.FindClosestNPC(600f, Projectile.position) != null)
             {
                 if (Main.myPlayer == Projectile.owner)
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(TFUtils.FindClosestNPC(600f, Projectile.position).Center) * 13f, ProjectileID.DiamondBolt, Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 0, 0);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.DirectionTo(TFUtils.FindClosestNPC(600f, Projectile.position).Center) * 13f, ModContent.ProjectileType<DiamondBoltProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, 1);
                 for (int i = 0; i < 8; i++)
                 {
                     Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.GemDiamond, Main.rand.NextVector2Circular(5, 5));

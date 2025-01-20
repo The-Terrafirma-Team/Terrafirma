@@ -21,11 +21,6 @@ namespace Terrafirma.Common
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 5));
             }
-            int[] DropsLivingIce = [NPCID.SpikedIceSlime,NPCID.IceBat,NPCID.IceElemental,NPCID.IcyMerman];
-            if (DropsLivingIce.Contains(npc.type))
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LivingIce>(), 5,1,2));
-            }
             if (NPCID.Sets.Zombies[npc.type])
             {
                 npcLoot.Add(ItemDropRule.Common(ItemID.Leather, 12));

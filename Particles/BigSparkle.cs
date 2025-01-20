@@ -14,6 +14,7 @@ namespace Terrafirma.Particles
         public float fadeInTime;
         public float smallestSize = 0.1f;
         public int TimeLeft = -1;
+        public float fadeOutMultiplier = 0.9f;
         public Color secondaryColor = new Color(255,255,255,0);
         public override void OnSpawn()
         {
@@ -21,7 +22,7 @@ namespace Terrafirma.Particles
         }
         public override void Update()
         {
-            velocity = velocity.RotatedBy(0.01f);
+            //velocity = velocity.RotatedBy(0.01f);
             position += velocity;
             if (TimeInWorld < fadeInTime)
             {
@@ -30,10 +31,10 @@ namespace Terrafirma.Particles
             }
             else
             {
-                sizeMultiplier *= 0.9f;
-                lengthMultiplier *= 0.9f;
-                color *= 0.9f;
-                secondaryColor *= 0.85f;
+                sizeMultiplier *= fadeOutMultiplier;
+                lengthMultiplier *= fadeOutMultiplier * 0.97f;
+                color *= fadeOutMultiplier * 0.99f;
+                secondaryColor *= fadeOutMultiplier * 0.98f;
             }
 
             if (sizeMultiplier < smallestSize)

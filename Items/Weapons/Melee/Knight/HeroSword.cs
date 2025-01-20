@@ -21,7 +21,7 @@ namespace Terrafirma.Items.Weapons.Melee.Knight
             Item.useAnimation = 12;
             Item.knockBack = 6;
 
-            Item.useStyle = 15;
+            Item.useStyle = 666;
             Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Knight.HeroSword>();

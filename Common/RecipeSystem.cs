@@ -35,8 +35,6 @@ namespace Terrafirma.Common
             Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.GoldShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(), 8).Register();
             Recipe.Create(ItemID.Terragrim).AddTile(TileID.DemonAltar).AddIngredient(ItemID.PlatinumShortsword).AddIngredient(ModContent.ItemType<AncientSpiritEssence>(), 8).Register();
 
-            Recipe.Create(ItemID.IceBlade).AddTile(TileID.IceMachine).AddIngredient(ItemID.SilverBroadsword).AddIngredient(ItemID.IceBlock,25).AddIngredient(ModContent.ItemType<LivingIce>(), 10).Register();
-
             Recipe.Create(ItemID.LightningBoots).AddTile(TileID.TinkerersWorkbench).AddIngredient(ModContent.ItemType<SpringBoots>()).AddIngredient(ItemID.Aglet).AddIngredient(ItemID.RocketBoots).AddIngredient(ItemID.AnkletoftheWind).Register();
             AddCookingRecipes();
         }

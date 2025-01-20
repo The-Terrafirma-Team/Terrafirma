@@ -10,24 +10,33 @@ namespace Terrafirma.Particles
     public class ColorDot : Particle
     {
         private static Asset<Texture2D> texture;
-        float ai2;
+        float RandomTimer;
         public float Size;
+        public Color secondaryColor = new Color(255, 255, 255, 0);
+        public float Waviness = 0.05f;
+        public float gravity = 0.01f;
+        public float fadeOut = 0.9f;
+        public override void OnSpawn()
+        {
+            RandomTimer = Main.rand.NextFloat(MathHelper.TwoPi);
+        }
         public override void Update()
         {
-            ai2 += Main.rand.NextFloat(3);
-            velocity = velocity.RotatedBy(Math.Sin(ai2 * 0.1f - MathHelper.PiOver2) * 0.05f) * Main.rand.NextFloat(0.8f, 1.1f);
-            velocity.Y += 0.01f;
+            RandomTimer += Main.rand.NextFloat(0.3f);
+            velocity = velocity.RotatedBy(Math.Sin(RandomTimer - MathHelper.PiOver4) * Waviness) * Main.rand.NextFloat(0.8f, 1.1f);
+            velocity.Y += gravity;
 
             position += velocity;
 
             float scale = velocity.Length() / 8f;
-            if (scale <= 0.01f)
+            if (scale <= 0.03f)
             {
                 Active = false;
             }
             if (TimeInWorld > 60)
             {
-                velocity *= 0.9f;
+                velocity *= fadeOut;
+                gravity *= fadeOut;
             }
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -45,7 +54,7 @@ namespace Terrafirma.Particles
 
             spriteBatch.Draw(texture.Value, DrawPos, null, color * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale, 1), scale) * Size, SpriteEffects.None, 0);
 
-            spriteBatch.Draw(texture.Value, DrawPos, null, new Color(255, 255, 255, 0) * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale, 1), scale) * 0.8f * Size, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture.Value, DrawPos, null, secondaryColor * MathHelper.Min(scale * 0.4f, 1) * opacityMulti, velocity.ToRotation() + MathHelper.PiOver2, frameOrigin, new Vector2(MathHelper.Min(scale, 1), scale) * 0.8f * Size, SpriteEffects.None, 0);
         }
     }
 }
