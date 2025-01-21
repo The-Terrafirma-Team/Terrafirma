@@ -32,13 +32,13 @@ namespace Terrafirma
         {
             return i is 0 or -1000 or -2000;
         }
-        public static void HealWithAdjustments(this Player reciever, int life)
+        public static void HealWithAdjustments(this Player reciever, float life)
         {
-            reciever.Heal((int)(life * reciever.PlayerStats().HealingMultiplier));
+            reciever.Heal((int)Math.Round(life * reciever.PlayerStats().HealingMultiplier));
         }
-        public static void HealWithAdjustments(this Player reciever, Player giver, int life)
+        public static void HealWithAdjustments(this Player reciever, Player giver, float life)
         {
-            reciever.Heal((int)(life * reciever.PlayerStats().HealingMultiplier * giver.PlayerStats().OutgoingHealingMultiplier));
+            reciever.Heal((int)Math.Round(life * reciever.PlayerStats().HealingMultiplier * giver.PlayerStats().OutgoingHealingMultiplier));
         }
         public static float GetAdjustedWeaponSpeedPercent(this Player player, Item item)
         {
