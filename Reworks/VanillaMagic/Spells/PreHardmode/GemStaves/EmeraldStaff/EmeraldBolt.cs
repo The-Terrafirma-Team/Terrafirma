@@ -41,12 +41,13 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
         public override void AI()
         {
             Projectile.ai[0]++;
-            ParticleSystem.AddParticle(new ColorDot() { Size = 0.5f, TimeInWorld = 40, Waviness = Main.rand.NextFloat(0.04f), gravity = 0f, secondaryColor = new Color(30, 180, 120, 0) * 0.1f }, Projectile.Center, Projectile.velocity * 0.5f, new Color(30, 180, 120, 0) * Math.Min(Projectile.ai[0] / 10, 1) * 0.3f);
+            ParticleSystem.AddParticle(new ColorDot() { Size = 0.5f, TimeInWorld = 40, Waviness = Main.rand.NextFloat(0.02f), gravity = 0f, secondaryColor = new Color(30, 180, 120, 0) * 0.1f }, Projectile.Center, Projectile.velocity * 0.5f, new Color(30, 180, 120, 0) * Math.Min(Projectile.ai[0] / 10, 1) * 0.3f);
 
             if (Main.rand.NextBool(6))
             {
                 ParticleSystem.AddParticle(new BigSparkle() { fadeInTime = 7, Scale = 1f, fadeOutMultiplier = 0.99f, Rotation = Main.rand.NextFloat(MathHelper.TwoPi), secondaryColor = new Color(0.3f,0.3f,0.3f,0f)}, Projectile.Center + Main.rand.NextVector2Circular(5,5), Vector2.Zero, new Color(30, 180, 120, 0) * 0.3f);
             }
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathF.Sin((Projectile.ai[0] * 0.2f) - MathHelper.PiOver2) * 0.05f); 
         }
         public override void OnKill(int timeLeft)
         {
@@ -56,7 +57,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.GemEmerald, Main.rand.NextVector2Circular(4, 4) + Projectile.velocity * 0.5f);
                 d.noGravity = true;
             }
-            ParticleSystem.AddParticle(new BigSparkle() { fadeInTime = 15, fadeOutMultiplier = 0.99f, lengthMultiplier = 2f, Scale = 0.1f, Rotation = Main.rand.NextFloat(MathHelper.TwoPi) }, Projectile.Center + Main.rand.NextVector2Circular(5, 5), Vector2.Zero, new Color(30, 180, 120, 0));
+            ParticleSystem.AddParticle(new BigSparkle() { fadeInTime = 3, fadeOutMultiplier = 0.99f, lengthMultiplier = 2f, Scale = 5f, smallestSize = 0f, Rotation = Main.rand.NextFloat(MathHelper.TwoPi) }, Projectile.Center + Main.rand.NextVector2Circular(5, 5), Vector2.Zero, new Color(30, 180, 120, 0));
             for (int i = 0; i < 15; i++)
             {
                 ParticleSystem.AddParticle(new ColorDot() { Size = 0.1f, gravity = Main.rand.NextFloat(0.04f), TimeInWorld = 40, secondaryColor = new Color(30, 180, 120, 0), fadeOut = 0.99f }, Projectile.Center, Main.rand.NextVector2Circular(2, 2) + Projectile.velocity * 0.5f + new Vector2(0, -2), new Color(30, 180, 120, 0) * Math.Min(Projectile.ai[0] / 10, 1)); ;

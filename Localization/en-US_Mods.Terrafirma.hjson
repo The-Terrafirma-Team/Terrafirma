@@ -1611,6 +1611,8 @@ Projectiles: {
 	AmethystBoltProj.DisplayName: Amethyst Bolt Proj
 	DiamondBoltProj.DisplayName: Diamond Bolt Proj
 	EmeraldBoltProj.DisplayName: Emerald Bolt Proj
+	RubyBoltProj.DisplayName: Ruby Bolt Proj
+	TopazBoltProj.DisplayName: Topaz Bolt Proj
 }
 
 Tiles: {
