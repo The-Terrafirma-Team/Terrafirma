@@ -27,7 +27,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WandOfSparking
         {
             for (int i = -2; i < 2; i++)
             {
-                Projectile.NewProjectile(source, position, velocity.RotatedBy(0.1f * i), ModContent.ProjectileType<FireCrackerSpark>(), (int)(damage / 1.5f), knockback, player.whoAmI);
+                Projectile.NewProjectile(source, position, velocity.RotatedBy(0.1f * i) * Main.rand.NextFloat(0.8f,1.1f), ModContent.ProjectileType<FireCrackerSpark>(), (int)(damage / 3f), knockback, player.whoAmI);
             }
             return false;
         }
@@ -38,7 +38,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WandOfSparking
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.WandOfSparkingSpark}";
         public override void SetDefaults()
         {
-            Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
 
@@ -52,14 +51,12 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WandOfSparking
             Projectile.velocity.X *= 0.98f;
             Projectile.velocity.Y += 0.1f;
 
-            if (Projectile.ai[0] % 2 == 0)
+            if (Main.rand.NextBool())
             {
-                Dust d = Dust.NewDustDirect(Projectile.Center - new Vector2(2, 2), 4, 4, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y + Main.rand.NextFloat(-1f, 1f), Scale: Projectile.timeLeft / 20f + 0.3f);
+                Dust d = Dust.NewDustDirect(Projectile.Center - new Vector2(2, 2), 4, 4, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y + Main.rand.NextFloat(-3f, 1f), Scale: Projectile.timeLeft / 20f + 0.1f);
                 d.noGravity = false;
                 d.customData = 0;
             }
-
-            Projectile.ai[0]++;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
