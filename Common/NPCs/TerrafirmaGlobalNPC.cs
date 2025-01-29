@@ -147,6 +147,12 @@ namespace Terrafirma.Common.NPCs
                         ParticleSystem.AddParticle(new BigSparkle() {Rotation = Main.rand.NextFloat(-0.2f,0.2f), Scale = 0.3f, fadeInTime = 10 }, Main.rand.NextVector2FromRectangle(npc.Hitbox),npc.velocity * 0.1f,Main.DiscoColor with { A = 0});
                     }
                     break;
+                case NPCID.GraniteGolem:
+                    if (npc.ai[2] < 0)
+                    {
+                        npc.ReflectProjectiles(npc.Hitbox);
+                    }
+                    break;
             }
         }
         public override void OnKill(NPC npc)

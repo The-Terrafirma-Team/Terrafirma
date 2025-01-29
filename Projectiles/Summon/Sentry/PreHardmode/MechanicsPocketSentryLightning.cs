@@ -41,7 +41,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
                 newdust.noGravity = true;
                 Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.85f, 0.4f));
             }
-            if (!targetnpc.active)
+            if (targetnpc == null || !targetnpc.active)
                 Projectile.Kill();
             Projectile.ai[0]++;
 

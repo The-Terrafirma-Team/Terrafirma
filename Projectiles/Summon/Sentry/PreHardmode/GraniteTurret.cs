@@ -9,10 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class GraniteTurret : ModProjectile
+    public class GraniteTurret : SentryTemplate
     {
         NPC TargetNPC = null;
         public override void SetDefaults()
@@ -54,13 +55,13 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             else
             {
                 Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.DirectionTo(target.Center).ToRotation(), 0.2f);
-                if (Projectile.ai[0] > 60 * Projectile.GetSentryAttackCooldownMultiplier())
+                if (Projectile.ai[0] >= 60 * Projectile.GetSentryAttackCooldownMultiplier())
                 {
                     Projectile.rotation = Projectile.Center.DirectionTo(target.Center).ToRotation();
                     Projectile.ai[0] = 0;
                     if (Main.myPlayer == Projectile.owner)
                     {
-                        Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center - new Vector2(0, 2), Projectile.Center.DirectionTo(target.Center) * 12, ModContent.ProjectileType<GraniteTurretShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectileButWithChangesFromSentryBuffs(Projectile.GetSource_FromThis(), Projectile.Center - new Vector2(0, 2), Projectile.Center.DirectionTo(target.Center) * 12, ModContent.ProjectileType<GraniteTurretShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner, RangeDoesNotAffectVelocity: true);
                     }
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.position);
                     for (int i = 0; i < 10; i++)
@@ -74,7 +75,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.ai[0] = MathHelper.Clamp(Projectile.ai[0], 0, 60 * Projectile.GetSentryAttackCooldownMultiplier());
             Projectile.spriteDirection = Math.Abs(Projectile.rotation) < MathHelper.PiOver2? 1 : -1;
         }
-        
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 60 * Projectile.GetSentryAttackCooldownMultiplier();
+        }
         public override bool PreDraw(ref Color lightColor)
         {
             Rectangle head = new Rectangle(0,0,34,22);

@@ -15,6 +15,10 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
 {
     public class MetalWrench : WrenchItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override void SetDefaults()
         {
             Item.DefaultToWrench(8, 25);

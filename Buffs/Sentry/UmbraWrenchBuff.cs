@@ -11,19 +11,20 @@ using Terraria.ID;
 
 namespace Terrafirma.Buffs.Sentry
 {
-    public class CoolWrenchBuff : SentryBuff
+    public class UmbraWrenchBuff : SentryBuff
     {
         public override void UpdateSentry(Projectile sentry, SentryStats stats)
         {
-            stats.RangeMultiplier += 0.6f;
+            stats.SpeedMultiplier -= 0.15f;
             if (Main.rand.NextBool(5))
             {
-                Dust d = Dust.NewDustDirect(sentry.position, sentry.width, sentry.height / 4, Main.rand.NextBool()? DustID.Snow : DustID.Ice, 0);
+                Dust d = Dust.NewDustDirect(sentry.BottomLeft + new Vector2(0, -4), sentry.width, 0, DustID.Corruption, 0, -sentry.height / 10);
                 d.noGravity = true;
-                d.velocity = Main.rand.NextVector2Circular(2, 1);
-                d.velocity.Y += 2;
+                d.velocity.X *= 0.1f;
+                d.scale *= 1.5f;
                 d.alpha = 128;
-                d.noLightEmittence = true;
+                if (d.velocity.Y > 0)
+                    d.velocity *= -1;
             }
         }
     }

@@ -4,10 +4,11 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using System.Collections.Generic;
 using Terraria.ID;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    internal class PortableSlimeBakeryProj : ModProjectile
+    internal class PortableSlimeBakeryProj : SentryTemplate
     {
         public override void SetDefaults()
         {
@@ -22,7 +23,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.sentry = true;
             Projectile.hide = true;
         }
-
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 160 * Projectile.GetSentryAttackCooldownMultiplier();
+        }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             return false;

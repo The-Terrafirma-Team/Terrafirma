@@ -7,10 +7,11 @@ using Terraria.ID;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class HellfireGargoyleSentry : ModProjectile
+    public class HellfireGargoyleSentry : SentryTemplate
     {
         int shoottime;
         Asset<Texture2D> texglow;
@@ -32,7 +33,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
             Projectile.penetrate = -1;
             Projectile.sentry = true;
         }
-
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = shoottime / 8;
+        }
         public override void AI()
         {
             Projectile.velocity.Y += 0.5f;

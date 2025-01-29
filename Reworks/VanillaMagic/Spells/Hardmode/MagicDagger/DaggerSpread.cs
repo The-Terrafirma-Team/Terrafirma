@@ -23,7 +23,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.MagicDagger
         {
             for (float i = -2.5f; i < 2.5f; i++)
             {
-                Projectile.NewProjectile(source, position, velocity.RotatedBy(i * 0.3f), ModContent.ProjectileType<MagicDaggerSpread>(), damage, knockback, player.whoAmI, 0);
+                Projectile.NewProjectile(source, player.Center, velocity.RotatedBy(i * 0.3f), ModContent.ProjectileType<MagicDaggerSpread>(), (int)(damage * 0.8f), knockback, player.whoAmI, 0);
             }
             return false;
         }

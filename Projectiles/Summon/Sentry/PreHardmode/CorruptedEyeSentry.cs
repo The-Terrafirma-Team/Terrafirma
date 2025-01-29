@@ -9,10 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class CorruptedEyeSentry : ModProjectile
+    public class CorruptedEyeSentry : SentryTemplate
     {
         NPC TargetNPC = null;
         Vector2 LastRecordedPos = Vector2.Zero;
@@ -41,6 +42,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 60f * TFUtils.GetSentryAttackCooldownMultiplier(Projectile);
         }
         public override void AI()
         {

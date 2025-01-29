@@ -6,10 +6,11 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class CorruptedSunflower : ModProjectile
+    public class CorruptedSunflower : SentryTemplate
     {
         public override void SetDefaults()
         {
@@ -49,6 +50,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 90 * Projectile.GetSentryAttackCooldownMultiplier();
         }
         public override void AI()
         {

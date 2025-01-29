@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.DataStructures;
 using Terrafirma.Particles;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    internal class CrimsonHeartSentryHeart : ModProjectile
+    internal class CrimsonHeartSentryHeart : SentryTemplate
     {
         public Projectile BaseProj = null;
         public override string Texture => "Terrafirma/Projectiles/Summon/Sentry/PreHardmode/CrimsonHeartSentryHeart";
@@ -57,6 +58,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = (int)(24 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile));
         }
         public override void AI()
         {

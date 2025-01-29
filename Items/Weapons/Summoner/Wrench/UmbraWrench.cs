@@ -15,7 +15,7 @@ namespace Terrafirma.Items.Weapons.Summoner.Wrench
             Item.DefaultToWrench(16, 30);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1);
-            Buff = new ShadowflameWrenchBuff();
+            Buff = new UmbraWrenchBuff();
             BuffDuration = 60 * 15;
         }
         public override void AddRecipes()

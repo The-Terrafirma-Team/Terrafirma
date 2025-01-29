@@ -7,10 +7,11 @@ using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using Steamworks;
 using Terraria.GameContent;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class BowTurret : ModProjectile
+    public class BowTurret : SentryTemplate
     {
         Texture2D tex;
         NPC targetNPC = null;
@@ -52,6 +53,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = (int)(60 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile));
         }
         public override void AI()
         {

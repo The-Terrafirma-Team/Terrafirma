@@ -9,10 +9,11 @@ using Terraria.Audio;
 using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {
-    internal class CursedFlameSentry : ModProjectile
+    internal class CursedFlameSentry : SentryTemplate
     {
         NPC targetnpc = null;
         int sentryradius = 350;
@@ -48,6 +49,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
         {
             return false;
         }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 8 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile);
+        }
         public override void AI()
         {
 
@@ -67,7 +72,7 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
             if (targetnpc != null) 
             {
                 Projectile.rotation = Utils.AngleLerp(Projectile.rotation, (Projectile.Center - new Vector2(0, verticalshooteroffset)).DirectionTo(targetnpc.Center).ToRotation() + MathHelper.PiOver2, 0.15f);
-                if (Projectile.ai[0] > 8 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile))
+                if (Projectile.ai[0] >= 8 * TFUtils.GetSentryAttackCooldownMultiplier(Projectile))
                 {
                     Projectile.NewProjectileButWithChangesFromSentryBuffs(
                         Projectile.GetSource_FromThis(),

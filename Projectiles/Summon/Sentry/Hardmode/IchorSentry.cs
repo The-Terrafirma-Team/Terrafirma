@@ -9,10 +9,11 @@ using Terraria.Audio;
 using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {
-    internal class IchorSentry : ModProjectile
+    internal class IchorSentry : SentryTemplate
     {
         float sentryrot = MathHelper.PiOver2;
         float backtimer = 0;
@@ -48,6 +49,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 30 * Projectile.GetSentryAttackCooldownMultiplier();
         }
         public override void AI()
         {

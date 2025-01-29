@@ -21,10 +21,18 @@ namespace Terrafirma.Common.Templates
             {
                 if (sentry.sentry && sentry.Hitbox.Intersects(hitbox))
                 {
-                    if((sentry.GetGlobalProjectile<SentryStats>().BuffTime < (int)(wrench.BuffDuration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier) - player.HeldItem.useTime) || sentry.GetGlobalProjectile<SentryStats>().BuffType != wrench.Buff) 
+                    int adjusteddBuffTime = (int)(wrench.BuffDuration * player.GetModPlayer<PlayerStats>().WrenchBuffTimeMultiplier);
+                    if ((sentry.GetGlobalProjectile<SentryStats>().BuffTime < adjusteddBuffTime - player.itemAnimationMax) || sentry.GetGlobalProjectile<SentryStats>().BuffType != wrench.Buff) 
                     {
-                        if (Main.netMode == NetmodeID.SinglePlayer) ApplySentryBuff(sentry, wrench.Buff, (int)(wrench.BuffDuration * player.PlayerStats().WrenchBuffTimeMultiplier));
+                        if (Main.netMode == NetmodeID.SinglePlayer) 
+                            ApplySentryBuff(sentry, wrench.Buff, (int)(wrench.BuffDuration * player.PlayerStats().WrenchBuffTimeMultiplier));
+                        
                         SyncSentryBuff(sentry, wrench.Buff, (int)(wrench.BuffDuration * player.PlayerStats().WrenchBuffTimeMultiplier));
+                        if(sentry.ModProjectile is SentryTemplate s)
+                        {
+                            s.OnHitByWrench(player, wrench);
+                        }
+                        sentry.netUpdate = true;
                     }
                 }
             }
@@ -58,7 +66,6 @@ namespace Terrafirma.Common.Templates
             player.MinionAttackTargetNPC = target.whoAmI;
             base.OnHitNPC(player, target, hit, damageDone);
         }
-
         public static void SyncSentryBuff(Projectile proj, SentryBuff buff, int BuffDuration)
         {
             if (Main.netMode == NetmodeID.SinglePlayer) return; //Why are you trying to sync a sentry buff in singleplayer?

@@ -4,10 +4,11 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.ID;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    public class Sportar : ModProjectile
+    public class Sportar : SentryTemplate
     {
         public override void SetStaticDefaults()
         {
@@ -38,6 +39,11 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 90 * Projectile.GetSentryAttackCooldownMultiplier();
+            Projectile.ai[1] = 0;
         }
         public override void AI()
         {

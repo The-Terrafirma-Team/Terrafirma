@@ -10,6 +10,7 @@ namespace Terrafirma.Common.Templates
 {
     public abstract class SentryBuff : ModBuff
     {
+        public override string Texture => "Terrafirma/Assets/Bullet";
         public int ID { get => GetID(); }
         public virtual void UpdateSentry(Projectile sentry, SentryStats sentryStats)
         {

@@ -198,6 +198,11 @@ Buffs: {
 		DisplayName: Starlight Mana
 		Description: Magic damage increased
 	}
+
+	UmbraWrenchBuff: {
+		DisplayName: Umbra Wrench Buff
+		Description: Mods.Terrafirma.Buffs.UmbraWrenchBuff.Description
+	}
 }
 
 Items: {
@@ -526,7 +531,7 @@ Items: {
 
 	UmbraWrench: {
 		DisplayName: Umbra Wrench
-		Tooltip: Makes sentires inflict shadowflame
+		Tooltip: Boosts sentry attack speed
 	}
 
 	EngineeringPotion: {
@@ -1162,7 +1167,7 @@ Items: {
 
 	ShadowflameWrench: {
 		DisplayName: Shadowflame Wrench
-		Tooltip: ""
+		Tooltip: Imbues sentries with shadowflame
 	}
 
 	GlowingMushroomCap: {

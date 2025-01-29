@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ID;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
 {
-    internal class MechanicsPocketSentry : ModProjectile
+    internal class MechanicsPocketSentry : SentryTemplate
     {
         Vector2 Glowrand = Vector2.Zero;
 
@@ -44,6 +45,10 @@ namespace Terrafirma.Projectiles.Summon.Sentry.PreHardmode
         public override bool? CanHitNPC(NPC target)
         {
             return false;
+        }
+        public override void OnHitByWrench(Player player, WrenchItem wrench)
+        {
+            Projectile.ai[0] = 30 * Projectile.GetSentryAttackCooldownMultiplier();
         }
         public override void AI()
         {
