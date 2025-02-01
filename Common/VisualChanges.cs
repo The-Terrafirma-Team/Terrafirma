@@ -307,9 +307,10 @@ namespace Terrafirma.Common
                 ProjectileID.Sets.TrailCacheLength[Bullets[i]] = 8;
                 ProjectileID.Sets.TrailingMode[Bullets[i]] = 0;
             }
-            ProjectileID.Sets.TrailCacheLength[302] = 16;
-            ProjectileID.Sets.TrailCacheLength[242] = 16;
-            ProjectileID.Sets.TrailCacheLength[638] = 16;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.SniperBullet] = 16;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.CrystalBullet] = 12;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.BulletHighVelocity] = 16;
+            ProjectileID.Sets.TrailCacheLength[ProjectileID.MoonlordBullet] = 16;
         }
         public static void drawBullet(Projectile p, Color brightColor, Color darkColor, float scale = 1f)
         {
@@ -338,7 +339,7 @@ namespace Terrafirma.Common
                     drawBullet(projectile, new Color(1f, 0.4f, 0.4f, 0f), new Color(0.8f, 0f, 0f, 0.7f));
                     break;
                 case 89: // Crystal
-                    drawBullet(projectile, new Color(0.4f, 1f, 1f, 0f), new Color(0.3f, 0.5f, 0.8f, 0.5f));
+                    drawBullet(projectile, projectile.whoAmI % 2 == 0 ? new Color(0.4f, 1f, 1f, 0f) : new Color(1f, 0.4f, 1f, 0f), projectile.whoAmI % 2 == 0 ? new Color(0.3f, 0.5f, 0.8f, 0.5f) : new Color(0.8f, 0.6f, 0.8f, 0.5f));
                     break;
                 case 104: // Cursed
                     drawBullet(projectile, new Color(0.9f, 1f, 0f, 0f), new Color(0f, 0.5f, 0f, 0.5f));

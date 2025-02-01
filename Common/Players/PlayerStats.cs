@@ -22,6 +22,14 @@ namespace Terrafirma.Common.Players
         public override void Load()
         {
             On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
+            On_Player.PickTile += On_Player_PickTile;
+        }
+
+        private void On_Player_PickTile(On_Player.orig_PickTile orig, Player self, int x, int y, int pickPower)
+        {
+            self.PlayerStats().TileBeingPicked = new Point(x, y);
+            orig(self,x, y, pickPower);
+            
         }
 
         private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
@@ -38,7 +46,7 @@ namespace Terrafirma.Common.Players
         }
 
         public int SpiritCrystals = 0;
-
+        public Point? TileBeingPicked = null;
         Item lastHeldItem = null;
         public bool hasSwappedItems = false;
         public uint TimesHeldWeaponHasBeenSwung = 0;
@@ -151,6 +159,10 @@ namespace Terrafirma.Common.Players
 
         public override void ResetEffects()
         {
+            if (!Player.ItemAnimationActive)
+            {
+                TileBeingPicked = null;
+            }
             EnemySpawnRateMultiplier = 1f;
             MaxEnemySpawnMultiplier = 1f;
 
@@ -281,7 +293,7 @@ namespace Terrafirma.Common.Players
             {
                 scale -= scale * 0.25f;
             }
-            if (item.DamageType == DamageClass.Melee)
+            if (item.DamageType.CountsAsClass(DamageClass.Melee))
                 scale += MeleeWeaponScale;
             //else if (item.ModItem is NecromancerScythe)
             //    scale += NecromancerWeaponScale;

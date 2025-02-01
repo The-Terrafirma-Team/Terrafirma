@@ -13,7 +13,7 @@ namespace Terrafirma.Items.Tools
         public override void SetDefaults()
         {
             Item.DefaultToSword(25, 15, 4);
-            Item.pick = 50;
+            Item.pick = 55;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(silver: 75);
             Item.tileBoost = 2;
