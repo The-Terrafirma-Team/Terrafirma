@@ -8,18 +8,19 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Items.Tools
 {
-    public class GranitePickaxe : ModItem
+    public class AncientBronzePickaxe : ModItem
     {
         public override void SetDefaults()
         {
-            Item.DefaultToSword(10, 25, 4);
+            Item.DefaultToSword(7, 15, 4);
             Item.pick = 55;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(silver: 75);
+            Item.tileBoost = 2;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 25).AddIngredient(ItemID.Sapphire, 3).AddIngredient(ModContent.ItemType<EnchantedStone>()).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddRecipeGroup(RecipeGroupID.Wood, 25).AddIngredient(ModContent.ItemType<AncientBronze>(),8).Register();
         }
     }
 }

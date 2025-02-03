@@ -45,7 +45,9 @@ namespace Terrafirma.Common
                 case NPCID.GraniteFlyer:
                     npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnchantedStone>(), 5, 1, 1));
                     break;
-
+                case NPCID.GreekSkeleton:
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AncientBronze>(), 2, 2, 4));
+                    break;
                 case NPCID.KingSlime:
                     npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<PortableSlimeBakery>(), 5, 1, 1));
                     break;

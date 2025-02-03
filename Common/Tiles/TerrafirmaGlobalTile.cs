@@ -26,9 +26,69 @@ namespace Terrafirma.Common.Tiles
             }
             return base.CanExplode(i, j, type);
         }
+        private int getVanillaOreDrop(int type)
+        {
+            switch (type)
+            {
+                case TileID.Copper:
+                    return ItemID.CopperOre;
+                case TileID.Tin:
+                    return ItemID.TinOre;
+                case TileID.Iron:
+                    return ItemID.IronOre;
+                case TileID.Lead:
+                    return ItemID.LeadOre;
+                case TileID.Silver:
+                    return ItemID.SilverOre;
+                case TileID.Tungsten:
+                    return ItemID.TungstenOre;
+                case TileID.Gold:
+                    return ItemID.GoldOre;
+                case TileID.Platinum:
+                    return ItemID.PlatinumOre;
+                case TileID.Demonite:
+                    return ItemID.DemoniteOre;
+                case TileID.Crimtane:
+                    return ItemID.CrimtaneOre;
+                case TileID.Obsidian:
+                    return ItemID.Obsidian;
+                case TileID.Hellstone:
+                    return ItemID.Hellstone;
+                case TileID.Cobalt:
+                    return ItemID.CobaltOre;
+                case TileID.Palladium:
+                    return ItemID.PalladiumOre;
+                case TileID.Mythril:
+                    return ItemID.MythrilOre;
+                case TileID.Orichalcum:
+                    return ItemID.OrichalcumOre;
+                case TileID.Adamantite:
+                    return ItemID.AdamantiteOre;
+                case TileID.Titanium:
+                    return ItemID.TitaniumOre;
+                case TileID.Chlorophyte:
+                    return ItemID.ChlorophyteOre;
+                case TileID.LunarOre:
+                    return ItemID.LunarOre;
+
+                case TileID.Amethyst:
+                    return ItemID.Amethyst;
+                case TileID.Topaz:
+                    return ItemID.Topaz;
+                case TileID.Emerald:
+                    return ItemID.Topaz;
+                case TileID.Sapphire:
+                    return ItemID.Topaz;
+                case TileID.Ruby:
+                    return ItemID.Ruby;
+                case TileID.Diamond:
+                    return ItemID.Diamond;
+                default:
+                    return -1;
+            }
+        }
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-
             if (!fail)
             {
                 // Granite Pickaxe Ore Duplication
@@ -36,59 +96,7 @@ namespace Terrafirma.Common.Tiles
                 {
                     if (Main.tile[i, j].TileType < 692)
                     {
-                        int dropType = 0;
-                        switch (type)
-                        {
-                            case TileID.Copper:
-                                dropType = ItemID.CopperOre;
-                                break;
-                            case TileID.Tin:
-                                dropType = ItemID.TinOre;
-                                break;
-                            case TileID.Iron:
-                                dropType = ItemID.IronOre;
-                                break;
-                            case TileID.Lead:
-                                dropType = ItemID.LeadOre;
-                                break;
-                            case TileID.Silver:
-                                dropType = ItemID.SilverOre;
-                                break;
-                            case TileID.Tungsten:
-                                dropType = ItemID.TungstenOre;
-                                break;
-                            case TileID.Gold:
-                                dropType = ItemID.GoldOre;
-                                break;
-                            case TileID.Platinum:
-                                dropType = ItemID.PlatinumOre;
-                                break;
-                            case TileID.Demonite:
-                                dropType = ItemID.DemoniteOre;
-                                break;
-                            case TileID.Crimtane:
-                                dropType = ItemID.CrimtaneOre;
-                                break;
-                            case TileID.Amethyst:
-                                dropType = ItemID.Amethyst;
-                                break;
-                            case TileID.Topaz:
-                                dropType = ItemID.Topaz;
-                                break;
-                            case TileID.Emerald:
-                                dropType = ItemID.Topaz;
-                                break;
-                            case TileID.Sapphire:
-                                dropType = ItemID.Topaz;
-                                break;
-                            case TileID.Ruby:
-                                dropType = ItemID.Ruby;
-                                break;
-                            case TileID.Diamond:
-                                dropType = ItemID.Diamond;
-                                break;
-                        }
-                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Point(i, j).ToWorldCoordinates(), dropType);
+                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Point(i, j).ToWorldCoordinates(), getVanillaOreDrop(type));
                     }
                     else
                     {

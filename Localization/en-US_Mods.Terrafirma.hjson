@@ -1414,6 +1414,21 @@ Items: {
 		DisplayName: Antihero
 		Tooltip: ""
 	}
+
+	AncientBronze: {
+		DisplayName: Ancient Bronze
+		Tooltip: ""
+	}
+
+	AncientBronzePickaxe: {
+		DisplayName: Ancient Bronze Pickaxe
+		Tooltip: ""
+	}
+
+	GraniteStaff: {
+		DisplayName: Granite Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1618,6 +1633,8 @@ Projectiles: {
 	EmeraldBoltProj.DisplayName: Emerald Bolt Proj
 	RubyBoltProj.DisplayName: Ruby Bolt Proj
 	TopazBoltProj.DisplayName: Topaz Bolt Proj
+	GranitePlatform.DisplayName: Granite Platform
+	GraniteStalactites.DisplayName: Granite Stalactites
 }
 
 Tiles: {
@@ -1999,6 +2016,16 @@ Spells: {
 	MagicDagger: {
 		Name: Magic Dagger
 		Description: Throws a magical dagger
+	}
+
+	GranitePlatform: {
+		Name: Granite Platform
+		Description: ""
+	}
+
+	GraniteStalactites: {
+		Name: Granite Stalactites
+		Description: ""
 	}
 }
 

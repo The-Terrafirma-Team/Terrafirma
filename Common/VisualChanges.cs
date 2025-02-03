@@ -314,17 +314,21 @@ namespace Terrafirma.Common
         }
         public static void drawBullet(Projectile p, Color brightColor, Color darkColor, float scale = 1f)
         {
+            drawBullet(p, brightColor, darkColor, Vector2.Zero, scale);
+        }
+        public static void drawBullet(Projectile p, Color brightColor, Color darkColor, Vector2 Offset, float scale = 1f)
+        {
             Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, null, darkColor, p.rotation, tex.Size() / 2, scale, SpriteEffects.None);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[p.type] - 1; i++)
             {
                 //Main.NewText(p.oldPos[7]);
                 if (p.oldPos[i + 1] != Vector2.Zero)
                 {
-                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
-                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition, new Rectangle(0, 8, 14, 2), brightColor * (0.5f - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
+                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition + Offset, new Rectangle(0, 8, 14, 2), darkColor * (1 - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
+                    Main.EntitySpriteDraw(tex.Value, p.oldPos[i] + (p.Size / 2) - Main.screenPosition + Offset, new Rectangle(0, 8, 14, 2), brightColor * (0.5f - ((i - 1) / (float)ProjectileID.Sets.TrailCacheLength[p.type])), p.oldPos[i].DirectionFrom(p.oldPos[i + 1]).ToRotation() + MathHelper.PiOver2, new Vector2(7, 0), new Vector2((1f - (i / (float)ProjectileID.Sets.TrailCacheLength[p.type])) * scale * p.scale, p.oldPos[i].Distance(p.oldPos[i + 1]) / 2), SpriteEffects.None);
                 }
             }
-            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition, null, brightColor, p.rotation, tex.Size() / 2, scale * p.scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(tex.Value, p.Center - Main.screenPosition + Offset, null, brightColor, p.rotation, tex.Size() / 2, scale * p.scale, SpriteEffects.None);
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
@@ -336,13 +340,17 @@ namespace Terrafirma.Common
                     drawBullet(projectile, new Color(1f, 1f, 0.5f, 0f), new Color(1f, 0.1f, 0f, 0.5f));
                     break;
                 case 36: // meteor
-                    drawBullet(projectile, new Color(1f, 0.4f, 0.4f, 0f), new Color(0.8f, 0f, 0f, 0.7f));
+                    drawBullet(projectile, new Color(1f, 0.5f, 0.5f, 0f), new Color(0.8f, 0f, 0f, 0.7f));
                     break;
                 case 89: // Crystal
                     drawBullet(projectile, projectile.whoAmI % 2 == 0 ? new Color(0.4f, 1f, 1f, 0f) : new Color(1f, 0.4f, 1f, 0f), projectile.whoAmI % 2 == 0 ? new Color(0.3f, 0.5f, 0.8f, 0.5f) : new Color(0.8f, 0.6f, 0.8f, 0.5f));
                     break;
                 case 104: // Cursed
-                    drawBullet(projectile, new Color(0.9f, 1f, 0f, 0f), new Color(0f, 0.5f, 0f, 0.5f));
+                    for(int i = 0; i < 2; i++)
+                    {
+                        drawBullet(projectile, new Color(0.9f, 1f, 0f, 0f), new Color(0f, 0.5f, 0f, 0f), Main.rand.NextVector2Circular(6,6), 0.5f);
+                    }
+                    drawBullet(projectile, new Color(0.9f, 1f, 0f, 0f), new Color(0f, 0.5f, 0f, 0f));
                     break;
                 case 207: // Chloro
                     drawBullet(projectile, new Color(0f, 1f, 0f, 0f), new Color(0f, 0.5f, 0.2f, 0.5f));
@@ -358,7 +366,8 @@ namespace Terrafirma.Common
                     drawBullet(projectile, new Color(185, 128, 193, 128), new Color(95, 67, 139, 255));
                     break;
                 case 284: // Party
-                    drawBullet(projectile, new Color(255, 128, 255, 128), new Color(200, 0, 255, 128));
+                          //drawBullet(projectile, new Color(255, 128, 255, 128), new Color(200, 0, 255, 128));
+                    drawBullet(projectile, new Color(1f, 1f, 1f, 0f), Main.DiscoColor);
                     break;
                 case 285: // Nano
                     drawBullet(projectile, new Color(0, 255, 255, 0), new Color(0, 0, 0, 255));
