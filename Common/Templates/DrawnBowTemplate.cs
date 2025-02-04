@@ -76,7 +76,7 @@ namespace Terrafirma.Common.Templates
                         bigsparkle.fadeInTime = 6;
                         bigsparkle.Rotation = Main.rand.NextFloat(-0.4f, 0.4f);
                         bigsparkle.Scale = 2f;
-                        ParticleSystem.AddParticle(bigsparkle, Projectile.Center + player.Center.DirectionTo(player.PlayerStats().MouseWorld) * 5, null, new Color(128, 255, 255, 128), ParticleLayer.normal);
+                        ParticleSystem.AddParticle(bigsparkle, Projectile.Center + player.Center.DirectionTo(player.PlayerStats().MouseWorld) * 5, null, new Color(128, 255, 255, 128), ParticleLayer.NormalPixel);
                     }
                     if(SoundEngine.TryGetActiveSound(BowPullSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
                     {

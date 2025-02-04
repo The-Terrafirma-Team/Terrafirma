@@ -2,21 +2,24 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Particles
 {
     public enum ParticleLayer : byte
     {
-        normal = 0,
+        NormalPixel = 0,
         UI = 1,
-        BehindTiles = 2
+        BehindTiles = 2,
+        Normal = 0,
     }
     public class ParticleSystem : ModSystem
     {
+        static List<Particle> PixelParticles;
         static List<Particle> Particles;
         static List<Particle> PreTileParticles;
-        const int MaxParticles = 3000;
+        const int MaxParticles = 700;
         static List<Particle> TooltipParticles;
 
         private static void DrawParticles(List<Particle> list)
@@ -58,14 +61,34 @@ namespace Terrafirma.Particles
                 }
             }
         }
+        private static RenderTarget2D pixelTarget;
         public override void Load()
         {
             TooltipParticles = new List<Particle>(MaxParticles);
             PreTileParticles = new List<Particle>(MaxParticles);
+            PixelParticles = new List<Particle>(MaxParticles);
             Particles = new List<Particle>(MaxParticles);
-
             On_Main.DrawDust += On_Main_DrawDust;
             On_Main.DrawBackGore += On_Main_DrawBackGore;
+            Main.OnPreDraw += DrawPixelTarget;
+            Main.QueueMainThreadAction(setRenderTarget);
+        }
+
+        private void DrawPixelTarget(GameTime obj)
+        {
+            var oldTargets = Main.instance.GraphicsDevice.GetRenderTargets();
+            Main.instance.GraphicsDevice.SetRenderTarget(pixelTarget);
+            Main.instance.GraphicsDevice.Clear(Color.Transparent);
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform * Matrix.CreateScale(0.25f / Main.GameZoomTarget));
+            DrawParticles(PixelParticles);
+            //Main.spriteBatch.Draw(TextureAssets.Item[1].Value, Main.LocalPlayer.Center - Main.screenPosition, Color.White);
+            Main.spriteBatch.End();
+            Main.instance.GraphicsDevice.SetRenderTargets(oldTargets);
+        }
+
+        private void setRenderTarget()
+        {
+            pixelTarget = new RenderTarget2D(Main.instance.GraphicsDevice, Main.screenWidth, Main.screenHeight,false,SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
         }
         private void On_Main_DrawBackGore(On_Main.orig_DrawBackGore orig, Main self)
         {
@@ -102,31 +125,32 @@ namespace Terrafirma.Particles
         }
         public static void DrawParticles()
         {
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer);
+            Main.spriteBatch.Draw(pixelTarget, new Rectangle(0,0, (int)(Main.screenWidth * 4 * Main.GameZoomTarget), (int)(Main.screenHeight * 4 * Main.GameZoomTarget)), Color.White);
             DrawParticles(Particles);
             Main.spriteBatch.End();
         }
         public override void PostUpdateDusts()
         {
-            UpdateParticles(Particles);
+            UpdateParticles(PixelParticles);
             UpdateParticles(PreTileParticles);
             UpdateParticles(TooltipParticles);
         }
 
-        public static void AddParticle(Particle particle, Vector2 Position, Vector2? Velocity = null, Color? color = null, ParticleLayer layer = ParticleLayer.normal)
+        public static void AddParticle(Particle particle, Vector2 Position, Vector2? Velocity = null, Color? color = null, ParticleLayer layer = ParticleLayer.NormalPixel)
         {
             particle.position = Position;
             particle.velocity = (Vector2)(Velocity == null ? Vector2.Zero : Velocity);
             particle.color = (Color)(color == null ? Color.White : color);
             switch (layer)
             {
-                case ParticleLayer.normal:
+                case ParticleLayer.NormalPixel:
                     {
-                        if (Particles.Count == MaxParticles)
+                        if (PixelParticles.Count == MaxParticles)
                         {
-                            Particles.Remove(Particles[0]);
+                            PixelParticles.Remove(PixelParticles[0]);
                         }
-                        Particles.Add(particle);
+                        PixelParticles.Add(particle);
                         break;
                     }
                 case ParticleLayer.UI:
