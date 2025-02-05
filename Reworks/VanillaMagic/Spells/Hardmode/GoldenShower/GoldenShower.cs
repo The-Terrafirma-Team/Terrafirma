@@ -13,16 +13,9 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.GoldenShower
         public override int UseTime => 6;
         public override int ManaCost => 7;
         public override int[] SpellItem => new int[] { ItemID.GoldenShower };
-        public override void SetDefaults(Item entity)
-        {
-            entity.UseSound = null;
-        }
-
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             type = ProjectileID.GoldenShowerFriendly;
-
-            if (player.ItemAnimationJustStarted) SoundEngine.PlaySound(SoundID.Item13, player.position);
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
             return false;

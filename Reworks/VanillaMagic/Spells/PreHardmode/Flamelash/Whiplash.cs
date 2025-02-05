@@ -39,14 +39,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
             }
             return false;
         }
-
-        public override void OnLeftMousePressed(Item item, Player player)
+        public override bool Channeled => true;
+        public override void SetDefaults(Item item)
         {
             item.autoReuse = true;
             item.useStyle = ItemUseStyleID.Shoot;
-            item.channel = true;
-            Item.staff[item.type] = true;
-            base.OnLeftMousePressed(item, player);
         }
         public override void OnLeftMouseReleased(Item item, Player player)
         {

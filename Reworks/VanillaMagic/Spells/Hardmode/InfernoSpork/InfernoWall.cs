@@ -15,10 +15,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.InfernoSpork
         public override int ManaCost => 24;
         public override int[] SpellItem => new int[] { ItemID.InfernoFork };
 
-        public override void SetDefaults(Item entity)
-        {
-            entity.UseSound = null;
-        }
+        public override bool OverrideSoundstyle => true;
+        public override SoundStyle? UseSound => null;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             type = ModContent.ProjectileType<Firewall>();

@@ -23,14 +23,11 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
         public override int ReuseDelay => -1;
         public override int[] SpellItem => new int[] { ItemID.Flamelash };
 
-        public override void OnLeftMousePressed(Item item, Player player)
+        public override bool Channeled => true;
+        public override void SetDefaults(Item item)
         {
             item.autoReuse = false;
             item.useStyle = ItemUseStyleID.Swing;
-            item.channel = true;
-            Item.staff[item.type] = false;
-            base.OnLeftMousePressed(item, player);
         }
-
     }
 }

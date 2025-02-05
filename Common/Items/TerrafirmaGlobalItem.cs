@@ -41,6 +41,7 @@ namespace Terrafirma.Common.Items
             ItemSets.ThrowerWeapon[ItemID.Beenade] = true;
             ItemSets.ThrowerWeapon[ItemID.PartyGirlGrenade] = true;
             ItemSets.ThrowerWeapon[ItemID.AleThrowingGlove] = true;
+            Item.staff[ItemID.Flamelash] = true;
         }
         public override void SetDefaults(Item item)
         {

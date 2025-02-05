@@ -52,6 +52,7 @@ namespace Terrafirma.Common
                 {
                     Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellID.GetWeaponSpellFromIndex(SpellID.GetMaxSpellsforWeaponwithAccessory(Player.HeldItem.type) - 1, Player.HeldItem.type);
                 }
+                ModifyMagicSpellStats.ApplyDefaults(Player.HeldItem);
             }
 
             if (nextSpell != null && nextSpell.JustPressed && SpellID.itemcatalogue.ContainsKey(Player.HeldItem.type) && !Player.ItemAnimationActive)
@@ -64,6 +65,7 @@ namespace Terrafirma.Common
                 {
                     Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellID.GetWeaponSpellFromIndex(0, Player.HeldItem.type);
                 }
+                ModifyMagicSpellStats.ApplyDefaults(Player.HeldItem);
                 //Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellIndex.GetWeaponSpellIndex(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) < SpellIndex.ItemCatalogue[Player.HeldItem.type].Length - 1 ? SpellIndex.ItemCatalogue[Player.HeldItem.type][SpellIndex.GetWeaponSpellIndex(Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell, Player.HeldItem.type) + 1] : SpellIndex.ItemCatalogue[Player.HeldItem.type][0];
             }
 
@@ -82,6 +84,7 @@ namespace Terrafirma.Common
                     }
                 }
                 if (!accessoriescontainspell) Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell = SpellID.itemcatalogue[Player.HeldItem.type][0];
+                ModifyMagicSpellStats.ApplyDefaults(Player.HeldItem);
             }
 
         }

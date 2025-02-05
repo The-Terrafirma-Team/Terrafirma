@@ -185,6 +185,7 @@ namespace Terrafirma.Common.Players
                         SpellUI = false;
                         Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell =
                         ModContent.GetInstance<SpellUISystem>().SelectedSpell;
+                        ModifyMagicSpellStats.ApplyDefaults(Player.HeldItem);
                     }
                 }
             }

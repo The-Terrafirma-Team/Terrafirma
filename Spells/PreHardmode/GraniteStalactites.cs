@@ -5,6 +5,7 @@ using Terrafirma.Items.Weapons.Magic.Tempire;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,6 +18,8 @@ namespace Terrafirma.Spells.PreHardmode
         public override int UseTime => 30;
         public override int ManaCost => 8;
         public override int[] SpellItem => [ModContent.ItemType<GraniteStaff>()];
+        public override bool OverrideSoundstyle => true;
+        public override SoundStyle? UseSound => SoundID.Item8;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for(int i = 0; i < 3; i++)

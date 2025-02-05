@@ -27,6 +27,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
             Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<VileStaffDark>(), damage, knockback, player.whoAmI, 0, 0, 0);
             return false;
         }
+        public override bool Channeled => true;
     }
     public class VileStaffDark : HeldProjectile
     {

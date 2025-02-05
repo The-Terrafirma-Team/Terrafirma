@@ -33,7 +33,7 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
         }
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Tink with { MaxInstances = 10});
+            SoundEngine.PlaySound(SoundID.Tink with { MaxInstances = 10, Volume = Math.Min((Projectile.oldVelocity.Length() * 0.02f) + 0.1f, 1f) });
             for (int i = 0; i < 20; i++)
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Granite);
@@ -41,6 +41,7 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
                 d.velocity.Y *= 0.1f;
                 d.velocity.Y -= Projectile.velocity.Y * Main.rand.NextFloat(0.8f);
             }
+            ParticleSystem.AddParticle(new Shockwave() { Scale = new Vector2(Main.rand.NextFloat(0.1f,0.2f),0.3f) * Projectile.oldVelocity.Length() * 0.04f, rotation = Projectile.oldVelocity.ToRotation()}, Projectile.Bottom, null, Color.LightBlue * Math.Min(Projectile.oldVelocity.Length() * 0.04f, 0.7f));
         }
         public override void AI()
         {

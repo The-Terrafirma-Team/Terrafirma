@@ -16,17 +16,13 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.GoldenShower
         public override int ManaCost => 7;
         public override int[] SpellItem => new int[] { ItemID.GoldenShower };
 
-        public override void SetDefaults(Item entity)
-        {
-            entity.UseSound = null;
-        }
+        public override bool OverrideSoundstyle => true;
+        public override SoundStyle? UseSound => SoundID.NPCDeath19;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             velocity *= 0.45f;
             damage *= 3;
             type = ModContent.ProjectileType<IchorBubbleProj>();
-
-            SoundEngine.PlaySound(SoundID.NPCDeath19, player.position);
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, 0);
             return false;

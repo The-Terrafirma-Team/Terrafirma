@@ -12,11 +12,6 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.CursedFlamesBook
         public override int UseTime => 15;
         public override int ManaCost => 9;
         public override int[] SpellItem => new int[] { ItemID.CursedFlames };
-
-        public override void SetDefaults(Item entity)
-        {
-            entity.UseSound = null;
-        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             return true;

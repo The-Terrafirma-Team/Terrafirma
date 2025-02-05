@@ -28,21 +28,21 @@ namespace Terrafirma.Systems.MageClass
                 var manaremove = tooltips.Where(tooltip => tooltip.Name == "UseMana").FirstOrDefault();
                 tooltips.Remove(manaremove);
 
-                if (getplayer != null && !getplayer.GetModPlayer<Keybinds>().Shifting)
-                {
-                    if (SpellID.itemcatalogue[item.type].Length > 1)
-                    {
-                        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellID.itemcatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
-                    }
-                    else
-                    {
-                        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellID.itemcatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
-                    }
-                }
+                //if (getplayer != null && !getplayer.GetModPlayer<Keybinds>().Shifting)
+                //{
+                //    if (SpellID.itemcatalogue[item.type].Length > 1)
+                //    {
+                //        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellID.itemcatalogue[item.type].Length + " Spells (Hold " + "Shift" + " for more info)"));
+                //    }
+                //    else
+                //    {
+                //        tooltips.Add(new TooltipLine(Terrafirma.Mod, "SpellAmount", SpellID.itemcatalogue[item.type].Length + " Spell (Hold " + "Shift" + " for more info)"));
+                //    }
+                //}
 
 
-                if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
-                {
+                //if (getplayer != null && getplayer.GetModPlayer<Keybinds>().Shifting)
+                //{
                     for (int i = 0; i < SpellID.itemcatalogue[item.type].Length; i++)
                     {
                         int spellmanacost = SpellID.itemcatalogue[item.type][i].ManaCost == -1 ? item.mana : SpellID.itemcatalogue[item.type][i].ManaCost;
@@ -58,7 +58,7 @@ namespace Terrafirma.Systems.MageClass
                         ));
                     }
 
-                }
+                //}
             }
         }
     }

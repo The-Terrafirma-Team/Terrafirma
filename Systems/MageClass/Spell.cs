@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.UIElements;
 using System;
 using Terrafirma.Common.Items;
+using Terraria.Audio;
 
 namespace Terrafirma.Systems.MageClass
 {
@@ -39,6 +40,21 @@ namespace Terrafirma.Systems.MageClass
         /// Sets the UseAnimation of the spell's item. Set to -1 to use the item's default UseAnimation
         /// </summary>
         public virtual int UseAnimation => -1;
+
+        /// <summary>
+        ///  Sets the use sound of the spell's item
+        /// </summary>
+        public virtual bool OverrideSoundstyle => false;
+
+        /// <summary>
+        ///  Sets the use sound of the spell's item, set OverrideSoundstyle for this to do anything.
+        /// </summary>
+        public virtual SoundStyle? UseSound => null;
+
+        /// <summary>
+        /// Whether or not the item needs channeling for the spell to work
+        /// </summary>
+        public virtual bool Channeled => false;
         /// <summary>
         /// Array of all items that can use this spell. Works for all Weapons and Accessories, doesn't have any effect on other items.
         /// </summary>
@@ -79,7 +95,7 @@ namespace Terrafirma.Systems.MageClass
             return Language.GetTextValue("Mods.Terrafirma.Spells." + $"{this.GetType().Name}" + ".Description");
         }
 
-        public virtual void SetDefaults(Item entity)
+        public virtual void SetDefaults(Item item)
         {
         }
 

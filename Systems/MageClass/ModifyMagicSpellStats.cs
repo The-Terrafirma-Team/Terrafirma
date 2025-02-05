@@ -8,17 +8,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrafirma.Systems.MageClass
 {
-    internal class ModifyMagicSpellStats : GlobalItemInstanced
-    {  
+    internal class ModifyMagicSpellStats : GlobalItem
+    {
+        public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.DamageType == DamageClass.Magic;
         }
-        public override void SetDefaults(Item entity)
+        public static void ApplyDefaults(Item item)
         {
-            if (entity.Spell() != null) entity.Spell().SetDefaults(entity);
+            if (item.Spell() != null)
+            {
+                item.Spell().SetDefaults(item);
+                item.channel = item.Spell().Channeled;
+                item.UseSound = !item.Spell().OverrideSoundstyle ? ContentSamples.ItemsByType[item.type].UseSound : item.Spell().UseSound;
+            }
         }
-
         public override bool? CanAutoReuseItem(Item item, Player player)
         {
             if (item.Spell() != null) return item.Spell().CanAutoReuse();
