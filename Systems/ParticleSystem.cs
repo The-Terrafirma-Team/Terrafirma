@@ -88,6 +88,7 @@ namespace Terrafirma.Particles
         public override void Unload()
         {
             pixelTarget.Dispose();
+
             TooltipParticles.Clear();
             PreTileParticles.Clear();
             PixelParticles.Clear();
@@ -140,13 +141,18 @@ namespace Terrafirma.Particles
         public static void DrawParticles()
         {
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer);
-            Main.spriteBatch.Draw(pixelTarget, new Rectangle(0,0, (int)(Main.screenWidth * 4 * Main.GameZoomTarget), (int)(Main.screenHeight * 4 * Main.GameZoomTarget)), Color.White);
+            Vector2 position = (Main.screenPosition - Main.screenLastPosition) * -Main.GameZoomTarget;
+            Main.spriteBatch.Draw(pixelTarget, new Rectangle((int)position.X,(int)position.Y, (int)(Main.screenWidth * 4 * Main.GameZoomTarget), (int)(Main.screenHeight * 4 * Main.GameZoomTarget)), Color.White);
+            Main.spriteBatch.End();
+
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
             DrawParticles(Particles);
             Main.spriteBatch.End();
         }
         public override void PostUpdateDusts()
         {
             UpdateParticles(PixelParticles);
+            UpdateParticles(Particles);
             UpdateParticles(PreTileParticles);
             UpdateParticles(TooltipParticles);
         }

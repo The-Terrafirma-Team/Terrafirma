@@ -29,17 +29,22 @@ namespace Terrafirma.Items.Equipment.MiningBuilding
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (power > 0)
+            if (power > 0 && set)
             {
                 SoundEngine.PlaySound(SoundID.NPCDeath45,Player.position);
-                for (int x = 0; x < 8; x++)
+                //for (int x = 0; x < 8; x++)
+                //{
+                //    PixelCircle p = new PixelCircle();
+                //    p.outlineColor = new Color(183, 247, 255);
+                //    p.scale = Main.rand.NextFloat(2, 4);
+                //    p.gravity = 0.2f;
+                //    ParticleSystem.AddParticle(p, Player.Center, Main.rand.NextVector2Circular(6, 6) + new Vector2(0, -3), new Color(0, 192, 255));
+                //}
+                for(int i = 0; i < 16; i++)
                 {
-                    PixelCircle p = new PixelCircle();
-                    p.outlineColor = new Color(183, 247, 255);
-                    p.scale = Main.rand.NextFloat(2, 4);
-                    p.gravity = 0.2f;
-                    ParticleSystem.AddParticle(p, Player.Center, Main.rand.NextVector2Circular(6, 6) + new Vector2(0, -3), new Color(0, 192, 255));
+                    ParticleSystem.AddParticle(new ImpactSparkle() { Scale = 0.3f, LifeTime = 60, secondaryColor = new Color(1f,1f,1f,0f) * power }, Player.Center, Main.rand.NextVector2Circular(8,8), new Color(0.4f, 1f, 1f, 0f) * power);
                 }
+                ParticleSystem.AddParticle(new Shockwave() {Scale = new Vector2(0.5f,0.5f) * power }, Player.Center, Vector2.Zero, new Color(0.4f, 1f, 1f, 0f) * power);
                 modifiers.IncomingDamageMultiplier *= (0.5f + (1 - power) * 0.5f);
                 power = 0;
             }
@@ -55,14 +60,16 @@ namespace Terrafirma.Items.Equipment.MiningBuilding
             {
                 for(int x = 0; x < 4; x++)
                 {
-                    PixelCircle p = new PixelCircle();
-                    p.outlineColor = new Color(183,247,255);
-                    p.scale = Main.rand.NextFloat(2,4);
-                    p.gravity = 0.2f;
-                    p.tileCollide = true;
-                    ParticleSystem.AddParticle(p, new Vector2((i * 16) + 8, (j * 16) + 8), Main.rand.NextVector2Circular(4, 4) + new Vector2(0,-3), new Color(0, 192, 255));
+                    //PixelCircle p = new PixelCircle();
+                    //p.outlineColor = new Color(183,247,255);
+                    //p.scale = Main.rand.NextFloat(2,4);
+                    //p.gravity = 0.2f;
+                    //p.tileCollide = true;
+                    //ParticleSystem.AddParticle(p, new Vector2((i * 16) + 8, (j * 16) + 8), Main.rand.NextVector2Circular(4, 4) + new Vector2(0,-3), new Color(0, 192, 255));
                     //Dust d = Dust.NewDustPerfect(new Vector2((i * 16) + 8, (j * 16) + 8),DustID.GemSapphire,Main.rand.NextVector2Circular(4,4));
                     //d.noGravity = true;
+                    Vector2 rand = Main.rand.NextVector2Circular(1, 1);
+                    ParticleSystem.AddParticle(new ImpactSparkle() { Scale = 0.6f, LifeTime = 30}, Main.LocalPlayer.Center + rand * 80, -rand * 6, new Color(0.4f,1f,1f,0f) * 0.8f);
                 }
 
                 setPlayer.powerGoDownTimer = 60 * 30;

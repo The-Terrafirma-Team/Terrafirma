@@ -855,7 +855,7 @@ Items: {
 		SetBonus:
 			'''
 			Mining ores generates a shield
-			The shield can block up to 45 damage
+			The shield can block up to 50% of incoming damage
 			'''
 	}
 

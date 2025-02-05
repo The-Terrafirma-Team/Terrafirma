@@ -18,8 +18,9 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
         public override void SetDefaults()
         {
             Projectile.friendly = true;
-            Projectile.Size = new Vector2(8,32);
+            Projectile.Size = new Vector2(8,32) / 0.8f;
             Projectile.alpha = 250;
+            Projectile.scale = 0.8f;
         }
         public override void SetStaticDefaults()
         {
@@ -41,6 +42,11 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
                 d.velocity.Y *= 0.1f;
                 d.velocity.Y -= Projectile.velocity.Y * Main.rand.NextFloat(0.8f);
             }
+                for (int i = 0; i < Math.Min(Projectile.velocity.Y * 0.2f,3); i++)
+                {
+                    float opacity = Main.rand.NextFloat(0.5f);
+                    ParticleSystem.AddParticle(new Smoke() { Scale = 1f, secondaryColor = new Color(25, 23, 54) * opacity }, Projectile.Bottom, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-Projectile.velocity.Y * 0.5f, -1)), new Color(116, 132, 169) * opacity, ParticleLayer.Normal);
+                }
             ParticleSystem.AddParticle(new Shockwave() { Scale = new Vector2(Main.rand.NextFloat(0.1f,0.2f),0.3f) * Projectile.oldVelocity.Length() * 0.04f, rotation = Projectile.oldVelocity.ToRotation()}, Projectile.Bottom, null, Color.LightBlue * Math.Min(Projectile.oldVelocity.Length() * 0.04f, 0.7f));
         }
         public override void AI()
@@ -56,6 +62,10 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
             if(Projectile.alpha > 0)
             {
                 Projectile.alpha -= 10;
+            }
+            if (Projectile.scale < 1)
+            {
+                Projectile.scale += 0.025f;
             }
             Projectile.tileCollide = Projectile.position.Y > Projectile.ai[2];
         }
