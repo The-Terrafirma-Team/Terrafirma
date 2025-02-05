@@ -19,6 +19,7 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
         {
             Projectile.friendly = true;
             Projectile.Size = new Vector2(8,32);
+            Projectile.alpha = 250;
         }
         public override void SetStaticDefaults()
         {
@@ -50,6 +51,10 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
             {
                 Projectile.velocity.Y += 0.2f;
                 Projectile.velocity.Y *= 1.02f;
+            }
+            if(Projectile.alpha > 0)
+            {
+                Projectile.alpha -= 10;
             }
             Projectile.tileCollide = Projectile.position.Y > Projectile.ai[2];
         }

@@ -12,7 +12,7 @@ namespace Terrafirma.Particles
         NormalPixel = 0,
         UI = 1,
         BehindTiles = 2,
-        Normal = 0,
+        Normal = 4,
     }
     public class ParticleSystem : ModSystem
     {
@@ -72,8 +72,27 @@ namespace Terrafirma.Particles
             On_Main.DrawBackGore += On_Main_DrawBackGore;
             Main.OnPreDraw += DrawPixelTarget;
             Main.QueueMainThreadAction(setRenderTarget);
+            Main.graphics.GraphicsDevice.DeviceReset += GraphicsDevice_DeviceReset;
         }
 
+        private void GraphicsDevice_DeviceReset(object sender, System.EventArgs e)
+        {
+            pixelTarget.Dispose();
+            setRenderTarget();
+        }
+
+        private void setRenderTarget()
+        {
+            pixelTarget = new RenderTarget2D(Main.instance.GraphicsDevice, Main.screenWidth, Main.screenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+        }
+        public override void Unload()
+        {
+            pixelTarget.Dispose();
+            TooltipParticles.Clear();
+            PreTileParticles.Clear();
+            PixelParticles.Clear();
+            Particles.Clear();
+        }
         private void DrawPixelTarget(GameTime obj)
         {
             var oldTargets = Main.instance.GraphicsDevice.GetRenderTargets();
@@ -84,11 +103,6 @@ namespace Terrafirma.Particles
             //Main.spriteBatch.Draw(TextureAssets.Item[1].Value, Main.LocalPlayer.Center - Main.screenPosition, Color.White);
             Main.spriteBatch.End();
             Main.instance.GraphicsDevice.SetRenderTargets(oldTargets);
-        }
-
-        private void setRenderTarget()
-        {
-            pixelTarget = new RenderTarget2D(Main.instance.GraphicsDevice, Main.screenWidth, Main.screenHeight,false,SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
         }
         private void On_Main_DrawBackGore(On_Main.orig_DrawBackGore orig, Main self)
         {
@@ -151,6 +165,15 @@ namespace Terrafirma.Particles
                             PixelParticles.Remove(PixelParticles[0]);
                         }
                         PixelParticles.Add(particle);
+                        break;
+                    }
+                case ParticleLayer.Normal:
+                    {
+                        if (Particles.Count == MaxParticles)
+                        {
+                            Particles.Remove(Particles[0]);
+                        }
+                        Particles.Add(particle);
                         break;
                     }
                 case ParticleLayer.UI:
