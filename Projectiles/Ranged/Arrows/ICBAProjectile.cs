@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -23,6 +24,10 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
             Projectile.extraUpdates = 1;
             Projectile.arrow = true;
             Projectile.DamageType = DamageClass.Ranged;
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

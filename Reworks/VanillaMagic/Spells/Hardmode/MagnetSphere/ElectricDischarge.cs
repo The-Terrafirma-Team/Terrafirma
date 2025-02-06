@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -30,6 +31,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.MagnetSphere
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 7;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

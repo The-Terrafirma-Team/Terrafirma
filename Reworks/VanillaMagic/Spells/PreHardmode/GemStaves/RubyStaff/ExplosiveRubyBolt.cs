@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -28,6 +29,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.RubyStaff
     }
     public class ExplodingRuby : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.RubyBolt}";
         public override void SetDefaults()
         {

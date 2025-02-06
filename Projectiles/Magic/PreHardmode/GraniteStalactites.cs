@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Terrafirma.Common;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
@@ -27,6 +28,7 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
             Main.projFrames[Type] = 3;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -51,10 +53,15 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
         }
         public override void AI()
         {
+            if (Projectile.reflected)
+            {
+                Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
+            }
+
             Projectile.frame = (int)Projectile.ai[0];
 
             Projectile.ai[1]++;
-            if (Projectile.ai[1] > 30)
+            if (Projectile.ai[1] > 30 || Projectile.reflected)
             {
                 Projectile.velocity.Y += 0.2f;
                 Projectile.velocity.Y *= 1.02f;
@@ -67,7 +74,7 @@ namespace Terrafirma.Projectiles.Magic.PreHardmode
             {
                 Projectile.scale += 0.025f;
             }
-            Projectile.tileCollide = Projectile.position.Y > Projectile.ai[2];
+            //Projectile.tileCollide = Projectile.position.Y > Projectile.ai[2];
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {

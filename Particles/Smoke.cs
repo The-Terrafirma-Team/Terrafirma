@@ -15,6 +15,7 @@ namespace Terrafirma.Particles
         bool fade = false;
         float opacity = 1f;
         public bool AffectedByLight = true;
+        int Frame = Main.rand.Next(3);
 
         private static Asset<Texture2D> Tex;
         float Size = 0f;
@@ -26,7 +27,7 @@ namespace Terrafirma.Particles
         {
             if(Size < 1f && !fade)
             {
-                Size += 0.1f;
+                Size += Main.rand.NextFloat(0.05f,0.1f);
             }
             else if(!fade)
             {
@@ -34,10 +35,10 @@ namespace Terrafirma.Particles
             }
             else
             {
-                Size -= 0.01f;
+                Size -= 0.005f;
                 opacity -= 0.01f;
             }
-            if (Size < 0)
+            if (opacity < 0 || Size < 0)
                 Active = false;
 
             position += velocity;
@@ -48,14 +49,14 @@ namespace Terrafirma.Particles
         {
             if (!AffectedByLight)
             {
-                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 0, 0), secondaryColor * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
-                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 1, 0), color * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
+                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 0, Frame), secondaryColor * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
+                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 1, Frame), color * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
             }
             else
             {
                 Vector3 vect = Lighting.GetSubLight(position);
-                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 0, 0), (secondaryColor.ToVector3() * vect).ToColor() with { A = secondaryColor.A},rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
-                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 1, 0), (color.ToVector3() * vect).ToColor() with { A = color.A } * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
+                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 0, Frame), (secondaryColor.ToVector3() * vect).ToColor() with { A = secondaryColor.A} * opacity,rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
+                spriteBatch.Draw(Tex.Value, position - Main.screenPosition, Tex.Frame(2, 3, 1, Frame), (color.ToVector3() * vect).ToColor() with { A = color.A } * opacity, rotation, new Vector2(19), Scale * Size, SpriteEffects.None, 0);
             }
         }
     }

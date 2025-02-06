@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -53,6 +54,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GrayZapinator
             Projectile.timeLeft = 400;
             Projectile.friendly = true;
             Projectile.tileCollide = false;
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
 
         NPC targetDuck = null;
@@ -158,7 +163,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GrayZapinator
 
             foreach (Projectile proj in Main.ActiveProjectiles)
             {
-                if (proj.friendly && Main.player[proj.owner].team == Main.player[Projectile.owner].team && proj.type != Type && proj.damage > 0 && proj.Colliding(Projectile.Hitbox, proj.Hitbox))
+                if (proj.friendly && Main.player[proj.owner].team == Main.player[Projectile.owner].team && proj.type != Type && proj.damage > 0 && proj.Colliding(Projectile.Hitbox, proj.Hitbox) && !proj.reflected)
                 {
                     SoundStyle killSound = new SoundStyle("Terrafirma/Sounds/DuckHunterShot");
                     SoundEngine.PlaySound(killSound, Projectile.Center);

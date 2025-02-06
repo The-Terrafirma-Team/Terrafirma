@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -25,6 +26,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.AmethystS
     }
     public class AmethystBoltProj : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override string Texture => "Terrafirma/Assets/Bullet";
         public override void SetDefaults()
         {

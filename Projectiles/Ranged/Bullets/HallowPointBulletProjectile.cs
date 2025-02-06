@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Common;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
@@ -25,6 +26,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void AI()
         {

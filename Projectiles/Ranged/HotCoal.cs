@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.Primitives;
 using ReLogic.Content;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Ranged
 {
@@ -28,6 +29,7 @@ namespace Terrafirma.Projectiles.Ranged
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

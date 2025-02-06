@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terrafirma.Common;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
@@ -25,6 +26,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
 
         public override void SetDefaults()

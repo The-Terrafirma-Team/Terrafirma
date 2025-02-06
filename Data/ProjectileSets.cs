@@ -6,5 +6,6 @@ namespace Terrafirma.Data
     {
         public static bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet();
         public static bool[] AutomaticallyGivenMeleeScaling = ProjectileID.Sets.Factory.CreateBoolSet();
+        public static bool[] CanBeReflected = ProjectileID.Sets.Factory.CreateBoolSet();
     }
 }

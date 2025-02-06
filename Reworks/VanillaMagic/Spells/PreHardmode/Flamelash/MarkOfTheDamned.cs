@@ -110,7 +110,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
 
             foreach(Projectile proj in Main.ActiveProjectiles)
             {
-                if (proj.friendly && proj.type != ProjectileID.FallingStar && Main.player[proj.owner].heldProj != proj.whoAmI && proj.Center.Distance(Projectile.Center) < 200f && proj != Projectile)
+                if (proj.friendly && proj.type != ProjectileID.FallingStar && Main.player[proj.owner].heldProj != proj.whoAmI && proj.Center.Distance(Projectile.Center) < 200f && proj != Projectile && proj.CanBeReflected())
                 {
                     proj.velocity = Vector2.Lerp(proj.velocity, proj.DirectionTo(Projectile.Center) * 16, 0.1f);
                     if (Main.myPlayer == Projectile.owner && Projectile.timeLeft % 6 == 0)

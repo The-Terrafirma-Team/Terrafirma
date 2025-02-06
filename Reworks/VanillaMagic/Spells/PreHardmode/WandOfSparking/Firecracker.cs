@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Linq;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -45,7 +46,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WandOfSparking
             Projectile.Opacity = 0f;
             Projectile.Size = new Vector2(16);
         }
-
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void AI()
         {
             Projectile.velocity.X *= 0.98f;

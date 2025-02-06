@@ -8,11 +8,16 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Ranged
 {
     internal class IcicleProjectile : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.damage = 8;

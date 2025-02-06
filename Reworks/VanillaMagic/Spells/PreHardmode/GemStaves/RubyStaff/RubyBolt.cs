@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -30,6 +31,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.RubyStaff
         {
             Projectile.CloneDefaults(ProjectileID.AmethystBolt);
             Projectile.aiStyle = -1;
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void AI()
         {

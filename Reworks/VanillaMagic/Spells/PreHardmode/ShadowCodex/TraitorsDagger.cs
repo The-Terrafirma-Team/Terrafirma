@@ -10,6 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Data;
 
 namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
 {
@@ -39,6 +40,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.ShadowCodex
         {
             Projectile.QuickDefaults();
             Projectile.timeLeft = 60;
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void AI()
         {

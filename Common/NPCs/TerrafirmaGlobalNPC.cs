@@ -173,5 +173,22 @@ namespace Terrafirma.Common.NPCs
                 TFUtils.SendImportantStatusMessage("Mods.Terrafirma.Misc.CrimstoneWeak", new Color(50, 255, 130));
             }
         }
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {
+            switch (npc.type)
+            {
+                case NPCID.GraniteGolem:
+                case NPCID.GraniteFlyer:
+                    if (npc.life <= 0)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            float opacity = Main.rand.NextFloat(0.5f,0.7f);
+                            ParticleSystem.AddParticle(new Smoke() { Scale = 1f, secondaryColor = new Color(25, 23, 54) * opacity }, Main.rand.NextVector2FromRectangle(npc.Hitbox), Main.rand.NextVector2Circular(3, 3), new Color(116, 132, 169) * opacity, ParticleLayer.Normal);
+                        }
+                    }
+                    break;
+            }
+        }
     }
 }

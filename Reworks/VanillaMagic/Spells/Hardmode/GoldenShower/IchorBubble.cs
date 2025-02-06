@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -33,6 +34,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.GoldenShower
         public override Color? GetAlpha(Color lightColor)
         {
             return new Color(1f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.14f) * 0.3f, 1f + (float)Math.Sin(Projectile.timeLeft * 0.12f) * 0.3f, 0.4f) * (0.8f + (float)Math.Sin(Projectile.timeLeft * 0.1f) * 0.2f);
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

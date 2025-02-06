@@ -4,6 +4,7 @@ using ReLogic.Content;
 using System;
 using Terrafirma.Common;
 using Terrafirma.Common.Templates;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -109,6 +110,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.VileStaff
     }
     public class DarkBolt : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.friendly = true;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Buffs.Debuffs.Throwing;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -10,6 +11,10 @@ namespace Terrafirma.Projectiles.Ranged.Throwing
 {
     public class DarkenedDiamond : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.QuickDefaults(size: 16);

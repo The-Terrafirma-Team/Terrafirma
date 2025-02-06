@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -28,6 +29,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.TopazStaf
     }
     public class SplittingTopaz : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TopazBolt}";
         public override void SetDefaults()
         {
@@ -77,6 +82,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.TopazStaf
 
     public class SplitTopaz : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TopazBolt}";
         public override void SetDefaults()
         {

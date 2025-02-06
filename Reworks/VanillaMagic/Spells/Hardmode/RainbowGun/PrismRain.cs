@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terrafirma.Systems.MageClass;
 using Terraria;
@@ -34,6 +35,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.RainbowGun
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

@@ -18,6 +18,17 @@ namespace Terrafirma.Common
 {
     public class TerrafirmaGlobalProjectile : GlobalProjectile
     {
+        public override void Load()
+        {
+            On_Projectile.CanBeReflected += On_Projectile_CanBeReflected;
+        }
+        private bool On_Projectile_CanBeReflected(On_Projectile.orig_CanBeReflected orig, Projectile self)
+        {
+            if (ProjectileSets.CanBeReflected[self.type])
+                return true;
+            return orig(self);
+        }
+
         public override void SetDefaults(Projectile projectile)
         {
             switch (projectile.type)

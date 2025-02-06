@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -35,6 +36,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.BookOfSkulls
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

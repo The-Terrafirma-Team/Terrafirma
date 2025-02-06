@@ -7,6 +7,7 @@ using System;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.DataStructures;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Ranged.Arrows
 {
@@ -19,6 +20,7 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

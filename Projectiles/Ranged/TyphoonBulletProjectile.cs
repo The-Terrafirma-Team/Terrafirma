@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
@@ -11,6 +12,10 @@ namespace Terrafirma.Projectiles.Ranged
 {
     internal class TyphoonBulletProjectile : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 8; 

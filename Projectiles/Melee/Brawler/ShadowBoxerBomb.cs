@@ -18,9 +18,11 @@ namespace Terrafirma.Projectiles.Melee.Brawler
     public class ShadowBoxerBomb : ModProjectile
     {
         private static Asset<Texture2D> back;
+
         public override void SetStaticDefaults()
         {
             ProjectileSets.AutomaticallyGivenMeleeScaling[Type] = true;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {
@@ -56,6 +58,8 @@ namespace Terrafirma.Projectiles.Melee.Brawler
                 d.scale *= 1.5f;
                 d.noGravity = Main.rand.NextBool();
             }
+            if (Projectile.reflected)
+                return;
             Player player = Main.player[Projectile.owner];
             player.Teleport(Projectile.Center - new Vector2(player.width / 2, player.height),TeleportationStyleID.DebugTeleport);
             player.immune = true;

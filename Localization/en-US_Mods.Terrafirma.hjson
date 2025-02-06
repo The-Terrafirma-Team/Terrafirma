@@ -2020,12 +2020,12 @@ Spells: {
 
 	GranitePlatform: {
 		Name: Granite Platform
-		Description: ""
+		Description: Creates a floating platform
 	}
 
 	GraniteStalactites: {
 		Name: Granite Stalactites
-		Description: ""
+		Description: Drops granite stalactites that do more damage as they fall
 	}
 }
 

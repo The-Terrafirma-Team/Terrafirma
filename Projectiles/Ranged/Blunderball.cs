@@ -10,6 +10,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
+using Terrafirma.Data;
 
 namespace Terrafirma.Projectiles.Ranged
 {
@@ -19,6 +20,7 @@ namespace Terrafirma.Projectiles.Ranged
         {
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

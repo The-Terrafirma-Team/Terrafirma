@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -11,6 +12,10 @@ namespace Terrafirma.Projectiles.Melee.Knight
 {
     public class Splinter : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(16);

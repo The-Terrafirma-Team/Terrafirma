@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -13,6 +14,10 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
     {
         Vector2 offset =  Vector2.Zero;
         float stickrotation = 0f;
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 4;

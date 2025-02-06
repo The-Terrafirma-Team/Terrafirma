@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Terrafirma.Common;
+using Terrafirma.Data;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.ID;
@@ -24,6 +25,7 @@ namespace Terrafirma.Projectiles.Magic
         }
         public override void SetStaticDefaults()
         {
+            ProjectileSets.CanBeReflected[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 24;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }

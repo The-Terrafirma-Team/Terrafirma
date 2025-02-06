@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Linq;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -47,7 +48,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.WandOfFrosting
             Projectile.Size = new Vector2(16);
             Projectile.extraUpdates = 0;
         }
-
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void AI()
         {
             Dust d = Dust.NewDustPerfect(Projectile.Center, Projectile.ai[1] == 0 ? DustID.Torch : DustID.IceTorch, Vector2.Zero, 1, Scale: 1.5f);

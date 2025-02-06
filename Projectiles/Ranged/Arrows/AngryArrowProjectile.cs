@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terrafirma.Buffs.Debuffs;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -10,6 +11,10 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
 {
     internal class AngryArrowProjectile : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.damage = 17;
@@ -26,8 +31,9 @@ namespace Terrafirma.Projectiles.Ranged.Arrows
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.boss && Main.rand.Next(11) == 10)
+            if (target.boss)
             {
+                if(Main.rand.NextBool(11))
                 target.target = Projectile.owner;
             }
             else

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Buffs.Debuffs.Throwing;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -35,6 +36,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.MagicDagger
         {
             Projectile.QuickDefaults(size: 10);
             Projectile.alpha = 100;
+        }
+        public override void SetStaticDefaults()
+        {
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void AI()
         {

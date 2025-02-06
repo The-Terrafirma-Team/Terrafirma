@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terrafirma.Data;
 using Terrafirma.Systems.MageClass;
 using Terraria;
 using Terraria.Audio;
@@ -36,6 +37,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.Hardmode.SkyFracture
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 8;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {

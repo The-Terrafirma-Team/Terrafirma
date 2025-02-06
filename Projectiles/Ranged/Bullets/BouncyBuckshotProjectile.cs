@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terrafirma.Common;
+using Terrafirma.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -87,6 +88,7 @@ namespace Terrafirma.Projectiles.Ranged.Bullets
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileSets.CanBeReflected[Type] = true;
         }
         public override bool PreDraw(ref Color lightColor)
         {
