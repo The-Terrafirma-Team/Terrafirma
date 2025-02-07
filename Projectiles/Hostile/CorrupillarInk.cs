@@ -45,7 +45,7 @@ namespace Terrafirma.Projectiles.Hostile
         }
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
             for (int i = 0; i < 15; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Corruption, Projectile.velocity.RotateRandom(1.5f) * -Main.rand.NextFloat(0.5f));

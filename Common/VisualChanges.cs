@@ -391,5 +391,18 @@ namespace Terrafirma.Common
             }
             return false;
         }
+        public override void OnKill(Projectile projectile, int timeLeft)
+        {
+            switch (projectile.type)
+            {
+                case ProjectileID.CrystalBullet:
+                    ParticleSystem.AddParticle(new BigSparkle() { Scale = 0.6f, Rotation = Main.rand.NextFloat(-1f, 1f), TimeLeft = 30, fadeInTime = 10f, secondaryColor = Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()) }, projectile.Center, Vector2.Zero, Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()));
+                    for (int e = 0; e < 5; e++)
+                    {
+                        ParticleSystem.AddParticle(new ImpactSparkle() { Scale = 0.6f, LifeTime = 30, secondaryColor = Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()) }, projectile.Center, Main.rand.NextVector2Circular(4, 4), Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()));
+                    }
+                    break;
+            }
+        }
     }
 }

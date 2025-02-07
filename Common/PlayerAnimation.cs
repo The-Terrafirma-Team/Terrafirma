@@ -85,7 +85,8 @@ namespace Terrafirma.Common
                 PunchCameraModifier modifier = new PunchCameraModifier(player.MountedCenter, new Vector2(Main.rand.NextFloat(-1.5f, -0.7f), 0).RotatedBy(player.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f)), screenshakeIntensity, 6f, 8, 200f, player.name);
                 Main.instance.CameraModifiers.Add(modifier);
             }
-
+            //float percent = player.itemAnimation / (float)player.itemAnimationMax;
+            //player.itemLocation += new Vector2(MathHelper.SmoothStep(backwardsMovement * player.direction,0, percent), 0).RotatedBy(player.itemRotation);
             if (player.itemAnimationMax - player.itemAnimation < 15)
             {
                 player.itemLocation -= new Vector2((float)Math.Sin((player.itemAnimationMax - player.itemAnimation) * 0.4f) * backwardsMovement * player.direction, 0).RotatedBy(player.itemRotation);

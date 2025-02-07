@@ -166,7 +166,7 @@ namespace Terrafirma.Items.Equipment.MiningBuilding
     {
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 25).AddIngredient(ItemID.Sapphire, 3).AddIngredient(ModContent.ItemType<EnchantedStone>()).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.Granite, 15).AddIngredient(ItemID.Sapphire, 6).AddIngredient(ModContent.ItemType<EnchantedStone>()).Register();
         }
         public override void SetDefaults()
         {

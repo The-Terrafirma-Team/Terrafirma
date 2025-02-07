@@ -1406,7 +1406,7 @@ Items: {
 	}
 
 	GraniteTurretStaff: {
-		DisplayName: Granite Turret Staff
+		DisplayName: Granite Turret Cane
 		Tooltip: Summons a sentry
 	}
 
@@ -1428,6 +1428,16 @@ Items: {
 	GraniteStaff: {
 		DisplayName: Granite Staff
 		Tooltip: ""
+	}
+
+	CrystalPickaxe: {
+		DisplayName: Crystal Pickaxe
+		Tooltip: ""
+	}
+
+	SapphireWard: {
+		DisplayName: Sapphire Ward
+		Tooltip: Armor is 50% more effective against reflected attacks
 	}
 }
 

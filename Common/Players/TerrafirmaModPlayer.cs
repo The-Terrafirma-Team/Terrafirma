@@ -28,6 +28,7 @@ namespace Terrafirma.Common.Players
         //Accessories
 
         public bool PristineEmblem = false;
+        public bool SapphireWard = false;
         public bool Foregrip = false;
         public bool DrumMag = false;
         public bool AmmoCan = false;
@@ -62,6 +63,7 @@ namespace Terrafirma.Common.Players
             //Player.runAcceleration *= 2;
 
             PristineEmblem = false;
+            SapphireWard = false;
             Foregrip = false;
             DrumMag = false;
             AmmoCan = false;
@@ -256,6 +258,13 @@ namespace Terrafirma.Common.Players
             if(PristineEmblem && target.life >= target.lifeMax * 0.66f)
             {
                 modifiers.SourceDamage *= 1.1f;
+            }
+        }
+        public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+        {
+            if(proj.reflected && proj.owner == Player.whoAmI && SapphireWard)
+            {
+                modifiers.ScalingArmorPenetration += -0.5f;
             }
         }
     }
