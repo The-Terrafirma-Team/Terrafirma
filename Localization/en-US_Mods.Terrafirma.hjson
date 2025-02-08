@@ -203,6 +203,11 @@ Buffs: {
 		DisplayName: Umbra Wrench Buff
 		Description: Mods.Terrafirma.Buffs.UmbraWrenchBuff.Description
 	}
+
+	HallowedFlames: {
+		DisplayName: Hallowed Flames
+		Description: Mods.Terrafirma.Buffs.HallowedFlames.Description
+	}
 }
 
 Items: {
@@ -836,7 +841,7 @@ Items: {
 			'''
 			Movement speed increased by 5%
 			Mining speed increased by 10%
-			Increases block placement & tool range by 1
+			Increases block placement range by 1
 			'''
 	}
 
@@ -845,7 +850,7 @@ Items: {
 		Tooltip:
 			'''
 			Movement speed increased by 5%
-			Increases block placement & tool range by 1
+			Increases block placement range by 1
 			'''
 	}
 
@@ -1442,17 +1447,37 @@ Items: {
 
 	CrystalChestplate: {
 		DisplayName: Crystal Chestplate
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases block placement range by 1
+			5% increased damage reduction
+			20% increased mining speed
+			7% increased damage
+			'''
 	}
 
 	CrystalGreaves: {
 		DisplayName: Crystal Greaves
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases block placement range by 1
+			Increases jump height
+			50% increased movement speed
+			10% increased mining speed
+			7% increased damage
+			'''
 	}
 
 	CrystalHelmet: {
 		DisplayName: Crystal Helmet
-		Tooltip: ""
+		Tooltip:
+			'''
+			Provides light
+			Increases block placement range by 1
+			10% increased mining speed and critical strike chance
+			7% increased damage
+			'''
+		SetBonus: Hallowed flames light your cursor
 	}
 }
 

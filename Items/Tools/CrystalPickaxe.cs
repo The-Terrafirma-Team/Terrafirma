@@ -19,7 +19,7 @@ namespace Terrafirma.Items.Tools
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.MythrilAnvil).AddIngredient(ItemID.PearlstoneBlock, 25).AddIngredient(ItemID.CrystalShard, 25).AddIngredient(ItemID.SoulofLight, 10).Register();
+            CreateRecipe().AddTile(TileID.Anvils).AddIngredient(ItemID.PearlstoneBlock, 25).AddIngredient(ItemID.CrystalShard, 25).AddIngredient(ItemID.SoulofLight, 10).Register();
         }
         public override Color? GetAlpha(Color lightColor)
         {
