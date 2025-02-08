@@ -1439,6 +1439,21 @@ Items: {
 		DisplayName: Sapphire Ward
 		Tooltip: Armor is 50% more effective against reflected attacks
 	}
+
+	CrystalChestplate: {
+		DisplayName: Crystal Chestplate
+		Tooltip: ""
+	}
+
+	CrystalGreaves: {
+		DisplayName: Crystal Greaves
+		Tooltip: ""
+	}
+
+	CrystalHelmet: {
+		DisplayName: Crystal Helmet
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

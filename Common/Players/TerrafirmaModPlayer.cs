@@ -110,7 +110,7 @@ namespace Terrafirma.Common.Players
             }
             if (Player.ItemAnimationActive && Player.HeldItem.type != 0)
             {
-                if (Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell != null && Player.HeldItem.GetGlobalItem<GlobalItemInstanced>().Spell.GetSpellName() == "Mana Bloom")
+                if (Player.HeldItem.Spell() != null && Player.HeldItem.Spell().GetSpellName() == "Mana Bloom")
                 {
                     Player.accRunSpeed = 2f;
                 }

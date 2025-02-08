@@ -29,5 +29,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
             item.autoReuse = false;
             item.useStyle = ItemUseStyleID.Swing;
         }
+
+        public override bool CanAutoReuse() => false;
     }
 }

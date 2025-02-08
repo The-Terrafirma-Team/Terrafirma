@@ -49,10 +49,8 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
             }
             return false;
         }
-        public override bool CanAutoReuse()
-        {
-            return false;
-        }
+
+        public override bool CanAutoReuse() => false;
     }
 
     internal class MarkOfTheDamnedProj : ModProjectile
