@@ -16,6 +16,7 @@ using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Particles;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Data;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Common.Templates.Melee
 {

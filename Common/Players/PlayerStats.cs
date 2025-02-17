@@ -23,13 +23,16 @@ namespace Terrafirma.Common.Players
         {
             On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
             On_Player.PickTile += On_Player_PickTile;
+            On_Main.DamageVar_float_float += On_Main_DamageVar_float_float;
         }
-
+        private int On_Main_DamageVar_float_float(On_Main.orig_DamageVar_float_float orig, float dmg, float luck)
+        {
+            return (int)dmg;
+        }
         private void On_Player_PickTile(On_Player.orig_PickTile orig, Player self, int x, int y, int pickPower)
         {
             self.PlayerStats().TileBeingPicked = new Point(x, y);
             orig(self,x, y, pickPower);
-            
         }
 
         private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
@@ -117,7 +120,7 @@ namespace Terrafirma.Common.Players
         public float maxRunSpeedFlat = 0f;
 
         //Mana Types
-        public Dictionary<ManaType, NumberRange> playerManaTypes = new Dictionary<ManaType, NumberRange>();
+        public Dictionary<ManaType, NumberRange> playerManaTypes = [];
         public bool manaUsed = false;
         public bool consumeManaType = true;
 
@@ -346,8 +349,8 @@ namespace Terrafirma.Common.Players
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.DamageVariationScale *= 0;
             modifiers.CritDamage += GenericCritDamage;
+            modifiers.DamageVariationScale *= 0;
             base.ModifyHitNPC(target, ref modifiers);
         }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -367,8 +370,7 @@ namespace Terrafirma.Common.Players
         {
             if (ParryProjectile == -1)
                 return false;
-            Entity e;
-            info.DamageSource.TryGetCausingEntity(out e);
+            info.DamageSource.TryGetCausingEntity(out Entity e);
 
             if (Main.projectile[ParryProjectile].ModProjectile is MeleeParry p && e.Hitbox.Intersects(Main.projectile[ParryProjectile].Hitbox))
             {

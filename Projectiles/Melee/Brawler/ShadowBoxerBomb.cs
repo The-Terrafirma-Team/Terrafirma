@@ -12,6 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using Terrafirma.Particles;
 
 namespace Terrafirma.Projectiles.Melee.Brawler
 {
@@ -33,16 +34,16 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         {
             SoundEngine.PlaySound(SoundID.Item14);
             Projectile.Explode(16 * 8);
-            for(int i = 0; i < 40; i++)
-            {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.FireworksRGB);
-                d.velocity = Main.rand.NextVector2Circular(7,7);
-                d.color = new Color(60, 0, 150);
-                d.noGravity = true;
-                d.scale *= 1.3f;
-                d.fadeIn = Main.rand.NextFloat(2);
-                d.noLight = d.noLightEmittence = true;
-            }
+            //for(int i = 0; i < 40; i++)
+            //{
+            //    Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.FireworksRGB);
+            //    d.velocity = Main.rand.NextVector2Circular(7,7);
+            //    d.color = new Color(60, 0, 150);
+            //    d.noGravity = true;
+            //    d.scale *= 1.3f;
+            //    d.fadeIn = Main.rand.NextFloat(2);
+            //    d.noLight = d.noLightEmittence = true;
+            //}
             for (int i = 0; i < 20; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Corruption);
@@ -58,6 +59,8 @@ namespace Terrafirma.Projectiles.Melee.Brawler
                 d.scale *= 1.5f;
                 d.noGravity = Main.rand.NextBool();
             }
+            ParticleSystem.AddParticle(new Shockwave() { Scale = new Vector2(0.4f)}, Projectile.Center, null, new Color(128, 0, 255, 0));
+            ParticleSystem.AddParticle(new Shockwave() { Scale = new Vector2(0.2f) }, Projectile.Center, null, new Color(128, 0, 255, 0));
             if (Projectile.reflected)
                 return;
             Player player = Main.player[Projectile.owner];

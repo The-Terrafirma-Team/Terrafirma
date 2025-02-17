@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using System;
-using Terrafirma.Common;
+using Terrafirma.Common.Projectiles;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;

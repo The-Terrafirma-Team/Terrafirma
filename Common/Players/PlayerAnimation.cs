@@ -4,7 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terrafirma.Systems;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Players
 {
     public static class PlayerAnimation
     {

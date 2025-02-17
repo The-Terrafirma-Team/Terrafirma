@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Runtime.InteropServices;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 using Terrafirma.Common.Templates;
 using Terrafirma.Common.Templates.Melee;
 using Terrafirma.Data;

@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terrafirma.Common.Templates;
+using Terrafirma.Common.Projectiles;
 
 namespace Terrafirma.Common
 {

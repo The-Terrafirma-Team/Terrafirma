@@ -13,7 +13,7 @@ using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using ReLogic.Content;
 using Terrafirma.Common.Templates;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Projectiles
 {
     public class SentryItemChanges : GlobalItem
     {
@@ -33,7 +33,7 @@ namespace Terrafirma.Common
             return base.CanUseItem(item, player);
         }
     }
-    public class SentryStats : Terraria.ModLoader.GlobalProjectile
+    public class SentryStats : GlobalProjectile
     {
         private static Asset<Texture2D> Bookmark;
 
@@ -80,11 +80,11 @@ namespace Terrafirma.Common
                 SpeedMultiplier *= 0.8f;
 
             BuffTime--;
-            if(BuffType != null)
+            if (BuffType != null)
             {
-                BuffType.UpdateSentry(projectile,this);
+                BuffType.UpdateSentry(projectile, this);
             }
-            if(BuffTime <= 0)
+            if (BuffTime <= 0)
             {
                 BuffType = null;
             }
@@ -167,7 +167,7 @@ namespace Terrafirma.Common
             return base.PreAI(projectile);
         }
     }
-    public class SentryBulletBuff : Terraria.ModLoader.GlobalProjectile
+    public class SentryBulletBuff : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
 
@@ -193,6 +193,6 @@ namespace Terrafirma.Common
 
     public static class SentryBuffID
     {
-        public static SentryBuff[] sentrybuffs = new SentryBuff[]{};
+        public static SentryBuff[] sentrybuffs = new SentryBuff[] { };
     }
 }

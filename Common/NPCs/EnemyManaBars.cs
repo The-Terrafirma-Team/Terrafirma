@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Common.NPCs;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.NPCs
 {
     public class EnemyManaBars : UIState
     {
@@ -29,7 +28,7 @@ namespace Terrafirma.Common
                 return;
 
             float alpha = Lighting.Brightness((int)(npc.Center.X / 16), (int)((npc.Center.Y + npc.gfxOffY) / 16));
-            
+
             float percent = gNPC.Mana / (float)gNPC.MaxMana;
             Color barColor;
 
@@ -39,7 +38,7 @@ namespace Terrafirma.Common
 
             if (percent > 0.5f)
             {
-                barColor = Color.Lerp(Color.Cyan, new Color(128, 0, 255), (percent * 2) - 1);
+                barColor = Color.Lerp(Color.Cyan, new Color(128, 0, 255), percent * 2 - 1);
             }
             else
             {
@@ -69,7 +68,8 @@ namespace Terrafirma.Common
             {
                 layers.Insert(Index, new LegacyGameInterfaceLayer(
                     "Terrafirma: EnemyManaBar",
-                    delegate {
+                    delegate
+                    {
                         _enemyManaBarsUI.Draw(Main.spriteBatch, new GameTime());
                         return true;
                     },

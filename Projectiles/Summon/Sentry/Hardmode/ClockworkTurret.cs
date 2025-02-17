@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ID;
-using Terrafirma.Common;
+using Terrafirma.Common.Projectiles;
 
 namespace Terrafirma.Projectiles.Summon.Sentry.Hardmode
 {

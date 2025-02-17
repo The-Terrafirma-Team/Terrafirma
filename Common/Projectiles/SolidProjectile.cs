@@ -10,7 +10,7 @@ using Terraria.GameInput;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Projectiles
 {
     public enum SolidProjectileCollisionType
     {
@@ -110,13 +110,13 @@ namespace Terrafirma.Common
                             Player.velocity.X = Math.Clamp(Player.velocity.X, Proj.velocity.X <= 0 ? Proj.velocity.X : 0, 10000);
                         }
                     }
-                    else if (SolidProjectiles.Projectiles[i].CollisionType == SolidProjectileCollisionType.SemiSolid && SolidProjectiles.Projectiles[i].DoCollision) 
+                    else if (SolidProjectiles.Projectiles[i].CollisionType == SolidProjectileCollisionType.SemiSolid && SolidProjectiles.Projectiles[i].DoCollision)
                     {
                         //Top Side
                         if (Player.Bottom.Y > Proj.position.Y &&
                             Player.Bottom.Y < Proj.position.Y + 6 &&
                             Player.Right.X > Proj.position.X &&
-                            Player.position.X < Proj.Right.X  &&
+                            Player.position.X < Proj.Right.X &&
                             Player.velocity.Y > 0 &&
                             FallThroughTimer <= 0)
                         {

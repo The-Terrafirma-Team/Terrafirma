@@ -49,7 +49,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             if (Projectile.ai[2] == 0)
             {
                 Projectile.ai[2] = 1;
-                Main.player[Projectile.owner].velocity -= Projectile.velocity * (1f - target.knockBackResist) * 0.8f;
+                //Main.player[Projectile.owner].velocity -= Projectile.velocity * (1f - target.knockBackResist) * 0.8f;
                 Main.player[Projectile.owner].GiveTension(5);
             }
         }
@@ -58,7 +58,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
             if (Projectile.ai[2] == 0)
             {
                 Projectile.ai[2] = 1;
-                Main.player[Projectile.owner].velocity -= Projectile.velocity * 0.8f;
+                //Main.player[Projectile.owner].velocity -= Projectile.velocity * 0.8f;
                 Main.player[Projectile.owner].GiveTension(5);
             }
         }

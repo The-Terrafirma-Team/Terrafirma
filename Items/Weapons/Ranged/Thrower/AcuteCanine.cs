@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 using Terrafirma.Data;
 using Terraria;
 using Terraria.ID;

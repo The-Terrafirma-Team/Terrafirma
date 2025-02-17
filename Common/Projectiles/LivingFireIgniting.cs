@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Projectiles
 {
     public class LivingFireIgniting : GlobalProjectile
     {

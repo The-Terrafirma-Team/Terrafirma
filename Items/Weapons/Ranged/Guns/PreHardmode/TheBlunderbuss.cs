@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terrafirma.Projectiles.Ranged;
 using Terrafirma.Items.Materials;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Items.Weapons.Ranged.Guns.PreHardmode
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Common.Players;
+using Terrafirma.Common.Projectiles;
 using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;

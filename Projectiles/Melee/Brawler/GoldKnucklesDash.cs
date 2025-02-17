@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Data;
+using Terrafirma.Particles;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -105,7 +106,7 @@ namespace Terrafirma.Projectiles.Melee.Brawler
         {
 
             target.AddBuff(ModContent.BuffType<Stunned>(), 60 * 2);
-            Main.player[Projectile.owner].velocity = -Projectile.velocity * 0.25f;
+            Main.player[Projectile.owner].velocity = -Projectile.velocity * 0.45f;
             Main.player[Projectile.owner].immune = true;
             Main.player[Projectile.owner].AddImmuneTime(ImmunityCooldownID.General,20);
 
@@ -121,11 +122,12 @@ namespace Terrafirma.Projectiles.Melee.Brawler
                 d.noGravity = true;
                 d.fadeIn = 1.5f;
             }
+            ParticleSystem.AddParticle(new Shockwave() { rotation = Projectile.velocity.ToRotation(), Scale = new Vector2(0.08f,0.16f)}, target.Hitbox.ClosestPointInRect(Main.player[Projectile.owner].Center), null, Color.White * 0.5f);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<Stunned>(), 60 * 2);
-            Main.player[Projectile.owner].velocity = -Projectile.velocity * 0.25f;
+            Main.player[Projectile.owner].velocity = -Projectile.velocity * 0.45f;
             Main.player[Projectile.owner].immune = true;
             Main.player[Projectile.owner].AddImmuneTime(ImmunityCooldownID.General, 20);
         }

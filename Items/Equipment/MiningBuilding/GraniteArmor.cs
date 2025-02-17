@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Terrafirma.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -11,6 +10,7 @@ using System;
 using Terrafirma.Particles;
 using Terraria.Audio;
 using Terrafirma.Items.Materials;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Items.Equipment.MiningBuilding
 {

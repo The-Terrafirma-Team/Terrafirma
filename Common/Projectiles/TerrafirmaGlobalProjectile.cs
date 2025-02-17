@@ -14,7 +14,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Common
+namespace Terrafirma.Common.Projectiles
 {
     public class TerrafirmaGlobalProjectile : GlobalProjectile
     {
@@ -55,15 +55,15 @@ namespace Terrafirma.Common
                 projectile.maxPenetrate = (int)(projectile.maxPenetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
                 projectile.penetrate = (int)(projectile.penetrate * Main.player[projectile.owner].GetModPlayer<PlayerStats>().ExtraWeaponPierceMultiplier);
             }
-            if(source is EntitySource_ItemUse_WithAmmo ammoSource)
+            if (source is EntitySource_ItemUse_WithAmmo ammoSource)
             {
                 switch (ammoSource.Item.prefix)
                 {
-                    case PrefixID.Frenzying: 
-                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
+                    case PrefixID.Frenzying:
+                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f);
                         break;
-                    case PrefixID.Furious: 
-                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f); 
+                    case PrefixID.Furious:
+                        projectile.velocity = projectile.velocity.RotatedByRandom(0.12f);
                         break;
                 }
 
@@ -75,7 +75,7 @@ namespace Terrafirma.Common
                 }
                 if (projectile.ModProjectile is IUsesStoredMeleeCharge i && ammoSource.Player.PlayerStats().StoredMeleeCharge != 0)
                 {
-                    i.ApplyStoredCharge(ammoSource.Player,projectile);
+                    i.ApplyStoredCharge(ammoSource.Player, projectile);
                     ammoSource.Player.PlayerStats().StoredMeleeCharge = 0;
                 }
             }
@@ -110,7 +110,7 @@ namespace Terrafirma.Common
                     break;
             }
 
-            return base.OnTileCollide(projectile,oldVelocity);
+            return base.OnTileCollide(projectile, oldVelocity);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using Terrafirma.Common;
+using Terrafirma.Common.Players;
 using Terrafirma.Common.Templates;
 using Terrafirma.Data;
 using Terraria;

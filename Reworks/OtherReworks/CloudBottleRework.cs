@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Common;
+using Terrafirma.Common.Projectiles;
 using Terrafirma.Projectiles.Misc;
 using Terrafirma.Tiles;
 using Terraria;

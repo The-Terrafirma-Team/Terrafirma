@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Terrafirma.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -11,17 +10,18 @@ using System;
 using Terrafirma.Particles;
 using Terraria.Audio;
 using Terrafirma.Items.Materials;
+using Terrafirma.Common.Players;
 
 namespace Terrafirma.Items.Equipment.MiningBuilding
 {
-    public class CrystalSetbonus : ModPlayer
-    {
-        public bool set = false;
-        public override void ResetEffects()
-        {
-            set = false;
-        }
-    }
+    //public class CrystalSetbonus : ModPlayer
+    //{
+    //    public bool set = false;
+    //    public override void ResetEffects()
+    //    {
+    //        set = false;
+    //    }
+    //}
 
     [AutoloadEquip(EquipType.Head)]
     public class CrystalHelmet : ModItem
@@ -37,18 +37,15 @@ namespace Terrafirma.Items.Equipment.MiningBuilding
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = Language.GetTextValue("Mods.Terrafirma.Items.CrystalHelmet.SetBonus");
-            player.GetModPlayer<CrystalSetbonus>().set = true;
+            //player.GetModPlayer<CrystalSetbonus>().set = true;
 
             Lighting.AddLight(player.PlayerStats().MouseWorld, new Vector3(Math.Abs((float)Math.Sin(Main.timeForVisualEffects * 0.006f)) * 0.5f + 0.5f, 0.5f, 1f) * 0.5f);
             ParticleSystem.AddParticle(new ColorDot() { Size = Main.rand.NextFloat(0.2f, 1f), TimeInWorld = 40, Waviness = Main.rand.NextFloat(0.04f), gravity = -0.1f, secondaryColor = Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()) }, player.PlayerStats().MouseWorld, Main.rand.NextVector2Circular(1,1), Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()));
-
-            //Dust d = Dust.NewDustPerfect(player.PlayerStats().MouseWorld, DustID.HallowedTorch);
-            //d.noGravity = true;
-            //d.noLightEmittence = true;
         }
         public override void UpdateVanitySet(Player player)
         {
             player.armorEffectDrawShadow = true;
+            player.GetModPlayer<PlayerDrawEffects>().CrystalAfterimages = true;
         }
         public override void SetDefaults()
         {

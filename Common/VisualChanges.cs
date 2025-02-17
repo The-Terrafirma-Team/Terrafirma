@@ -252,6 +252,9 @@ namespace Terrafirma.Common
                     case NPCID.UmbrellaSlime:
                         Type = Mod.Find<ModGore>("Umbrella_" + $"{v % Umbrella.Length}").Type;
                         break;
+                    case NPCID.Slimer:
+                        Type = Mod.Find<ModGore>("SlimerWing").Type;
+                        break;
                 }
             }
             return orig(source,Position,Velocity,Type,Scale);

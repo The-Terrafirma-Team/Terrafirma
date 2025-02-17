@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Terrafirma.Common;
+using Terrafirma.Common.Projectiles;
 using Terrafirma.Common.Templates;
 using Terrafirma.Projectiles.Summon.Sentry.PreHardmode;
 using Terraria;

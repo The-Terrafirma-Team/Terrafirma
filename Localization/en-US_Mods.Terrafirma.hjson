@@ -1685,6 +1685,7 @@ Projectiles: {
 	TopazBoltProj.DisplayName: Topaz Bolt Proj
 	GranitePlatform.DisplayName: Granite Platform
 	GraniteStalactites.DisplayName: Granite Stalactites
+	YinYangRiser.DisplayName: Yin Yang Riser
 }
 
 Tiles: {
@@ -2089,6 +2090,7 @@ NPCs: {
 	Corrupillar.DisplayName: Corrupillar
 	MatriarchSlime.DisplayName: Grandmother Slime
 	TragicUmbrellaSlime.DisplayName: Tragic Umbrella Slime
+	YinYangSlime.DisplayName: Yin Yang Slime
 }
 
 Configs: {

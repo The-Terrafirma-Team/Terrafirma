@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using Terrafirma.Common;
+using Terrafirma.Common.Projectiles;
 using Terraria;
 using Terraria.ID;
 

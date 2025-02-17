@@ -12,7 +12,6 @@ using Terrafirma.Particles;
 using Terrafirma.Systems.AccessorySynergy;
 using Terraria.GameContent;
 using ReLogic.Graphics;
-using Terrafirma.Common;
 using Terrafirma.Systems.MageClass;
 using Terrafirma.Common.Items;
 using ReLogic.Content;
@@ -23,6 +22,7 @@ using Terraria.Chat;
 using Terraria.Localization;
 using System.Collections.Generic;
 using Terraria.GameInput;
+using Terrafirma.Common.Projectiles;
 
 namespace Terrafirma
 {
