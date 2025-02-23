@@ -24,7 +24,14 @@ namespace Terrafirma.Common.Players
             On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
             On_Player.PickTile += On_Player_PickTile;
             On_Main.DamageVar_float_float += On_Main_DamageVar_float_float;
+            On_Player.Heal += On_Player_Heal;
         }
+
+        private void On_Player_Heal(On_Player.orig_Heal orig, Player self, int amount)
+        {
+            orig(self, (int)Math.Round(amount * self.PlayerStats().HealingMultiplier));
+        }
+
         private int On_Main_DamageVar_float_float(On_Main.orig_DamageVar_float_float orig, float dmg, float luck)
         {
             return (int)dmg;

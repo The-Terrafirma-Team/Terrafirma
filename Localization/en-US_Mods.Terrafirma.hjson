@@ -2336,6 +2336,7 @@ Misc: {
 }
 
 VanillaItemTooltips: {
+	StarpowerBand: Increases maximum mana by 60
 	AnkhCharm: Decreases debuff duration by 50%
 	LivingFireBlock: Arrows that pass through are lit ablaze
 	EngineeringHelmet:

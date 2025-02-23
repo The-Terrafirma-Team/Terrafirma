@@ -53,9 +53,9 @@ namespace Terrafirma
         {
             reciever.Heal((int)Math.Round(life * reciever.PlayerStats().HealingMultiplier));
         }
-        public static void HealWithAdjustments(this Player reciever, Player giver, float life)
+        public static void Heal(this Player reciever, Player giver, float life)
         {
-            reciever.Heal((int)Math.Round(life * reciever.PlayerStats().HealingMultiplier * giver.PlayerStats().OutgoingHealingMultiplier));
+            reciever.Heal((int)Math.Round(life * giver.PlayerStats().OutgoingHealingMultiplier));
         }
         public static float GetAdjustedWeaponSpeedPercent(this Player player, Item item)
         {

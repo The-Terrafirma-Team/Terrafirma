@@ -116,6 +116,11 @@ namespace Terrafirma.Common.Items
                 case ItemID.AnkhShield:
                     player.PlayerStats().DebuffTimeMultiplier -= 0.5f;
                     break;
+                case ItemID.BandofStarpower:
+                case ItemID.ManaRegenerationBand:
+                case ItemID.MagicCuffs:
+                    player.statManaMax2 += 40;
+                    break;
             }
         }
         public override bool? UseItem(Item item, Player player)
@@ -142,9 +147,12 @@ namespace Terrafirma.Common.Items
                     tooltips[i].Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Main.LocalPlayer.PlayerStats().HealingMultiplier * Main.LocalPlayer.PlayerStats().PotionHealingMultiplier));
                     break;
                 }
-                else if(tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("HealLife"))
+                else if(tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("Tooltip0"))
                 {
-
+                    if(item.type == ItemID.BandofStarpower || item.type == ItemID.ManaRegenerationBand || item.type == ItemID.MagicCuffs)
+                    {
+                        tooltips[i].Text = Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.StarpowerBand");
+                    }
                 }
             }
             switch (item.type)
