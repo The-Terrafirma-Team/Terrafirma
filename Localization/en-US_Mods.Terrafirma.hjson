@@ -1407,7 +1407,7 @@ Items: {
 
 	GranitePickaxe: {
 		DisplayName: Granite Pickaxe
-		Tooltip: ""
+		Tooltip: Has a chance to duplicate ores
 	}
 
 	GraniteTurretStaff: {
@@ -1437,7 +1437,7 @@ Items: {
 
 	CrystalPickaxe: {
 		DisplayName: Crystal Pickaxe
-		Tooltip: ""
+		Tooltip: Has a chance to duplicate ores
 	}
 
 	SapphireWard: {
@@ -2336,6 +2336,7 @@ Misc: {
 }
 
 VanillaItemTooltips: {
+	AnkhCharm: Decreases debuff duration by 50%
 	LivingFireBlock: Arrows that pass through are lit ablaze
 	EngineeringHelmet:
 		'''
@@ -2359,6 +2360,8 @@ VanillaItemTooltips: {
 		7% increased melee speed
 		Allows the holder to do a fiery double jump
 		'''
+	SilverChainmail: 5% increased melee speed
+	SilverGreaves: 5% increased movement speed
 }
 
 Prefixes: {

@@ -123,6 +123,8 @@ namespace Terrafirma.Common.Tiles
                             ParticleSystem.AddParticle(new ImpactSparkle() { Scale = 0.6f, LifeTime = 30, secondaryColor = Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()) }, new Vector2(i * 16 + 8, j * 16 + 8), Main.rand.NextVector2Circular(4,4), Color.Lerp(new Color(0.3f, 1f, 1f, 0f), new Color(0.8f, 0.3f, 1f, 0f), Main.rand.NextFloat()));
                         }
                         SoundEngine.PlaySound(SoundID.Item35 with { PitchVariance = 0.3f}, new Vector2(i * 16, j * 16));
+                        //SoundEngine.PlaySound(new SoundStyle("Terrafirma/Sounds/OreDuplicated") { MaxInstances = 10}, new Vector2(i * 16, j * 16));
+                        //CombatText.NewText(new Rectangle(i * 16, j * 16, 16, 16), Main.DiscoColor, "Ore Duplicated!!!", true);
                     }
                 }
                 TilePlacedByPlayerSystem.TilesPlacedByPlayers.Remove(new Point(i, j));

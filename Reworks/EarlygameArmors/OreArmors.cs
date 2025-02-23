@@ -50,4 +50,36 @@ namespace Terrafirma.Reworks.EarlygameArmors
             }
         }
     }
+    public class OreArmorGlobalItem : GlobalItem
+    {
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.ModItem == null;
+            return entity.type is ItemID.SilverHelmet or ItemID.SilverChainmail or ItemID.SilverGreaves;
+        }
+        public override void UpdateEquip(Item item, Player player)
+        {
+            switch (item.type)
+            {
+                case ItemID.SilverChainmail:
+                    player.GetAttackSpeed(DamageClass.Melee) += 0.07f;
+                    break;
+                case ItemID.SilverGreaves:
+                    player.moveSpeed += 0.07f;
+                    break;
+            }
+        }
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            switch (item.type)
+            {
+                case ItemID.SilverChainmail:
+                    tooltips.Insert(tooltips.FindAppropriateLineForTooltip(), new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.SilverChainmail")));
+                    break;
+                case ItemID.SilverGreaves:
+                    tooltips.Insert(tooltips.FindAppropriateLineForTooltip(), new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.SilverGreaves")));
+                    break;
+            }
+        }
+    }
 }

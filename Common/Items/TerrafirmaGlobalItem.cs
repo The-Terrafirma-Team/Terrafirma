@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terrafirma.Buffs.Debuffs;
 using Terrafirma.Common.Players;
 using Terrafirma.Data;
@@ -81,7 +82,7 @@ namespace Terrafirma.Common.Items
         //}
         public override void UpdateEquip(Item item, Player player)
         {
-            PlayerStats stats = player.PlayerStats();
+            //PlayerStats stats = player.PlayerStats();
             switch (item.type)
             {
                 //case ItemID.FeralClaws:
@@ -111,6 +112,10 @@ namespace Terrafirma.Common.Items
                     player.PlayerStats().SentryDamageMultiplier += 0.05f;
                     player.maxTurrets += 1;
                     break;
+                case ItemID.AnkhCharm:
+                case ItemID.AnkhShield:
+                    player.PlayerStats().DebuffTimeMultiplier -= 0.5f;
+                    break;
             }
         }
         public override bool? UseItem(Item item, Player player)
@@ -137,6 +142,10 @@ namespace Terrafirma.Common.Items
                     tooltips[i].Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Main.LocalPlayer.PlayerStats().HealingMultiplier * Main.LocalPlayer.PlayerStats().PotionHealingMultiplier));
                     break;
                 }
+                else if(tooltips[i].Mod.Equals("Terraria") && tooltips[i].Name.Equals("HealLife"))
+                {
+
+                }
             }
             switch (item.type)
             {
@@ -149,9 +158,25 @@ namespace Terrafirma.Common.Items
                     tooltips.Add(new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.LivingFireBlock")));
                     break;
                 case ItemID.EngineeringHelmet:
-                    tooltips.Add(new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.EngineeringHelmet")));
+                    tooltips.Insert(tooltips.FindAppropriateLineForTooltip(), new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.EngineeringHelmet")));
+                    break;
+                case ItemID.AnkhCharm:
+                case ItemID.AnkhShield:
+                    tooltips.Insert(tooltips.FindAppropriateLineForTooltip(),new TooltipLine(Mod, "Tooltip", Language.GetTextValue("Mods.Terrafirma.VanillaItemTooltips.AnkhCharm")));
+                    break;
+                case ItemID.ManaFlower:
+                case ItemID.ManaCloak:
+                case ItemID.MagnetFlower:
+                case ItemID.ArcaneFlower:
+                    tooltips.Remove(tooltips.Where(tooltip => tooltip.Name == "Tooltip1").FirstOrDefault());
                     break;
             }
+        }
+        public override bool CanShoot(Item item, Player player)
+        {
+            if (item.type == ItemID.IceBlock) return false;
+
+            return base.CanShoot(item, player);
         }
         public override void GetHealLife(Item item, Player player, bool quickHeal, ref int healValue)
         {
@@ -164,14 +189,18 @@ namespace Terrafirma.Common.Items
 
                 if (line.Name == "ItemName")
                 {
-                    if (Main.timeForVisualEffects % 15 == 0)
+                    if (Main.timeForVisualEffects % 7 == 0)
                     {
-                        BigSparkle p = new BigSparkle();
-                        p.Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
-                        p.fadeInTime = 20;
-                        p.Scale = Main.rand.NextFloat(0.3f, 1.2f);
-                        p.smallestSize = 0f;
-                        ParticleSystem.AddParticle(new BigSparkle(), new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(20f)), null, line.Color, ParticleLayer.UI);
+                        BigSparkle p = new BigSparkle
+                        {
+                            Rotation = Main.rand.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2),
+                            fadeInTime = 10,
+                            Scale = Main.rand.NextFloat(0.7f, 1.6f),
+                            secondaryColor = new Color(1f, 1f, 1f, 0f) * 0.125f,
+                            lengthMultiplier = 0.2f,
+                            fadeOutMultiplier = 0.98f
+                        };
+                        ParticleSystem.AddParticle(p, new Vector2(Main.rand.NextFloat(line.Text.Length * 9.5f), Main.rand.NextFloat(10f,20f)), new Vector2(0,-Main.rand.NextFloat(0.5f)), line.Color with { A = 0} * Main.rand.NextFloat(0.125f,0.5f), ParticleLayer.UI);
                     }
                     ParticleSystem.DrawUIParticles(new Vector2(line.X, line.Y));
                 }

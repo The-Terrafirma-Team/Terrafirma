@@ -33,12 +33,6 @@ namespace Terrafirma.Common.Items
         //}
 
         //Modify Tooltips
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (item.type == ItemID.ManaFlower || item.type == ItemID.ManaCloak || item.type == ItemID.MagnetFlower || item.type == ItemID.ArcaneFlower) tooltips.Remove(tooltips.Where(tooltip => tooltip.Name == "Tooltip1").FirstOrDefault());
-
-            base.ModifyTooltips(item, tooltips);
-        }
         public override bool GrabStyle(Item item, Player player)
         {
             if (droppedForRecovery)
@@ -64,11 +58,6 @@ namespace Terrafirma.Common.Items
         //Set Defaults
         public override void SetDefaults(Item entity)
         {
-            if (entity.type == ItemID.ManaFlower)
-            {
-
-            }
-
             if (entity.DamageType == DamageClass.Summon && entity.type <= 5455 && !entity.sentry)
             {
                 entity.useTime = entity.useAnimation = 16;
@@ -131,14 +120,6 @@ namespace Terrafirma.Common.Items
 
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
         }
-
-        public override bool CanShoot(Item item, Player player)
-        {
-            if (item.type == ItemID.IceBlock) return false;
-
-            return base.CanShoot(item, player);
-        }
-
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (spawnAmmoParticle)

@@ -94,8 +94,8 @@ namespace Terrafirma.Reworks.EarlygameArmors
         }
         public override void UpdateHorizontalSpeeds(Player player)
         {
-            player.runAcceleration *= 6;
-            player.maxRunSpeed *= 3f;
+            player.runAcceleration *= 3;
+            player.maxRunSpeed *= 1.5f;
         }
         public override void OnStarted(Player player, ref bool playSound)
         {

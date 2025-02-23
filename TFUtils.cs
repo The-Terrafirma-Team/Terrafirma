@@ -28,6 +28,31 @@ namespace Terrafirma
 {
     public static class TFUtils
     {
+        /// <summary>
+        /// Will need to be updated as cases arise. Fearful.
+        /// </summary>
+        public static int FindAppropriateLineForTooltip(this List<TooltipLine> tooltips)
+        {
+            int index = tooltips.Count;
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                if (tooltips[i].Mod.Equals("Terraria"))
+                {
+                    if (tooltips[i].Name.Equals("Defense"))
+                        index = i + 1;
+                    else if (tooltips[i].Name.Equals("Material"))
+                        index = i + 1;
+                    else if (tooltips[i].Name.Equals("Material"))
+                        index = i + 1;
+                    else if (tooltips[i].Name.Equals("Tooltip0"))
+                        index = i + 1;
+                    else if (tooltips[i].Name.Equals("Tooltip1"))
+                        index = i + 1;
+                }
+            }
+            //new TooltipLine();
+            return index;
+        }
         public static bool IfTheSlimesAI0WasThisNumberItWouldJump(int i)
         {
             return i is 0 or -1000 or -2000;
@@ -106,6 +131,8 @@ namespace Terrafirma
                     return "+";
                 case "OemMinus":
                     return "-";
+                default:
+                    break;
             }
             return name;
         }
@@ -311,7 +338,7 @@ namespace Terrafirma
             item.useAmmo = AmmoID.Arrow;
             item.Size = new Vector2(16, 16);
             item.shoot = Projectile;
-            item.shootSpeed = 6f;
+            item.shootSpeed = shootSpeed;
             item.channel = true;
             item.noUseGraphic = true;
             item.noMelee = true;
@@ -424,7 +451,7 @@ namespace Terrafirma
 
         public static NPC FindSummonTarget(this Projectile proj, float maxDetectDistance, Vector2 position, bool TargetThroughWalls = true)
         {
-            NPC TargetNPC = null;
+            NPC TargetNPC;
             if (Main.player[proj.owner].HasMinionAttackTargetNPC && Main.npc[Main.player[proj.owner].MinionAttackTargetNPC].Center.Distance(position) < maxDetectDistance)
                 TargetNPC = Main.npc[Main.player[proj.owner].MinionAttackTargetNPC];
             else 

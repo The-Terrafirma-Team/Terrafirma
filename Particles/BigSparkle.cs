@@ -23,6 +23,7 @@ namespace Terrafirma.Particles
         public override void Update()
         {
             //velocity = velocity.RotatedBy(0.01f);
+            velocity *= 0.98f;
             position += velocity;
             if (TimeInWorld < fadeInTime)
             {
@@ -60,10 +61,10 @@ namespace Terrafirma.Particles
         public override void DrawInUI(SpriteBatch spriteBatch, Vector2 linePos)
         {
             Texture2D Sparkle = TextureAssets.Extra[89].Value;
-            spriteBatch.Draw(Sparkle, position + linePos , new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, Rotation, Sparkle.Size() / 2, sizeMultiplier * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, sizeMultiplier * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), new Color(1f, 1f, 1f, 0f), Rotation, Sparkle.Size() / 2, sizeMultiplier * 0.5f * Scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), new Color(1f, 1f, 1f, 0f), MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, sizeMultiplier * 0.5f * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), color, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * 0.5f * Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Sparkle, position + linePos, new Rectangle(0, 0, Sparkle.Width, Sparkle.Height), secondaryColor, MathHelper.PiOver2 + Rotation, Sparkle.Size() / 2, new Vector2(sizeMultiplier, sizeMultiplier * lengthMultiplier) * 0.5f * Scale, SpriteEffects.None, 0);
         }
     }
 }
