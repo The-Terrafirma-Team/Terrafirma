@@ -38,15 +38,7 @@ namespace Terrafirma
             {
                 if (tooltips[i].Mod.Equals("Terraria"))
                 {
-                    if (tooltips[i].Name.Equals("Defense"))
-                        index = i + 1;
-                    else if (tooltips[i].Name.Equals("Material"))
-                        index = i + 1;
-                    else if (tooltips[i].Name.Equals("Material"))
-                        index = i + 1;
-                    else if (tooltips[i].Name.Equals("Tooltip0"))
-                        index = i + 1;
-                    else if (tooltips[i].Name.Equals("Tooltip1"))
+                    if (tooltips[i].Name.Equals("Defense") || tooltips[i].Name.Equals("Material") || tooltips[i].Name.Equals("Tooltip0") || tooltips[i].Name.Equals("Tooltip1"))
                         index = i + 1;
                 }
             }
