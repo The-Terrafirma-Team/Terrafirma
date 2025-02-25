@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.Primitives;
 using ReLogic.Content;
 using Terrafirma.Data;
+using Terraria.GameContent;
 
 namespace Terrafirma.Projectiles.Ranged
 {
@@ -19,7 +20,9 @@ namespace Terrafirma.Projectiles.Ranged
     { 
 
         Vector2 randpos = Vector2.Zero;
-        Trail trail;
+        TFTrail trail;
+        TFTrail trail2;
+        Color trailcol = Color.White;
         private static Asset<Texture2D> trailTex;
         public override void Load()
         {
@@ -28,23 +31,42 @@ namespace Terrafirma.Projectiles.Ranged
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
             ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {
-            trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
-            trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
-            trail.color = f => new Color(0.4f, 0.4f, 0.4f, 0f) * 0.2f;
+            //trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
+            //trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            //trail.color = f => new Color(0.4f, 0.4f, 0.4f, 0f) * 0.2f;
 
             Projectile.width = 12;
             Projectile.height = 12;
-            Projectile.timeLeft = 100;
+            Projectile.timeLeft = 1000;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
 
             DrawOffsetX = -2;
             DrawOriginOffsetY = -8;
+
+            trail = new TFTrail();           
+            trail.textureOffsetDelegate = (float i) => new Vector2((float)Main.timeForVisualEffects / 20f, 0f);      
+            trail.widthDelegate = (float i) => (float)Math.Sin(i * MathHelper.Pi) * 50f;
+            trail.colorDelegate = (float i) => trailcol;
+            trail.trailOffsetDelegate = (float i, float r) => new Vector2(0, ((float)Math.Sin(Main.timeForVisualEffects / 20f + i * 10f) * 10f) * (float)Math.Sin(i * MathHelper.Pi)).RotatedBy(-r);
+            trail.texture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            trail.pixellate = true;
+            trail.flipTextureX = true;
+
+            trail2 = new TFTrail();
+            trail2.textureOffsetDelegate = (float i) => new Vector2((float)Main.timeForVisualEffects / 40f, 0f);
+            trail2.widthDelegate = (float i) => (float)Math.Sin(i * MathHelper.Pi) * 70f;
+            trail2.colorDelegate = (float i) => trailcol * 0.5f;
+
+            trail2.trailOffsetDelegate = (float i, float r) => new Vector2(0, ((float)Math.Sin(Main.timeForVisualEffects / 40f + i * 10f) * 5f) * (float)Math.Sin(i * MathHelper.Pi)).RotatedBy(-r);
+            trail2.texture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
+            trail2.pixellate = true;
+            trail2.flipTextureX = true;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -76,9 +98,20 @@ namespace Terrafirma.Projectiles.Ranged
 
             if (Projectile.ai[0] > 20)
             {
-                Projectile.velocity.Y += 0.5f;
+                //Projectile.velocity.Y += 0.5f;
             }
 
+            Projectile.Center = Main.MouseWorld;
+            trail.points = Projectile.oldPos;
+            trail2.points = Projectile.oldPos;
+            trailcol = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB, 1);
+            //Main.NewText(Projectile.oldPos[Projectile.oldPos.Length - 1]);
+            //trail.points = new Vector2[] { Projectile.Center, Projectile.Center + new Vector2(50,0) };
+
+            foreach (Vector2 p in Projectile.oldPos)
+            {
+                Lighting.AddLight(p, new Vector3(trailcol.R, trailcol.G, trailcol.B) * 0.005f);
+            }
         }
 
         public override void OnKill(int timeLeft)
@@ -91,7 +124,6 @@ namespace Terrafirma.Projectiles.Ranged
             }
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item50, Projectile.position);
-
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -99,7 +131,8 @@ namespace Terrafirma.Projectiles.Ranged
             Texture2D texture = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoal").Value;
             Texture2D textureglow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoalGlow").Value;
 
-            trail.Draw(Projectile.Right);
+            trail.QueueDraw();
+            trail2.QueueDraw();
 
             Main.EntitySpriteDraw(texture,
                 Projectile.Center - Main.screenPosition,

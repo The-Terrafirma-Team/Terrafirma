@@ -99,7 +99,7 @@ namespace Terrafirma.Particles
             var oldTargets = Main.instance.GraphicsDevice.GetRenderTargets();
             Main.instance.GraphicsDevice.SetRenderTarget(pixelTarget);
             Main.instance.GraphicsDevice.Clear(Color.Transparent);
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform * Matrix.CreateScale(0.25f / Main.GameZoomTarget));
+            Main.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform * Matrix.CreateScale(0.25f / Main.GameZoomTarget));
             DrawParticles(PixelParticles);
             //Main.spriteBatch.Draw(TextureAssets.Item[1].Value, Main.LocalPlayer.Center - Main.screenPosition, Color.White);
             Main.spriteBatch.End();
@@ -165,14 +165,14 @@ namespace Terrafirma.Particles
             switch (layer)
             {
                 case ParticleLayer.NormalPixel:
-                    {
-                        if (PixelParticles.Count == MaxParticles)
-                        {
-                            PixelParticles.Remove(PixelParticles[0]);
-                        }
-                        PixelParticles.Add(particle);
-                        break;
-                    }
+                    //{
+                    //    if (PixelParticles.Count == MaxParticles)
+                    //    {
+                    //        PixelParticles.Remove(PixelParticles[0]);
+                    //    }
+                    //    PixelParticles.Add(particle);
+                    //    break;
+                    //}
                 case ParticleLayer.Normal:
                     {
                         if (Particles.Count == MaxParticles)
