@@ -17,36 +17,37 @@ namespace Terrafirma.Systems.Primitives
     public static class TFTrailSystem
     {
         public static List<TFTrail> trails = new List<TFTrail>() { };
+        public static List<Action> trailDrawActions { get; } = new();
         public static void DrawTrails(bool pixellate)
         {
-            for (int i = 0; i < trails.Count; i++)
+            foreach(Action action in trailDrawActions)
             {
-                if (trails[i].pixellate == pixellate)  trails[i].Draw();
+                action.Invoke();
             }
 
+            //Main.NewText(trails.Count);
+            //for (int i = 0; i < trails.Count; i++)
+            //{
+            //    if (trails[i].pixellate == pixellate)  trails[i].Draw();
+            //}
+
+        }
+
+        //Queues the Trail to draw this frame
+        public static void QueueDraw( this TFTrail trail, Vector2[] points)
+        {
+            //TFTrailSystem.trails.Add(trail);
+            TFTrailSystem.trailDrawActions.Add(
+                () => { trail.Draw(points); }
+                );
         }
 
     }
     
-    public class TFTrail : ModType
+    public abstract class TFTrail : ModType, IDisposable
     {
         public BasicEffect effect;
         private GraphicsDevice GraphicsDevice;
-
-        public delegate float TFTrailWidthDelegate(float trailpart);
-        public TFTrailWidthDelegate widthDelegate = (float i)=>50f;
-
-        public delegate Vector2 TFTrailOffsetDelegate(float trailpart);
-        public TFTrailOffsetDelegate offsetDelegate = (float i) => Vector2.Zero;
-
-        public delegate Vector2 TFTrailTextureOffsetDelegate(float trailpart);
-        public TFTrailTextureOffsetDelegate textureOffsetDelegate = (float i) => Vector2.Zero;
-
-        public delegate Vector2 TFTrailTrailOffsetDelegate(float trailpart, float rotation);
-        public TFTrailTrailOffsetDelegate trailOffsetDelegate = (float i, float r) => Vector2.Zero;
-
-        public delegate Color TFTrailColorDelegate(float trailpart);
-        public TFTrailColorDelegate colorDelegate = (float i) => Color.White;
 
         public Vector2[] points = new Vector2[]{ };
 
@@ -55,6 +56,9 @@ namespace Terrafirma.Systems.Primitives
         public Vector2 textureRepeat = Vector2.One;
         public bool flipTextureX = false;
         public bool flipTextureY = false;
+
+        private VertexPositionColorTexture[] vertices;
+        private short[] indices;
 
         public TFTrail()
         {
@@ -68,43 +72,78 @@ namespace Terrafirma.Systems.Primitives
                 effect.VertexColorEnabled = true;
                 effect.TextureEnabled = true;
             });
+        }
 
-            widthDelegate = (float i) => 50f;
-            offsetDelegate = (float i) => Vector2.Zero;
-            textureOffsetDelegate = (float i) => Vector2.Zero;
-            trailOffsetDelegate = (float i, float r) => Vector2.Zero;
-            colorDelegate = (float i) => Color.White;
+        public virtual float Width(float segment)
+        {
+            return 1.0f;
+        }
+
+        public virtual Vector2 TrailOffset(float segment, float segmentRotation)
+        {
+            return Vector2.Zero;
+        }
+
+        public virtual Vector2 TextureOffset(float segment)
+        {
+            return Vector2.Zero;
+        }
+
+        public virtual Color TrailColor(float segment)
+        {
+            return Color.White;
         }
 
         public override void Unload()
         {
+            Dispose();
+        }
+
+        public bool isDisposed = false;
+        public event EventHandler<EventArgs> Disposing;
+        public void Dispose()
+        {
+
+            texture?.Dispose();
+            texture = null;
             effect?.Dispose();
             effect = null;
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
-        
-        //Queues the Trail to draw this frame
-        public void QueueDraw()
+
+        protected virtual void Dispose(bool disposing)
         {
-            TFTrailSystem.trails.Add(this);
+            if (!isDisposed)
+            {
+                if (disposing && this.Disposing != null)
+                {
+                    this.Disposing(this, EventArgs.Empty);
+                }
+
+                isDisposed = true;
+            }
         }
 
         //If you want to have effects like pixellation please use QueueDraw instead :)
-        public void Draw()
-        {          
+        public void Draw(Vector2[] Points)
+        {           
+            points = Points;
 
-            if (Main.netMode == NetmodeID.Server || points.Length <= 3) return;
+            if (Main.netMode == NetmodeID.Server || points.Length <= 1 || isDisposed)
+            {
+                return;
+            }
 
             GraphicsDevice = Main.instance.GraphicsDevice;
-            VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[] {};
-            short[] indices = new short[] {};
-
+            vertices = new VertexPositionColorTexture[] {};
+            indices = new short[] {};
 
             //Set Indices and Vertices
             for (int i = 0; i < points.Length; i++)
             {
                 if (points[i].X == 0f && points[i].Y == 0f) continue;
 
-                
                 //Vector2 screenDiff = new Vector2(((Main.screenWidth * Main.GameZoomTarget) - Main.screenWidth), ((Main.screenHeight * Main.GameZoomTarget) - Main.screenHeight));
                 float pixelScaling = pixellate ? 2 * Main.GameZoomTarget : 1 * Main.GameZoomTarget;
 
@@ -117,19 +156,19 @@ namespace Terrafirma.Systems.Primitives
                 else segment.rotation = points[i].AngleTo(points[i - 1]) - MathHelper.Pi;
 
                 //Width
-                segment.width = widthDelegate == null? 50f : widthDelegate(i / (float)points.Length) / pixelScaling;
+                segment.width = Width(i / ((float)points.Length - 1)) / pixelScaling;
 
                 //Color
                 Color segmentColor;
-                segmentColor = colorDelegate == null? Color.White : colorDelegate(i / (float)points.Length);
+                segmentColor = TrailColor(i / ((float)points.Length - 1));
 
                 //Texture Position
                 Vector2 textureOffset;
-                textureOffset = textureOffsetDelegate == null? Vector2.Zero : textureOffsetDelegate(i / (float)points.Length) / pixelScaling;
+                textureOffset = TextureOffset(i / ((float)points.Length - 1)) / pixelScaling;
 
                 //Segment Position
                 Vector2 segmentOffset;
-                segmentOffset = trailOffsetDelegate == null? Vector2.Zero : trailOffsetDelegate(i / (float)points.Length, segment.rotation) / pixelScaling;
+                segmentOffset = TrailOffset(i / ((float)points.Length - 1), segment.rotation) / pixelScaling;
 
                 segment.SetPoints();
 
@@ -171,8 +210,8 @@ namespace Terrafirma.Systems.Primitives
                 return;
             }
 
-            //Final
-            //GraphicsDevice.Textures[0] = TextureAssets.Item[ItemID.CopperShortsword].Value;
+
+            //Final           
 
             Viewport viewport = GraphicsDevice.Viewport;
             effect.World = Matrix.CreateTranslation(new Vector3(-Main.screenPosition, 0));
@@ -188,6 +227,7 @@ namespace Terrafirma.Systems.Primitives
                 GraphicsDevice.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
                 //GraphicsDevice.DrawUserIndexedPrimitives(PrimitiveType.LineList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
             }
+
 
         }
 
