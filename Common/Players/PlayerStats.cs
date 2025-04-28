@@ -92,14 +92,12 @@ namespace Terrafirma.Common.Players
         public float SentryDamageMultiplier = 0f;
         public float WrenchBuffTimeMultiplier = 1f;
         public bool CanThrowWrenches = false;
+        public int MaxArmyTroops;
 
         public float KnockbackResist = 1f;
         public float ExtraWeaponPierceMultiplier = 1;
         public float DebuffTimeMultiplier = 1f;
         public float buffTimeMultiplier = 1f;
-        public float NecromancerWeaponScale = 0;
-        public float NecromancerChargeBonus = 1f;
-        public float NecromancerAttackSpeed = 1f;
         public float AmmoSaveChance = 0;
         public float ThrowerDebuffPower = 1f;
         public float ThrowerGrabRange = 1f;
@@ -220,10 +218,6 @@ namespace Terrafirma.Common.Players
             DebuffTimeMultiplier = 1f;
             buffTimeMultiplier = 1f;
 
-            NecromancerWeaponScale = 0;
-            NecromancerChargeBonus = 1f;
-            NecromancerAttackSpeed = 1f;
-
             MeleeFlatDamage = 0;
             RangedFlatDamage = 0;
             MagicFlatDamage = 0;
@@ -238,6 +232,7 @@ namespace Terrafirma.Common.Players
             KnockbackResist = 1f;
             ExtraWeaponPierceMultiplier = 1f;
             WrenchBuffTimeMultiplier = 1f;
+            MaxArmyTroops = 3;
 
             maxRunSpeedMultiplier = 1f;
             maxRunSpeedFlat = 0f;

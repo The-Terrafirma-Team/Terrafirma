@@ -208,6 +208,11 @@ Buffs: {
 		DisplayName: Hallowed Flames
 		Description: Mods.Terrafirma.Buffs.HallowedFlames.Description
 	}
+
+	MeteorSaucerArmy: {
+		DisplayName: Meteor Saucer Army
+		Description: Mods.Terrafirma.Buffs.MeteorSaucerArmy.Description
+	}
 }
 
 Items: {
@@ -1479,6 +1484,11 @@ Items: {
 			'''
 		SetBonus: Hallowed flames light your cursor
 	}
+
+	MeteorBaton: {
+		DisplayName: Meteor Baton
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1686,6 +1696,7 @@ Projectiles: {
 	GranitePlatform.DisplayName: Granite Platform
 	GraniteStalactites.DisplayName: Granite Stalactites
 	YinYangRiser.DisplayName: Yin Yang Riser
+	MeteorSaucer.DisplayName: Meteor Saucer
 }
 
 Tiles: {

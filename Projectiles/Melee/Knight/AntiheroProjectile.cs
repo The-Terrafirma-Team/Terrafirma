@@ -73,7 +73,7 @@ namespace Terrafirma.Projectiles.Melee.Knight
 
                     int healAmount = (int)(4 * (((600 - (int)Main.player[Projectile.owner].Center.Distance(Projectile.Center)) / 300f) + 1));
 
-                    if (healAmount > 0 && targetNPC.type != NPCID.TargetDummy) Main.player[Projectile.owner].HealWithAdjustments(healAmount);
+                    if (healAmount > 0 && targetNPC.type != NPCID.TargetDummy) Main.player[Projectile.owner].Heal(healAmount);
 
                     for (int i = 0; i < Projectile.Center.Distance(Main.player[Projectile.owner].Center); i += 5)
                     {

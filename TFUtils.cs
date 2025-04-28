@@ -23,13 +23,39 @@ using Terraria.Localization;
 using System.Collections.Generic;
 using Terraria.GameInput;
 using Terrafirma.Common.Projectiles;
+using Terrafirma.Common.Templates;
 
 namespace Terrafirma
 {
     public static class TFUtils
     {
+        public static void UpdateCommanderArmy(this Player player, byte mode, int damage, float knockback)
+        {
+            if (ContentSamples.ProjectilesByType[player.HeldItem.shoot].ModProjectile is CommanderSummonTemplate cm)
+            {
+                player.AddBuff(cm.AssociatedBuff, 3600 * 2);
+            }
+            if (player == Main.LocalPlayer)
+            {
+                for (int i = player.ownedProjectileCounts[player.HeldItem.shoot]; i < player.PlayerStats().MaxArmyTroops; i++)
+                {
+                    Projectile.NewProjectile(player.GetSource_ItemUse_WithPotentialAmmo(player.HeldItem, -1), player.Center + Main.rand.NextVector2Circular(player.width,player.width), Main.rand.NextVector2Circular(3,3), player.HeldItem.shoot, damage, knockback, player.whoAmI);
+                }
+            }
+            foreach(Projectile p in Main.ActiveProjectiles)
+            {
+                if(p.owner == player.whoAmI && p.type == player.HeldItem.shoot && p.ModProjectile is CommanderSummonTemplate c)
+                {
+                    if (c.mode != mode)
+                    {
+                        c.SwitchMode(c.mode);
+                        c.mode = mode;
+                    }
+                }
+            }
+        }
         /// <summary>
-        /// Will need to be updated as cases arise. Fearful.
+        /// Will likely need to be updated as cases arise. Fearful.
         /// </summary>
         public static int FindAppropriateLineForTooltip(this List<TooltipLine> tooltips)
         {
@@ -48,10 +74,6 @@ namespace Terrafirma
         public static bool IfTheSlimesAI0WasThisNumberItWouldJump(int i)
         {
             return i is 0 or -1000 or -2000;
-        }
-        public static void HealWithAdjustments(this Player reciever, float life)
-        {
-            reciever.Heal((int)Math.Round(life * reciever.PlayerStats().HealingMultiplier));
         }
         public static void Heal(this Player reciever, Player giver, float life)
         {
