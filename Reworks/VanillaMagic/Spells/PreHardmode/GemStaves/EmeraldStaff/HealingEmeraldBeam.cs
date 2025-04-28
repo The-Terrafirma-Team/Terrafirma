@@ -97,7 +97,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.GemStaves.EmeraldSt
         {
             if (Main.player[Projectile.owner].HeldItem.type != ItemID.EmeraldStaff) Projectile.Kill();
 
-            if (Main.LocalPlayer == Main.player[Projectile.owner]) Main.player[Projectile.owner].SendMouseWorld();
+            //if (Main.LocalPlayer == Main.player[Projectile.owner]) Main.player[Projectile.owner].SendMouseWorld();
             MousePos = Main.player[Projectile.owner].PlayerStats().MouseWorld;
 
             //Find Closest NPC to mouse

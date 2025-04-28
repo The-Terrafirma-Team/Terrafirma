@@ -190,6 +190,8 @@ namespace Terrafirma.Systems.Primitives
                 indices = indices.Append((short)(1 + i * 2)).ToArray();
             }
 
+            
+
             //Base primitive drawing code
             GraphicsDevice.Textures[0] = trailtexture;
 

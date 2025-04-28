@@ -134,6 +134,15 @@ namespace Terrafirma.Common.Players
             manaUsed = true;
         }
 
+        public override void CopyClientState(ModPlayer targetCopy)
+        {
+            base.CopyClientState(targetCopy);
+        }
+        public override void SendClientChanges(ModPlayer clientPlayer)
+        {
+            if (Player == Main.LocalPlayer) PlayerMethods.SendMouseWorld(Player);
+            base.SendClientChanges(clientPlayer);
+        }
         public override void PreUpdateBuffs()
         {
             //Mana Types

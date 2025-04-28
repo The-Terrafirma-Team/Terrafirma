@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terrafirma.Systems.Primitives;
 using ReLogic.Content;
 using Terrafirma.Data;
+using Terraria.GameContent;
 
 namespace Terrafirma.Projectiles.Ranged
 {
@@ -19,32 +20,24 @@ namespace Terrafirma.Projectiles.Ranged
     { 
 
         Vector2 randpos = Vector2.Zero;
-        Trail trail;
-        private static Asset<Texture2D> trailTex;
-        public override void Load()
-        {
-            trailTex = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail");
-        }
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
             ProjectileSets.CanBeReflected[Type] = true;
         }
         public override void SetDefaults()
         {
-            trail = new Trail(Projectile.oldPos, TrailWidth.FlatWidth, 40);
-            trail.trailtexture = ModContent.Request<Texture2D>("Terrafirma/Assets/Particles/FireTrail").Value;
-            trail.color = f => new Color(0.4f, 0.4f, 0.4f, 0f) * 0.2f;
 
             Projectile.width = 12;
             Projectile.height = 12;
-            Projectile.timeLeft = 100;
+            Projectile.timeLeft = 1000;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
 
             DrawOffsetX = -2;
             DrawOriginOffsetY = -8;
+
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -91,15 +84,12 @@ namespace Terrafirma.Projectiles.Ranged
             }
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item50, Projectile.position);
-
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoal").Value;
             Texture2D textureglow = ModContent.Request<Texture2D>("Terrafirma/Projectiles/Ranged/HotCoalGlow").Value;
-
-            trail.Draw(Projectile.Right);
 
             Main.EntitySpriteDraw(texture,
                 Projectile.Center - Main.screenPosition,
