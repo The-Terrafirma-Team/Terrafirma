@@ -18,11 +18,23 @@ namespace Terrafirma.Systems.Primitives
     {
         public static List<TFTrail> trails = new List<TFTrail>() { };
         public static List<Action> trailDrawActions { get; } = new();
+        public static List<Action> pixelTrailDrawActions { get; } = new();
         public static void DrawTrails(bool pixellate)
         {
-            foreach(Action action in trailDrawActions)
+            if (pixellate)
             {
-                action.Invoke();
+                foreach (Action action in pixelTrailDrawActions)
+                {
+                    
+                    action.Invoke();
+                }
+            }
+            else
+            {
+                foreach (Action action in trailDrawActions)
+                {
+                    action.Invoke();
+                }
             }
 
             //Main.NewText(trails.Count);
@@ -37,9 +49,18 @@ namespace Terrafirma.Systems.Primitives
         public static void QueueDraw( this TFTrail trail, Vector2[] points)
         {
             //TFTrailSystem.trails.Add(trail);
-            TFTrailSystem.trailDrawActions.Add(
-                () => { trail.Draw(points); }
-                );
+            if (trail.pixellate)
+            {
+                TFTrailSystem.pixelTrailDrawActions.Add(
+                    () => { trail.Draw(points); }
+                    );
+            }
+            else
+            {
+                TFTrailSystem.trailDrawActions.Add(
+                    () => { trail.Draw(points); }
+                    );
+            }
         }
 
     }
@@ -106,9 +127,12 @@ namespace Terrafirma.Systems.Primitives
 
             texture?.Dispose();
             texture = null;
-            effect?.Dispose();
-            effect = null;
-            Dispose(disposing: true);
+            Main.RunOnMainThread(() =>
+            {
+                effect?.Dispose();
+                effect = null;
+                Dispose(disposing: true);
+            });
             GC.SuppressFinalize(this);
         }
 

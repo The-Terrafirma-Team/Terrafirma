@@ -85,7 +85,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
             trail.width = 20f;
             trail.singleColor = false;
             trail.colorStart = new Color(255, 255, 255, 0);
-            trail.colorEnd = new Color(255, 60, 0, 0);
+            trail.colorEnd = new Color(255, 60, 0, 0) * 0.5f;
             trail.texture = trailTexture;
             trail.pixellate = true;
             trail.flipTextureX = true;
@@ -135,7 +135,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
         {
             Player player = Main.player[Projectile.owner];
 
-            float curAngle = player.Center.AngleTo(Projectile.Center);
+            float curAngle = player.RotatedRelativePoint(player.MountedCenter).AngleTo(Projectile.Center);
 
             //Projectile.Center = player.Center + player.Center.DirectionTo(player.PlayerStats().MouseWorld) * (Projectile.ai[2] + 30f);
             float dist = (500f - Projectile.ai[2]) / 500f;
@@ -170,9 +170,10 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
                     ColorDot dot = new ColorDot();
                     dot.Size = Main.rand.NextFloat(0.15f,0.3f);
                     dot.TimeInWorld = 40;
-                    dot.color = Color.Red;
+                    dot.color = Color.White;
+                    dot.secondaryColor = Color.White;
                     dot.Waviness = 0.1f;
-                    ParticleSystem.AddParticle(dot, Projectile.Center, new Vector2(Main.rand.NextFloat(5f, 10f), 0f).RotatedBy(player.Center.AngleTo(player.PlayerStats().MouseWorld)).RotatedByRandom(0.2f), Color.Orange);
+                    ParticleSystem.AddParticle(dot, Projectile.Center, new Vector2(Main.rand.NextFloat(5f, 10f), 0f).RotatedBy(player.Center.AngleTo(player.PlayerStats().MouseWorld)).RotatedByRandom(0.2f), Color.White);
                 }
 
                 if (Projectile.timeLeft % 1 == 0)
@@ -204,7 +205,7 @@ namespace Terrafirma.Reworks.VanillaMagic.Spells.PreHardmode.Flamelash
                     dot.TimeInWorld = 40;
                     dot.color = Color.White * 0.5f;
                     dot.Waviness = 0.1f;
-                    ParticleSystem.AddParticle(dot, Projectile.Center, new Vector2(Main.rand.NextFloat(2f, 3f), 0f).RotatedBy(player.Center.AngleTo(player.PlayerStats().MouseWorld)).RotatedByRandom(0.2f));
+                    ParticleSystem.AddParticle(dot, Projectile.Center, new Vector2(Main.rand.NextFloat(2f, 3f), Main.rand.NextFloat(-5f, 5f)).RotatedBy(player.Center.AngleTo(player.PlayerStats().MouseWorld)).RotatedByRandom(0.2f));
                 }
             }
 

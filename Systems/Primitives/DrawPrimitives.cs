@@ -13,8 +13,11 @@ namespace Terrafirma.Systems.Primitives
         private GraphicsDevice GraphicsDevice;
         public override void Unload()
         {
-            primitiveRenderTarget.Dispose();
-            pixelPrimitiveRenderTarget.Dispose();
+            Main.RunOnMainThread(() =>
+            {
+                primitiveRenderTarget.Dispose();
+                pixelPrimitiveRenderTarget.Dispose();
+            });
         }
         public override void Load()
         {
@@ -69,8 +72,11 @@ namespace Terrafirma.Systems.Primitives
 
         private void GraphicsDevice_DeviceReset(object sender, EventArgs e)
         {
-            primitiveRenderTarget.Dispose();
-            SetRenderTarget();
+            Main.RunOnMainThread(() =>
+            {
+                primitiveRenderTarget.Dispose();
+                SetRenderTarget();
+            });
         }
 
         public void DrawPrimTarget(On_Main.orig_CheckMonoliths orig)
@@ -83,16 +89,14 @@ namespace Terrafirma.Systems.Primitives
             GraphicsDevice.SetRenderTarget(primitiveRenderTarget);
             GraphicsDevice.Clear(Color.Transparent);
             Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
-
             //Put all Primitive Draw methods here
             Main.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.None, Main.Rasterizer, null, Matrix.Identity);
-            //TFTrailSystem.DrawTrails(false);         
+            TFTrailSystem.DrawTrails(false);         
             Main.spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(pixelPrimitiveRenderTarget);
             GraphicsDevice.Clear(Color.Transparent);
             Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
-
             //Put all Pixel Primitive Draw methods here
             Main.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.None, Main.Rasterizer, null, Matrix.Identity);
             TFTrailSystem.DrawTrails(true);
@@ -101,6 +105,7 @@ namespace Terrafirma.Systems.Primitives
             GraphicsDevice.SetRenderTargets(oldTargets);
             TFTrailSystem.trails.Clear();
             TFTrailSystem.trailDrawActions.Clear();
+            TFTrailSystem.pixelTrailDrawActions.Clear();
         }
     }
 }

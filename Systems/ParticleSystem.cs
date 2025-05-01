@@ -77,7 +77,10 @@ namespace Terrafirma.Particles
 
         private void GraphicsDevice_DeviceReset(object sender, System.EventArgs e)
         {
-            pixelTarget.Dispose();
+            Main.RunOnMainThread(() =>
+            {
+                pixelTarget.Dispose();
+                });
             setRenderTarget();
         }
 
@@ -87,7 +90,10 @@ namespace Terrafirma.Particles
         }
         public override void Unload()
         {
-            pixelTarget.Dispose();
+            Main.RunOnMainThread(() =>
+            {
+                pixelTarget.Dispose();
+            });
 
             TooltipParticles.Clear();
             PreTileParticles.Clear();
@@ -99,7 +105,7 @@ namespace Terrafirma.Particles
             var oldTargets = Main.instance.GraphicsDevice.GetRenderTargets();
             Main.instance.GraphicsDevice.SetRenderTarget(pixelTarget);
             Main.instance.GraphicsDevice.Clear(Color.Transparent);
-            Main.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform * Matrix.CreateScale(0.25f / Main.GameZoomTarget));
+            Main.spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Matrix.Identity);
             DrawParticles(PixelParticles);
             //Main.spriteBatch.Draw(TextureAssets.Item[1].Value, Main.LocalPlayer.Center - Main.screenPosition, Color.White);
             Main.spriteBatch.End();
@@ -141,8 +147,10 @@ namespace Terrafirma.Particles
         public static void DrawParticles()
         {
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer);
-            Vector2 position = (Main.screenPosition - Main.screenLastPosition) * -Main.GameZoomTarget;
-            Main.spriteBatch.Draw(pixelTarget, new Rectangle((int)position.X,(int)position.Y, (int)(Main.screenWidth * 4 * Main.GameZoomTarget), (int)(Main.screenHeight * 4 * Main.GameZoomTarget)), Color.White);
+            Vector2 position = (Main.screenPosition - Main.screenLastPosition);
+            Main.spriteBatch.Draw(pixelTarget, 
+                new Rectangle((int)position.X, (int)position.Y, (int)(Main.screenWidth * Main.GameZoomTarget), (int)(Main.screenHeight * Main.GameZoomTarget)), 
+                Color.White);
             Main.spriteBatch.End();
 
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
@@ -165,14 +173,14 @@ namespace Terrafirma.Particles
             switch (layer)
             {
                 case ParticleLayer.NormalPixel:
-                    //{
-                    //    if (PixelParticles.Count == MaxParticles)
-                    //    {
-                    //        PixelParticles.Remove(PixelParticles[0]);
-                    //    }
-                    //    PixelParticles.Add(particle);
-                    //    break;
-                    //}
+                    {
+                        if (PixelParticles.Count == MaxParticles)
+                        {
+                            PixelParticles.Remove(PixelParticles[0]);
+                        }
+                        PixelParticles.Add(particle);
+                        break;
+                    }
                 case ParticleLayer.Normal:
                     {
                         if (Particles.Count == MaxParticles)

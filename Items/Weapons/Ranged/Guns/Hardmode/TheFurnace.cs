@@ -16,8 +16,8 @@ namespace Terrafirma.Items.Weapons.Ranged.Guns.Hardmode
             Item.knockBack = 6f;
 
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useAnimation = 1;
-            Item.useTime = 1;
+            Item.useAnimation = 12;
+            Item.useTime = 12;
             Item.width = 56;
             Item.height = 34;
             Item.UseSound = SoundID.Item34;

@@ -1489,6 +1489,36 @@ Items: {
 		DisplayName: Meteor Baton
 		Tooltip: ""
 	}
+
+	LapisBullet: {
+		DisplayName: Lapis Bullet
+		Tooltip: Slightly follows your cursor
+	}
+
+	Chainshot: {
+		DisplayName: Chainshot
+		Tooltip: ""
+	}
+
+	LightningArrow: {
+		DisplayName: Lightning Arrow
+		Tooltip: ""
+	}
+
+	KebabArrow: {
+		DisplayName: Kebab Arrow
+		Tooltip: "'Yummy!'"
+	}
+
+	IncendiaryBall: {
+		DisplayName: Incendiary Ball
+		Tooltip: ""
+	}
+
+	AcornArrow: {
+		DisplayName: Acorn Arrow
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -1697,6 +1727,12 @@ Projectiles: {
 	GraniteStalactites.DisplayName: Granite Stalactites
 	YinYangRiser.DisplayName: Yin Yang Riser
 	MeteorSaucer.DisplayName: Meteor Saucer
+	LapisBulletProjectile.DisplayName: Lapis Bullet Projectile
+	ChainshotProjectile.DisplayName: Chainshot Projectile
+	LightningArrowProjectile.DisplayName: Lightning Arrow Projectile
+	KebabArrowProjectile.DisplayName: Kebab Arrow Projectile
+	IncendiaryBallProjectile.DisplayName: Incendiary Ball Projectile
+	AcornArrowProjectile.DisplayName: Acorn Arrow Projectile
 }
 
 Tiles: {
