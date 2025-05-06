@@ -29,6 +29,7 @@ namespace Terrafirma.Reworks.VanillaRanger.Bows.PreHardmode
                 (int)MathHelper.Lerp(damage, damage * 3, (float)Math.Pow(power,3)), 
                 knockback, 
                 player.whoAmI);
+            p.penetrate++;
         } 
     }
 }

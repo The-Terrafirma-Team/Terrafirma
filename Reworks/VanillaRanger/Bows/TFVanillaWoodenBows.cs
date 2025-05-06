@@ -12,9 +12,11 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Reworks.VanillaRanger.Bows
 {
-    internal class TFVanillaBowEdits : GlobalItem
+    internal class TFVanillaWoodenBows : GlobalItem
     {
-        private static HashSet<int> types = new HashSet<int> { ItemID.WoodenBow };
+        private static HashSet<int> types = new HashSet<int> { 
+            ItemID.WoodenBow 
+        };
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return types.Contains(entity.type);
