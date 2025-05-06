@@ -1733,6 +1733,8 @@ Projectiles: {
 	KebabArrowProjectile.DisplayName: Kebab Arrow Projectile
 	IncendiaryBallProjectile.DisplayName: Incendiary Ball Projectile
 	AcornArrowProjectile.DisplayName: Acorn Arrow Projectile
+	SteelGreatbowProj.DisplayName: Steel Greatbow Proj
+	WoodenBowProj.DisplayName: Wooden Bow Proj
 }
 
 Tiles: {

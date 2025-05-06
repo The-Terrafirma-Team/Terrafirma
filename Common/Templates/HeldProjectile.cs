@@ -9,6 +9,10 @@ namespace Terrafirma.Common.Templates
     public abstract class HeldProjectile : ModProjectile
     {
         public Player player { get => Main.player[Projectile.owner]; }
+        /// <summary>
+        /// If true, Player.channel does not affect this Projectile's lifetime.
+        /// </summary>
+        public bool ignoreHold = false;
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(16);
@@ -25,7 +29,7 @@ namespace Terrafirma.Common.Templates
         public void commonHeldLogic(int dummyTime = 2)
         {
             player.heldProj = Projectile.whoAmI;
-            if (player.channel && !stoppedChanneling)
+            if (player.channel && !stoppedChanneling && !ignoreHold)
             {
                 Projectile.timeLeft = dummyTime;
                 player.SetDummyItemTime(dummyTime);
