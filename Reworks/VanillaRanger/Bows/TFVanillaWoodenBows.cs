@@ -15,7 +15,7 @@ namespace Terrafirma.Reworks.VanillaRanger.Bows
     internal class TFVanillaWoodenBows : GlobalItem
     {
         private static HashSet<int> types = new HashSet<int> { 
-            ItemID.WoodenBow 
+            ItemID.WoodenBow, ItemID.BorealWoodBow
         };
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -47,6 +47,7 @@ namespace Terrafirma.Reworks.VanillaRanger.Bows
             switch (item.type)
             {
                 case ItemID.WoodenBow: shoot = ModContent.ProjectileType<WoodenBowProj>(); break;
+                case ItemID.BorealWoodBow: shoot = ModContent.ProjectileType<BorealWoodBowProj>(); break;
                 default: shoot = -1; break;
             }
 

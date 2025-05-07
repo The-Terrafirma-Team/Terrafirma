@@ -1735,6 +1735,7 @@ Projectiles: {
 	AcornArrowProjectile.DisplayName: Acorn Arrow Projectile
 	SteelGreatbowProj.DisplayName: Steel Greatbow Proj
 	WoodenBowProj.DisplayName: Wooden Bow Proj
+	BorealWoodBowProj.DisplayName: Boreal Wood Bow Proj
 }
 
 Tiles: {
