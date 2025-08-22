@@ -28,7 +28,7 @@ namespace Terrafirma.Common.PlayerLayers
             if (drawInfo.shadow > 0)
                 return;
             float alpha = Lighting.Brightness((int)(drawInfo.drawPlayer.Center.X / 16), (int)((drawInfo.drawPlayer.Center.Y + drawInfo.drawPlayer.gfxOffY) / 16));
-            drawInfo.DrawDataCache.Add(new DrawData(SilenceTex.Value, drawInfo.Center - Main.screenPosition + new Vector2(0, -30), null, Color.White * alpha, 0f, SilenceTex.Size() / 2, 1f + Main.masterColor * 0.1f, SpriteEffects.None, 0));
+            drawInfo.DrawDataCache.Add(new DrawData(SilenceTex.Value, new Vector2((int)drawInfo.Center.X, (int)drawInfo.Center.Y) - Main.screenPosition + new Vector2(0, -30), null, Color.White * alpha, 0f, SilenceTex.Size() / 2, 1f + Main.masterColor * 0.1f, SpriteEffects.None, 0));
         }
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
     }

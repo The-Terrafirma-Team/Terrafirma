@@ -1,4 +1,83 @@
-ItemName: {
-	Vilethorn: Vile Staff
-	DemonScythe: Shadow Codex
+Mods: {
+	Terrafirma: {
+		Keybinds: {
+			BlockKey.DisplayName: Block Key
+			"First Skill.DisplayName": First  Skill
+			"Second Skill.DisplayName": Second  Skill
+			"Third Skill.DisplayName": Third  Skill
+			"Fourth Skill.DisplayName": Fourth  Skill
+		}
+
+		Buffs: {
+			Shattered: {
+				DisplayName: Shattered
+				Description: Blocking blocked!
+			}
+
+			Parried: {
+				DisplayName: Parried
+				Description: Mods.TerrafirmaCombat.Buffs.Parried.Description
+			}
+
+			Stunned: {
+				DisplayName: Stunned
+				Description: Mods.TerrafirmaCombat.Buffs.Stunned.Description
+			}
+
+			Flightless: {
+				DisplayName: Flightless
+				Description: Mods.TerrafirmaCombat.Buffs.Flightless.Description
+			}
+
+			FocusStrikeBuff: {
+				DisplayName: Focus Strike Buff
+				Description: Mods.TerrafirmaCombat.Buffs.FocusStrikeBuff.Description
+			}
+		}
+
+		Projectiles.SlimeStab.DisplayName: Slimey Stab
+
+		Configs: {
+			ClientConfig: {
+				DisplayName: Client Config
+
+				EnableScreenshake: {
+					Label: Enable Screenshake
+					Tooltip: ""
+				}
+
+				EnableMusicReplacements: {
+					Label: Enable Music Replacements
+					Tooltip: ""
+				}
+
+				EnableAmbientParticles: {
+					Label: Enable Ambient Particles
+					Tooltip: ""
+				}
+			}
+
+			Headers: {
+				Accessibility: Accessibility
+				Modules: Modules
+				Preferences: Enable Music Replacements Header
+			}
+
+			ServerConfig: {
+				DisplayName: Server Config
+
+				CombatReworkEnabled: {
+					Label: Enable Combat Overhaul
+					Tooltip: ""
+				}
+			}
+		}
+
+		Items: {
+			SmoothStone: {
+				DisplayName: Smooth Stone
+				Tooltip: ""
+			}
+		}
+	}
 }

@@ -1,37 +1,13 @@
-
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\tModLoader.targets" />
-  <PropertyGroup>
-    <AssemblyName>Terrafirma</AssemblyName>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\Accessories\**" />
-    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
-    <AdditionalFiles Remove="Systems\MageClass\SpellIcons\Tempire\**" />
-    <Compile Remove="Systems\MageClass\SpellIcons\Accessories\**" />
-    <Compile Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
-    <Compile Remove="Systems\MageClass\SpellIcons\Tempire\**" />
-    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\Accessories\**" />
-    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
-    <EmbeddedResource Remove="Systems\MageClass\SpellIcons\Tempire\**" />
-    <None Remove="Systems\MageClass\SpellIcons\Accessories\**" />
-    <None Remove="Systems\MageClass\SpellIcons\PreHardmode\**" />
-    <None Remove="Systems\MageClass\SpellIcons\Tempire\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Items\Consumable\Mana\TestManaTypeConsumable.png" />
-    <None Remove="Projectiles\Melee\Knight\AntiheroProjectile.png" />
-    <None Remove="Projectiles\Ranged\BuckshotProjectile.png" />
-    <None Remove="Projectiles\Tools\UldraxProjectile.png" />
-    <None Remove="Systems\Cooking\CookingPotUI.cs~RF44f8c32a.TMP" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="SubworldLibrary">
-      <HintPath>..\..\..\..\..\..\Downloads\SubworldLibrary.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Prefixes\Curses\" />
-  </ItemGroup>
+
+	<!-- Import tModLoader mod properties -->
+	<Import Project="..\tModLoader.targets" />
+
+	<!-- General -->
+	<PropertyGroup>
+		
+	</PropertyGroup>
+
+	<!-- References -->
+
 </Project>
