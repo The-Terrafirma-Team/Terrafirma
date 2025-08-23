@@ -78,6 +78,21 @@ Mods: {
 				DisplayName: Smooth Stone
 				Tooltip: ""
 			}
+
+			GlowingMushroomCap: {
+				DisplayName: Glowing Mushroom Cap
+				Tooltip: Increases max mana by 40
+			}
+
+			MushroomCap: {
+				DisplayName: Mushroom Cap
+				Tooltip: Increases max life by 25
+			}
+
+			SunflowerPin: {
+				DisplayName: Sunflower Pin
+				Tooltip: Fills you with joy!
+			}
 		}
 	}
 }

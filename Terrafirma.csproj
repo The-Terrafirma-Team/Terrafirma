@@ -7,6 +7,9 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <Folder Include="Content\Items\Equipment\" />
+	</ItemGroup>
 
 	<!-- References -->
 
