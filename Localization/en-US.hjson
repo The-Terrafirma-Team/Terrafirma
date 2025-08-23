@@ -95,7 +95,7 @@ Mods: {
 			}
 
 			SmoothStoneWallItem: {
-				DisplayName: Smooth Stone Wall Item
+				DisplayName: Smooth Stone Wall
 				Tooltip: ""
 			}
 		}
