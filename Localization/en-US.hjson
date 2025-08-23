@@ -93,6 +93,11 @@ Mods: {
 				DisplayName: Sunflower Pin
 				Tooltip: Fills you with joy!
 			}
+
+			SmoothStoneWallItem: {
+				DisplayName: Smooth Stone Wall Item
+				Tooltip: ""
+			}
 		}
 	}
 }
