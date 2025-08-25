@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Common.Interfaces;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common
@@ -11,6 +13,11 @@ namespace Terrafirma.Common
     public class PlayerStats : ModPlayer
     {
         public bool ItemUseBlocked = false;
+        public float KnockbackResist = 1f;
+        /// <summary>
+        /// This defaults to 0.5f, multiply it down to make the player slow down less in the air.
+        /// </summary>
+        public float AirResistenceMultiplier = 0.5f;
 
         public int ParryDamage = 0;
         public float ParryPower = 1f;
@@ -22,8 +29,15 @@ namespace Terrafirma.Common
         public float TensionCostMultiplier = 1f;
         public int FlatTensionGain = 0;
         public int FlatTensionCost = 0;
+
+        internal bool RightMouseSwitch = false;
         public override void ResetEffects()
         {
+            KnockbackResist = 1f;
+            AirResistenceMultiplier = 0.5f;
+            Player.pickSpeed *= 0.8f;
+            Player.autoJump = true;
+
             ItemUseBlocked = false;
 
             ParryDamage = 8;
@@ -36,10 +50,43 @@ namespace Terrafirma.Common
             FlatTensionGain = 0;
             FlatTensionCost = 0;
         }
+
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            modifiers.Knockback *= KnockbackResist;
+        }
         public override bool CanUseItem(Item item)
         {
             if (ItemUseBlocked) return false;
             return base.CanUseItem(item);
+        }
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+            if (!mediumCoreDeath)
+            {
+                Player.ConsumedManaCrystals = 2;
+            }
+            return base.AddStartingItems(mediumCoreDeath);
+        }
+
+        public override bool HoverSlot(Item[] inventory, int context, int slot)
+        {
+            if (Main.mouseRight && !RightMouseSwitch)
+            {
+                if (Main.mouseItem.ModItem is IUseOnItemInInventoryItem item)
+                {
+                    if (item.canBeUsedOnThisItem(Player, Main.mouseItem, inventory[slot], context))
+                        item.useOnItem(Player, Main.mouseItem, inventory[slot], context);
+                }
+                RightMouseSwitch = true;
+            }
+            if (!Main.mouseRight) RightMouseSwitch = false;
+            return base.HoverSlot(inventory, context, slot);
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (((Player.controlRight && Player.velocity.X > 0) || (Player.controlLeft && Player.velocity.X < 0)) && Player.velocity.Y != 0)
+                Player.runSlowdown *= AirResistenceMultiplier;
         }
     }
 }

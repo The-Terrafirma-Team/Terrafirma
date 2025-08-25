@@ -35,25 +35,32 @@ namespace Terrafirma
         {
             float power = p.PlayerStats().ParryPower;
             p.StrikeNPCDirect(n, n.CalculateHitInfo(p.PlayerStats().ParryDamage, n.Center.X < p.Center.X ? -1 : 1, false, 4, DamageClass.Melee));
-            if (n.ModNPC is ICustomBlockBehavior i)
-                i.OnBlocked(p, power);
+            if (n.ModNPC is ICustomBlockBehavior behavior)
+                behavior.OnBlocked(p, power);
             else
             {
-                switch (n.type)
+                for(int i = 0; i < n.EntityGlobals.Length; i++)
                 {
-                    case NPCID.BlueSlime:
-                        n.GetGlobalNPC<Slime>().OnBlocked(n, p, power);
-                        break;
-                    case NPCID.DemonEye:
-                    case NPCID.CataractEye:
-                    case NPCID.PurpleEye:
-                    case NPCID.GreenEye:
-                    case NPCID.DemonEyeOwl:
-                    case NPCID.DemonEyeSpaceship:
-                    case NPCID.DialatedEye:
-                        n.GetGlobalNPC<DemonEye>().OnBlocked(n, p, power);
-                        break;
+                    if (n.EntityGlobals[i] is ICustomBlockBehavior behaviorGlobal)
+                    {
+                        behaviorGlobal.OnBlocked(p, power, n);
+                    }
                 }
+                //switch (n.type)
+                //{
+                //    case NPCID.BlueSlime:
+                //        n.GetGlobalNPC<Slime>().OnBlocked(n, p, power);
+                //        break;
+                //    case NPCID.DemonEye:
+                //    case NPCID.CataractEye:
+                //    case NPCID.PurpleEye:
+                //    case NPCID.GreenEye:
+                //    case NPCID.DemonEyeOwl:
+                //    case NPCID.DemonEyeSpaceship:
+                //    case NPCID.DialatedEye:
+                //        n.GetGlobalNPC<DemonEye>().OnBlocked(n, p, power);
+                //        break;
+                //}
             }
         }
         public static bool CheckTension(this Player player, int Tension, bool Consume = true)
@@ -144,6 +151,7 @@ namespace Terrafirma
         }
         /// <summary>
         /// Will likely need to be updated as cases arise. Fearful.
+        /// Gives you the index to insert a tooltip at so that it doesn't go after the modifiers stats things.
         /// </summary>
         public static int FindAppropriateLineForTooltip(this List<TooltipLine> tooltips)
         {

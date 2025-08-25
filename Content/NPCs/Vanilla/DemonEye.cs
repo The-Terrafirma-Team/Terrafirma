@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Common;
+using Terrafirma.Common.Interfaces;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terraria;
 using Terraria.ID;
@@ -7,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Content.NPCs.Vanilla
 {
-    public class DemonEye : GlobalNPC
+    public class DemonEye : GlobalNPC, ICustomBlockBehavior
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
@@ -18,7 +19,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         {
             return entity.type is NPCID.DemonEye or NPCID.CataractEye or NPCID.PurpleEye or NPCID.GreenEye or NPCID.DemonEyeOwl or NPCID.DemonEyeSpaceship or NPCID.DialatedEye;
         }
-        public void OnBlocked(NPC npc, Player player, float Power)
+        public void OnBlocked(Player player, float Power, NPC npc = null)
         {
             npc.AddBuff(ModContent.BuffType<Flightless>(), (int)(60 * 3 * Power));
         }

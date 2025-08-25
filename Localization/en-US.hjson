@@ -35,7 +35,10 @@ Mods: {
 			}
 		}
 
-		Projectiles.SlimeStab.DisplayName: Slimey Stab
+		Projectiles: {
+			SlimeStab.DisplayName: Slimey Stab
+			LanceProj.DisplayName: Lance Proj
+		}
 
 		Configs: {
 			ClientConfig: {
@@ -97,6 +100,27 @@ Mods: {
 			SmoothStoneWallItem: {
 				DisplayName: Smooth Stone Wall
 				Tooltip: ""
+			}
+
+			RepairKit: {
+				DisplayName: Repair Kit
+				Tooltip: Drag over and right click on an item with a bad prefix in the inventory to reforge it
+			}
+
+			Shield: {
+				DisplayName: Shield
+				Tooltip: Increases knockback resistance by 35%
+				TooltipCombatRework: Increases block damage by 2
+			}
+
+			WindCharm: {
+				DisplayName: Wind Charm
+				Tooltip: You slow down less in the air
+			}
+
+			Lance: {
+				DisplayName: Lance
+				Tooltip: Build momentum to increase attack power
 			}
 		}
 	}

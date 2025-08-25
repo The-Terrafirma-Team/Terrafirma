@@ -9,6 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Folder Include="Content\Items\Equipment\" />
+	  <Folder Include="Content\Tiles\Furniture\" />
 	</ItemGroup>
 
 	<!-- References -->

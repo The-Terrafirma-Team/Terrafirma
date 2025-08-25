@@ -66,6 +66,7 @@ namespace Terrafirma.Content.Skills
                 modifiers.ScalingBonusDamage += 2f;
                 modifiers.ScalingArmorPenetration += 1f;
                 Player.ClearBuff(ModContent.BuffType<FocusStrikeBuff>());
+                Active = false;
             }
         }
     }

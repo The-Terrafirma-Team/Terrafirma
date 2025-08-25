@@ -4,6 +4,7 @@ using ReLogic.Content;
 using System;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
+using Terrafirma.Common.Mechanics;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terraria;
 using Terraria.Audio;
@@ -13,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Content.NPCs.Vanilla
 {
-    public class Slime : GlobalNPC
+    public class Slime : GlobalNPC, ICustomBlockBehavior
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
@@ -39,7 +40,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         private float frameCounter;
         private int frame;
 
-        public void OnBlocked(NPC npc, Player player, float Power)
+        public void OnBlocked(Player player, float Power, NPC npc = null)
         {
             npc.AddBuff(ModContent.BuffType<Stunned>(), (int)(60 * 2 * Power));
         }
@@ -318,13 +319,14 @@ namespace Terrafirma.Content.NPCs.Vanilla
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.Knockback *= 1.5f;
-            target.AddBuff(BuffID.Slow, 60 * 15);
+            if(!target.GetModPlayer<BlockingPlayer>().Blocking)
+                target.AddBuff(BuffID.Slow, 60 * 15);
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             return targetHitbox.ClosestPointInRect(targetHitbox.Center()).Distance(Projectile.Center) < (55 * Main.npc[(int)Projectile.ai[0]].scale);
         }
-        public void OnBlocked(Player player, float Power)
+        public void OnBlocked(Player player, float Power, NPC npc = null)
         {
             player.ParryStrike(Main.npc[(int)Projectile.ai[0]]);
         }
