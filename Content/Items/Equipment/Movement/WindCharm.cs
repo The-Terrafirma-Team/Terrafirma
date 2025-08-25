@@ -12,6 +12,8 @@ namespace Terrafirma.Content.Items.Equipment.Movement
         public override void SetDefaults()
         {
             Item.DefaultToAccessory();
+            Item.value = Item.sellPrice(0, 1, 50);
+            Item.rare = ItemRarityID.Blue;
         }
         public override void UpdateEquip(Player player)
         {

@@ -123,6 +123,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public override void AI(NPC npc)
         {
+            NPCStats stats = npc.NPCStats();
             npc.rotation = npc.velocity.X * 0.1f * npc.velocity.Y * -0.1f;
 
             if (npc.direction == 0)
@@ -137,7 +138,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             if (npc.wet)
             {
 
-                npc.velocity.X += npc.direction * 0.1f * npc.NPCStats().MoveSpeed;
+                npc.velocity.X += npc.direction * 0.1f * stats.MoveSpeed;
                 if (npc.velocity.Y == 0)
                 {
                     npc.velocity.Y = -2f;
@@ -153,7 +154,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
                 }
                 npc.ai[3] = 1;
             }
-            if (npc.NPCStats().Immobile)
+            if (stats.Immobile)
             {
                 npc.ai[3] = 0;
                 npc.ai[2] = 0;
@@ -169,18 +170,18 @@ namespace Terrafirma.Content.NPCs.Vanilla
             if (npc.velocity.Y == 0)
             {
                 npc.velocity.X *= 0.8f;
-                npc.ai[0]+= npc.NPCStats().AttackSpeed;
+                npc.ai[0]+= stats.AttackSpeed;
                 npc.ai[3] = 0;
             }
             else if (npc.ai[3] == 1)
             {
                 if ((npc.direction == 1 && npc.velocity.X < 0.1f) || (npc.direction == -1 && npc.velocity.X > -0.1f) && CanAttack(npc))
-                    npc.velocity.X += npc.direction * 0.6f * npc.NPCStats().MoveSpeed;
+                    npc.velocity.X += npc.direction * 0.6f * stats.MoveSpeed;
             }
             if (npc.ai[0] > 50)
-                frameCounter += npc.NPCStats().MoveSpeed;
+                frameCounter += stats.MoveSpeed;
             if (npc.ai[0] > 75)
-                frameCounter += npc.NPCStats().MoveSpeed;
+                frameCounter += stats.MoveSpeed;
 
             if (!npc.HasValidTarget)
             {
@@ -198,7 +199,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
                     }
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(-20, 0);
-                    npc.velocity.X += npc.direction * Main.rand.NextFloat(2, 4) * npc.NPCStats().MoveSpeed;
+                    npc.velocity.X += npc.direction * Main.rand.NextFloat(2, 4) * stats.MoveSpeed;
                     npc.velocity.Y += Main.rand.NextFloat(-8, -5);
                     npc.netUpdate = true;
                 }
@@ -214,7 +215,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
                         npc.direction *= -1;
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(40);
-                    npc.velocity.X += MathHelper.Clamp((p.Center.X - npc.Center.X) * 0.04f, -4, 4) * (npc.confused ? -1 : 1) * npc.NPCStats().MoveSpeed;
+                    npc.velocity.X += MathHelper.Clamp((p.Center.X - npc.Center.X) * 0.04f, -4, 4) * (npc.confused ? -1 : 1) * stats.MoveSpeed;
                     npc.velocity.Y += MathHelper.Clamp((p.Center.Y - npc.Center.Y) * 0.06f, -12, Main.rand.NextFloat(-8, -5));
                     npc.netUpdate = true;
                 }
