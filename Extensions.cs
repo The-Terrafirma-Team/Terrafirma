@@ -46,21 +46,6 @@ namespace Terrafirma
                         behaviorGlobal.OnBlocked(p, power, n);
                     }
                 }
-                //switch (n.type)
-                //{
-                //    case NPCID.BlueSlime:
-                //        n.GetGlobalNPC<Slime>().OnBlocked(n, p, power);
-                //        break;
-                //    case NPCID.DemonEye:
-                //    case NPCID.CataractEye:
-                //    case NPCID.PurpleEye:
-                //    case NPCID.GreenEye:
-                //    case NPCID.DemonEyeOwl:
-                //    case NPCID.DemonEyeSpaceship:
-                //    case NPCID.DialatedEye:
-                //        n.GetGlobalNPC<DemonEye>().OnBlocked(n, p, power);
-                //        break;
-                //}
             }
         }
         public static bool CheckTension(this Player player, int Tension, bool Consume = true)
