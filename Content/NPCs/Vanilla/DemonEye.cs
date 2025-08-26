@@ -1,8 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,9 +18,11 @@ namespace Terrafirma.Content.NPCs.Vanilla
             return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
         }
         public override bool InstancePerEntity => true;
+
+        int[] DemonEyes = { NPCID.DemonEye, NPCID.CataractEye, NPCID.PurpleEye, NPCID.GreenEye, NPCID.DemonEyeOwl, NPCID.DemonEyeSpaceship, NPCID.DialatedEye };
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return entity.type is NPCID.DemonEye or NPCID.CataractEye or NPCID.PurpleEye or NPCID.GreenEye or NPCID.DemonEyeOwl or NPCID.DemonEyeSpaceship or NPCID.DialatedEye;
+            return DemonEyes.Contains(entity.type);
         }
         public void OnBlocked(Player player, float Power, NPC npc = null)
         {
@@ -28,6 +33,29 @@ namespace Terrafirma.Content.NPCs.Vanilla
             npc.aiStyle = -1;
             npc.noGravity = true;
         }
+
+        public override void SetStaticDefaults()
+        {
+            for (int i = 0; i < DemonEyes.Length; i++)
+            {
+                Main.npcFrameCount[DemonEyes[i]] = 12;
+            }
+            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye");
+            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Cataract");
+            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Purple");
+            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Green");
+            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // need sprite
+            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Dilated");
+        }
+        public override void Unload()
+        {
+            for(int i = 0; i < DemonEyes.Length; i++)
+            {
+                TextureAssets.Npc[NPCID.DemonEye] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{DemonEyes[i]}");
+                Main.npcFrameCount[DemonEyes[i]] = 2;
+            }
+        }
         public override void FindFrame(NPC npc, int frameHeight)
         {
             // WHY IS THE DEMON EYE CODED THE WAY IT IS
@@ -37,11 +65,25 @@ namespace Terrafirma.Content.NPCs.Vanilla
                 npc.localAI[0] += npc.velocity.X * 0.1f;
             if(!npc.IsABestiaryIconDummy)
                 npc.rotation = npc.localAI[0] + (npc.spriteDirection == 1 ? 0 : MathHelper.Pi);
+
+            npc.frameCounter++;
+            if (npc.noGravity)
+            {
+                if (npc.frame.Y > frameHeight * 5)
+                {
+                    npc.frame.Y = 0;
+                }
+            }
+            else
+            {
+                if (npc.frame.Y > frameHeight * 11 || npc.frame.Y < frameHeight * 6)
+                {
+                    npc.frame.Y = frameHeight * 6;
+                }
+            }
         }
         public override void AI(NPC npc)
         {
-
-
             NPCStats stats = npc.NPCStats();
 
             if (Main.rand.NextBool(40))
