@@ -19,7 +19,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public override bool InstancePerEntity => true;
 
-        int[] DemonEyes = { NPCID.DemonEye, NPCID.CataractEye, NPCID.PurpleEye, NPCID.GreenEye, NPCID.DemonEyeOwl, NPCID.DemonEyeSpaceship, NPCID.DialatedEye };
+        int[] DemonEyes = { NPCID.DemonEye, NPCID.CataractEye, NPCID.PurpleEye, NPCID.GreenEye, NPCID.DemonEyeOwl, NPCID.DemonEyeSpaceship, NPCID.DialatedEye, NPCID.SleepyEye };
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return DemonEyes.Contains(entity.type);
@@ -47,6 +47,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // need sprite
             TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // ditto
             TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Dilated");
+            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // ditto
         }
         public override void Unload()
         {
