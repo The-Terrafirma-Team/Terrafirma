@@ -124,12 +124,12 @@ Mods: {
 			}
 
 			MusicBoxAltHellItem: {
-				DisplayName: Music Box Alt Hell Item
+				DisplayName: Music Box (Alt Hell)
 				Tooltip: ""
 			}
 
 			MusicBoxMeteorItem: {
-				DisplayName: Music Box Meteor Item
+				DisplayName: Music Box (Meteorite)
 				Tooltip: ""
 			}
 		}
