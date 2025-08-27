@@ -1,0 +1,99 @@
+﻿using Microsoft.Xna.Framework;
+using System;
+using Terrafirma.Common.Mechanics;
+using Terrafirma.Common.Systems;
+using Terrafirma.Content.Buffs.Debuffs;
+using Terrafirma.Content.Particles;
+using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace Terrafirma.Content.Skills
+{
+    public class GroundSlam : Skill
+    {
+        public override int TensionCost => 20;
+        public override int CooldownMax => 60 * 10;
+        public override Color RechargeFlashColor => Color.Red;
+        public override void Use(Player player)
+        {
+            player.GetModPlayer<GroundSlamPlayer>().GroundSlamming = true;
+
+            for (int i = 0; i < 15; i++)
+            {
+                Dust d = Dust.NewDustPerfect(player.Bottom, DustID.Cloud);
+                d.noGravity = true;
+                d.velocity = Main.rand.NextVector2CircularEdge(6, 3);
+                d.velocity *= Main.rand.NextFloat(0.8f, 1f);
+                d.scale *= 2;
+                SoundEngine.PlaySound(SoundID.DoubleJump, player.position);
+            }
+        }
+    }
+    public class GroundSlamPlayer : ModPlayer
+    {
+        public bool GroundSlamming = false;
+        public float Power = 0.5f;
+
+        public override void PreUpdateBuffs()
+        {
+            if (GroundSlamming)
+                Player.PlayerStats().ImmuneToContactDamage = true;
+
+        }
+        public override void PreUpdateMovement()
+        {
+            if (GroundSlamming && Collision.SolidCollision(Player.BottomLeft + new Vector2(0, Math.Max(Player.velocity.Y, 0) - 9), Player.width, 10))
+            {
+                SoundEngine.PlaySound(SoundID.Item14, Player.position);
+                for (int i = 0; i < (5 * Power); i++)
+                {
+                    ParticleSystem.NewParticle(new Smoke(Main.rand.NextVector2Circular(2, 1f) - Vector2.UnitY, Color.Beige * 0.5f, Color.DarkGoldenrod * 0.3f, Main.rand.NextFloat(0.8f, 1.2f)), Player.Bottom);
+                }
+                DecalsSystem.NewDecal(new CrackDecal(0.5f + (Power / 3f)), Player.Bottom + Player.velocity);
+                GroundSlamming = false;
+                Player.fallStart = (int)Player.position.X / 16;
+                Player.velocity.Y = -4f - Power * 0.5f;
+                foreach (NPC n in Main.ActiveNPCs)
+                {
+                    if (!n.friendly && n.Center.Distance(Player.Center) < (16 * (4f + Power * 0.5f)))
+                    {
+                        Player.StrikeNPCDirect(n, n.CalculateHitInfo((int)(Power * 3), n.Center.X < Player.Center.X ? -1 : 1, true, MathHelper.Max(1f, Power), DamageClass.Melee, true));
+                        n.AddBuff(ModContent.BuffType<Stunned>(), 60 * 3);
+                        if (n.knockBackResist > 0)
+                            n.velocity.Y = Player.velocity.Y;
+                    }
+                }
+                Power = 0.5f;
+
+                Player.AddImmuneTime(ImmunityCooldownID.General, 60);
+                Player.immune = true;
+            }
+            if (GroundSlamming)
+            {
+                foreach (NPC n in Main.ActiveNPCs)
+                {
+                    if (!n.friendly && n.Hitbox.Intersects(Player.Hitbox))
+                    {
+                        n.AddBuff(ModContent.BuffType<Stunned>(), 60 * 3);
+                        if (n.knockBackResist > 0)
+                            n.velocity = Player.velocity;
+                    }
+                }
+                Power *= 1.1f;
+                if (Power > 5f)
+                    Power = 5f;
+
+                Player.RemoveAllGrapplingHooks();
+                Player.PlayerStats().TurnOffDownwardsMovementRestrictions = true;
+                Player.velocity.X *= 0.9f;
+                Player.velocity.Y = Math.Max(Player.velocity.Y + 0.3f, 2f);
+                Dust d = Dust.NewDustDirect(Player.BottomLeft + Player.velocity, Player.width, 2, DustID.Cloud);
+                d.noGravity = true;
+                d.velocity = Main.rand.NextVector2Circular(2, 2);
+                d.velocity.Y -= 2f;
+            }
+        }
+    }
+}

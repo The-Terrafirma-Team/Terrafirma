@@ -29,5 +29,12 @@ namespace Terrafirma.Common
             MoveSpeed = 1f;
             AttackSpeed = 1f;
         }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (target.PlayerStats().ImmuneToContactDamage)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
     }
 }

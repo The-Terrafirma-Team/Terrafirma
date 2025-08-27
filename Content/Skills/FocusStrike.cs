@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
+using Terrafirma.Common.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
@@ -22,6 +23,8 @@ namespace Terrafirma.Content.Skills
         public override Color RechargeFlashColor => Color.Yellow;
         public override void Casting(Player player)
         {
+            player.runSlowdown += 0.5f;
+            player.PlayerStats().AirResistenceMultiplier *= 2;
             Vector2 vect = Main.rand.NextVector2CircularEdge(1, 1);
             Dust d = Dust.NewDustPerfect(player.Center + vect * 40, DustID.HallowedWeapons, -vect * 2);
             d.noGravity = true;

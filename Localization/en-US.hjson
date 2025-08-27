@@ -122,6 +122,16 @@ Mods: {
 				DisplayName: Lance
 				Tooltip: Build momentum to increase attack power
 			}
+
+			MusicBoxAltHellItem: {
+				DisplayName: Music Box Alt Hell Item
+				Tooltip: ""
+			}
+
+			MusicBoxMeteorItem: {
+				DisplayName: Music Box Meteor Item
+				Tooltip: ""
+			}
 		}
 	}
 }

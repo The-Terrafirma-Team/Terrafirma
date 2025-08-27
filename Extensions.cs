@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
@@ -26,6 +27,15 @@ namespace Terrafirma
         public static PlayerStats PlayerStats(this Player player)
         {
             return player.GetModPlayer<PlayerStats>();
+        }
+        public static Color ApplyLighting(this Color color, Color light)
+        {
+            Color color1 = color;
+            color1.R = (byte)Math.Clamp(color.R - (255 - light.R), 0, 255);
+            color1.G = (byte)Math.Clamp(color.G - (255 - light.G), 0, 255);
+            color1.B = (byte)Math.Clamp(color.B - (255 - light.B), 0, 255);
+            color1.A = (byte)Math.Clamp(color.A - (255 - light.A), 0, 255);
+            return color1;
         }
         public static NPCStats NPCStats(this NPC npc)
         {

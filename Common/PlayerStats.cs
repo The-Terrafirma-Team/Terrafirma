@@ -13,6 +13,8 @@ namespace Terrafirma.Common
     public class PlayerStats : ModPlayer
     {
         public bool ItemUseBlocked = false;
+        public bool TurnOffDownwardsMovementRestrictions = false;
+        public bool ImmuneToContactDamage = false;
         public float KnockbackResist = 1f;
         /// <summary>
         /// This defaults to 0.5f, multiply it down to make the player slow down less in the air.
@@ -33,6 +35,13 @@ namespace Terrafirma.Common
         internal bool RightMouseSwitch = false;
         public override void ResetEffects()
         {
+            if (TurnOffDownwardsMovementRestrictions)
+            {
+                Player.maxFallSpeed = 1000;
+            }
+            ImmuneToContactDamage = false;
+            TurnOffDownwardsMovementRestrictions = false;
+
             KnockbackResist = 1f;
             AirResistenceMultiplier = 0.5f;
             Player.pickSpeed *= 0.8f;

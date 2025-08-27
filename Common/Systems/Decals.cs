@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 
@@ -25,7 +26,7 @@ namespace Terrafirma.Common.Systems
             spriteBatch.Begin();
             graphics.Clear(Color.Transparent);
             Main.spriteBatch.Draw(Main.instance.tileTarget, Main.sceneTilePos - Main.screenPosition, Color.Black);
-            Main.spriteBatch.Draw(Main.instance.blackTarget, Main.sceneTilePos - Main.screenPosition, Color.Black);
+            //Main.spriteBatch.Draw(Main.instance.blackTarget, Main.sceneTilePos - Main.screenPosition, Color.Black);
             spriteBatch.End();
             graphics.SetRenderTargets(oldTargets);
             _wasPrepared = true;
@@ -42,6 +43,10 @@ namespace Terrafirma.Common.Systems
             graphics.SetRenderTarget(_target);
             spriteBatch.Begin();
             graphics.Clear(Color.Transparent);
+            for(int i = 0; i < DecalsSystem.decals.Count; i++)
+            {
+                DecalsSystem.decals[i].Draw(spriteBatch,Main.screenPosition);
+            }
             spriteBatch.End();
 
             graphics.SetRenderTargets(oldTargets);
@@ -53,6 +58,8 @@ namespace Terrafirma.Common.Systems
         public static WorldMaskTarget MaskTarget;
         public static DecalsRenderTarget DecalsTarget;
         public static Asset<Effect> MaskShader;
+
+        internal static List<Particle> decals = new();
         public override void Load()
         {
             MaskShader = Mod.Assets.Request<Effect>("Assets/Effects/MaskShader", AssetRequestMode.ImmediateLoad);
@@ -63,6 +70,29 @@ namespace Terrafirma.Common.Systems
         {
             Main.ContentThatNeedsRenderTargets.Remove(DecalsTarget);
             Main.ContentThatNeedsRenderTargets.Remove(MaskTarget);
+            decals.Clear();
+        }
+        public override void PostUpdateDusts()
+        {
+            for (int i = 0; i < decals.Count; i++)
+            {
+                decals[i].Update();
+                decals[i].TimeInWorld++;
+                if (decals[i].Active == false)
+                    decals.RemoveAt(i);
+            }
+        }
+
+        /// <summary>
+        /// They're literally just particles but you can't see them if they're not over a tile.
+        /// </summary>
+        /// <param name="particle"></param>
+        /// <param name="position"></param>
+        public static void NewDecal(Particle particle, Vector2 position)
+        {
+            particle.Position = position;
+            decals.Add(particle);
+            particle.OnSpawn();
         }
         public override void PostDrawTiles()
         {

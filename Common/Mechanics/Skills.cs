@@ -118,11 +118,11 @@ namespace Terrafirma.Common.Mechanics
         {
             return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
         }
-        public Skill[] Skills = { new FocusStrike(), null, null, null };
+        public Skill[] Skills = { new FocusStrike(), new GroundSlam(), null, null };
         public static bool[] HasDoneCooldownChime = { true, true, true, true };
         public static byte[] CooldownFlashLight = { 0, 0, 0, 0 };
 
-        public int MaxSkills = 2;
+        public int MaxSkills = 3;
         public static ModKeybind Skill1 { get; set; }
         public static ModKeybind Skill2 { get; set; }
         public static ModKeybind Skill3 { get; set; }
