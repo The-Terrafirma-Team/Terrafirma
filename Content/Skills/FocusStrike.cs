@@ -19,8 +19,7 @@ namespace Terrafirma.Content.Skills
         public override int TensionCost => 20;
         public override int CastTimeMax => 120;
         public override int CooldownMax => 60 * 30;
-
-        public override Color RechargeFlashColor => Color.Yellow;
+        public override Color RechargeFlashColor => Color.Goldenrod;
         public override void Casting(Player player)
         {
             player.runSlowdown += 0.5f;

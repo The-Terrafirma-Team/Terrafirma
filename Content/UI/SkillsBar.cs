@@ -71,7 +71,10 @@ namespace Terrafirma.Content.UI
                     {
                         spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID()].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 0, 48, percent + 2), Color.White with { A = 128 }, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
                         spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID()].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 50, 48, percent), new Color(64, 64, 64), 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
-                        spriteBatch.Draw(BarTex.Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(188, 0, 48, 48), player.Skills[i].RechargeFlashColor * (SkillsPlayer.CooldownFlashLight[i] / 255f), 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(BarTex.Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(188, 0, 48, 48), player.Skills[i].RechargeFlashColor with { A = 0 } * (SkillsPlayer.CooldownFlashLight[i] / 255f) * 0.75f, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
                     }
                 }
             }

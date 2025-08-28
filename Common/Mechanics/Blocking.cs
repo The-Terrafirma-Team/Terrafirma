@@ -148,6 +148,10 @@ namespace Terrafirma.Common.Mechanics
         }
         public static void SyncBlock(int blocker, bool Blocking)
         {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                return;
+            }
             ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
             packet.Write((byte)Terrafirma.TFNetMessage.Blocking);
             packet.Write((byte)blocker);

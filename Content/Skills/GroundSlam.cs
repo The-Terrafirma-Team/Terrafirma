@@ -15,7 +15,7 @@ namespace Terrafirma.Content.Skills
     {
         public override int TensionCost => 20;
         public override int CooldownMax => 60 * 10;
-        public override Color RechargeFlashColor => Color.Red;
+        public override Color RechargeFlashColor => Color.LightCoral;
         public override void Use(Player player)
         {
             player.GetModPlayer<GroundSlamPlayer>().GroundSlamming = true;

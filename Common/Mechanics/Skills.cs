@@ -118,6 +118,10 @@ namespace Terrafirma.Common.Mechanics
         }
         public static void SyncSkillUse(int player, byte SkillBeingUsed)
         {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                return;
+            }
             ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
             packet.Write((byte)Terrafirma.TFNetMessage.SkillActivate);
             packet.Write((byte)player);
@@ -182,7 +186,7 @@ namespace Terrafirma.Common.Mechanics
         {
             for (int i = 0; i < Skills.Length; i++)
             {
-                if(CooldownFlashLight[i] > 17)
+                if(CooldownFlashLight[i] >= 17)
                 CooldownFlashLight[i]-= 17;
 
                 if (Skills[i] != null)
