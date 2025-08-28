@@ -4,6 +4,7 @@ using ReLogic.Content;
 using Steamworks;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,7 @@ using Terrafirma.Content.Buffs.Cooldowns;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameInput;
@@ -60,8 +62,26 @@ namespace Terrafirma.Common.Mechanics
         {
             if (BlockKey.Current && CanBlock(Player))
             {
-                blockAmount = MathHelper.Lerp(blockAmount, 1f, 0.5f);
                 Blocking = true;
+                if (BlockKey.JustPressed)
+                {
+                    SyncBlock(Player.whoAmI, true);
+                }
+            }
+            else
+            {
+                if (BlockKey.JustReleased)
+                {
+                    SyncBlock(Player.whoAmI, false);
+                }
+                Blocking = false;
+            }
+        }
+        public override void PostUpdateMiscEffects()
+        {
+            if (Blocking)
+            {
+                blockAmount = MathHelper.Lerp(blockAmount, 1f, 0.5f);
                 BlockConsumeTensionTimer++;
                 Player.controlTorch = false;
                 if (BlockConsumeTensionTimer > 5)
@@ -73,8 +93,8 @@ namespace Terrafirma.Common.Mechanics
             else
             {
                 blockAmount = MathHelper.Lerp(blockAmount, 0f, 0.3f);
-                Blocking = false;
             }
+
             if (Player.ItemAnimationActive || (!Blocking && blockAmount < 0.1f) || Player.controlTorch)
             {
                 blockAmount = 0;
@@ -125,6 +145,30 @@ namespace Terrafirma.Common.Mechanics
                 return true;
             }
             return base.FreeDodge(info);
+        }
+        public static void SyncBlock(int blocker, bool Blocking)
+        {
+            ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
+            packet.Write((byte)Terrafirma.TFNetMessage.Blocking);
+            packet.Write((byte)blocker);
+            packet.Write(Blocking);
+            packet.Send(ignoreClient: blocker);
+        }
+        public static void RecieveBlockMessage(BinaryReader reader, int whoAmI)
+        {
+            int player = reader.ReadByte();
+            bool blocking = reader.ReadBoolean();
+            if (Main.netMode == NetmodeID.Server)
+            {
+                // This check forces the affected player to be whichever client sent the message to the server, this prevents other clients from spoofing a message for another player. This is a typical approach for untrusted messages from clients.
+                player = whoAmI;
+            }
+            if(player != Main.myPlayer)
+            {
+                Main.player[player].GetModPlayer<BlockingPlayer>().Blocking = blocking;
+            }
+            if (Main.netMode == NetmodeID.Server)
+                SyncBlock(player, blocking);
         }
     }
     public class BlockingGlobalItem : GlobalItem
