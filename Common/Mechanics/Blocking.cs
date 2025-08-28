@@ -38,18 +38,19 @@ namespace Terrafirma.Common.Mechanics
             BlockKey = null;
         }
 
+        public int ShieldToHoldWhileBlocking = -1;
         public bool Shattered = false;
         public bool Blocking = false;
         public int BlockConsumeTensionTimer = 0;
         public float blockAmount = 0;
         public override void ResetEffects()
         {
+            ShieldToHoldWhileBlocking = -1;
             Shattered = false;
         }
-
         public bool CanBlock(Player player)
         {
-            if (!player.ItemAnimationActive && !Shattered && player.PlayerStats().Tension > 0)
+            if (!player.ItemAnimationActive && !Shattered && player.PlayerStats().Tension > 0 && !player.PlayerStats().ItemUseBlocked && !player.cursed)
             {
                 return true;
             }
@@ -62,7 +63,8 @@ namespace Terrafirma.Common.Mechanics
                 blockAmount = MathHelper.Lerp(blockAmount, 1f, 0.5f);
                 Blocking = true;
                 BlockConsumeTensionTimer++;
-                if(BlockConsumeTensionTimer > 5)
+                Player.controlTorch = false;
+                if (BlockConsumeTensionTimer > 5)
                 {
                     BlockConsumeTensionTimer = 0;
                     Player.PlayerStats().Tension -= 1;
@@ -73,19 +75,27 @@ namespace Terrafirma.Common.Mechanics
                 blockAmount = MathHelper.Lerp(blockAmount, 0f, 0.3f);
                 Blocking = false;
             }
-            if (Player.ItemAnimationActive || (!Blocking && blockAmount < 0.1f))
+            if (Player.ItemAnimationActive || (!Blocking && blockAmount < 0.1f) || Player.controlTorch)
             {
                 blockAmount = 0;
             }
         }
         public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
         {
+            if (drawInfo.drawPlayer.shield != -1)
+                ShieldToHoldWhileBlocking = drawInfo.drawPlayer.shield;
             if (blockAmount > 0)
             {
-                CompositeArmStretchAmount amt = CompositeArmStretchAmount.ThreeQuarters;
-
-                drawInfo.drawPlayer.SetCompositeArmFront(true, amt, Player.direction * -2 * blockAmount);
-                drawInfo.drawPlayer.SetCompositeArmBack(true, amt, Player.direction * -2.3f * blockAmount);
+                if (ShieldToHoldWhileBlocking == -1)
+                {
+                    drawInfo.drawPlayer.SetCompositeArmFront(true, CompositeArmStretchAmount.ThreeQuarters, Player.direction * -2 * blockAmount);
+                    drawInfo.drawPlayer.SetCompositeArmBack(true, CompositeArmStretchAmount.ThreeQuarters, Player.direction * -2.3f * blockAmount);
+                }
+                else
+                {
+                    drawInfo.drawPlayer.shield = -1;
+                    drawInfo.drawPlayer.bodyFrame.Y = 56 * 10;
+                }
             }
         }
         public override bool FreeDodge(HurtInfo info)
@@ -115,6 +125,17 @@ namespace Terrafirma.Common.Mechanics
                 return true;
             }
             return base.FreeDodge(info);
+        }
+    }
+    public class BlockingGlobalItem : GlobalItem
+    {
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return lateInstantiation && entity.shieldSlot >= 0;
+        }
+        public override void UpdateEquip(Item item, Player player)
+        {
+            player.GetModPlayer<BlockingPlayer>().ShieldToHoldWhileBlocking = item.shieldSlot;
         }
     }
 }

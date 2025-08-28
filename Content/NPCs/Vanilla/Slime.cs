@@ -38,6 +38,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             TextureAssets.Npc[NPCID.BlueSlime] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/Slime");
             Extra = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/SlimeExtra");
             Main.npcFrameCount[NPCID.BlueSlime] = 10;
+            DataSets.NPCWhitelistedForStun[NPCID.BlueSlime] = true;
         }
         private float frameCounter;
         private int frame;

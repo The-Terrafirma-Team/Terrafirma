@@ -39,6 +39,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             for (int i = 0; i < DemonEyes.Length; i++)
             {
                 Main.npcFrameCount[DemonEyes[i]] = 12;
+                DataSets.NPCWhitelistedForStun[DemonEyes[i]] = true;
             }
             TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye");
             TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Cataract");

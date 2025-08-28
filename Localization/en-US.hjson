@@ -110,7 +110,7 @@ Mods: {
 			Shield: {
 				DisplayName: Shield
 				Tooltip: Increases knockback resistance by 35%
-				TooltipCombatRework: Increases block damage by 2
+				TooltipCombatRework: Increases block damage by 6
 			}
 
 			WindCharm: {

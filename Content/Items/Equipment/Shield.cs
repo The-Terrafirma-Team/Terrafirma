@@ -19,7 +19,7 @@ namespace Terrafirma.Content.Items.Equipment
         {
             PlayerStats stats = player.PlayerStats(); 
             stats.KnockbackResist -= 0.35f;
-            stats.ParryDamage += 3;
+            stats.ParryDamage += 6;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
