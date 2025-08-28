@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
+using System;
+using System.IO;
 using System.Linq;
 using Terrafirma.Content.Skills;
 using Terraria;
@@ -62,14 +64,17 @@ namespace Terrafirma.Common.Mechanics
                 return false;
             bool Mana = ManaCost != 0 ? player.CheckMana(ManaCost, false) : true;
             bool Tension = TensionCost != 0 ? player.CheckTension(TensionCost, false) : true;
-            if (pay)
+            if (Mana && Tension)
             {
-                if (Mana && Tension)
+                Cooldown = 1f;
+                if (CastTimeMax > 0)
+                    CastTime = 1f;
+                else
                 {
-                    Cooldown = 1f;
-                    if (CastTimeMax > 0)
-                        CastTime = 1f;
-
+                    Use(player);
+                }
+                if (pay)
+                {
                     if (TensionCost > 0)
                         player.CheckTension(TensionCost, true);
                     if (ManaCost > 0)
@@ -110,6 +115,30 @@ namespace Terrafirma.Common.Mechanics
         {
             Skills = null;
             SkillTextures = null;
+        }
+        public static void SyncSkillUse(int player, byte SkillBeingUsed)
+        {
+            ModPacket packet = ModContent.GetInstance<Terrafirma>().GetPacket();
+            packet.Write((byte)Terrafirma.TFNetMessage.SkillActivate);
+            packet.Write((byte)player);
+            packet.Write(SkillBeingUsed);
+            packet.Send(ignoreClient: player);
+        }
+        public static void RecieveSkillUse(BinaryReader reader, int whoAmI)
+        {
+            int player = reader.ReadByte();
+            byte skill = reader.ReadByte();
+            if (Main.netMode == NetmodeID.Server)
+            {
+                // This check forces the affected player to be whichever client sent the message to the server, this prevents other clients from spoofing a message for another player. This is a typical approach for untrusted messages from clients.
+                player = whoAmI;
+            }
+            if (player != Main.myPlayer)
+            {
+                Main.player[player].GetModPlayer<SkillsPlayer>().Skills[skill].TryToUse(Main.player[player]);
+            }
+            if (Main.netMode == NetmodeID.Server)
+                SyncSkillUse(player, skill);
         }
     }
     public class SkillsPlayer : ModPlayer
@@ -208,32 +237,32 @@ namespace Terrafirma.Common.Mechanics
                 if (Skills[0].CastTimeMax == 0)
                 {
                     HasDoneCooldownChime[0] = false;
-                    Skills[0].Use(Player);
                 }
+                SkillsSystem.SyncSkillUse(Player.whoAmI, 0);
             }
             if (Skill2.JustPressed && Skills[1] != null && Skills[1].TryToUse(Player))
             {
                 if (Skills[1].CastTimeMax == 0)
                 {
                     HasDoneCooldownChime[1] = false;
-                    Skills[1].Use(Player);
                 }
+                SkillsSystem.SyncSkillUse(Player.whoAmI, 1);
             }
             if (MaxSkills >= 3 && Skill3.JustPressed && Skills[2] != null && Skills[2].TryToUse(Player))
             {
                 if (Skills[2].CastTimeMax == 0)
                 {
                     HasDoneCooldownChime[2] = false;
-                    Skills[2].Use(Player);
                 }
+                SkillsSystem.SyncSkillUse(Player.whoAmI, 2);
             }
             if (MaxSkills >= 4 && Skill4.JustPressed && Skills[3] != null && Skills[3].TryToUse(Player))
             {
                 if (Skills[3].CastTimeMax == 0)
                 {
                     HasDoneCooldownChime[3] = false;
-                    Skills[3].Use(Player);
                 }
+                SkillsSystem.SyncSkillUse(Player.whoAmI, 3);
             }
         }
         public override void Unload()

@@ -14,7 +14,8 @@ namespace Terrafirma
     {
         internal enum TFNetMessage : byte
         {
-            Blocking
+            Blocking,
+            SkillActivate
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
@@ -23,6 +24,9 @@ namespace Terrafirma
             {
                 case TFNetMessage.Blocking:
                     BlockingPlayer.RecieveBlockMessage(reader, whoAmI);
+                    break;
+                case TFNetMessage.SkillActivate:
+                    SkillsSystem.RecieveSkillUse(reader, whoAmI);
                     break;
                 default:
                     Main.NewText($"SOMEONE SEND AN INVALID NET MESSAGE TYPE {type}. DESTROY THEM. KTHX BYEEEEE :3", Color.Red);
