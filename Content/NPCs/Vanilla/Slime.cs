@@ -285,8 +285,8 @@ namespace Terrafirma.Content.NPCs.Vanilla
                     break;
             }
 
-            spriteBatch.Draw(Extra.Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { Width = 132 / 2 }, Color.Lerp(npc.GetColor(npc.GetNPCColorTintedByBuffs(drawColor)), Color.Black, 0.85f) * 0.4f * npc.Opacity * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
-            spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame, npc.GetColor(npc.GetNPCColorTintedByBuffs(drawColor)) * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Extra.Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { Width = 132 / 2 }, Color.Lerp(npc.GetNPCColorTintedByBuffs(npc.color).MultiplyRGBA(drawColor),Color.Black * 0.4f, 0.85f) * npc.Opacity * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame, npc.GetNPCColorTintedByBuffs(npc.color).MultiplyRGBA(drawColor) * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Extra.Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { Width = 132 / 2, X = 132 / 2 }, highlightColor with { A = 0 } * npc.Opacity * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
         }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

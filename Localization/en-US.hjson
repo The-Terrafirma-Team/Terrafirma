@@ -132,6 +132,46 @@ Mods: {
 				DisplayName: Music Box (Meteorite)
 				Tooltip: ""
 			}
+
+			PottedCorruptBamboo: {
+				DisplayName: Potted Corrupt Bamboo
+				Tooltip: ""
+			}
+
+			PottedCorruptCedar: {
+				DisplayName: Potted Corrupt Cedar
+				Tooltip: ""
+			}
+
+			PottedCorruptPalm: {
+				DisplayName: Potted Corrupt Palm
+				Tooltip: ""
+			}
+
+			PottedCorruptTree: {
+				DisplayName: Potted Corrupt Tree
+				Tooltip: ""
+			}
+
+			PottedCrimsonBamboo: {
+				DisplayName: Potted Crimson Bamboo
+				Tooltip: ""
+			}
+
+			PottedCrimsonCedar: {
+				DisplayName: Potted Crimson Cedar
+				Tooltip: ""
+			}
+
+			PottedCrimsonPalm: {
+				DisplayName: Potted Crimson Palm
+				Tooltip: ""
+			}
+
+			PottedCrimsonTree: {
+				DisplayName: Potted Crimson Tree
+				Tooltip: ""
+			}
 		}
 	}
 }

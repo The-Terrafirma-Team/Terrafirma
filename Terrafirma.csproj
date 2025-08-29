@@ -11,7 +11,6 @@
 	  <Folder Include="Assets\Effects\" />
 	  <Folder Include="Content\Dusts\" />
 	  <Folder Include="Content\Items\Equipment\" />
-	  <Folder Include="Content\Tiles\Furniture\" />
 	</ItemGroup>
 
 	<!-- References -->

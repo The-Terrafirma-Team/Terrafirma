@@ -44,7 +44,8 @@ namespace Terrafirma.Content.Skills
         }
         public override void PreUpdateMovement()
         {
-            if (GroundSlamming && Collision.SolidCollision(Player.BottomLeft + new Vector2(0, Math.Max(Player.velocity.Y, 0) - 9), Player.width, 10))
+            //Collision.SolidCollision(Player.BottomLeft + new Vector2(0, Math.Max(Player.velocity.Y, 0) - 9), Player.width, 10)
+            if (GroundSlamming && Collision.AnyCollision(Player.position,Player.velocity,Player.width,Player.height).Y == 0)
             {
                 SoundEngine.PlaySound(SoundID.Item14, Player.position);
                 for (int i = 0; i < (5 * Power); i++)
