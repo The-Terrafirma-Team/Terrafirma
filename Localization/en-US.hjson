@@ -205,5 +205,19 @@ Mods: {
 			SilverChainmail: 5% increased melee speed
 			SilverGreaves: 5% increased movement speed
 		}
+
+		Prefixes: {
+			Healthy.DisplayName: Healthy
+			Hearty.DisplayName: Hearty
+			OK.DisplayName: O.K.
+			Stoic.DisplayName: Stoic
+			Tense.DisplayName: Tense
+		}
+
+		Misc: {
+			MaxTensionPrefix: "{0} max tension"
+			MaxLifePrefix: "{0} max life"
+			LifeRegenPrefix: "{0} life regeneration"
+		}
 	}
 }

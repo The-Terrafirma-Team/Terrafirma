@@ -54,7 +54,6 @@ namespace Terrafirma.Content.Items.Equipment.Vanilla
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return entity.ModItem == null;
             return entity.type is ItemID.SilverHelmet or ItemID.SilverChainmail or ItemID.SilverGreaves;
         }
         public override void UpdateEquip(Item item, Player player)

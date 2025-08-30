@@ -37,7 +37,7 @@ namespace Terrafirma.Common
         public bool TurnOffDownwardsMovementRestrictions = false;
         public bool ImmuneToContactDamage = false;
         public float KnockbackResist = 1f;
-        public float MeleeWeaponScale = 1f;
+        public float MeleeWeaponScale = 0f;
         public float AmmoSaveChance = 0f;
         /// <summary>
         /// This defaults to 0.5f, multiply it down to make the player slow down less in the air.
@@ -48,6 +48,9 @@ namespace Terrafirma.Common
         public float ParryPower = 1f;
         // Tension
         public int Tension = 50;
+        /// <summary>
+        /// The base tension max. Buffs and things should change TensionMax2 instead.
+        /// </summary>
         public int TensionMax = 50;
         public int TensionMax2 = 0;
         public float TensionGainMultiplier = 1f;
@@ -60,7 +63,7 @@ namespace Terrafirma.Common
         {
             DebuffTimeMultiplier = 1f;
             BuffTimeMultiplier = 1f;
-            MeleeWeaponScale = 1f;
+            MeleeWeaponScale = 0f;
             AmmoSaveChance = 0f;
 
             if (TurnOffDownwardsMovementRestrictions)
@@ -80,8 +83,8 @@ namespace Terrafirma.Common
             ParryDamage = 8;
             ParryPower = 1f;
 
-            TensionMax2 = TensionMax;
             Tension = Math.Clamp(Tension, 0, TensionMax2);
+            TensionMax2 = TensionMax;
             TensionGainMultiplier = 1f;
             TensionCostMultiplier = 1f;
             FlatTensionGain = 0;
