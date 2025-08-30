@@ -43,27 +43,19 @@ namespace Terrafirma.Content.Skills
             if (GroundSlamming)
                 Player.PlayerStats().ImmuneToContactDamage = true;
 
-        }
-
-        public override void ProcessTriggers(TriggersSet triggersSet)
-        {
-            if (Player.grappling[0] > -1 || (Player.controlJump && (Player.AnyExtraJumpUsable() || Player.wingTime > 0f)))
-                GroundSlamming = false;
-        }
-        public override void PreUpdateMovement()
-        {
-            //Collision.SolidCollision(Player.BottomLeft + new Vector2(0, Math.Max(Player.velocity.Y, 0) - 9), Player.width, 10)
-            if (GroundSlamming && Collision.AnyCollision(Player.position,Player.velocity,Player.width,Player.height).Y == 0)
+            bool flipped = Player.gravDir == -1;
+            Vector2 bottom = flipped ? Player.Top : Player.Bottom;
+            if (GroundSlamming && Player.velocity.Y == 0)
             {
                 SoundEngine.PlaySound(SoundID.Item14, Player.position);
                 for (int i = 0; i < (5 * Power); i++)
                 {
-                    ParticleSystem.NewParticle(new Smoke(Main.rand.NextVector2Circular(2, 1f) - Vector2.UnitY, Color.Beige * 0.5f, Color.DarkGoldenrod * 0.3f, Main.rand.NextFloat(0.8f, 1.2f)), Player.Bottom);
+                    ParticleSystem.NewParticle(new Smoke(Main.rand.NextVector2Circular(2, 1f) - Vector2.UnitY * Player.gravDir, Color.Beige * 0.5f, Color.DarkGoldenrod * 0.3f, Main.rand.NextFloat(0.8f, 1.2f)), bottom);
                 }
-                DecalsSystem.NewDecal(new CrackDecal(0.5f + (Power / 3f)), Player.Bottom + Player.velocity);
+                DecalsSystem.NewDecal(new CrackDecal(0.5f + (Power / 3f)), bottom + Player.velocity);
                 GroundSlamming = false;
                 Player.fallStart = (int)Player.position.X / 16;
-                Player.velocity.Y = -4f - Power * 0.5f;
+                Player.velocity.Y = -4f - Power * 0.5f * Player.gravDir;
                 foreach (NPC n in Main.ActiveNPCs)
                 {
                     if (!n.friendly && n.Center.Distance(Player.Center) < (16 * (4f + Power * 0.5f)))
@@ -97,12 +89,19 @@ namespace Terrafirma.Content.Skills
 
                 Player.PlayerStats().TurnOffDownwardsMovementRestrictions = true;
                 Player.velocity.X *= 0.9f;
-                Player.velocity.Y = Math.Max(Player.velocity.Y + 0.3f, 2f);
-                Dust d = Dust.NewDustDirect(Player.BottomLeft + Player.velocity, Player.width, 2, DustID.Cloud);
+                Player.velocity.Y = flipped ? Math.Min(Player.velocity.Y - 0.3f, -2f) : Math.Max(Player.velocity.Y + 0.3f, 2f);
+
+                Dust d = Dust.NewDustDirect((flipped ? Player.position : Player.BottomLeft) + Player.velocity, Player.width, 2, DustID.Cloud);
                 d.noGravity = true;
                 d.velocity = Main.rand.NextVector2Circular(2, 2);
-                d.velocity.Y -= 2f;
+                d.velocity.Y -= 2f * Player.gravDir;
             }
+        }
+
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (Player.grappling[0] > -1 || (Player.controlJump && (Player.AnyExtraJumpUsable() || Player.wingTime > 0f)))
+                GroundSlamming = false;
         }
     }
 }
