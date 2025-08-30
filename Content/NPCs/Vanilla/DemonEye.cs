@@ -41,14 +41,14 @@ namespace Terrafirma.Content.NPCs.Vanilla
                 Main.npcFrameCount[DemonEyes[i]] = 12;
                 DataSets.NPCWhitelistedForStun[DemonEyes[i]] = true;
             }
-            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye");
-            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Cataract");
-            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Purple");
-            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Green");
-            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // need sprite
-            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // ditto
-            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye_Dilated");
-            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye");
+            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Cataract");
+            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Purple");
+            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Green");
+            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // need sprite
+            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Dilated");
+            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // ditto
         }
         public override void Unload()
         {

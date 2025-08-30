@@ -35,8 +35,8 @@ namespace Terrafirma.Content.NPCs.Vanilla
         private static Asset<Texture2D> Extra;
         public override void SetStaticDefaults()
         {
-            TextureAssets.Npc[NPCID.BlueSlime] = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/Slime");
-            Extra = Mod.Assets.Request<Texture2D>("Assets/Resprites/NPCs/SlimeExtra");
+            TextureAssets.Npc[NPCID.BlueSlime] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/Slime");
+            Extra = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/SlimeExtra");
             Main.npcFrameCount[NPCID.BlueSlime] = 10;
             DataSets.NPCWhitelistedForStun[NPCID.BlueSlime] = true;
         }
