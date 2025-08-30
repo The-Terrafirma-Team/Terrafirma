@@ -10,7 +10,6 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Effects\" />
 	  <Folder Include="Content\Dusts\" />
-	  <Folder Include="Content\Items\Equipment\" />
 	</ItemGroup>
 
 	<!-- References -->

@@ -70,20 +70,20 @@ namespace Terrafirma.Common.PlayerLayers
                 }
             }
             DrawData item;
-            //if (true)
-            //{
-                //float num = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f));
-                //float x = 2.5f + 1.5f * num;
-                //Color colorArmorBody = drawInfo.colorArmorBody;
-                //colorArmorBody.A = 0;
-                //colorArmorBody *= 0.45f - num * 0.15f;
-                //for (float num2 = 0f; num2 < 4f; num2 += 1f)
-                //{
-                //    item = new DrawData(TextureAssets.AccShield[shield].Value, zero2 + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + zero + new Vector2(x, 0f).RotatedBy(num2 / 4f * ((float)Math.PI * 2f)), bodyFrame, colorArmorBody, drawInfo.drawPlayer.bodyRotation, bodyVect, 1f, drawInfo.playerEffect);
-                //    item.shader = drawInfo.cShield;
-                //    drawInfo.DrawDataCache.Add(item);
-                //}
-            //}
+            if (true) // the glow effect
+            {
+                float num = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f));
+                float x = 2.5f + 1.5f * num;
+                Color colorArmorBody = drawInfo.colorArmorBody;
+                colorArmorBody.A = 0;
+                colorArmorBody *= 0.45f - num * 0.15f;
+                for (float num2 = 0f; num2 < 4f; num2 += 1f)
+                {
+                    item = new DrawData(TextureAssets.AccShield[shield].Value, zero2 + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + zero + new Vector2(x, 0f).RotatedBy(num2 / 4f * ((float)Math.PI * 2f)), bodyFrame, colorArmorBody, drawInfo.drawPlayer.bodyRotation, bodyVect, 1f, drawInfo.playerEffect);
+                    item.shader = drawInfo.cShield;
+                    drawInfo.DrawDataCache.Add(item);
+                }
+            }
             item = new DrawData(TextureAssets.AccShield[shield].Value, zero2 + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + zero, bodyFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, bodyVect, 1f, drawInfo.playerEffect);
             item.shader = drawInfo.cShield;
             drawInfo.DrawDataCache.Add(item);

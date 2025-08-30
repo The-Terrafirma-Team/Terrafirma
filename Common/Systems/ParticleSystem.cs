@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Systems
 {
+    //Only god knows why we have this instead of particle orchestrator
     public class ParticleSystem : ModSystem
     {
         private static List<Particle> Particles = new();

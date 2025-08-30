@@ -6,16 +6,39 @@ using System.Threading.Tasks;
 using Terrafirma.Common.Interfaces;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common
 {
     public class PlayerStats : ModPlayer
     {
+        public override void Load()
+        {
+            On_Player.AddBuff_DetermineBuffTimeToAdd += On_Player_AddBuff_DetermineBuffTimeToAdd;
+        }
+        private int On_Player_AddBuff_DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time1)
+        {
+            if (Main.debuff[type] && !BuffID.Sets.NurseCannotRemoveDebuff[type])
+            {
+                time1 = (int)(time1 * self.PlayerStats().DebuffTimeMultiplier);
+            }
+            else
+            {
+                time1 = (int)(time1 * self.PlayerStats().BuffTimeMultiplier);
+            }
+            return orig(self, type, time1);
+        }
+
+        public float DebuffTimeMultiplier = 1f;
+        public float BuffTimeMultiplier = 1f;
+
         public bool ItemUseBlocked = false;
         public bool TurnOffDownwardsMovementRestrictions = false;
         public bool ImmuneToContactDamage = false;
         public float KnockbackResist = 1f;
+        public float MeleeWeaponScale = 1f;
+        public float AmmoSaveChance = 0f;
         /// <summary>
         /// This defaults to 0.5f, multiply it down to make the player slow down less in the air.
         /// </summary>
@@ -35,6 +58,11 @@ namespace Terrafirma.Common
         internal bool RightMouseSwitch = false;
         public override void ResetEffects()
         {
+            DebuffTimeMultiplier = 1f;
+            BuffTimeMultiplier = 1f;
+            MeleeWeaponScale = 1f;
+            AmmoSaveChance = 0f;
+
             if (TurnOffDownwardsMovementRestrictions)
             {
                 Player.maxFallSpeed = 1000;
@@ -59,7 +87,6 @@ namespace Terrafirma.Common
             FlatTensionGain = 0;
             FlatTensionCost = 0;
         }
-
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             modifiers.Knockback *= KnockbackResist;
@@ -77,7 +104,18 @@ namespace Terrafirma.Common
             }
             return base.AddStartingItems(mediumCoreDeath);
         }
+        public override bool CanConsumeAmmo(Item weapon, Item ammo)
+        {
+            if (Main.rand.NextFloat() < AmmoSaveChance)
+                return false;
 
+            return base.CanConsumeAmmo(weapon, ammo);
+        }
+        public override void ModifyItemScale(Item item, ref float scale)
+        {
+            if (item.DamageType.CountsAsClass(DamageClass.Melee))
+                scale += MeleeWeaponScale;
+        }
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
             if (Main.mouseRight && !RightMouseSwitch)

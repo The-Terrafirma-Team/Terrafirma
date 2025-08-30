@@ -173,5 +173,37 @@ Mods: {
 				Tooltip: ""
 			}
 		}
+
+		VanillaSetBonus: {
+			Lead:
+				'''
+				+3 defense
+				33% chance to save ammo
+				Your attacks have a chance to poison enemies
+				'''
+			Silver:
+				'''
+				+3 defense
+				Debuffs last half as long
+				'''
+			Tungsten:
+				'''
+				+3 defense
+				+10% knockback
+				Melee weapons are 20% larger
+				'''
+			Gold:
+				'''
+				+3 defense
+				Enemies killed will drop more money
+				'''
+		}
+
+		VanillaItemTooltips: {
+			AnkhCharm: Decreases debuff duration by 50%
+			LivingFireBlock: Arrows that pass through are lit ablaze
+			SilverChainmail: 5% increased melee speed
+			SilverGreaves: 5% increased movement speed
+		}
 	}
 }
