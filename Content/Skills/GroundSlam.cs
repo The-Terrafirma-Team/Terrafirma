@@ -6,6 +6,7 @@ using Terrafirma.Content.Buffs.Debuffs;
 using Terrafirma.Content.Particles;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,6 +19,7 @@ namespace Terrafirma.Content.Skills
         public override Color RechargeFlashColor => Color.LightCoral;
         public override void Use(Player player)
         {
+            player.RemoveAllGrapplingHooks();
             player.GetModPlayer<GroundSlamPlayer>().GroundSlamming = true;
 
             for (int i = 0; i < 15; i++)
@@ -41,6 +43,12 @@ namespace Terrafirma.Content.Skills
             if (GroundSlamming)
                 Player.PlayerStats().ImmuneToContactDamage = true;
 
+        }
+
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (Player.grappling[0] > -1 || (Player.controlJump && (Player.AnyExtraJumpUsable() || Player.wingTime > 0f)))
+                GroundSlamming = false;
         }
         public override void PreUpdateMovement()
         {
@@ -73,6 +81,7 @@ namespace Terrafirma.Content.Skills
             }
             if (GroundSlamming)
             {
+                Player.wingTime = 0f;
                 foreach (NPC n in Main.ActiveNPCs)
                 {
                     if (!n.friendly && n.Hitbox.Intersects(Player.Hitbox))
@@ -86,7 +95,6 @@ namespace Terrafirma.Content.Skills
                 if (Power > 5f)
                     Power = 5f;
 
-                Player.RemoveAllGrapplingHooks();
                 Player.PlayerStats().TurnOffDownwardsMovementRestrictions = true;
                 Player.velocity.X *= 0.9f;
                 Player.velocity.Y = Math.Max(Player.velocity.Y + 0.3f, 2f);
