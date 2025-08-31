@@ -11,25 +11,25 @@ using Terrafirma.Common;
 
 namespace TerrafirmaSceneries.Common.Ambience
 {
+    internal class MusicSystem : ModSystem // mfw the setstaticdefaults in the ModSceneEffects didn't work: ):
+    {
+        public override void SetStaticDefaults()
+        {
+            MusicID.Sets.SkipsVolumeRemap[MusicLoader.GetMusicSlot("Terrafirma/Assets/Music/Meteor")] = true;
+            MusicID.Sets.SkipsVolumeRemap[MusicLoader.GetMusicSlot("Terrafirma/Assets/Music/Hell")] = true;
+        }
+    }
     internal class MeteorMusic : ModSceneEffect
     {
         public override bool IsSceneEffectActive(Player player)
         {
             return player.ZoneMeteor && ModContent.GetInstance<ClientConfig>().EnableMusicReplacements;
         }
-        public override void SetStaticDefaults()
-        {
-            MusicID.Sets.SkipsVolumeRemap[MusicLoader.GetMusicSlot("Terrafirma/Assets/Music/Meteor")] = true;
-        }
         public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
         public override int Music => MusicLoader.GetMusicSlot("Terrafirma/Assets/Music/Meteor");
     }
     internal class HellAlternate : ModSceneEffect
     {
-        public override void SetStaticDefaults()
-        {
-            MusicID.Sets.SkipsVolumeRemap[MusicLoader.GetMusicSlot("Terrafirma/Assets/Music/Hell")] = true;
-        }
         public static bool AltHellTheme = false;
         public override bool IsSceneEffectActive(Player player)
         {

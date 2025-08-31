@@ -14,11 +14,6 @@ Mods: {
 				Description: Blocking blocked!
 			}
 
-			Parried: {
-				DisplayName: Parried
-				Description: Mods.TerrafirmaCombat.Buffs.Parried.Description
-			}
-
 			Stunned: {
 				DisplayName: Stunned
 				Description: Mods.TerrafirmaCombat.Buffs.Stunned.Description
@@ -172,6 +167,21 @@ Mods: {
 				DisplayName: Potted Crimson Tree
 				Tooltip: ""
 			}
+
+			DemoniteCrystalMedium: {
+				DisplayName: Medium Demonite Crystal
+				Tooltip: "'Pulsing with dark energy'"
+			}
+
+			DemoniteCrystalLarge: {
+				DisplayName: large Demonite Crystal
+				Tooltip: "'Pulsing with dark energy'"
+			}
+
+			CrimtaneGrowthLarge: {
+				DisplayName: Large Crimtane Growth
+				Tooltip: ""
+			}
 		}
 
 		VanillaSetBonus: {
@@ -219,5 +229,7 @@ Mods: {
 			MaxLifePrefix: "{0} max life"
 			LifeRegenPrefix: "{0} life regeneration"
 		}
+
+		WorldGen.RandomDecorationsMessage: Miscellaneous Decorations
 	}
 }

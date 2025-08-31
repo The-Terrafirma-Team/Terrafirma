@@ -1,14 +1,15 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Threading;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.GameContent;
-using ReLogic.Threading;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Ambience
 {
@@ -114,7 +115,7 @@ namespace Terrafirma.Common.Ambience
             }
             else
             {
-                Ember.Opacity -= 0.02f;
+                Ember.Opacity -= 0.01f;
             }
             Ember.Opacity = MathHelper.Clamp(Ember.Opacity,0,1);
 
