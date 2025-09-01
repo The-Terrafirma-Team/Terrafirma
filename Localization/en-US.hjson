@@ -185,7 +185,7 @@ Mods: {
 
 			DemoniteCrystalSmall: {
 				DisplayName: Small Demonite Crystal
-				Tooltip: "Pulsing with dark energy'"
+				Tooltip: Pulsing with dark energy'
 			}
 		}
 

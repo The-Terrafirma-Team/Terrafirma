@@ -102,11 +102,11 @@ namespace Terrafirma.Common.Mechanics
         }
         public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
         {
-            if (drawInfo.drawPlayer.shield != -1)
+            if (drawInfo.drawPlayer.shield >= 0)
                 ShieldToHoldWhileBlocking = drawInfo.drawPlayer.shield;
             if (blockAmount > 0)
             {
-                if (ShieldToHoldWhileBlocking == -1)
+                if (ShieldToHoldWhileBlocking < 0)
                 {
                     drawInfo.drawPlayer.SetCompositeArmFront(true, CompositeArmStretchAmount.ThreeQuarters, Player.direction * -2 * blockAmount);
                     drawInfo.drawPlayer.SetCompositeArmBack(true, CompositeArmStretchAmount.ThreeQuarters, Player.direction * -2.3f * blockAmount);

@@ -2,10 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
 using Terraria;
 using Terraria.DataStructures;
@@ -37,7 +33,7 @@ namespace Terrafirma.Common.PlayerLayers
                 return;
             float alpha = Lighting.Brightness((int)(drawInfo.drawPlayer.Center.X / 16), (int)((drawInfo.drawPlayer.Center.Y + drawInfo.drawPlayer.gfxOffY) / 16));
             float opacity = drawInfo.drawPlayer.GetModPlayer<BlockingPlayer>().blockAmount;
-            drawInfo.DrawDataCache.Add(new DrawData(BlockTex.Value, new Vector2((int)drawInfo.Center.X, (int)drawInfo.Center.Y) - Main.screenPosition - Vector2.UnitY, BlockTex.Frame(2,1,0,0), Color.Cyan with { A = 0 } * alpha * opacity, 0f, new Vector2(BlockTex.Height() / 2), 1f * opacity, SpriteEffects.None, 0));
+            drawInfo.DrawDataCache.Add(new DrawData(BlockTex.Value, new Vector2((int)drawInfo.Center.X, (int)drawInfo.Center.Y) - Main.screenPosition - Vector2.UnitY, BlockTex.Frame(2, 1, 0, 0), Color.Cyan with { A = 0 } * alpha * opacity, 0f, new Vector2(BlockTex.Height() / 2), 1f * opacity, SpriteEffects.None, 0));
             drawInfo.DrawDataCache.Add(new DrawData(BlockTex.Value, new Vector2((int)drawInfo.Center.X, (int)drawInfo.Center.Y) - Main.screenPosition - Vector2.UnitY, BlockTex.Frame(2, 1, 1, 0), Color.White with { A = 0 } * alpha * opacity, 0f, new Vector2(BlockTex.Height() / 2), 1f * opacity, SpriteEffects.None, 0));
         }
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
@@ -52,6 +48,10 @@ namespace Terrafirma.Common.PlayerLayers
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             int shield = drawInfo.drawPlayer.GetModPlayer<BlockingPlayer>().ShieldToHoldWhileBlocking;
+            if (!TextureAssets.AccShield[shield].IsLoaded)
+            {
+                Main.instance.LoadAccShield(shield);
+            }
             Vector2 zero = Vector2.Zero;
             if (true)
             {
@@ -89,12 +89,12 @@ namespace Terrafirma.Common.PlayerLayers
             drawInfo.DrawDataCache.Add(item);
             //if (true)
             //{
-                Color colorArmorBody2 = drawInfo.colorArmorBody;
-                float num3 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (float)Math.PI);
-                colorArmorBody2.A = (byte)((float)(int)colorArmorBody2.A * (0.5f + 0.5f * num3));
-                colorArmorBody2 *= 0.5f + 0.5f * num3;
-                item = new DrawData(TextureAssets.AccShield[shield].Value, zero2 + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + zero, bodyFrame, colorArmorBody2, drawInfo.drawPlayer.bodyRotation, bodyVect, 1f, drawInfo.playerEffect);
-                item.shader = drawInfo.cShield;
+            Color colorArmorBody2 = drawInfo.colorArmorBody;
+            float num3 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (float)Math.PI);
+            colorArmorBody2.A = (byte)((float)(int)colorArmorBody2.A * (0.5f + 0.5f * num3));
+            colorArmorBody2 *= 0.5f + 0.5f * num3;
+            item = new DrawData(TextureAssets.AccShield[shield].Value, zero2 + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + zero, bodyFrame, colorArmorBody2, drawInfo.drawPlayer.bodyRotation, bodyVect, 1f, drawInfo.playerEffect);
+            item.shader = drawInfo.cShield;
             //}
         }
     }
