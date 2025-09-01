@@ -14,6 +14,18 @@ using Terraria.ObjectData;
 
 namespace Terrafirma.Content.Tiles.Natural
 {
+    public class DemoniteCrystalSmall : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.CloneDefaults(ItemID.DemoniteOre);
+            Item.createTile = ModContent.TileType<DemoniteCrystal1x1>();
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddTile(TileID.HeavyWorkBench).AddIngredient(ItemID.DemoniteOre).Register();
+        }
+    }
     public class DemoniteCrystalMedium : ModItem
     {
         public override void SetDefaults()
@@ -40,11 +52,33 @@ namespace Terrafirma.Content.Tiles.Natural
             CreateRecipe().AddTile(TileID.HeavyWorkBench).AddIngredient(ItemID.DemoniteOre, 6).Register();
         }
     }
+    public class DemoniteCrystal1x1 : DemoniteCrystal2x2
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.tileLighted[Type] = true;
+            Main.tileFrameImportant[Type] = true;
+            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop, TileObjectData.newTile.Width, 0);
+            TileObjectData.newTile.UsesCustomCanPlace = true;
+            TileObjectData.newTile.CoordinateWidth = 16;
+            TileObjectData.newTile.CoordinatePadding = 2;
+            TileObjectData.newTile.StyleHorizontal = true;
+            TileObjectData.newTile.RandomStyleRange = 3;
+            DustType = DustID.Demonite;
+            MinPick = 55;
+            TileObjectData.addTile(Type);
+            AddMapEntry(new Color(98, 95, 167), Language.GetText("MapObject.Demonite"));
+        }
+        public override IEnumerable<Item> GetItemDrops(int i, int j)
+        {
+            yield return new Item(ItemID.DemoniteOre);
+        }
+    }
     public class DemoniteCrystal2x2 : ModTile
     {
         public override void EmitParticles(int i, int j, Tile tile, short tileFrameX, short tileFrameY, Color tileLight, bool visible)
         {
-            if(tileFrameY == 18 && Main.rand.NextBool(8))
+            if(Main.rand.NextBool(8))
             {
                 Dust d = Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 14),16,1,DustID.CorruptTorch);
                 d.noLight = true;
@@ -59,7 +93,7 @@ namespace Terrafirma.Content.Tiles.Natural
             TileObjectData.newTile.Width = 2;
             TileObjectData.newTile.Height = 2;
             TileObjectData.newTile.Origin = new Point16(1, 1);
-            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
+            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.CoordinateHeights = [16, 16];
             TileObjectData.newTile.CoordinateWidth = 16;
@@ -97,7 +131,7 @@ namespace Terrafirma.Content.Tiles.Natural
             TileObjectData.newTile.Width = 3;
             TileObjectData.newTile.Height = 2;
             TileObjectData.newTile.Origin = new Point16(1, 1);
-            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
+            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.CoordinateHeights = [16, 16];
             TileObjectData.newTile.CoordinateWidth = 16;

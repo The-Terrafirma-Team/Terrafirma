@@ -25,10 +25,18 @@ namespace Terrafirma.Content.Worldgen
             {
                 if (Main.rand.NextBool(23))
                 {
-                    if (Main.rand.NextBool())
-                        WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal2x2>(), true, false, -1, Main.rand.Next(3));
-                    else
-                        WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal3x2>(), true, false, -1, 0);
+                    switch (Main.rand.Next(3))
+                    {
+                        case 0:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal2x2>(), true, false, -1, Main.rand.Next(3));
+                            break;
+                        case 1:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal1x1>(), true, false, -1, Main.rand.Next(3));
+                            break;
+                        case 2:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal3x2>(), true, false, -1, 0);
+                            break;
+                    }
                 }
             }
             else if(Main.tile[x, y + 1].TileType == TileID.Crimstone)
@@ -48,10 +56,18 @@ namespace Terrafirma.Content.Worldgen
                 }
                 else
                 {
-                    if (Main.rand.NextBool())
-                        WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal2x2>(), true, false, -1, Main.rand.Next(3));
-                    else
-                        WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal3x2>(), true, false, -1, 0);
+                    switch (Main.rand.Next(3))
+                    {
+                        case 0:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal2x2>(), true, false, -1, Main.rand.Next(3));
+                            break;
+                        case 1:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal1x1>(), true, false, -1, Main.rand.Next(3));
+                            break;
+                        case 2:
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<DemoniteCrystal3x2>(), true, false, -1, 0);
+                            break;
+                    }
                 }
             }
         }
@@ -62,6 +78,8 @@ namespace Terrafirma.Content.Worldgen
             {
                 for (int y = 100; y < Main.maxTilesY - 20; y++)
                 {
+                    if (Main.tile[x, y + 1].TileType is TileID.BlueDungeonBrick or TileID.GreenDungeonBrick or TileID.PinkDungeonBrick or TileID.LihzahrdBrick)
+                        continue;
                     TryToPlaceEvilOreChunks(x, y);
                 }
             }
@@ -72,7 +90,7 @@ namespace Terrafirma.Content.Worldgen
     {
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
-            int index = tasks.FindIndex(GenPass => GenPass.Name.Equals("Piles"));
+            int index = tasks.FindIndex(GenPass => GenPass.Name.Equals("Stalac"));
             tasks.Insert(index + 1, new RandomDecorationsPass("RandomDecorations",100f));
         }
         public static LocalizedText RandomDecorationsMessage { get; private set; }

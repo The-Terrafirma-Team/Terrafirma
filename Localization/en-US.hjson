@@ -182,6 +182,11 @@ Mods: {
 				DisplayName: Large Crimtane Growth
 				Tooltip: ""
 			}
+
+			DemoniteCrystalSmall: {
+				DisplayName: Small Demonite Crystal
+				Tooltip: "Pulsing with dark energy'"
+			}
 		}
 
 		VanillaSetBonus: {

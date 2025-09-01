@@ -89,8 +89,20 @@ namespace Terrafirma.Common
                 if (recipe.Mod != null)
                     return;
 
+                bool hasWall = false;
+                for(int j = 0; j < recipe.requiredItem.Count; j++)
+                {
+                    if (recipe.requiredItem[j].createWall != -1)
+                    {
+                        hasWall = true;
+                        break;
+                    }
+                }
+                if (hasWall)
+                    continue;
+
                 #region bricks
-                if (recipe.HasResult(ItemID.GrayBrick))
+                if (recipe.HasResult(ItemID.GrayBrick) && !recipe.HasIngredient(ItemID.StonePlatform))
                 {
                     recipe.RemoveIngredient(ItemID.StoneBlock);
                     recipe.AddIngredient(ItemID.StoneBlock);
