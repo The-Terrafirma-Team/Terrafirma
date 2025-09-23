@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace Terrafirma.Content.Buffs.Cooldowns
 {
@@ -13,7 +14,7 @@ namespace Terrafirma.Content.Buffs.Cooldowns
     {
         public override void SetStaticDefaults()
         {
-            Main.pvpBuff[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
             Main.debuff[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)

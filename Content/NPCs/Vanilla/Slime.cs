@@ -29,7 +29,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public override void Unload()
         {
-            TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
+            //TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
             Main.npcFrameCount[NPCID.BlueSlime] = 2;
         }
         private static Asset<Texture2D> Extra;

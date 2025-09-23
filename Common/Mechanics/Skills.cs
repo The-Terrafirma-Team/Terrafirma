@@ -11,6 +11,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Mechanics
@@ -30,6 +31,10 @@ namespace Terrafirma.Common.Mechanics
             SkillsSystem.Skills = SkillsSystem.Skills.Append(this).ToArray();
             SkillsSystem.SkillTextures = SkillsSystem.SkillTextures.Append(ModContent.Request<Texture2D>(Texture)).ToArray();
         }
+
+        //public string LocalizationCategory => "Skills";
+        //public virtual LocalizedText DisplayName => this.GetLocalization(nameof(DisplayName), PrettyPrintName);
+        //public virtual LocalizedText Tooltip => this.GetLocalization(nameof(Tooltip), () => "");
         public virtual int ManaCost => 0;
 
         public virtual Color RechargeFlashColor => Color.White;

@@ -70,8 +70,8 @@ namespace Terrafirma.Common
             {
                 Player.maxFallSpeed = 1000;
             }
-            ImmuneToContactDamage = false;
             TurnOffDownwardsMovementRestrictions = false;
+            ImmuneToContactDamage = false;
 
             KnockbackResist = 1f;
             AirResistenceMultiplier = 0.5f;

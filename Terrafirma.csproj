@@ -9,6 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Folder Include="Assets\Effects\" />
+	  <Folder Include="Common\Systems\" />
 	  <Folder Include="Content\Dusts\" />
 	</ItemGroup>
 

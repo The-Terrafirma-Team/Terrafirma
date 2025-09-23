@@ -28,6 +28,11 @@ Mods: {
 				DisplayName: Focus Strike Buff
 				Description: Mods.TerrafirmaCombat.Buffs.FocusStrikeBuff.Description
 			}
+
+			CleanseBuff: {
+				DisplayName: Cleansed
+				Description: Immune to most debuffs
+			}
 		}
 
 		Projectiles: {
@@ -186,6 +191,11 @@ Mods: {
 			DemoniteCrystalSmall: {
 				DisplayName: Small Demonite Crystal
 				Tooltip: Pulsing with dark energy'
+			}
+
+			SpellScrollCleanse: {
+				DisplayName: Spell Scroll Cleanse
+				Tooltip: ""
 			}
 		}
 
