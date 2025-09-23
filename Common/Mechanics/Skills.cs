@@ -13,12 +13,18 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Core;
 
 namespace Terrafirma.Common.Mechanics
 {
-    public abstract class Skill : ILoadable
+    public abstract class Skill : ModType, ILocalizedModType
     {
-        public int ID()
+        protected Skill()
+        {
+            ID = GetID();
+        }
+        public int ID;
+        public int GetID()
         {
             for (int i = 0; i < SkillsSystem.Skills.Length; i++)
                 if (SkillsSystem.Skills[i].GetType().Name == this.GetType().Name)
@@ -26,17 +32,27 @@ namespace Terrafirma.Common.Mechanics
             return -1;
         }
         public virtual string Texture => (GetType().Namespace + "." + GetType().Name).Replace('.', '/');
-        public void Load(Mod mod)
+        public override void Load()
         {
+            ID = SkillsSystem.Skills.Length;
             SkillsSystem.Skills = SkillsSystem.Skills.Append(this).ToArray();
             SkillsSystem.SkillTextures = SkillsSystem.SkillTextures.Append(ModContent.Request<Texture2D>(Texture)).ToArray();
         }
-
-        //public string LocalizationCategory => "Skills";
-        //public virtual LocalizedText DisplayName => this.GetLocalization(nameof(DisplayName), PrettyPrintName);
-        //public virtual LocalizedText Tooltip => this.GetLocalization(nameof(Tooltip), () => "");
+        public sealed override void SetupContent()
+        {
+            SetStaticDefaults();
+            _ = DisplayName;
+            _ = Tooltip;
+        }
+        protected sealed override void Register()
+        {
+            ModTypeLookup<Skill>.Register(this);
+        }
+        public string LocalizationCategory => "Skills";
+        public virtual LocalizedText DisplayName => this.GetLocalization(nameof(DisplayName), PrettyPrintName);
+        public virtual LocalizedText Tooltip => this.GetLocalization(nameof(Tooltip), () => "");
+        public virtual object[] TooltipFormatting() => [];
         public virtual int ManaCost => 0;
-
         public virtual Color RechargeFlashColor => Color.White;
         public virtual int TensionCost => 0;
         /// <summary>
@@ -107,9 +123,6 @@ namespace Terrafirma.Common.Mechanics
         public virtual void CastingEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
         }
-        public void Unload()
-        {
-        }
     }
 
     public class SkillsSystem : ModSystem
@@ -156,7 +169,7 @@ namespace Terrafirma.Common.Mechanics
         {
             return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
         }
-        public Skill[] Skills = { new FocusStrike(), new GroundSlam(), null, null };
+        public Skill[] Skills = { null, null, null, null };
         public static bool[] HasDoneCooldownChime = { true, true, true, true };
         public static byte[] CooldownFlashLight = { 0, 0, 0, 0 };
 

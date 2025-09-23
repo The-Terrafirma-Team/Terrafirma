@@ -197,6 +197,16 @@ Mods: {
 				DisplayName: Spell Scroll Cleanse
 				Tooltip: ""
 			}
+
+			SpellScrollFocusStrike: {
+				DisplayName: Spell Scroll Focus Strike
+				Tooltip: ""
+			}
+
+			SpellScrollGroundSlam: {
+				DisplayName: Spell Scroll Ground Slam
+				Tooltip: ""
+			}
 		}
 
 		VanillaSetBonus: {
@@ -246,5 +256,42 @@ Mods: {
 		}
 
 		WorldGen.RandomDecorationsMessage: Miscellaneous Decorations
+
+		Skills: {
+			Cleanse: {
+				DisplayName: Cleanse
+				Tooltip: It doesn't do {0} damage!
+			}
+
+			FocusStrike: {
+				DisplayName: Focus Strike
+				Tooltip: ""
+			}
+
+			GroundSlam: {
+				DisplayName: Ground Slam
+				Tooltip: ""
+			}
+
+			TestSkill: {
+				DisplayName: Test Skill
+				Tooltip: ""
+			}
+
+			TestSkill2: {
+				DisplayName: Test Skill2
+				Tooltip: ""
+			}
+
+			TestSkill3: {
+				DisplayName: Test Skill3
+				Tooltip: ""
+			}
+
+			TestSkill4: {
+				DisplayName: Test Skill4
+				Tooltip: ""
+			}
+		}
 	}
 }

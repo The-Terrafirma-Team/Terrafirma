@@ -11,6 +11,10 @@ namespace Terrafirma.Content.Skills
 {
     public class Cleanse : Skill
     {
+        public override object[] TooltipFormatting()
+        {
+            return new object[] { Main.LocalPlayer.GetTotalDamage(DamageClass.Magic).ApplyTo(30) };
+        }
         public override int ManaCost => 100;
         public override int CastTimeMax => 120;
         public override int CooldownMax => 1 * 30;

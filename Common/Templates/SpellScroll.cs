@@ -9,6 +9,7 @@ using Terrafirma.Common.Systems;
 using Terrafirma.Content.Particles;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Templates
@@ -36,8 +37,9 @@ namespace Terrafirma.Common.Templates
                         {
                             ParticleSystem.NewParticle(new StarSparkle(Main.rand.Next(14, 42), Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(0.4f, 1f), SkillToLearn.RechargeFlashColor with { A = 0 } * Main.rand.NextFloat(0.2f,1f), Main.rand.NextVector2Circular(5, 5) + new Vector2(0, -3)), player.Bottom);
                         }
-                        //Main.NewText(SkillsSystem.Skills[0]);
-                        p.Skills[i] = (Skill)Activator.CreateInstance(SkillToLearn.GetType());
+                        Skill s = SkillsSystem.Skills[SkillToLearn.ID];
+                        p.Skills[i] = s;
+                        //Main.NewText(s.Tooltip.WithFormatArgs(s.TooltipFormatting()));
                         break;
                     }
                 }

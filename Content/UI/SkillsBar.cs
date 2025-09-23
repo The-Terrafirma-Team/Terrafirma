@@ -60,7 +60,7 @@ namespace Terrafirma.Content.UI
                         spriteBatch.DrawString(FontAssets.MouseText.Value, $"{player.Skills[i].TensionCost}", drawPos + new Vector2(midRect.Width * i - textOffset, 2), new Color(64, 255, 160), 0, Vector2.Zero, 0.8f, SpriteEffects.None, 0);
 
                     }
-                    spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID()].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 0, 48, 48), player.Skills[i].Cooldown > 0 ? Color.DarkGray : Color.White, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 0, 48, 48), player.Skills[i].Cooldown > 0 ? Color.DarkGray : Color.White, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
                     int percent = (int)(48 * player.Skills[i].Cooldown);
                     percent /= 2;
                     percent *= 2;
@@ -69,8 +69,8 @@ namespace Terrafirma.Content.UI
 
                     if (player.Skills[i].Cooldown > 0)
                     {
-                        spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID()].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 0, 48, percent + 2), Color.White with { A = 128 }, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
-                        spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID()].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 50, 48, percent), new Color(64, 64, 64), 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
+                        spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 0, 48, percent + 2), Color.White with { A = 128 }, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
+                        spriteBatch.Draw(SkillsSystem.SkillTextures[player.Skills[i].ID].Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(0, 50, 48, percent), new Color(64, 64, 64), 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
                     }
                     else
                     {
