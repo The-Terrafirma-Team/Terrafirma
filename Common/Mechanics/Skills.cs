@@ -17,8 +17,16 @@ using Terraria.ModLoader.IO;
 
 namespace Terrafirma.Common.Mechanics
 {
+    public enum SkillCategory : byte
+    {
+        General,
+        Melee,
+        Magic,
+        Ranged
+    }
     public abstract class Skill : ModType, ILocalizedModType
     {
+        public virtual SkillCategory Category => SkillCategory.General;
         protected Skill()
         {
             ID = GetID();

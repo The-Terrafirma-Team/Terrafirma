@@ -14,6 +14,7 @@ namespace Terrafirma.Content.Skills
 {
     public class GroundSlam : Skill
     {
+        public override SkillCategory Category => SkillCategory.Melee;
         public override int TensionCost => 20;
         public override int CooldownMax => 60 * 10;
         public override Color RechargeFlashColor => Color.LightCoral;
