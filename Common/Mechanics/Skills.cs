@@ -211,7 +211,7 @@ namespace Terrafirma.Common.Mechanics
             for (int i = 0; i < RememberedSkillIDs.Length; i++)
             {
                 if (RememberedSkillIDs[i])
-                    RememberedSkills = RememberedSkills.Append(SkillsSystem.Skills[EquippedSkills[i].ID].FullName).ToArray();
+                    RememberedSkills = RememberedSkills.Append(SkillsSystem.Skills[i].FullName).ToArray();
             }
             tag["Terrafirma:RememberedSkills"] = RememberedSkills;
         }
@@ -236,11 +236,10 @@ namespace Terrafirma.Common.Mechanics
             }
             if (tag.ContainsKey("Terrafirma:RememberedSkills"))
             {
-
                 for(int i = 0; i < SkillsSystem.Skills.Length; i++)
                 {
                     String[] names = tag.Get<String[]>("Terrafirma:EquippedSkills");
-                    if (SkillsSystem.Skills[i].FullName == names[i])
+                    if (names.Contains(SkillsSystem.Skills[i].FullName))
                     {
                         RememberedSkillIDs[i] = true;
                     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terrafirma.Common.Mechanics;
+using Terrafirma.Common.PlayerLayers;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Particles;
 using Terraria;
@@ -30,6 +31,7 @@ namespace Terrafirma.Content.Skills
         public override void CastingEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             drawInfo.drawPlayer.bodyFrame.Y = 56 * 6;
+            drawInfo.drawPlayer.GetModPlayer<PlayerMouthLayer>().MouthFrame = MouthFrame.Talking;
         }
         public override void Use(Player player)
         {
