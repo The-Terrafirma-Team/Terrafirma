@@ -243,8 +243,6 @@ namespace Terrafirma.Common.Mechanics
         {
             RememberedSkillIDs = new bool[SkillsSystem.Skills.Length];
         }
-
-        // ExampleList.RemoveAll(x => RemoveFromExampleList.Contains(ExampleList.IndexOf(x)));
         public static bool[] RememberedSkillIDs;
         public Skill[] EquippedSkills = { null, null, null, null };
         public static bool[] HasDoneCooldownChime = { true, true, true, true };
