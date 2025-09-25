@@ -23,7 +23,7 @@ namespace Terrafirma.Common
             {
                 time1 = (int)(time1 * self.PlayerStats().DebuffTimeMultiplier);
             }
-            else
+            else if(!Main.debuff[type])
             {
                 time1 = (int)(time1 * self.PlayerStats().BuffTimeMultiplier);
             }
@@ -32,6 +32,11 @@ namespace Terrafirma.Common
 
         public float DebuffTimeMultiplier = 1f;
         public float BuffTimeMultiplier = 1f;
+
+        public float SkillCastTime = 1f;
+        public float SkillCooldown = 1f;
+        public float SkillManaCost = 1f;
+        public float SkillTensionCost = 1f;
 
         public bool ItemUseBlocked = false;
         public bool TurnOffDownwardsMovementRestrictions = false;
@@ -61,6 +66,11 @@ namespace Terrafirma.Common
         internal bool RightMouseSwitch = false;
         public override void ResetEffects()
         {
+            SkillCastTime = 1f;
+            SkillCooldown = 1f;
+            SkillManaCost = 1f;
+            SkillTensionCost = 1f;
+
             DebuffTimeMultiplier = 1f;
             BuffTimeMultiplier = 1f;
             MeleeWeaponScale = 0f;

@@ -13,7 +13,7 @@ namespace Terrafirma.Content.Skills
     {
         public override object[] TooltipFormatting()
         {
-            return new object[] { Main.LocalPlayer.GetTotalDamage(DamageClass.Magic).ApplyTo(30) };
+            return new object[] { 5 };
         }
         public override int ManaCost => 100;
         public override int CastTimeMax => 120;

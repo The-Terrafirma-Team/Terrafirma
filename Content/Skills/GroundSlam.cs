@@ -32,6 +32,14 @@ namespace Terrafirma.Content.Skills
                 SoundEngine.PlaySound(SoundID.DoubleJump, player.position);
             }
         }
+        public override object[] TooltipFormatting()
+        {
+            return new object[] 
+            {
+                (int)Main.LocalPlayer.GetTotalDamage(DamageClass.Melee).ApplyTo(1.5f) * 2,
+                (int)Main.LocalPlayer.GetTotalDamage(DamageClass.Melee).ApplyTo(15) * 2
+            };
+        }
     }
     public class GroundSlamPlayer : ModPlayer
     {

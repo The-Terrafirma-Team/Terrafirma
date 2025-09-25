@@ -28,15 +28,6 @@ namespace Terrafirma
         {
             return player.GetModPlayer<PlayerStats>();
         }
-        public static Color ApplyLighting(this Color color, Color light)
-        {
-            Color color1 = color;
-            color1.R = (byte)Math.Clamp(color.R - (255 - light.R), 0, 255);
-            color1.G = (byte)Math.Clamp(color.G - (255 - light.G), 0, 255);
-            color1.B = (byte)Math.Clamp(color.B - (255 - light.B), 0, 255);
-            color1.A = (byte)Math.Clamp(color.A - (255 - light.A), 0, 255);
-            return color1;
-        }
         public static NPCStats NPCStats(this NPC npc)
         {
             return npc.GetGlobalNPC<NPCStats>();
@@ -58,7 +49,7 @@ namespace Terrafirma
                 }
             }
         }
-        public static bool CheckTension(this Player player, int Tension, bool Consume = true)
+        public static bool CheckTension(this Player player, float Tension, bool Consume = true)
         {
             PlayerStats pStats = player.PlayerStats();
             if (pStats.Tension >= Tension)
@@ -81,7 +72,7 @@ namespace Terrafirma
             if (Numbers)
                 CombatText.NewText(player.Hitbox, new Color(64,222,170), gain);
         }
-        public static int ApplyTensionBonusScaling(this Player player, int number, bool drain = false)
+        public static int ApplyTensionBonusScaling(this Player player, float number, bool drain = false)
         {
             PlayerStats stats = player.PlayerStats();
             if (!drain)

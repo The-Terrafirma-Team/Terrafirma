@@ -194,17 +194,22 @@ Mods: {
 			}
 
 			SpellScrollCleanse: {
-				DisplayName: Spell Scroll Cleanse
+				DisplayName: Spell Scroll (Cleanse)
 				Tooltip: ""
 			}
 
 			SpellScrollFocusStrike: {
-				DisplayName: Spell Scroll Focus Strike
+				DisplayName: Spell Scroll (Focus Strike)
 				Tooltip: ""
 			}
 
 			SpellScrollGroundSlam: {
-				DisplayName: Spell Scroll Ground Slam
+				DisplayName: Spell Scroll (Ground Slam)
+				Tooltip: ""
+			}
+
+			SkillResetter: {
+				DisplayName: Skill Resetter
 				Tooltip: ""
 			}
 		}
@@ -258,19 +263,31 @@ Mods: {
 		WorldGen.RandomDecorationsMessage: Miscellaneous Decorations
 
 		Skills: {
+			Tooltips: {
+				SkillScroll: Teaches you the '{0}' skill
+				ManaCost: Uses {0} mana
+				TensionCost: Uses {0} tension
+				Cooldown: "{0} second cooldown"
+				CastTime: "{0} second cast time"
+			}
+
 			Cleanse: {
 				DisplayName: Cleanse
-				Tooltip: It doesn't do {0} damage!
+				Tooltip: Grants a buff to you and nearby players that makes them immune to debuffs for {0} seconds.
 			}
 
 			FocusStrike: {
 				DisplayName: Focus Strike
-				Tooltip: ""
+				Tooltip: Makes your next attack critically strikes for 500% damage and ignores armor
 			}
 
 			GroundSlam: {
 				DisplayName: Ground Slam
-				Tooltip: ""
+				Tooltip:
+					'''
+					Slam into the ground, dealing {0} to {1} critical melee damage in an area.
+					Enemies hit while falling or by the shockwave are stunned for 3 seconds.
+					'''
 			}
 
 			TestSkill: {
