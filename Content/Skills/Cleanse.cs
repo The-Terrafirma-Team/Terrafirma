@@ -18,7 +18,7 @@ namespace Terrafirma.Content.Skills
         }
         public override int ManaCost => 100;
         public override int CastTimeMax => 120;
-        public override int CooldownMax => 1 * 30;
+        public override int CooldownMax => 60 * 30;
         public override Color RechargeFlashColor => Color.LimeGreen;
         public override void Casting(Player player)
         {

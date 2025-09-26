@@ -29,10 +29,20 @@ namespace Terrafirma.Common.PlayerLayers
         public override void ResetEffects()
         {
             MouthFrame = MouthFrame.Closed;
-            if(Main.timeForVisualEffects % 6 == 0)
+            if(Main.timeForVisualEffects % 8 == 0)
             {
-                TalkFrame = Main.rand.Next(3);
-
+                switch (TalkFrame)
+                {
+                    case 0:
+                        TalkFrame = Main.rand.Next(1, 3);
+                        break;
+                    case 1:
+                        TalkFrame = Main.rand.NextBool() ? 0 : 2;
+                        break;
+                    case 2:
+                        TalkFrame = Main.rand.Next(0, 2);
+                        break;
+                }
             }
         }
 
