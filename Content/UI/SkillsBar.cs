@@ -2,12 +2,17 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Graphics;
+using System;
 using System.Collections.Generic;
 using Terrafirma.Common;
 using Terrafirma.Common.Mechanics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.UI;
 using Terraria.UI;
 
 namespace Terrafirma.Content.UI
@@ -15,12 +20,34 @@ namespace Terrafirma.Content.UI
     public class SkillsBar : UIState
     {
         internal static Asset<Texture2D> BarTex;
+        internal static Asset<Texture2D> SelectTex;
+        internal static Asset<Texture2D> menuIconTex;
+        public static Rectangle[] skillSlots;
+        public static bool[] hoveredSlots;
+
+        TerrafirmaUIImage menuIcon;
+
+        public override void OnInitialize()
+        {
+            hoveredSlots = new bool[4];
+
+            menuIcon = new TerrafirmaUIImage(menuIconTex);
+            menuIcon.frame = new Rectangle(0, 0, 30, 30);
+            menuIcon.Left.Pixels = Main.screenWidth * 0.5f + 30;
+            menuIcon.Top.Pixels = 10;
+            Append(menuIcon);
+
+            base.OnInitialize();
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             SkillsPlayer player = Main.LocalPlayer.GetModPlayer<SkillsPlayer>();
             Vector2 position = new Vector2(Main.screenWidth, 32) * 0.5f;
             position.X -= 24 * (player.MaxSkills - 2);
             Rectangle midRect = new Rectangle(62, 0, 56, 86);
+
+            skillSlots = new Rectangle[player.MaxSkills];
+
             for (int i = 0; i < player.MaxSkills; i++)
             {
                 Vector2 drawPos = position;
@@ -32,8 +59,11 @@ namespace Terrafirma.Content.UI
                 }
                 else if (i == player.MaxSkills - 1)
                     rect = new Rectangle(120, 0, 66, 86);
+
                 spriteBatch.Draw(BarTex.Value, drawPos + new Vector2(midRect.Width * i, 0), rect, Color.White, 0f, new Vector2(28, 0), 1.01f, SpriteEffects.None, 0);
-                if (player.EquippedSkills[i] != null)
+
+
+                if (i < 4 && player.EquippedSkills[i] != null)
                 {
                     if (i == 0)
                     {
@@ -77,18 +107,57 @@ namespace Terrafirma.Content.UI
                         spriteBatch.Draw(BarTex.Value, drawPos + new Vector2(midRect.Width * i, 0), new Rectangle(188, 0, 48, 48), player.EquippedSkills[i].RechargeFlashColor with { A = 0 } * (SkillsPlayer.CooldownFlashLight[i] / 255f) * 0.75f, 0f, new Vector2(24, -25), 1.0f, SpriteEffects.None, 0);
                     }
                 }
+
+                Vector2 slotPos = drawPos + new Vector2(midRect.Width * i, 0);
+                if (i == 0) slotPos += new Vector2(4, 25);
+                else slotPos += new Vector2(4, 25);
+
+                skillSlots[i] = new Rectangle((int)slotPos.X - 24, (int)slotPos.Y, 48, 48);
+                if (i < 4 && hoveredSlots[i]) spriteBatch.Draw(SelectTex.Value, slotPos, new Rectangle(0, 0, 48, 48), new Color(1f, 1f, 1f, 0f), 0f, new Vector2(28, 0), 1.01f, SpriteEffects.None, 0);
+
+                menuIcon.Draw(spriteBatch);
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //Initialize();
+            SkillsPlayer player = Main.LocalPlayer.GetModPlayer<SkillsPlayer>();
+            menuIcon.Left.Pixels = Main.screenWidth * 0.5f - 24 * Math.Clamp(player.MaxSkills - 2,1,1000) - 66;
+            menuIcon.Top.Pixels = 46;
+            menuIcon.Width.Pixels = 30;
+            menuIcon.Height.Pixels = 30;
+
+            if (menuIcon.IsMouseHovering)
+            {
+                menuIcon.frame = new Rectangle(30, 0, 30, 30);
+            }
+            else menuIcon.frame = new Rectangle(0, 0, 30, 30);
+
+            base.Update(gameTime);
+        }
+
+        public override void LeftClick(UIMouseEvent evt)
+        {
+            if (menuIcon.IsMouseHovering)
+            {
+                SkillBookSystem.Flip();
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
+            base.LeftClick(evt);
         }
     }
 
     [Autoload(Side = ModSide.Client)]
-    public class SkillsBarystem : ModSystem
+    public class SkillsBarSystem : ModSystem
     {
         private UserInterface skillsBarInterface;
         internal SkillsBar skillsBar;
         public override void Load()
         {
             SkillsBar.BarTex = Mod.Assets.Request<Texture2D>("Assets/UI/SkillsBar");
+            SkillsBar.SelectTex = Mod.Assets.Request<Texture2D>("Assets/UI/SkillsBarSelect");
+            SkillsBar.menuIconTex = Mod.Assets.Request<Texture2D>("Assets/UI/SkillMenuIcon");
             skillsBar = new();
             skillsBarInterface = new();
             skillsBarInterface.SetState(skillsBar);

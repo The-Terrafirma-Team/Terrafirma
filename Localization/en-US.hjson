@@ -263,6 +263,8 @@ Mods: {
 		WorldGen.RandomDecorationsMessage: Miscellaneous Decorations
 
 		Skills: {
+			Misc.OpenMenuButton: Open Skill Menu
+
 			Tooltips: {
 				SkillScroll: Teaches you the '{0}' skill
 				ManaCost: Uses {0} mana
