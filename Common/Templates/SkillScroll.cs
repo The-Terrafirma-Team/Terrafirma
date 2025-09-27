@@ -14,8 +14,12 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common.Templates
 {
-    public abstract class SpellScroll : ModItem
+    public abstract class SkillScroll : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return Terrafirma.CombatReworkEnabled;
+        }
         public virtual Skill SkillToLearn => null;
         public override void SetDefaults()
         {

@@ -9,7 +9,7 @@ using Terrafirma.Content.Skills;
 
 namespace Terrafirma.Content.Items.SpellScrolls
 {
-    public class SpellScrollFocusStrike : SpellScroll
+    public class SpellScrollFocusStrike : SkillScroll
     {
         public override Skill SkillToLearn => new FocusStrike();
     }
