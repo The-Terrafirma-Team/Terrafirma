@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.Text;
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,7 +16,7 @@ using Terraria.UI;
 
 namespace Terrafirma.Content.UI
 {
-    internal class SkillBookHoverIcon : UIElement
+    public class SkillBookHoverIcon : UIElement
     {
 
         public Skill skill;
@@ -31,20 +32,39 @@ namespace Terrafirma.Content.UI
         Vector2? swapSlotTarget = null;
         Skill swapSkill = null;
 
+        public bool doUpdate = true;
+
         public SkillBookHoverIcon(Skill iconSkill)
         {
             skill = iconSkill;
             Initialize();
         }
 
+        public SkillBookHoverIcon()
+        {
+            Initialize();
+        }
+
         public override void OnInitialize()
         {
+            rot = 0.0f;
+            scale = 1.0f;
+            velocity = Vector2.Zero;
+            opacity = 1.0f;
             position = Main.MouseScreen;
+            doUpdate = true;
+            gone = false;
+
+            swapSlotTarget = null;
+            swapSlotPos = null;
+            slotPos = null;
+
             base.OnInitialize();
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (skill == null || !doUpdate) return;
             if (!Main.mouseLeft)
             {
                 gone = true;
@@ -89,8 +109,8 @@ namespace Terrafirma.Content.UI
                     rot *= 0.95f;
                     if (opacity <= 0.0f)
                     {
-                        Remove();
-                        Deactivate();
+                        doUpdate = false;
+                        skill = null;
                     }
                 }
                 else
@@ -100,8 +120,8 @@ namespace Terrafirma.Content.UI
                     rot = MathHelper.Lerp(rot, 0.0f, 0.4f);
                     if (scale <= 1.01f)
                     {
-                        Remove();
-                        Deactivate();
+                        doUpdate = false;
+                        skill = null;
                     }
                 }
 
@@ -129,6 +149,7 @@ namespace Terrafirma.Content.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (skill == null || !doUpdate) return;
             base.Draw(spriteBatch);
 
             if (swapSlotTarget != null && swapSkill != null)
@@ -160,10 +181,10 @@ namespace Terrafirma.Content.UI
                 SkillBook.skillBorderTex.Value,
                 position - new Vector2(0, 1),
                 new Rectangle(0, 0, SkillBook.skillBorderTex.Width(), SkillBook.skillBorderTex.Height()),
-                Color.White * opacity * ((opacity - 1f) * 5f),
+                Color.White * opacity * ((scale - 1f) * 5f),
                 rot,
                 SkillBook.skillBorderTex.Size() / 2,
-                scale,
+                scale * 0.98f,
                 SpriteEffects.None,
                 0f);
 

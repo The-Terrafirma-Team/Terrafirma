@@ -75,7 +75,8 @@ namespace Terrafirma.Content.UI
             if (Main.mouseLeft && IsMouseHovering && !mouseDrag && mouseAllow)
             {
                 mouseDrag = true;
-                Parent.Parent.Parent.Append(new SkillBookHoverIcon(skill));
+                SkillBook book = Parent.Parent.Parent as SkillBook;
+                book.SetIconSkill(skill);
                 if (ClickSound != null)
                     SoundEngine.PlaySound(ClickSound.Value);
             }

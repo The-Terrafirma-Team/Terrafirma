@@ -28,6 +28,9 @@ namespace Terrafirma.Content.UI
         internal static Asset<Texture2D> closeIconTex;
         internal static Asset<Texture2D> skillBorderTex;
 
+        internal static SkillBookHoverIcon hoverIcon;
+        public Skill selectedSkill;
+
         Vector2 uiPosition = Vector2.Zero;
         bool mouseDrag = false;
         bool mouseAllow = true;
@@ -46,6 +49,9 @@ namespace Terrafirma.Content.UI
         {
             RemoveAllChildren();
             uiPosition = Main.ScreenSize.ToVector2() / 2;
+
+            hoverIcon = new SkillBookHoverIcon();
+            Append(hoverIcon);
 
             mainPanel = new UIPanel();
             mainPanel.MinWidth.Pixels = 500;
@@ -120,6 +126,13 @@ namespace Terrafirma.Content.UI
                 SkillBookSystem.Hide();
             }
             base.LeftClick(evt);
+        }
+
+        public void SetIconSkill(Skill skill)
+        {
+            hoverIcon.skill = skill;
+            hoverIcon.doUpdate = true;
+            hoverIcon.Initialize();
         }
 
         public void GetSkills()
@@ -236,7 +249,7 @@ namespace Terrafirma.Content.UI
             SkillBook.skillBorderTex = Mod.Assets.Request<Texture2D>("Assets/UI/SkillIconBorder");
             skillBook = new();
             skillsBookInterface = new();
-            skillsBookInterface.SetState(skillBook);
+            skillsBookInterface.SetState(null);
         }
 
         public static void Hide()
