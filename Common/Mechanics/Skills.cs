@@ -190,6 +190,32 @@ namespace Terrafirma.Common.Mechanics
             if (Main.netMode == NetmodeID.Server)
                 SyncSkillUse(player, skill);
         }
+
+        public static Skill[] GetSkillsOfCategory(SkillCategory[] categories, bool onlyRememberedSkill = true)
+        {
+            Skill[] skills = new Skill[]{};
+            foreach (Skill i in Skills)
+            {
+                if (categories.Contains(i.Category))
+                {
+                    if ((SkillsPlayer.RememberedSkillIDs[i.ID] && onlyRememberedSkill) || !onlyRememberedSkill) skills = skills.Append(i).ToArray();
+                }
+            }
+            return skills;
+        }
+
+        public static Skill[] GetSkillsOfCategory(SkillCategory category, bool onlyRememberedSkill = true)
+        {
+            Skill[] skills = new Skill[] { };
+            foreach (Skill i in Skills)
+            {
+                if (category == i.Category)
+                {
+                    if ((SkillsPlayer.RememberedSkillIDs[i.ID] && onlyRememberedSkill) || !onlyRememberedSkill) skills = skills.Append(i).ToArray();
+                }
+            }
+            return skills;
+        }
     }
     public class SkillsPlayer : ModPlayer
     {

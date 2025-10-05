@@ -14,6 +14,8 @@ namespace Terrafirma.Content.UI
     internal class TerrafirmaUIImage : UIElement
     {
         private Asset<Texture2D> _texture;
+        private Texture2D _nonReloadingTexture;
+
         public float ImageScale = 1f;
         public float Rotation;
         public bool ScaleToFit;
@@ -21,25 +23,39 @@ namespace Terrafirma.Content.UI
         public Color Color = Color.White;
         public Vector2 NormalizedOrigin = Vector2.Zero;
         public bool RemoveFloatingPointsFromDrawPosition;
-        private Texture2D _nonReloadingTexture;
 
         //Terrafirma specific Vars
+        private Asset<Texture2D> _overlayTexture;
+        private Texture2D _nonReloadingOverlayTexture;
+
         public Rectangle? frame = null;
+        /// <summary>
+        /// If true, the overlay will use overlayFrame instead
+        /// </summary>
+        public bool customOverlayFrame = false;
+        public Rectangle? overlayFrame = null;
+        public bool showOverlay = true;
+        public Object customData;
 
-        public TerrafirmaUIImage(Asset<Texture2D> texture)
+        public TerrafirmaUIImage(Asset<Texture2D> texture, Asset<Texture2D> overlayTexture = null, bool customOverFrame = false)
         {
-            SetImage(texture);
+            SetImage(texture, overlayTexture);
+            customOverlayFrame = customOverFrame;
         }
 
-        public TerrafirmaUIImage(Texture2D nonReloadingTexture)
+        public TerrafirmaUIImage(Texture2D nonReloadingTexture, Texture2D nonReloadingOverlayTexture = null, bool customOverFrame = false)
         {
-            SetImage(nonReloadingTexture);
+            SetImage(nonReloadingTexture, nonReloadingOverlayTexture);
+            customOverlayFrame = customOverFrame;
         }
 
-        public void SetImage(Asset<Texture2D> texture)
+        public void SetImage(Asset<Texture2D> texture, Asset<Texture2D> overlayTexture)
         {
             _texture = texture;
             _nonReloadingTexture = null;
+            _overlayTexture = overlayTexture;
+            _nonReloadingOverlayTexture = null;
+
             if (AllowResizingDimensions)
             {
                 Width.Set(_texture.Width(), 0f);
@@ -47,10 +63,13 @@ namespace Terrafirma.Content.UI
             }
         }
 
-        public void SetImage(Texture2D nonReloadingTexture)
+        public void SetImage(Texture2D nonReloadingTexture, Texture2D nonReloadingOverlayTexture = null)
         {
             _texture = null;
             _nonReloadingTexture = nonReloadingTexture;
+            _overlayTexture = null;
+            _nonReloadingOverlayTexture = nonReloadingOverlayTexture;
+
             if (AllowResizingDimensions)
             {
                 Width.Set(_nonReloadingTexture.Width, 0f);
@@ -62,15 +81,16 @@ namespace Terrafirma.Content.UI
         {
             CalculatedStyle dimensions = GetDimensions();
             Texture2D texture2D = null;
-            if (_texture != null)
-                texture2D = _texture.Value;
-
-            if (_nonReloadingTexture != null)
-                texture2D = _nonReloadingTexture;
+            Texture2D overlayTexture2D = null;
+            if (_texture != null) texture2D = _texture.Value;
+            if (_nonReloadingTexture != null) texture2D = _nonReloadingTexture;
+            if (_overlayTexture != null) overlayTexture2D = _overlayTexture.Value;
+            if (_nonReloadingOverlayTexture != null) overlayTexture2D = _nonReloadingOverlayTexture;
 
             if (ScaleToFit)
             {
-                spriteBatch.Draw(texture2D, dimensions.ToRectangle(), Color);
+                spriteBatch.Draw(texture2D, dimensions.ToRectangle(), frame, Color);
+                if (overlayTexture2D != null && showOverlay) spriteBatch.Draw(overlayTexture2D, dimensions.ToRectangle(), customOverlayFrame? overlayFrame : frame, Color);
                 return;
             }
 
@@ -80,6 +100,7 @@ namespace Terrafirma.Content.UI
                 vector2 = vector2.Floor();
 
             spriteBatch.Draw(texture2D, vector2, frame, Color, Rotation, vector * NormalizedOrigin, ImageScale, SpriteEffects.None, 0f);
+            if (overlayTexture2D != null && showOverlay) spriteBatch.Draw(overlayTexture2D, vector2, customOverlayFrame ? overlayFrame : frame, Color, Rotation, vector * NormalizedOrigin, ImageScale, SpriteEffects.None, 0f);
         }
     }
 }

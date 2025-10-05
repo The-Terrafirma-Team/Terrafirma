@@ -92,6 +92,7 @@ namespace Terrafirma.Content.UI
         {
             base.MouseOver(evt);
 
+            Main.LocalPlayer.mouseInterface = true;
             if (HoverSound != null)
                 SoundEngine.PlaySound(HoverSound.Value);
         }
