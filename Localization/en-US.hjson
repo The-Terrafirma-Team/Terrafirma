@@ -212,6 +212,16 @@ Mods: {
 				DisplayName: Skill Resetter
 				Tooltip: ""
 			}
+
+			CueCards: {
+				DisplayName: Cue Cards
+				Tooltip: Decreases skill cast time by 20%
+			}
+
+			MysticHourglass: {
+				DisplayName: Mystic Hourglass
+				Tooltip: Decreases skill cooldowns by 10%
+			}
 		}
 
 		VanillaSetBonus: {

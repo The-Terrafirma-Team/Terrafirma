@@ -82,7 +82,6 @@ namespace Terrafirma.Common
             }
             TurnOffDownwardsMovementRestrictions = false;
             ImmuneToContactDamage = false;
-
             KnockbackResist = 1f;
             AirResistenceMultiplier = 0.5f;
             Player.pickSpeed *= 0.8f;
