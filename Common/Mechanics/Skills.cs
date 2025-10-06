@@ -22,7 +22,8 @@ namespace Terrafirma.Common.Mechanics
         General,
         Melee,
         Magic,
-        Ranged
+        Ranged,
+        Summoner
     }
     public abstract class Skill : ModType, ILocalizedModType
     {
