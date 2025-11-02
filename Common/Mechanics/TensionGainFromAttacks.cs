@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -16,17 +11,27 @@ namespace Terrafirma.Common.Mechanics
         public float AccumulatedTension = 0;
         private void AccumulatedTensionDistanceScaler(float damage, NPC target)
         {
+            PlayerStats pStats = Player.PlayerStats();
             int maxDistance = 35;
             int giveTension = 0;
-            AccumulatedTension += Math.Max(((16 * maxDistance) - Player.Center.Distance(target.Hitbox.ClosestPointInRect(Player.Center))) / 50 * damage, 0);
-            while (AccumulatedTension > 75)
+            AccumulatedTension += Math.Max(((16 * maxDistance) - Player.Center.Distance(target.Hitbox.ClosestPointInRect(Player.Center))) / 100 * damage, 0) * pStats.TensionGainMultiplier;
+
+
+            int TensionGainMultiple = 1;
+            while (AccumulatedTension > 75 * TensionGainMultiple)
             {
-                AccumulatedTension -= 75;
-                giveTension++;
+                AccumulatedTension -= 75 * TensionGainMultiple;
+                giveTension+= 5;
+                if (giveTension + pStats.Tension > pStats.TensionMax2)
+                {
+                    giveTension = pStats.TensionMax2 - pStats.Tension;
+                    break;
+                }
             }
             if (giveTension > 0)
             {
-                Player.GiveTension(giveTension, true);
+                pStats.Tension += giveTension;
+                CombatText.NewText(Player.Hitbox, Terrafirma.TensionGainColor, giveTension, dot: true);
             }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)

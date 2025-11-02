@@ -62,15 +62,19 @@ namespace Terrafirma
             }
             return false;
         }
-        public static void GiveTension(this Player player, int Tension, bool Numbers = true)
+        public static int GiveTension(this Player player, int Tension, bool Numbers = true, bool smallNumbers = false)
         {
             PlayerStats pStats = player.PlayerStats();
-            int gain = (int)(Tension * pStats.TensionGainMultiplier);
+            int gain = ApplyTensionBonusScaling(player,Tension);
             pStats.Tension += gain;
             if (pStats.Tension > pStats.TensionMax2)
+            {
+                Numbers = false;
                 pStats.Tension = pStats.TensionMax2;
+            }
             if (Numbers)
-                CombatText.NewText(player.Hitbox, new Color(64,222,170), gain);
+                CombatText.NewText(player.Hitbox, Terrafirma.TensionGainColor, gain, dot: smallNumbers);
+            return gain;
         }
         public static int ApplyTensionBonusScaling(this Player player, float number, bool drain = false)
         {

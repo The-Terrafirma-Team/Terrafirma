@@ -79,7 +79,9 @@ namespace Terrafirma.Common.Systems
                 decals[i].Update();
                 decals[i].TimeInWorld++;
                 if (decals[i].Active == false)
+                {
                     decals.RemoveAt(i);
+                }
             }
         }
 

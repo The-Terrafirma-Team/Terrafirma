@@ -126,7 +126,7 @@ namespace Terrafirma.Common.Mechanics
                 if (!Player.CheckTension(tensionCost))
                 {
                     Player.AddBuff(ModContent.BuffType<Shattered>(), 60 * 10);
-                    CombatText.NewText(Player.Hitbox, Color.LightGray, "Shattered!", true);
+                    CombatText.NewText(Player.Hitbox, Color.LightGray, "Shattered!", dot: true);
                     Player.PlayerStats().Tension = 0;
                 }
                 Player.immune = true;

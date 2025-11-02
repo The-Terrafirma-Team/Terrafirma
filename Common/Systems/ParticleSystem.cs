@@ -39,7 +39,10 @@ namespace Terrafirma.Common.Systems
                 Particles[i].Update();
                 Particles[i].TimeInWorld++;
                 if (Particles[i].Active == false)
+                {
                     Particles.RemoveAt(i);
+                    i--;
+                }
             }
         }
         public static void NewParticle(Particle particle, Vector2 position)

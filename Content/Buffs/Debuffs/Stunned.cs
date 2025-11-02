@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
+using Terrafirma.Common;
 
 namespace Terrafirma.Content.Buffs.Debuffs
 {
@@ -19,8 +20,10 @@ namespace Terrafirma.Content.Buffs.Debuffs
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.NPCStats().NoFlight = true;
-            npc.NPCStats().Immobile = true;
+            NPCStats stats = npc.NPCStats();
+            stats.NoFlight = true;
+            stats.Immobile = true;
+            stats.StunStarEffects = true;
         }
     }
 }

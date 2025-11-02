@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.NPCs.Vanilla
+namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
 {
     public class DemonEye : GlobalNPC, ICustomBlockBehavior
     {
@@ -26,6 +26,10 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public void OnBlocked(Player player, float Power, NPC npc = null)
         {
+            if (npc.HasBuff<Flightless>())
+            {
+                npc.AddBuff(ModContent.BuffType<Stunned>(), (int)(60 * 3 * Power));
+            }
             npc.AddBuff(ModContent.BuffType<Flightless>(), (int)(60 * 3 * Power));
         }
         public override void SetDefaults(NPC npc)
@@ -41,14 +45,14 @@ namespace Terrafirma.Content.NPCs.Vanilla
                 Main.npcFrameCount[DemonEyes[i]] = 12;
                 DataSets.NPCWhitelistedForStun[DemonEyes[i]] = true;
             }
-            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye");
-            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Cataract");
-            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Purple");
-            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Green");
-            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // need sprite
-            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // ditto
-            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye_Dilated");
-            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye");
+            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Cataract");
+            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Purple");
+            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Green");
+            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // need sprite
+            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Dilated");
+            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // ditto
         }
         public override void Unload()
         {
@@ -62,7 +66,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         {
             // WHY IS THE DEMON EYE CODED THE WAY IT IS
             if (npc.noGravity)
-                npc.localAI[0] = Utils.AngleLerp(npc.localAI[0], npc.velocity.ToRotation(), 0.1f * npc.NPCStats().MoveSpeed);
+                npc.localAI[0] = npc.localAI[0].AngleLerp(npc.velocity.ToRotation(), 0.1f * npc.NPCStats().MoveSpeed);
             else
                 npc.localAI[0] += npc.velocity.X * 0.1f;
             if(!npc.IsABestiaryIconDummy)
@@ -91,7 +95,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             if (Main.rand.NextBool(40))
             {
                 npc.position += npc.netOffset;
-                int num4 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + (float)npc.height * 0.25f), npc.width, (int)((float)npc.height * 0.5f), DustID.Blood, npc.velocity.X, 2f);
+                int num4 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + npc.height * 0.25f), npc.width, (int)(npc.height * 0.5f), DustID.Blood, npc.velocity.X, 2f);
                 Main.dust[num4].velocity.X *= 0.5f;
                 Main.dust[num4].velocity.Y *= 0.1f;
                 npc.position -= npc.netOffset;

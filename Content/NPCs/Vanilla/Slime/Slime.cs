@@ -14,7 +14,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.NPCs.Vanilla
+namespace Terrafirma.Content.NPCs.Vanilla.Slime
 {
     public class Slime : GlobalNPC, ICustomBlockBehavior
     {
@@ -29,14 +29,14 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public override void Unload()
         {
-            //TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
+            TextureAssets.Npc[NPCID.BlueSlime] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{NPCID.BlueSlime}");
             Main.npcFrameCount[NPCID.BlueSlime] = 2;
         }
         private static Asset<Texture2D> Extra;
         public override void SetStaticDefaults()
         {
-            TextureAssets.Npc[NPCID.BlueSlime] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/Slime");
-            Extra = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/SlimeExtra");
+            TextureAssets.Npc[NPCID.BlueSlime] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/Slime/Slime");
+            Extra = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/Slime/SlimeExtra");
             Main.npcFrameCount[NPCID.BlueSlime] = 10;
             DataSets.NPCWhitelistedForStun[NPCID.BlueSlime] = true;
         }
@@ -178,7 +178,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
             }
             else if (npc.ai[3] == 1)
             {
-                if ((npc.direction == 1 && npc.velocity.X < 0.1f) || (npc.direction == -1 && npc.velocity.X > -0.1f) && CanAttack(npc))
+                if (npc.direction == 1 && npc.velocity.X < 0.1f || npc.direction == -1 && npc.velocity.X > -0.1f && CanAttack(npc))
                     npc.velocity.X += npc.direction * 0.6f * stats.MoveSpeed;
             }
             if (npc.ai[0] > 50)
@@ -222,7 +222,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
                     npc.velocity.Y += MathHelper.Clamp((p.Center.Y - npc.Center.Y) * 0.06f, -12, Main.rand.NextFloat(-8, -5));
                     npc.netUpdate = true;
                 }
-                else if ((((p.Center + p.velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(p.Center)) < 32 * npc.scale && npc.ai[0] > 20) || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
+                else if (((p.Center + p.velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(p.Center)) < 32 * npc.scale && npc.ai[0] > 20 || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
                 {
                     npc.ai[0] = 0;
                     npc.ai[2]++;
@@ -244,8 +244,8 @@ namespace Terrafirma.Content.NPCs.Vanilla
                             {
                                 for (int i = 0; i < 7; i++)
                                 {
-                                    Dust.NewDustPerfect(npc.Center, DustID.Mud, (Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f)) + new Vector2(0, -2f), Main.rand.Next(128));
-                                    Dust.NewDustPerfect(npc.Center, DustID.JungleGrass, (Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f)) + new Vector2(0, -2f));
+                                    Dust.NewDustPerfect(npc.Center, DustID.Mud, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(128));
+                                    Dust.NewDustPerfect(npc.Center, DustID.JungleGrass, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f));
                                 }
                             }
 
@@ -253,7 +253,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
                             {
                                 for (int i = 0; i < 15; i++)
                                 {
-                                    Dust.NewDustPerfect(npc.Center, DustID.t_Slime, (Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f)) + new Vector2(0, -2f), Main.rand.Next(255), npc.color);
+                                    Dust.NewDustPerfect(npc.Center, DustID.t_Slime, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(255), npc.color);
                                 }
                             }
                             SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
@@ -295,13 +295,13 @@ namespace Terrafirma.Content.NPCs.Vanilla
             {
                 Main.GetItemDrawFrame((int)npc.ai[1], out var itemTexture, out var rectangle);
                 float itemScale = 0.7f;
-                spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f), rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f, rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
             }
             if (CanAttack(npc))
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    DrawSlime(npc, npc.Bottom - (npc.velocity * i), spriteBatch, screenPos, Color.Lerp(drawColor, Color.Black, i * 0.1f),0.2f);
+                    DrawSlime(npc, npc.Bottom - npc.velocity * i, spriteBatch, screenPos, Color.Lerp(drawColor, Color.Black, i * 0.1f),0.2f);
                 }
             }
             DrawSlime(npc, npc.Bottom, spriteBatch, screenPos, drawColor, 1f);
@@ -328,7 +328,7 @@ namespace Terrafirma.Content.NPCs.Vanilla
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            return targetHitbox.ClosestPointInRect(targetHitbox.Center()).Distance(Projectile.Center) < (55 * Main.npc[(int)Projectile.ai[0]].scale);
+            return targetHitbox.ClosestPointInRect(targetHitbox.Center()).Distance(Projectile.Center) < 55 * Main.npc[(int)Projectile.ai[0]].scale;
         }
         public void OnBlocked(Player player, float Power, NPC npc = null)
         {
