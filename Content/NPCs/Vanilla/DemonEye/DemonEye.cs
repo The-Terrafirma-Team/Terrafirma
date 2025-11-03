@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Linq;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Content.Buffs.Debuffs;
+using Terrafirma.Content.Dusts;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -11,8 +14,9 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
 {
-    public class DemonEye : GlobalNPC, ICustomBlockBehavior
+    public class DemonEye : GlobalNPC, ICustomBlockBehavior, ISpecificBlockConditions
     {
+        private static Asset<Texture2D> Glow;
         public override bool IsLoadingEnabled(Mod mod)
         {
             return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
@@ -28,9 +32,9 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         {
             if (npc.HasBuff<Flightless>())
             {
-                npc.AddBuff(ModContent.BuffType<Stunned>(), (int)(60 * 3 * Power));
+                npc.AddBuff(ModContent.BuffType<Stunned>(), (int)(60 * 5 * Power));
             }
-            npc.AddBuff(ModContent.BuffType<Flightless>(), (int)(60 * 3 * Power));
+            npc.AddBuff(ModContent.BuffType<Flightless>(), (int)(60 * 5 * Power));
         }
         public override void SetDefaults(NPC npc)
         {
@@ -45,18 +49,20 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                 Main.npcFrameCount[DemonEyes[i]] = 12;
                 DataSets.NPCWhitelistedForStun[DemonEyes[i]] = true;
             }
-            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye");
-            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Cataract");
-            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Purple");
-            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Green");
-            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // need sprite
-            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // ditto
-            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye_Dilated");
-            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>("Content/NPCs/Vanilla/DemonEye/DemonEye"); // ditto
+            string path = "Content/NPCs/Vanilla/DemonEye/";
+            Glow = Mod.Assets.Request<Texture2D>(path + "DemonEyeGlow");
+            TextureAssets.Npc[NPCID.DemonEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye");
+            TextureAssets.Npc[NPCID.CataractEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye_Cataract");
+            TextureAssets.Npc[NPCID.PurpleEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye_Purple");
+            TextureAssets.Npc[NPCID.GreenEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye_Green");
+            TextureAssets.Npc[NPCID.DemonEyeOwl] = Mod.Assets.Request<Texture2D>(path + "DemonEye"); // need sprite
+            TextureAssets.Npc[NPCID.DemonEyeSpaceship] = Mod.Assets.Request<Texture2D>(path + "DemonEye"); // ditto
+            TextureAssets.Npc[NPCID.DialatedEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye_Dilated");
+            TextureAssets.Npc[NPCID.SleepyEye] = Mod.Assets.Request<Texture2D>(path + "DemonEye"); // ditto
         }
         public override void Unload()
         {
-            for(int i = 0; i < DemonEyes.Length; i++)
+            for (int i = 0; i < DemonEyes.Length; i++)
             {
                 TextureAssets.Npc[NPCID.DemonEye] = ModContent.Request<Texture2D>($"Terraria/Images/NPC_{DemonEyes[i]}");
                 Main.npcFrameCount[DemonEyes[i]] = 2;
@@ -69,7 +75,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                 npc.localAI[0] = npc.localAI[0].AngleLerp(npc.velocity.ToRotation(), 0.1f * npc.NPCStats().MoveSpeed);
             else
                 npc.localAI[0] += npc.velocity.X * 0.1f;
-            if(!npc.IsABestiaryIconDummy)
+            if (!npc.IsABestiaryIconDummy)
                 npc.rotation = npc.localAI[0] + (npc.spriteDirection == 1 ? 0 : MathHelper.Pi);
 
             npc.frameCounter++;
@@ -87,6 +93,33 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                     npc.frame.Y = frameHeight * 6;
                 }
             }
+        }
+        const int DashTime = 120;
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Asset<Texture2D> tex = TextureAssets.Npc[npc.type];
+
+            float GlowOpacity = (npc.ai[2] - DashTime + 15) * 1f / 30;
+            if (GlowOpacity > 1)
+                GlowOpacity = 1;
+
+            if (GlowOpacity > 0)
+                for (int i = 0; i < 4; i++)
+                {
+                    spriteBatch.Draw(Glow.Value, npc.Center - screenPos + new Vector2(0, 2 * npc.scale).RotatedBy(npc.rotation + (i * MathHelper.PiOver2)), npc.frame, Terrafirma.UnparryableAttackColor * GlowOpacity, npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                }
+
+            spriteBatch.Draw(tex.Value, npc.Center - screenPos, npc.frame, drawColor, npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+
+
+            float flashSize = MathF.Sin(MathHelper.Clamp((npc.ai[2] - DashTime + 15) * 0.06f, 0, 1) * MathHelper.Pi) * 1.5f;
+            Asset<Texture2D> highlight = TextureAssets.Extra[ExtrasID.ThePerfectGlow];
+            for (int i = 0; i < 2; i++)
+            {
+                spriteBatch.Draw(highlight.Value, npc.Center - screenPos + new Vector2(npc.frame.Width * 0.5f * npc.spriteDirection * npc.scale, 0).RotatedBy(npc.rotation), null, Terrafirma.UnparryableAttackColor with { A = 0}, i * MathHelper.PiOver2 + ((float)Main.timeForVisualEffects * 0.1f), highlight.Size() / 2, npc.scale * new Vector2(0.5f, 1f) * flashSize, SpriteEffects.None, 0);
+                spriteBatch.Draw(highlight.Value, npc.Center - screenPos + new Vector2(npc.frame.Width * 0.5f * npc.spriteDirection * npc.scale, 0).RotatedBy(npc.rotation), null, new Color(1f, 1f, 1f, 0f) * 0.5f, i * MathHelper.PiOver2 + ((float)Main.timeForVisualEffects * 0.1f), highlight.Size() / 2, npc.scale * new Vector2(0.4f, 0.4f) * flashSize, SpriteEffects.None, 0);
+            }
+            return false;
         }
         public override void AI(NPC npc)
         {
@@ -117,13 +150,14 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
 
             if (stats.NoFlight || stats.Immobile)
             {
+                npc.ai[2] = 0;
                 npc.noGravity = false;
                 if (npc.collideY)
                 {
                     npc.velocity.X *= 0.98f;
                     if (!stats.Immobile)
                     {
-                        npc.velocity.Y -= Main.rand.NextFloat(4,6);
+                        npc.velocity.Y -= Main.rand.NextFloat(4, 6);
                         npc.velocity.X += Main.rand.NextFloat(-1f, 1f) * stats.MoveSpeed;
                         npc.netUpdate = true;
                     }
@@ -138,119 +172,166 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
             {
                 npc.noGravity = true;
             }
+            npc.ai[2]++;
+            if (npc.ai[2] < DashTime) // Regular flight
+            {
+                if (!npc.noTileCollide)
+                {
+                    if (npc.collideX)
+                    {
+                        npc.velocity.X = npc.oldVelocity.X * -0.2f;
+                        if (npc.direction == -1 && npc.velocity.X > 0f && npc.velocity.X < 2f)
+                        {
+                            npc.velocity.X = 2f;
+                        }
+                        if (npc.direction == 1 && npc.velocity.X < 0f && npc.velocity.X > -2f)
+                        {
+                            npc.velocity.X = -2f;
+                        }
+                    }
+                    if (npc.collideY)
+                    {
+                        npc.velocity.Y = npc.oldVelocity.Y * -0.2f;
+                        if (npc.velocity.Y > 0f && npc.velocity.Y < 1f)
+                        {
+                            npc.velocity.Y = 1f;
+                        }
+                        if (npc.velocity.Y < 0f && npc.velocity.Y > -1f)
+                        {
+                            npc.velocity.Y = -1f;
+                        }
+                    }
+                }
+                if (NPC.DespawnEncouragement_AIStyle2_FloatingEye_IsDiscouraged(npc.type, npc.position, npc.target))
+                {
+                    npc.EncourageDespawn(10);
+                    npc.directionY = -1;
+                    if (npc.velocity.Y > 0f)
+                    {
+                        npc.direction = 1;
+                    }
+                    npc.direction = -1;
+                    if (npc.velocity.X > 0f)
+                    {
+                        npc.direction = 1;
+                    }
+                }
+                else
+                {
+                    npc.TargetClosest();
+                }
 
-            if (!npc.noTileCollide)
-            {
-                if (npc.collideX)
+                float HorizontalSpeed = 4f * stats.MoveSpeed * npc.scale;
+                float VerticalSpeed = 2.5f * stats.MoveSpeed * npc.scale;
+                npc.velocity += new Vector2(npc.direction, npc.directionY * 0.6f) * 0.1f * stats.MoveSpeed;
+                if (npc.direction == -1 && npc.velocity.X > 0f - HorizontalSpeed)
                 {
-                    npc.velocity.X = npc.oldVelocity.X * -0.5f;
-                    if (npc.direction == -1 && npc.velocity.X > 0f && npc.velocity.X < 2f)
+                    if (npc.velocity.X > HorizontalSpeed)
                     {
-                        npc.velocity.X = 2f;
+                        npc.velocity.X -= 0.1f * stats.MoveSpeed;
                     }
-                    if (npc.direction == 1 && npc.velocity.X < 0f && npc.velocity.X > -2f)
+                    else if (npc.velocity.X > 0f)
                     {
-                        npc.velocity.X = -2f;
+                        npc.velocity.X += 0.05f * stats.MoveSpeed;
                     }
-                }
-                if (npc.collideY)
-                {
-                    npc.velocity.Y = npc.oldVelocity.Y * -0.5f;
-                    if (npc.velocity.Y > 0f && npc.velocity.Y < 1f)
+                    if (npc.velocity.X < -HorizontalSpeed)
                     {
-                        npc.velocity.Y = 1f;
-                    }
-                    if (npc.velocity.Y < 0f && npc.velocity.Y > -1f)
-                    {
-                        npc.velocity.Y = -1f;
+                        npc.velocity.X = -HorizontalSpeed;
                     }
                 }
-            }
-            if (NPC.DespawnEncouragement_AIStyle2_FloatingEye_IsDiscouraged(npc.type, npc.position, npc.target))
-            {
-                npc.EncourageDespawn(10);
-                npc.directionY = -1;
-                if (npc.velocity.Y > 0f)
+                else if (npc.direction == 1 && npc.velocity.X < HorizontalSpeed)
                 {
-                    npc.direction = 1;
+                    if (npc.velocity.X < 0f - HorizontalSpeed)
+                    {
+                        npc.velocity.X += 0.1f * stats.MoveSpeed;
+                    }
+                    else if (npc.velocity.X < 0f)
+                    {
+                        npc.velocity.X -= 0.05f * stats.MoveSpeed;
+                    }
+                    if (npc.velocity.X > HorizontalSpeed)
+                    {
+                        npc.velocity.X = HorizontalSpeed;
+                    }
                 }
-                npc.direction = -1;
-                if (npc.velocity.X > 0f)
+                if (npc.directionY == -1 && npc.velocity.Y > 0f - VerticalSpeed)
                 {
-                    npc.direction = 1;
+                    if (npc.velocity.Y > VerticalSpeed)
+                    {
+                        npc.velocity.Y -= 0.05f * stats.MoveSpeed;
+                    }
+                    else if (npc.velocity.Y > 0f)
+                    {
+                        npc.velocity.Y += 0.03f * stats.MoveSpeed;
+                    }
+                    if (npc.velocity.Y < -VerticalSpeed)
+                    {
+                        npc.velocity.Y = -VerticalSpeed;
+                    }
                 }
+                else if (npc.directionY == 1 && npc.velocity.Y < VerticalSpeed)
+                {
+                    if (npc.velocity.Y < 0f - VerticalSpeed)
+                    {
+                        npc.velocity.Y += 0.05f * stats.MoveSpeed;
+                    }
+                    else if (npc.velocity.Y < 0f)
+                    {
+                        npc.velocity.Y -= 0.03f * stats.MoveSpeed;
+                    }
+                    if (npc.velocity.Y > VerticalSpeed)
+                    {
+                        npc.velocity.Y = VerticalSpeed;
+                    }
+                }
+                if (npc.ai[2] > DashTime - 50)
+                    npc.velocity *= 0.95f;
             }
             else
             {
-                npc.TargetClosest();
-            }
+                int type = ModContent.DustType<SimpleColorableGlowyDust>();
+                if (npc.ai[2] == DashTime + 1)
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+                        Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.width, type);
+                        d.noGravity = true;
+                        d.color = Terrafirma.UnparryableAttackColor with { A = 0 };
+                        d.noLight = true;
+                        d.velocity *= 2;
+                    }
+                    npc.velocity = npc.Center.DirectionTo(Main.player[npc.target].Center) * 10;
+                }
 
-            float HorizontalSpeed = 4f * stats.MoveSpeed * npc.scale;
-            float VerticalSpeed = 2.5f * stats.MoveSpeed * npc.scale;
-            if (npc.direction == -1 && npc.velocity.X > 0f - HorizontalSpeed)
-            {
-                npc.velocity.X -= 0.1f * stats.MoveSpeed;
-                if (npc.velocity.X > HorizontalSpeed)
+                if (Main.rand.NextBool(3))
                 {
-                    npc.velocity.X -= 0.1f * stats.MoveSpeed;
+                    Dust d2 = Dust.NewDustDirect(npc.position, npc.width, npc.width, type);
+                    d2.noGravity = true;
+                    d2.velocity = npc.velocity * Main.rand.NextFloat(0.2f, 1f);
+                    d2.noLight = true;
+                    d2.color = Terrafirma.UnparryableAttackColor with { A = 0 };
                 }
-                else if (npc.velocity.X > 0f)
+
+                if (npc.collideX || npc.collideY || npc.ai[2] > DashTime + 60)
                 {
-                    npc.velocity.X += 0.05f * stats.MoveSpeed;
-                }
-                if (npc.velocity.X < -HorizontalSpeed)
-                {
-                    npc.velocity.X = -HorizontalSpeed;
-                }
-            }
-            else if (npc.direction == 1 && npc.velocity.X < HorizontalSpeed)
-            {
-                npc.velocity.X += 0.1f * stats.MoveSpeed;
-                if (npc.velocity.X < 0f - HorizontalSpeed)
-                {
-                    npc.velocity.X += 0.1f * stats.MoveSpeed;
-                }
-                else if (npc.velocity.X < 0f)
-                {
-                    npc.velocity.X -= 0.05f * stats.MoveSpeed;
-                }
-                if (npc.velocity.X > HorizontalSpeed)
-                {
-                    npc.velocity.X = HorizontalSpeed;
+                    npc.ai[2] = Main.rand.Next(-440,0);
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.width, type);
+                        d.noGravity = true;
+                        d.noLight = true;
+                        d.color = Terrafirma.UnparryableAttackColor with { A = 0 };
+                        if (Main.rand.NextBool())
+                            d.velocity += npc.velocity * Main.rand.NextFloat(0.5f, 1.5f);
+                    }
+                    npc.velocity *= 0.5f;
+                    npc.netUpdate = true;
                 }
             }
-            if (npc.directionY == -1 && npc.velocity.Y > 0f - VerticalSpeed)
-            {
-                npc.velocity.Y -= 0.04f * stats.MoveSpeed;
-                if (npc.velocity.Y > VerticalSpeed)
-                {
-                    npc.velocity.Y -= 0.05f * stats.MoveSpeed;
-                }
-                else if (npc.velocity.Y > 0f)
-                {
-                    npc.velocity.Y += 0.03f * stats.MoveSpeed;
-                }
-                if (npc.velocity.Y < -VerticalSpeed)
-                {
-                    npc.velocity.Y = -VerticalSpeed;
-                }
-            }
-            else if (npc.directionY == 1 && npc.velocity.Y < VerticalSpeed)
-            {
-                npc.velocity.Y += 0.04f * stats.MoveSpeed;
-                if (npc.velocity.Y < 0f - VerticalSpeed)
-                {
-                    npc.velocity.Y += 0.05f * stats.MoveSpeed;
-                }
-                else if (npc.velocity.Y < 0f)
-                {
-                    npc.velocity.Y -= 0.03f * stats.MoveSpeed;
-                }
-                if (npc.velocity.Y > VerticalSpeed)
-                {
-                    npc.velocity.Y = VerticalSpeed;
-                }
-            }
+        }
+        public bool CanBeBlocked(Player player, NPC? npc)
+        {
+            return npc.ai[2] < DashTime;
         }
     }
 }

@@ -17,11 +17,11 @@ namespace Terrafirma.Common.Mechanics
             AccumulatedTension += Math.Max(((16 * maxDistance) - Player.Center.Distance(target.Hitbox.ClosestPointInRect(Player.Center))) / 100 * damage, 0) * pStats.TensionGainMultiplier;
 
 
-            int TensionGainMultiple = 1;
+            int TensionGainMultiple = 3;
             while (AccumulatedTension > 75 * TensionGainMultiple)
             {
                 AccumulatedTension -= 75 * TensionGainMultiple;
-                giveTension+= 5;
+                giveTension+= TensionGainMultiple;
                 if (giveTension + pStats.Tension > pStats.TensionMax2)
                 {
                     giveTension = pStats.TensionMax2 - pStats.Tension;

@@ -58,6 +58,11 @@ Mods: {
 					Label: Enable Ambient Particles
 					Tooltip: ""
 				}
+
+				UnparryableColor: {
+					Label: Unblockable Attack Color
+					Tooltip: The color used to highlight unblockable attacks.
+				}
 			}
 
 			Headers: {

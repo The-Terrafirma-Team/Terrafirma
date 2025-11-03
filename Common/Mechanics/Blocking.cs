@@ -123,6 +123,45 @@ namespace Terrafirma.Common.Mechanics
             int tensionCost = 10;
             if (Blocking)
             {
+                info.DamageSource.TryGetCausingEntity(out var causingEntity);
+
+                if (causingEntity is NPC n2) {
+                    if (n2.ModNPC is ISpecificBlockConditions iS)
+                    {
+                        if (!iS.CanBeBlocked(Player))
+                            return false;
+                    }
+                    else
+                    {
+                        for(int i = 0; i < n2.EntityGlobals.Length; i++)
+                        {
+                            if (n2.EntityGlobals[i] is ISpecificBlockConditions iS2)
+                            {
+                                if(!iS2.CanBeBlocked(Player, n2))
+                                    return false;
+                            }
+                        }
+                    }
+                }
+                else if (causingEntity is Projectile p2)
+                {
+                    if (p2.ModProjectile is ISpecificBlockConditions iS)
+                    {
+                        if(!iS.CanBeBlocked(Player))
+                            return false;
+                    }
+                    //else
+                    //{
+                    //    for (int i = 0; i < p2.EntityGlobals.Length; i++)
+                    //    {
+                    //        if (p2.EntityGlobals[i] is ISpecificBlockConditions iS2)
+                    //        {
+                    //            return iS2.CanBeBlocked(Player, p2);
+                    //        }
+                    //    }
+                    //}
+                }
+
                 if (!Player.CheckTension(tensionCost))
                 {
                     Player.AddBuff(ModContent.BuffType<Shattered>(), 60 * 10);
@@ -133,7 +172,6 @@ namespace Terrafirma.Common.Mechanics
                 Player.AddImmuneTime(ImmunityCooldownID.General, 60 * 1);
                 SoundEngine.PlaySound(SoundID.Item37, Player.position);
                 
-                info.DamageSource.TryGetCausingEntity(out var causingEntity);
                 if (causingEntity is NPC n)
                 {
                     Player.ParryStrike(n);
