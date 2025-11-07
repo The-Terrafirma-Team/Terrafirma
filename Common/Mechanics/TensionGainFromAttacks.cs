@@ -1,4 +1,5 @@
 ﻿using System;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -17,7 +18,12 @@ namespace Terrafirma.Common.Mechanics
             AccumulatedTension += Math.Max(((16 * maxDistance) - Player.Center.Distance(target.Hitbox.ClosestPointInRect(Player.Center))) / 100 * damage, 0) * pStats.TensionGainMultiplier;
 
 
-            int TensionGainMultiple = 3;
+            int TensionGainMultiple = (int)Math.Ceiling(3 * pStats.TensionGainMultiplier);
+
+            if (TensionGainMultiple > pStats.TensionMax2 - pStats.Tension)
+                TensionGainMultiple = pStats.TensionMax2 - pStats.Tension;
+            if (TensionGainMultiple <= 0)
+                return;
             while (AccumulatedTension > 75 * TensionGainMultiple)
             {
                 AccumulatedTension -= 75 * TensionGainMultiple;

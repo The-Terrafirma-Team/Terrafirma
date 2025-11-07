@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Terrafirma.Common;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment
+namespace Terrafirma.Content.Items.Equipment.Defensive
 {
     [AutoloadEquip(EquipType.Shield)]
     public class Shield : ModItem

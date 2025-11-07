@@ -4,6 +4,7 @@ using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terrafirma.Content.Particles;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;

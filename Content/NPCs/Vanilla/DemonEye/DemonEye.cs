@@ -7,7 +7,9 @@ using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terrafirma.Content.Dusts;
+using Terrafirma.Utilities;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -40,8 +42,23 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         {
             npc.aiStyle = -1;
             npc.noGravity = true;
+            npc.DeathSound = SoundID.NPCDeath52;
         }
-
+        public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
+        {
+            if (npc.ai[2] > DashTime)
+                npc.ai[2] = 2000;
+        }
+        public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
+        {
+            if (npc.ai[2] > DashTime)
+                npc.ai[2] = 2000;
+        }
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.ai[2] > DashTime)
+                modifiers.Knockback *= 6;
+        }
         public override void SetStaticDefaults()
         {
             for (int i = 0; i < DemonEyes.Length; i++)
@@ -72,7 +89,10 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         {
             // WHY IS THE DEMON EYE CODED THE WAY IT IS
             if (npc.noGravity)
-                npc.localAI[0] = npc.localAI[0].AngleLerp(npc.velocity.ToRotation(), 0.1f * npc.NPCStats().MoveSpeed);
+            {
+                if (npc.ai[2] is > DashTime || npc.ai[2] < DashTime - 50)
+                    npc.localAI[0] = npc.localAI[0].AngleLerp(npc.velocity.ToRotation(), 0.1f * npc.NPCStats().MoveSpeed);
+            }
             else
                 npc.localAI[0] += npc.velocity.X * 0.1f;
             if (!npc.IsABestiaryIconDummy)
@@ -98,8 +118,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Asset<Texture2D> tex = TextureAssets.Npc[npc.type];
-
-            float GlowOpacity = (npc.ai[2] - DashTime + 15) * 1f / 30;
+            NPCStats stats = npc.NPCStats();
+            float GlowOpacity = (npc.ai[2] - DashTime + 35) * 1f / 30;
             if (GlowOpacity > 1)
                 GlowOpacity = 1;
 
@@ -109,10 +129,10 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                     spriteBatch.Draw(Glow.Value, npc.Center - screenPos + new Vector2(0, 2 * npc.scale).RotatedBy(npc.rotation + (i * MathHelper.PiOver2)), npc.frame, Terrafirma.UnparryableAttackColor * GlowOpacity, npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
                 }
 
-            spriteBatch.Draw(tex.Value, npc.Center - screenPos, npc.frame, drawColor, npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            spriteBatch.Draw(tex.Value, npc.Center - screenPos, npc.frame, Color.Lerp(npc.GetNPCColorTintedByBuffs(drawColor), Color.Black, GlowOpacity), npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
 
-            float flashSize = MathF.Sin(MathHelper.Clamp((npc.ai[2] - DashTime + 15) * 0.06f, 0, 1) * MathHelper.Pi) * 1.5f;
+            float flashSize = MathF.Sin(MathHelper.Clamp((npc.ai[2] - DashTime + (15 * stats.AttackSpeed)) * 0.06f / stats.AttackSpeed, 0, 1) * MathHelper.Pi) * 1.5f;
             Asset<Texture2D> highlight = TextureAssets.Extra[ExtrasID.ThePerfectGlow];
             for (int i = 0; i < 2; i++)
             {
@@ -172,9 +192,11 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
             {
                 npc.noGravity = true;
             }
-            npc.ai[2]++;
             if (npc.ai[2] < DashTime) // Regular flight
             {
+                npc.ai[2] += stats.AttackSpeed;
+                if (npc.ai[2] > DashTime)
+                    npc.ai[2] = DashTime;
                 if (!npc.noTileCollide)
                 {
                     if (npc.collideX)
@@ -284,11 +306,15 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                         npc.velocity.Y = VerticalSpeed;
                     }
                 }
-                if (npc.ai[2] > DashTime - 50)
+                if (npc.ai[2] > DashTime - 50 * stats.AttackSpeed)
+                {
                     npc.velocity *= 0.95f;
+                    npc.localAI[0] = npc.localAI[0].AngleLerp(npc.Center.DirectionTo(Main.player[npc.target].Center).ToRotation(),0.1f);
+                }
             }
             else
             {
+                npc.ai[2]++;
                 int type = ModContent.DustType<SimpleColorableGlowyDust>();
                 if (npc.ai[2] == DashTime + 1)
                 {
@@ -300,7 +326,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                         d.noLight = true;
                         d.velocity *= 2;
                     }
-                    npc.velocity = npc.Center.DirectionTo(Main.player[npc.target].Center) * 10;
+                    SoundEngine.PlaySound(SoundID.DD2_GoblinBomberThrow, npc.Center);
+                    npc.velocity = npc.Center.DirectionTo(Main.player[npc.target].Center) * 14 * stats.MoveSpeed;
                 }
 
                 if (Main.rand.NextBool(3))
@@ -312,10 +339,10 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                     d2.color = Terrafirma.UnparryableAttackColor with { A = 0 };
                 }
 
-                if (npc.collideX || npc.collideY || npc.ai[2] > DashTime + 60)
+                if (npc.collideX || npc.collideY || npc.ai[2] > DashTime + Math.Min((40 / stats.MoveSpeed),40))
                 {
                     npc.ai[2] = Main.rand.Next(-440,0);
-                    for (int i = 0; i < 30; i++)
+                    for (int i = 0; i < 20; i++)
                     {
                         Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.width, type);
                         d.noGravity = true;
@@ -324,7 +351,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                         if (Main.rand.NextBool())
                             d.velocity += npc.velocity * Main.rand.NextFloat(0.5f, 1.5f);
                     }
-                    npc.velocity *= 0.5f;
+                    npc.velocity *= 0.3f;
                     npc.netUpdate = true;
                 }
             }

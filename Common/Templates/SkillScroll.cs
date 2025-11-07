@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Particles;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment
+namespace Terrafirma.Content.Items.Equipment.Defensive
 {
 
     [AutoloadEquip(EquipType.Head)]

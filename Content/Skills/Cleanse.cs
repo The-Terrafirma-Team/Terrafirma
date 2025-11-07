@@ -3,6 +3,7 @@ using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.PlayerLayers;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Particles;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

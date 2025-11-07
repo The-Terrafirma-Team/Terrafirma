@@ -3,11 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terrafirma.Common;
+using Terrafirma.Common.AIStyles;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Buffs.Debuffs;
 using Terrafirma.Content.Particles;
+using Terrafirma.Utilities;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -49,25 +51,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            npc.frame.Y = frame * frameHeight;
-            if (npc.NPCStats().NoAnimation)
-                return;
-            if (npc.ai[2] == 0)
-            {
-                frameCounter += npc.NPCStats().MoveSpeed;
-                if (frameCounter > 8)
-                {
-                    frameCounter = 0;
-                    frame++;
-                }
-
-                if (frame > 3)
-                    frame = 0;
-                if (npc.velocity.Y < 0)
-                    frame = 5;
-                else if (npc.velocity.Y > 0)
-                    frame = 4;
-            }
+            SlimeAI.FindFrame(npc,frameHeight,ref frameCounter,ref frame);
         }
         public override void SetDefaults(NPC npc)
         {
@@ -103,11 +87,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         }
         public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
         {
-            return CanAttack(npc);
-        }
-        private static bool CanAttack(NPC npc)
-        {
-            return npc.velocity.Y != 0 && npc.ai[3] == 1 && !npc.NPCStats().Immobile;
+            return SlimeAI.CanAttack(npc);
         }
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
@@ -127,146 +107,54 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         public override void AI(NPC npc)
         {
             NPCStats stats = npc.NPCStats();
-            npc.rotation = npc.velocity.X * 0.1f * npc.velocity.Y * -0.1f;
-
-            if (npc.direction == 0)
-            {
-                npc.direction = Main.rand.NextBool() ? 1 : -1;
-            }
-            if (npc.ai[0] < -500)
-            {
-                npc.ai[0] = Main.rand.Next(20);
-                npc.netUpdate = true;
-            }
-            if (npc.wet)
-            {
-
-                npc.velocity.X += npc.direction * 0.1f * stats.MoveSpeed;
-                if (npc.velocity.Y == 0)
-                {
-                    npc.velocity.Y = -2f;
-                }
-                if (npc.velocity.Y > 2f)
-                {
-                    npc.velocity.Y *= 0.9f;
-                }
-                npc.velocity.Y -= 0.5f;
-                if (npc.velocity.Y < -4f)
-                {
-                    npc.velocity.Y = -4f;
-                }
-                npc.ai[3] = 1;
-            }
-            if (stats.Immobile)
-            {
-                npc.ai[3] = 0;
-                npc.ai[2] = 0;
-                npc.ai[0] = 0;
-                frameCounter += 2;
-                if (npc.velocity.Y == 0)
-                {
-                    npc.velocity.X *= 0.8f;
-                }
-                return;
-            }
-
-            if (npc.velocity.Y == 0)
-            {
-                npc.velocity.X *= 0.8f;
-                npc.ai[0]+= stats.AttackSpeed;
-                npc.ai[3] = 0;
-            }
-            else if (npc.ai[3] == 1)
-            {
-                if (npc.direction == 1 && npc.velocity.X < 0.1f || npc.direction == -1 && npc.velocity.X > -0.1f && CanAttack(npc))
-                    npc.velocity.X += npc.direction * 0.6f * stats.MoveSpeed;
-            }
-            if (npc.ai[0] > 50)
-                frameCounter += stats.MoveSpeed;
-            if (npc.ai[0] > 75)
-                frameCounter += stats.MoveSpeed;
-
+            SlimeAI.AI(npc, stats, ref frameCounter);
             if (!npc.HasValidTarget)
+                return;
+            Player p = Main.player[npc.target];
+            if (((p.Center + p.velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(p.Center)) < 32 * npc.scale && npc.ai[0] > 20 || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
             {
-                if (npc.life < npc.lifeMax || !Main.dayTime || npc.position.Y > Main.worldSurface * 16)
+                npc.ai[0] = 0;
+                npc.ai[2]++;
+                switch ((int)npc.ai[2] + 7)
                 {
-                    npc.TargetClosest(false);
-                }
+                    case 10:
+                        frame = 6;
+                        break;
+                    case 30:
+                        frame = 7;
+                        break;
+                    case 38:
+                        frame = 8;
+                        break;
+                    case 40:
+                        frame = 9;
 
-                npc.ai[2] = 0;
-                if (npc.ai[0] > 100)
-                {
-                    if (Main.rand.NextBool(3))
-                    {
-                        npc.direction = Main.rand.NextBool() ? -1 : 1;
-                    }
-                    npc.ai[3] = 1;
-                    npc.ai[0] = Main.rand.Next(-20, 0);
-                    npc.velocity.X += npc.direction * Main.rand.NextFloat(2, 4) * stats.MoveSpeed;
-                    npc.velocity.Y += Main.rand.NextFloat(-8, -5);
-                    npc.netUpdate = true;
-                }
-            }
-            else
-            {
-                Player p = Main.player[npc.target];
-
-                if (npc.ai[0] > 100)
-                {
-                    npc.direction = p.Center.X < npc.Center.X ? -1 : 1;
-                    if (npc.confused)
-                        npc.direction *= -1;
-                    npc.ai[3] = 1;
-                    npc.ai[0] = Main.rand.Next(40);
-                    npc.velocity.X += MathHelper.Clamp((p.Center.X - npc.Center.X) * 0.04f, -4, 4) * (npc.confused ? -1 : 1) * stats.MoveSpeed;
-                    npc.velocity.Y += MathHelper.Clamp((p.Center.Y - npc.Center.Y) * 0.06f, -12, Main.rand.NextFloat(-8, -5));
-                    npc.netUpdate = true;
-                }
-                else if (((p.Center + p.velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(p.Center)) < 32 * npc.scale && npc.ai[0] > 20 || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
-                {
-                    npc.ai[0] = 0;
-                    npc.ai[2]++;
-                    switch ((int)npc.ai[2] + 7)
-                    {
-                        case 10:
-                            frame = 6;
-                            break;
-                        case 30:
-                            frame = 7;
-                            break;
-                        case 38:
-                            frame = 8;
-                            break;
-                        case 40:
-                            frame = 9;
-
-                            if (npc.netID == NPCID.JungleSlime)
+                        if (npc.netID == NPCID.JungleSlime)
+                        {
+                            for (int i = 0; i < 7; i++)
                             {
-                                for (int i = 0; i < 7; i++)
-                                {
-                                    Dust.NewDustPerfect(npc.Center, DustID.Mud, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(128));
-                                    Dust.NewDustPerfect(npc.Center, DustID.JungleGrass, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f));
-                                }
+                                Dust.NewDustPerfect(npc.Center, DustID.Mud, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(128));
+                                Dust.NewDustPerfect(npc.Center, DustID.JungleGrass, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f));
                             }
+                        }
 
-                            else
+                        else
+                        {
+                            for (int i = 0; i < 15; i++)
                             {
-                                for (int i = 0; i < 15; i++)
-                                {
-                                    Dust.NewDustPerfect(npc.Center, DustID.t_Slime, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(255), npc.color);
-                                }
+                                Dust.NewDustPerfect(npc.Center, DustID.t_Slime, Main.rand.NextVector2CircularEdge(2, 1) * Main.rand.NextFloat(1, 2f) + new Vector2(0, -2f), Main.rand.Next(255), npc.color);
                             }
-                            SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
-                            if (Main.netMode != NetmodeID.MultiplayerClient)
-                                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Top, Vector2.Zero, ModContent.ProjectileType<SlimeStab>(), 15, 1, -1, npc.whoAmI);
-                            break;
-                        case 46:
-                            frame = 8;
-                            break;
-                        case 50:
-                            npc.ai[2] = 0;
-                            break;
-                    }
+                        }
+                        SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Top, Vector2.Zero, ModContent.ProjectileType<SlimeStab>(), 15, 1, -1, npc.whoAmI);
+                        break;
+                    case 46:
+                        frame = 8;
+                        break;
+                    case 50:
+                        npc.ai[2] = 0;
+                        break;
                 }
             }
         }
@@ -297,7 +185,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
                 float itemScale = 0.7f;
                 spriteBatch.Draw(itemTexture, npc.Center - screenPos + npc.velocity * -0.3f + new Vector2(0, (float)Math.Sin(Main.timeForVisualEffects * 0.05f)), rectangle, drawColor, npc.rotation + (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * (npc.velocity.Length() + 1) * 0.1f, rectangle.Size() / 2, itemScale * npc.scale, SpriteEffects.None, 0);
             }
-            if (CanAttack(npc))
+            if (SlimeAI.CanAttack(npc))
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -324,7 +212,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         {
             modifiers.Knockback *= 1.5f;
             if(!target.GetModPlayer<BlockingPlayer>().Blocking)
-                target.AddBuff(BuffID.Slow, 60 * 15);
+                target.AddBuff(BuffID.Slow, 60 * 4);
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {

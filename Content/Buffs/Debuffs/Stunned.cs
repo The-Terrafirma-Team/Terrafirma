@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terrafirma.Common;
+using Terrafirma.Utilities;
 
 namespace Terrafirma.Content.Buffs.Debuffs
 {

@@ -12,6 +12,7 @@ using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terrafirma.Common;
+using Terrafirma.Utilities;
 
 namespace Terrafirma.Content.UI
 {

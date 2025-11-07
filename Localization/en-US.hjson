@@ -33,6 +33,11 @@ Mods: {
 				DisplayName: Cleansed
 				Description: Immune to most debuffs
 			}
+
+			Bloodlust: {
+				DisplayName: Bloodlust
+				Description: Mods.Terrafirma.Buffs.Bloodlust.Description
+			}
 		}
 
 		Projectiles: {
