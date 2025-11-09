@@ -332,5 +332,15 @@ Mods: {
 				Tooltip: ""
 			}
 		}
+
+		EnemyPrefix: {
+			Bulky.DisplayName: Bulky
+			Jacked.DisplayName: Jacked
+			Scrawny.DisplayName: Scrawny
+			Speedy.DisplayName: Speedy
+			Tiny.DisplayName: Tiny
+			Weak.DisplayName: Weak
+			Elite.DisplayName: Elite
+		}
 	}
 }

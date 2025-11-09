@@ -41,7 +41,7 @@ namespace Terrafirma.Content.Skills
             {
                 if (p.Center.Distance(player.Center) < Radius)
                 {
-                    p.AddBuff(ModContent.BuffType<CleanseBuff>(), 60 * 5, true);
+                    p.AddBuff(ModContent.BuffType<CleanseBuff>(), 60 * 5);
                     for (int i = 0; i < 10; i++)
                     {
                         ParticleSystem.NewParticle(new StarSparkle(Main.rand.Next(14, 42), Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(0.4f, 1f), new Color(0.3f, 1f, Main.rand.NextFloat(0.5f), 0f), Main.rand.NextVector2Circular(5, 5) + new Vector2(0, -3)), p.Bottom);

@@ -25,6 +25,7 @@ public class NPCStats : GlobalNPC
 
     public float MoveSpeed = 1f;
     public float AttackSpeed = 1f;
+    public float AttackDamage = 1f;
     public override void ResetEffects(NPC npc)
     {
         NoAnimation = false;
@@ -35,8 +36,12 @@ public class NPCStats : GlobalNPC
 
         MoveSpeed = 1f;
         AttackSpeed = 1f;
+        AttackDamage = 1f;
     }
-
+    public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
+    {
+        modifiers.SourceDamage *= AttackDamage;
+    }
     public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
     {
         if (target.PlayerStats().ImmuneToContactDamage)
