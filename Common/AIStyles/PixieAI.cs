@@ -15,7 +15,10 @@ namespace Terrafirma.Common.AIStyles
         {
             npc.noGravity = true;
             if (!shouldBeDespawning)
+            {
                 npc.TargetClosest();
+            }
+
             maxSpeedX *= stats.MoveSpeed;
             maxSpeedY *= stats.MoveSpeed;
             acceleration *= stats.MoveSpeed;
@@ -23,7 +26,7 @@ namespace Terrafirma.Common.AIStyles
             if (stats.Immobile | stats.NoFlight)
             {
                 npc.velocity.X *= 0.99f;
-                npc.noGravity = false;
+                npc.noGravity = false | npc.noTileCollide;
                 return;
             }
 

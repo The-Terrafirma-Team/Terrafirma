@@ -135,12 +135,12 @@ Mods: {
 
 			MusicBoxAltHellItem: {
 				DisplayName: Music Box (Alt Hell)
-				Tooltip: ""
+				Tooltip: Brought to you by Ennway!
 			}
 
 			MusicBoxMeteorItem: {
 				DisplayName: Music Box (Meteorite)
-				Tooltip: ""
+				Tooltip: Brought to you by Ennway!
 			}
 
 			PottedCorruptBamboo: {

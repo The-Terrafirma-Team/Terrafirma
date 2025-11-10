@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
-using Terrafirma.Common.Systems;
 using Terrafirma.Utilities;
 using Terraria;
 using Terraria.DataStructures;
@@ -13,7 +7,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills
+namespace Terrafirma.Content.Skills.FocusStrike
 {
     public class FocusStrike : Skill
     {

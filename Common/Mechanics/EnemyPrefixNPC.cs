@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -51,6 +52,28 @@ namespace Terrafirma.Common.Mechanics
         {
             return Terrafirma.CombatReworkEnabled;
         }
+        public override void Load()
+        {
+            On_NPC.Transform += On_NPC_Transform;
+        }
+
+        private void On_NPC_Transform(On_NPC.orig_Transform orig, NPC self, int newType)
+        {
+            int prefix = -1;
+            EnemyPrefixNPC n = null;
+            if (self.TryGetGlobalNPC<EnemyPrefixNPC>(out n))
+            {
+                prefix = n.EnemyPrefix;
+            }
+            orig.Invoke(self, newType);
+            if (self.TryGetGlobalNPC<EnemyPrefixNPC>(out n))
+            {
+                n.EnemyPrefix = prefix;
+                n.appliedPrefix = true;
+                Prefixes[prefix].Apply(self);
+            }
+        }
+
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return !entity.friendly && !entity.boss && entity.lifeMax > 5;
@@ -65,6 +88,22 @@ namespace Terrafirma.Common.Mechanics
         {
             if (EnemyPrefix != -1)
                 typeName = Prefixes[EnemyPrefix].DisplayName.Value + " " + typeName;
+        }
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            if (source is EntitySource_Parent p && p.Entity is NPC n)
+            {
+                EnemyPrefix = n.GetGlobalNPC<EnemyPrefixNPC>().EnemyPrefix;
+                appliedPrefix = true;
+            }
+        }
+        public override GlobalNPC Clone(NPC from, NPC to)
+        {
+            EnemyPrefixNPC t = to.GetGlobalNPC<EnemyPrefixNPC>();
+            EnemyPrefixNPC f = from.GetGlobalNPC<EnemyPrefixNPC>();
+            t.EnemyPrefix = f.EnemyPrefix;
+            t.appliedPrefix = f.appliedPrefix;
+            return base.Clone(from, to);
         }
         public override bool PreAI(NPC npc)
         {

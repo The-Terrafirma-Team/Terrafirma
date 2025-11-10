@@ -139,6 +139,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                 spriteBatch.Draw(highlight.Value, npc.Center - screenPos + new Vector2(npc.frame.Width * 0.5f * npc.spriteDirection * npc.scale, 0).RotatedBy(npc.rotation), null, Terrafirma.UnparryableAttackColor with { A = 0}, i * MathHelper.PiOver2 + ((float)Main.timeForVisualEffects * 0.1f), highlight.Size() / 2, npc.scale * new Vector2(0.5f, 1f) * flashSize, SpriteEffects.None, 0);
                 spriteBatch.Draw(highlight.Value, npc.Center - screenPos + new Vector2(npc.frame.Width * 0.5f * npc.spriteDirection * npc.scale, 0).RotatedBy(npc.rotation), null, new Color(1f, 1f, 1f, 0f) * 0.5f, i * MathHelper.PiOver2 + ((float)Main.timeForVisualEffects * 0.1f), highlight.Size() / 2, npc.scale * new Vector2(0.4f, 0.4f) * flashSize, SpriteEffects.None, 0);
             }
+
+            Utilities.Extensions.DrawConfusedQuestionMark(npc, spriteBatch, screenPos);
             return false;
         }
         public override void AI(NPC npc)
@@ -243,73 +245,74 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                     npc.TargetClosest();
                 }
 
-                float HorizontalSpeed = 4f * stats.MoveSpeed * npc.scale;
-                float VerticalSpeed = 2.5f * stats.MoveSpeed * npc.scale;
-                npc.velocity += new Vector2(npc.direction, npc.directionY * 0.6f) * 0.1f * stats.MoveSpeed;
-                if (npc.direction == -1 && npc.velocity.X > 0f - HorizontalSpeed)
-                {
-                    if (npc.velocity.X > HorizontalSpeed)
-                    {
-                        npc.velocity.X -= 0.1f * stats.MoveSpeed;
-                    }
-                    else if (npc.velocity.X > 0f)
-                    {
-                        npc.velocity.X += 0.05f * stats.MoveSpeed;
-                    }
-                    if (npc.velocity.X < -HorizontalSpeed)
-                    {
-                        npc.velocity.X = -HorizontalSpeed;
-                    }
-                }
-                else if (npc.direction == 1 && npc.velocity.X < HorizontalSpeed)
-                {
-                    if (npc.velocity.X < 0f - HorizontalSpeed)
-                    {
-                        npc.velocity.X += 0.1f * stats.MoveSpeed;
-                    }
-                    else if (npc.velocity.X < 0f)
-                    {
-                        npc.velocity.X -= 0.05f * stats.MoveSpeed;
-                    }
-                    if (npc.velocity.X > HorizontalSpeed)
-                    {
-                        npc.velocity.X = HorizontalSpeed;
-                    }
-                }
-                if (npc.directionY == -1 && npc.velocity.Y > 0f - VerticalSpeed)
-                {
-                    if (npc.velocity.Y > VerticalSpeed)
-                    {
-                        npc.velocity.Y -= 0.05f * stats.MoveSpeed;
-                    }
-                    else if (npc.velocity.Y > 0f)
-                    {
-                        npc.velocity.Y += 0.03f * stats.MoveSpeed;
-                    }
-                    if (npc.velocity.Y < -VerticalSpeed)
-                    {
-                        npc.velocity.Y = -VerticalSpeed;
-                    }
-                }
-                else if (npc.directionY == 1 && npc.velocity.Y < VerticalSpeed)
-                {
-                    if (npc.velocity.Y < 0f - VerticalSpeed)
-                    {
-                        npc.velocity.Y += 0.05f * stats.MoveSpeed;
-                    }
-                    else if (npc.velocity.Y < 0f)
-                    {
-                        npc.velocity.Y -= 0.03f * stats.MoveSpeed;
-                    }
-                    if (npc.velocity.Y > VerticalSpeed)
-                    {
-                        npc.velocity.Y = VerticalSpeed;
-                    }
-                }
+                //float HorizontalSpeed = 4f * stats.MoveSpeed * npc.scale;
+                //float VerticalSpeed = 2.5f * stats.MoveSpeed * npc.scale;
+                //npc.velocity += new Vector2(npc.direction, npc.directionY * 0.6f) * 0.1f * stats.MoveSpeed;
+                npc.SimpleFlyMovement(new Vector2(8f * npc.direction,4.5f * npc.directionY) * stats.MoveSpeed * npc.scale, 0.05f * stats.MoveSpeed);
+                //if (npc.direction == -1 && npc.velocity.X > 0f - HorizontalSpeed)
+                //{
+                //    if (npc.velocity.X > HorizontalSpeed)
+                //    {
+                //        npc.velocity.X -= 0.1f * stats.MoveSpeed;
+                //    }
+                //    else if (npc.velocity.X > 0f)
+                //    {
+                //        npc.velocity.X += 0.05f * stats.MoveSpeed;
+                //    }
+                //    if (npc.velocity.X < -HorizontalSpeed)
+                //    {
+                //        npc.velocity.X = -HorizontalSpeed;
+                //    }
+                //}
+                //else if (npc.direction == 1 && npc.velocity.X < HorizontalSpeed)
+                //{
+                //    if (npc.velocity.X < 0f - HorizontalSpeed)
+                //    {
+                //        npc.velocity.X += 0.1f * stats.MoveSpeed;
+                //    }
+                //    else if (npc.velocity.X < 0f)
+                //    {
+                //        npc.velocity.X -= 0.05f * stats.MoveSpeed;
+                //    }
+                //    if (npc.velocity.X > HorizontalSpeed)
+                //    {
+                //        npc.velocity.X = HorizontalSpeed;
+                //    }
+                //}
+                //if (npc.directionY == -1 && npc.velocity.Y > 0f - VerticalSpeed)
+                //{
+                //    if (npc.velocity.Y > VerticalSpeed)
+                //    {
+                //        npc.velocity.Y -= 0.05f * stats.MoveSpeed;
+                //    }
+                //    else if (npc.velocity.Y > 0f)
+                //    {
+                //        npc.velocity.Y += 0.03f * stats.MoveSpeed;
+                //    }
+                //    if (npc.velocity.Y < -VerticalSpeed)
+                //    {
+                //        npc.velocity.Y = -VerticalSpeed;
+                //    }
+                //}
+                //else if (npc.directionY == 1 && npc.velocity.Y < VerticalSpeed)
+                //{
+                //    if (npc.velocity.Y < 0f - VerticalSpeed)
+                //    {
+                //        npc.velocity.Y += 0.05f * stats.MoveSpeed;
+                //    }
+                //    else if (npc.velocity.Y < 0f)
+                //    {
+                //        npc.velocity.Y -= 0.03f * stats.MoveSpeed;
+                //    }
+                //    if (npc.velocity.Y > VerticalSpeed)
+                //    {
+                //        npc.velocity.Y = VerticalSpeed;
+                //    }
+                //}
                 if (npc.ai[2] > DashTime - 50 * stats.AttackSpeed)
                 {
                     npc.velocity *= 0.95f;
-                    npc.localAI[0] = npc.localAI[0].AngleLerp(npc.Center.DirectionTo(Main.player[npc.target].Center).ToRotation(),0.1f);
+                    npc.localAI[0] = npc.localAI[0].AngleLerp(npc.Center.DirectionTo(Main.player[npc.target].Center).ToRotation() - (npc.confused? MathHelper.Pi : 0),0.1f);
                 }
             }
             else
@@ -327,7 +330,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                         d.velocity *= 2;
                     }
                     SoundEngine.PlaySound(SoundID.DD2_GoblinBomberThrow, npc.Center);
-                    npc.velocity = npc.Center.DirectionTo(Main.player[npc.target].Center) * 14 * stats.MoveSpeed;
+                    npc.velocity = npc.Center.DirectionTo(Main.player[npc.target].Center) * 14 * stats.MoveSpeed * (npc.confused? -1 : 1);
                 }
 
                 if (Main.rand.NextBool(3))

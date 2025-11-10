@@ -11,7 +11,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills
+namespace Terrafirma.Content.Skills.GroundSlam
 {
     public class GroundSlam : Skill
     {
@@ -58,17 +58,17 @@ namespace Terrafirma.Content.Skills
             if (GroundSlamming && Player.velocity.Y == 0)
             {
                 SoundEngine.PlaySound(SoundID.Item14, Player.position);
-                for (int i = 0; i < (5 * Power); i++)
+                for (int i = 0; i < 5 * Power; i++)
                 {
                     ParticleSystem.NewParticle(new Smoke(Main.rand.NextVector2Circular(2, 1f) - Vector2.UnitY * Player.gravDir, Color.Beige * 0.5f, Color.DarkGoldenrod * 0.3f, Main.rand.NextFloat(0.8f, 1.2f)), bottom);
                 }
-                DecalsSystem.NewDecal(new CrackDecal(0.5f + (Power / 3f)), bottom + Player.velocity);
+                DecalsSystem.NewDecal(new CrackDecal(0.5f + Power / 3f), bottom + Player.velocity);
                 GroundSlamming = false;
                 Player.fallStart = (int)Player.position.X / 16;
                 Player.velocity.Y = -4f - Power * 0.5f * Player.gravDir;
                 foreach (NPC n in Main.ActiveNPCs)
                 {
-                    if (!n.friendly && n.Center.Distance(Player.Center) < (16 * (4f + Power * 0.5f)))
+                    if (!n.friendly && n.Center.Distance(Player.Center) < 16 * (4f + Power * 0.5f))
                     {
                         Player.StrikeNPCDirect(n, n.CalculateHitInfo((int)(Power * 3), n.Center.X < Player.Center.X ? -1 : 1, true, MathHelper.Max(1f, Power), DamageClass.Melee, true));
                         n.AddBuff(ModContent.BuffType<Stunned>(), 60 * 3);
@@ -110,7 +110,7 @@ namespace Terrafirma.Content.Skills
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Player.grappling[0] > -1 || (Player.controlJump && (Player.AnyExtraJumpUsable() || Player.wingTime > 0f)))
+            if (Player.grappling[0] > -1 || Player.controlJump && (Player.AnyExtraJumpUsable() || Player.wingTime > 0f))
                 GroundSlamming = false;
         }
     }

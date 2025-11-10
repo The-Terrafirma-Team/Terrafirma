@@ -9,13 +9,13 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills
+namespace Terrafirma.Content.Skills.Cleanse
 {
     public class Cleanse : Skill
     {
         public override object[] TooltipFormatting()
         {
-            return new object[] { 5 };
+            return [5];
         }
         public override int ManaCost => 100;
         public override int CastTimeMax => 120;
@@ -61,7 +61,7 @@ namespace Terrafirma.Content.Skills
 
             for (int i = 0; i < player.buffType.Length; i++)
             {
-                if (Main.debuff[player.buffType[i]] && !BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]])
+                if (player.buffType[i] != BuffID.Tipsy && Main.debuff[player.buffType[i]] && !BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]])
                 {
                     player.DelBuff(i);
                     i--;
