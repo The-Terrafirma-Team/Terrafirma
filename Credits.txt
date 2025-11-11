@@ -5,5 +5,8 @@ Art:
 toonskinkt
 michal.1303
 dominicksprite
+pilchardheck
+
+Programming:
 
 I know there's more
