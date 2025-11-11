@@ -23,7 +23,10 @@ namespace Terrafirma.Common.Mechanics
             if (TensionGainMultiple > pStats.TensionMax2 - pStats.Tension)
                 TensionGainMultiple = pStats.TensionMax2 - pStats.Tension;
             if (TensionGainMultiple <= 0)
+            {
+                AccumulatedTension = 0;
                 return;
+            }
             while (AccumulatedTension > 75 * TensionGainMultiple)
             {
                 AccumulatedTension -= 75 * TensionGainMultiple;

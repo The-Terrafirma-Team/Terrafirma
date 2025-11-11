@@ -60,12 +60,19 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
             npc.height = 22;
             npc.width = 24;
             if (!npc.IsABestiaryIconDummy)
+            {
                 npc.color = Color.Lerp(new Color(0, 80, 255, 130), new Color(0, 200, 255, 130), Main.rand.NextFloat());
+                if(Main.LocalPlayer.position.Y > Main.rockLayer * 16)
+                {
+                    npc.color = Color.Lerp(npc.color, new Color(128, 128, 128, npc.color.A), Main.rand.NextFloat(0.75f));
+                }
+            }
         }
         public override void SetDefaultsFromNetId(NPC npc)
         {
             byte alpha = 130;
             if (!npc.IsABestiaryIconDummy)
+            {
                 switch (npc.netID)
                 {
                     case NPCID.RedSlime:
@@ -83,7 +90,16 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
                     case NPCID.JungleSlime:
                         npc.color = Color.Lerp(new Color(143, 215, 93, alpha), new Color(128, 64, 0, 255), Main.rand.NextFloat(0.75f));
                         break;
+                    //case NPCID.BabySlime:
+                    //    npc.color = new Color(Main.rand.NextFloat(0.4f,0.6f), Main.rand.NextFloat(0.4f, 0.6f), Main.rand.NextFloat(0.4f, 0.6f),npc.color.A);
+                    //    break;
                 }
+                if (Main.LocalPlayer.position.Y > Main.rockLayer * 16 && npc.netID != NPCID.BlackSlime && npc.netID != NPCID.BabySlime && npc.netID != NPCID.JungleSlime)
+                {
+                    Main.NewText(1);
+                    npc.color = Color.Lerp(npc.color, new Color(128, 128, 128, npc.color.A), Main.rand.NextFloat(0.75f));
+                }
+            }
         }
         public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
         {
@@ -173,6 +189,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
                     break;
             }
 
+            //spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame, npc.GetNPCColorTintedByBuffs(drawColor) * Opacity * (drawColor.A / 255f), npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
+            
             spriteBatch.Draw(Extra.Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { Width = 132 / 2 }, Color.Lerp(npc.GetNPCColorTintedByBuffs(npc.color).MultiplyRGBA(drawColor),Color.Black * 0.4f, 0.85f) * npc.Opacity * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
             spriteBatch.Draw(TextureAssets.Npc[NPCID.BlueSlime].Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame, npc.GetNPCColorTintedByBuffs(npc.color).MultiplyRGBA(drawColor) * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Extra.Value, position - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { Width = 132 / 2, X = 132 / 2 }, highlightColor with { A = 0 } * npc.Opacity * Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);

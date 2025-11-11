@@ -22,7 +22,7 @@ namespace Terrafirma.Content.Prefixes
             npc.scale *= 1.3f;
             npc.Size *= 1.3f;
         }
-        public override int Weight => 1;
+        public override int Weight => 10;
         public override void Update(NPC npc)
         {
             NPCStats stats = npc.NPCStats();

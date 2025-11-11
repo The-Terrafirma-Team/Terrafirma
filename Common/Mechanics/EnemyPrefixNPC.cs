@@ -19,7 +19,7 @@ namespace Terrafirma.Common.Mechanics
         }
         public string LocalizationCategory => "EnemyPrefix";
 
-        public virtual int Weight => 10;
+        public virtual int Weight => 100;
         public virtual LocalizedText DisplayName => this.GetLocalization(nameof(DisplayName), PrettyPrintName);
         public int ID { get; internal set; }
         public override void Load()
@@ -60,13 +60,12 @@ namespace Terrafirma.Common.Mechanics
         private void On_NPC_Transform(On_NPC.orig_Transform orig, NPC self, int newType)
         {
             int prefix = -1;
-            EnemyPrefixNPC n = null;
-            if (self.TryGetGlobalNPC<EnemyPrefixNPC>(out n))
+            if (self.TryGetGlobalNPC(out EnemyPrefixNPC n))
             {
                 prefix = n.EnemyPrefix;
             }
             orig.Invoke(self, newType);
-            if (self.TryGetGlobalNPC<EnemyPrefixNPC>(out n))
+            if (self.TryGetGlobalNPC(out n))
             {
                 n.EnemyPrefix = prefix;
                 n.appliedPrefix = true;
@@ -76,7 +75,7 @@ namespace Terrafirma.Common.Mechanics
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return !entity.friendly && !entity.boss && entity.lifeMax > 5;
+            return !entity.friendly && !entity.boss && entity.lifeMax > 5 && entity.type != NPCID.TargetDummy;
         }
         public override bool InstancePerEntity => true;
 
@@ -111,13 +110,13 @@ namespace Terrafirma.Common.Mechanics
             {
                 if (!appliedPrefix)
                 {
+                    appliedPrefix = true;
                     if (Main.rand.NextBool())
-                        base.PreAI(npc);
+                        return base.PreAI(npc);
                     EnemyPrefix = weightedPrefix.Get();
                     Prefixes[EnemyPrefix].Apply(npc);
                     npc.netUpdate = true;
                 }
-                appliedPrefix = true;
             }
 
             if (EnemyPrefix != -1)
