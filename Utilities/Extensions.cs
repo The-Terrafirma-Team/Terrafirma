@@ -1,18 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using Terrafirma.Common;
 using Terrafirma.Common.Interfaces;
-using Terrafirma.Content.NPCs.Vanilla;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Terrafirma.Utilities
 {
+    // TODO: Seperate this like the CollisionUtils file is
     public static class Extensions
     {
         public static void DrawConfusedQuestionMark(this NPC rCurrentNPC, SpriteBatch spritebatch, Vector2 screenPos, float heightOffset = 0f)

@@ -1,3 +1,4 @@
 displayName = Terrafirma
 author = JonaBlackstar, Fred
 version = 0.1
+modReferences = Daybreak

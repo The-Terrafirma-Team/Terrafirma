@@ -43,6 +43,7 @@ Mods: {
 		Projectiles: {
 			SlimeStab.DisplayName: Slimey Stab
 			LanceProj.DisplayName: Lance Proj
+			LavaSlimeSpike.DisplayName: Lava Slime Spike
 		}
 
 		Configs: {

@@ -65,7 +65,7 @@ namespace Terrafirma.Common.Mechanics
                 prefix = n.EnemyPrefix;
             }
             orig.Invoke(self, newType);
-            if (self.TryGetGlobalNPC(out n))
+            if (prefix > -1 && self.TryGetGlobalNPC(out n))
             {
                 n.EnemyPrefix = prefix;
                 n.appliedPrefix = true;

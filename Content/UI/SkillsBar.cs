@@ -42,7 +42,7 @@ namespace Terrafirma.Content.UI
         public override void Draw(SpriteBatch spriteBatch)
         {
             SkillsPlayer player = Main.LocalPlayer.GetModPlayer<SkillsPlayer>();
-            Vector2 position = new Vector2(Main.screenWidth, 32) * 0.5f;
+            Vector2 position = new Vector2((Main.playerInventory ? 330 : 280) * Main.UIScale, 16);
             position.X -= 24 * (player.MaxSkills - 2);
             Rectangle midRect = new Rectangle(62, 0, 56, 86);
 
@@ -123,7 +123,8 @@ namespace Terrafirma.Content.UI
         {
             //Initialize();
             SkillsPlayer player = Main.LocalPlayer.GetModPlayer<SkillsPlayer>();
-            menuIcon.Left.Pixels = Main.screenWidth * 0.5f - 24 * Math.Clamp(player.MaxSkills - 2,1,1000) - 66;
+            Vector2 position = new Vector2((Main.playerInventory ? 330 : 280) * Main.UIScale, 16);
+            menuIcon.Left.Pixels = position.X - 24 * Math.Clamp(player.MaxSkills - 2,1,1000) - 66;
             menuIcon.Top.Pixels = 46;
             menuIcon.Width.Pixels = 30;
             menuIcon.Height.Pixels = 30;

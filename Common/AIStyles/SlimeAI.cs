@@ -6,11 +6,18 @@ namespace Terrafirma.Common.AIStyles
 {
     public static class SlimeAI
     {
+        public static bool CanFallThrough(NPC npc)
+        {
+            return npc.HasValidTarget && npc.ai[3] > 0 && (npc.Bottom.Y + npc.velocity.Y < npc.targetRect.Bottom);
+        }
         public static void FindFrame(NPC npc, int frameHeight, ref float frameCounter, ref int frame, int maxFrames = 3, int jumpUpFrame = 5, int jumpDownFrame = 4)
         {
             npc.frame.Y = frame * frameHeight;
             if (npc.NPCStats().NoAnimation)
+            {
+                frameCounter = 0;
                 return;
+            }
             if (npc.ai[2] == 0)
             {
                 frameCounter += npc.NPCStats().MoveSpeed;
@@ -32,13 +39,15 @@ namespace Terrafirma.Common.AIStyles
         {
             return npc.velocity.Y != 0 && npc.ai[3] == 1 && !npc.NPCStats().Immobile;
         }
-        public static void AI(NPC npc, NPCStats stats, ref float frameCounter)
+        public static void AI(NPC npc, NPCStats stats, ref float frameCounter, float jumpHeight = -12f, float lowJumpHeight = -6)
         {
-            npc.rotation = npc.velocity.X * 0.1f * npc.velocity.Y * -0.1f;
-
+            npc.targetRect = npc.GetTargetData().Hitbox;
+            npc.rotation = npc.velocity.X * 0.05f * npc.velocity.Y * -0.05f;
+            npc.rotation = MathHelper.Clamp(npc.rotation, -0.2f, 0.2f);
             if (npc.direction == 0)
             {
                 npc.direction = Main.rand.NextBool() ? 1 : -1;
+                npc.netUpdate = true;
             }
             if (npc.ai[0] < -500)
             {
@@ -47,7 +56,8 @@ namespace Terrafirma.Common.AIStyles
             }
             if (npc.wet)
             {
-
+                npc.ai[0] = 0;
+                npc.FaceTarget();
                 npc.velocity.X += npc.direction * 0.1f * stats.MoveSpeed;
                 if (npc.velocity.Y == 0)
                 {
@@ -69,7 +79,7 @@ namespace Terrafirma.Common.AIStyles
                 npc.ai[3] = 0;
                 npc.ai[2] = 0;
                 npc.ai[0] = 0;
-                frameCounter += 2;
+                frameCounter -= npc.NPCStats().MoveSpeed * 0.5f;
                 if (npc.velocity.Y == 0)
                 {
                     npc.velocity.X *= 0.8f;
@@ -83,7 +93,7 @@ namespace Terrafirma.Common.AIStyles
                 npc.ai[0] += stats.AttackSpeed;
                 npc.ai[3] = 0;
             }
-            else if (npc.ai[3] == 1)
+            else if (npc.ai[3] >= 1 && npc.ai[2] < 1)
             {
                 if (npc.direction == 1 && npc.velocity.X < 0.1f || npc.direction == -1 && npc.velocity.X > -0.1f && CanAttack(npc))
                     npc.velocity.X += npc.direction * 0.6f * stats.MoveSpeed;
@@ -110,23 +120,19 @@ namespace Terrafirma.Common.AIStyles
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(-20, 0);
                     npc.velocity.X += npc.direction * Main.rand.NextFloat(2, 4) * stats.MoveSpeed;
-                    npc.velocity.Y += Main.rand.NextFloat(-8, -5);
+                    npc.velocity.Y += Main.rand.NextFloat(jumpHeight,lowJumpHeight);
                     npc.netUpdate = true;
                 }
             }
             else
             {
-                Player p = Main.player[npc.target];
-
                 if (npc.ai[0] > 100)
                 {
-                    npc.direction = p.Center.X < npc.Center.X ? -1 : 1;
-                    if (npc.confused)
-                        npc.direction *= -1;
+                    npc.FaceTarget();
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(40);
-                    npc.velocity.X += MathHelper.Clamp((p.Center.X - npc.Center.X) * 0.04f, -4, 4) * (npc.confused ? -1 : 1) * stats.MoveSpeed;
-                    npc.velocity.Y += MathHelper.Clamp((p.Center.Y - npc.Center.Y) * 0.06f, -12, Main.rand.NextFloat(-8, -5));
+                    npc.velocity.X += MathHelper.Clamp((npc.targetRect.Center.X - npc.Center.X) * 0.04f, -4 * stats.MoveSpeed, 4 * stats.MoveSpeed);
+                    npc.velocity.Y += MathHelper.Clamp((npc.targetRect.Center.Y - npc.Center.Y) * 0.06f, jumpHeight, lowJumpHeight);
                     npc.netUpdate = true;
                 }
             }

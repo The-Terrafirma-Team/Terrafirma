@@ -126,8 +126,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
             SlimeAI.AI(npc, stats, ref frameCounter);
             if (!npc.HasValidTarget)
                 return;
-            Player p = Main.player[npc.target];
-            if (((p.Center + p.velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(p.Center)) < 32 * npc.scale && npc.ai[0] > 20 || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
+            var target = npc.GetTargetData();
+            if (((target.Center + target.Velocity * 5).Distance(npc.Hitbox.ClosestPointInRect(target.Center)) < 32 * npc.scale && npc.ai[0] > 20 || npc.ai[2] > 0) && npc.ai[3] == 0) // Spike Attack
             {
                 npc.ai[0] = 0;
                 npc.ai[2]++;
@@ -214,6 +214,10 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
 
             npc.DrawConfusedQuestionMark(spriteBatch, screenPos);
             return false;
+        }
+        public override bool? CanFallThroughPlatforms(NPC npc)
+        {
+            return SlimeAI.CanFallThrough(npc);
         }
     }
     public class SlimeStab : ModProjectile, ICustomBlockBehavior
