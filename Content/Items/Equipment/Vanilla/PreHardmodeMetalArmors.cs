@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Content.Items.Equipment.Vanilla
 {
-    internal class PrehardmodeMetals : ModPlayer
+    internal class PreHardmodeMetalArmors : ModPlayer
     {
         public bool GoldArmor = false;
         public bool LeadArmor = false;

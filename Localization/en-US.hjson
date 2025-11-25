@@ -233,6 +233,11 @@ Mods: {
 				DisplayName: Mystic Hourglass
 				Tooltip: Decreases skill cooldowns by 10%
 			}
+
+			SpringBoots: {
+				DisplayName: Spring Boots
+				Tooltip: Keep jumping to build up height and speed
+			}
 		}
 
 		VanillaSetBonus: {

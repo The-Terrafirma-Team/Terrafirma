@@ -1,9 +1,8 @@
-﻿
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment
+namespace Terrafirma.Content.Items.Equipment.Magic.GlowingMushroomCap
 {
 
     [AutoloadEquip(EquipType.Head)]

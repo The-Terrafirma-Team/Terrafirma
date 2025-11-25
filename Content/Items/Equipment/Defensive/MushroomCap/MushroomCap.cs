@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Defensive
+namespace Terrafirma.Content.Items.Equipment.Defensive.MushroomCap
 {
 
     [AutoloadEquip(EquipType.Head)]
