@@ -9,18 +9,18 @@ using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Skills
+namespace Terrafirma.Content.Items.Equipment.Accessories.Combat.MysticHourglass
 {
-    public class CueCards : ModItem
+    public class MysticHourglass : ModItem
     {
         public override void SetDefaults()
         {
             Item.DefaultToAccessory();
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Orange;
         }
         public override void UpdateEquip(Player player)
         {
-            player.PlayerStats().SkillCastTime -= 0.2f;
+            player.PlayerStats().SkillCooldown -= 0.1f;
         }
     }
 }

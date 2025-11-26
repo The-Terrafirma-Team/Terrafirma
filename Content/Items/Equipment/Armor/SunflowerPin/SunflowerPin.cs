@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Movement.SunflowerPin
+namespace Terrafirma.Content.Items.Equipment.Armor.SunflowerPin
 {
 
     [AutoloadEquip(EquipType.Head)]

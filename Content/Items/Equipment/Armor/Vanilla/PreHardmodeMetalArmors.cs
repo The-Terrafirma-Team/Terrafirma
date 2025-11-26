@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terrafirma.Utilities;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Vanilla
+namespace Terrafirma.Content.Items.Equipment.Armor.Vanilla
 {
     internal class PreHardmodeMetalArmors : ModPlayer
     {

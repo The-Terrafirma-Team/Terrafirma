@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Defensive.Shield
+namespace Terrafirma.Content.Items.Equipment.Accessories.Defense.Shield
 {
     [AutoloadEquip(EquipType.Shield)]
     public class Shield : ModItem

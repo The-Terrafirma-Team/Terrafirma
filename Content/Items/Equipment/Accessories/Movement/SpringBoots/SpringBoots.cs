@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Movement.SpringBoots
+namespace Terrafirma.Content.Items.Equipment.Accessories.Movement.SpringBoots
 {
     [AutoloadEquip(EquipType.Shoes)]
     class SpringBoots : ModItem
@@ -26,8 +26,8 @@ namespace Terrafirma.Content.Items.Equipment.Movement.SpringBoots
             player.autoJump = true;
             player.noFallDmg = true;
 
-            player.jumpSpeedBoost = (player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier) * (player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier) / 2;
-            player.maxRunSpeed = 3 * (player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier);
+            player.jumpSpeedBoost = player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier * player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier / 2;
+            player.maxRunSpeed = 3 * player.GetModPlayer<SpringBootsPlayer>().JumpMultiplier;
 
             player.GetModPlayer<SpringBootsPlayer>().SpringBoots = true;
         }

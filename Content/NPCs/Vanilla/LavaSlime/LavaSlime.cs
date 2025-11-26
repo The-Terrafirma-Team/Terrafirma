@@ -48,6 +48,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
         private int frame;
         public void OnBlocked(Player player, float Power, NPC npc = null)
         {
+            npc.ai[2] = 0;
             npc.AddBuff(ModContent.BuffType<Stunned>(), (int)(60 * 1.5f * Power));
         }
         public override void FindFrame(NPC npc, int frameHeight)
@@ -93,7 +94,21 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
             if (npc.ai[2] > 0)
                 modifiers.DisableKnockback();
         }
-
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
+        {
+            if (npc.ai[2] <= 0)
+                return;
+            modifiers.Knockback *= 2f;
+            modifiers.SourceDamage *= 2.5f;
+        }
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+        {
+            if (target.GetModPlayer<BlockingPlayer>().Blocking)
+                return;
+            target.AddBuff(BuffID.OnFire3, 60 * 4);
+            if (npc.ai[2] > 0)
+                target.AddBuff(BuffID.BrokenArmor, 60 * 8);
+        }
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             //spriteBatch.Draw(TextureAssets.Npc[NPCID.LavaSlime].Value, npc.Bottom - screenPos + new Vector2(0, 4 * npc.scale), npc.frame, npc.GetNPCColorTintedByBuffs(npc.GetAlpha(Color.White)) * npc.Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
@@ -324,6 +339,9 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
         {
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.npc[(int)Projectile.ai[1]].Center.X);
             modifiers.Knockback *= 2f;
+        }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
             if (!target.GetModPlayer<BlockingPlayer>().Blocking)
                 target.AddBuff(BuffID.BrokenArmor, 60 * 4);
         }

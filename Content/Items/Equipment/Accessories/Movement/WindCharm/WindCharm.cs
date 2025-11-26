@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Items.Equipment.Movement.WindCharm
+namespace Terrafirma.Content.Items.Equipment.Accessories.Movement.WindCharm
 {
     public class WindCharm : ModItem
     {

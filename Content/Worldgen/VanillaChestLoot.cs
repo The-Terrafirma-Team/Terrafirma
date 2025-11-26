@@ -1,7 +1,7 @@
 ﻿using Terrafirma.Content.Items.Consumable;
 using Terrafirma.Content.Items.Equipment;
-using Terrafirma.Content.Items.Equipment.Defensive.Shield;
-using Terrafirma.Content.Items.Equipment.Movement.WindCharm;
+using Terrafirma.Content.Items.Equipment.Accessories.Defense.Shield;
+using Terrafirma.Content.Items.Equipment.Accessories.Movement.WindCharm;
 using Terrafirma.Content.Items.Weapons.Melee;
 using Terraria;
 using Terraria.ID;
