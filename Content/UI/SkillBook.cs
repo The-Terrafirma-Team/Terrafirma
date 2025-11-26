@@ -52,7 +52,6 @@ namespace Terrafirma.Content.UI
         public override void OnActivate()
         {
             RemoveAllChildren();
-            uiPosition = Main.ScreenSize.ToVector2() / 2;
 
             hoverIcon = new SkillBookHoverIcon();
             Append(hoverIcon);
@@ -115,6 +114,9 @@ namespace Terrafirma.Content.UI
             Append(mainPanel);
             Append(categoryPanel);
             //Append(dragIcon);
+
+            var dims = mainPanel.GetDimensions();
+            uiPosition = Main.ScreenSize.ToVector2() / 2 - new Vector2(dims.Width,dims.Height) / 2;
 
             GetSkills();
             GetCategories();
@@ -268,7 +270,9 @@ namespace Terrafirma.Content.UI
         public void UpdateDrag(GameTime gameTime)
         {
             bool mouseHover = false;
-
+            var dims = mainPanel.GetDimensions();
+            if (Main.MouseScreen.X >= dims.X && Main.MouseScreen.X <= uiPosition.X + dims.Height)
+                mouseHover = Main.LocalPlayer.mouseInterface = Main.MouseScreen.Y > dims.Y && Main.MouseScreen.Y < dims.Y + 40;
 
             if (Main.mouseLeft && !mouseHover)
             {
@@ -277,7 +281,6 @@ namespace Terrafirma.Content.UI
             if (mouseHover && Main.mouseLeft && !mouseDrag && mouseAllow)
             {
                 mouseDrag = true;
-                Main.LocalPlayer.mouseInterface = true;
                 dragOffset = Main.MouseScreen - mainPanel.GetDimensions().Position();
             }
             if (!Main.mouseLeft)
@@ -301,7 +304,8 @@ namespace Terrafirma.Content.UI
             foreach (TerrafirmaUIImage button in categoryButtons)
             {
                 button.showOverlay = button.IsMouseHovering;
-
+                if (button.IsMouseHovering)
+                    Main.LocalPlayer.mouseInterface = true;
                 int yPos = selectedCategory == (SkillCategory)(int)button.customData ? 62 : 0;
                 Rectangle baseFrame = button.frame.Value;
                 button.frame = new Rectangle(baseFrame.X, yPos, baseFrame.Width, baseFrame.Height);
@@ -328,8 +332,10 @@ namespace Terrafirma.Content.UI
     {
         private static UserInterface skillsBookInterface;
         internal static SkillBook skillBook;
+        public static ModKeybind OpenSkillbook { get; set; }
         public override void Load()
         {
+            OpenSkillbook = KeybindLoader.RegisterKeybind(Mod, "Open Skillbook", Keys.P);
             SkillBook.dragIconTex = Mod.Assets.Request<Texture2D>("Assets/UI/DragIcon");
             SkillBook.closeIconTex = Mod.Assets.Request<Texture2D>("Assets/UI/CloseButton");
             SkillBook.skillBorderTex = Mod.Assets.Request<Texture2D>("Assets/UI/SkillIconBorder");
@@ -360,9 +366,9 @@ namespace Terrafirma.Content.UI
         }
         public override void UpdateUI(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            if (OpenSkillbook.JustPressed)
             {
-                Show();
+                Flip();
             }
             skillsBookInterface?.Update(gameTime);
         }

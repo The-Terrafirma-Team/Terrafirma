@@ -91,7 +91,6 @@ namespace Terrafirma.Content.UI
         public override void MouseOver(UIMouseEvent evt)
         {
             base.MouseOver(evt);
-
             Main.LocalPlayer.mouseInterface = true;
             if (HoverSound != null)
                 SoundEngine.PlaySound(HoverSound.Value);

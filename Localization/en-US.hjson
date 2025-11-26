@@ -6,9 +6,16 @@ Mods: {
 			"Second Skill.DisplayName": Second  Skill
 			"Third Skill.DisplayName": Third  Skill
 			"Fourth Skill.DisplayName": Fourth  Skill
+			"Open Skillbook.DisplayName": Open  Skillbook
 		}
 
 		Buffs: {
+			CatBastUpgrade: Defense is increased by 7
+			CampfireUpgrade: Life regen is increased
+			HeartLampUpgrade: Life regen is greatly increased
+			StarInBottleUpgrade: Greatly increased mana regeneration
+			SunflowerUpgrade: Movement speed greatly increased and monster spawns reduced
+
 			Shattered: {
 				DisplayName: Shattered
 				Description: Blocking blocked!
@@ -237,6 +244,17 @@ Mods: {
 			SpringBoots: {
 				DisplayName: Spring Boots
 				Tooltip: Keep jumping to build up height and speed
+			}
+
+			LeatherChestplate: {
+				DisplayName: Leather Chestplate
+				SetBonus: Stationary buffs are empowered
+				Tooltip: 7% increased melee damage
+			}
+
+			LeatherPants: {
+				DisplayName: Leather Pants
+				Tooltip: 10% increased movement speed
 			}
 		}
 

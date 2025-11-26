@@ -88,6 +88,12 @@ namespace Terrafirma.Common
                 Recipe recipe = Main.recipe[i];
                 if (recipe.Mod != null)
                     return;
+                if (recipe.HasResult(ItemID.Leather))
+                {
+                    recipe.RemoveIngredient(ItemID.RottenChunk);
+                    recipe.AddIngredient(ItemID.RottenChunk, 3);
+                }
+                #region cheaper building blocks
 
                 bool hasWall = false;
                 for(int j = 0; j < recipe.requiredItem.Count; j++)
@@ -179,6 +185,7 @@ namespace Terrafirma.Common
                     recipe.ReplaceResult(ItemID.Sandstone, 2);
                 }
                 #endregion crafted blocks
+                #endregion cheaper building blocks
             }
         }
     }
