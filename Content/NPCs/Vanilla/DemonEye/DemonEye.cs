@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terrafirma.Utilities;
 
 namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
 {
@@ -140,7 +141,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                 spriteBatch.Draw(highlight.Value, npc.Center - screenPos + new Vector2(npc.frame.Width * 0.5f * npc.spriteDirection * npc.scale, 0).RotatedBy(npc.rotation), null, new Color(1f, 1f, 1f, 0f) * 0.5f, i * MathHelper.PiOver2 + ((float)Main.timeForVisualEffects * 0.1f), highlight.Size() / 2, npc.scale * new Vector2(0.4f, 0.4f) * flashSize, SpriteEffects.None, 0);
             }
 
-            Utilities.Extensions.DrawConfusedQuestionMark(npc, spriteBatch, screenPos);
+            npc.DrawConfusedQuestionMark(spriteBatch, screenPos);
             return false;
         }
         public override void AI(NPC npc)

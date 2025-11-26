@@ -129,6 +129,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
             spriteBatch.Draw(Glow.Value, npc.Bottom - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { X = npc.frame.Width }, npc.GetNPCColorTintedByBuffs(new Color(slamPercent, slamPercent * 0.5f, 0f, 0f)) * npc.Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Glow.Value, npc.Bottom - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { X = npc.frame.Width }, (new Color(60, 22, 8, 255) * slamPercent * slamPercent * slamPercent * 3) * npc.Opacity * 0.2f, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale, SpriteEffects.None, 0);
             spriteBatch.Draw(Glow.Value, npc.Bottom - screenPos + new Vector2(0, 4 * npc.scale), npc.frame with { X = npc.frame.Width }, (new Color(60, 22, 8, 255) * slamPercent * slamPercent * slamPercent * 3) * npc.Opacity, npc.rotation, new Vector2(npc.frame.Width / 2, npc.frame.Height), npc.scale * 0.8f, SpriteEffects.None, 0);
+            npc.DrawConfusedQuestionMark(spriteBatch, screenPos);
             return false;
         }
         public override void AI(NPC npc)
