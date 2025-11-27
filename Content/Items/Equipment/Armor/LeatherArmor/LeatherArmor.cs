@@ -74,7 +74,7 @@ namespace Terrafirma.Content.Items.Equipment.Armor.LeatherArmor
         {
             if (!Main.LocalPlayer.GetModPlayer<LeatherArmorPlayer>().Active)
                 return;
-            int affectedBuffColor = ItemRarityID.Yellow;
+            int affectedBuffColor = ItemRarityID.Orange;
             switch (type)
             {
                 case BuffID.CatBast:

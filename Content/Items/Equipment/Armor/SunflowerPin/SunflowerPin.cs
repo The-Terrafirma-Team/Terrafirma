@@ -22,7 +22,7 @@ namespace Terrafirma.Content.Items.Equipment.Armor.SunflowerPin
         }
         public override void UpdateEquip(Player player)
         {
-            player.AddBuff(BuffID.Sunflower, 1);
+            player.AddBuff(BuffID.Sunflower, 2, true);
         }
 
         public override void AddRecipes()
