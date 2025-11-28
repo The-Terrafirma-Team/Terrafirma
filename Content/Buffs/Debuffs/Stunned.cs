@@ -18,6 +18,7 @@ namespace Terrafirma.Content.Buffs.Debuffs
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
+            DataSets.RegisterStunDebuff(Type);
         }
         public override void Update(NPC npc, ref int buffIndex)
         {

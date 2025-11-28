@@ -98,20 +98,26 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
                 npc.localAI[0] += npc.velocity.X * 0.1f;
             if (!npc.IsABestiaryIconDummy)
                 npc.rotation = npc.localAI[0] + (npc.spriteDirection == 1 ? 0 : MathHelper.Pi);
-
-            npc.frameCounter++;
-            if (npc.noGravity)
+            if (npc.NPCStats().NoAnimation)
             {
-                if (npc.frame.Y > frameHeight * 5)
-                {
-                    npc.frame.Y = 0;
-                }
+                npc.frameCounter = 0;
             }
             else
             {
-                if (npc.frame.Y > frameHeight * 11 || npc.frame.Y < frameHeight * 6)
+                npc.frameCounter++;
+                if (npc.noGravity)
                 {
-                    npc.frame.Y = frameHeight * 6;
+                    if (npc.frame.Y > frameHeight * 5)
+                    {
+                        npc.frame.Y = 0;
+                    }
+                }
+                else
+                {
+                    if (npc.frame.Y > frameHeight * 11 || npc.frame.Y < frameHeight * 6)
+                    {
+                        npc.frame.Y = frameHeight * 6;
+                    }
                 }
             }
         }
@@ -148,7 +154,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         {
             NPCStats stats = npc.NPCStats();
 
-            if (Main.rand.NextBool(40))
+            if (!stats.NoParticles && Main.rand.NextBool(40))
             {
                 npc.position += npc.netOffset;
                 int num4 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + npc.height * 0.25f), npc.width, (int)(npc.height * 0.5f), DustID.Blood, npc.velocity.X, 2f);

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using Terrafirma.Common;
-using Terrafirma.Common.AIStyles;
 using Terrafirma.Common.Interfaces;
 using Terrafirma.Utilities;
 using Terraria;

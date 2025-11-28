@@ -95,13 +95,20 @@ namespace Terrafirma.Content.NPCs.Vanilla.Drippler
         }
         public override void AI(NPC npc)
         {
-            Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.CrimtaneWeapons);
-            d.alpha = Main.rand.Next(200);
-            d.velocity = npc.velocity * 0.6f;
-            d.velocity += new Vector2(Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(3));
-            d.noGravity = true;
 
             NPCStats stats = npc.NPCStats();
+
+            if (!stats.NoParticles)
+            {
+                Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.CrimtaneWeapons);
+                d.alpha = Main.rand.Next(200);
+                d.velocity = npc.velocity * 0.6f;
+                d.velocity += new Vector2(Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(3));
+                d.noGravity = true;
+            }
+
+            if (stats.NoAnimation)
+                npc.frameCounter = 0;
 
             npc.ai[2] += 0.001f;
             if (npc.ai[2] > 5)

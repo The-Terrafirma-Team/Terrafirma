@@ -17,7 +17,8 @@ namespace Terrafirma.Common
             {
                 if (!DataSets.NPCWhitelistedForStun[i])
                 {
-                    NPCID.Sets.SpecificDebuffImmunity[i][ModContent.BuffType<Stunned>()] = true;
+                    for(int x = 0; x < DataSets.StunDebuff.Length; x++)
+                    NPCID.Sets.SpecificDebuffImmunity[i][DataSets.StunDebuff[x]] = true;
                 }
             }
         }

@@ -21,6 +21,7 @@ public class NPCStats : GlobalNPC
     public bool Immobile = false;
     public bool NoFlight = false;
     public bool Silenced = false;
+    public bool NoParticles = false;
     public bool StunStarEffects = false;
 
     public float MoveSpeed = 1f;
@@ -32,6 +33,7 @@ public class NPCStats : GlobalNPC
         Immobile = false;
         NoFlight = false;
         Silenced = false;
+        NoParticles = false;
         StunStarEffects = false;
 
         MoveSpeed = 1f;

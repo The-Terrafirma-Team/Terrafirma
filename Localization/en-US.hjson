@@ -45,6 +45,11 @@ Mods: {
 				DisplayName: Bloodlust
 				Description: Mods.Terrafirma.Buffs.Bloodlust.Description
 			}
+
+			Frozen: {
+				DisplayName: Frozen
+				Description: Mods.Terrafirma.Buffs.Frozen.Description
+			}
 		}
 
 		Projectiles: {

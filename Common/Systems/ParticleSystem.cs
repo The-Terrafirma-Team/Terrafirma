@@ -24,13 +24,13 @@ namespace Terrafirma.Common.Systems
         }
         private void On_Main_DrawDust(On_Main.orig_DrawDust orig, Main self)
         {
-            orig.Invoke(self);
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
             for (int i = 0; i < Particles.Count; i++)
             {
                 Particles[i].Draw(Main.spriteBatch, Main.screenPosition);
             }
             Main.spriteBatch.End();
+            orig.Invoke(self);
         }
         public override void PostUpdateDusts()
         {

@@ -216,6 +216,8 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
             //{
             //    ParticleSystem.NewParticle(new Smoke(npc.velocity * 0.2f + Main.rand.NextVector2Circular(0.25f,0.25f), Color.Gray * 0.4f, Color.DarkGray * 0.25f, Main.rand.NextFloat(0.3f, 1.2f)), Main.rand.NextVector2FromRectangle(npc.Hitbox));
             //}
+            if (stats.NoParticles)
+                return;
             if (npc.ai[3] == 1)
             {
                 Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<SimpleColorableGlowierDust>());
