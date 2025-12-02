@@ -261,6 +261,16 @@ Mods: {
 				DisplayName: Leather Pants
 				Tooltip: 10% increased movement speed
 			}
+
+			SkillLearner: {
+				DisplayName: Skill Learner
+				Tooltip: ""
+			}
+
+			SkillUnlearner: {
+				DisplayName: Skill Unlearner
+				Tooltip: ""
+			}
 		}
 
 		VanillaSetBonus: {
