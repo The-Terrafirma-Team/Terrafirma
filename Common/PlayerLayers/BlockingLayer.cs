@@ -14,7 +14,7 @@ namespace Terrafirma.Common.PlayerLayers
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
+            return Terrafirma.CombatReworkEnabled;
         }
 
         private static Asset<Texture2D> BlockTex;

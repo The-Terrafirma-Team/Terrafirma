@@ -80,7 +80,7 @@ namespace Terrafirma.Common.Mechanics
         public override bool InstancePerEntity => true;
 
         public static EnemyPrefix[] Prefixes = [];
-        public static WeightedRandom<int> weightedPrefix = new WeightedRandom<int>();
+        public static WeightedRandom<int> weightedPrefix = new();
         public int EnemyPrefix = -1;
         public bool appliedPrefix = false;
         public override void ModifyTypeName(NPC npc, ref string typeName)
@@ -106,6 +106,11 @@ namespace Terrafirma.Common.Mechanics
         }
         public override bool PreAI(NPC npc)
         {
+            if (!ModContent.GetInstance<ServerConfig>().CombatPage.NPCPrefixes)
+            {
+                appliedPrefix = true;
+                return base.PreAI(npc);
+            }
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!appliedPrefix)

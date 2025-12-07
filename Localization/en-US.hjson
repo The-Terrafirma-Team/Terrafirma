@@ -85,15 +85,38 @@ Mods: {
 
 			Headers: {
 				Accessibility: Accessibility
-				Modules: Modules
+				CombatModule: Combat Overhaul
 				Preferences: Enable Music Replacements Header
 			}
 
 			ServerConfig: {
 				DisplayName: Server Config
 
+				CombatPage: {
+					Label: Combat Overhaul
+					Tooltip: ""
+				}
+			}
+
+			CombatModule: {
+				Tooltip: ""
+
 				CombatReworkEnabled: {
 					Label: Enable Combat Overhaul
+					Tooltip: ""
+				}
+
+				NPCPrefixes: {
+					Label: Enemy Prefixes
+					Tooltip: ""
+				}
+			}
+
+			WorldgenModule: {
+				Tooltip: ""
+
+				WorldgenChanges: {
+					Label: Worldgen Changes
 					Tooltip: ""
 				}
 			}

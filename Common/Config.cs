@@ -15,7 +15,7 @@ namespace Terrafirma.Common
         [Header("$Mods.Terrafirma.Configs.Headers.Accessibility")]
         [DefaultValue(true)]
         public bool EnableScreenshake;
-
+        [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255, 0, 0, 255")]
         public Color UnparryableColor;
 
@@ -30,9 +30,17 @@ namespace Terrafirma.Common
     {
         public override ConfigScope Mode => ConfigScope.ServerSide;
 
-        [Header("$Mods.Terrafirma.Configs.Headers.Modules")]
-        [DefaultValue(true)]
-        [ReloadRequired]
-        public bool CombatReworkEnabled;
+        public CombatModule CombatPage = new CombatModule();
+
+        [SeparatePage]
+        public class CombatModule
+        {
+            [Header("$Mods.Terrafirma.Configs.Headers.CombatModule")]
+            [DefaultValue(true)]
+            [ReloadRequired]
+            public bool CombatReworkEnabled;
+            [DefaultValue(true)]
+            public bool NPCPrefixes;
+        }
     }
 }

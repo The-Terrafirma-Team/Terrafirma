@@ -19,7 +19,7 @@ namespace Terrafirma.Common.Mechanics
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
+            return Terrafirma.CombatReworkEnabled;
         }
         public static ModKeybind BlockKey { get; set; }
         public override void Load()

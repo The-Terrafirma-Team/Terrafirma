@@ -12,7 +12,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.MeteorHead
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
+            return Terrafirma.CombatReworkEnabled;
         }
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)

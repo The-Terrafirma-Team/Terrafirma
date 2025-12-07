@@ -374,7 +374,7 @@ namespace Terrafirma.Content.UI
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            if (ModContent.GetInstance<ServerConfig>().CombatReworkEnabled)
+            if (Terrafirma.CombatReworkEnabled)
             {
                 int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Hotbar"));
                 if (mouseTextIndex != -1)

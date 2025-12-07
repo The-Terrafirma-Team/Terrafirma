@@ -21,7 +21,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
         private static Asset<Texture2D> Glow;
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
+            return Terrafirma.CombatReworkEnabled;
         }
         public override bool InstancePerEntity => true;
 

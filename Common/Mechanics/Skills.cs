@@ -223,7 +223,7 @@ namespace Terrafirma.Common.Mechanics
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<ServerConfig>().CombatReworkEnabled;
+            return Terrafirma.CombatReworkEnabled;
         }
         public override void SaveData(TagCompound tag)
         {
