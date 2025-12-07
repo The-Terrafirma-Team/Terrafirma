@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terrafirma.Common.Attributes;
+using Terrafirma.Common.Templates;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -42,16 +44,13 @@ namespace Terrafirma.Content.Items.Equipment.Accessories.Movement.SpringBoots
         }
 
     }
-    public class SpringBootsPlayer : ModPlayer
+    public class SpringBootsPlayer : TFModPlayer
     {
+        [ResetDefaults(false)]
         public bool SpringBoots = true;
         public Vector2 Momentum = Vector2.Zero;
         public int FloorTime = 0;
         public float JumpMultiplier = 1f;
-        public override void ResetEffects()
-        {
-            SpringBoots = false;
-        }
         public override void PostUpdateRunSpeeds()
         {
             if (SpringBoots)

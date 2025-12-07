@@ -51,7 +51,13 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
-            SlimeAI.FindFrame(npc,frameHeight,ref frameCounter,ref frame);
+            npc.frame.Y = frame * frameHeight;
+            if (npc.NPCStats().NoAnimation || npc.ai[2] != 0)
+            {
+                frameCounter = 0;
+                return;
+            }
+            SlimeAI.FindFrame(npc, frameHeight, ref frameCounter, ref frame);
         }
         public override void SetDefaults(NPC npc)
         {
@@ -123,7 +129,7 @@ namespace Terrafirma.Content.NPCs.Vanilla.Slime
         public override void AI(NPC npc)
         {
             NPCStats stats = npc.NPCStats();
-            SlimeAI.AI(npc, stats, ref frameCounter);
+            SlimeAI.AI(npc, stats, ref frameCounter, npc.life < npc.lifeMax || !Main.dayTime || npc.position.Y > Main.worldSurface * 16);
             if (!npc.HasValidTarget)
                 return;
             var target = npc.GetTargetData();

@@ -9,7 +9,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills.Cleanse
+namespace Terrafirma.Content.Skills.General.Cleanse
 {
     public class Cleanse : Skill
     {

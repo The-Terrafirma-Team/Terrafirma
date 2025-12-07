@@ -13,7 +13,6 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terrafirma.Utilities;
 
 namespace Terrafirma.Content.NPCs.Vanilla.DemonEye
 {

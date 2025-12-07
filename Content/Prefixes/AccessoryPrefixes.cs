@@ -70,6 +70,10 @@ namespace Terrafirma.Content.Prefixes
         public override PrefixCategory Category => PrefixCategory.Accessory;
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
+            yield return new TooltipLine(Mod, "PrefixAccDefense", "-1" + Lang.tip[25].Value)
+            {
+                IsModifier = false
+            };
             yield return new TooltipLine(Mod, "MaxTensionPrefix", Language.GetText("Mods.Terrafirma.Misc.MaxTensionPrefix").WithFormatArgs("+10").ToString())
             {
                 IsModifier = true
@@ -77,7 +81,8 @@ namespace Terrafirma.Content.Prefixes
         }
         public override void ApplyAccessoryEffects(Player player)
         {
-            player.PlayerStats().TensionMax2 += 10;
+            player.PlayerStats().TensionMax += 10;
+            player.statDefense -= 1;
         }
     }
 }

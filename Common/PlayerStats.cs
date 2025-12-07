@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Terrafirma.Common.Attributes;
 using Terrafirma.Common.Interfaces;
+using Terrafirma.Common.Templates;
 using Terrafirma.Utilities;
 using Terraria;
 using Terraria.GameInput;
@@ -12,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Common
 {
-    public class PlayerStats : ModPlayer
+    public class PlayerStats : TFModPlayer
     {
         public override void Load()
         {
@@ -30,78 +29,70 @@ namespace Terrafirma.Common
             }
             return orig(self, type, time1);
         }
-
+        [ResetDefaults(1f)]
         public float DebuffTimeMultiplier = 1f;
+        [ResetDefaults(1f)]
         public float BuffTimeMultiplier = 1f;
 
+        [ResetDefaults(1f)]
         public float SkillCastTime = 1f;
+        [ResetDefaults(1f)]
         public float SkillCooldown = 1f;
+        [ResetDefaults(1f)]
         public float SkillManaCost = 1f;
+        [ResetDefaults(1f)]
         public float SkillTensionCost = 1f;
 
+        [ResetDefaults(false)]
         public bool ItemUseBlocked = false;
+        [ResetDefaults(false)]
         public bool TurnOffDownwardsMovementRestrictions = false;
+        [ResetDefaults(false)]
         public bool ImmuneToContactDamage = false;
+        [ResetDefaults(1f)]
         public float KnockbackResist = 1f;
-        public float MeleeWeaponScale = 0f;
+        [ResetDefaults(1f)]
+        public float MeleeWeaponScale = 1f;
+        [ResetDefaults(0f)]
         public float AmmoSaveChance = 0f;
         /// <summary>
         /// This defaults to 0.5f, multiply it down to make the player slow down less in the air.
         /// </summary>
+        [ResetDefaults(0.5f)]
         public float AirResistenceMultiplier = 0.5f;
 
-        public int ParryDamage = 0;
+        [ResetDefaults(8)]
+        public int ParryDamage = 8;
+        [ResetDefaults(1f)]
         public float ParryPower = 1f;
         // Tension
-        public int Tension = 50;
-        /// <summary>
-        /// The base tension max. Buffs and things should change TensionMax2 instead.
-        /// </summary>
+        public int Tension = 0;
+        [ResetDefaults(50)]
         public int TensionMax = 50;
-        public int TensionMax2 = 0;
+        [ResetDefaults(1f)]
         public float TensionGainMultiplier = 1f;
+        [ResetDefaults(1f)]
         public float TensionCostMultiplier = 1f;
-        public int FlatTensionGain = 0;
-        public int FlatTensionCost = 0;
 
         internal bool RightMouseSwitch = false;
         public override void ResetEffects()
         {
-            SkillCastTime = 1f;
-            SkillCooldown = 1f;
-            SkillManaCost = 1f;
-            SkillTensionCost = 1f;
-
-            DebuffTimeMultiplier = 1f;
-            BuffTimeMultiplier = 1f;
-            MeleeWeaponScale = 0f;
-            AmmoSaveChance = 0f;
-
             if (TurnOffDownwardsMovementRestrictions)
             {
                 Player.maxFallSpeed = 1000;
             }
-            TurnOffDownwardsMovementRestrictions = false;
-            ImmuneToContactDamage = false;
-            KnockbackResist = 1f;
-            AirResistenceMultiplier = 0.5f;
+            base.ResetEffects();
             Player.pickSpeed *= 0.8f;
             Player.autoJump = true;
-
-            ItemUseBlocked = false;
-
-            ParryDamage = 8;
-            ParryPower = 1f;
-
-            Tension = Math.Clamp(Tension, 0, TensionMax2);
-            TensionMax2 = TensionMax;
-            TensionGainMultiplier = 1f;
-            TensionCostMultiplier = 1f;
-            FlatTensionGain = 0;
-            FlatTensionCost = 0;
+        }
+        public override void PostUpdateMiscEffects()
+        {
+            Tension = Math.Clamp(Tension, 0, TensionMax);
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
+            if (KnockbackResist <= 0)
+                Player.noKnockback = true;
             modifiers.Knockback *= KnockbackResist;
         }
         public override bool CanUseItem(Item item)
@@ -127,7 +118,7 @@ namespace Terrafirma.Common
         public override void ModifyItemScale(Item item, ref float scale)
         {
             if (item.DamageType.CountsAsClass(DamageClass.Melee))
-                scale += MeleeWeaponScale;
+                scale *= MeleeWeaponScale;
         }
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {

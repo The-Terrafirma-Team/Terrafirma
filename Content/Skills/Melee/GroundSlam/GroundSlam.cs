@@ -11,7 +11,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills.GroundSlam
+namespace Terrafirma.Content.Skills.Melee.GroundSlam
 {
     public class GroundSlam : Skill
     {

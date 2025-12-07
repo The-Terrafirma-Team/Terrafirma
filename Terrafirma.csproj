@@ -12,6 +12,8 @@
 	  <Folder Include="Assets\Sounds\" />
 	  <Folder Include="Common\Systems\" />
 	  <Folder Include="Content\Dusts\" />
+	  <Folder Include="Content\Items\Equipment\Accessories\Defense\SapphireWard\" />
+	  <Folder Include="Content\Skills\General\HealingBolt\" />
 	</ItemGroup>
 
 	<!-- References -->

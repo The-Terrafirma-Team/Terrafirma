@@ -131,6 +131,7 @@ namespace Terrafirma.Content.UI
 
             if (menuIcon.IsMouseHovering)
             {
+                Main.LocalPlayer.mouseInterface = true;
                 menuIcon.frame = new Rectangle(30, 0, 30, 30);
             }
             else menuIcon.frame = new Rectangle(0, 0, 30, 30);

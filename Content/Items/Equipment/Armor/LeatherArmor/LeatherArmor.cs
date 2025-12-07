@@ -1,4 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using Terrafirma.Common.Attributes;
+using Terrafirma.Common.Templates;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -51,13 +53,10 @@ namespace Terrafirma.Content.Items.Equipment.Armor.LeatherArmor
             player.GetModPlayer<LeatherArmorPlayer>().Active = true;
         }
     }
-    public class LeatherArmorPlayer : ModPlayer
+    public class LeatherArmorPlayer : TFModPlayer
     {
+        [ResetDefaults(false)]
         public bool Active = false;
-        public override void ResetEffects()
-        {
-            Active = false;
-        }
         public override void PostUpdateRunSpeeds()
         {
             if(Active && Player.sunflower)

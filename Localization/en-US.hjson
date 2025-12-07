@@ -271,6 +271,16 @@ Mods: {
 				DisplayName: Skill Unlearner
 				Tooltip: ""
 			}
+
+			SkillSlotChanger: {
+				DisplayName: Skill Slot Changer
+				Tooltip: ""
+			}
+
+			SapphireWard: {
+				DisplayName: Sapphire Ward
+				Tooltip: Defense is 50% more effective against reflected projectiles
+			}
 		}
 
 		VanillaSetBonus: {

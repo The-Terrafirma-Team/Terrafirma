@@ -46,10 +46,10 @@ namespace Terrafirma.Utilities
             PlayerStats pStats = player.PlayerStats();
             int gain = player.ApplyTensionBonusScaling(Tension);
             pStats.Tension += gain;
-            if (pStats.Tension > pStats.TensionMax2)
+            if (pStats.Tension > pStats.TensionMax)
             {
                 Numbers = false;
-                pStats.Tension = pStats.TensionMax2;
+                pStats.Tension = pStats.TensionMax;
             }
             if (Numbers)
                 CombatText.NewText(player.Hitbox, Terrafirma.TensionGainColor, gain, dot: smallNumbers);
@@ -60,11 +60,11 @@ namespace Terrafirma.Utilities
             PlayerStats stats = player.PlayerStats();
             if (!drain)
             {
-                return (int)(number * stats.TensionGainMultiplier) + stats.FlatTensionGain;
+                return (int)(number * stats.TensionGainMultiplier);
             }
             else
             {
-                return (int)(number * stats.TensionCostMultiplier) + stats.FlatTensionCost;
+                return (int)(number * stats.TensionCostMultiplier);
             }
         }
     }

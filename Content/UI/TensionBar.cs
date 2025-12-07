@@ -22,7 +22,7 @@ namespace Terrafirma.Content.UI
         public override void Draw(SpriteBatch spriteBatch)
         {
             PlayerStats stats = Main.LocalPlayer.PlayerStats();
-            float multiply = stats.Tension / (float)stats.TensionMax2;
+            float multiply = stats.Tension / (float)stats.TensionMax;
             Vector2 vector = new(Main.screenWidth - 350, 68);
             spriteBatch.Draw(BarTex.Value, vector, BarTex.Frame(2, 1, 0), Color.White, 0, new Vector2(0, BarTex.Height()), 1, SpriteEffects.None, 0);
 

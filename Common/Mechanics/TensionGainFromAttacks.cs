@@ -20,8 +20,8 @@ namespace Terrafirma.Common.Mechanics
 
             int TensionGainMultiple = (int)Math.Ceiling(3 * pStats.TensionGainMultiplier);
 
-            if (TensionGainMultiple > pStats.TensionMax2 - pStats.Tension)
-                TensionGainMultiple = pStats.TensionMax2 - pStats.Tension;
+            if (TensionGainMultiple > pStats.TensionMax - pStats.Tension)
+                TensionGainMultiple = pStats.TensionMax - pStats.Tension;
             if (TensionGainMultiple <= 0)
             {
                 AccumulatedTension = 0;
@@ -31,9 +31,9 @@ namespace Terrafirma.Common.Mechanics
             {
                 AccumulatedTension -= 75 * TensionGainMultiple;
                 giveTension+= TensionGainMultiple;
-                if (giveTension + pStats.Tension > pStats.TensionMax2)
+                if (giveTension + pStats.Tension > pStats.TensionMax)
                 {
-                    giveTension = pStats.TensionMax2 - pStats.Tension;
+                    giveTension = pStats.TensionMax - pStats.Tension;
                     break;
                 }
             }

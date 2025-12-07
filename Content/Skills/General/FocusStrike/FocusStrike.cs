@@ -7,7 +7,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Terrafirma.Content.Skills.FocusStrike
+namespace Terrafirma.Content.Skills.General.FocusStrike
 {
     public class FocusStrike : Skill
     {

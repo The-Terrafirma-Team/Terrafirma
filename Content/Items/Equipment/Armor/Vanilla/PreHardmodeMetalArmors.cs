@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Terrafirma.Common.Attributes;
+using Terrafirma.Common.Templates;
 using Terrafirma.Utilities;
 using Terraria;
 using Terraria.ID;
@@ -7,15 +9,12 @@ using Terraria.ModLoader;
 
 namespace Terrafirma.Content.Items.Equipment.Armor.Vanilla
 {
-    internal class PreHardmodeMetalArmors : ModPlayer
+    internal class PreHardmodeMetalArmors : TFModPlayer
     {
+        [ResetDefaults(false)]
         public bool GoldArmor = false;
+        [ResetDefaults(false)]
         public bool LeadArmor = false;
-        public override void ResetEffects()
-        {
-            GoldArmor = false;
-            LeadArmor = false;
-        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (GoldArmor) target.AddBuff(BuffID.Midas, 60 * 2);

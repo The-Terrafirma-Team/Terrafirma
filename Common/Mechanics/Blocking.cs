@@ -1,23 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Steamworks;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using Terrafirma.Common.Attributes;
 using Terrafirma.Common.Interfaces;
+using Terrafirma.Common.Templates;
 using Terrafirma.Content.Buffs.Cooldowns;
-using Terrafirma.Content.Buffs.Debuffs;
 using Terrafirma.Utilities;
 using Terraria;
 using Terraria.Audio;
-using Terraria.Chat;
 using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -25,7 +15,7 @@ using static Terraria.Player;
 
 namespace Terrafirma.Common.Mechanics
 {
-    public class BlockingPlayer : ModPlayer
+    public class BlockingPlayer : TFModPlayer
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
@@ -40,17 +30,13 @@ namespace Terrafirma.Common.Mechanics
         {
             BlockKey = null;
         }
-
+        [ResetDefaults(-1)]
         public int ShieldToHoldWhileBlocking = -1;
+        [ResetDefaults(false)]
         public bool Shattered = false;
         public bool Blocking = false;
         public int BlockConsumeTensionTimer = 0;
         public float blockAmount = 0;
-        public override void ResetEffects()
-        {
-            ShieldToHoldWhileBlocking = -1;
-            Shattered = false;
-        }
         public bool CanBlock(Player player)
         {
             if (!player.ItemAnimationActive && !Shattered && player.PlayerStats().Tension > 0 && !player.PlayerStats().ItemUseBlocked && !player.cursed)

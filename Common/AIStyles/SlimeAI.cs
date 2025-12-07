@@ -12,14 +12,14 @@ namespace Terrafirma.Common.AIStyles
         }
         public static void FindFrame(NPC npc, int frameHeight, ref float frameCounter, ref int frame, int maxFrames = 3, int jumpUpFrame = 5, int jumpDownFrame = 4)
         {
-            npc.frame.Y = frame * frameHeight;
-            if (npc.NPCStats().NoAnimation)
-            {
-                frameCounter = 0;
-                return;
-            }
-            if (npc.ai[2] == 0)
-            {
+            //npc.frame.Y = frame * frameHeight;
+            //if (npc.NPCStats().NoAnimation)
+            //{
+            //    frameCounter = 0;
+            //    return;
+            //}
+            //if (npc.ai[2] == 0)
+            //{
                 frameCounter += npc.NPCStats().MoveSpeed;
                 if (frameCounter > 8)
                 {
@@ -33,13 +33,13 @@ namespace Terrafirma.Common.AIStyles
                     frame = jumpUpFrame;
                 else if (npc.velocity.Y > 0)
                     frame = jumpDownFrame;
-            }
+            //}
         }
         public static bool CanAttack(NPC npc)
         {
             return npc.velocity.Y != 0 && npc.ai[3] == 1 && !npc.NPCStats().Immobile;
         }
-        public static void AI(NPC npc, NPCStats stats, ref float frameCounter, float jumpHeight = -12f, float lowJumpHeight = -6)
+        public static void AI(NPC npc, NPCStats stats, ref float frameCounter, bool canTarget = true, float jumpHeight = -12f, float lowJumpHeight = -6, float maxHorizontalSpeed = 4, float JumpInterval = 100)
         {
             npc.targetRect = npc.GetTargetData().Hitbox;
             npc.rotation = npc.velocity.X * 0.05f * npc.velocity.Y * -0.05f;
@@ -77,7 +77,6 @@ namespace Terrafirma.Common.AIStyles
             if (stats.Immobile)
             {
                 npc.ai[3] = 0;
-                npc.ai[2] = 0;
                 npc.ai[0] = 0;
                 frameCounter -= npc.NPCStats().MoveSpeed * 0.5f;
                 if (npc.velocity.Y == 0)
@@ -105,13 +104,11 @@ namespace Terrafirma.Common.AIStyles
 
             if (!npc.HasValidTarget)
             {
-                if (npc.life < npc.lifeMax || !Main.dayTime || npc.position.Y > Main.worldSurface * 16)
+                if (canTarget)
                 {
                     npc.TargetClosest(false);
                 }
-
-                npc.ai[2] = 0;
-                if (npc.ai[0] > 100)
+                if (npc.ai[0] > JumpInterval)
                 {
                     if (Main.rand.NextBool(3))
                     {
@@ -119,19 +116,19 @@ namespace Terrafirma.Common.AIStyles
                     }
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(-20, 0);
-                    npc.velocity.X += npc.direction * Main.rand.NextFloat(2, 4) * stats.MoveSpeed;
+                    npc.velocity.X += npc.direction * Main.rand.NextFloat(2, maxHorizontalSpeed) * stats.MoveSpeed;
                     npc.velocity.Y += Main.rand.NextFloat(jumpHeight,lowJumpHeight);
                     npc.netUpdate = true;
                 }
             }
             else
             {
-                if (npc.ai[0] > 100)
+                if (npc.ai[0] > JumpInterval)
                 {
                     npc.FaceTarget();
                     npc.ai[3] = 1;
                     npc.ai[0] = Main.rand.Next(40);
-                    npc.velocity.X += MathHelper.Clamp((npc.targetRect.Center.X - npc.Center.X) * 0.04f, -4 * stats.MoveSpeed, 4 * stats.MoveSpeed);
+                    npc.velocity.X += MathHelper.Clamp((npc.targetRect.Center.X - npc.Center.X) * 0.04f, -maxHorizontalSpeed * stats.MoveSpeed, maxHorizontalSpeed * stats.MoveSpeed);
                     npc.velocity.Y += MathHelper.Clamp((npc.targetRect.Center.Y - npc.Center.Y) * 0.06f, jumpHeight, lowJumpHeight);
                     npc.netUpdate = true;
                 }

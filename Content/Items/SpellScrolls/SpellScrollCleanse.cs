@@ -1,6 +1,6 @@
 ﻿using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Templates;
-using Terrafirma.Content.Skills.Cleanse;
+using Terrafirma.Content.Skills.General.Cleanse;
 
 namespace Terrafirma.Content.Items.SpellScrolls
 {

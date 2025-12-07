@@ -53,6 +53,12 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
+            npc.frame.Y = frame * frameHeight;
+            if (npc.NPCStats().NoAnimation || npc.ai[2] != 0)
+            {
+                frameCounter = 0;
+                return;
+            }
             SlimeAI.FindFrame(npc, frameHeight, ref frameCounter, ref frame);
         }
         public override Color? GetAlpha(NPC npc, Color drawColor)
@@ -134,9 +140,13 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
         }
         public override void AI(NPC npc)
         {
-            int bigSquishTime = -260;
+            int bigSquishTime = -140;
             NPCStats stats = npc.NPCStats();
             float dist = Math.Abs(npc.Center.X - npc.targetRect.Center.X);
+            if(stats.Immobile || !npc.HasValidTarget)
+            {
+                npc.ai[2] = 0;
+            }
             if ((npc.ai[2] > 0 || (npc.ai[3] == 1 && npc.position.Y < npc.targetRect.Y - 60 && dist < 60 && npc.velocity.Y < 4)) && npc.ai[0] > 0)
             {
                 npc.ai[2] += stats.AttackSpeed;
@@ -195,17 +205,15 @@ namespace Terrafirma.Content.NPCs.Vanilla.LavaSlime
             }
             else
             {
-                if (npc.ai[0] < bigSquishTime + 60)
+                if (npc.ai[0] < bigSquishTime + 30)
                     frame = 7;
-                else if (npc.ai[0] < bigSquishTime + 80)
+                else if (npc.ai[0] < bigSquishTime + 50)
                     frame = 0;
-                else if (npc.ai[0] < bigSquishTime + 110)
+                else if (npc.ai[0] < bigSquishTime + 70)
                     frame = 3;
             }
 
-            stats.MoveSpeed *= 2f;
-            stats.AttackSpeed *= 2.5f;
-            SlimeAI.AI(npc, stats, ref frameCounter, -17, dist < 300 ? -17 : -6);
+            SlimeAI.AI(npc, stats, ref frameCounter, true, -17, dist < 300 ? -17 : -6, 8, 40);
 
             if (npc.wet)
             {

@@ -1,6 +1,6 @@
 ﻿using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Templates;
-using Terrafirma.Content.Skills.GroundSlam;
+using Terrafirma.Content.Skills.Melee.GroundSlam;
 
 namespace Terrafirma.Content.Items.SpellScrolls
 {
