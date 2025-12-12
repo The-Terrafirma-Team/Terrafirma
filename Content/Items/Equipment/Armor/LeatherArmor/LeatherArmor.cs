@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Terrafirma.Common.Attributes;
+﻿using Terrafirma.Common.Attributes;
 using Terrafirma.Common.Templates;
 using Terraria;
 using Terraria.ID;

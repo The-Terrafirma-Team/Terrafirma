@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;

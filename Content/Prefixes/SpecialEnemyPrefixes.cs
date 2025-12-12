@@ -4,9 +4,7 @@ using Terrafirma.Common.Mechanics;
 using Terrafirma.Content.Dusts;
 using Terrafirma.Utilities;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 
 namespace Terrafirma.Content.Prefixes
 {

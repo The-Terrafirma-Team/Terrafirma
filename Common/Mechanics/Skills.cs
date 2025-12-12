@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terrafirma.Utilities;

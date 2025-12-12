@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using Terrafirma.Common;
-using Terrafirma.Common.Interfaces;
-using Terraria;
-using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
 

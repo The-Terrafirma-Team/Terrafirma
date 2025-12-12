@@ -4,15 +4,12 @@ using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
-using Terrafirma.Common;
 using Terrafirma.Common.Mechanics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.UI;
 using Terraria.UI;
 
 namespace Terrafirma.Content.UI

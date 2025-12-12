@@ -1,14 +1,6 @@
-﻿using Terrafirma.Common.Mechanics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Terrafirma.Utilities;
 using Terraria;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
-using Terrafirma.Utilities;
 
 namespace Terrafirma.Content.Buffs.Debuffs
 {

@@ -1,17 +1,10 @@
-﻿using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualBasic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace Terrafirma.Content.UI

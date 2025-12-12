@@ -1,5 +1,4 @@
 ﻿using Terrafirma.Content.Items.Consumable;
-using Terrafirma.Content.Items.Equipment;
 using Terrafirma.Content.Items.Equipment.Accessories.Defense.Shield;
 using Terrafirma.Content.Items.Equipment.Accessories.Movement.WindCharm;
 using Terrafirma.Content.Items.Weapons.Melee;

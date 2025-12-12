@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Attributes;
 using Terrafirma.Common.Templates;
 using Terraria;

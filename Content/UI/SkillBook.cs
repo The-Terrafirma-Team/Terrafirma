@@ -5,20 +5,13 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Common;
 using Terrafirma.Common.Mechanics;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.UI;
 using Terraria.UI;
-using Terraria.UI.Chat;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Terrafirma.Content.UI
 {

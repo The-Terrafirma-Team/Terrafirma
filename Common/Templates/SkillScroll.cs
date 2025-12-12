@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terrafirma.Common.Mechanics;
 using Terrafirma.Common.Systems;
 using Terrafirma.Content.Particles;

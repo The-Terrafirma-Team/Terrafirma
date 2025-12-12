@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terrafirma.Common.Templates;
+﻿using Terrafirma.Common.Templates;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 
 namespace Terrafirma.Content.Tiles.MusicBoxes
 {
